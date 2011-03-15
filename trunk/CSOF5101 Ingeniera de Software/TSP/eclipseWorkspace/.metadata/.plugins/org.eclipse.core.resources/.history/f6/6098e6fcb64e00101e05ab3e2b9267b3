@@ -1,7 +1,0 @@
-package com.ingenium.tsp.test;
-
-public class TestClass {
-
-	public void testMethod(){
-	}
-}
