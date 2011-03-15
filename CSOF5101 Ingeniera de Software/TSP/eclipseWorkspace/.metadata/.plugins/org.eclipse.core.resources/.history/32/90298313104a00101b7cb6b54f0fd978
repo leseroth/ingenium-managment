@@ -1,0 +1,32 @@
+package mypsp.earcos.test;
+
+import java.io.File;
+import java.util.List;
+
+import mypsp.earcos.control.Analizer;
+import junit.framework.TestCase;
+
+public class TestAnnotation extends TestCase {
+
+	private Analizer analizer;
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		
+		analizer = new Analizer();		
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		
+		analizer = null;
+	}
+	
+	public void testOneClassAnnotation(){
+		File file = new File("/mypsp/earcos/test/TestClass.java");
+		analizer.analizeFile(file);
+		List<String[]> outcome = analizer.getDescription().get(Analizer.PLAN);
+		assertTrue("El tamano es 455",outcome.get(0)[1].equals("455"));
+		assertTrue("El tiempo es 1432",outcome.get(0)[2].equals("143"));
+	}
+}

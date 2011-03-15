@@ -1,0 +1,18 @@
+1300149953493	Rename package 'mypsp.earcos.annotations'
+1300149973904	Rename package 'mypsp.earcos.control'
+1300149991059	Rename package 'mypsp.earcos.test'
+1300152652954	Rename type 'MyPsp'
+1300152742378	Delete element
+1300154095073	Rename method 'checkMethodAnnotation'
+1300154175049	Rename local variable 'method'
+1300154291856	Rename local variable 'accesible'
+1300154369670	Rename local variable 'accesibleObject'
+1300156163314	Move compilation unit
+1300159582937	Delete element
+1300160074340	Rename local variable 'auxArray'
+1300160082355	Rename local variable 'array'
+1300160865527	Delete elements
+1300161363383	Rename local variable 'auxArray'
+1300161376375	Rename local variable 'array'
+1300164166570	Rename local variable 'auxArray'
+1300164190193	Rename local variable 'array'

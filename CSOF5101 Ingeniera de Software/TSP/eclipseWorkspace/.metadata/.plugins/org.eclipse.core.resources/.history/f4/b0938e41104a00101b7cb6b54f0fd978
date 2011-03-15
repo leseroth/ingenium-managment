@@ -1,0 +1,7 @@
+package mypsp.earcos.test;
+
+import mypsp.earcos.annotations.Plan;
+
+@Plan(size = 455, time = 1432)
+public class TestClass {
+}

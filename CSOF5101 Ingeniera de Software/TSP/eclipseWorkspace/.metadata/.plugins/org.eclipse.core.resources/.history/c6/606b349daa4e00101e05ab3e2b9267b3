@@ -1,0 +1,71 @@
+package com.ingenium.tsp.control;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ingenium.tsp.annotations.Constants;
+import com.ingenium.tsp.annotations.Loc;
+import com.ingenium.tsp.annotations.LocList;
+
+/**
+ * 
+ * @author Ingenium
+ */
+public class IngeniumTSP {
+
+	private Analizer analizer;
+	private List<String> totalOutcome;
+
+	@LocList({ @Loc(cycle = Constants.CYCLE_1, size = 2) })
+	public static void main(String... args) {
+		IngeniumTSP ingeniumTSP = new IngeniumTSP();
+		ingeniumTSP.checkProject();
+	}
+
+	@LocList({ @Loc(cycle = Constants.CYCLE_1, size = 1) })
+	public IngeniumTSP() {
+		analizer = new Analizer();
+	}
+
+	@LocList({ @Loc(cycle = Constants.CYCLE_1, size = 20) })
+	private void checkProject() {
+		String projectPath = new String();
+
+		try {
+			projectPath = new File(".").getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		totalOutcome = new ArrayList<String>();
+		File directory = new File(projectPath);
+
+		if (directory.exists() && directory.isDirectory()) {
+			List<File> fileList = new ArrayList<File>();
+			loadFileList(fileList, directory);
+
+			for (File file : fileList) {
+				totalOutcome.addAll(analizer.analizeFile(file));
+			}
+		}
+
+		if (totalOutcome.get(0).contains("no existe")) {
+			analizer.printFailedAnalysis(totalOutcome.get(0));
+		} else {
+			analizer.printSuccessfulAnalysis(totalOutcome);
+		}
+	}
+
+	@LocList({ @Loc(cycle = Constants.CYCLE_1, size = 7) })
+	private void loadFileList(List<File> fileList, File file) {
+		if (file.isDirectory()) {
+			for (File f : file.listFiles()) {
+				loadFileList(fileList, f);
+			}
+		} else {
+			fileList.add(file);
+		}
+	}
+}

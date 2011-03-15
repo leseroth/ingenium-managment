@@ -1,0 +1,25 @@
+package com.ingenium.tsp.test;
+
+import java.io.File;
+import java.util.List;
+
+import com.ingenium.tsp.control.Analizer;
+
+import junit.framework.TestCase;
+
+public class TestAnnotation extends TestCase {
+
+	private Analizer analizer;
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		
+		analizer = new Analizer();		
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		
+		analizer = null;
+	}
+}

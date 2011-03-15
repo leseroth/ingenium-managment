@@ -1,0 +1,34 @@
+package com.ingenium.tsp.report;
+
+public class LogTRecord extends Record {
+	private String taskId;
+	private int min;
+
+	public LogTRecord(String testClass, String testMember, String date,
+			String cycle, String taskId, String responsible, int min) {
+		this.testClass = testClass;
+		this.testMember = testMember;
+		this.date = date;
+		this.cycle = cycle;
+		this.taskId = taskId;
+		this.responsible = responsible;
+		this.min = min;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
+}

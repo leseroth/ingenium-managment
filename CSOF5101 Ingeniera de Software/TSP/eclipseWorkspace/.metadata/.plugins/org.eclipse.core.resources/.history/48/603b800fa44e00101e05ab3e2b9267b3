@@ -1,0 +1,12 @@
+package com.ingenium.tsp.control;
+
+/**
+ * 
+ * @author Ingenium
+ */
+public class IngeniumTSP {
+	public static void main(String... args) {
+		Control control = new Control();
+		control.validateCommand(args);
+	}
+}
