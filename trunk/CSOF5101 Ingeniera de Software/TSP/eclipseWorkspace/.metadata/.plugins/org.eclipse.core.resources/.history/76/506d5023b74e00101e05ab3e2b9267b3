@@ -1,0 +1,7 @@
+package com.ingenium.tsp.report;
+
+public class Record {
+	protected String testClass;
+	protected String testMember;
+
+}

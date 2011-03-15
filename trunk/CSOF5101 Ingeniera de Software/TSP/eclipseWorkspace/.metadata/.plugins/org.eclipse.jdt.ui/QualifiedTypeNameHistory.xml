@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.LogTList"/>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.PlanQ"/>
+<fullyQualifiedTypeName name="test.TestClassAnottation"/>
+<fullyQualifiedTypeName name="javax.tools.JavaCompiler"/>
+<fullyQualifiedTypeName name="javax.tools.ToolProvider"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.net.URLClassLoader"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="mypsp.earcos.control.Analizer"/>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.Loc"/>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.LogD"/>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.LogD.STAGE"/>
+<fullyQualifiedTypeName name="mypsp.earcos.annotations.LogDList"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogD.STAGE"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogDList"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogD"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.Plan"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.PlanQ"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.control.Analizer"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.Constants"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
+<fullyQualifiedTypeName name="java.lang.reflect.AccessibleObject"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.model.Person"/>
+<fullyQualifiedTypeName name="javax.tools.StandardJavaFileManager"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.report.Record"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.report.LocRecord"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogTList"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogT"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.report.LogTRecord"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LocList"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.Loc"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogInt"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.report.LogIntRecord"/>
+<fullyQualifiedTypeName name="com.ingenium.tsp.annotations.LogIntList"/>
+</qualifiedTypeNameHistroy>

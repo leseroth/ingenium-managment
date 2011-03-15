@@ -1,0 +1,12 @@
+package mypsp.earcos.test;
+
+import com.ingenium.tsp.annotations.Loc;
+import com.ingenium.tsp.annotations.Plan;
+
+@Plan(size = 10, time = 20)
+public class TestClass {
+	
+	@Loc(size = 1)
+	public void testMethod(){
+	}
+}

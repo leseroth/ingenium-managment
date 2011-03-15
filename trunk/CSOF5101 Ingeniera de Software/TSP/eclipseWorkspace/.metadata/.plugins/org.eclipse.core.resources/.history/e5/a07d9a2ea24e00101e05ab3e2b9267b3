@@ -1,0 +1,5 @@
+package com.ingenium.tsp.annotations;
+
+public class Constants {
+
+}

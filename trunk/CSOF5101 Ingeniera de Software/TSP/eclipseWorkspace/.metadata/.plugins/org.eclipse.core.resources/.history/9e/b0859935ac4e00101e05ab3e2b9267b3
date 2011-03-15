@@ -1,0 +1,5 @@
+package com.ingenium.tsp.model;
+
+public class Person {
+
+}

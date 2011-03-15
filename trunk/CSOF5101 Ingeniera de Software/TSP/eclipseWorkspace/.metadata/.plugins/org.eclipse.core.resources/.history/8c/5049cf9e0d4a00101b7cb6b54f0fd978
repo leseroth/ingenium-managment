@@ -1,0 +1,18 @@
+package mypsp.earcos.test;
+
+import junit.framework.TestCase;
+
+public class TestAnnotation extends TestCase {
+
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+	
+	public void testOneClassAnnotation(){
+		
+	}
+}

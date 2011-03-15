@@ -1,0 +1,28 @@
+package mypsp.earcos.annotations;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * 
+ * @author Erik
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
+public @interface LogD {
+
+	public static enum STAGE {
+		PLANNING("planeacion"), DESIGN("diseno"), CODING("codificaicon"), TESTING("pruebas"), POSTMORTEM("postmortem"), INSPECTION("inspeccion");
+		
+		private String value;
+	    STAGE(String v){
+			value = v;
+		}
+	};
+
+	String stage() default "";
+
+	String type() default "";
+}
