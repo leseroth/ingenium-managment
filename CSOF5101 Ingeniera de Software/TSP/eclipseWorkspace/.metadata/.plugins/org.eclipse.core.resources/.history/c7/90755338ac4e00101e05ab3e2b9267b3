@@ -1,8 +1,0 @@
-package com.ingenium.tsp.model;
-
-public class Person {
-	String id;
-	String name;
-	String role;
-
-}
