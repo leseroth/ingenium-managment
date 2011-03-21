@@ -1,4 +1,4 @@
-package com.ingenium.tsp.properties;
+package com.ingenium.tsp.control;
 
 import java.io.File;
 import java.io.FileInputStream;

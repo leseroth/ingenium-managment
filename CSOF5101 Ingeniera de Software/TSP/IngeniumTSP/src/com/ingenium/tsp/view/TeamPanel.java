@@ -20,12 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 
-import com.ingenium.tsp.properties.ManagePropertyFile;
 import com.ingenium.tsp.util.Constants;
 import com.ingenium.tsp.util.Util;
 import com.ingenium.tsp.view.table.PersonTableDataModel;
 import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.control.ManagePropertyFile;
 import com.ingenium.tsp.model.Person;
 import com.ingenium.tsp.model.Person.Role;
 
