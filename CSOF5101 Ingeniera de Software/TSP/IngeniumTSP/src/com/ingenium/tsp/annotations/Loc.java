@@ -13,7 +13,9 @@ import java.lang.annotation.Target;
 @Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface Loc {
 
-	int size() default 0;
+    int size() default 0;
 
-	String cycle() default "";
+    String cycle() default "";
+    
+    String responsible() default "";
 }

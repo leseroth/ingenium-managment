@@ -6,11 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * 
  * @author Ingenium
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})
+@Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface LogTList {
 
     LogT[] value();
