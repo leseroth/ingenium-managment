@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface LogD {
 
-	String stage() default "";
+    String stage() default "";
 
-	String type() default "";
+    String type() default "";
 }

@@ -12,15 +12,15 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface PlanQ {
-	int[] planificacion();
+    int[] planificacion();
 
-	int[] diseno();
+    int[] diseno();
 
-	int[] codificacion();
+    int[] codificacion();
 
-	int[] pruebas();
+    int[] pruebas();
 
-	int[] postmortem();
+    int[] postmortem();
 
-	int[] inspeccion();
+    int[] inspeccion();
 }

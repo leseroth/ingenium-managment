@@ -1,47 +1,44 @@
 package com.ingenium.tsp.report;
 
+import com.ingenium.tsp.annotations.Loc;
+import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.util.Constants;
+
 public class LocRecord extends Record {
-	private int size;
-	private String testClass;
-	private String testMember;
-	private String cycle;
+    private int size;
+    private String responsible;
+    private String cycle;
 
-	public LocRecord(String testClass, String testMember, int size, String cycle) {
-		this.testClass = testClass;
-		this.testMember = testMember;
-		this.size = size;
-		this.cycle = cycle;
-	}
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 3, responsible = "201110949") })
+    public LocRecord(int size, String cycle, String responsible) {
+	this.size = size;
+	this.cycle = cycle;
+	this.responsible = responsible;
+    }
 
-	public String getTestClass() {
-		return testClass;
-	}
+    public String getCycle() {
+	return cycle;
+    }
 
-	public void setTestClass(String testClass) {
-		this.testClass = testClass;
-	}
+    public void setCycle(String cycle) {
+	this.cycle = cycle;
+    }
 
-	public String getTestMember() {
-		return testMember;
-	}
+    public int getSize() {
+	return size;
+    }
 
-	public void setTestMember(String testMember) {
-		this.testMember = testMember;
-	}
+    public void setSize(int size) {
+	this.size = size;
+    }
 
-	public String getCycle() {
-		return cycle;
-	}
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110949") })
+    public String getResponsible() {
+        return responsible;
+    }
 
-	public void setCycle(String cycle) {
-		this.cycle = cycle;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110949") })
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
 }

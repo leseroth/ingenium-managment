@@ -13,13 +13,13 @@ import java.lang.annotation.Target;
 @Target(value = { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface LogInt {
 
-	String date() default "";
+    String date() default "";
 
-	String intId() default "";
-	
-	String cycle() default "";
-	
-	String responsible() default "";
+    String intId() default "";
 
-	int min() default 0;
+    String cycle() default "";
+
+    String responsible() default "";
+
+    int min() default 0;
 }
