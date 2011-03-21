@@ -18,9 +18,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.control.ManagePropertyFile;
 import com.ingenium.tsp.control.Report;
 import com.ingenium.tsp.model.Person;
-import com.ingenium.tsp.properties.ManagePropertyFile;
 import com.ingenium.tsp.report.ProductivityRecord;
 import com.ingenium.tsp.util.Constants;
 import com.ingenium.tsp.util.Util;
