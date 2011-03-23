@@ -48,9 +48,14 @@ public class ReportPanel extends JPanel implements ActionListener {
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 12, responsible = "201110856") })
     private void initComponents() {
+	JPanel proPanel = new JPanel();
+	Box proBox = Box.createVerticalBox();
+	proBox.add(initProductivityReport());
+	proBox.add(initGroupProductivityReport());
+	
 	reportCardPanel = new JPanel(new CardLayout());
 	reportCardPanel.add(initFileListReport(), FILE_LIST_LABEL);
-	reportCardPanel.add(initProductivityReport(), PRODUCTIVITY_LABEL);
+	reportCardPanel.add(proPanel.add(proBox), PRODUCTIVITY_LABEL);
 
 	setBackground(Constants.backgroundColor);
 	Box box = Box.createVerticalBox();
@@ -99,17 +104,17 @@ public class ReportPanel extends JPanel implements ActionListener {
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 35, responsible = "201110856") })
     private JPanel initProductivityReport() {
 	ManagePropertyFile personFile = ManagePropertyFile.getInstance(ManagePropertyFile.PERSON_FILE);
-	Object[][] data = new Object[report.getLocReport().size()][6];
+	Object[][] data = new Object[report.getProductivityReport().size()][6];
 
 	int i = 0;
-	for (ProductivityRecord productivityRecord : report.getLocReport().values()) {
+	for (ProductivityRecord productivityRecord : report.getProductivityReport().values()) {
 	    Person person = new Person(personFile.getProperty(productivityRecord.getResponsible()));
 	    
 	    data[i][0] = productivityRecord.getCycle();
 	    data[i][1] = person == null ? "Rol no definido" : person.getRole();
 	    data[i][2] = person == null ? "Nombre no definido" : person.getName();
 	    data[i][3] = productivityRecord.getSize();
-	    data[i][4] = productivityRecord.getMin();
+	    data[i][4] = decimalFormatter.format((double)productivityRecord.getMin()/60);
 	    data[i][5] = decimalFormatter.format(productivityRecord.getProductivity());
 	    i++;
 	}
@@ -117,7 +122,7 @@ public class ReportPanel extends JPanel implements ActionListener {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);
 	JLabel labelProductividad = new JLabel("Productividad por Integrante");
-	JTable table = createTable(data, new String[] { "Ciclo", "Rol", "Responsable", "Loc", "Tiempo", "Productividad LOC/Hora" }, 900, 300);
+	JTable table = createTable(data, new String[] { "Ciclo", "Rol", "Responsable", "Loc", "Tiempo (H)", "Productividad LOC/Hora" }, 900, 200);
 	table.getColumnModel().getColumn(0).setPreferredWidth(100);
 	table.getColumnModel().getColumn(1).setPreferredWidth(200);
 	table.getColumnModel().getColumn(2).setPreferredWidth(200);
@@ -127,6 +132,47 @@ public class ReportPanel extends JPanel implements ActionListener {
 	table.getColumnModel().getColumn(4).setCellRenderer(rightAlignment);
 	table.getColumnModel().getColumn(5).setPreferredWidth(150);
 	table.getColumnModel().getColumn(5).setCellRenderer(rightAlignment);
+	JScrollPane tableScrollPane = new JScrollPane(table);
+	labelProductividad.setAlignmentX(CENTER_ALIGNMENT);
+	tableScrollPane.setAlignmentX(CENTER_ALIGNMENT);
+	
+	Box box = Box.createVerticalBox();
+	box.add(Util.getBoxFiller());
+	box.add(labelProductividad);
+	box.add(Util.getBoxFiller());
+	box.add(tableScrollPane);
+	panel.add(box);
+
+	return panel;
+    }
+    
+    @LocList({
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"),
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "200819123"),
+	@Loc(cycle = Constants.CYCLE_2, size = 9, responsible = "201117818")})
+    private JPanel initGroupProductivityReport() {
+	Object[][] data = new Object[report.getGroupProductivityReport().size()][4];
+
+	int i = 0;
+	for (ProductivityRecord productivityRecord : report.getGroupProductivityReport().values()) {
+	    data[i][0] = productivityRecord.getCycle();
+	    data[i][1] = productivityRecord.getSize();
+	    data[i][2] = decimalFormatter.format((double)productivityRecord.getMin()/60);
+	    data[i][3] = decimalFormatter.format(productivityRecord.getProductivity());
+	    i++;
+	}
+	
+	JPanel panel = new JPanel();
+	panel.setBackground(Constants.backgroundColor);
+	JLabel labelProductividad = new JLabel("Productividad del Grupo");
+	JTable table = createTable(data, new String[] { "Ciclo", "Loc", "Tiempo (H)", "Productividad LOC/Hora" }, 900, 50);
+	table.getColumnModel().getColumn(0).setPreferredWidth(100);
+	table.getColumnModel().getColumn(1).setPreferredWidth(100);
+	table.getColumnModel().getColumn(1).setCellRenderer(rightAlignment);
+	table.getColumnModel().getColumn(2).setPreferredWidth(100);
+	table.getColumnModel().getColumn(2).setCellRenderer(rightAlignment);
+	table.getColumnModel().getColumn(3).setPreferredWidth(150);
+	table.getColumnModel().getColumn(3).setCellRenderer(rightAlignment);
 	JScrollPane tableScrollPane = new JScrollPane(table);
 	labelProductividad.setAlignmentX(CENTER_ALIGNMENT);
 	tableScrollPane.setAlignmentX(CENTER_ALIGNMENT);
