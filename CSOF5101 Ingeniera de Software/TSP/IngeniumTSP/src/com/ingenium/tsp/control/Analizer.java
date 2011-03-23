@@ -42,6 +42,7 @@ public class Analizer {
     public static List<Person> ingenium;
     private Report report;
 
+    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 4, responsible = "201110856") })
     public Analizer() {
 	report = new Report();
 	description = new HashMap<String, List<? extends Record>>();
@@ -88,7 +89,7 @@ public class Analizer {
     }
 
     @SuppressWarnings("rawtypes")
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 15, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 15, responsible = "201110949") })
     public List<String> analizeFile(File file) {
 	List<String> outcome = new ArrayList<String>();
 
@@ -170,7 +171,6 @@ public class Analizer {
 	return testClass;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110856")})
     public Report getReport() {
         return report;
     }

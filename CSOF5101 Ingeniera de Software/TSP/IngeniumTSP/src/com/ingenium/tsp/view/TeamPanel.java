@@ -65,7 +65,7 @@ public class TeamPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 11, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 11, responsible = "201110949") })
     private void initComponents() {
 	setBackground(Constants.backgroundColor);
 	Box box = Box.createVerticalBox();
@@ -80,7 +80,7 @@ public class TeamPanel extends JPanel implements ActionListener {
 	add(box);
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 13, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 13, responsible = "201110949") })
     private JScrollPane initPersonListPanel() {
 	JPanel personTablePanel = new JPanel();
 	personTablePanel.setOpaque(true);
@@ -101,7 +101,7 @@ public class TeamPanel extends JPanel implements ActionListener {
 	return scrollPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 18, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 18, responsible = "201110856") })
     private JPanel initFormPanel() {
 	JPanel formPanel = new JPanel();
 	formPanel.setLayout(new SpringLayout());
@@ -129,7 +129,7 @@ public class TeamPanel extends JPanel implements ActionListener {
 	return formPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "201117818") })
     private JPanel initControlPanel() {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);

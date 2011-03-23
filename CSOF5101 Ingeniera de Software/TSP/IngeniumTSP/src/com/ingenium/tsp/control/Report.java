@@ -24,6 +24,7 @@ public class Report {
     
     private List<String> fileList;
     private TreeMap<String, ProductivityRecord> productivityReport;
+    private TreeMap<String, ProductivityRecord> groupProductivityReport;
 
     @SuppressWarnings("unchecked")
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856") })
@@ -114,13 +115,16 @@ public class Report {
 
     @LocList({ 
 	@Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110949"), 
-	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856")})
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544")})
     private void calculateProductivity(List<LocRecord> locRecordList, List<LogTRecord> logTRecordList) {
 	productivityReport = new TreeMap<String, ProductivityRecord>();
+	groupProductivityReport = new TreeMap<String, ProductivityRecord>();
 
 	if (!locRecordList.isEmpty()) {
 	    for (LocRecord locRecord : locRecordList) {
 		ProductivityRecord resume = productivityReport.get(locRecord.getCycle() + "-" + locRecord.getResponsible());
+		ProductivityRecord groupResume = groupProductivityReport.get(locRecord.getCycle());
 
 		if (resume == null) {
 		    resume = new ProductivityRecord();
@@ -131,13 +135,23 @@ public class Report {
 		} else {
 		    resume.setSize(resume.getSize() + locRecord.getSize());
 		}
+		
+		if(groupResume == null) {
+		    groupResume = new ProductivityRecord();
+		    groupResume.setSize(locRecord.getSize());
+		    groupResume.setCycle(locRecord.getCycle());
+		    groupProductivityReport.put(resume.getCycle(), groupResume);
+		} else {
+		    groupResume.setSize(groupResume.getSize() + locRecord.getSize());
+		}
 	    }
 	}
 	
 	if(!logTRecordList.isEmpty()) {
 	    for(LogTRecord logTRecord:logTRecordList) {
 		ProductivityRecord resume = productivityReport.get(logTRecord.getCycle() + "-" + logTRecord.getResponsible());
-		
+		ProductivityRecord groupResume = groupProductivityReport.get(logTRecord.getCycle());
+
 		if (resume == null) {
 		    resume = new ProductivityRecord();
 		    resume.setMin(logTRecord.getMin());
@@ -146,6 +160,15 @@ public class Report {
 		    productivityReport.put(resume.getCycle() + "-" + resume.getResponsible(), resume);
 		} else {
 		    resume.setMin(resume.getMin() + logTRecord.getMin());
+		}
+		
+		if (groupResume == null) {
+		    groupResume = new ProductivityRecord();
+		    groupResume.setMin(logTRecord.getMin());
+		    groupResume.setCycle(logTRecord.getCycle());
+		    groupProductivityReport.put(groupResume.getCycle(), groupResume);
+		} else {
+		    groupResume.setMin(groupResume.getMin() + logTRecord.getMin());
 		}
 	    }
 	}
@@ -206,12 +229,14 @@ public class Report {
 	return productivity;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110856")})
-    public TreeMap<String, ProductivityRecord> getLocReport() {
+    public TreeMap<String, ProductivityRecord> getProductivityReport() {
         return productivityReport;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110856")})
+    public TreeMap<String, ProductivityRecord> getGroupProductivityReport() {
+        return groupProductivityReport;
+    }
+
     public List<String> getFileList() {
         return fileList;
     }

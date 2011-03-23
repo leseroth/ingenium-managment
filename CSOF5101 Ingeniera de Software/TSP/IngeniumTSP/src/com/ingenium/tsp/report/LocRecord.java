@@ -32,12 +32,10 @@ public class LocRecord extends Record {
 	this.size = size;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110949") })
     public String getResponsible() {
         return responsible;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201110949") })
     public void setResponsible(String responsible) {
         this.responsible = responsible;
     }
