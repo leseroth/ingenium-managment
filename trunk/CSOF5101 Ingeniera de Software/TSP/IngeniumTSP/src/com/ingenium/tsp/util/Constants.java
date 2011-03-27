@@ -33,10 +33,12 @@ public class Constants {
     public static final String STAGE_6_TEST = "s6";
     public static final String STAGE_7_POSTMORTEM = "s7";
 
-    public static final String NAME_PROJECT = "TSP";
-    public static final String NAME_CYCLE_1 = "Ciclo 1";
-    public static final String NAME_CYCLE_2 = "Ciclo 2";
-    public static final String NAME_CYCLE_3 = "Ciclo 3";
+    public static final String NAME_PROJECT = "1 TSP";
+    public static final String INICIO = "1.1 Inicio";
+    public static final String LANZAMIENTO = "1.2 Lanzamiento";
+    public static final String NAME_CYCLE_1 = "1.3 Ciclo 1";
+    public static final String NAME_CYCLE_2 = "1.4 Ciclo 2";
+    public static final String NAME_CYCLE_3 = "1.5 Ciclo 3";
 
     public static final String NAME_STAGE_1_STRATEGY = "Estrategia";
     public static final String NAME_STAGE_2_PLAN = "Plan";
@@ -62,8 +64,8 @@ public class Constants {
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.3.2.1", responsible = "201110544", min = 20),
 	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.3.3.1", responsible = "201110544", min = 150),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2011", taskId = "1.3.3.2", responsible = "201110544", min = 15),
-	    @LogT(cycle = CYCLE_1, date = "12/03/2011", taskId = "1.3.4.1", responsible = "201110544", min = 20),
-	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.3.4.2", responsible = "201110544", min = 30),
+	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.3.4.2", responsible = "201110544", min = 120),
+	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.3.4.2", responsible = "201110856", min = 160),
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "201110951", min = 150),
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.3.2.4", responsible = "201117818", min = 60),
 	    @LogT(cycle = CYCLE_1, date = "10/03/2011", taskId = "1.3.2.4", responsible = "201117818", min = 60),
@@ -86,7 +88,7 @@ public class Constants {
 	    @LogT(cycle = CYCLE_1, date = "14/03/2011", taskId = "9999", responsible = "201117818", min = 60),
 	    @LogT(cycle = CYCLE_1, date = "14/03/2011", taskId = "1.3.1.3", responsible = "201110949", min = 180),
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "201110949", min = 120),
-	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.21", responsible = "201117818", min = 120),
+	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "201117818", min = 120),
 	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.2.2", responsible = "201117818", min = 30),
 	    @LogT(cycle = CYCLE_1, date = "14/03/2011", taskId = "1.2.3", responsible = "201117818", min = 20),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2011", taskId = "1.2.3", responsible = "201110949", min = 60),

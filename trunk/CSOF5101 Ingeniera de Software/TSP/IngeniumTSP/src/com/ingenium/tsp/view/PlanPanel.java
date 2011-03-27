@@ -33,20 +33,22 @@ import javax.swing.tree.TreeSelectionModel;
 import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
 import com.ingenium.tsp.control.ManagePropertyFile;
+import com.ingenium.tsp.control.Report;
 import com.ingenium.tsp.model.Task;
 import com.ingenium.tsp.util.Constants;
 import com.ingenium.tsp.util.Util;
 
-
 @SuppressWarnings("serial")
 public class PlanPanel extends JPanel implements TreeSelectionListener, MouseListener, ActionListener {
 
-    private static final String ID_TAREA = "Id. tarea";
-    private static final String DESCRIPCION = "Descripcion";
-    private static final String TIEMPO_ESTIMADO = "Tiempo estimado";
-    private static final String VALOR_GANADO = "Valor ganado";
-    private static final String ROL_RESPONSABLES = "Responsable";
+    private static final String ID_TAREA = "Id. tarea:";
+    private static final String DESCRIPCION = "Descripcion:";
+    private static final String TIEMPO_ESTIMADO = "Tiempo estimado:";
+    private static final String VALOR_GANADO = "Valor ganado:";
+    private static final String ROL_RESPONSABLE = "Responsable:";
+    private static final String VALOR_GANADO_REAL = "Valor ganado real:";
     private static final String GUARDAR = "Guardar";
+    private static final int DIVIDER_LOCATION = 200;
 
     private DefaultMutableTreeNode top;
     private DefaultTreeModel treeModel;
@@ -55,18 +57,25 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     private HashMap<String, Task> dataTasks;
     private JTree tree;
     private JPanel descriptionPanel;
+    private JScrollPane content;
+    private JSplitPane splitPane;
+    private Report mainReport;
 
     private JTextField fieldIdTask = new JTextField();
     private JTextField fieldNameTask = new JTextField();
     private JTextField fieldTimeTask = new JTextField();
     private JTextField fieldValueTask = new JTextField();
     private JTextField fieldRoleTask = new JTextField();
-    
+    private JTextField fieldValueRealTask = new JTextField();
+
     private JPopupMenu popupAdd;
     private JPopupMenu popupRemove;
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    public PlanPanel() {
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"),
+	@Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
+    public PlanPanel(Report report) {
+	mainReport = report;
 	taskFile = ManagePropertyFile.getInstance(ManagePropertyFile.TASK_FILE);
 	initFile();
 	initComponents();
@@ -85,9 +94,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 26, responsible = "201117818") })
     private void initComponents() {
-	
+
 	top = new DefaultMutableTreeNode(Constants.NAME_PROJECT);
-        treeModel = new DefaultTreeModel(top);
+	treeModel = new DefaultTreeModel(top);
 
 	createNodes(top);
 	tree = new JTree(treeModel);
@@ -97,12 +106,12 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	JScrollPane treeView = new JScrollPane(tree);
 
 	initDescriptionPanel();
-	JScrollPane content = new JScrollPane(descriptionPanel);
+	content = new JScrollPane(descriptionPanel);
 
-	JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeView, content);
+	splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treeView, content);
 	splitPane.setOneTouchExpandable(true);
-	splitPane.setDividerLocation(200);
-	splitPane.setPreferredSize(new Dimension(900, 400));
+	splitPane.setDividerLocation(DIVIDER_LOCATION);
+	splitPane.setPreferredSize(new Dimension(900, 480));
 	splitPane.setAlignmentX(CENTER_ALIGNMENT);
 
 	setBackground(Constants.backgroundColor);
@@ -112,24 +121,23 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	box.add(Util.getBoxFiller());
 	box.add(splitPane);
 	add(box);
-	
-	
+
 	popupAdd = new JPopupMenu();
 	JMenuItem menuItem = new JMenuItem("Crear");
-	menuItem.addActionListener( new ActionListener() {	    
+	menuItem.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		addObject("Nuevo");
-		
+
 	    }
 	});
 	popupAdd.add(menuItem);
-	
+
 	popupRemove = new JPopupMenu();
 	menuItem = new JMenuItem("Eliminar");
-	menuItem.addActionListener( new ActionListener() {
+	menuItem.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		removeCurrentNode();
-		
+
 	    }
 	});
 	popupRemove.add(menuItem);
@@ -144,6 +152,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	    return;
 	}
 
+	splitPane.setRightComponent(content);
 	Object nodeInfo = node.getUserObject();
 	if (node.isLeaf()) {
 	    if (!(nodeInfo instanceof String)) {
@@ -151,29 +160,36 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 		updateFormPanel(task);
 	    }
 	} else {
-	    descriptionPanel.setVisible(false);
+	    if (nodeInfo instanceof String && ((String) nodeInfo).contains("Ciclo")) {
+		CycleOutcomeGraphic localBarChartDemo1 = new CycleOutcomeGraphic(mainReport, (String) nodeInfo);
+		splitPane.setRightComponent(localBarChartDemo1);
+	    } else {
+		descriptionPanel.setVisible(false);
+	    }
 	}
-    }  
-    
+	splitPane.setDividerLocation(DIVIDER_LOCATION);
+    }
+
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
     public void actionPerformed(ActionEvent e) {
 	String command = e.getActionCommand();
-	if (GUARDAR.equals(command)){
+	if (GUARDAR.equals(command)) {
 	    DefaultMutableTreeNode node = getCurrentNode();
-	    DefaultMutableTreeNode parent = (DefaultMutableTreeNode)node.getParent();
-	    Task parentTask = (Task)parent.getUserObject();
-	    
-	    Task task = (Task)node.getUserObject();
+	    DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+	    Task parentTask = (Task) parent.getUserObject();
+
+	    Task task = (Task) node.getUserObject();
 	    task.setId(fieldIdTask.getText());
 	    task.setName(fieldNameTask.getText());
 	    task.setResponsable(fieldRoleTask.getText());
 	    task.setTiempoEstimado(fieldTimeTask.getText());
 	    task.setValorEstimado(fieldValueTask.getText());
+	    task.setValorReal(fieldValueRealTask.getText());
 	    task.setCiclo(parentTask.getCiclo());
 	    task.setFase(parentTask.getFase());
 	    taskFile.put(task);
 	    taskFile.persist();
-	    
+
 	    top.removeAllChildren();
 	    initFile();
 	    createNodes(top);
@@ -182,89 +198,80 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    private DefaultMutableTreeNode getCurrentNode(){
-        DefaultMutableTreeNode parentNode = null;
-        TreePath parentPath = tree.getSelectionPath();
+    private DefaultMutableTreeNode getCurrentNode() {
+	DefaultMutableTreeNode parentNode = null;
+	TreePath parentPath = tree.getSelectionPath();
 
-        if (parentPath == null) {
-            parentNode = top;
-        } else {
-            parentNode = (DefaultMutableTreeNode)
-                         (parentPath.getLastPathComponent());
-        }
+	if (parentPath == null) {
+	    parentNode = top;
+	} else {
+	    parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+	}
 	return parentNode;
     }
-    
+
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
     public DefaultMutableTreeNode addObject(Object child) {
-        DefaultMutableTreeNode parentNode = getCurrentNode();        
-        return addObject(parentNode, child, true);
+	DefaultMutableTreeNode parentNode = getCurrentNode();
+	return addObject(parentNode, child, true);
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-                                            Object child, 
-                                            boolean shouldBeVisible) {
-        DefaultMutableTreeNode childNode = 
-                new DefaultMutableTreeNode(new Task());
+    public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent, Object child, boolean shouldBeVisible) {
+	DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(new Task());
 
-        if (parent == null) {
-            parent = top;
-        }
-	
-        treeModel.insertNodeInto(childNode, parent, 
-                                 parent.getChildCount());
+	if (parent == null) {
+	    parent = top;
+	}
 
-       if (shouldBeVisible) {
-            tree.scrollPathToVisible(new TreePath(childNode.getPath()));
-        }
-        return childNode;
+	treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
+
+	if (shouldBeVisible) {
+	    tree.scrollPathToVisible(new TreePath(childNode.getPath()));
+	}
+	return childNode;
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
     public void removeCurrentNode() {
-        TreePath currentSelection = tree.getSelectionPath();
-        if (currentSelection != null) {
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
-                         (currentSelection.getLastPathComponent());
-            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
-            if (parent != null) {
-        	treeModel.removeNodeFromParent(currentNode);
-                Task task = (Task)currentNode.getUserObject();
-                taskFile.remove(task);
-                taskFile.persist();
-                
-                top.removeAllChildren();
-    	    	initFile();
-    	    	createNodes(top);
-                treeModel.reload();
-                descriptionPanel.setVisible(false);
-            }
-        } 
+	TreePath currentSelection = tree.getSelectionPath();
+	if (currentSelection != null) {
+	    DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection.getLastPathComponent());
+	    MutableTreeNode parent = (MutableTreeNode) (currentNode.getParent());
+	    if (parent != null) {
+		treeModel.removeNodeFromParent(currentNode);
+		Task task = (Task) currentNode.getUserObject();
+		taskFile.remove(task);
+		taskFile.persist();
+
+		top.removeAllChildren();
+		initFile();
+		createNodes(top);
+		treeModel.reload();
+		descriptionPanel.setVisible(false);
+	    }
+	}
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent event) {
 
 	DefaultMutableTreeNode parentNode = null;
-        TreePath parentPath = tree.getSelectionPath();
+	TreePath parentPath = tree.getSelectionPath();
 
-        if (parentPath == null) {
-            parentNode = top;
-        } else {
-            parentNode = (DefaultMutableTreeNode)
-                         (parentPath.getLastPathComponent());
-        }
-	
-	if (parentNode.getLevel() == 2 && e.getButton() != MouseEvent.BUTTON1) {
-            popupAdd.show(e.getComponent(),
-                       e.getX(), e.getY());
-        }
-	
-	if (parentNode.getLevel() == 3 && e.getButton() != MouseEvent.BUTTON1) {
-            popupRemove.show(e.getComponent(),
-                       e.getX(), e.getY());
-        }
+	if (parentPath == null) {
+	    parentNode = top;
+	} else {
+	    parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+	}
+
+	if (parentNode.getLevel() == 2 && event.getButton() != MouseEvent.BUTTON1) {
+	    popupAdd.show(event.getComponent(), event.getX(), event.getY());
+	}
+
+	if (parentNode.getLevel() == 3 && event.getButton() != MouseEvent.BUTTON1) {
+	    popupRemove.show(event.getComponent(), event.getX(), event.getY());
+	}
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544") })
@@ -275,6 +282,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	    fieldTimeTask.setText(task.getTiempoEstimado());
 	    fieldRoleTask.setText(task.getResponsable());
 	    fieldValueTask.setText(task.getValorEstimado());
+	    fieldValueRealTask.setText(task.getValorReal());
 	    descriptionPanel.setVisible(true);
 	} else {
 	    descriptionPanel.setVisible(false);
@@ -295,16 +303,18 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	descriptionPanel.add(fieldTimeTask);
 	descriptionPanel.add(new JLabel(VALOR_GANADO, JLabel.TRAILING));
 	descriptionPanel.add(fieldValueTask);
-	descriptionPanel.add(new JLabel(ROL_RESPONSABLES, JLabel.TRAILING));
+	descriptionPanel.add(new JLabel(ROL_RESPONSABLE, JLabel.TRAILING));
 	descriptionPanel.add(fieldRoleTask);
+	descriptionPanel.add(new JLabel(VALOR_GANADO_REAL, JLabel.TRAILING));
+	descriptionPanel.add(fieldValueRealTask);
 	descriptionPanel.add(Util.getBigBoxFiller());
+
 	JButton guardarButton = new JButton(GUARDAR);
 	guardarButton.setActionCommand(GUARDAR);
 	guardarButton.addActionListener(this);
 	descriptionPanel.add(guardarButton);
-	//descriptionPanel.add(new JLabel("oon", JLabel.TRAILING));
 
-	Util.makeCompactGrid(descriptionPanel, 6, 2, 6, 6, 12, 6);
+	Util.makeCompactGrid(descriptionPanel, 7, 2, 6, 6, 12, 6);
 	descriptionPanel.setAlignmentX(CENTER_ALIGNMENT);
 	descriptionPanel.setAlignmentY(TOP_ALIGNMENT);
 	descriptionPanel.setMaximumSize(descriptionPanel.getPreferredSize());
@@ -314,59 +324,42 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 73, responsible = "201110951") })
     private void createNodes(DefaultMutableTreeNode top) {
 
+	DefaultMutableTreeNode inicio = new DefaultMutableTreeNode(Constants.INICIO);
+	DefaultMutableTreeNode lanzamiento = new DefaultMutableTreeNode(Constants.LANZAMIENTO);
 	DefaultMutableTreeNode ciclo1 = new DefaultMutableTreeNode(Constants.NAME_CYCLE_1);
 	DefaultMutableTreeNode ciclo2 = new DefaultMutableTreeNode(Constants.NAME_CYCLE_2);
 	DefaultMutableTreeNode ciclo3 = new DefaultMutableTreeNode(Constants.NAME_CYCLE_3);
 
-	DefaultMutableTreeNode c1fase1 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 1, 1));
-	DefaultMutableTreeNode c1fase2 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_2_PLAN, 1, 2));
-	DefaultMutableTreeNode c1fase3 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 1, 3));
-	DefaultMutableTreeNode c1fase4 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_4_DESIGN, 1, 4));
-	DefaultMutableTreeNode c1fase5 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 1, 5));
-	DefaultMutableTreeNode c1fase6 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_6_TEST, 1, 6));
-	DefaultMutableTreeNode c1fase7 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 1, 7));
+	DefaultMutableTreeNode c1fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 3, 1));
+	DefaultMutableTreeNode c1fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 3, 2));
+	DefaultMutableTreeNode c1fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 3, 3));
+	DefaultMutableTreeNode c1fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 3, 4));
+	DefaultMutableTreeNode c1fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 3, 5));
+	DefaultMutableTreeNode c1fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 3, 6));
+	DefaultMutableTreeNode c1fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 3, 7));
 
-	DefaultMutableTreeNode c2fase1 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 2, 1));
-	DefaultMutableTreeNode c2fase2 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_2_PLAN, 2, 2));
-	DefaultMutableTreeNode c2fase3 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 2, 3));
-	DefaultMutableTreeNode c2fase4 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_4_DESIGN, 2, 4));
-	DefaultMutableTreeNode c2fase5 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 2, 5));
-	DefaultMutableTreeNode c2fase6 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_6_TEST, 2, 6));
-	DefaultMutableTreeNode c2fase7 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 2, 7));
+	DefaultMutableTreeNode c2fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 4, 1));
+	DefaultMutableTreeNode c2fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 4, 2));
+	DefaultMutableTreeNode c2fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 4, 3));
+	DefaultMutableTreeNode c2fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 4, 4));
+	DefaultMutableTreeNode c2fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 4, 5));
+	DefaultMutableTreeNode c2fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 4, 6));
+	DefaultMutableTreeNode c2fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 4, 7));
 
-	DefaultMutableTreeNode c3fase1 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 3, 1));
-	DefaultMutableTreeNode c3fase2 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_2_PLAN, 3, 2));
-	DefaultMutableTreeNode c3fase3 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 3, 3));
-	DefaultMutableTreeNode c3fase4 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_4_DESIGN, 3, 4));
-	DefaultMutableTreeNode c3fase5 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 3, 5));
-	DefaultMutableTreeNode c3fase6 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_6_TEST, 3, 6));
-	DefaultMutableTreeNode c3fase7 = new DefaultMutableTreeNode(
-		getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 3, 7));
+	DefaultMutableTreeNode c3fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 5, 1));
+	DefaultMutableTreeNode c3fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 5, 2));
+	DefaultMutableTreeNode c3fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 5, 3));
+	DefaultMutableTreeNode c3fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 5, 4));
+	DefaultMutableTreeNode c3fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 5, 5));
+	DefaultMutableTreeNode c3fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 5, 6));
+	DefaultMutableTreeNode c3fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 5, 7));
 
+	top.add(inicio);
+	top.add(lanzamiento);
 	top.add(ciclo1);
 	top.add(ciclo2);
 	top.add(ciclo3);
-	
+
 	ciclo1.add(c1fase1);
 	ciclo1.add(c1fase2);
 	ciclo1.add(c1fase3);
@@ -401,6 +394,10 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 		dataTasks.put(task.getId(), task);
 
 		switch (Integer.valueOf(task.getCiclo())) {
+
+		case 0:
+		    lanzamiento.add(activity);
+		    break;
 
 		case 1:
 		    switch (Integer.valueOf(task.getFase())) {
@@ -483,19 +480,19 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	    }
 	}
     }
-    
+
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    private Task getDummyTask(String name, int ciclo, int fase){
+    private Task getDummyTask(String name, int ciclo, int fase) {
 	Task task = new Task();
 	task.setName(name);
 	task.setCiclo(String.valueOf(ciclo));
 	task.setFase(String.valueOf(fase));
-	task.setId(ciclo+"."+fase);
+	task.setId("1." + ciclo + "." + fase);
 	return task;
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
-    public void mouseEntered(MouseEvent e) {	
+    public void mouseEntered(MouseEvent e) {
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })

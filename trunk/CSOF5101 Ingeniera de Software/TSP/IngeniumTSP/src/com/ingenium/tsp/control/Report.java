@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.model.Task;
+import com.ingenium.tsp.report.DurationRecord;
 import com.ingenium.tsp.report.LocRecord;
 import com.ingenium.tsp.report.LogIntRecord;
 import com.ingenium.tsp.report.LogTRecord;
@@ -24,21 +26,15 @@ public class Report {
     private TreeMap<String, ProductivityRecord> groupProductivityReport;
     private TreeMap<String, LogIntRecord> interruptionReport;
     private TreeMap<String, LogIntRecord> groupInterruptionReport;
+    private TreeMap<String, DurationRecord> taskDurationReport;
 
     @SuppressWarnings("unchecked")
-    @LocList({ 
-	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"),
-	@Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201110856")})
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"), @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
     public void calculateSuccessfulAnalysis(List<String> totalOutcome, Map<String, List<? extends Record>> description) {
 	fileList = totalOutcome;
-	// printPlan(description.get(Analizer.PLAN));
 	calculateInterruption((List<LogIntRecord>) description.get(Analizer.LOG_INT));
-	// printLogT((List<LogTRecord>) description.get(Analizer.LOG_T));
 	calculateProductivity((List<LocRecord>) description.get(Analizer.LOC), (List<LogTRecord>) description.get(Analizer.LOG_T));
-	// printLogD(description.get(Analizer.LOG_D),
-	// description.get(Analizer.PLAN_Q));
-	// printPlanQ(description.get(Analizer.PLAN_Q));
-	// printProductivity();
+	calculateTaskDuration((List<LogTRecord>) description.get(Analizer.LOG_T));
     }
 
     public void printHeader(List<String> totalOutcome) {
@@ -74,7 +70,7 @@ public class Report {
 	System.out.println();
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 15, responsible = "201110544")})
+    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 15, responsible = "201110544") })
     public void printLogT(List<LogTRecord> logTRecordList) {
 	System.out.println("Total de tareas realizadas");
 	if (!logTRecordList.isEmpty()) {
@@ -89,7 +85,7 @@ public class Report {
 	    System.out.printf("| %1$-6s | %2$-15s | %3$-10s | %4$-15s | %5$-10s |", "Ciclo", "Responsable", "Tarea", "Fecha", "Duracion");
 	    System.out.println("\n------------------------------------------------------------------------");
 	    for (LogTRecord info : tasks.values()) {
-		//realTime += info.getMin();
+		// realTime += info.getMin();
 		System.out.printf("| %1$-6s | %2$-15s | %3$-10s | %4$-15s | %5$10d |", info.getCycle(), info.getResponsible(), info.getTaskId(),
 		        info.getDate(), info.getMin());
 		System.out.println();
@@ -104,10 +100,8 @@ public class Report {
 	System.out.println();
     }
 
-    @LocList({ 
-	@Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110949"), 
-	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"), 
-	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544")})
+    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110949"), @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"),
+	    @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544") })
     private void calculateProductivity(List<LocRecord> locRecordList, List<LogTRecord> logTRecordList) {
 	productivityReport = new TreeMap<String, ProductivityRecord>();
 	groupProductivityReport = new TreeMap<String, ProductivityRecord>();
@@ -126,8 +120,8 @@ public class Report {
 		} else {
 		    resume.setSize(resume.getSize() + locRecord.getSize());
 		}
-		
-		if(groupResume == null) {
+
+		if (groupResume == null) {
 		    groupResume = new ProductivityRecord();
 		    groupResume.setSize(locRecord.getSize());
 		    groupResume.setCycle(locRecord.getCycle());
@@ -137,9 +131,9 @@ public class Report {
 		}
 	    }
 	}
-	
-	if(!logTRecordList.isEmpty()) {
-	    for(LogTRecord logTRecord:logTRecordList) {
+
+	if (!logTRecordList.isEmpty()) {
+	    for (LogTRecord logTRecord : logTRecordList) {
 		ProductivityRecord resume = productivityReport.get(logTRecord.getCycle() + "-" + logTRecord.getResponsible());
 		ProductivityRecord groupResume = groupProductivityReport.get(logTRecord.getCycle());
 
@@ -152,7 +146,7 @@ public class Report {
 		} else {
 		    resume.setMin(resume.getMin() + logTRecord.getMin());
 		}
-		
+
 		if (groupResume == null) {
 		    groupResume = new ProductivityRecord();
 		    groupResume.setMin(logTRecord.getMin());
@@ -164,15 +158,14 @@ public class Report {
 	    }
 	}
     }
-    
-    @LocList({ 
-	@Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "201110856")})
+
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "201110856") })
     private void calculateInterruption(List<LogIntRecord> logIntRecordList) {
 	interruptionReport = new TreeMap<String, LogIntRecord>();
 	groupInterruptionReport = new TreeMap<String, LogIntRecord>();
-	
+
 	if (!logIntRecordList.isEmpty()) {
-	    for(LogIntRecord logIntRecord: logIntRecordList){
+	    for (LogIntRecord logIntRecord : logIntRecordList) {
 		LogIntRecord resume = interruptionReport.get(logIntRecord.getCycle() + "-" + logIntRecord.getResponsible());
 		LogIntRecord groupResume = groupInterruptionReport.get(logIntRecord.getInterruption());
 
@@ -187,7 +180,7 @@ public class Report {
 		} else {
 		    resume.setMin(resume.getMin() + logIntRecord.getMin());
 		}
-		
+
 		if (groupResume == null) {
 		    groupResume = new LogIntRecord();
 		    groupResume.setMin(logIntRecord.getMin());
@@ -200,70 +193,52 @@ public class Report {
 	}
     }
 
-    /*
-     * private void printPlan(List<String[]> auxArray) {
-     * System.out.println("Plan realizado"); if (!auxArray.isEmpty()) { for
-     * (String[] array : auxArray) { if (array[0].indexOf("Test") == -1) {
-     * System.out.println("Definido en: " + array[0] + ",   Tamano: " + array[1]
-     * + " locs,   Tiempo: " + array[2] + " minutos"); } } } else {
-     * System.out.println("No hay informacion disponible"); }
-     * System.out.println(); }
-     *
-     * private void printLogD(List<String[]> logD, List<String[]> planQ) {
-     * System.out.println("Total de Errores"); if (!logD.isEmpty()) { System.out
-     * .println(
-     * "---------------------------------------------------------------------------------------------------"
-     * ); System.out.printf("| %1$-35s | %2$-30s | %3$15s | %4$6s |", "Clase",
-     * "Metodo", "Etapa", "Error"); System.out .println(
-     * "\n---------------------------------------------------------------------------------------------------"
-     * ); for (String[] array : logD) {
-     * System.out.printf("| %1$-35s | %2$-30s | %3$15s | %4$6s |", array[0],
-     * array[1], array[2], array[3]); System.out.println();
-     * 
-     * 
-     * for (STAGE stage : STAGE.values()) { if
-     * (array[2].equals(stage.getValue())) { planQ.get(stage.ordinal())[3] = new
-     * Integer( planQ.get(stage.ordinal())[3]) + 1 + ""; } }
-     * 
-     * } System.out .println(
-     * "---------------------------------------------------------------------------------------------------"
-     * ); } else { System.out.println("No hay informacion disponible"); }
-     * System.out.println(); }
-     * 
-     * private void printPlanQ(List<String[]> auxArray) {
-     * System.out.println("Plan de Calidad"); if (!auxArray.isEmpty()) {
-     * System.out .println(
-     * "----------------------------------------------------------------------------------------------------"
-     * ); System.out.printf( "| %1$-13s | %2$-26s | %3$25s | %4$10s | %5$10s |",
-     * "Etapa", "Planeado Inyeccion D/KLOC", "Planeado Remocion D/KLOC",
-     * "Defectos", "Def/KLOC"); System.out .println(
-     * "\n----------------------------------------------------------------------------------------------------"
-     * ); for (String[] array : auxArray) { System.out.printf(
-     * "| %1$-13s | %2$-26s | %3$25s | %4$10s | %5$,10.2f |", array[0],
-     * array[1], array[2], array[3], new Double( array[3]) * 1000 / realLoc);
-     * System.out.println(); } System.out .println(
-     * "----------------------------------------------------------------------------------------------------"
-     * ); } else { System.out.println("No hay informacion disponible"); }
-     * System.out.println(); }
-     */
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 0, responsible = "201110856") })
+    private void calculateTaskDuration(List<LogTRecord> logTRecordList) {
+
+	if (!logTRecordList.isEmpty()) {
+	    ManagePropertyFile taskFile = ManagePropertyFile.getInstance(ManagePropertyFile.TASK_FILE);
+	    taskDurationReport = new TreeMap<String, DurationRecord>();
+		
+	    for (LogTRecord logTRecord : logTRecordList) {
+		String encoded = taskFile.getProperty(logTRecord.getTaskId());
+		if (encoded != null) {
+		    Task task = new Task(encoded);
+		    
+		    DurationRecord durationRecord = taskDurationReport.get(task.getCiclo()+"-"+task.getFase());
+		    if(durationRecord == null) {
+			durationRecord = new DurationRecord(task, logTRecord.getMin());
+			taskDurationReport.put(task.getCiclo()+"-"+task.getFase(), durationRecord);
+		    } else {
+			durationRecord.addTime(logTRecord.getMin());
+		    }
+		}
+	    }
+	}
+
+    }
 
     public TreeMap<String, ProductivityRecord> getProductivityReport() {
-        return productivityReport;
+	return productivityReport;
     }
 
     public TreeMap<String, ProductivityRecord> getGroupProductivityReport() {
-        return groupProductivityReport;
+	return groupProductivityReport;
     }
 
     public TreeMap<String, LogIntRecord> getInterruptionReport() {
-        return interruptionReport;
+	return interruptionReport;
     }
 
     public TreeMap<String, LogIntRecord> getGroupInterruptionReport() {
-        return groupInterruptionReport;
+	return groupInterruptionReport;
+    }
+
+    public TreeMap<String, DurationRecord> getTaskDurationReport() {
+	return taskDurationReport;
     }
 
     public List<String> getFileList() {
-        return fileList;
+	return fileList;
     }
 }

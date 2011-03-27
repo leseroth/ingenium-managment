@@ -9,6 +9,7 @@ public class Task extends PropertyRecord implements Comparable<Task> {
     String tiempoEstimado;
     String valorEstimado;
     String responsable;
+    String valorReal;
 
     public Task(){
     }
@@ -17,7 +18,6 @@ public class Task extends PropertyRecord implements Comparable<Task> {
 	decodeData(encoded);
     }
 
-    @Override
     public String encodeData() {
 	StringBuffer encoded = new StringBuffer();
 	encoded.append(id);
@@ -33,10 +33,11 @@ public class Task extends PropertyRecord implements Comparable<Task> {
 	encoded.append(valorEstimado);
 	encoded.append(SEPARATOR);
 	encoded.append(responsable);
+	encoded.append(SEPARATOR);
+	encoded.append(valorReal);
 	return encoded.toString();
     }
 
-    @Override
     public void decodeData(String encodedData) {
 	String[] decoded = encodedData.split(SEPARATOR);
 	id = decoded[0];
@@ -45,10 +46,10 @@ public class Task extends PropertyRecord implements Comparable<Task> {
 	name = decoded[3];
 	tiempoEstimado = decoded[4];
 	valorEstimado = decoded[5];
-	responsable = decoded[6];	
+	responsable = decoded[6];
+	valorReal = decoded[7];	
     }    
 
-    @Override
     public int compareTo(Task o) {
 	return getId().compareToIgnoreCase(o.getId());
     }
@@ -103,6 +104,14 @@ public class Task extends PropertyRecord implements Comparable<Task> {
 
     public void setValorEstimado(String valorEstimado) {
         this.valorEstimado = valorEstimado;
+    }
+
+    public String getValorReal() {
+        return valorReal;
+    }
+
+    public void setValorReal(String valorReal) {
+        this.valorReal = valorReal;
     }
 
 }
