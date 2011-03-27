@@ -54,7 +54,7 @@ public class Task extends PropertyRecord implements Comparable<Task> {
     }
     
     public String toString() {
-        return name;
+        return id+" "+name;
     }
 
     public String getCiclo() {

@@ -19,19 +19,20 @@ import com.ingenium.tsp.util.Constants;
  */
 public class Report {
 
-    private double realLoc = 0;
-    private double realTime = 0;
-    
     private List<String> fileList;
     private TreeMap<String, ProductivityRecord> productivityReport;
     private TreeMap<String, ProductivityRecord> groupProductivityReport;
+    private TreeMap<String, LogIntRecord> interruptionReport;
+    private TreeMap<String, LogIntRecord> groupInterruptionReport;
 
     @SuppressWarnings("unchecked")
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"),
+	@Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201110856")})
     public void calculateSuccessfulAnalysis(List<String> totalOutcome, Map<String, List<? extends Record>> description) {
 	fileList = totalOutcome;
 	// printPlan(description.get(Analizer.PLAN));
-	// printLogInt((List<LogIntRecord>) description.get(Analizer.LOG_INT));
+	calculateInterruption((List<LogIntRecord>) description.get(Analizer.LOG_INT));
 	// printLogT((List<LogTRecord>) description.get(Analizer.LOG_T));
 	calculateProductivity((List<LocRecord>) description.get(Analizer.LOC), (List<LogTRecord>) description.get(Analizer.LOG_T));
 	// printLogD(description.get(Analizer.LOG_D),
@@ -47,16 +48,6 @@ public class Report {
 	}
 	System.out.println();
     }
-
-    /*
-     * private void printPlan(List<String[]> auxArray) {
-     * System.out.println("Plan realizado"); if (!auxArray.isEmpty()) { for
-     * (String[] array : auxArray) { if (array[0].indexOf("Test") == -1) {
-     * System.out.println("Definido en: " + array[0] + ",   Tamano: " + array[1]
-     * + " locs,   Tiempo: " + array[2] + " minutos"); } } } else {
-     * System.out.println("No hay informacion disponible"); }
-     * System.out.println(); }
-     */
 
     @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110951") })
     public void printLogInt(List<LogIntRecord> logIntRecordList) {
@@ -98,7 +89,7 @@ public class Report {
 	    System.out.printf("| %1$-6s | %2$-15s | %3$-10s | %4$-15s | %5$-10s |", "Ciclo", "Responsable", "Tarea", "Fecha", "Duracion");
 	    System.out.println("\n------------------------------------------------------------------------");
 	    for (LogTRecord info : tasks.values()) {
-		realTime += info.getMin();
+		//realTime += info.getMin();
 		System.out.printf("| %1$-6s | %2$-15s | %3$-10s | %4$-15s | %5$10d |", info.getCycle(), info.getResponsible(), info.getTaskId(),
 		        info.getDate(), info.getMin());
 		System.out.println();
@@ -173,9 +164,51 @@ public class Report {
 	    }
 	}
     }
+    
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "201110856")})
+    private void calculateInterruption(List<LogIntRecord> logIntRecordList) {
+	interruptionReport = new TreeMap<String, LogIntRecord>();
+	groupInterruptionReport = new TreeMap<String, LogIntRecord>();
+	
+	if (!logIntRecordList.isEmpty()) {
+	    for(LogIntRecord logIntRecord: logIntRecordList){
+		LogIntRecord resume = interruptionReport.get(logIntRecord.getCycle() + "-" + logIntRecord.getResponsible());
+		LogIntRecord groupResume = groupInterruptionReport.get(logIntRecord.getInterruption());
+
+		if (resume == null) {
+		    resume = new LogIntRecord();
+		    resume.setMin(logIntRecord.getMin());
+		    resume.setCycle(logIntRecord.getCycle());
+		    resume.setResponsible(logIntRecord.getResponsible());
+		    resume.setDate(logIntRecord.getDate());
+		    resume.setInterruption(logIntRecord.getInterruption());
+		    interruptionReport.put(resume.getCycle() + "-" + resume.getResponsible(), resume);
+		} else {
+		    resume.setMin(resume.getMin() + logIntRecord.getMin());
+		}
+		
+		if (groupResume == null) {
+		    groupResume = new LogIntRecord();
+		    groupResume.setMin(logIntRecord.getMin());
+		    groupResume.setInterruption(logIntRecord.getInterruption());
+		    groupInterruptionReport.put(groupResume.getInterruption(), groupResume);
+		} else {
+		    groupResume.setMin(groupResume.getMin() + logIntRecord.getMin());
+		}
+	    }
+	}
+    }
 
     /*
-     * 
+     * private void printPlan(List<String[]> auxArray) {
+     * System.out.println("Plan realizado"); if (!auxArray.isEmpty()) { for
+     * (String[] array : auxArray) { if (array[0].indexOf("Test") == -1) {
+     * System.out.println("Definido en: " + array[0] + ",   Tamano: " + array[1]
+     * + " locs,   Tiempo: " + array[2] + " minutos"); } } } else {
+     * System.out.println("No hay informacion disponible"); }
+     * System.out.println(); }
+     *
      * private void printLogD(List<String[]> logD, List<String[]> planQ) {
      * System.out.println("Total de Errores"); if (!logD.isEmpty()) { System.out
      * .println(
@@ -214,27 +247,20 @@ public class Report {
      * System.out.println(); }
      */
 
-    public void printProductivity() {
-	System.out.printf(" Productividad Real: TotalLOC = %1$.0f, Total Tiempo = %2$.0f por tanto: %3$,6.2f LOC/Hora", realLoc, realTime,
-	        getProductivity(realLoc, realTime));
-	System.out.println();
-    }
-
-    private double getProductivity(double loc, double time) {
-	double productivity = 0;
-	if (time != 0) {
-	    productivity = (loc / (time / 60));
-	}
-
-	return productivity;
-    }
-
     public TreeMap<String, ProductivityRecord> getProductivityReport() {
         return productivityReport;
     }
 
     public TreeMap<String, ProductivityRecord> getGroupProductivityReport() {
         return groupProductivityReport;
+    }
+
+    public TreeMap<String, LogIntRecord> getInterruptionReport() {
+        return interruptionReport;
+    }
+
+    public TreeMap<String, LogIntRecord> getGroupInterruptionReport() {
+        return groupInterruptionReport;
     }
 
     public List<String> getFileList() {

@@ -67,7 +67,7 @@ public class TSPFrame extends JFrame implements ActionListener {
         mainTabbedPane.addTab(Constants.PANEL_QUALITY_LABEL, qualityPanel);
         mainTabbedPane.addTab(Constants.PANEL_REPORT_LABEL, reportPanel);
         mainTabbedPane.setAlignmentX(RIGHT_ALIGNMENT);
-        mainTabbedPane.setPreferredSize(new Dimension(1000, 500));
+        mainTabbedPane.setPreferredSize(new Dimension(1000, 580));
 
         Box mainBox = Box.createVerticalBox();
         mainBox.add(initHeaderPanel());
