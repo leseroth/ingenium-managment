@@ -17,10 +17,13 @@ import javax.tools.ToolProvider;
 
 import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.annotations.LogInt;
+import com.ingenium.tsp.annotations.LogIntList;
 import com.ingenium.tsp.annotations.LogT;
 import com.ingenium.tsp.annotations.LogTList;
 import com.ingenium.tsp.model.Person;
 import com.ingenium.tsp.report.LocRecord;
+import com.ingenium.tsp.report.LogIntRecord;
 import com.ingenium.tsp.report.LogTRecord;
 import com.ingenium.tsp.report.Record;
 import com.ingenium.tsp.util.Constants;
@@ -42,12 +45,15 @@ public class Analizer {
     public static List<Person> ingenium;
     private Report report;
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 4, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_1, size = 4, responsible = "201110856"),
+	@Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201110856")})
     public Analizer() {
 	report = new Report();
 	description = new HashMap<String, List<? extends Record>>();
 	description.put(LOC, new ArrayList<LocRecord>());
 	description.put(LOG_T, new ArrayList<LogTRecord>());
+	description.put(LOG_INT, new ArrayList<LogIntRecord>());
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 20, responsible = "201110856") })
@@ -118,10 +124,10 @@ public class Analizer {
 
     @LocList({ 
 	@Loc(cycle = Constants.CYCLE_1, size = 15, responsible = "200819123"), 
-	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "200819123")})
+	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "200819123"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 5, responsible = "201110856")})
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private void checkAnnotation(Class testClass, AccessibleObject accessible) {
-
 	if (accessible.isAnnotationPresent(LocList.class)) {
 	    LocList locList = accessible.getAnnotation(LocList.class);
 	    List<LocRecord> descList = (List<LocRecord>) description.get(LOC);
@@ -135,6 +141,14 @@ public class Analizer {
 	    List<LogTRecord> descList = (List<LogTRecord>) description.get(LOG_T);
 	    for (LogT logT : logTList.value()) {
 		descList.add(new LogTRecord(logT.date(), logT.cycle(), logT.taskId(), logT.responsible(), logT.min()));
+	    }
+	}
+	
+	if(accessible.isAnnotationPresent(LogIntList.class)) {
+	    LogIntList logIntList = accessible.getAnnotation(LogIntList.class);
+	    List<LogIntRecord> descList = (List<LogIntRecord>) description.get(LOG_INT); 
+	    for(LogInt logInt : logIntList.value()) {
+		descList.add(new LogIntRecord(logInt.intId(), logInt.cycle(), logInt.date(), logInt.responsible(), logInt.min()));
 	    }
 	}
     }

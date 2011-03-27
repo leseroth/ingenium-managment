@@ -6,6 +6,9 @@ public class LogIntRecord extends Record {
     private String date;
     private String responsible;
     private int min;
+    
+    public LogIntRecord(){
+    }
 
     public LogIntRecord(String interruption, String cycle, String date, String responsible, int min) {
 	super();
