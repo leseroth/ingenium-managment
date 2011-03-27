@@ -57,7 +57,7 @@ public class TSPFrame extends JFrame implements ActionListener {
 	setJMenuBar(menuBar);
 
 	teamPanel = new TeamPanel();
-	planPanel = new PlanPanel();
+	planPanel = new PlanPanel(analizer.getReport());
 	qualityPanel = new QualityPanel();
 	reportPanel = new ReportPanel(analizer.getReport());
 
