@@ -227,7 +227,7 @@ public class ReportPanel extends JPanel implements ActionListener {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);
 	JLabel labelProductividad = new JLabel("Interrupciones por Integrante");
-	JTable table = createTable(data, new String[] { "Ciclo", "Rol", "Responsable", "Interrupcion","Fecha", "Tiempo (H)"}, REPORT_WIDTH, PERSON_REPORT_HEIGHT);
+	JTable table = createTable(data, new String[] { "Ciclo", "Rol", "Responsable", "Interrupcion","Fecha", "Tiempo (H)"}, REPORT_WIDTH, PERSON_REPORT_HEIGHT-50);
 	table.getColumnModel().getColumn(0).setPreferredWidth(100);
 	table.getColumnModel().getColumn(1).setPreferredWidth(150);
 	table.getColumnModel().getColumn(2).setPreferredWidth(200);
@@ -265,7 +265,7 @@ public class ReportPanel extends JPanel implements ActionListener {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);
 	JLabel labelProductividad = new JLabel("Interrupciones del grupo del Grupo");
-	JTable table = createTable(data, new String[] { "Interrupcion", "Tiempo (H)"}, REPORT_WIDTH, GROUP_REPORT_HEIGHT);
+	JTable table = createTable(data, new String[] { "Interrupcion", "Tiempo (H)"}, REPORT_WIDTH, GROUP_REPORT_HEIGHT+50);
 	table.getColumnModel().getColumn(0).setPreferredWidth(200);
 	table.getColumnModel().getColumn(1).setPreferredWidth(100);
 	table.getColumnModel().getColumn(1).setCellRenderer(rightAlignment);

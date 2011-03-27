@@ -48,14 +48,8 @@ public class Constants {
     public static final String NAME_STAGE_6_TEST = "Pruebas";
     public static final String NAME_STAGE_7_POSTMORTEM = "Postmortem";
 
-    public static final String INGENIUM_CARLOS = "r1";
-    public static final String INGENIUM_SANDRA = "r2";
-    public static final String INGENIUM_MAURICIO = "r3";
-    public static final String INGENIUM_DAVID = "r4";
-    public static final String INGENIUM_WILLIAN = "r5";
-    public static final String INGENIUM_ERIK = "r6";
-
-    @LogTList({ @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "201110544", min = 30),
+    @LogTList({ 
+	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "200819123", min = 30),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2010", taskId = "1.2.1", responsible = "201110544", min = 50),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2010", taskId = "1.2.3", responsible = "201110544", min = 30),
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.3.1.1", responsible = "201110544", min = 180),
@@ -150,7 +144,9 @@ public class Constants {
 	    @LogT(cycle = CYCLE_2, date = "22/03/2011", taskId = "1.4.7.1", responsible = "200819123", min = 120),
 	    @LogT(cycle = CYCLE_2, date = "22/03/2011", taskId = "1.4.7.2", responsible = "201110951", min = 60),
 	    @LogT(cycle = CYCLE_2, date = "22/03/2011", taskId = "1.4.7.1", responsible = "201110951", min = 60),
-	    @LogT(cycle = CYCLE_2, date = "22/03/2011", taskId = "1.4.7.2", responsible = "200819123", min = 120)})
+	    @LogT(cycle = CYCLE_2, date = "22/03/2011", taskId = "1.4.7.2", responsible = "200819123", min = 120),
+	    @LogT(cycle = CYCLE_2, date = "23/03/2011", taskId = "9999", responsible = "200819123", min = 53),
+	    @LogT(cycle = CYCLE_2, date = "23/03/2011", taskId = "9999", responsible = "201117818", min = 40)})
     @LogIntList({ @LogInt(cycle = CYCLE_1, date = "14/03/2011", intId = "Skype", responsible = "201110856", min = 25),
 	    @LogInt(cycle = CYCLE_1, date = "09/03/2011", intId = "Internet", responsible = "201110544", min = 10),
 	    @LogInt(cycle = CYCLE_1, date = "09/03/2011", intId = "Internet", responsible = "201117818", min = 15),
@@ -162,7 +158,18 @@ public class Constants {
 	    @LogInt(cycle = CYCLE_1, date = "14/03/2011", intId = "LlamadaTelefonica", responsible = "201110949", min = 30),
 	    @LogInt(cycle = CYCLE_1, date = "13/03/2011", intId = "LlamadaTelefonica", responsible = "201110949", min = 40),
 	    @LogInt(cycle = CYCLE_1, date = "13/03/2011", intId = "PedirComida", responsible = "200819123", min = 10),
-	    @LogInt(cycle = CYCLE_1, date = "14/03/2011", intId = "PedirComida", responsible = "200819123", min = 10) })
+	    @LogInt(cycle = CYCLE_1, date = "14/03/2011", intId = "PedirComida", responsible = "200819123", min = 10),
+	    @LogInt(cycle = CYCLE_2, date = "20/03/2011", intId = "Telefono", responsible = "201117818", min = 10),
+	    @LogInt(cycle = CYCLE_2, date = "21/03/2011", intId = "Desayuno", responsible = "201117818", min = 75),
+	    @LogInt(cycle = CYCLE_2, date = "20/03/2011", intId = "Internet", responsible = "201117818", min = 43),
+	    @LogInt(cycle = CYCLE_2, date = "21/03/2011", intId = "Internet", responsible = "201117818", min = 46),
+	    @LogInt(cycle = CYCLE_2, date = "21/03/2011", intId = "Tienda", responsible = "201117818", min = 6),
+	    @LogInt(cycle = CYCLE_2, date = "22/03/2011", intId = "Cafe", responsible = "201110949", min = 10),
+	    @LogInt(cycle = CYCLE_2, date = "22/03/2011", intId = "LlamadaTelefonica", responsible = "201110949", min = 15),
+	    @LogInt(cycle = CYCLE_2, date = "21/03/2011", intId = "LlamadaTelefonica", responsible = "201110949", min = 15),
+	    @LogInt(cycle = CYCLE_2, date = "19/03/2011", intId = "LlamadaTelefonica", responsible = "201110949", min = 20),
+	    @LogInt(cycle = CYCLE_2, date = "19/03/2011", intId = "PedirComida", responsible = "201110949", min = 5),
+	    @LogInt(cycle = CYCLE_2, date = "21/03/2011", intId = "PedirComida", responsible = "201110949", min = 5)})
     public void loadDataCycleOne() {
     }
 }

@@ -69,4 +69,10 @@ public class PersonTableDataModel extends AbstractTableModel {
 	fireTableDataChanged();
 	return removed;
     }
+    
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201117818") })
+    public void removeAll(){
+	personDataList.clear();
+	fireTableDataChanged();
+    }
 }

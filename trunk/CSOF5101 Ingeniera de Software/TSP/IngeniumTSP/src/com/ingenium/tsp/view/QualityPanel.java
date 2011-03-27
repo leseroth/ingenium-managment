@@ -48,16 +48,16 @@ public class QualityPanel extends JPanel implements ActionListener {
     private static final String DEF_INY_EST_LABEL = "Defectos inyectados estimados";
     private static final String DEF_REM_EST_LABEL = "Defectos removidos estimados";
     private static final String DEF_INY_REAL_LABEL = "Defectos inyectados reales";
-    private static final String DEF_REM_REAL_LABEL = "Defectos emovidos reales";
+    private static final String DEF_REM_REAL_LABEL = "Defectos removidos reales";
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110951") })
     public QualityPanel() {
 	initFile();
 	initComponents();
     }
     
     @SuppressWarnings("rawtypes")
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 6, responsible = "201110951") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 6, responsible = "201110951") })
     private void initFile() {
 	qualityFile = ManagePropertyFile.getInstance(ManagePropertyFile.QUALITY_FILE);
 	qualityList = new ArrayList<Quality>();
@@ -69,7 +69,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 11, responsible = "201110949") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 11, responsible = "201110949") })
     private void initComponents() {
 	setBackground(Constants.backgroundColor);
 	Box box = Box.createVerticalBox();
@@ -87,7 +87,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	add(box);
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 13, responsible = "201110949") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 13, responsible = "201110949") })
     private JScrollPane initPersonListPanel() {
 	JPanel personTablePanel = new JPanel();
 	personTablePanel.setOpaque(true);
@@ -108,7 +108,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	return scrollPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 18, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 18, responsible = "201110856") })
     private JPanel initFormPanel() {
 	JPanel formPanel = new JPanel();
 	formPanel.setLayout(new SpringLayout());
@@ -142,7 +142,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	return formPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 17, responsible = "201117818") })
     private JPanel initControlPanel() {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);
@@ -168,7 +168,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	return panel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 6, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 6, responsible = "200819123") })
     public void actionPerformed(ActionEvent event) {
 	if (event.getSource().equals(addQuality)) {
 	    actionAddPerson();
@@ -179,7 +179,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 8, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 8, responsible = "200819123") })
     private void actionAddPerson() {
 	if (Util.isEmptyTextComponent(defectosInyectados) && Util.isEmptyTextComponent(defectosInyectadosReal)
 		&& Util.isEmptyTextComponent(defectosRemovidos) && Util.isEmptyTextComponent(defectosRemovidosReal)) {
@@ -196,7 +196,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 6, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 6, responsible = "200819123") })
     private void actionRemovePerson() {
 	if (qualityTable.getSelectedRows().length != 0) {
 	    for (int c : qualityTable.getSelectedRows()) {
@@ -209,7 +209,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "200819123") })
     private void actionButtonSave() {
 	qualityFile.persist();
 	JOptionPane.showMessageDialog(this, "La informacion se almaceno correctamente", "Guardar", JOptionPane.INFORMATION_MESSAGE);

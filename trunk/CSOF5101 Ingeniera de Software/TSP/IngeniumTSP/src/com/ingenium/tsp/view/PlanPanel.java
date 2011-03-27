@@ -1,5 +1,6 @@
 package com.ingenium.tsp.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +11,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,8 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -34,9 +40,12 @@ import com.ingenium.tsp.annotations.Loc;
 import com.ingenium.tsp.annotations.LocList;
 import com.ingenium.tsp.control.ManagePropertyFile;
 import com.ingenium.tsp.control.Report;
+import com.ingenium.tsp.model.Person;
 import com.ingenium.tsp.model.Task;
+import com.ingenium.tsp.report.LogTRecord;
 import com.ingenium.tsp.util.Constants;
 import com.ingenium.tsp.util.Util;
+import com.ingenium.tsp.view.table.PersonTableDataModel;
 
 @SuppressWarnings("serial")
 public class PlanPanel extends JPanel implements TreeSelectionListener, MouseListener, ActionListener {
@@ -47,12 +56,13 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     private static final String VALOR_GANADO = "Valor ganado:";
     private static final String ROL_RESPONSABLE = "Responsable:";
     private static final String VALOR_GANADO_REAL = "Valor ganado real:";
-    private static final String GUARDAR = "Guardar";
+    private static final String SAVE = "Guardar";
     private static final int DIVIDER_LOCATION = 200;
 
     private DefaultMutableTreeNode top;
     private DefaultTreeModel treeModel;
     private ManagePropertyFile taskFile;
+    private ManagePropertyFile personFile;
     private List<Task> taskList;
     private HashMap<String, Task> dataTasks;
     private JTree tree;
@@ -60,23 +70,23 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     private JScrollPane content;
     private JSplitPane splitPane;
     private Report mainReport;
+    private PersonTableDataModel personTableDataModel;
 
     private JTextField fieldIdTask = new JTextField();
     private JTextField fieldNameTask = new JTextField();
     private JTextField fieldTimeTask = new JTextField();
     private JTextField fieldValueTask = new JTextField();
-    private JTextField fieldRoleTask = new JTextField();
+    private JTextArea fieldRoleTask = new JTextArea();
     private JTextField fieldValueRealTask = new JTextField();
 
     private JPopupMenu popupAdd;
     private JPopupMenu popupRemove;
 
-    @LocList({ 
-	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"),
-	@Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
     public PlanPanel(Report report) {
 	mainReport = report;
 	taskFile = ManagePropertyFile.getInstance(ManagePropertyFile.TASK_FILE);
+	personFile = ManagePropertyFile.getInstance(ManagePropertyFile.PERSON_FILE);
 	initFile();
 	initComponents();
     }
@@ -173,7 +183,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
     public void actionPerformed(ActionEvent e) {
 	String command = e.getActionCommand();
-	if (GUARDAR.equals(command)) {
+	if (SAVE.equals(command)) {
 	    DefaultMutableTreeNode node = getCurrentNode();
 	    DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
 	    Task parentTask = (Task) parent.getUserObject();
@@ -283,6 +293,20 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	    fieldRoleTask.setText(task.getResponsable());
 	    fieldValueTask.setText(task.getValorEstimado());
 	    fieldValueRealTask.setText(task.getValorReal());
+
+	    personTableDataModel.removeAll();
+	    Map<String, Person> personMap = new HashMap<String, Person>();
+	    for (LogTRecord record : mainReport.getTaskList()) {
+		if (record.getTaskId().equals(task.getId())) {
+		    Person person = personMap.get(record.getResponsible());
+		    if(person == null){
+			person = new Person(personFile.getProperty(record.getResponsible()));
+			personMap.put(record.getResponsible(), person);
+			personTableDataModel.addPerson(person);
+		    }
+		}
+	    }
+
 	    descriptionPanel.setVisible(true);
 	} else {
 	    descriptionPanel.setVisible(false);
@@ -293,32 +317,51 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "200819123") })
     private void initDescriptionPanel() {
 	descriptionPanel = new JPanel();
-	descriptionPanel.setLayout(new SpringLayout());
+	JPanel formPanel = new JPanel();
+	formPanel.setLayout(new SpringLayout());
 
-	descriptionPanel.add(new JLabel(ID_TAREA, JLabel.TRAILING));
-	descriptionPanel.add(fieldIdTask);
-	descriptionPanel.add(new JLabel(DESCRIPCION, JLabel.TRAILING));
-	descriptionPanel.add(fieldNameTask);
-	descriptionPanel.add(new JLabel(TIEMPO_ESTIMADO, JLabel.TRAILING));
-	descriptionPanel.add(fieldTimeTask);
-	descriptionPanel.add(new JLabel(VALOR_GANADO, JLabel.TRAILING));
-	descriptionPanel.add(fieldValueTask);
-	descriptionPanel.add(new JLabel(ROL_RESPONSABLE, JLabel.TRAILING));
-	descriptionPanel.add(fieldRoleTask);
-	descriptionPanel.add(new JLabel(VALOR_GANADO_REAL, JLabel.TRAILING));
-	descriptionPanel.add(fieldValueRealTask);
-	descriptionPanel.add(Util.getBigBoxFiller());
+	JButton buttonSave = new JButton(SAVE);
+	buttonSave.setActionCommand(SAVE);
+	buttonSave.addActionListener(this);
 
-	JButton guardarButton = new JButton(GUARDAR);
-	guardarButton.setActionCommand(GUARDAR);
-	guardarButton.addActionListener(this);
-	descriptionPanel.add(guardarButton);
+	formPanel.add(new JLabel(ID_TAREA, JLabel.TRAILING));
+	formPanel.add(fieldIdTask);
+	formPanel.add(new JLabel(DESCRIPCION, JLabel.TRAILING));
+	formPanel.add(fieldNameTask);
+	formPanel.add(new JLabel(TIEMPO_ESTIMADO, JLabel.TRAILING));
+	formPanel.add(fieldTimeTask);
+	formPanel.add(new JLabel(VALOR_GANADO, JLabel.TRAILING));
+	formPanel.add(fieldValueTask);
+	formPanel.add(new JLabel(ROL_RESPONSABLE, JLabel.TRAILING));
+	formPanel.add(fieldRoleTask);
+	formPanel.add(new JLabel(VALOR_GANADO_REAL, JLabel.TRAILING));
+	formPanel.add(fieldValueRealTask);
 
-	Util.makeCompactGrid(descriptionPanel, 7, 2, 6, 6, 12, 6);
-	descriptionPanel.setAlignmentX(CENTER_ALIGNMENT);
-	descriptionPanel.setAlignmentY(TOP_ALIGNMENT);
-	descriptionPanel.setMaximumSize(descriptionPanel.getPreferredSize());
+	fieldIdTask.setPreferredSize(new Dimension(500, 20));
+	fieldRoleTask.setRows(3);
+	fieldRoleTask.setLineWrap(true);
+	fieldRoleTask.setWrapStyleWord(true);
+	fieldRoleTask.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+	Util.makeCompactGrid(formPanel, 6, 2, 6, 6, 12, 6);
+	formPanel.setAlignmentX(CENTER_ALIGNMENT);
+	formPanel.setMaximumSize(formPanel.getPreferredSize());
+	formPanel.setVisible(true);
+
+	JLabel participant = new JLabel("Participantes");
+	participant.setAlignmentX(CENTER_ALIGNMENT);
+
+	Box box = Box.createVerticalBox();
+	box.add(formPanel);
+	box.add(Util.getBoxFiller());
+	box.add(buttonSave);
+	box.add(Util.getBigBoxFiller());
+	box.add(participant);
+	box.add(createParticipantTable(450, 200));
+
 	descriptionPanel.setVisible(false);
+	descriptionPanel.add(box);
+	descriptionPanel.setMaximumSize(descriptionPanel.getPreferredSize());
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 73, responsible = "201110951") })
@@ -395,90 +438,59 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 
 		switch (Integer.valueOf(task.getCiclo())) {
 
-		case 0:
-		    lanzamiento.add(activity);
-		    break;
+		case 0: lanzamiento.add(activity); break;
 
 		case 1:
 		    switch (Integer.valueOf(task.getFase())) {
-		    case 1:
-			c1fase1.add(activity);
-			break;
-		    case 2:
-			c1fase2.add(activity);
-			break;
-		    case 3:
-			c1fase3.add(activity);
-			break;
-		    case 4:
-			c1fase4.add(activity);
-			break;
-		    case 5:
-			c1fase5.add(activity);
-			break;
-		    case 6:
-			c1fase6.add(activity);
-			break;
-		    case 7:
-			c1fase7.add(activity);
-			break;
+		    case 1: c1fase1.add(activity); break;
+		    case 2: c1fase2.add(activity); break;
+		    case 3: c1fase3.add(activity); break;
+		    case 4: c1fase4.add(activity); break;
+		    case 5: c1fase5.add(activity); break;
+		    case 6: c1fase6.add(activity); break;
+		    case 7: c1fase7.add(activity); break;
 		    }
 		    break;
 
 		case 2:
 		    switch (Integer.valueOf(task.getFase())) {
-		    case 1:
-			c2fase1.add(activity);
-			break;
-		    case 2:
-			c2fase2.add(activity);
-			break;
-		    case 3:
-			c2fase3.add(activity);
-			break;
-		    case 4:
-			c2fase4.add(activity);
-			break;
-		    case 5:
-			c2fase5.add(activity);
-			break;
-		    case 6:
-			c2fase6.add(activity);
-			break;
-		    case 7:
-			c2fase7.add(activity);
-			break;
+		    case 1: c2fase1.add(activity); break;
+		    case 2: c2fase2.add(activity); break;
+		    case 3: c2fase3.add(activity); break;
+		    case 4: c2fase4.add(activity); break;
+		    case 5: c2fase5.add(activity); break;
+		    case 6: c2fase6.add(activity); break;
+		    case 7: c2fase7.add(activity); break;
 		    }
 		    break;
 
 		case 3:
 		    switch (Integer.valueOf(task.getFase())) {
-		    case 1:
-			c3fase1.add(activity);
-			break;
-		    case 2:
-			c3fase2.add(activity);
-			break;
-		    case 3:
-			c3fase3.add(activity);
-			break;
-		    case 4:
-			c3fase4.add(activity);
-			break;
-		    case 5:
-			c3fase5.add(activity);
-			break;
-		    case 6:
-			c3fase6.add(activity);
-			break;
-		    case 7:
-			c3fase7.add(activity);
-			break;
+		    case 1: c3fase1.add(activity); break;
+		    case 2: c3fase2.add(activity); break;
+		    case 3: c3fase3.add(activity); break;
+		    case 4: c3fase4.add(activity); break;
+		    case 5: c3fase5.add(activity); break;
+		    case 6: c3fase6.add(activity); break;
+		    case 7: c3fase7.add(activity); break;
 		    }
 		    break;
 		}
 	    }
 	}
+    }
+
+    private JTable createParticipantTable(int widht, int height) {
+	personTableDataModel = new PersonTableDataModel(new ArrayList<Person>(), new String[] { "Codigo", "Nombre", "Rol" });
+
+	JTable personTable = new JTable(personTableDataModel);
+	personTable.setPreferredScrollableViewportSize(new Dimension(widht, height));
+	personTable.setFillsViewportHeight(true);
+	personTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	personTable.setAutoCreateRowSorter(true);
+	personTable.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+	return personTable;
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
