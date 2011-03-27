@@ -27,11 +27,13 @@ public class Report {
     private TreeMap<String, LogIntRecord> interruptionReport;
     private TreeMap<String, LogIntRecord> groupInterruptionReport;
     private TreeMap<String, DurationRecord> taskDurationReport;
+    private List<LogTRecord> taskList;
 
     @SuppressWarnings("unchecked")
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"), @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
     public void calculateSuccessfulAnalysis(List<String> totalOutcome, Map<String, List<? extends Record>> description) {
 	fileList = totalOutcome;
+	taskList = (List<LogTRecord>) description.get(Analizer.LOG_T);
 	calculateInterruption((List<LogIntRecord>) description.get(Analizer.LOG_INT));
 	calculateProductivity((List<LocRecord>) description.get(Analizer.LOC), (List<LogTRecord>) description.get(Analizer.LOG_T));
 	calculateTaskDuration((List<LogTRecord>) description.get(Analizer.LOG_T));
@@ -236,6 +238,10 @@ public class Report {
 
     public TreeMap<String, DurationRecord> getTaskDurationReport() {
 	return taskDurationReport;
+    }
+
+    public List<LogTRecord> getTaskList() {
+        return taskList;
     }
 
     public List<String> getFileList() {

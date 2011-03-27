@@ -1,6 +1,5 @@
 package com.ingenium.tsp.test;
 
-import com.ingenium.tsp.model.Person;
 import com.ingenium.tsp.report.*;
 import com.ingenium.tsp.util.Constants;
 import com.ingenium.tsp.annotations.Loc;
