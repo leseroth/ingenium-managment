@@ -21,9 +21,9 @@ public class Constants {
     public static final String PANEL_QUALITY_LABEL="Plan de calidad";
     public static final String PANEL_REPORT_LABEL="Reporte";
 
-    public static final String CYCLE_1 = "c1";
-    public static final String CYCLE_2 = "c2";
-    public static final String CYCLE_3 = "c3";
+    public static final String CYCLE_1 = "1";
+    public static final String CYCLE_2 = "2";
+    public static final String CYCLE_3 = "3";
 
     public static final String STAGE_1_STRATEGY = "s1";
     public static final String STAGE_2_PLAN = "s2";
@@ -49,6 +49,9 @@ public class Constants {
     public static final String NAME_STAGE_7_POSTMORTEM = "Postmortem";
 
     @LogTList({ 
+	    @LogT(cycle = CYCLE_1, date = "11/03/2011", taskId = "1.2.2", responsible = "200819123", min = 10),
+	    @LogT(cycle = CYCLE_1, date = "12/03/2011", taskId = "1.2.3", responsible = "200819123", min = 10),
+	    @LogT(cycle = CYCLE_1, date = "13/03/2011", taskId = "1.2.4", responsible = "200819123", min = 10),
 	    @LogT(cycle = CYCLE_1, date = "09/03/2011", taskId = "1.2.1", responsible = "200819123", min = 30),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2010", taskId = "1.2.1", responsible = "201110544", min = 50),
 	    @LogT(cycle = CYCLE_1, date = "12/03/2010", taskId = "1.2.3", responsible = "201110544", min = 30),

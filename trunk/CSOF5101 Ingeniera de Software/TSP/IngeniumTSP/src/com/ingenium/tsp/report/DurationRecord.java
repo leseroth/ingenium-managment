@@ -15,6 +15,14 @@ public class DurationRecord extends Record {
 	realTime = time;
     }
 
+    public DurationRecord(int cycle, int stage, double plannedTime, int realTime) {
+	super();
+	this.cycle = cycle;
+	this.stage = stage;
+	this.plannedTime = plannedTime;
+	this.realTime = realTime;
+    }
+
     public int getCycle() {
 	return cycle;
     }

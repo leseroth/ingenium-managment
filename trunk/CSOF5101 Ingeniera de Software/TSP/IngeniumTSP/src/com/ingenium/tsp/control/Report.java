@@ -214,6 +214,14 @@ public class Report {
 		    } else {
 			durationRecord.addTime(logTRecord.getMin());
 		    }
+		} else if("9999".equals(logTRecord.getTaskId())) {
+		    DurationRecord durationRecord = taskDurationReport.get(logTRecord.getCycle()+"-9999");
+		    if(durationRecord == null) {
+			durationRecord = new DurationRecord(Integer.parseInt(logTRecord.getCycle()),9,0d,logTRecord.getMin());
+			taskDurationReport.put(logTRecord.getCycle()+"-9999", durationRecord);
+		    } else {
+			durationRecord.addTime(logTRecord.getMin());
+		    }
 		}
 	    }
 	}

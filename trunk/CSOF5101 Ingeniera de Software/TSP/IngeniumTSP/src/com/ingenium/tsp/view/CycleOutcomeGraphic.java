@@ -36,27 +36,14 @@ public class CycleOutcomeGraphic extends JPanel {
     private String getStage(int stage) {
 	String name = null;
 	switch (stage) {
-	case 1:
-	    name = Constants.NAME_STAGE_1_STRATEGY;
-	    break;
-	case 2:
-	    name = Constants.NAME_STAGE_2_PLAN;
-	    break;
-	case 3:
-	    name = Constants.NAME_STAGE_3_REQUIREMENT;
-	    break;
-	case 4:
-	    name = Constants.NAME_STAGE_4_DESIGN;
-	    break;
-	case 5:
-	    name = Constants.NAME_STAGE_5_IMPLEMENTATION;
-	    break;
-	case 6:
-	    name = Constants.NAME_STAGE_6_TEST;
-	    break;
-	case 7:
-	    name = Constants.NAME_STAGE_7_POSTMORTEM;
-	    break;
+	case 1: name = Constants.NAME_STAGE_1_STRATEGY; break;
+	case 2: name = Constants.NAME_STAGE_2_PLAN; break;
+	case 3: name = Constants.NAME_STAGE_3_REQUIREMENT; break;
+	case 4: name = Constants.NAME_STAGE_4_DESIGN; break;
+	case 5: name = Constants.NAME_STAGE_5_IMPLEMENTATION; break;
+	case 6: name = Constants.NAME_STAGE_6_TEST; break;
+	case 7: name = Constants.NAME_STAGE_7_POSTMORTEM; break;
+	case 9: name = "Misc"; break;
 	}
 	return name;
     }

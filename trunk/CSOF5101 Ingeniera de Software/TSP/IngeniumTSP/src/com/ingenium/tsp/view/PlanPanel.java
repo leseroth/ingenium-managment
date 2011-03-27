@@ -480,7 +480,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
-    private JTable createParticipantTable(int widht, int height) {
+    private JScrollPane createParticipantTable(int widht, int height) {
 	personTableDataModel = new PersonTableDataModel(new ArrayList<Person>(), new String[] { "Codigo", "Nombre", "Rol" });
 
 	JTable personTable = new JTable(personTableDataModel);
@@ -488,9 +488,11 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	personTable.setFillsViewportHeight(true);
 	personTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	personTable.setAutoCreateRowSorter(true);
-	personTable.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	
+	JScrollPane scrollPane = new JScrollPane(personTable);
+	scrollPane.setPreferredSize(new Dimension(widht, height));
 
-	return personTable;
+	return scrollPane;
     }
 
     @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
