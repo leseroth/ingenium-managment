@@ -204,6 +204,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	    initFile();
 	    createNodes(top);
 	    treeModel.reload();
+	    descriptionPanel.setVisible(false);
 	}
     }
 
@@ -373,29 +374,29 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	DefaultMutableTreeNode ciclo2 = new DefaultMutableTreeNode(Constants.NAME_CYCLE_2);
 	DefaultMutableTreeNode ciclo3 = new DefaultMutableTreeNode(Constants.NAME_CYCLE_3);
 
-	DefaultMutableTreeNode c1fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 3, 1));
-	DefaultMutableTreeNode c1fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 3, 2));
-	DefaultMutableTreeNode c1fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 3, 3));
-	DefaultMutableTreeNode c1fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 3, 4));
-	DefaultMutableTreeNode c1fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 3, 5));
-	DefaultMutableTreeNode c1fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 3, 6));
-	DefaultMutableTreeNode c1fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 3, 7));
+	DefaultMutableTreeNode c1fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 1, 1));
+	DefaultMutableTreeNode c1fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 1, 2));
+	DefaultMutableTreeNode c1fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 1, 3));
+	DefaultMutableTreeNode c1fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 1, 4));
+	DefaultMutableTreeNode c1fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 1, 5));
+	DefaultMutableTreeNode c1fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 1, 6));
+	DefaultMutableTreeNode c1fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 1, 7));
 
-	DefaultMutableTreeNode c2fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 4, 1));
-	DefaultMutableTreeNode c2fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 4, 2));
-	DefaultMutableTreeNode c2fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 4, 3));
-	DefaultMutableTreeNode c2fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 4, 4));
-	DefaultMutableTreeNode c2fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 4, 5));
-	DefaultMutableTreeNode c2fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 4, 6));
-	DefaultMutableTreeNode c2fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 4, 7));
+	DefaultMutableTreeNode c2fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 2, 1));
+	DefaultMutableTreeNode c2fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 2, 2));
+	DefaultMutableTreeNode c2fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 2, 3));
+	DefaultMutableTreeNode c2fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 2, 4));
+	DefaultMutableTreeNode c2fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 2, 5));
+	DefaultMutableTreeNode c2fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 2, 6));
+	DefaultMutableTreeNode c2fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 2, 7));
 
-	DefaultMutableTreeNode c3fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 5, 1));
-	DefaultMutableTreeNode c3fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 5, 2));
-	DefaultMutableTreeNode c3fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 5, 3));
-	DefaultMutableTreeNode c3fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 5, 4));
-	DefaultMutableTreeNode c3fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 5, 5));
-	DefaultMutableTreeNode c3fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 5, 6));
-	DefaultMutableTreeNode c3fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 5, 7));
+	DefaultMutableTreeNode c3fase1 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_1_STRATEGY, 3, 1));
+	DefaultMutableTreeNode c3fase2 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_2_PLAN, 3, 2));
+	DefaultMutableTreeNode c3fase3 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_3_REQUIREMENT, 3, 3));
+	DefaultMutableTreeNode c3fase4 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_4_DESIGN, 3, 4));
+	DefaultMutableTreeNode c3fase5 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_5_IMPLEMENTATION, 3, 5));
+	DefaultMutableTreeNode c3fase6 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_6_TEST, 3, 6));
+	DefaultMutableTreeNode c3fase7 = new DefaultMutableTreeNode(getDummyTask(Constants.NAME_STAGE_7_POSTMORTEM, 3, 7));
 
 	top.add(inicio);
 	top.add(lanzamiento);
@@ -501,7 +502,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	task.setName(name);
 	task.setCiclo(String.valueOf(ciclo));
 	task.setFase(String.valueOf(fase));
-	task.setId("1." + ciclo + "." + fase);
+	task.setId("1." + (ciclo+2) + "." + fase);
 	return task;
     }
 
