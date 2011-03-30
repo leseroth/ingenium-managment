@@ -69,7 +69,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 11, responsible = "201110949") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 14, responsible = "201110949") })
     private void initComponents() {
 	setBackground(Constants.backgroundColor);
 	Box box = Box.createVerticalBox();
@@ -108,7 +108,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	return scrollPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 18, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 24, responsible = "201110856") })
     private JPanel initFormPanel() {
 	JPanel formPanel = new JPanel();
 	formPanel.setLayout(new SpringLayout());
@@ -142,7 +142,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	return formPanel;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 17, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 18, responsible = "201117818") })
     private JPanel initControlPanel() {
 	JPanel panel = new JPanel();
 	panel.setBackground(Constants.backgroundColor);
@@ -179,7 +179,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 8, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 10, responsible = "200819123") })
     private void actionAddPerson() {
 	if (Util.isEmptyTextComponent(defectosInyectados) && Util.isEmptyTextComponent(defectosInyectadosReal)
 		&& Util.isEmptyTextComponent(defectosRemovidos) && Util.isEmptyTextComponent(defectosRemovidosReal)) {
@@ -196,7 +196,7 @@ public class QualityPanel extends JPanel implements ActionListener {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 6, responsible = "200819123") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 7, responsible = "200819123") })
     private void actionRemovePerson() {
 	if (qualityTable.getSelectedRows().length != 0) {
 	    for (int c : qualityTable.getSelectedRows()) {
