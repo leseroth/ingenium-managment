@@ -82,7 +82,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
     private JPopupMenu popupAdd;
     private JPopupMenu popupRemove;
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 3, responsible = "201110544") })
     public PlanPanel(Report report) {
 	mainReport = report;
 	taskFile = ManagePropertyFile.getInstance(ManagePropertyFile.TASK_FILE);
@@ -102,7 +104,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 26, responsible = "201117818") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 26, responsible = "201117818"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 8, responsible = "201110544") })
     private void initComponents() {
 
 	top = new DefaultMutableTreeNode(Constants.NAME_PROJECT);
@@ -154,7 +158,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 9, responsible = "201110544") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 9, responsible = "201110544"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 7, responsible = "201110544") })
     public void valueChanged(TreeSelectionEvent e) {
 	DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 
@@ -180,7 +186,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	splitPane.setDividerLocation(DIVIDER_LOCATION);
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 17, responsible = "201110951") })
     public void actionPerformed(ActionEvent e) {
 	String command = e.getActionCommand();
 	if (SAVE.equals(command)) {
@@ -208,7 +216,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 4, responsible = "201110951") })
     private DefaultMutableTreeNode getCurrentNode() {
 	DefaultMutableTreeNode parentNode = null;
 	TreePath parentPath = tree.getSelectionPath();
@@ -227,7 +237,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	return addObject(parentNode, child, true);
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 5, responsible = "201110951") })
     public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent, Object child, boolean shouldBeVisible) {
 	DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(new Task());
 
@@ -243,7 +255,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	return childNode;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 12, responsible = "201110951") })
     public void removeCurrentNode() {
 	TreePath currentSelection = tree.getSelectionPath();
 	if (currentSelection != null) {
@@ -264,7 +278,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 8, responsible = "201110951") })
     public void mouseClicked(MouseEvent event) {
 
 	DefaultMutableTreeNode parentNode = null;
@@ -285,7 +301,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 10, responsible = "201110951")})
     private void updateFormPanel(Task task) {
 	if (task != null) {
 	    fieldIdTask.setText(task.getId());
@@ -315,7 +333,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	descriptionPanel.repaint();
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "200819123") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 17, responsible = "200819123"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "201110951") })
     private void initDescriptionPanel() {
 	descriptionPanel = new JPanel();
 	JPanel formPanel = new JPanel();
@@ -365,7 +385,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	descriptionPanel.setMaximumSize(descriptionPanel.getPreferredSize());
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 73, responsible = "201110951") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 73, responsible = "201110951"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 4, responsible = "201110951") })
     private void createNodes(DefaultMutableTreeNode top) {
 
 	DefaultMutableTreeNode inicio = new DefaultMutableTreeNode(Constants.INICIO);
@@ -481,6 +503,7 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	}
     }
 
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 9, responsible = "201110951")})
     private JScrollPane createParticipantTable(int widht, int height) {
 	personTableDataModel = new PersonTableDataModel(new ArrayList<Person>(), new String[] { "Codigo", "Nombre", "Rol" });
 
@@ -496,7 +519,9 @@ public class PlanPanel extends JPanel implements TreeSelectionListener, MouseLis
 	return scrollPane;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 4, responsible = "201110951") })
     private Task getDummyTask(String name, int ciclo, int fase) {
 	Task task = new Task();
 	task.setName(name);

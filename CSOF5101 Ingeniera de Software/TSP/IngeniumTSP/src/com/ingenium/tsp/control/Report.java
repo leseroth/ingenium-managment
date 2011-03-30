@@ -30,7 +30,9 @@ public class Report {
     private List<LogTRecord> taskList;
 
     @SuppressWarnings("unchecked")
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"), @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110856") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "201110856"), 
+	@Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "200819123") })
     public void calculateSuccessfulAnalysis(List<String> totalOutcome, Map<String, List<? extends Record>> description) {
 	fileList = totalOutcome;
 	taskList = (List<LogTRecord>) description.get(Analizer.LOG_T);
@@ -102,8 +104,10 @@ public class Report {
 	System.out.println();
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110949"), @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"),
-	    @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_1, size = 10, responsible = "201110949"), 
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110856"),
+	@Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110544") })
     private void calculateProductivity(List<LocRecord> locRecordList, List<LogTRecord> logTRecordList) {
 	productivityReport = new TreeMap<String, ProductivityRecord>();
 	groupProductivityReport = new TreeMap<String, ProductivityRecord>();
@@ -161,14 +165,14 @@ public class Report {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 22, responsible = "200819123") })
     private void calculateInterruption(List<LogIntRecord> logIntRecordList) {
 	interruptionReport = new TreeMap<String, LogIntRecord>();
 	groupInterruptionReport = new TreeMap<String, LogIntRecord>();
 
 	if (!logIntRecordList.isEmpty()) {
 	    for (LogIntRecord logIntRecord : logIntRecordList) {
-		LogIntRecord resume = interruptionReport.get(logIntRecord.getCycle() + "-" + logIntRecord.getResponsible());
+		LogIntRecord resume = interruptionReport.get(logIntRecord.getCycle() + "-" + logIntRecord.getResponsible()+"-"+logIntRecord.getInterruption());
 		LogIntRecord groupResume = groupInterruptionReport.get(logIntRecord.getInterruption());
 
 		if (resume == null) {
@@ -178,7 +182,7 @@ public class Report {
 		    resume.setResponsible(logIntRecord.getResponsible());
 		    resume.setDate(logIntRecord.getDate());
 		    resume.setInterruption(logIntRecord.getInterruption());
-		    interruptionReport.put(resume.getCycle() + "-" + resume.getResponsible(), resume);
+		    interruptionReport.put(resume.getCycle() + "-" + resume.getResponsible()+"-"+logIntRecord.getInterruption(), resume);
 		} else {
 		    resume.setMin(resume.getMin() + logIntRecord.getMin());
 		}
@@ -195,7 +199,7 @@ public class Report {
 	}
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 0, responsible = "201110856") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 20, responsible = "201110544") })
     private void calculateTaskDuration(List<LogTRecord> logTRecordList) {
 
 	if (!logTRecordList.isEmpty()) {
@@ -212,7 +216,7 @@ public class Report {
 			durationRecord = new DurationRecord(task, logTRecord.getMin());
 			taskDurationReport.put(task.getCiclo()+"-"+task.getFase(), durationRecord);
 		    } else {
-			durationRecord.addTime(logTRecord.getMin());
+			durationRecord.addTime(task,logTRecord.getMin());
 		    }
 		} else if("9999".equals(logTRecord.getTaskId())) {
 		    DurationRecord durationRecord = taskDurationReport.get(logTRecord.getCycle()+"-9999");

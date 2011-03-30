@@ -1,5 +1,9 @@
 package com.ingenium.tsp.model;
 
+import com.ingenium.tsp.annotations.Loc;
+import com.ingenium.tsp.annotations.LocList;
+import com.ingenium.tsp.util.Constants;
+
 public class Quality extends PropertyRecord {
 
     public enum EtapaQuality {
@@ -23,11 +27,13 @@ public class Quality extends PropertyRecord {
     
     public Quality(){
     }
-    
+
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201110949") })
     public Quality(String encoded) {
 	decodeData(encoded);
     }
     
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 11, responsible = "201110949") })
     public String encodeData() {
 	StringBuffer encoded = new StringBuffer();
 	encoded.append(id);
@@ -42,6 +48,7 @@ public class Quality extends PropertyRecord {
 	return encoded.toString();
     }
 
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 6, responsible = "201110949") })
     public void decodeData(String encodedData) {
 	String[] decoded = encodedData.split(SEPARATOR);
 	id = decoded[0];

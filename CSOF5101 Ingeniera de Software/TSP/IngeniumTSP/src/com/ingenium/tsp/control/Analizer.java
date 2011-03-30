@@ -47,7 +47,7 @@ public class Analizer {
 
     @LocList({ 
 	@Loc(cycle = Constants.CYCLE_1, size = 4, responsible = "201110856"),
-	@Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201110856")})
+	@Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "200819123")})
     public Analizer() {
 	report = new Report();
 	description = new HashMap<String, List<? extends Record>>();
@@ -125,7 +125,7 @@ public class Analizer {
     @LocList({ 
 	@Loc(cycle = Constants.CYCLE_1, size = 15, responsible = "200819123"), 
 	@Loc(cycle = Constants.CYCLE_2, size = 5, responsible = "200819123"), 
-	@Loc(cycle = Constants.CYCLE_3, size = 5, responsible = "201110856")})
+	@Loc(cycle = Constants.CYCLE_3, size = 5, responsible = "200819123")})
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private void checkAnnotation(Class testClass, AccessibleObject accessible) {
 	if (accessible.isAnnotationPresent(LocList.class)) {

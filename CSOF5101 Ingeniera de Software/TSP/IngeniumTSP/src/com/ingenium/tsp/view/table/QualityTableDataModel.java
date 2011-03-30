@@ -15,29 +15,29 @@ public class QualityTableDataModel extends AbstractTableModel {
     private String[] columnNames;
     private List<Quality> qualityDataList;
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201117818") })
     public QualityTableDataModel(List<Quality> qualityList, String[] columnTitles) {
 	columnNames = columnTitles;
 	qualityDataList = qualityList;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201117818") })
     public int getColumnCount() {
 	return columnNames.length;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201117818") })
     public int getRowCount() {
 	return qualityDataList.size();
     }
 
     @Override
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 1, responsible = "201117818") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 1, responsible = "201117818") })
     public String getColumnName(int col) {
 	return columnNames[col];
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 10, responsible = "201110949") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 10, responsible = "201110949") })
     public Object getValueAt(int row, int col) {
 	String value = null;
 	Quality quality = qualityDataList.get(row);
@@ -63,13 +63,14 @@ public class QualityTableDataModel extends AbstractTableModel {
 	return value;
     }
 
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201110949") })
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 2, responsible = "201110949") })
     public void addQuality(Quality quality) {
 	qualityDataList.add(quality);
 	fireTableDataChanged();
     }
     
-    @LocList({ @Loc(cycle = Constants.CYCLE_2, size = 2, responsible = "201117818") })
+    @LocList({ 
+	@Loc(cycle = Constants.CYCLE_3, size = 3, responsible = "201117818") })
     public Quality removeQuality(int index){
 	Quality removed = qualityDataList.remove(index);
 	fireTableDataChanged();

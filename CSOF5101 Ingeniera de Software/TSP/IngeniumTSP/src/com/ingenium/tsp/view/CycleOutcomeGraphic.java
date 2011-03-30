@@ -20,6 +20,8 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.TextAnchor;
 
+import com.ingenium.tsp.annotations.Loc;
+import com.ingenium.tsp.annotations.LocList;
 import com.ingenium.tsp.control.Report;
 import com.ingenium.tsp.report.DurationRecord;
 import com.ingenium.tsp.util.Constants;
@@ -27,12 +29,14 @@ import com.ingenium.tsp.util.Constants;
 @SuppressWarnings("serial")
 public class CycleOutcomeGraphic extends JPanel {
 
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 3, responsible = "201110544") })
     public CycleOutcomeGraphic(Report report, String cycle) {
 	setPreferredSize(new Dimension(500, 300));
 	int intCycle = Integer.parseInt(cycle.substring(cycle.lastIndexOf("Ciclo") + 6));
 	add(new ChartPanel(createChart(createDataset(report, intCycle))));
     }
-
+    
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 11, responsible = "201117818") })
     private String getStage(int stage) {
 	String name = null;
 	switch (stage) {
@@ -48,6 +52,7 @@ public class CycleOutcomeGraphic extends JPanel {
 	return name;
     }
 
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 8, responsible = "201117818") })
     private CategoryDataset createDataset(Report report, int cycle) {
 	String categoryPlanned = "Planeado";
 	String categoryReal = "Real";
@@ -63,6 +68,7 @@ public class CycleOutcomeGraphic extends JPanel {
     }
 
     @SuppressWarnings("deprecation")
+    @LocList({ @Loc(cycle = Constants.CYCLE_3, size = 14, responsible = "201117818") })
     private JFreeChart createChart(CategoryDataset paramCategoryDataset) {
 	JFreeChart chart = ChartFactory.createBarChart("Estimado vs Real", "Fase", "Horas", paramCategoryDataset, PlotOrientation.VERTICAL, true, true, false);
 	CategoryPlot localCategoryPlot = (CategoryPlot) chart.getPlot();
