@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<MM_Document version="1.0">
+<MM_Application name="Architect" version="2,3,5,27596"/>
+<MM_StorageUnit name="file:///C:\Users\Fenix\Desktop\ingenium\CSOF5100 Proyecto 1\Segunda Entrega\ArqApps.xma" metamodel="ArchiMate">
+<MM_Module id="fdbe3df6-d15b-4e8a-8327-9b0bde8ea078" name="AmberComponent" nextObjectId="113">
+<Component name="root" id="0">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Aplicaciones'</MM_Value>
+<MM_List name="viewSettings2" type="ViewSettings2">
+<MM_Struct name="ViewSetting2" type="ViewSetting2">
+<MM_Value name="diagObj" type="objectref">33</MM_Value>
+<MM_Value name="x11" type="real">1.000</MM_Value>
+<MM_Value name="x12" type="real">0.000</MM_Value>
+<MM_Value name="x21" type="real">0.000</MM_Value>
+<MM_Value name="x22" type="real">1.000</MM_Value>
+<MM_Value name="x0" type="real">0.000</MM_Value>
+<MM_Value name="y0" type="real">0.000</MM_Value>
+<MM_List name="selectedObjects" type="SelectedObjects2"/>
+</MM_Struct>
+</MM_List>
+</MM_ProfileValues>
+<DomainDataSet name="domainDataSet" id="1"/>
+<Principals name="principals" id="2"/>
+<Groups name="groups" id="3"/>
+<AbstractContainers name="containers" id="5">
+<ApplicationScheme id="6">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Applications'</MM_Value>
+</MM_ProfileValues>
+<ApplicationComponentScheme name="componentScheme" id="7">
+<ApplicationComponents name="components" id="8">
+<ApplicationComponent id="9">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Audit Application System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="10">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'BAM'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="12">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'TransactManager-System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="13">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'CRM'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="14">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'RiskQualification-System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="15">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'WebDocumentManagement'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="17">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'BillingCharges-System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="20">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'BackUp Management System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="65">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'POManager'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="70">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'SSO Authentication'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="99">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'International Risk &#xd;&#xa;Qualification System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="103">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'TRM System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+<ApplicationComponent id="107">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Payment System'</MM_Value>
+</MM_ProfileValues>
+</ApplicationComponent>
+</ApplicationComponents>
+</ApplicationComponentScheme>
+<Relations name="relations" id="21">
+<UseRelation id="23" from="12" to="13"/>
+<UseRelation id="26" from="13" to="10"/>
+<UseRelation id="28" from="14" to="13"/>
+<UseRelation id="29" from="13" to="15"/>
+<UseRelation id="30" from="17" to="10"/>
+<UseRelation id="31" from="17" to="13"/>
+<UseRelation id="32" from="12" to="10"/>
+<UseRelation id="68" from="12" to="65"/>
+<UseRelation id="73" from="65" to="70"/>
+<UseRelation id="75" from="12" to="70"/>
+<UseRelation id="77" from="10" to="70"/>
+<UseRelation id="79" from="20" to="70"/>
+<UseRelation id="81" from="9" to="70"/>
+<UseRelation id="83" from="17" to="70"/>
+<UseRelation id="85" from="14" to="70"/>
+<UseRelation id="87" from="13" to="70"/>
+<UseRelation id="89" from="15" to="70"/>
+<UseRelation id="106" from="103" to="70"/>
+<UseRelation id="102" from="99" to="13"/>
+<UseRelation id="110" from="107" to="70"/>
+<UseRelation id="112" from="107" to="13"/>
+</Relations>
+</ApplicationScheme>
+<ApplicationCooperationView id="33">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Application cooperation view'</MM_Value>
+</MM_ProfileValues>
+<GroupingScheme name="groupingScheme" id="34">
+<Groupings name="groupings" id="35">
+<Grouping id="36">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'MarketPlace Applications'</MM_Value>
+</MM_ProfileValues>
+<GroupingScheme name="groupingScheme" id="37">
+<Groupings name="groupings" id="38"/>
+<RefObjects name="refObjects" id="39">
+<UseRelationRef id="42" to="23"/>
+<UseRelationRef id="46" to="26"/>
+<ApplicationComponentRef id="47" to="17"/>
+<UseRelationRef id="49" to="28"/>
+<UseRelationRef id="50" to="29"/>
+<UseRelationRef id="51" to="30"/>
+<UseRelationRef id="52" to="31"/>
+<UseRelationRef id="53" to="32"/>
+<ApplicationComponentRef id="54" to="10"/>
+<ApplicationComponentRef id="56" to="9"/>
+<ApplicationComponentRef id="57" to="12"/>
+<ApplicationComponentRef id="58" to="14"/>
+<ApplicationComponentRef id="59" to="13"/>
+<ApplicationComponentRef id="60" to="15"/>
+<ApplicationComponentRef id="62" to="20"/>
+<ApplicationComponentRef id="66" to="65"/>
+<UseRelationRef id="67" to="68"/>
+<UseRelationRef id="72" to="73"/>
+<ApplicationComponentRef id="71" to="70"/>
+<UseRelationRef id="74" to="75"/>
+<UseRelationRef id="76" to="77"/>
+<UseRelationRef id="78" to="79"/>
+<UseRelationRef id="80" to="81"/>
+<UseRelationRef id="82" to="83"/>
+<UseRelationRef id="84" to="85"/>
+<UseRelationRef id="86" to="87"/>
+<UseRelationRef id="88" to="89"/>
+<ApplicationComponentRef id="100" to="99"/>
+<ApplicationComponentRef id="108" to="107"/>
+<UseRelationRef id="105" to="106"/>
+<UseRelationRef id="101" to="102"/>
+<ApplicationComponentRef id="104" to="103"/>
+<UseRelationRef id="109" to="110"/>
+<UseRelationRef id="111" to="112"/>
+</RefObjects>
+</GroupingScheme>
+</Grouping>
+</Groupings>
+</GroupingScheme>
+<RefObjects name="refObjects" id="63"/>
+</ApplicationCooperationView>
+<ViewFolder id="91" tag="1234">
+<MM_ProfileValues>
+<MM_Value name="nm" type="string" xml:lang="neutral">'Generated views'</MM_Value>
+</MM_ProfileValues>
+<AbstractContainers name="containers" id="92"/>
+</ViewFolder>
+</AbstractContainers>
+</Component>
+</MM_Module>
+<MM_Module id="014d4da3-6e89-42f3-9b79-8177a98740ee" name="ArchiMateViewDomain" nextObjectId="141">
+<MM_Diagram name="root" id="0">
+<MM_Compound name="mm_canvas" id="1" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/33">
+<MM_Graphics name="mm_nodes" id="4">
+<MM_Compound id="5" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/36">
+<MM_Graphics name="mm_nodes" id="6">
+<MM_Compound id="7" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/47">
+<MM_Decorations name="mm_decorations" id="8">
+<MM_Decoration id="9">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="90" y="1140" w="480" h="150"/>
+</MM_Compound>
+<MM_Compound id="13" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/59">
+<MM_Decorations name="mm_decorations" id="14">
+<MM_Decoration id="15">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="1020" y="690" w="510" h="150"/>
+</MM_Compound>
+<MM_Compound id="22" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/60">
+<MM_Decorations name="mm_decorations" id="23">
+<MM_Decoration id="24">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="1290" y="1140" w="600" h="150"/>
+</MM_Compound>
+<MM_Compound id="25" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/58">
+<MM_Decorations name="mm_decorations" id="26">
+<MM_Decoration id="27">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="60" y="810" w="540" h="150"/>
+</MM_Compound>
+<MM_Compound id="28" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/57">
+<MM_Decorations name="mm_decorations" id="29">
+<MM_Decoration id="30">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="60" y="120" w="540" h="150"/>
+</MM_Compound>
+<MM_Compound id="31" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/54">
+<MM_Decorations name="mm_decorations" id="32">
+<MM_Decoration id="33">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="60" y="450" w="300" h="150"/>
+</MM_Compound>
+<MM_Compound id="34" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/56">
+<MM_Decorations name="mm_decorations" id="35">
+<MM_Decoration id="36">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="2070" y="630" w="510" h="150"/>
+</MM_Compound>
+<MM_Compound id="40" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/62">
+<MM_Decorations name="mm_decorations" id="41">
+<MM_Decoration id="42">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="1980" y="360" w="600" h="150"/>
+</MM_Compound>
+<MM_Compound id="57" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/66">
+<MM_Decorations name="mm_decorations" id="58">
+<MM_Decoration id="59">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="990" y="120" w="540" h="150"/>
+</MM_Compound>
+<MM_Compound id="61" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/71">
+<MM_Decorations name="mm_decorations" id="62">
+<MM_Decoration id="63">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="1080" y="390" w="420" h="150"/>
+</MM_Compound>
+<MM_Compound id="128" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/100">
+<MM_Decorations name="mm_decorations" id="129">
+<MM_Decoration id="130">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="720" y="1140" w="471" h="150"/>
+</MM_Compound>
+<MM_Compound id="132" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/104">
+<MM_Decorations name="mm_decorations" id="133">
+<MM_Decoration id="134">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="2100" y="120" w="471" h="150"/>
+</MM_Compound>
+<MM_Compound id="136" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/108">
+<MM_Decorations name="mm_decorations" id="137">
+<MM_Decoration id="138">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>ApplicationComponent</mm_concept>
+<MM_Rect name="mm_rect" x="2040" y="960" w="471" h="150"/>
+</MM_Compound>
+</MM_Graphics>
+<MM_Graphics name="mm_relations" id="43">
+<MM_DirectedRel id="66" mm_from="31" mm_to="61" mm_fromx="150" mm_fromy="90" mm_tox="270" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/76">
+<MM_Decorations name="mm_decorations" id="85"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="60" mm_from="28" mm_to="57" mm_fromx="510" mm_fromy="90" mm_tox="60" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/67">
+<MM_Decorations name="mm_decorations" id="88"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="45" mm_from="28" mm_to="13" mm_fromx="150" mm_fromy="120" mm_tox="150" mm_toy="0" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/42">
+<MM_Decorations name="mm_decorations" id="94"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="50" mm_from="25" mm_to="13" mm_fromx="270" mm_fromy="30" mm_tox="270" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/49">
+<MM_Decorations name="mm_decorations" id="97"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="52" mm_from="7" mm_to="31" mm_fromx="120" mm_fromy="30" mm_tox="270" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/51">
+<MM_Decorations name="mm_decorations" id="100"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="67" mm_from="40" mm_to="61" mm_fromx="180" mm_fromy="90" mm_tox="330" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/78">
+<MM_Decorations name="mm_decorations" id="103"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="65" mm_from="28" mm_to="61" mm_fromx="210" mm_fromy="120" mm_tox="150" mm_toy="30" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/74">
+<MM_Decorations name="mm_decorations" id="106"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="64" mm_from="57" mm_to="61" mm_fromx="300" mm_fromy="150" mm_tox="210" mm_toy="0" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/72">
+<MM_Decorations name="mm_decorations" id="109"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="68" mm_from="34" mm_to="61" mm_fromx="210" mm_fromy="120" mm_tox="360" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/80">
+<MM_Decorations name="mm_decorations" id="112"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="69" mm_from="7" mm_to="61" mm_fromx="300" mm_fromy="30" mm_tox="210" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/82">
+<MM_Decorations name="mm_decorations" id="115"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="70" mm_from="25" mm_to="61" mm_fromx="420" mm_fromy="60" mm_tox="120" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/84">
+<MM_Decorations name="mm_decorations" id="118"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="72" mm_from="22" mm_to="61" mm_fromx="630" mm_fromy="0" mm_tox="420" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/88">
+<MM_Decorations name="mm_decorations" id="124"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="131" mm_from="128" mm_to="13" mm_fromx="120" mm_fromy="30" mm_tox="420" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/101">
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="51" mm_from="13" mm_to="22" mm_fromx="480" mm_fromy="120" mm_tox="90" mm_toy="30" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/50">
+<MM_Decorations name="mm_decorations" id="76"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="135" mm_from="132" mm_to="61" mm_fromx="30" mm_fromy="0" mm_tox="300" mm_toy="0" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/105">
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="46" mm_from="28" mm_to="31" mm_fromx="120" mm_fromy="150" mm_tox="180" mm_toy="30" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/53">
+<MM_Decorations name="mm_decorations" id="91"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="54" mm_from="13" mm_to="31" mm_fromx="0" mm_fromy="60" mm_tox="90" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/46">
+<MM_Decorations name="mm_decorations" id="82"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="53" mm_from="7" mm_to="13" mm_fromx="450" mm_fromy="120" mm_tox="90" mm_toy="150" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/52">
+<MM_Decorations name="mm_decorations" id="79"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="71" mm_from="13" mm_to="61" mm_fromx="420" mm_fromy="60" mm_tox="360" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/86">
+<MM_Decorations name="mm_decorations" id="121"/>
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="139" mm_from="136" mm_to="61" mm_fromx="120" mm_fromy="90" mm_tox="390" mm_toy="120" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/109">
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+<MM_DirectedRel id="140" mm_from="136" mm_to="13" mm_fromx="0" mm_fromy="150" mm_tox="480" mm_toy="90" mm_semanticObject="#fdbe3df6-d15b-4e8a-8327-9b0bde8ea078/111">
+<mm_concept>UseRelation</mm_concept>
+</MM_DirectedRel>
+</MM_Graphics>
+<MM_Decorations name="mm_decorations" id="55">
+<MM_Decoration id="56">
+<mm_concept>label</mm_concept>
+</MM_Decoration>
+</MM_Decorations>
+<mm_concept>Grouping</mm_concept>
+<MM_Rect name="mm_rect" x="30" y="60" w="2700" h="1560"/>
+</MM_Compound>
+</MM_Graphics>
+<MM_Decorations name="mm_decorations" id="2"/>
+<mm_concept>Canvas</mm_concept>
+<MM_Rect name="mm_rect" x="0" y="0" w="2147483647" h="2147483647"/>
+</MM_Compound>
+</MM_Diagram>
+</MM_Module>
+</MM_StorageUnit>
+</MM_Document>
