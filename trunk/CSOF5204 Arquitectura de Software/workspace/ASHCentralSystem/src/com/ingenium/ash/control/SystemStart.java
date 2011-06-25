@@ -4,9 +4,7 @@
  */
 package com.ingenium.ash.control;
 
-import com.ingenium.ash.communication.ConnectorProcessor;
 import com.ingenium.ash.communication.ConnectorServer;
-import com.ingenium.ash.notificator.Notificator;
 
 /**
  *
@@ -15,18 +13,17 @@ import com.ingenium.ash.notificator.Notificator;
 public class SystemStart {
 
     private ConnectorServer connServer;
-    private ConnectorProcessor connProcessor;
+    private CentralConnectorProcessor connProcessor;
     private static int SERVER_PORT = 4444;
 
     public static void main(String... args) {
-       // notificator.notificateClient(1,1);
         SystemStart systemStart = new SystemStart();
         systemStart.startSystem();
         
     }
     
     private void startSystem(){
-        connProcessor = new ConnectorProcessor();
+        connProcessor = new CentralConnectorProcessor();
         connServer = new ConnectorServer(connProcessor);
         connServer.startServer(SERVER_PORT);
     }

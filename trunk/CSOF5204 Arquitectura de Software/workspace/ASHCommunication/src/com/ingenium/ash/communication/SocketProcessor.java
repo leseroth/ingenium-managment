@@ -4,8 +4,10 @@ import com.ingenium.ash.communication.util.Util;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,10 +20,12 @@ public class SocketProcessor implements Runnable {
     private Socket socket;
     private boolean keepAlive;
     private DataInputStream dataInputStream;
+    private ManagerInterface managerInterface;
 
-    public SocketProcessor(Socket s) {
+    public SocketProcessor(Socket s, ManagerInterface mi) {
         socket = s;
         keepAlive = true;
+        managerInterface = mi;
     }
 
     @Override
@@ -72,5 +76,9 @@ public class SocketProcessor implements Runnable {
 
     private void processMessage(byte[] info) {
         // TODO processar la informacion enviada
+        int totalEvent = (info.length - 2) / 6;
+        for (int i = 0; i < totalEvent; i++) {
+            managerInterface.processEvent(Arrays.copyOfRange(info, i * 6 + 2, i * 6 + 8));
+        }
     }
 }
