@@ -13,7 +13,7 @@ public class Constants {
     /**Respresenta el valor del sensor cuando se encuentra una señal de humo**/
     public static final byte SMOKESTATUS =   Byte.parseByte("00000001", 2);
     /**Respresenta el valor contra el cual comparar si no existe regla asociada**/
-    public static final byte DEFAULTSTATUS = Byte.parseByte("11111111", 2);
+    public static final byte DEFAULTSTATUS = Byte.parseByte("01111111", 2);
     /**Estados de apertura de puertas y ventanas**/
     public static final byte OPENSTATUS =   Byte.parseByte("00000001", 2);
     public static final byte CLOSEDSTATUS = Byte.parseByte("00000000", 2);

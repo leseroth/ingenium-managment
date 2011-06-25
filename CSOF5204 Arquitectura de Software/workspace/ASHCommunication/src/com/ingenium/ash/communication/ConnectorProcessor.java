@@ -8,19 +8,15 @@ import java.util.List;
  *
  * @author Erik Arcos
  */
-public class ConnectorProcessor {
+public abstract class ConnectorProcessor {
 
-    private List<SocketProcessor> connectedSockets;
+    protected List<SocketProcessor> connectedSockets;
 
     public ConnectorProcessor() {
         connectedSockets = new ArrayList<SocketProcessor>();
     }
 
-    protected void addConnection(Socket socket) {
-        SocketProcessor sp = new SocketProcessor(socket);
-        connectedSockets.add(sp);
-        new Thread(sp).start();
-    }
+    abstract public void addConnection(Socket socket);
 
     /**
      * Returns a list of all the opened connections to this server
