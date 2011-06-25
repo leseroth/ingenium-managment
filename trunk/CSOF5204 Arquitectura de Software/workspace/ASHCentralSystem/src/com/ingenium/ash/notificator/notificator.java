@@ -19,8 +19,8 @@ import javax.mail.internet.*;
 public class notificator {
 
     private static String MAIL_HOST = "smtp.gmail.com";
-    private static String MAIL_USER = "mauricio.erazo@gmail.com";
-    private static String MAIL_PASSWORD = "";
+    private static String MAIL_USER = "ingenium.uniandes@gmail.com";
+    private static String MAIL_PASSWORD = "ingenium2011";
     private static String TEMPLATE_FILE = "htmlTemplate.html";
 
     /**
@@ -116,14 +116,18 @@ public class notificator {
     private static String readTemplate() throws IOException {
 
         FileInputStream stream = null;
+        String template = "";
         try {
-            stream = new FileInputStream(new File(TEMPLATE_FILE));
-            FileChannel fc = stream.getChannel();
-            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-            return Charset.defaultCharset().decode(bb).toString();
+            File file = new File(TEMPLATE_FILE);
+            if (file.exists())  {
+                stream = new FileInputStream(file);
+                FileChannel fc = stream.getChannel();
+                MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+                template = Charset.defaultCharset().decode(bb).toString();
+            }
         } finally {
             stream.close();
         }
-
+        return template;
     }
 }
