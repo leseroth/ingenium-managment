@@ -24,4 +24,10 @@ public class Constants {
     /**Manejo de alertas**/
     public static final byte OK =    Byte.parseByte("00000001", 2);
     public static final byte ALERT = Byte.parseByte("00000000", 2);
+    /** Notificador     */
+    public static final String MAIL_HOST = "smtp.gmail.com";
+    public static final String MAIL_USER = "ingenium.uniandes@gmail.com";
+    public static final String MAIL_PASSWORD = "ingenium2011";
+    public static final String TEMPLATE_FILE = "htmlTemplate.html";
+    
 }
