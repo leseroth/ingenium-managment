@@ -74,8 +74,6 @@ public class HomeModuleMain implements Runnable {
                 } catch (InterruptedException ex) {
                 }
             }
-            
-            keepAlive = false;
         }
     }
 }
