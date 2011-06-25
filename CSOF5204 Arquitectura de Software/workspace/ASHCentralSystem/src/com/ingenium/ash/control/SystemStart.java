@@ -6,7 +6,7 @@ package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorProcessor;
 import com.ingenium.ash.communication.ConnectorServer;
-import com.ingenium.ash.notificator.notificator;
+import com.ingenium.ash.notificator.Notificator;
 
 /**
  *

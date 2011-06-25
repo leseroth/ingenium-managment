@@ -49,7 +49,7 @@ public class TestHouseModule {
         hmm.startHomeModule("localhost", 4444);
 
         long referenceTime = System.currentTimeMillis();
-        while (5000 > System.currentTimeMillis() - referenceTime) {
+        while (20000 > System.currentTimeMillis() - referenceTime) {
             hmm.setStatus(random.nextInt(itemTotal), (byte) random.nextInt(100));
         }
 
