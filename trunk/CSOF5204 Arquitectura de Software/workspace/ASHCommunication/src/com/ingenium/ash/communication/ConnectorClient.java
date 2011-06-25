@@ -42,5 +42,7 @@ public class ConnectorClient {
         in.close();
         stdIn.close();
         kkSocket.close();
+        
+        // test sandra
     }
 }
