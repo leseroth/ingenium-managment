@@ -11,18 +11,14 @@ import java.nio.charset.Charset;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import com.ingenium.ash.util.*;
 
 /**
  *
  * @author Mauricio
  */
 public class notificator {
-
-    private static String MAIL_HOST = "smtp.gmail.com";
-    private static String MAIL_USER = "ingenium.uniandes@gmail.com";
-    private static String MAIL_PASSWORD = "ingenium2011";
-    private static String TEMPLATE_FILE = "htmlTemplate.html";
-
+   
     /**
      * Notifica al cliente sobre la alarma que se ha presentado
      * @param idClient Id del cliente
@@ -54,21 +50,21 @@ public class notificator {
         try {
             Properties props = System.getProperties();
             props.put("mail.smtp.starttls.enable", "true"); // added this line
-            props.put("mail.smtp.host", MAIL_HOST);
-            props.put("mail.smtp.user", MAIL_USER);
-            props.put("mail.smtp.password", MAIL_PASSWORD);
+            props.put("mail.smtp.host", Constants.MAIL_HOST);
+            props.put("mail.smtp.user", Constants.MAIL_USER);
+            props.put("mail.smtp.password", Constants.MAIL_PASSWORD);
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.auth", "true");
 
             Session session = Session.getDefaultInstance(props, null);
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(MAIL_USER));
+            message.setFrom(new InternetAddress(Constants.MAIL_USER));
 
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toAddress));
             message.setSubject("sending in a group");
             message.setText("Welcome to JavaMail");
             Transport transport = session.getTransport("smtp");
-            transport.connect(MAIL_HOST, MAIL_USER, MAIL_PASSWORD);
+            transport.connect(Constants.MAIL_HOST, Constants.MAIL_USER, Constants.MAIL_PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
 
@@ -102,9 +98,9 @@ public class notificator {
      */
     private static String processTemplate(String template, String clientName, String eventType) {
 
-        template.replace("[[SUSCRIPTOR]]", clientName);
-        template.replace("[[TIPO]]", eventType);
-        template.replace("[[FECHA]]", new Date().toString());
+        template = template.replace("[[SUSCRIPTOR]]", clientName);
+        template = template.replace("[[TIPO]]", eventType);
+        template = template.replace("[[FECHA]]", new Date().toString());
         return template;
     }
 
@@ -118,7 +114,8 @@ public class notificator {
         FileInputStream stream = null;
         String template = "";
         try {
-            File file = new File(TEMPLATE_FILE);
+            //URL url = FileLoadder.class.getResource("ListStopWords.txt");
+            File file = new File("src/com/ingenium/ash/notificator/" + Constants.TEMPLATE_FILE);
             if (file.exists())  {
                 stream = new FileInputStream(file);
                 FileChannel fc = stream.getChannel();
