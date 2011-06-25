@@ -1,9 +1,8 @@
 package com.ingenium.ash.communication;
 
+import com.ingenium.ash.communication.util.Constants;
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +38,7 @@ public class ConnectorServer implements Runnable {
         } else {
             try {
                 serverSocket = new ServerSocket(port);
+                serverSocket.setSoTimeout(Constants.TIMEOUT);
             } catch (IOException e) {
                 message = "No se puede escuchar en el puerto: " + port;
                 e.printStackTrace();
@@ -61,12 +61,12 @@ public class ConnectorServer implements Runnable {
         try {
             while (keepAlive) {
 
-                Socket clientSocket = null;
                 try {
-                    clientSocket = serverSocket.accept();
+                    Socket clientSocket = serverSocket.accept();
                     connProcessor.addConnection(clientSocket);
+                } catch (SocketTimeoutException ste) {
                 } catch (IOException e) {
-                    Logger.getLogger(ConnectorServer.class.getName()).log(Level.WARNING, "No fue posible aceptar una conexion");
+                    Logger.getLogger(ConnectorServer.class.getName()).log(Level.WARNING, "No fue posible aceptar una conexion", e);
                     e.printStackTrace();
                 }
             }
@@ -74,7 +74,7 @@ public class ConnectorServer implements Runnable {
             try {
                 serverSocket.close();
             } catch (IOException ex) {
-                Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, ex.getMessage());
+                Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
     }
@@ -83,36 +83,11 @@ public class ConnectorServer implements Runnable {
      * Stops the server
      */
     public void stopServer() {
-        keepAlive = false;
-    }
-}
-
-/*
- * 
-    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-    BufferedReader in = new BufferedReader(
-            new InputStreamReader(
-            clientSocket.getInputStream()));
-    String inputLine, outputLine;
-    KnockKnockProtocol kkp = new KnockKnockProtocol();
-    outputLine  = kkp.processInput(null);
-
-    out.println (outputLine);
-    
-    while ((inputLine  = in.readLine()
-
-    
-        ) != null) {
-                outputLine = kkp.processInput(inputLine);
-        out.println(outputLine);
-        if (outputLine.equals("Bye.")) {
-            break;
+        try {
+            keepAlive = false;
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    out.close ();
-
-    in.close ();
 }
- * 
- */

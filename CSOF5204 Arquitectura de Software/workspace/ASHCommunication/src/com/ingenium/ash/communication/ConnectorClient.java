@@ -2,47 +2,40 @@ package com.ingenium.ash.communication;
 
 import java.io.*;
 import java.net.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectorClient {
-    public static void main(String[] args) throws IOException {
-
-        Socket kkSocket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
-
+    
+    private Socket socket;
+    private DataOutputStream dataOutputStream;
+    
+    public ConnectorClient(String server, int port){
         try {
-            kkSocket = new Socket("127.0.0.1", 4444);
-            out = new PrintWriter(kkSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: taranis.");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: taranis.");
-            System.exit(1);
+            socket = new Socket(server,port);
+            OutputStream os = socket.getOutputStream();
+            dataOutputStream = new DataOutputStream(os);
+	} catch (UnknownHostException ex) {
+            Logger.getLogger(ConnectorClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectorClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String fromServer;
-        String fromUser;
-
-        while ((fromServer = in.readLine()) != null) {
-            System.out.println("Server: " + fromServer);
-            if (fromServer.equals("Bye."))
-                break;
-		    
-            fromUser = stdIn.readLine();
-	    if (fromUser != null) {
-                System.out.println("Client: " + fromUser);
-                out.println(fromUser);
-	    }
+    }
+    
+    public void sendMessage(){
+        try {
+            dataOutputStream.write(new byte[]{5,1,2,3,4,5});
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectorClient.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+    
+    public void killSocket(){
+        try {
+            dataOutputStream.close();
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectorClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        out.close();
-        in.close();
-        stdIn.close();
-        kkSocket.close();
-        
-        // test sandra
     }
 }
