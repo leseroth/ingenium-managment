@@ -1,5 +1,6 @@
 package com.ingenium.ash.communication;
 
+import com.ingenium.ash.communication.util.Util;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
@@ -34,11 +35,18 @@ public class SocketProcessor implements Runnable {
 
         while (keepAlive) {
             try {
-                byte size = dataInputStream.readByte();
+                byte[] byteTotal = new byte[4];
+                byteTotal[0] = dataInputStream.readByte();
+                byteTotal[1] = dataInputStream.readByte();
+                byteTotal[2] = dataInputStream.readByte();
+                byteTotal[3] = dataInputStream.readByte();
+                int size = Util.byteArrayToInt(byteTotal);
+
                 byte[] byteArray = new byte[size];
-                dataInputStream.readFully(byteArray);
+                dataInputStream.read(byteArray);
                 processMessage(byteArray);
             } catch (SocketException se) {
+                se.printStackTrace();
                 Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha cerrado el socket");
                 keepAlive = false;
             } catch (EOFException eofe) {

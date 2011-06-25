@@ -22,14 +22,6 @@ public class ConnectorClient {
         }
     }
 
-    public void sendMessage(byte message) {
-        try {
-            dataOutputStream.write(message);
-        } catch (IOException ex) {
-            Logger.getLogger(ConnectorClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void sendMessage(byte[] message) {
         try {
             dataOutputStream.write(message);

@@ -19,7 +19,7 @@ public class SystemStart {
     private static int SERVER_PORT = 4444;
 
     public static void main(String... args) {
-        notificator.notificateClient(1,1);
+       // notificator.notificateClient(1,1);
         SystemStart systemStart = new SystemStart();
         systemStart.startSystem();
         

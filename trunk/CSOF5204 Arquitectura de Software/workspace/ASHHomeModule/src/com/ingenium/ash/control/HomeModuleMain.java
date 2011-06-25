@@ -2,6 +2,7 @@ package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorClient;
 import com.ingenium.ash.vo.Item;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +24,8 @@ public class HomeModuleMain implements Runnable {
 
     public HomeModuleMain(short homeId) {
         homeIdentifier = new byte[2];
-        homeIdentifier[0] = (byte)(homeId & 0xff);
-        homeIdentifier[1] = (byte)((homeId >> 8) & 0xff);
+        homeIdentifier[0] = (byte) (homeId & 0xff);
+        homeIdentifier[1] = (byte) ((homeId >> 8) & 0xff);
         itemList = new HashMap<Integer, Item>();
     }
 
@@ -55,11 +56,15 @@ public class HomeModuleMain implements Runnable {
         while (keepAlive) {
             referenceTime = System.currentTimeMillis();
 
-            connClient.sendMessage((byte) (2 + itemList.size()));
-            connClient.sendMessage(homeIdentifier);
+            int size = 2 + itemList.size() * 6;
+
+            ByteBuffer bb = ByteBuffer.allocate(4 + size);
+            bb.putInt(size);
+            bb.put(homeIdentifier);
             for (Item item : itemList.values()) {
-                connClient.sendMessage(item.encode());
+                bb.put(item.encode());
             }
+            connClient.sendMessage(bb.array());
 
             diffTime = System.currentTimeMillis() - referenceTime;
 
@@ -69,6 +74,8 @@ public class HomeModuleMain implements Runnable {
                 } catch (InterruptedException ex) {
                 }
             }
+            
+            keepAlive = false;
         }
     }
 }
