@@ -26,8 +26,8 @@ public class TestConnection {
     public void testConnection() {
         ConnectorClient cc = new ConnectorClient("localhost", 4444);
         
-        cc.sendMessage();
-        cc.sendMessage();
-        cc.sendMessage();
+        cc.sendMessage(new byte[]{5,1,2,3,4,5});
+        cc.sendMessage(new byte[]{6,1,2,3,4,5,6});
+        cc.sendMessage(new byte[]{7,1,2,3,4,5,6,7});
     }
 }
