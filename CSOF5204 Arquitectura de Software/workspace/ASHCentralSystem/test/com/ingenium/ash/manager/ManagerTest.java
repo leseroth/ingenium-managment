@@ -48,10 +48,10 @@ public class ManagerTest {
      */
     @Test
     public void testProcessEvent() {
-        //System.out.println("processEvent");
+
         event = null;
         Manager instance = new Manager();
-        instance.processEvent(event);
+        instance.processEvent(event, System.currentTimeMillis());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -61,7 +61,7 @@ public class ManagerTest {
      */
     @Test
     public void testEvaluate() {
-        //System.out.println("evaluate");
+       
         /*Evento no casa quemandose*/
         event = new byte[]{2,1,1,1,1,0};
         Manager instance = new Manager();
@@ -94,7 +94,7 @@ public class ManagerTest {
      */
     @Test
     public void testSmokeProcess() {
-        //System.out.println("smokeProcess");
+        
         byte status = 0;
         boolean expResult = false;
         boolean result = Manager.smokeProcess(status);
@@ -108,7 +108,7 @@ public class ManagerTest {
      */
     @Test
     public void testSensorProcess() {
-        //System.out.println("sensorProcess");
+        
         byte status = 0;
         int code = 0;
         boolean expResult = false;
@@ -123,7 +123,7 @@ public class ManagerTest {
      */
     @Test
     public void testRFIDProcess() {
-        //System.out.println("RFIDProcess");
+        
         byte status = 0;
         int code = 0;
         boolean expResult = false;

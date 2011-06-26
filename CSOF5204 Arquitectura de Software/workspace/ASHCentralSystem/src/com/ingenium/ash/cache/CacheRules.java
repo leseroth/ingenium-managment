@@ -15,17 +15,6 @@ public class CacheRules {
 
     private static HashMap<String, Byte> hmRules = new HashMap();
 
-/*    public CacheRules() {
-        RuleHouse reglaCasa = new RuleHouse();
-
-        reglaCasa.setInfoRule();
-
-        hmRules.put(reglaCasa.getKeyRuleItem(), reglaCasa.getRuleItem());
-        System.out.println(getStatus("1-24"));
-    }
- * 
- */
-
     /**
      *
      * @param code
@@ -34,7 +23,6 @@ public class CacheRules {
     public static byte getStatus(String code) {
         Object o = hmRules.get(code);
         if (o == null) {
-            //System.out.println("null");
             return Constants.DEFAULTSTATUS;
         } else {
             return ((Byte) o).byteValue();
