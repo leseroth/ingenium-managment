@@ -13,17 +13,17 @@ package com.ingenium.ash.cache;
 public class RuleHouse {
 
     public int itemCode;
-    public byte itemhora;
+    public int itemhora;
     public byte itemStatus;
 
     public RuleHouse() {
         
     }
 
-    public void setInfoRule() {
-        itemCode = 1;
-        itemhora = 24;
-        itemStatus = 3;
+    public RuleHouse(int itemCode, int itemhora, byte itemStatus) {
+        this.itemCode = itemCode;
+        this.itemhora = itemhora;
+        this.itemStatus = itemStatus;
     }
 
     public String getKeyRuleItem() {

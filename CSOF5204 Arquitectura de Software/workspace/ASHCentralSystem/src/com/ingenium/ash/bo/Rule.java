@@ -13,7 +13,19 @@ public class Rule {
 
     private byte RuleStatus;
     private Item item;
-    private int Hora;    
+    private int Hora;
+
+    /**
+     * 
+     * @param RuleStatus
+     * @param item
+     * @param Hora
+     */
+    public Rule(byte RuleStatus, Item item, int Hora) {
+        this.RuleStatus = RuleStatus;
+        this.item = item;
+        this.Hora = Hora;
+    }
 
     /**
      * @return the RuleStatus
