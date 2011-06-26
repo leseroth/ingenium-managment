@@ -23,6 +23,7 @@ public class Util {
             int shift = (4 - 1 - i) * 8;
             value += (array[i] & 0x000000FF) << shift;
         }
+        System.out.println(value);
         return value;
     }
     
