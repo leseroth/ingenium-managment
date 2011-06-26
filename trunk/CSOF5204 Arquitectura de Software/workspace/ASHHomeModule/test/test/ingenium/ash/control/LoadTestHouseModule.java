@@ -10,7 +10,7 @@ import junit.framework.Test;
 
 public class LoadTestHouseModule {
     public static Test suite() {
-        long maxTimeInMillis = 1000; //modificar tiempo en milisegundos aceptado
+        long maxTimeInMillis = 80000; //modificar tiempo en milisegundos aceptado
         int concurrentUsers = 50; //modificar usuarios componentes
         Test test = new TestHouseModule("testHouseModule");
         Test timedTest = new TimedTest(test, maxTimeInMillis);

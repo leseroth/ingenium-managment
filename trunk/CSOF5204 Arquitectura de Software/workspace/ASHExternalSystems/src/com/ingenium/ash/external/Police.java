@@ -32,7 +32,8 @@ public class Police {
         } catch (IOException ex) {
             Logger.getLogger(Police.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        int counter = 0;
         while (true) {
             try {
                 byte[] byteTotal = new byte[4];
@@ -45,7 +46,8 @@ public class Police {
                 byte[] byteArray = new byte[size];
                 dataInputStream.read(byteArray);
                 
-                Logger.getLogger(Police.class.getName()).log(Level.WARNING, new String(byteArray));
+                counter++;
+                Logger.getLogger(Police.class.getName()).log(Level.WARNING, counter+" " +new String(byteArray));
             } catch (IOException ex) {
                 Logger.getLogger(Police.class.getName()).log(Level.SEVERE, null, ex);
             }

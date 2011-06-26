@@ -21,6 +21,7 @@ public class HomeModuleMain implements Runnable {
     private long reportTime = 1000;
     private byte[] homeIdentifier;
     private Map<Integer, Item> itemList;
+    private int messageCounter;
 
     public HomeModuleMain(short homeId) {
         homeIdentifier = new byte[2];
@@ -65,6 +66,7 @@ public class HomeModuleMain implements Runnable {
                 bb.put(item.encode());
             }
             connClient.sendMessage(bb.array());
+            messageCounter++;
 
             diffTime = System.currentTimeMillis() - referenceTime;
 
@@ -75,5 +77,9 @@ public class HomeModuleMain implements Runnable {
                 }
             }
         }
+    }
+    
+    public int getMessageCounter(){
+        return messageCounter;
     }
 }
