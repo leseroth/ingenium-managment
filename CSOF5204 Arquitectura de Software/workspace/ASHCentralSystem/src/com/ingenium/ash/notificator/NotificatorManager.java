@@ -5,11 +5,14 @@
 package com.ingenium.ash.notificator;
 
 import java.io.*;
+import java.net.UnknownHostException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.*;
 import com.ingenium.ash.util.*;
+import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.DataHandler;
@@ -33,6 +36,10 @@ public class NotificatorManager {
     private static String NOTIFICATION_TEMPLATE;
     private static Session SESSION;
     private static Transport TRANSPORT;
+    private static Socket POLICE_SOCKET;
+    private static Socket EMERGENCY_SOCKET;
+    private static DataOutputStream POLICE_STREAM;
+    private static DataOutputStream EMERGENCY_STREAM;
 
     static {
         try {
@@ -59,36 +66,71 @@ public class NotificatorManager {
             System.out.println("No cargo el template");
         }
     }
-    
-    
+
+    static {
+        try {
+            POLICE_SOCKET = new Socket("localhost", 4450);
+            EMERGENCY_SOCKET = new Socket("localhost", 4460);
+
+            POLICE_STREAM = new DataOutputStream(POLICE_SOCKET.getOutputStream());
+            EMERGENCY_STREAM = new DataOutputStream(EMERGENCY_SOCKET.getOutputStream());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Notifica al cliente sobre la alarma que se ha presentado
      * @param idClient Id del cliente
      * @param idEvent Id del evento
      */
-    public static void notificateClient(String customerMail, String clientName, String tipoEvento, final long time) {
+    public static void notificateClient(String customerMail, String clientName, final String tipoEvento, final long time) {
 
-        clientName = clientName == null ? "Erik Arcos" : clientName;
+        final String finalClientName = clientName == null ? "Erik Arcos" : clientName;
         final String finalCustomerMail = customerMail == null ? "ercos41@gmail.com" : customerMail;
-        final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, clientName, tipoEvento);
+        final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName, tipoEvento);
         final String subject = "Informacion de su sistema";
 
         new Thread() {
 
             @Override
             public void run() {
-                long preMail = System.currentTimeMillis();
+                long pre = System.currentTimeMillis();
+                
+                if(tipoEvento.equals(Constants.SMOKE)) {
+                    sendMessage(EMERGENCY_STREAM, "Se ha detectado "+tipoEvento+" en la propiedad de "+finalClientName);
+                } else {
+                    sendMessage(POLICE_STREAM, "Se ha detectado "+tipoEvento+" en la propiedad de "+finalClientName);
+                }
+                long postMessage = System.currentTimeMillis();
+                
                 sendMail(finalCustomerMail, subject, mailBody);
                 long postMail = System.currentTimeMillis();
+                
                 StringBuilder sb = new StringBuilder("El mensaje se proceso en ");
-                sb.append(preMail - time);
+                sb.append(pre - time);
                 sb.append("ms , tomo ");
-                sb.append(postMail - preMail);
-                sb.append("ms, enviar el correo");
-                Logger.getLogger("<Notificacion>").log(Level.INFO, sb.toString());
+                sb.append(postMessage - pre);
+                sb.append("ms notificar a las autoridades y ");
+                sb.append(postMail - postMessage);
+                sb.append("ms notificar al propietaro");
+                Logger.getLogger(NotificatorManager.class.getName()).log(Level.INFO, sb.toString());
             }
         }.start();
+    }
+
+    private static void sendMessage(DataOutputStream dos, String message) {
+        try {
+            byte[] byteMessage = message.getBytes();
+            ByteBuffer bb = ByteBuffer.allocate(4 + byteMessage.length);
+            bb.putInt(byteMessage.length);
+            bb.put(byteMessage);
+            dos.write(bb.array());
+        } catch (IOException ex) {
+            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

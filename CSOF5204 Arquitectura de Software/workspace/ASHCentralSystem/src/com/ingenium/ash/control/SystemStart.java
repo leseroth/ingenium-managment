@@ -19,7 +19,6 @@ public class SystemStart {
     public static void main(String... args) {
         SystemStart systemStart = new SystemStart();
         systemStart.startSystem();
-        
     }
     
     private void startSystem(){
