@@ -5,6 +5,9 @@
 package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorServer;
+import com.ingenium.ash.notificator.NotificatorManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +23,8 @@ public class SystemStart {
         SystemStart systemStart = new SystemStart();
         systemStart.startSystem();
     }
-    
-    private void startSystem(){
+
+    private void startSystem() {
         connProcessor = new CentralConnectorProcessor();
         connServer = new ConnectorServer(connProcessor);
         connServer.startServer(SERVER_PORT);

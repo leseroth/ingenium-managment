@@ -4,6 +4,7 @@
  */
 package com.ingenium.ash.notificator;
 
+import com.ingenium.ash.communication.SocketProcessor;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.nio.MappedByteBuffer;
@@ -40,6 +41,35 @@ public class NotificatorManager {
     private static Socket EMERGENCY_SOCKET;
     private static DataOutputStream POLICE_STREAM;
     private static DataOutputStream EMERGENCY_STREAM;
+    private static List<long[]> testInfo = new ArrayList<long[]>();
+    private static int emergencyCounter = 0;
+    private static int policeCounter = 0;
+
+    static {
+        new Thread() {
+
+            @Override
+            public void run() {
+                boolean keepAlive = true;
+
+                while (keepAlive) {
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException ex) {
+                    }
+
+                    System.out.println(" total " + testInfo.size() + " ec " + emergencyCounter + " pc " + policeCounter);
+                    if (SocketProcessor.closedCounter == 50) {
+
+                        for (long[] info : testInfo) {
+                            System.out.println(info[0] + " " + info[1] + " " + info[2]);
+                        }
+                        keepAlive = false;
+                    }
+                }
+            }
+        }.start();
+    }
 
     static {
         try {
@@ -98,25 +128,21 @@ public class NotificatorManager {
             @Override
             public void run() {
                 long pre = System.currentTimeMillis();
-                
-                if(tipoEvento.equals(Constants.SMOKE)) {
-                    sendMessage(EMERGENCY_STREAM, "Se ha detectado "+tipoEvento+" en la propiedad de "+finalClientName);
+
+                if (tipoEvento.equals(Constants.SMOKE)) {
+                    sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+                    emergencyCounter++;
                 } else {
-                    sendMessage(POLICE_STREAM, "Se ha detectado "+tipoEvento+" en la propiedad de "+finalClientName);
+                    sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+                    policeCounter++;
                 }
                 long postMessage = System.currentTimeMillis();
-                
+
                 sendMail(finalCustomerMail, subject, mailBody);
                 long postMail = System.currentTimeMillis();
-                
-                StringBuilder sb = new StringBuilder("El mensaje se proceso en ");
-                sb.append(pre - time);
-                sb.append("ms , tomo ");
-                sb.append(postMessage - pre);
-                sb.append("ms notificar a las autoridades y ");
-                sb.append(postMail - postMessage);
-                sb.append("ms notificar al propietaro");
-                Logger.getLogger(NotificatorManager.class.getName()).log(Level.INFO, sb.toString());
+
+                testInfo.add(new long[]{pre - time, postMessage - pre, postMail - postMessage});
+
             }
         }.start();
     }
@@ -155,23 +181,6 @@ public class NotificatorManager {
             TRANSPORT.sendMessage(message, message.getAllRecipients());
             //transport.close();
         } catch (Exception ex) {
-            Logger.getLogger(NotificatorManager.class.getName()).log(Level.WARNING, "No se pudo enviar el correo de notificacion ");
-        }
-    }
-
-    /**
-     * Envia la notificacion a las autoridades correspondientes
-     * @param eventType Tipo de evento
-     */
-    private static void sendWarning(int eventType) {
-        switch (eventType) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-
         }
     }
 

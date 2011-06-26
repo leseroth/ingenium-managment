@@ -39,11 +39,12 @@ public class TestHouseModule extends TestCase {
         hmm.startHomeModule("localhost", 4444);
 
         long referenceTime = System.currentTimeMillis();
-        while (20000 > System.currentTimeMillis() - referenceTime) {
+        while (10000 > System.currentTimeMillis() - referenceTime) {
             hmm.setStatus(random.nextInt(itemTotal), (byte) random.nextInt(100));
         }
 
         hmm.stopHomeModule();
+        System.out.println("total "+hmm.getMessageCounter());
     }
 
 }

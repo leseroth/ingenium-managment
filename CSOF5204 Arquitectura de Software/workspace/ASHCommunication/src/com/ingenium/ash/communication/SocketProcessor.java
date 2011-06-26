@@ -20,6 +20,8 @@ public class SocketProcessor implements Runnable {
     private boolean keepAlive;
     private DataInputStream dataInputStream;
     private ManagerInterface managerInterface;
+    public static int counter;
+    public static int closedCounter;
 
     public SocketProcessor(Socket s, ManagerInterface mi) {
         socket = s;
@@ -46,6 +48,7 @@ public class SocketProcessor implements Runnable {
                 int size = Util.byteArrayToInt(byteTotal);
                 
                 long time = System.currentTimeMillis();
+                counter ++;
 
                 byte[] byteArray = new byte[size];
                 dataInputStream.read(byteArray);
@@ -54,13 +57,20 @@ public class SocketProcessor implements Runnable {
                 se.printStackTrace();
                 Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha cerrado el socket");
                 keepAlive = false;
+                closedCounter++;
             } catch (EOFException eofe) {
                 Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha perdido la conexion");
                 keepAlive = false;
+                closedCounter++;
             } catch (IOException ex) {
                 Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.SEVERE, null, ex);
                 keepAlive = false;
+                closedCounter++;
             }
+        }
+        
+        if(closedCounter==50){
+            System.out.println("Total Mensajes "+counter);
         }
 
         closeSocket();
