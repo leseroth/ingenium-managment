@@ -17,7 +17,7 @@ import com.ingenium.ash.util.*;
  *
  * @author Mauricio
  */
-public class Notificator {
+public class NotificatorManager {
    
     /**
      * Notifica al cliente sobre la alarma que se ha presentado
