@@ -18,11 +18,14 @@ public class CacheContactInfo {
     public CacheContactInfo() {
         
         for (int i = 0; i < 240; i++) {
-            hmContact.put("user_"+i, new ContactInfo(1, "David", "Pérez","davidres@gmail.com",2,2011) );
+            hmContact.put(String.valueOf(i), new ContactInfo(1, "David", "Pérez","davidres@gmail.com",2,2011) );
         }
     }
 
     public static ContactInfo getInfoContact(String code) {
         return hmContact.get(code);
+    }
+    public static void putInfoContact(ContactInfo contactInfo) {
+        hmContact.put(contactInfo.getKeyContactHouse(), contactInfo);
     }
 }

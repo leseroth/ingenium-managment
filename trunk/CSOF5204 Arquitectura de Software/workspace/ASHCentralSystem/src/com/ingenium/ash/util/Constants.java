@@ -29,5 +29,8 @@ public class Constants {
     public static final String MAIL_USER = "ingenium.uniandes@gmail.com";
     public static final String MAIL_PASSWORD = "ingenium2011";
     public static final String TEMPLATE_FILE = "htmlTemplate.html";
-    
+    /**Eventos**/
+    public static final String SMOKE = "Ha ocurrido un incendio";
+    public static final String SENSOR = "Se ha abierto una puerta o ventana en su hogar";
+    public static final String RFID = "Movimiento no permitido";
 }

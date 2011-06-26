@@ -4,10 +4,13 @@
  */
 package com.ingenium.ash.manager;
 
+import com.ingenium.ash.cache.CacheContactInfo;
 import com.ingenium.ash.cache.CacheRules;
 import com.ingenium.ash.communication.ManagerInterface;
+import com.ingenium.ash.notificator.NotificatorManager;
 import com.ingenium.ash.util.Constants;
 import com.ingenium.ash.util.Util;
+import com.ingenium.ash.valueobjects.ContactInfo;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -26,18 +29,32 @@ public class Manager implements ManagerInterface {
 
         if (itemType == Constants.SMOKETYPE) {
             /*Selecciona del arreglo el byte relacionado al status*/
-            smokeProcess(event[5]);
+            if (smokeProcess(event[5])) {
+                /*Evento de fuego*/
+                byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
+                int code = Util.convertArraytoInt(codebytes);
+                ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE);
+            }
 
         } else if (itemType == Constants.SENSORTYPE) {
             /*Procesar evento*/
             byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
             int code = Util.convertArraytoInt(codebytes);
-            sensorProcess(event[5], code);
+            if (sensorProcess(event[5], code)) {
+                /*Evento de apertura de puerta o ventana*/
+                ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR);
+            }
         } else if (itemType == Constants.RFIDTYPE) {
             /*Procesar evento*/
             byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
             int code = Util.convertArraytoInt(codebytes);
-            sensorProcess(event[5], code);
+            if (sensorProcess(event[5], code)) {
+                /*RFID en lugar no autorizado*/
+                ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.RFID);
+            }
         } else {
             /*No contiene un tipo de item definido*/
         }

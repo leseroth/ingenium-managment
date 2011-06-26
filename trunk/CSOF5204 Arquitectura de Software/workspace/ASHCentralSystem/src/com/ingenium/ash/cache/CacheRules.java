@@ -34,12 +34,11 @@ public class CacheRules {
     public static byte getStatus(String code) {
         Object o = hmRules.get(code);
         if (o == null) {
-            System.out.println("null");
+            //System.out.println("null");
             return Constants.DEFAULTSTATUS;
         } else {
             return ((Byte) o).byteValue();
         }
-
     }
 
     public static void putRule(RuleHouse rule) {

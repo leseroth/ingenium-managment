@@ -24,16 +24,16 @@ public class NotificatorManager {
      * @param idClient Id del cliente
      * @param idEvent Id del evento
      */
-    public static void notificateClient(int idClient, int idEvent) {
+    public static void notificateClient(String customerMail, String clientName, String tipoEvento ) {
         try {
             // info cliente
-            String customerMail = "";
+            /*String customerMail = "";
             String clientName = "";
-            String tipoEvento = "";
+            String tipoEvento = "";*/
             String mailBody = readTemplate();
             mailBody = processTemplate(mailBody, clientName, tipoEvento);
             String subject = "Informacion de su sistema";
-            sendWarning(idEvent);
+            //sendWarning(idEvent);
             sendMail(customerMail, subject, mailBody);
         } catch (IOException ex) {
             ex.printStackTrace();
