@@ -1,42 +1,32 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package test.ingenium.ash.control;
 
 import com.ingenium.ash.control.HomeModuleMain;
 import java.util.Random;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
 
-/**
- *
- * @author Erik Arcos
- */
-public class TestHouseModule {
+
+public class TestHouseModule extends TestCase {
 
     private Random random;
 
-    public TestHouseModule() {
+    public TestHouseModule(String testName) {
+        super(testName);
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() {
+    @Override
+    protected void setUp() throws Exception {
         random = new Random();
     }
 
-    @After
-    public void tearDown() {
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 
-    @Test
     public void testHouseModule() {
         HomeModuleMain hmm = new HomeModuleMain((short) 1);
 
@@ -55,4 +45,5 @@ public class TestHouseModule {
 
         hmm.stopHomeModule();
     }
+
 }
