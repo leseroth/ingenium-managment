@@ -36,7 +36,7 @@ public class TestConnection {
         ByteBuffer bb = ByteBuffer.allocate(4);
         bb.putInt(135);
         byte[] test=bb.array();
-        System.out.println(test[0]+"-"+test[1]+"-"+test[2]+"-"+test[3]);
+
         cc.sendMessage(bb.array());
         try {
             Thread.sleep(1000*60*10);

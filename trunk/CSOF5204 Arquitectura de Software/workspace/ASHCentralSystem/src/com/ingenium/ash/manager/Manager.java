@@ -21,7 +21,7 @@ import java.util.Calendar;
 public class Manager implements ManagerInterface {
 
     @Override
-    public void processEvent(byte[] event) {
+    public void processEvent(byte[] event, long time) {
 
         /*Selecciona del arreglo el byte del tipo de item*/
 
@@ -34,7 +34,7 @@ public class Manager implements ManagerInterface {
                 byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
                 int code = Util.convertArraytoInt(codebytes);
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE, time);
             }
 
         } else if (itemType == Constants.SENSORTYPE) {
@@ -44,7 +44,7 @@ public class Manager implements ManagerInterface {
             if (sensorProcess(event[5], code)) {
                 /*Evento de apertura de puerta o ventana*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR, time);
             }
         } else if (itemType == Constants.RFIDTYPE) {
             /*Procesar evento*/
@@ -53,7 +53,7 @@ public class Manager implements ManagerInterface {
             if (sensorProcess(event[5], code)) {
                 /*RFID en lugar no autorizado*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.RFID);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.RFID, time);
             }
         } else {
             /*No contiene un tipo de item definido*/

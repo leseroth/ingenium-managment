@@ -6,6 +6,6 @@ package com.ingenium.ash.communication;
  */
 public interface ManagerInterface {
     
-    void processEvent(byte[] event);
+    void processEvent(byte[] event, long time);
     
 }

@@ -5,7 +5,6 @@
 
 package com.ingenium.ash.manager;
 
-import com.ingenium.ash.bo.Rule;
 import com.ingenium.ash.cache.CacheRules;
 import com.ingenium.ash.cache.RuleHouse;
 import org.junit.After;
