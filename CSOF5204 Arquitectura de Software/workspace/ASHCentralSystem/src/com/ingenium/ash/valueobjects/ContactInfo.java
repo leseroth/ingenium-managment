@@ -27,7 +27,6 @@ public class ContactInfo {
     }
 
     public String getKeyContactHouse() {
-
         return String.valueOf(itemCode);
     }
 
