@@ -78,8 +78,8 @@ public class HomeModuleMain implements Runnable {
             }
         }
     }
-    
-    public int getMessageCounter(){
+
+    public int getMessageCounter() {
         return messageCounter;
     }
 }
