@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,8 +24,9 @@ public class SocketProcessor implements Runnable {
     private ManagerInterface managerInterface;
     public static int counter;
     public static int closedCounter;
-    public static int maxConnections = 300;
-    
+    public static int maxConnections = 10;
+    public static List<String> timeTest = new ArrayList<String>();
+
     public SocketProcessor(Socket s, ManagerInterface mi) {
         socket = s;
         keepAlive = true;
@@ -47,9 +50,9 @@ public class SocketProcessor implements Runnable {
                 byteTotal[2] = dataInputStream.readByte();
                 byteTotal[3] = dataInputStream.readByte();
                 int size = Util.byteArrayToInt(byteTotal);
-                
+
                 long time = System.currentTimeMillis();
-                counter ++;
+                counter++;
 
                 byte[] byteArray = new byte[size];
                 dataInputStream.read(byteArray);
@@ -57,20 +60,21 @@ public class SocketProcessor implements Runnable {
             } catch (SocketException se) {
                 //Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha cerrado el socket");
                 keepAlive = false;
-                closedCounter++;
             } catch (EOFException eofe) {
                 //Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha perdido la conexion");
                 keepAlive = false;
-                closedCounter++;
             } catch (IOException ex) {
                 Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.SEVERE, null, ex);
                 keepAlive = false;
-                closedCounter++;
             }
         }
-        
-        if(closedCounter==maxConnections){
-            System.out.println("Total Mensajes "+counter);
+
+        closedCounter++;
+        if (closedCounter == maxConnections) {
+            for (String s : timeTest) {
+                System.out.println(s);
+            }
+            closedCounter = 0;
         }
 
         closeSocket();
