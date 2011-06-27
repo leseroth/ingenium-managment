@@ -5,13 +5,9 @@
 package test.ingenium.ash.control;
 
 import com.ingenium.ash.control.HomeModuleMain;
-import java.util.Random;
 import junit.framework.TestCase;
 
-
 public class TestHouseModule extends TestCase {
-
-    private Random random;
 
     public TestHouseModule(String testName) {
         super(testName);
@@ -19,7 +15,6 @@ public class TestHouseModule extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        random = new Random();
     }
 
     @Override
@@ -30,21 +25,29 @@ public class TestHouseModule extends TestCase {
     public void testHouseModule() {
         HomeModuleMain hmm = new HomeModuleMain((short) 1);
 
-        int itemTotal = 20 + random.nextInt(30);
-        byte[] itemType = {1, 2, 3};
+        int itemTotal = 40;
         for (int i = 0; i < itemTotal; i++) {
-            hmm.addItem(i, itemType[random.nextInt(3)]);
+            if (i < 10) {
+                hmm.addItem(i, (byte) 2);
+            } else if (i < 20) {
+                hmm.addItem(i, (byte) 2);
+            } else {
+                hmm.addItem(i, (byte) 2);
+            }
         }
 
         hmm.startHomeModule("localhost", 4444);
 
         long referenceTime = System.currentTimeMillis();
+        boolean test = true;
         while (10000 > System.currentTimeMillis() - referenceTime) {
-            hmm.setStatus(random.nextInt(itemTotal), (byte) random.nextInt(100));
+            if(test && 5000 > System.currentTimeMillis() - referenceTime) {
+                hmm.setStatus(1, (byte) 1);
+                test = false;
+            }   
         }
 
         hmm.stopHomeModule();
-        System.out.println("total "+hmm.getMessageCounter());
+        System.out.println("total " + hmm.getMessageCounter());
     }
-
 }
