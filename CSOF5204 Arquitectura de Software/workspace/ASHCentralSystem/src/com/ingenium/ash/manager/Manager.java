@@ -30,7 +30,7 @@ public class Manager implements ManagerInterface {
             /*Selecciona del arreglo el byte relacionado al status*/
             if (smokeProcess(event[5])) {
                 /*Evento de fuego*/
-                byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
+                byte[] codebytes = new byte[]{event[1],event[2],event[3],event[4]};//Arrays.copyOfRange(event, 1, 5);
                 int code = Util.convertArraytoInt(codebytes);
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
                 NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE, time);
@@ -38,11 +38,12 @@ public class Manager implements ManagerInterface {
 
         } else if (itemType == Constants.SENSORTYPE) {
             /*Procesar evento*/
-            byte[] codebytes = Arrays.copyOfRange(event, 1, 5);
+            byte[] codebytes = new byte[]{event[1],event[2],event[3],event[4]};//Arrays.copyOfRange(event, 1, 5);
             int code = Util.convertArraytoInt(codebytes);
             if (sensorProcess(event[5], code)) {
                 /*Evento de apertura de puerta o ventana*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
+                System.out.println(System.currentTimeMillis());
                 NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR, time);
             }
         } else if (itemType == Constants.RFIDTYPE) {

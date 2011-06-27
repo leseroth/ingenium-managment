@@ -34,7 +34,7 @@ import javax.mail.util.ByteArrayDataSource;
  */
 public class NotificatorManager {
 
-    private static String NOTIFICATION_TEMPLATE;
+    public static String NOTIFICATION_TEMPLATE;
     private static Session SESSION;
     private static Transport TRANSPORT;
     private static Socket POLICE_SOCKET;
@@ -90,7 +90,12 @@ public class NotificatorManager {
      * @param idEvent Id del evento
      */
     public static void notificateClient(String customerMail, String clientName, final String tipoEvento, final long time) {
-
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         final String finalClientName = clientName == null ? "Erik Arcos" : clientName;
         final String finalCustomerMail = customerMail == null ? "ercos41@gmail.com" : customerMail;
         final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName, tipoEvento);
