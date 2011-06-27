@@ -100,21 +100,21 @@ public class NotificatorManager {
 //
 //            @Override
 //            public void run() {
-                long pre = System.currentTimeMillis();
 
-                if (tipoEvento.equals(Constants.SMOKE)) {
-                    sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
-                    emergencyCounter++;
-                } else {
-                    sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
-                    policeCounter++;
-                }
-                long postMessage = System.currentTimeMillis();
+        if (tipoEvento.equals(Constants.SMOKE)) {
+            sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            emergencyCounter++;
+        } else {
+            sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            policeCounter++;
+        }
+        long postMessage = System.currentTimeMillis();
 
-                //sendMail(finalCustomerMail, subject, mailBody);
-                //long postMail = System.currentTimeMillis();
+        //sendMail(finalCustomerMail, subject, mailBody);
+        //long postMail = System.currentTimeMillis();
 
-                System.out.println(emergencyCounter+" "+policeCounter+" "+(pre - time));
+        SocketProcessor.timeTest.add(emergencyCounter + " " + policeCounter + " " + System.currentTimeMillis() + " " + time + " " + (System.currentTimeMillis() - time));
+
 //            }
 //        }.start();
     }
