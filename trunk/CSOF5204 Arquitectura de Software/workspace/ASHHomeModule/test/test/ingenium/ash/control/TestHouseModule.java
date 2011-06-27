@@ -48,6 +48,5 @@ public class TestHouseModule extends TestCase {
         }
 
         hmm.stopHomeModule();
-        System.out.println("total " + hmm.getMessageCounter());
     }
 }

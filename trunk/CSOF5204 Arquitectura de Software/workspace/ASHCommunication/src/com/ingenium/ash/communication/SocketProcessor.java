@@ -70,12 +70,12 @@ public class SocketProcessor implements Runnable {
         }
 
         closedCounter++;
-//        if (closedCounter == maxConnections) {
-//            for (String s : timeTest) {
-//                System.out.println(s);
-//            }
-//            closedCounter = 0;
-//        }
+        if (closedCounter == maxConnections) {
+            for (String s : timeTest) {
+                System.out.println(s);
+            }
+            closedCounter = 0;
+        }
 
         closeSocket();
     }

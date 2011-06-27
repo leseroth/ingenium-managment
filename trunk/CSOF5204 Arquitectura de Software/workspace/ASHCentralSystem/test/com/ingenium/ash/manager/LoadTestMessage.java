@@ -14,8 +14,8 @@ import junit.framework.Test;
 public class LoadTestMessage {
 
     public static Test suite() {
-        long maxTimeInMillis = 80000; //modificar tiempo en milisegundos aceptado
-        int concurrentUsers = 10; //modificar usuarios componentes
+        long maxTimeInMillis = 1000; //modificar tiempo en milisegundos aceptado
+        int concurrentUsers = 3000; //modificar usuarios componentes
         Test test = new MessageTest("testMessage");
         Test timedTest = new TimedTest(test, maxTimeInMillis);
         Test loadTest1 = new com.clarkware.junitperf.LoadTest(timedTest, concurrentUsers);
