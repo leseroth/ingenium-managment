@@ -11,7 +11,7 @@ import junit.framework.Test;
 public class LoadTestHouseModule {
     public static Test suite() {
         long maxTimeInMillis = 80000; //modificar tiempo en milisegundos aceptado
-        int concurrentUsers = 50; //modificar usuarios componentes
+        int concurrentUsers = 100; //modificar usuarios componentes
         Test test = new TestHouseModule("testHouseModule");
         Test timedTest = new TimedTest(test, maxTimeInMillis);
         Test loadTest1 = new com.clarkware.junitperf.LoadTest(timedTest, concurrentUsers);

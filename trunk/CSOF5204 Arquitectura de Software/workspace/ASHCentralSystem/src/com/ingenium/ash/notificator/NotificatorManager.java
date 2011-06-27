@@ -41,35 +41,8 @@ public class NotificatorManager {
     private static Socket EMERGENCY_SOCKET;
     private static DataOutputStream POLICE_STREAM;
     private static DataOutputStream EMERGENCY_STREAM;
-    private static List<long[]> testInfo = new ArrayList<long[]>();
     private static int emergencyCounter = 0;
     private static int policeCounter = 0;
-
-    static {
-        new Thread() {
-
-            @Override
-            public void run() {
-                boolean keepAlive = true;
-
-                while (keepAlive) {
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException ex) {
-                    }
-
-                    System.out.println(" total " + testInfo.size() + " ec " + emergencyCounter + " pc " + policeCounter);
-                    if (SocketProcessor.closedCounter == 50) {
-
-                        for (long[] info : testInfo) {
-                            System.out.println(info[0] + " " + info[1] + " " + info[2]);
-                        }
-                        keepAlive = false;
-                    }
-                }
-            }
-        }.start();
-    }
 
     static {
         try {
@@ -123,10 +96,10 @@ public class NotificatorManager {
         final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName, tipoEvento);
         final String subject = "Informacion de su sistema";
 
-        new Thread() {
-
-            @Override
-            public void run() {
+//        new Thread() {
+//
+//            @Override
+//            public void run() {
                 long pre = System.currentTimeMillis();
 
                 if (tipoEvento.equals(Constants.SMOKE)) {
@@ -138,13 +111,12 @@ public class NotificatorManager {
                 }
                 long postMessage = System.currentTimeMillis();
 
-                sendMail(finalCustomerMail, subject, mailBody);
-                long postMail = System.currentTimeMillis();
+                //sendMail(finalCustomerMail, subject, mailBody);
+                //long postMail = System.currentTimeMillis();
 
-                testInfo.add(new long[]{pre - time, postMessage - pre, postMail - postMessage});
-
-            }
-        }.start();
+                System.out.println(emergencyCounter+" "+policeCounter+" "+(pre - time));
+//            }
+//        }.start();
     }
 
     private static void sendMessage(DataOutputStream dos, String message) {

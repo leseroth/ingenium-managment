@@ -5,9 +5,6 @@
 package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorServer;
-import com.ingenium.ash.notificator.NotificatorManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -47,7 +47,7 @@ public class Police {
                 dataInputStream.read(byteArray);
                 
                 counter++;
-                Logger.getLogger(Police.class.getName()).log(Level.WARNING, counter+" " +new String(byteArray));
+                System.out.println(counter+" " +new String(byteArray));
             } catch (IOException ex) {
                 Logger.getLogger(Police.class.getName()).log(Level.SEVERE, null, ex);
             }

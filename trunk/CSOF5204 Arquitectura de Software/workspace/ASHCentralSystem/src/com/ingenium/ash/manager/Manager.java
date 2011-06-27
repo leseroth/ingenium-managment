@@ -22,7 +22,6 @@ public class Manager implements ManagerInterface {
 
     @Override
     public void processEvent(byte[] event, long time) {
-
         /*Selecciona del arreglo el byte del tipo de item*/
 
         byte itemType = event[0];
