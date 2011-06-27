@@ -5,20 +5,20 @@
 
 package com.ingenium.ash.manager;
 
-import com.ingenium.ash.cache.CacheRules;
-import com.ingenium.ash.cache.RuleHouse;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+//import com.ingenium.ash.cache.CacheRules;
+//import com.ingenium.ash.cache.RuleHouse;
+//import org.junit.After;
+//import org.junit.AfterClass;
+//import org.junit.Before;
+//import org.junit.BeforeClass;
+//import org.junit.Test;
 
 /**
  *
  * @author admin
  */
 public class DataTest {
-
+/*
     public DataTest() {
     }
 
@@ -42,5 +42,5 @@ public class DataTest {
     public void loadData() {
         RuleHouse rh = new RuleHouse(1,1,Byte.parseByte("00000001", 2));
         CacheRules.putRule(rh);
-    }
+    } */
 }
