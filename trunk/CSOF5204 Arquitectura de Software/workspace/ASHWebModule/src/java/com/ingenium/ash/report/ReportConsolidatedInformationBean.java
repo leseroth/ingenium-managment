@@ -11,6 +11,7 @@ import java.util.List;
  * 
  * @author Sandra Milena Gómez Ríos
  */
+
 public class ReportConsolidatedInformationBean {
     
     /* Lista con los eventos */
@@ -28,7 +29,7 @@ public class ReportConsolidatedInformationBean {
     
     /**
      * Consulta los todos los eventos registrados para la casa u oficina seleccionada.
-     */
+     */    
     public void informationConsult(){
         try{
            listEvents = new ArrayList<Event>();           
