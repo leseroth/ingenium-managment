@@ -4,9 +4,7 @@
  */
 package com.ingenium.ash.manager;
 
-import com.ingenium.ash.notificator.NotificatorManager;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import junit.framework.TestCase;
 
 /**
@@ -61,7 +59,7 @@ public class MessageTest extends TestCase {
             bb.put(info[i * 6 + 5]);
             bb.put(info[i * 6 + 6]);
             bb.put(info[i * 6 + 7]);
-            manager.processEvent(bb.array(), System.currentTimeMillis());
+            manager.processEvent(bb.array());
         }
         
     }

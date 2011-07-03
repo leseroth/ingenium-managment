@@ -1,6 +1,5 @@
 package com.ingenium.ash.external;
 
-import com.ingenium.ash.communication.util.Util;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;

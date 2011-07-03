@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.ingenium.ash.util;
-
 
 /**
  *
@@ -17,7 +15,7 @@ public class Util {
      * @param array
      * @return
      */
-    public static int convertArraytoInt(byte[] array){
+    public static int convertArraytoInt(byte[] array) {
         int value = 0;
         for (int i = 0; i < 4; i++) {
             int shift = (4 - 1 - i) * 8;
@@ -26,7 +24,7 @@ public class Util {
 
         return value;
     }
-    
+
     /**
      * Convierte un entero a un arreglo de bytes
      * @param value
@@ -41,4 +39,10 @@ public class Util {
         return b;
     }
 
+    public static int byteArrayToInt(byte[] bytes) {
+        return (bytes[0] << 24)
+                + ((bytes[1] & 0xFF) << 16)
+                + ((bytes[2] & 0xFF) << 8)
+                + (bytes[3] & 0xFF);
+    }
 }
