@@ -29,16 +29,13 @@ public class HomeSystemConnection implements Runnable {
 
         while (true) {
             try {
-                byte[] byteTotal = new byte[4];
-                byteTotal[0] = dataInputStream.readByte();
-                byteTotal[1] = dataInputStream.readByte();
-                byteTotal[2] = dataInputStream.readByte();
-                byteTotal[3] = dataInputStream.readByte();
-                int size = Util.byteArrayToInt(byteTotal);
-                byte[] byteArray = new byte[size];
-                dataInputStream.read(byteArray);
+                int payloadSize = dataInputStream.readInt();
+                short homeId = dataInputStream.readShort();
+                int messageId = dataInputStream.readInt();          
+                byte[] payload = new byte[payloadSize];
+                dataInputStream.read(payload);
 
-                LoadBalancer.getInstance().redirectMessage(byteTotal, byteArray);
+                LoadBalancer.getInstance().redirectMessage(homeId, messageId, payload);
             } catch (IOException ex) {
                 Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al redireccionar el mensaje");
             }

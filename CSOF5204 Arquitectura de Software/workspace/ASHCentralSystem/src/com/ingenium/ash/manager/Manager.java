@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ingenium.ash.manager;
 
 import com.ingenium.ash.cache.CacheContactInfo;
 import com.ingenium.ash.cache.CacheRules;
-import com.ingenium.ash.communication.ManagerInterface;
 import com.ingenium.ash.notificator.NotificatorManager;
 import com.ingenium.ash.util.Constants;
 import com.ingenium.ash.util.Util;
@@ -16,12 +11,11 @@ import java.util.Calendar;
 
 /**
  *
- * @author admin
+ * @author Erik Arcos
  */
-public class Manager implements ManagerInterface {
+public class Manager {
 
-    @Override
-    public void processEvent(byte[] event, long time) {
+    public void processEvent(byte[] event) {
         /*Selecciona del arreglo el byte del tipo de item*/
 
         byte itemType = event[0];
@@ -33,7 +27,7 @@ public class Manager implements ManagerInterface {
                 byte[] codebytes = new byte[]{event[1],event[2],event[3],event[4]};//Arrays.copyOfRange(event, 1, 5);
                 int code = Util.convertArraytoInt(codebytes);
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE, time);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SMOKE);
             }
 
         } else if (itemType == Constants.SENSORTYPE) {
@@ -44,7 +38,7 @@ public class Manager implements ManagerInterface {
                 /*Evento de apertura de puerta o ventana*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
                 System.out.println(System.currentTimeMillis());
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR, time);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR);
             }
         } else if (itemType == Constants.RFIDTYPE) {
             /*Procesar evento*/
@@ -53,7 +47,7 @@ public class Manager implements ManagerInterface {
             if (sensorProcess(event[5], code)) {
                 /*RFID en lugar no autorizado*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.RFID, time);
+                NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.RFID);
             }
         } else {
             /*No contiene un tipo de item definido*/

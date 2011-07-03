@@ -4,7 +4,6 @@
  */
 package com.ingenium.ash.notificator;
 
-import com.ingenium.ash.communication.SocketProcessor;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.nio.MappedByteBuffer;
@@ -89,7 +88,7 @@ public class NotificatorManager {
      * @param idClient Id del cliente
      * @param idEvent Id del evento
      */
-    public static void notificateClient(String customerMail, String clientName, final String tipoEvento, final long time) {
+    public static void notificateClient(String customerMail, String clientName, final String tipoEvento) {
         try {
             Thread.sleep(50);
         } catch (InterruptedException ex) {
@@ -117,9 +116,6 @@ public class NotificatorManager {
 
         //sendMail(finalCustomerMail, subject, mailBody);
         //long postMail = System.currentTimeMillis();
-
-        SocketProcessor.timeTest.add(emergencyCounter + " " + policeCounter + " " + System.currentTimeMillis() + " " + time + " " + (System.currentTimeMillis() - time));
-
 //            }
 //        }.start();
     }

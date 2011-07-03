@@ -13,8 +13,8 @@ import com.ingenium.ash.communication.ConnectorServer;
 public class SystemStart {
 
     private ConnectorServer connServer;
-    private CentralConnectorProcessor connProcessor;
-    private static int SERVER_PORT = 4444;
+    public final static int BALANCER_PORT = 4444;
+    public final static String BALANCER_LOCATION = "localhost";
 
     public static void main(String... args) {
         SystemStart systemStart = new SystemStart();
@@ -22,8 +22,7 @@ public class SystemStart {
     }
 
     private void startSystem() {
-        connProcessor = new CentralConnectorProcessor();
-        connServer = new ConnectorServer(connProcessor);
-        connServer.startServer(SERVER_PORT);
+        connServer = new ConnectorServer();
+        connServer.startServer();
     }
 }
