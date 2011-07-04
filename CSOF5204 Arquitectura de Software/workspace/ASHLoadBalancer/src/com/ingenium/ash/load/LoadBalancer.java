@@ -234,6 +234,14 @@ public class LoadBalancer {
                     }
                 }
 
+                // Mostrar los datos de auditoria
+                if (centralSystemIdentifier == 1) {
+                    for (Long time : recievedMessageTime.values()) {
+                        System.out.println(time);
+                    }
+                    recievedMessageTime.clear();
+                }
+
                 // Volver a enviar los mensajes que un CS caido no contesto
                 try {
                     removeServer(centralSystemIdentifier);
@@ -269,7 +277,6 @@ public class LoadBalancer {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo iniciar el socket de las casas");
                 }
 
-                long firstTime = System.currentTimeMillis();
                 System.out.println("El balanceador de carga esta listo para aceptar conexiones de casas");
                 boolean keepAlive = true;
                 while (keepAlive) {
@@ -280,14 +287,6 @@ public class LoadBalancer {
                     } catch (IOException ex) {
                         Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al conectar una casa al balanceador de carga");
                         keepAlive = false;
-                    }
-
-                    if (System.currentTimeMillis() - firstTime > 60000) {
-                        for (Long time : recievedMessageTime.values()) {
-                            System.out.println(time);
-                        }
-                        recievedMessageTime.clear();
-                        firstTime = System.currentTimeMillis();
                     }
                 }
             }
