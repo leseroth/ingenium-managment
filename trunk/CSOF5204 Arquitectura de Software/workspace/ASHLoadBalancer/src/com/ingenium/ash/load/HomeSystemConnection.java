@@ -58,7 +58,7 @@ public class HomeSystemConnection implements Runnable {
                     boolean verified = SignatureVerifier.verifySignature(payload, signedPayload);
 
                     if (verified) {
-                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload, recievedTime);
+                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
                     } else {
                         System.out.println("No se pudo verificar la firma de la casa " + homeId);
                         socket.close();
