@@ -11,10 +11,12 @@ import java.util.logging.Logger;
  * @author Erik
  */
 public class HomeSystemConnection implements Runnable {
+
     private int messageIdGenerator;
     private Socket socket;
-    
-    public HomeSystemConnection(Socket s){
+    private LoadBalancer loadBalancer = LoadBalancer.getInstance();
+
+    public HomeSystemConnection(Socket s) {
         socket = s;
     }
 
@@ -29,19 +31,26 @@ public class HomeSystemConnection implements Runnable {
 
         boolean keepAlive = true;
         short homeIdCache = 0;
-        
+
         while (keepAlive) {
             try {
                 messageIdGenerator++;
-                
+
                 short homeId = dataInputStream.readShort();
                 int payloadSize = dataInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 dataInputStream.read(payload);
                 homeIdCache = homeId;
-                LoadBalancer.getInstance().redirectMessage(homeId, messageIdGenerator, payload);
+
+                boolean dos = loadBalancer.verifyDenialOfService(homeId, System.currentTimeMillis());
+                if (dos) {
+                    socket.close();
+                    throw new IOException();
+                } else {
+                    loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
+                }
             } catch (IOException ex) {
-                String message = "Se ha perdido la conexion con la casa "+homeIdCache;
+                String message = "Se ha perdido la conexion con la casa " + homeIdCache;
                 Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, message);
                 keepAlive = false;
             }

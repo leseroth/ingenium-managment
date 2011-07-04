@@ -37,7 +37,6 @@ public class Manager {
             if (sensorProcess(event[5], code)) {
                 /*Evento de apertura de puerta o ventana*/
                 ContactInfo contactInfo = CacheContactInfo.getInfoContact(String.valueOf(code));
-                System.out.println(System.currentTimeMillis());
                 NotificatorManager.notificateClient(contactInfo.email, contactInfo.name, Constants.SENSOR);
             }
         } else if (itemType == Constants.RFIDTYPE) {

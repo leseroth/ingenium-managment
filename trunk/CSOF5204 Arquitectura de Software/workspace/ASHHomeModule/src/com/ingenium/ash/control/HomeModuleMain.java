@@ -2,10 +2,13 @@ package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorClient;
 import com.ingenium.ash.vo.Item;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import static com.ingenium.ash.util.Constants.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,26 +61,31 @@ public class HomeModuleMain implements Runnable {
         diffTime = 0;
 
         while (keepAlive) {
-            referenceTime = System.currentTimeMillis();
+            try {
+                referenceTime = System.currentTimeMillis();
 
-            int payloadSize = itemList.size() * ITEM_SIZE;
+                int payloadSize = itemList.size() * ITEM_SIZE;
 
-            ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize);
-            bb.putShort(homeIdentifier);
-            bb.putInt(payloadSize);
-            for (Item item : itemList.values()) {
-                bb.put(item.encode());
-            }
-            connClient.sendMessage(bb.array());
-            messageCounter++;
-
-            diffTime = System.currentTimeMillis() - referenceTime;
-
-            if (diffTime < reportTime) {
-                try {
-                    Thread.sleep(reportTime - diffTime);
-                } catch (InterruptedException ex) {
+                ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize);
+                bb.putShort(homeIdentifier);
+                bb.putInt(payloadSize);
+                for (Item item : itemList.values()) {
+                    bb.put(item.encode());
                 }
+                connClient.sendMessage(bb.array());
+                messageCounter++;
+
+                diffTime = System.currentTimeMillis() - referenceTime;
+
+                if (diffTime < reportTime) {
+                    try {
+                        Thread.sleep(reportTime - diffTime);
+                    } catch (InterruptedException ex) {
+                    }
+                }
+            } catch (IOException ex) {
+                keepAlive = false;
+                Logger.getLogger(HomeModuleMain.class.getName()).log(Level.SEVERE, "Se ha perdido la conexion con el servidor", ex);
             }
         }
     }
