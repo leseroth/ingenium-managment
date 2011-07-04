@@ -30,7 +30,7 @@ public class LoadBalancer {
     // Token para determinar el siguiente servidor a quien se le va a asignar la conexion
     private int centralSystemTokenPosition;
     // Cache de mensajes
-    private static final String SEPARATOR = "*";
+    private static final String MEESSAGE_ID_SEPARATOR = "-";
     private Map<String, byte[]> messageCache;
     // Referencia al unico Balanceador de carga
     private static LoadBalancer reference;
@@ -65,8 +65,15 @@ public class LoadBalancer {
             centralSystemTokenPosition = 0;
         }
 
-        Object[] description = centralSystemList.get(centralSystemTokenPosition);
-        return (DataOutputStream) description[LB_SC_SENDER_STREAM];
+        DataOutputStream dos = null;
+
+        try {
+            Object[] description = centralSystemList.get(centralSystemTokenPosition);
+            dos = (DataOutputStream) description[LB_CS_SENDER_STREAM];
+        } catch (Exception e) {
+            dos = getNextDataOutputStream();
+        }
+        return dos;
     }
 
     /**
@@ -87,7 +94,7 @@ public class LoadBalancer {
         dataOutputStream.write(bb.array());
 
         //Almacenar mensaje en cache
-        Integer csId = (Integer) centralSystemList.get(centralSystemTokenPosition)[LB_SC_IDENTIFIER];
+        Integer csId = (Integer) centralSystemList.get(centralSystemTokenPosition)[LB_CS_IDENTIFIER];
         messageCache.put(generateIdentifier(homeIdentifier, csId, messageIdentifier), payload);
     }
 
@@ -101,9 +108,9 @@ public class LoadBalancer {
     public static String generateIdentifier(short homeIdentifier, int centralSystemIdentifier, int messageIdentifier) {
         StringBuilder sb = new StringBuilder();
         sb.append(homeIdentifier);
-        sb.append(SEPARATOR);
+        sb.append(MEESSAGE_ID_SEPARATOR);
         sb.append(centralSystemIdentifier);
-        sb.append(SEPARATOR);
+        sb.append(MEESSAGE_ID_SEPARATOR);
         sb.append(messageIdentifier);
         return sb.toString();
     }
@@ -112,9 +119,9 @@ public class LoadBalancer {
      * Elimina un servidor de la lista de servidores
      * @param socket 
      */
-    public void removeServer(Socket socket) {
+    private synchronized void removeServer(int centralSystemId) throws IOException {
         for (Object[] description : centralSystemList) {
-            if (socket.equals(description[LB_SC_SOCKET_SENDER]) || socket.equals(description[LB_SC_SOCKET_RECIEVER])) {
+            if (centralSystemId == Integer.parseInt(description[LB_CS_IDENTIFIER].toString())) {
                 centralSystemList.remove(description);
                 break;
             }
@@ -160,11 +167,11 @@ public class LoadBalancer {
      * @throws IOException 
      */
     private void addCentralSystemConnection(int identifier, Socket sender, Socket reciever) throws IOException {
-        Object[] description = new Object[LB_SC_TOTAL_INFO];
-        description[LB_SC_IDENTIFIER] = identifier;
-        description[LB_SC_SOCKET_SENDER] = sender;
-        description[LB_SC_SOCKET_RECIEVER] = reciever;
-        description[LB_SC_SENDER_STREAM] = new DataOutputStream(sender.getOutputStream());
+        Object[] description = new Object[LB_CS_TOTAL_INFO];
+        description[LB_CS_IDENTIFIER] = identifier;
+        description[LB_CS_SOCKET_SENDER] = sender;
+        description[LB_CS_SOCKET_RECIEVER] = reciever;
+        description[LB_CS_SENDER_STREAM] = new DataOutputStream(sender.getOutputStream());
         centralSystemList.add(description);
     }
 
@@ -184,19 +191,45 @@ public class LoadBalancer {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo obtener el ouputStream");
                 }
 
-                while (true) {
+                boolean keepAlive = true;
+                while (keepAlive) {
                     try {
                         short homeIdentifier = dataInputStream.readShort();
                         int messageIdentifier = dataInputStream.readInt();
 
                         removeMessageFromCache(generateIdentifier(homeIdentifier, centralSystemIdentifier, messageIdentifier));
                     } catch (IOException ex) {
-                        Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al redireccionar el mensaje");
+                        String message = "Se ha perdido la conexion con el Central System: " + centralSystemIdentifier;
+                        Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, message);
+                        keepAlive = false;
                     }
                 }
 
+                // Volver a enviar los mensajes que un CS caido no contesto
+                try {
+                    removeServer(centralSystemIdentifier);
+                    resendUnprocessedMessages(centralSystemIdentifier);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al redireccionar los mensajes de un Central System Caido", ex);
+                }
             }
         }.start();
+    }
+
+    private synchronized void resendUnprocessedMessages(int fallenCentralSystemId) throws IOException {
+        for (String messageId : messageCache.keySet()) {
+            String[] messageIdInfo = messageId.split(MEESSAGE_ID_SEPARATOR);
+
+            StringBuilder builderKey = new StringBuilder();
+            builderKey.append(MEESSAGE_ID_SEPARATOR);
+            builderKey.append(fallenCentralSystemId);
+            builderKey.append(MEESSAGE_ID_SEPARATOR);
+            String key = builderKey.toString();
+
+            if (messageIdInfo[1].equals("" + fallenCentralSystemId)) {
+                redirectMessage(Short.parseShort(messageIdInfo[0]), Integer.parseInt(messageIdInfo[2]), messageCache.get(messageId));
+            }
+        }
     }
 
     /**
