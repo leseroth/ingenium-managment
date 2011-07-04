@@ -32,7 +32,6 @@ public class LoadBalancer {
     // Cache de mensajes
     private static final String MEESSAGE_ID_SEPARATOR = "-";
     private Map<String, byte[]> messageCache;
-    private Map<String, Long> recievedMessageTime;
     // Tiempo de recepcion del ultimo mensaje de una determinada casa
     private Map<Short, Long> lastTimeHomeReport;
     private static final long DOS_TIME = 500;
@@ -57,7 +56,6 @@ public class LoadBalancer {
         messageCache = new HashMap<String, byte[]>();
         centralSystemList = new ArrayList<Object[]>();
         lastTimeHomeReport = new HashMap<Short, Long>();
-        recievedMessageTime = new HashMap<String, Long>();
         centralSystemTokenPosition = 0;
     }
 
@@ -107,7 +105,7 @@ public class LoadBalancer {
      * @param payload
      * @throws IOException 
      */
-    public synchronized void redirectMessage(short homeIdentifier, int messageIdentifier, byte[] payload, long recievedTime) throws IOException {
+    public synchronized int redirectMessage(short homeIdentifier, int messageIdentifier, byte[] payload) throws IOException {
         ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + SIZE_INT + payload.length);
         bb.putShort(homeIdentifier);
         bb.putInt(messageIdentifier);
@@ -122,7 +120,7 @@ public class LoadBalancer {
         Integer csId = (Integer) centralSystemList.get(centralSystemTokenPosition)[LB_CS_IDENTIFIER];
         String messageId = generateIdentifier(homeIdentifier, csId, messageIdentifier);
         messageCache.put(messageId, payload);
-        recievedMessageTime.put(messageId, recievedTime);
+        return csId.intValue();
     }
 
     private synchronized void removeMessageFromCache(String identifier) {
@@ -130,8 +128,6 @@ public class LoadBalancer {
         if (message != null && SHOW_LOAD_BALANCER) {
             System.out.println("Procesado: " + identifier);
         }
-        long rt = recievedMessageTime.get(identifier);
-        recievedMessageTime.put(identifier, System.currentTimeMillis() - rt);
     }
 
     public static String generateIdentifier(short homeIdentifier, int centralSystemIdentifier, int messageIdentifier) {
@@ -234,14 +230,6 @@ public class LoadBalancer {
                     }
                 }
 
-                // Mostrar los datos de auditoria
-                System.out.println("Va a imprimir los datos de auditoria");
-                for (Long time : recievedMessageTime.values()) {
-                    System.out.println(time);
-                }
-                recievedMessageTime.clear();
-                System.out.println("Fin de datos de auditoria");
-
                 // Volver a enviar los mensajes que un CS caido no contesto
                 try {
                     removeServer(centralSystemIdentifier);
@@ -252,13 +240,17 @@ public class LoadBalancer {
             }
         }.start();
     }
+    
+    public synchronized byte[] checkMessage(String id){
+        return messageCache.get(id);
+    }
 
     private synchronized void resendUnprocessedMessages(int fallenCentralSystemId) throws IOException {
         for (String messageId : messageCache.keySet()) {
             String[] messageIdInfo = messageId.split(MEESSAGE_ID_SEPARATOR);
 
             if (messageIdInfo[1].equals("" + fallenCentralSystemId)) {
-                redirectMessage(Short.parseShort(messageIdInfo[0]), Integer.parseInt(messageIdInfo[2]), messageCache.get(messageId), System.currentTimeMillis());
+                redirectMessage(Short.parseShort(messageIdInfo[0]), Integer.parseInt(messageIdInfo[2]), messageCache.get(messageId));
             }
         }
     }
