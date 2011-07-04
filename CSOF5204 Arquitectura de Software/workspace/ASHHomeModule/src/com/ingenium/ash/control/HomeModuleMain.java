@@ -27,7 +27,7 @@ public class HomeModuleMain implements Runnable {
     public static final int SIZE_INT = 4;
     private ConnectorClient connClient;
     private boolean keepAlive;
-    private long reportTime = 1000;
+    private long reportTime = 950;
     private short homeIdentifier;
     private Map<Integer, Item> itemList;
     private int messageCounter;
@@ -58,13 +58,9 @@ public class HomeModuleMain implements Runnable {
 
     @Override
     public void run() {
-        long referenceTime, diffTime;
-        diffTime = 0;
 
         while (keepAlive) {
             try {
-                referenceTime = System.currentTimeMillis();
-
                 int payloadSize = itemList.size() * ITEM_SIZE;
                 ByteBuffer bbPayload = ByteBuffer.allocate(payloadSize);
                 for (Item item : itemList.values()) {
@@ -84,17 +80,13 @@ public class HomeModuleMain implements Runnable {
                 connClient.sendMessage(bbMessage.array());
                 messageCounter++;
 
-                diffTime = System.currentTimeMillis() - referenceTime;
-
-                if (diffTime < reportTime) {
-                    try {
-                        Thread.sleep(reportTime - diffTime);
-                    } catch (InterruptedException ex) {
-                    }
+                try {
+                    Thread.sleep(reportTime);
+                } catch (InterruptedException ex) {
                 }
             } catch (IOException ex) {
                 keepAlive = false;
-                Logger.getLogger(HomeModuleMain.class.getName()).log(Level.SEVERE, "Se ha perdido la conexion con el servidor", ex);
+                Logger.getLogger(HomeModuleMain.class.getName()).log(Level.SEVERE, "Se ha perdido la conexion con el servidor");
             }
         }
     }

@@ -36,6 +36,7 @@ public class HomeSystemConnection implements Runnable {
         while (keepAlive) {
             try {
                 messageIdGenerator++;
+                long recievedTime = System.currentTimeMillis();
 
                 short homeId = dataInputStream.readShort();
                 int payloadSize = dataInputStream.readInt();
@@ -57,7 +58,7 @@ public class HomeSystemConnection implements Runnable {
                     boolean verified = SignatureVerifier.verifySignature(payload, signedPayload);
 
                     if (verified) {
-                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
+                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload, recievedTime);
                     } else {
                         System.out.println("No se pudo verificar la firma de la casa " + homeId);
                         socket.close();
