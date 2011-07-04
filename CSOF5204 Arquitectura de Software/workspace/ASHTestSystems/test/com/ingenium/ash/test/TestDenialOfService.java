@@ -5,6 +5,7 @@
 package com.ingenium.ash.test;
 
 import com.ingenium.ash.communication.ConnectorClient;
+import com.ingenium.ash.security.SignatureCypher;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import junit.framework.TestCase;
@@ -22,17 +23,23 @@ public class TestDenialOfService extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + ITEM_SIZE * totalItems);
-        bb.putShort(houseId);
-        bb.putInt(ITEM_SIZE * totalItems);
-
+        ByteBuffer bbPayload = ByteBuffer.allocate(ITEM_SIZE * totalItems);
         for (int i = 0; i < totalItems; i++) {
-            bb.put((byte) 2);
-            bb.putInt(i);
-            bb.put((byte) 0);
+            bbPayload.put((byte) 2);
+            bbPayload.putInt(i);
+            bbPayload.put((byte) 0);
         }
 
-        message = bb.array();
+        byte[] payload = bbPayload.array();
+        byte[] signedPayload = SignatureCypher.Cypher(payload);
+
+        ByteBuffer buffer = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payload.length + SIZE_INT + signedPayload.length);
+        buffer.putShort(houseId);
+        buffer.putInt(payload.length);
+        buffer.put(payload);
+        buffer.putInt(signedPayload.length);
+        buffer.put(signedPayload);
+        message = buffer.array();
     }
 
     public void testDenialOfService() {

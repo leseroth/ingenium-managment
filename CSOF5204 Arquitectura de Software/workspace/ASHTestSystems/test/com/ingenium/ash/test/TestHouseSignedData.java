@@ -7,6 +7,8 @@ package com.ingenium.ash.test;
 import junit.framework.TestCase;
 import com.ingenium.ash.security.SignatureCypher;
 import com.ingenium.ash.security.SignatureVerifier;
+import java.nio.ByteBuffer;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  *
@@ -14,13 +16,26 @@ import com.ingenium.ash.security.SignatureVerifier;
  */
 public class TestHouseSignedData extends TestCase {
 
+    private static short houseId = 777;
+    private byte[] message;
+    private int totalItems = 40;
+
     public TestHouseSignedData(String testName) {
         super(testName);
     }
 
     @Override
     protected void setUp() throws Exception {
-        super.setUp();
+        ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + ITEM_SIZE * totalItems);
+        bb.putShort(houseId);
+        bb.putInt(ITEM_SIZE * totalItems);
+        for (int i = 0; i < totalItems; i++) {
+            bb.put((byte) 2);
+            bb.putInt(i);
+            bb.put((byte) 0);
+        }
+
+        message = bb.array();
     }
 
     @Override
@@ -29,13 +44,8 @@ public class TestHouseSignedData extends TestCase {
     }
 
     public void testFirmaTrama() throws Exception {
-        byte[] b1 = new byte[300];
-        for (int i = 0; i < 300; i++) {
-            b1[i] = 5;
-        }
-        byte[] result =  SignatureCypher.Cypher(b1);
-
-        boolean equal = SignatureVerifier.VerifySignature(b1, result);
+        byte[] result = SignatureCypher.Cypher(message);
+        boolean equal = SignatureVerifier.verifySignature(message, result);
         assertEquals(equal, true);
     }
     // TODO add test methods here. The name must begin with 'test'. For example:

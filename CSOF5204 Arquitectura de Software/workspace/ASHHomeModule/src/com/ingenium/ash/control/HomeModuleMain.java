@@ -1,6 +1,7 @@
 package com.ingenium.ash.control;
 
 import com.ingenium.ash.communication.ConnectorClient;
+import com.ingenium.ash.security.SignatureCypher;
 import com.ingenium.ash.vo.Item;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -65,14 +66,22 @@ public class HomeModuleMain implements Runnable {
                 referenceTime = System.currentTimeMillis();
 
                 int payloadSize = itemList.size() * ITEM_SIZE;
-
-                ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize);
-                bb.putShort(homeIdentifier);
-                bb.putInt(payloadSize);
+                ByteBuffer bbPayload = ByteBuffer.allocate(payloadSize);
                 for (Item item : itemList.values()) {
-                    bb.put(item.encode());
+                    bbPayload.put(item.encode());
                 }
-                connClient.sendMessage(bb.array());
+                byte[] payload = bbPayload.array();
+                byte[] signedPayload = SignatureCypher.Cypher(payload);
+                int signedPayloadSize = signedPayload.length;
+
+                ByteBuffer bbMessage = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize + SIZE_INT + signedPayloadSize);
+                bbMessage.putShort(homeIdentifier);
+                bbMessage.putInt(payloadSize);
+                bbMessage.put(payload);
+                bbMessage.putInt(signedPayloadSize);
+                bbMessage.put(signedPayload);
+
+                connClient.sendMessage(bbMessage.array());
                 messageCounter++;
 
                 diffTime = System.currentTimeMillis() - referenceTime;
