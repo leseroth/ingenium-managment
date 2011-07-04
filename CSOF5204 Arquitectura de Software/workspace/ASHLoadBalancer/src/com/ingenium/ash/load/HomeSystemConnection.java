@@ -27,7 +27,10 @@ public class HomeSystemConnection implements Runnable {
             Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo obtener el ouputStream");
         }
 
-        while (true) {
+        boolean keepAlive = true;
+        short homeIdCache = 0;
+        
+        while (keepAlive) {
             try {
                 messageIdGenerator++;
                 
@@ -35,10 +38,12 @@ public class HomeSystemConnection implements Runnable {
                 int payloadSize = dataInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 dataInputStream.read(payload);
-
+                homeIdCache = homeId;
                 LoadBalancer.getInstance().redirectMessage(homeId, messageIdGenerator, payload);
             } catch (IOException ex) {
-                Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al redireccionar el mensaje");
+                String message = "Se ha perdido la conexion con la casa "+homeIdCache;
+                Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, message);
+                keepAlive = false;
             }
         }
     }

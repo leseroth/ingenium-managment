@@ -1,12 +1,13 @@
 package com.ingenium.ash.vo;
 
+import static com.ingenium.ash.util.Constants.*;
+
 /**
  *
  * @author Erik Arcos
  */
 public class Item {
 
-    public static final int ITEM_SIZE = 6;
     private byte itemStatus;
     private byte[] encoded;
 
@@ -24,6 +25,11 @@ public class Item {
         itemStatus = status;
     }
 
+    /**
+     * Permite codificar el item, una vez se ha codificado se regresa el valor
+     * a su posicion normal
+     * @return 
+     */
     public byte[] encode() {
         encoded[5] = itemStatus;
         itemStatus = 0;
