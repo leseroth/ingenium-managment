@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author Erik
  */
 public class HomeSystemConnection implements Runnable {
-    int idGenerator;
+    private int messageIdGenerator;
     private Socket socket;
     
     public HomeSystemConnection(Socket s){
@@ -29,13 +29,14 @@ public class HomeSystemConnection implements Runnable {
 
         while (true) {
             try {
-                int payloadSize = dataInputStream.readInt();
+                messageIdGenerator++;
+                
                 short homeId = dataInputStream.readShort();
-                int messageId = dataInputStream.readInt();          
+                int payloadSize = dataInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 dataInputStream.read(payload);
 
-                LoadBalancer.getInstance().redirectMessage(homeId, messageId, payload);
+                LoadBalancer.getInstance().redirectMessage(homeId, messageIdGenerator, payload);
             } catch (IOException ex) {
                 Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al redireccionar el mensaje");
             }

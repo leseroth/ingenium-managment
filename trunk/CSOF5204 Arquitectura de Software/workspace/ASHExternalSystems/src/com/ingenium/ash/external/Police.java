@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ingenium.ash.util.Util.*;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Police {
                 byteTotal[1] = dataInputStream.readByte();
                 byteTotal[2] = dataInputStream.readByte();
                 byteTotal[3] = dataInputStream.readByte();
-                int size = Util.byteArrayToInt(byteTotal);
+                int size = byteArrayToInt(byteTotal);
 
                 byte[] byteArray = new byte[size];
                 dataInputStream.read(byteArray);

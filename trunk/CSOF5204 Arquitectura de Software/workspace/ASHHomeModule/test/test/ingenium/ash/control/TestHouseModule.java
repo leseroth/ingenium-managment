@@ -36,7 +36,7 @@ public class TestHouseModule extends TestCase {
             }
         }
 
-        hmm.startHomeModule("localhost", 4444);
+        hmm.startHomeModule();
 
         long referenceTime = System.currentTimeMillis();
         boolean test = true;
