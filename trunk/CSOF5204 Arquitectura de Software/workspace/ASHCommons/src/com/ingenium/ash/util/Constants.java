@@ -6,7 +6,7 @@ package com.ingenium.ash.util;
  */
 public class Constants {
     
-    public static final boolean SHOW_LOAD_BALANCER = true;
+    public static final boolean SHOW_LOAD_BALANCER = false;
     public static final boolean ENABLE_MAIL_NOTIFICATION = false;
     public static final boolean EMULATE_EXTERNAL_SYSTEM_NOTIFICATION = true;
     public static final boolean ENABLE_EXTERNAL_SYSTEM_NOTIFICATION = false;
@@ -43,7 +43,8 @@ public class Constants {
     public static final int LB_CS_SOCKET_SENDER = 1;
     public static final int LB_CS_SOCKET_RECIEVER = 2;
     public static final int LB_CS_SENDER_STREAM = 3;
-    public static final int LB_CS_TOTAL_INFO = 4;
+    public static final int LB_CS_RECIEVED_TIME = 4;
+    public static final int LB_CS_TOTAL_INFO = 5;
     // Balanceador de carga
     public static final String LB_LOCATION = "localhost";
     public static final int LB_CENTRAL_SYSTEM_SOCKET_PORT = 4450;
