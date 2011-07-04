@@ -32,6 +32,9 @@ public class LoadBalancer {
     // Cache de mensajes
     private static final String MEESSAGE_ID_SEPARATOR = "-";
     private Map<String, byte[]> messageCache;
+    // Tiempo de recepcion del ultimo mensaje de una determinada casa
+    private Map<Short, Long> lastTimeHomeReport;
+    private static final long DOS_TIME = 500;
     // Referencia al unico Balanceador de carga
     private static LoadBalancer reference;
 
@@ -52,6 +55,7 @@ public class LoadBalancer {
     private LoadBalancer() {
         messageCache = new HashMap<String, byte[]>();
         centralSystemList = new ArrayList<Object[]>();
+        lastTimeHomeReport = new HashMap<Short, Long>();
         centralSystemTokenPosition = 0;
     }
 
@@ -73,6 +77,25 @@ public class LoadBalancer {
         } catch (Exception e) {
             dos = getNextDataOutputStream();
         }
+        return dos;
+    }
+
+    public synchronized boolean verifyDenialOfService(short homeIdentifier, long currentTime) {
+        boolean dos = false;
+
+        Long lastTimeLong = lastTimeHomeReport.get(homeIdentifier);
+        if (lastTimeLong == null) {
+            System.out.println("Registrada la primera conexion de "+homeIdentifier);
+            lastTimeHomeReport.put(homeIdentifier, currentTime);
+        } else {
+            dos = currentTime - lastTimeLong < DOS_TIME;
+            if (dos) {
+                System.out.println("Posible DOS detectado desde la casa "+homeIdentifier);
+            } else {
+                lastTimeHomeReport.put(homeIdentifier, currentTime);
+            }
+        }
+
         return dos;
     }
 
