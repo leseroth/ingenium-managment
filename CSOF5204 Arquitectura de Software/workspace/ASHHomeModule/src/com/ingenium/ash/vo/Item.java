@@ -6,12 +6,13 @@ package com.ingenium.ash.vo;
  */
 public class Item {
 
+    public static final int ITEM_SIZE = 6;
     private byte itemStatus;
     private byte[] encoded;
 
     public Item(int itemId, byte itemType) {
         itemStatus = 0;
-        encoded = new byte[6];
+        encoded = new byte[ITEM_SIZE];
         encoded[0] = itemType;
         encoded[1] = (byte) (itemId >> 24);
         encoded[2] = (byte) ((itemId << 8) >> 24);

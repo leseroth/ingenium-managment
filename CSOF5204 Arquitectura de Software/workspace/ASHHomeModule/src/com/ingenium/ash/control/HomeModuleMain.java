@@ -16,22 +16,24 @@ import java.util.Map;
  */
 public class HomeModuleMain implements Runnable {
 
+    // Size en bytes de los tipos de datos numericos
+    public static final int SIZE_BYTE = 1;
+    public static final int SIZE_SHORT = 2;
+    public static final int SIZE_INT = 4;
     private ConnectorClient connClient;
     private boolean keepAlive;
     private long reportTime = 1000;
-    private byte[] homeIdentifier;
+    private short homeIdentifier;
     private Map<Integer, Item> itemList;
     private int messageCounter;
 
     public HomeModuleMain(short homeId) {
-        homeIdentifier = new byte[2];
-        homeIdentifier[0] = (byte) (homeId & 0xff);
-        homeIdentifier[1] = (byte) ((homeId >> 8) & 0xff);
+        homeIdentifier = homeId;
         itemList = new HashMap<Integer, Item>();
     }
 
-    public void startHomeModule(String server, int port) {
-        connClient = new ConnectorClient(server, port);
+    public void startHomeModule() {
+        connClient = new ConnectorClient();
         keepAlive = true;
         new Thread(this).start();
     }
@@ -57,11 +59,11 @@ public class HomeModuleMain implements Runnable {
         while (keepAlive) {
             referenceTime = System.currentTimeMillis();
 
-            int size = 2 + itemList.size() * 6;
+            int payloadSize = itemList.size() * Item.ITEM_SIZE;
 
-            ByteBuffer bb = ByteBuffer.allocate(4 + size);
-            bb.putInt(size);
-            bb.put(homeIdentifier);
+            ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize);
+            bb.putShort(homeIdentifier);
+            bb.putInt(payloadSize);
             for (Item item : itemList.values()) {
                 bb.put(item.encode());
             }

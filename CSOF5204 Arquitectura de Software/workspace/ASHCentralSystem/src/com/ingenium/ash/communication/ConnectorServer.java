@@ -2,13 +2,13 @@ package com.ingenium.ash.communication;
 
 import com.ingenium.ash.control.SystemStart;
 import com.ingenium.ash.manager.Manager;
-import com.ingenium.ash.util.Util;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  * 
@@ -32,8 +32,8 @@ public class ConnectorServer implements Runnable {
         manager = new Manager();
         
         try {
-            reciever = new Socket(SystemStart.BALANCER_LOCATION, SystemStart.BALANCER_PORT);
-            sender = new Socket(SystemStart.BALANCER_LOCATION, SystemStart.BALANCER_PORT);
+            reciever = new Socket(LB_LOCATION, LB_CENTRAL_SYSTEM_SOCKET_PORT);
+            sender = new Socket(LB_LOCATION, LB_CENTRAL_SYSTEM_SOCKET_PORT);
 
             OutputStream os = sender.getOutputStream();
             senderOutputStream = new DataOutputStream(os);

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  *
@@ -19,26 +20,18 @@ import java.util.logging.Logger;
  */
 public class LoadBalancer {
 
-    // Posiciones descriptivas de cada servidor
-    private static int SC_IDENTIFIER = 0;
-    private static int SC_SOCKET_SENDER = 1;
-    private static int SC_SOCKET_RECIEVER = 2;
-    private static int SC_SENDER_STREAM = 3;
-    private static int SC_TOTAL_INFO = 4;
     // Informacion para las conexiones de los sistemas de cada hogar
-    private int homeSystemPort = 4440;
-    private ServerSocket homeSystemSocket;
+    private ServerSocket homeSystemServerSocket;
     // Informacion para las conexiones de los sistemas centrales
-    private int centralSystemPort = 4450;
     private int centralSystemCounter;
-    private ServerSocket centralSystemSocket;
+    private ServerSocket centralSystemServerSocket;
+    // Lista de servidores
+    private static List<Object[]> centralSystemList;
     // Token para determinar el siguiente servidor a quien se le va a asignar la conexion
     private int centralSystemTokenPosition;
     // Cache de mensajes
     private static final String SEPARATOR = "*";
     private Map<String, byte[]> messageCache;
-    // Lista de servidores
-    private static List<Object[]> serverList;
     // Referencia al unico Balanceador de carga
     private static LoadBalancer reference;
 
@@ -58,7 +51,7 @@ public class LoadBalancer {
      */
     private LoadBalancer() {
         messageCache = new HashMap<String, byte[]>();
-        serverList = new ArrayList<Object[]>();
+        centralSystemList = new ArrayList<Object[]>();
         centralSystemTokenPosition = 0;
     }
 
@@ -66,14 +59,14 @@ public class LoadBalancer {
      * Retorna el flujo de salida del servidor asignado a procesar la peticion
      * @return 
      */
-    private DataOutputStream getNextDOS() {
+    private DataOutputStream getNextDataOutputStream() {
         centralSystemTokenPosition++;
-        if (centralSystemTokenPosition == serverList.size()) {
+        if (centralSystemTokenPosition == centralSystemList.size()) {
             centralSystemTokenPosition = 0;
         }
 
-        Object[] description = serverList.get(centralSystemTokenPosition);
-        return (DataOutputStream) description[SC_SENDER_STREAM];
+        Object[] description = centralSystemList.get(centralSystemTokenPosition);
+        return (DataOutputStream) description[LB_SC_SENDER_STREAM];
     }
 
     /**
@@ -83,18 +76,18 @@ public class LoadBalancer {
      * @throws IOException 
      */
     public synchronized void redirectMessage(short homeIdentifier, int messageIdentifier, byte[] payload) throws IOException {
-        ByteBuffer bb = ByteBuffer.allocate(2 + 4 + 4 + payload.length);
+        ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + SIZE_INT + payload.length);
         bb.putShort(homeIdentifier);
         bb.putInt(messageIdentifier);
         bb.putInt(payload.length);
         bb.put(payload);
 
         //Redireccionar el mensaje
-        DataOutputStream dataOutputStream = getNextDOS();
+        DataOutputStream dataOutputStream = getNextDataOutputStream();
         dataOutputStream.write(bb.array());
 
         //Almacenar mensaje en cache
-        Integer csId = (Integer) serverList.get(centralSystemTokenPosition)[SC_IDENTIFIER];
+        Integer csId = (Integer) centralSystemList.get(centralSystemTokenPosition)[LB_SC_IDENTIFIER];
         messageCache.put(generateIdentifier(homeIdentifier, csId, messageIdentifier), payload);
     }
 
@@ -117,9 +110,9 @@ public class LoadBalancer {
      * @param socket 
      */
     public void removeServer(Socket socket) {
-        for (Object[] description : serverList) {
-            if (socket.equals(description[SC_SOCKET_SENDER]) || socket.equals(description[SC_SOCKET_RECIEVER])) {
-                serverList.remove(description);
+        for (Object[] description : centralSystemList) {
+            if (socket.equals(description[LB_SC_SOCKET_SENDER]) || socket.equals(description[LB_SC_SOCKET_RECIEVER])) {
+                centralSystemList.remove(description);
                 break;
             }
         }
@@ -134,18 +127,18 @@ public class LoadBalancer {
             @Override
             public void run() {
                 try {
-                    centralSystemSocket = new ServerSocket(centralSystemPort);
+                    centralSystemServerSocket = new ServerSocket(LB_CENTRAL_SYSTEM_SOCKET_PORT);
                 } catch (IOException ex) {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo iniciar el socket central");
                 }
 
                 while (true) {
                     try {
-                        Socket sender = centralSystemSocket.accept();
-                        Socket reciever = centralSystemSocket.accept();
+                        centralSystemCounter++;
+                        Socket sender = centralSystemServerSocket.accept();
+                        Socket reciever = centralSystemServerSocket.accept();
                         startCentralSystemRecieverThread(centralSystemCounter, reciever);
                         addCentralSystemConnection(centralSystemCounter, sender, reciever);
-                        centralSystemCounter++;
                     } catch (IOException ex) {
                         Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al conectar un CentralSystem");
                     }
@@ -162,12 +155,12 @@ public class LoadBalancer {
      * @throws IOException 
      */
     private void addCentralSystemConnection(int identifier, Socket sender, Socket reciever) throws IOException {
-        Object[] description = new Object[SC_TOTAL_INFO];
-        description[SC_IDENTIFIER] = identifier;
-        description[SC_SOCKET_SENDER] = sender;
-        description[SC_SOCKET_RECIEVER] = reciever;
-        description[SC_SENDER_STREAM] = new DataOutputStream(sender.getOutputStream());
-        serverList.add(description);
+        Object[] description = new Object[LB_SC_TOTAL_INFO];
+        description[LB_SC_IDENTIFIER] = identifier;
+        description[LB_SC_SOCKET_SENDER] = sender;
+        description[LB_SC_SOCKET_RECIEVER] = reciever;
+        description[LB_SC_SENDER_STREAM] = new DataOutputStream(sender.getOutputStream());
+        centralSystemList.add(description);
     }
 
     /**
@@ -210,14 +203,14 @@ public class LoadBalancer {
             @Override
             public void run() {
                 try {
-                    homeSystemSocket = new ServerSocket(homeSystemPort);
+                    homeSystemServerSocket = new ServerSocket(LB_HOME_SYSTEM_SOCKET_PORT);
                 } catch (IOException ex) {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo iniciar el socket de las casas");
                 }
 
                 while (true) {
                     try {
-                        Socket homeSocket = homeSystemSocket.accept();
+                        Socket homeSocket = homeSystemServerSocket.accept();
                         HomeSystemConnection hsc = new HomeSystemConnection(homeSocket);
                         new Thread(hsc).start();
                     } catch (IOException ex) {

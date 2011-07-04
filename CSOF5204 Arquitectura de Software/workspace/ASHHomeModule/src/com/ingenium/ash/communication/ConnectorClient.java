@@ -4,15 +4,16 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ingenium.ash.util.Constants.*;
 
 public class ConnectorClient {
 
     private Socket socket;
     private DataOutputStream dataOutputStream;
 
-    public ConnectorClient(String server, int port) {
+    public ConnectorClient() {
         try {
-            socket = new Socket(server, port);
+            socket = new Socket(LB_LOCATION, LB_HOME_SYSTEM_SOCKET_PORT);
             OutputStream os = socket.getOutputStream();
             dataOutputStream = new DataOutputStream(os);
         } catch (UnknownHostException ex) {
