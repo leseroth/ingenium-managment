@@ -1,5 +1,6 @@
 package com.ingenium.ash.load;
 
+import com.ingenium.ash.security.SignatureVerifier;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -40,14 +41,28 @@ public class HomeSystemConnection implements Runnable {
                 int payloadSize = dataInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 dataInputStream.read(payload);
+                int signedPayloadSize = dataInputStream.readInt();
+                byte[] signedPayload = new byte[signedPayloadSize];
+                dataInputStream.read(signedPayload);
+
                 homeIdCache = homeId;
 
                 boolean dos = loadBalancer.verifyDenialOfService(homeId, System.currentTimeMillis());
+
                 if (dos) {
+                    System.out.println("Posible ataque de DOS detectado desde la casa " + homeId);
                     socket.close();
                     throw new IOException();
                 } else {
-                    loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
+                    boolean verified = SignatureVerifier.verifySignature(payload, signedPayload);
+
+                    if (verified) {
+                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
+                    } else {
+                        System.out.println("No se pudo verificar la firma de la casa " + homeId);
+                        socket.close();
+                        throw new IOException();
+                    }
                 }
             } catch (IOException ex) {
                 String message = "Se ha perdido la conexion con la casa " + homeIdCache;

@@ -7,6 +7,8 @@ package com.ingenium.ash.security;
 import java.io.*;
 import java.security.*;
 import java.security.spec.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,34 +16,36 @@ import java.security.spec.*;
  */
 public class SignatureVerifier {
 
-    public static Boolean VerifySignature(byte[] originalData, byte[] signedData) throws Exception {
+    public static Boolean verifySignature(byte[] originalData, byte[] signedData) {
+        boolean verified = false;
+
         try {
-            /* import encoded public key */
-            FileInputStream keyfis = new FileInputStream("src/com/ingenium/ash/publicIngenium");
+            FileInputStream keyfis = null;
+            keyfis = new FileInputStream("src/com/ingenium/ash/publicIngenium");
             byte[] encKey = new byte[keyfis.available()];
             keyfis.read(encKey);
             keyfis.close();
-
             X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encKey);
-
             KeyFactory keyFactory = KeyFactory.getInstance("DSA", "SUN");
             PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);
-
-            /* create a Signature object and initialize it with the public key */
-
             Signature sig = Signature.getInstance("SHA1withDSA", "SUN");
             sig.initVerify(pubKey);
-
-            /* Update and verify the data */
-
             sig.update(originalData, 0, originalData.length);
-
-            return sig.verify(signedData);
-
-        } catch (SignatureException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            verified = sig.verify(signedData);
+        } catch (SignatureException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
+        } catch (IOException ex) {
+            Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
         }
+
+        return verified;
     }
 }

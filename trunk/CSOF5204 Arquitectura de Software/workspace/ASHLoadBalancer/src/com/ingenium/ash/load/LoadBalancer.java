@@ -85,13 +85,11 @@ public class LoadBalancer {
 
         Long lastTimeLong = lastTimeHomeReport.get(homeIdentifier);
         if (lastTimeLong == null) {
-            System.out.println("Registrada la primera conexion de "+homeIdentifier);
+            System.out.println("Registrada la primera conexion de " + homeIdentifier);
             lastTimeHomeReport.put(homeIdentifier, currentTime);
         } else {
             dos = currentTime - lastTimeLong < DOS_TIME;
-            if (dos) {
-                System.out.println("Posible DOS detectado desde la casa "+homeIdentifier);
-            } else {
+            if (!dos) {
                 lastTimeHomeReport.put(homeIdentifier, currentTime);
             }
         }
