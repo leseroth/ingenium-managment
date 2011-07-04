@@ -235,12 +235,12 @@ public class LoadBalancer {
                 }
 
                 // Mostrar los datos de auditoria
-                if (centralSystemIdentifier == 1) {
-                    for (Long time : recievedMessageTime.values()) {
-                        System.out.println(time);
-                    }
-                    recievedMessageTime.clear();
+                System.out.println("Va a imprimir los datos de auditoria");
+                for (Long time : recievedMessageTime.values()) {
+                    System.out.println(time);
                 }
+                recievedMessageTime.clear();
+                System.out.println("Fin de datos de auditoria");
 
                 // Volver a enviar los mensajes que un CS caido no contesto
                 try {
