@@ -39,11 +39,11 @@ public class Constants {
     public static final int SIZE_SHORT = 2;
     public static final int SIZE_INT = 4;
     // Posiciones descriptivas de cada servidor
-    public static final int LB_SC_IDENTIFIER = 0;
-    public static final int LB_SC_SOCKET_SENDER = 1;
-    public static final int LB_SC_SOCKET_RECIEVER = 2;
-    public static final int LB_SC_SENDER_STREAM = 3;
-    public static final int LB_SC_TOTAL_INFO = 4;
+    public static final int LB_CS_IDENTIFIER = 0;
+    public static final int LB_CS_SOCKET_SENDER = 1;
+    public static final int LB_CS_SOCKET_RECIEVER = 2;
+    public static final int LB_CS_SENDER_STREAM = 3;
+    public static final int LB_CS_TOTAL_INFO = 4;
     // Balanceador de carga
     public static final String LB_LOCATION = "localhost";
     public static final int LB_CENTRAL_SYSTEM_SOCKET_PORT = 4450;

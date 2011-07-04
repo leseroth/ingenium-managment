@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 public class TestHouseModule extends TestCase {
     
     private static short houseId = 100;
-    private int totalSeconds = 10;
+    private int totalSeconds = 30;
 
     public TestHouseModule(String testName) {
         super(testName);
