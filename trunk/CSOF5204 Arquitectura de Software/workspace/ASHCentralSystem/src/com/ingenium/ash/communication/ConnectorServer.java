@@ -1,6 +1,6 @@
 package com.ingenium.ash.communication;
 
-import com.ingenium.ash.control.SystemStart;
+import com.ingenium.ash.control.StartCentralSystem;
 import com.ingenium.ash.manager.Manager;
 import java.net.*;
 import java.io.*;
@@ -30,13 +30,14 @@ public class ConnectorServer implements Runnable {
      */
     public void startServer() {
         manager = new Manager();
-        
+
         try {
             reciever = new Socket(LB_LOCATION, LB_CENTRAL_SYSTEM_SOCKET_PORT);
             sender = new Socket(LB_LOCATION, LB_CENTRAL_SYSTEM_SOCKET_PORT);
 
             OutputStream os = sender.getOutputStream();
             senderOutputStream = new DataOutputStream(os);
+            System.out.println("Se ha registrado un sistema central con el balaneceador de carga");
             new Thread(this).start();
         } catch (UnknownHostException ex) {
             Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +75,7 @@ public class ConnectorServer implements Runnable {
                 int payloadSize = recieverInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 recieverInputStream.read(payload);
-                
+
                 processMessage(homeId, messageId, payload);
             } catch (SocketException se) {
                 //Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha cerrado el socket");
@@ -85,17 +86,17 @@ public class ConnectorServer implements Runnable {
             } catch (IOException ex) {
                 Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
                 keepAlive = false;
-            } finally {
-                try {
-                    recieverInputStream.close();
-                    senderOutputStream.close();
-                    
-                    reciever.close();
-                    sender.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
+        }
+        
+        try {
+            recieverInputStream.close();
+            senderOutputStream.close();
+
+            reciever.close();
+            sender.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -106,13 +107,13 @@ public class ConnectorServer implements Runnable {
         }
         informLoadBalancer(homeId, messageId);
     }
-    
-    private void informLoadBalancer(short homeId, int messageId){
+
+    private void informLoadBalancer(short homeId, int messageId) {
         try {
             senderOutputStream.writeShort(homeId);
             senderOutputStream.writeInt(messageId);
         } catch (IOException ex) {
             Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 }
