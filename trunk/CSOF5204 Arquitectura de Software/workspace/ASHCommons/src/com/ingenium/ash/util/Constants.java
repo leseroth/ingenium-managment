@@ -5,6 +5,11 @@ package com.ingenium.ash.util;
  * @author Erik Arcos
  */
 public class Constants {
+    
+    public static final boolean SHOW_LOAD_BALANCER = true;
+    public static final boolean ENABLE_MAIL_NOTIFICATION = false;
+    public static final boolean EMULATE_EXTERNAL_SYSTEM_NOTIFICATION = true;
+    public static final boolean ENABLE_EXTERNAL_SYSTEM_NOTIFICATION = false;
 
     /**Respresenta el valor del sensor cuando se encuentra una señal de humo**/
     public static final byte SMOKESTATUS = Byte.parseByte("00000001", 2);
@@ -43,4 +48,6 @@ public class Constants {
     public static final String LB_LOCATION = "localhost";
     public static final int LB_CENTRAL_SYSTEM_SOCKET_PORT = 4450;
     public static final int LB_HOME_SYSTEM_SOCKET_PORT = 4440;
+    // Info de los item
+    public static final int ITEM_SIZE = 6;
 }

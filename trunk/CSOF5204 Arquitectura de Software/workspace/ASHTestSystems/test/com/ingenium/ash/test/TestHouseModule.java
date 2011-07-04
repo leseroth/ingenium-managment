@@ -8,13 +8,16 @@ import com.ingenium.ash.control.HomeModuleMain;
 import junit.framework.TestCase;
 
 public class TestHouseModule extends TestCase {
+    
+    private static short houseId = 100;
+    private int totalSeconds = 10;
 
     public TestHouseModule(String testName) {
         super(testName);
     }
 
     public void testHouseModule() {
-        HomeModuleMain hmm = new HomeModuleMain((short) 1);
+        HomeModuleMain hmm = new HomeModuleMain((short) houseId++);
 
         int itemTotal = 40;
         for (int i = 0; i < itemTotal; i++) {
@@ -30,12 +33,14 @@ public class TestHouseModule extends TestCase {
         hmm.startHomeModule();
 
         long referenceTime = System.currentTimeMillis();
+        long cycleTime = referenceTime;
         boolean test = true;
-        while (10000 > System.currentTimeMillis() - referenceTime) {
-            if(test && 5000 > System.currentTimeMillis() - referenceTime) {
+        while (totalSeconds * 1000 > cycleTime - referenceTime) {
+            if(test && 5000 < cycleTime - referenceTime) {
                 hmm.setStatus(1, (byte) 1);
                 test = false;
-            }   
+            }
+            cycleTime = System.currentTimeMillis();
         }
 
         hmm.stopHomeModule();

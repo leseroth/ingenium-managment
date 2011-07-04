@@ -92,7 +92,10 @@ public class LoadBalancer {
     }
 
     private synchronized void removeMessageFromCache(String identifier) {
-        messageCache.remove(identifier);
+        byte[] message = messageCache.remove(identifier);
+        if (message != null && SHOW_LOAD_BALANCER) {
+            System.out.println("Procesado: " + identifier);
+        }
     }
 
     public static String generateIdentifier(short homeIdentifier, int centralSystemIdentifier, int messageIdentifier) {
@@ -132,6 +135,7 @@ public class LoadBalancer {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo iniciar el socket central");
                 }
 
+                System.out.println("El balanceador de carga esta listo para aceptar conexiones de servidores");
                 while (true) {
                     try {
                         centralSystemCounter++;
@@ -209,13 +213,16 @@ public class LoadBalancer {
                     Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo iniciar el socket de las casas");
                 }
 
-                while (true) {
+                System.out.println("El balanceador de carga esta listo para aceptar conexiones de casas");
+                boolean keepAlive = true;
+                while (keepAlive) {
                     try {
                         Socket homeSocket = homeSystemServerSocket.accept();
                         HomeSystemConnection hsc = new HomeSystemConnection(homeSocket);
                         new Thread(hsc).start();
                     } catch (IOException ex) {
                         Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al conectar una casa al balanceador de carga");
+                        keepAlive = false;
                     }
                 }
             }

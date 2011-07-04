@@ -1,6 +1,5 @@
 package com.ingenium.ash.communication;
 
-import com.ingenium.ash.control.StartCentralSystem;
 import com.ingenium.ash.manager.Manager;
 import java.net.*;
 import java.io.*;
@@ -88,7 +87,7 @@ public class ConnectorServer implements Runnable {
                 keepAlive = false;
             }
         }
-        
+
         try {
             recieverInputStream.close();
             senderOutputStream.close();
@@ -101,9 +100,15 @@ public class ConnectorServer implements Runnable {
     }
 
     private void processMessage(short homeId, int messageId, byte[] payload) {
-        int totalEvent = (payload.length - 2) / 6;
+        //System.out.println();
+        if (SHOW_LOAD_BALANCER) {
+            System.out.println("home: " + homeId + " message:" + messageId);
+        }
+        int totalEvent = (payload.length - 2) / ITEM_SIZE;
         for (int i = 0; i < totalEvent; i++) {
-            manager.processEvent(Arrays.copyOfRange(payload, i * 6 + 2, i * 6 + 8));
+            byte[] itemStatus = Arrays.copyOfRange(payload, i * ITEM_SIZE, (i + 1) * ITEM_SIZE);
+            //System.out.print(" " + itemStatus[0] + itemStatus[1] + itemStatus[2] + itemStatus[3] + itemStatus[4] + itemStatus[5]);
+            manager.processEvent(itemStatus);
         }
         informLoadBalancer(homeId, messageId);
     }

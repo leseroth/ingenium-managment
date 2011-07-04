@@ -5,6 +5,7 @@ import com.ingenium.ash.vo.Item;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  *
@@ -59,7 +60,7 @@ public class HomeModuleMain implements Runnable {
         while (keepAlive) {
             referenceTime = System.currentTimeMillis();
 
-            int payloadSize = itemList.size() * Item.ITEM_SIZE;
+            int payloadSize = itemList.size() * ITEM_SIZE;
 
             ByteBuffer bb = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize);
             bb.putShort(homeIdentifier);

@@ -26,6 +26,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  *
@@ -36,12 +37,14 @@ public class NotificatorManager {
     public static String NOTIFICATION_TEMPLATE;
     private static Session SESSION;
     private static Transport TRANSPORT;
+    // Auditoria
+    private static int emergencyCounter = 0;
+    private static int policeCounter = 0;
+    // Sockets a sistemas externos
     private static Socket POLICE_SOCKET;
     private static Socket EMERGENCY_SOCKET;
     private static DataOutputStream POLICE_STREAM;
     private static DataOutputStream EMERGENCY_STREAM;
-    private static int emergencyCounter = 0;
-    private static int policeCounter = 0;
 
     static {
         try {
@@ -70,16 +73,18 @@ public class NotificatorManager {
     }
 
     static {
-        try {
-            POLICE_SOCKET = new Socket("localhost", 4450);
-            EMERGENCY_SOCKET = new Socket("localhost", 4460);
+        if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
+            try {
+                POLICE_SOCKET = new Socket("localhost", 4450);
+                EMERGENCY_SOCKET = new Socket("localhost", 4460);
 
-            POLICE_STREAM = new DataOutputStream(POLICE_SOCKET.getOutputStream());
-            EMERGENCY_STREAM = new DataOutputStream(EMERGENCY_SOCKET.getOutputStream());
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+                POLICE_STREAM = new DataOutputStream(POLICE_SOCKET.getOutputStream());
+                EMERGENCY_STREAM = new DataOutputStream(EMERGENCY_SOCKET.getOutputStream());
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -89,35 +94,43 @@ public class NotificatorManager {
      * @param idEvent Id del evento
      */
     public static void notificateClient(String customerMail, String clientName, final String tipoEvento) {
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (EMULATE_EXTERNAL_SYSTEM_NOTIFICATION) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
         final String finalClientName = clientName == null ? "Erik Arcos" : clientName;
         final String finalCustomerMail = customerMail == null ? "ercos41@gmail.com" : customerMail;
         final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName, tipoEvento);
         final String subject = "Informacion de su sistema";
 
-//        new Thread() {
-//
-//            @Override
-//            public void run() {
-
         if (tipoEvento.equals(Constants.SMOKE)) {
-            sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            System.out.println("Notificar Emergencia");
+            if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
+                sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            }
             emergencyCounter++;
         } else {
-            sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            System.out.println("Notificar Policia");
+            if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
+                sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
+            }
             policeCounter++;
         }
-        long postMessage = System.currentTimeMillis();
 
-        //sendMail(finalCustomerMail, subject, mailBody);
-        //long postMail = System.currentTimeMillis();
-//            }
-//        }.start();
+        if (ENABLE_MAIL_NOTIFICATION) {
+            new Thread() {
+
+                @Override
+                public void run() {
+                    sendMail(finalCustomerMail, subject, mailBody);
+                }
+            }.start();
+        }
     }
 
     private static void sendMessage(DataOutputStream dos, String message) {
