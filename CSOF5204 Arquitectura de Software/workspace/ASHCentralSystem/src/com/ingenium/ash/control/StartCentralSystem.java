@@ -10,12 +10,12 @@ import com.ingenium.ash.communication.ConnectorServer;
  *
  * @author Erik Arcos
  */
-public class SystemStart {
+public class StartCentralSystem {
 
     private ConnectorServer connServer;
 
     public static void main(String... args) {
-        SystemStart systemStart = new SystemStart();
+        StartCentralSystem systemStart = new StartCentralSystem();
         systemStart.startSystem();
     }
 

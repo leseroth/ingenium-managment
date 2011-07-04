@@ -139,6 +139,7 @@ public class LoadBalancer {
                         Socket reciever = centralSystemServerSocket.accept();
                         startCentralSystemRecieverThread(centralSystemCounter, reciever);
                         addCentralSystemConnection(centralSystemCounter, sender, reciever);
+                        System.out.println("Se ha agregado un servidor al pool");
                     } catch (IOException ex) {
                         Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "Error al conectar un CentralSystem");
                     }
