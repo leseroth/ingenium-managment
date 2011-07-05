@@ -17,7 +17,7 @@ import oracle.jdbc.OracleTypes;
 public class ManagerConnection {
 
     /* Conexion con la base de datos */
-    Connection connection;
+    private Connection connection;
     
     /**
      * Constructor de la clase, obtiene la conexion con la base de datos
@@ -30,24 +30,25 @@ public class ManagerConnection {
      * Consulta todos los eventos generados
      * @return List, lista de eventos
      */
-    public List<Event> eventsGeneratedConsult() {
+    public List<Event> eventsGeneratedConsult(int page) {
 
-        String procedure = "{call PROGETREPORTBYHOME(?)}";
+        String procedure = "{call PROGETREPORTBYHOME(?,?)}";
         ResultSet resultSet = null;
         CallableStatement callableStatement = null;
         List<Event> result = new ArrayList<Event>();
 
         try {
-            callableStatement = connection.prepareCall(procedure);
+            callableStatement = getConnection().prepareCall(procedure);
 
             // Registramos los parametro de salida OUT
-            callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
+            callableStatement.setInt(1, page);
+            callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
             
             // Ejecutamos el procedimiento
             callableStatement.execute();
 
             // Obtenemos los parametros de salida OUT
-            resultSet = (ResultSet) callableStatement.getObject(1);
+            resultSet = (ResultSet) callableStatement.getObject(2);
             
             while (resultSet.next()) {
                 Event event = new Event();
@@ -75,7 +76,7 @@ public class ManagerConnection {
         List<Event> result = new ArrayList<Event>();
 
         try {
-            callableStatement = connection.prepareCall(procedure);
+            callableStatement = getConnection().prepareCall(procedure);
 
             // Registramos los parametro de salida OUT
             callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
@@ -98,5 +99,19 @@ public class ManagerConnection {
             System.err.println("Error al generar la consulta del reporte de evento generados: "+" : "+e);
         } 
         return result;
+    }
+
+    /**
+     * @return the connection
+     */
+    public Connection getConnection() {
+        return connection;
+    }
+
+    /**
+     * @param connection the connection to set
+     */
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 }

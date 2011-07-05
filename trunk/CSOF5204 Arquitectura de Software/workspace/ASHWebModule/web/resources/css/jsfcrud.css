@@ -1,4 +1,4 @@
-root { 
+root {
     display: block;
 }
 
@@ -21,7 +21,7 @@ table {
 form.jsfcrud_list_form th, td th {
     font-size: x-small;
     color: #4e6a71;
-    border-top-style: solid;
+/*    border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
     border-right-style: solid;
@@ -32,7 +32,7 @@ form.jsfcrud_list_form th, td th {
     border-top-color: #b2d5d6;
     border-bottom-color: #b2d5d6;
     border-left-color: #90b4bd;
-    border-right-color: #90b4bd;
+    border-right-color: #90b4bd;*/
     letter-spacing: 3px;
     text-align: left;
     padding-top: 6px;
@@ -49,7 +49,7 @@ td {
 }
 
 form.jsfcrud_list_form td, td td {
-    border-top-style: solid;
+/*    border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
     border-right-style: solid;
@@ -60,7 +60,7 @@ form.jsfcrud_list_form td, td td {
     border-top-color: #b2d5d6;
     border-bottom-color: #b2d5d6;
     border-left-color: #b2d5d6;
-    border-right-color: #b2d5d6;
+    border-right-color: #b2d5d6;*/
     vertical-align: baseline;
     padding-bottom: 0px;
 }
