@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateContactbyhomeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateContactbyhomeLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{contactbyhomeController.selected.id}" title="#{bundle.CreateContactbyhomeTitle_id}" required="true" requiredMessage="#{bundle.CreateContactbyhomeRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateContactbyhomeLabel_home}" for="home" />
+                    <h:selectOneMenu id="home" value="#{contactbyhomeController.selected.home}" title="#{bundle.CreateContactbyhomeTitle_home}" required="true" requiredMessage="#{bundle.CreateContactbyhomeRequiredMessage_home}">
+                        <f:selectItems value="#{homeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateContactbyhomeLabel_contact}" for="contact" />
+                    <h:selectOneMenu id="contact" value="#{contactbyhomeController.selected.contact}" title="#{bundle.CreateContactbyhomeTitle_contact}" required="true" requiredMessage="#{bundle.CreateContactbyhomeRequiredMessage_contact}">
+                        <f:selectItems value="#{contactController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contactbyhomeController.create}" value="#{bundle.CreateContactbyhomeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{contactbyhomeController.prepareList}" value="#{bundle.CreateContactbyhomeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateContactbyhomeIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

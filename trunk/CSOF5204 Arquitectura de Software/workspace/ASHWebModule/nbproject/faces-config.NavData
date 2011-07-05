@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="CRUD/rule/Edit.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="template.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="CRUD/role/Create.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="CRUD/event/Create.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="CRUD/item/View.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="CRUD/contactbyhome/List.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="CRUD/event/Edit.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="CRUD/rolbyuser/List.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="CRUD/role/List.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="CRUD/rolbyuser/Create.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="CRUD/role/View.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="CRUD/rolbyuser/Edit.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="CRUD/contact/View.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="CRUD/person/View.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="CRUD/item/Edit.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="CRUD/rule/View.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="CRUD/role/Edit.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="CRUD/person/Edit.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="CRUD/contactbyhome/Edit.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="CRUD/event/List.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="login.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="CRUD/home/Edit.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="CRUD/contact/Create.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="CRUD/item/List.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="*" x="900" y="900" zoom="true"/>
+        <Node id="CRUD/rolbyuser/View.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="CRUD/item/Create.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="CRUD/home/List.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="CRUD/rule/List.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="CRUD/contactbyhome/Create.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="CRUD/event/View.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="CRUD/person/List.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="CRUD/person/Create.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="CRUD/contact/Edit.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="CRUD/home/View.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="faces/reporte.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="index.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="reporte.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="CRUD/home/Create.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="CRUD/rule/Create.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="CRUD/contact/List.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="CRUD/contactbyhome/View.xhtml" x="1400" y="450" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>
