@@ -1,0 +1,411 @@
+init:
+Deleting: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCentralSystem.init:
+ASHCentralSystem.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.init:
+ASHCommons.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\build
+Nothing to copy.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\dist\ASHCommons.jar"
+ASHCommons.jar:
+ASHCentralSystem.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\ASHCentralSystem.jar"
+ASHCentralSystem.jar:
+ASHExternalSystems.init:
+ASHExternalSystems.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHExternalSystems.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\ASHExternalSystems.jar"
+ASHExternalSystems.jar:
+ASHHomeModule.init:
+ASHHomeModule.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHHomeModule.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\ASHHomeModule.jar"
+ASHHomeModule.jar:
+ASHLoadBalancer.init:
+ASHLoadBalancer.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHLoadBalancer.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\ASHLoadBalancer.jar"
+ASHLoadBalancer.jar:
+compile:
+Compiling 1 source ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\test\classes
+compile-test-single:
+run-test-with-main:
+El balanceador de carga esta listo para aceptar conexiones de servidores
+El balanceador de carga esta listo para aceptar conexiones de casas
+Se ha agregado un servidor al pool
+Se ha agregado un servidor al pool
+.........................................
+.........................................
+......................................140
+270
+271
+527
+527
+570
+789
+790
+790
+791
+892
+796
+796
+797
+795
+798
+796
+801
+806
+810
+813
+806
+882
+888
+886
+896
+858
+859
+931
+858
+864
+863
+864
+865
+864
+863
+863
+875
+875
+971
+872
+872
+873
+875
+875
+877
+878
+878
+882
+880
+884
+951
+950
+895
+896
+896
+953
+898
+891
+892
+895
+893
+896
+895
+896
+897
+905
+908
+907
+908
+910
+905
+905
+905
+905
+1078
+1071
+1083
+1084
+1046
+1086
+1090
+1092
+1028
+1057
+1025
+1031
+1100
+1129
+1132
+1128
+1098
+1102
+1067
+1104
+1049
+1047
+1052
+1072
+1129
+1132
+1161
+1133
+1132
+1133
+1133
+1163
+1097
+1136
+1137
+1074
+1079
+1141
+1083
+1158
+1171
+1071
+1073
+1383
+1421
+
+Time: 1.468
+There were 45 ailures:
+1) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1078ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+2) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1071ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+3) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1083ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+4) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1084ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+5) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1046ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+6) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1086ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+7) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1090ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+8) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1092ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+9) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1028ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+10) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1057ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+11) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1025ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+12) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1031ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+13) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1100ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+14) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1129ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+15) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1132ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+16) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1128ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+17) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1098ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+18) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1102ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+19) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1067ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+20) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1104ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+21) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1049ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+22) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1047ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+23) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1052ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+24) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1072ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+25) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1129ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+26) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1132ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+27) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1161ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+28) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1133ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+29) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1132ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+30) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1133ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+31) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1133ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+32) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1163ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+33) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1097ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+34) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1136ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+35) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1137ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+36) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1074ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+37) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1079ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+38) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1141ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+39) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1083ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+40) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1158ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+41) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1171ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+42) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1071ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+43) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1073ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+44) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1383ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+45) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1421ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+
+AILURES!!!
+Tests run: 120,  ailures: 45,  Errors: 0
+

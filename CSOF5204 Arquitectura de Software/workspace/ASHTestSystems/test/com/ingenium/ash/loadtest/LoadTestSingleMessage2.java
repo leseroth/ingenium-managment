@@ -5,7 +5,6 @@
 package com.ingenium.ash.loadtest;
 
 import com.clarkware.junitperf.TimedTest;
-import com.ingenium.ash.control.StartCentralSystem;
 import com.ingenium.ash.load.StartLoadBalancer;
 
 import com.ingenium.ash.test.TestSingleMessage2;
@@ -20,7 +19,7 @@ public class LoadTestSingleMessage2 {
     public static Test suite() {
         try {
             StartLoadBalancer.main();
-            Thread.sleep(10000);
+            Thread.sleep(20000);
 //            for (int i = 0; i < centralSystems; i++) {
 //                StartCentralSystem.main();
 //                Thread.sleep(1000);
@@ -30,7 +29,7 @@ public class LoadTestSingleMessage2 {
         }
 
         long maxTimeInMillis = 1000; //modificar tiempo en milisegundos aceptado
-        int concurrentUsers = 10; //modificar usuarios componentes
+        int concurrentUsers = 190; //modificar usuarios componentes
         Test test = new TestSingleMessage2("testMessage");
         Test timedTest = new TimedTest(test, maxTimeInMillis);
         Test loadTest1 = new com.clarkware.junitperf.LoadTest(timedTest, concurrentUsers);

@@ -31,10 +31,12 @@ public class HomeModuleMain implements Runnable {
     private short homeIdentifier;
     private Map<Integer, Item> itemList;
     private int messageCounter;
+    private SignatureCypher signatureCypher;
 
     public HomeModuleMain(short homeId) {
         homeIdentifier = homeId;
         itemList = new HashMap<Integer, Item>();
+        signatureCypher = new SignatureCypher();
     }
 
     public void startHomeModule() {
@@ -67,7 +69,7 @@ public class HomeModuleMain implements Runnable {
                     bbPayload.put(item.encode());
                 }
                 byte[] payload = bbPayload.array();
-                byte[] signedPayload = SignatureCypher.Cypher(payload);
+                byte[] signedPayload = signatureCypher.cypher(payload);
                 int signedPayloadSize = signedPayload.length;
 
                 ByteBuffer bbMessage = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payloadSize + SIZE_INT + signedPayloadSize);

@@ -31,7 +31,7 @@ public class TestDenialOfService extends TestCase {
         }
 
         byte[] payload = bbPayload.array();
-        byte[] signedPayload = SignatureCypher.Cypher(payload);
+        byte[] signedPayload = (new SignatureCypher()).cypher(payload);
 
         ByteBuffer buffer = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payload.length + SIZE_INT + signedPayload.length);
         buffer.putShort(houseId);
