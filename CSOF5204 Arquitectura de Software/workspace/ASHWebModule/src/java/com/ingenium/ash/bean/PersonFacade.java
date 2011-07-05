@@ -9,6 +9,7 @@ import com.ingenium.ash.entities.Person;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +26,16 @@ public class PersonFacade extends AbstractFacade<Person> {
 
     public PersonFacade() {
         super(Person.class);
+    }
+
+     public Person getPersonbyName(String Name){
+        try{
+        Query q = em.createQuery("select object(o) from Person as o where o.login =:user");
+        q.setParameter("user", Name);
+        return (Person) q.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
     }
 
 }

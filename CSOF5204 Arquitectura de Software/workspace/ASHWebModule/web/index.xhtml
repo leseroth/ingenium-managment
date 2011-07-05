@@ -2,43 +2,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Iniciar Sesion</title>
-<h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        <f:view>
-            <div id="principal" style="text-align: center; margin: 0px auto; width: 800px;border:1px">
 
-                <h:panelGrid id="encabezado" style="width:100%;text-align:left" columns="2">
-                    <h:outputLabel id="lblReport" style="color:coral;font-size:25px"
-                                   value="Log In" />
-                    <h:panelGrid id="pglogo" style="width:100%;text-align:right">
-                        <h:graphicImage id="logo" url="/resources/ingenium-logo.png" />
-                    </h:panelGrid>
-                </h:panelGrid>
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Menú"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
 
-                <h:form>
-                    <h:panelGrid id="filtro" style="width:100%;text-align:left">
-                        <h:panelGrid columns="2" cellspacing="3px">
-                            <h:outputText value="Usuario" id="usuario" style="font-size: 12px;" />
-                            <h:inputText value="#{login.user.name}" id="user" style="font-size: 12px;" autocomplete="off"/>
-                            <h:outputText value="Clave" id="clave" style="font-size: 12px;"/>
-                            <h:inputSecret value="#{login.user.password}" id="pass" style="font-size: 12px;" />
-                        </h:panelGrid>
-                        <h:commandButton id="login" value="Iniciar Sesion" style="float:right;"
-                                         action="#{Login.login}" />
-                    </h:panelGrid>
-                </h:form>
-            </div>
+            <h:form rendered="#{Login.person != null}">
 
-        </f:view>
-        <h:form>
-                    <h:commandLink action="/CRUD/person/List" value="Show All Person Items"/>
-                    <h:commandLink action="/CRUD/role/List" value="Show All Role Items"/>
-                </h:form>
-</h:body>
-
+                <h:commandLink action="#{ReportConsolidatedInformationBean.setupInformationConsult}" value="Reporte"/><br/>
+                <h:commandLink action="/CRUD/contact/List" value="Contactos"/><br/>
+                <!--h:commandLink action="/CRUD/contactbyhome/List" value="Show All Contactbyhome Items" rendered="false"/><br/-->
+                <h:commandLink action="/CRUD/event/List" value="Eventos"/><br/>
+                <h:commandLink action="/CRUD/home/List" value="Hogares / Oficinas"/><br/>
+                <h:commandLink action="/CRUD/item/List" value="Items"/><br/>
+                <h:commandLink action="/CRUD/person/List" value="Usuarios"/><br/>
+                <!--h:commandLink action="/CRUD/rolbyuser/List" value="Show All Rolbyuser Items" rendered="false"/><br/-->
+                <h:commandLink action="/CRUD/role/List" value="Roles"/><br/>
+                <h:commandLink action="/CRUD/rule/List" value="Reglas"/><br/>
+            </h:form>
+            <h:form rendered="#{Login.person == null}">
+                <script type="text/javascript">
+     location.href='http://localhost:8080/ASHWebModule/';
+                </script>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 </html>

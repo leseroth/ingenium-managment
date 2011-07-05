@@ -1,9 +1,12 @@
 package com.ingenium.ash.facade;
 
 import com.ingenium.ash.entities.Person;
-import com.ingenium.ash.util.JsfUtil;
-import com.ingenium.ash.util.PaginationHelper;
+import com.ingenium.ash.facade.util.JsfUtil;
+import com.ingenium.ash.facade.util.PaginationHelper;
 import com.ingenium.ash.bean.PersonFacade;
+import com.ingenium.ash.util.MD5;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -28,6 +31,20 @@ public class PersonController {
     private int selectedItemIndex;
 
     public PersonController() {
+    }
+
+        public Person login(String Name, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
+        Person p = ejbFacade.getPersonbyName(Name);
+        if(p==null){
+            return null;
+        }else{
+            if(p.getPassword().equals(MD5.Cipher(password))){
+                return p;
+            }
+            else{
+                return null;
+            }
+        }
     }
 
     public Person getSelected() {
@@ -79,6 +96,7 @@ public class PersonController {
 
     public String create() {
         try {
+            current.setPassword(MD5.Cipher(current.getPassword()));
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonCreated"));
             return prepareCreate();
@@ -96,6 +114,7 @@ public class PersonController {
 
     public String update() {
         try {
+            current.setPassword(MD5.Cipher(current.getPassword()));
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonUpdated"));
             return "View";

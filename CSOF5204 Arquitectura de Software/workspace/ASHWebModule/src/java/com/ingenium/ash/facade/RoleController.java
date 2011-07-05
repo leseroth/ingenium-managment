@@ -1,8 +1,8 @@
 package com.ingenium.ash.facade;
 
 import com.ingenium.ash.entities.Role;
-import com.ingenium.ash.util.JsfUtil;
-import com.ingenium.ash.util.PaginationHelper;
+import com.ingenium.ash.facade.util.JsfUtil;
+import com.ingenium.ash.facade.util.PaginationHelper;
 import com.ingenium.ash.bean.RoleFacade;
 
 import java.util.ResourceBundle;

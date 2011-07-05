@@ -18,6 +18,7 @@ public class ReportConsolidatedInformationBean {
     private List<Event> listEvents;
     /* Administrador de consultar */
     private ManagerConnection managerConnection;
+    private int page;
     
     /**
      * Constructor de la clase 
@@ -27,13 +28,22 @@ public class ReportConsolidatedInformationBean {
         managerConnection = new ManagerConnection();
     }
     
+    /*Inicializa la conexion*/
+    public String setupInformationConsult(){
+        listEvents = new ArrayList<Event>();           
+        managerConnection.getConnection();
+        page = 1;
+        return "reporte";
+    }
+
+
     /**
      * Consulta los todos los eventos registrados para la casa u oficina seleccionada.
      */    
     public void informationConsult(){
-        try{
-           listEvents = new ArrayList<Event>();           
-           listEvents = managerConnection.eventsGeneratedConsult();
+
+        try{           
+           listEvents = managerConnection.eventsGeneratedConsult(getPage());
         } catch(Exception ex){
            System.err.println("Se presentó un error al cargar la lista de casas y oficinas: "+ex);
         }
@@ -45,6 +55,20 @@ public class ReportConsolidatedInformationBean {
      */
     public List<Event> getListEvents() {
         return listEvents;
+    }
+
+    /**
+     * @return the page
+     */
+    public int getPage() {
+        return page;
+    }
+
+    /**
+     * @param page the page to set
+     */
+    public void setPage(int page) {
+        this.page = page;
     }
     
 }
