@@ -16,6 +16,7 @@ public class HomeSystemConnection implements Runnable {
     private int messageIdGenerator;
     private Socket socket;
     private LoadBalancer loadBalancer = LoadBalancer.getInstance();
+    private SignatureVerifier sigVerifier;
 
     public HomeSystemConnection(Socket s) {
         socket = s;
@@ -55,7 +56,7 @@ public class HomeSystemConnection implements Runnable {
                     socket.close();
                     throw new IOException();
                 } else {
-                    boolean verified = SignatureVerifier.verifySignature(payload, signedPayload);
+                    boolean verified = sigVerifier.verifySignature(payload, signedPayload);
 
                     if (verified) {
                         loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);

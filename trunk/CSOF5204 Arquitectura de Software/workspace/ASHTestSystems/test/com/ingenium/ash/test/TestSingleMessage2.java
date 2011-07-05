@@ -42,7 +42,7 @@ public class TestSingleMessage2 extends TestCase {
         }
 
         payload = bbPayload.array();
-        signedPayload = SignatureCypher.Cypher(payload);
+        signedPayload = (new SignatureCypher()).cypher(payload);
     }
 
     @Override
@@ -56,14 +56,17 @@ public class TestSingleMessage2 extends TestCase {
         int csId = 0;
         int msgId = MESSAGE_ID++;
         boolean dos = loadBalancer.verifyDenialOfService(homeId, System.currentTimeMillis());
+        
+        boolean send = false;
 
         try {
             if (dos) {
                 System.out.println("Posible ataque de DOS detectado desde la casa " + homeId);
             } else {
-                boolean verified = SignatureVerifier.verifySignature(payload, signedPayload);
+                boolean verified = (new SignatureVerifier()).verifySignature(payload, signedPayload);
 
                 if (verified) {
+                    send = true;
                     csId = loadBalancer.redirectMessage(homeId, msgId, payload);
                 } else {
                     System.out.println("No se pudo verificar la firma de la casa " + homeId);
@@ -71,13 +74,13 @@ public class TestSingleMessage2 extends TestCase {
                 }
             }
         } catch (IOException ex) {
-            System.out.println("IOException");
+            System.out.println("Error en el test");
         }
 
         String id = LoadBalancer.generateIdentifier(homeId, csId, msgId);
         boolean check = true;
-        while (check) {
-            for (int i = 0; i < 10000; i++) {
+        while (send && check) {
+            for (int i = 0; i < 500; i++) {
                 check = !check;
             }
             check = loadBalancer.checkMessage(id) != null;

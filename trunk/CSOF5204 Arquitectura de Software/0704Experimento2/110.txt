@@ -1,0 +1,211 @@
+init:
+Deleting: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCentralSystem.init:
+ASHCentralSystem.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.init:
+ASHCommons.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\build
+Nothing to copy.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\dist\ASHCommons.jar"
+ASHCommons.jar:
+ASHCentralSystem.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\ASHCentralSystem.jar"
+ASHCentralSystem.jar:
+ASHExternalSystems.init:
+ASHExternalSystems.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHExternalSystems.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\ASHExternalSystems.jar"
+ASHExternalSystems.jar:
+ASHHomeModule.init:
+ASHHomeModule.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHHomeModule.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\ASHHomeModule.jar"
+ASHHomeModule.jar:
+ASHLoadBalancer.init:
+ASHLoadBalancer.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHLoadBalancer.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\ASHLoadBalancer.jar"
+ASHLoadBalancer.jar:
+compile:
+Compiling 1 source ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\test\classes
+compile-test-single:
+run-test-with-main:
+El balanceador de carga esta listo para aceptar conexiones de casas
+El balanceador de carga esta listo para aceptar conexiones de servidores
+Se ha agregado un servidor al pool
+Se ha agregado un servidor al pool
+.........................................
+.........................................
+............................87
+266
+268
+297
+299
+523
+783
+785
+787
+777
+722
+718
+725
+733
+734
+733
+733
+735
+728
+735
+738
+738
+732
+737
+736
+756
+754
+757
+846
+828
+849
+858
+861
+871
+869
+791
+856
+795
+802
+802
+802
+802
+881
+898
+866
+870
+883
+804
+813
+813
+813
+814
+816
+815
+817
+820
+822
+809
+808
+893
+880
+881
+883
+895
+880
+898
+817
+822
+882
+903
+905
+890
+907
+888
+904
+891
+902
+885
+913
+913
+905
+914
+828
+892
+915
+930
+901
+896
+897
+916
+899
+919
+900
+983
+913
+910
+1009
+968
+975
+914
+981
+1002
+995
+923
+1002
+979
+1057
+1090
+1053
+1046
+
+Time: 1.121
+There were 7 ailures:
+1) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1009ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+2) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1002ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+3) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1002ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+4) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1057ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+5) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1090ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+6) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1053ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+7) testMessage(com.ingenium.ash.test.TestSingleMessage2)junit.ramework.AssertionailedError: Maximum elapsed time exceeded! Expected 1000ms, but was 1046ms.
+	at com.clarkware.junitper.TimedTest.runUntilTestCompletion(TimedTest.java:161)
+	at com.clarkware.junitper.TimedTest.run(TimedTest.java:138)
+	at com.clarkware.junitper.ThreadedTest$TestRunner.run(ThreadedTest.java:75)
+	at java.lang.Thread.run(Thread.java:662)
+
+AILURES!!!
+Tests run: 110,  ailures: 7,  Errors: 0
+

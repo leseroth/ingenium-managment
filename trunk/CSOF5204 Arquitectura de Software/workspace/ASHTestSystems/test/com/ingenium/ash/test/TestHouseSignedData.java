@@ -44,8 +44,8 @@ public class TestHouseSignedData extends TestCase {
     }
 
     public void testFirmaTrama() throws Exception {
-        byte[] result = SignatureCypher.Cypher(message);
-        boolean equal = SignatureVerifier.verifySignature(message, result);
+        byte[] result = (new SignatureCypher()).cypher(message);
+        boolean equal = (new SignatureVerifier()).verifySignature(message, result);
         assertEquals(equal, true);
     }
     // TODO add test methods here. The name must begin with 'test'. For example:

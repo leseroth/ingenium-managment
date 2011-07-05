@@ -41,7 +41,7 @@ public class TestHouseSignedWrong extends TestCase {
         }
 
         payload = bbPayload.array();
-        signedPayload = SignatureCypher.Cypher(payload);
+        signedPayload = (new SignatureCypher()).cypher(payload);
 
         ByteBuffer goodBuffer = ByteBuffer.allocate(SIZE_SHORT + SIZE_INT + payload.length + SIZE_INT + signedPayload.length);
         goodBuffer.putShort(houseId);
