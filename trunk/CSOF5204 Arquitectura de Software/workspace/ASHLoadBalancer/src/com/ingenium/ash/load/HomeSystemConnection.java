@@ -1,6 +1,5 @@
 package com.ingenium.ash.load;
 
-import com.ingenium.ash.security.SignatureVerifier;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
