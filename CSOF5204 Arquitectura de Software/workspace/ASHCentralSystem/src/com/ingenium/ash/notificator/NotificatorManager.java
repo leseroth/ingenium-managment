@@ -1,18 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ingenium.ash.notificator;
 
 import java.io.*;
-import java.net.UnknownHostException;
+import java.net.MalformedURLException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.*;
 import com.ingenium.ash.util.*;
-import java.net.Socket;
-import java.nio.ByteBuffer;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.DataHandler;
@@ -26,6 +21,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import policewebservice.NotifyWS;
+import policewebservice.UnReportedException;
 import static com.ingenium.ash.util.Constants.*;
 
 /**
@@ -37,14 +34,6 @@ public class NotificatorManager {
     public static String NOTIFICATION_TEMPLATE;
     private static Session SESSION;
     private static Transport TRANSPORT;
-    // Auditoria
-    private static int emergencyCounter = 0;
-    private static int policeCounter = 0;
-    // Sockets a sistemas externos
-    private static Socket POLICE_SOCKET;
-    private static Socket EMERGENCY_SOCKET;
-    private static DataOutputStream POLICE_STREAM;
-    private static DataOutputStream EMERGENCY_STREAM;
 
     static {
         try {
@@ -72,22 +61,6 @@ public class NotificatorManager {
         }
     }
 
-    static {
-        if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
-            try {
-                POLICE_SOCKET = new Socket("localhost", 4450);
-                EMERGENCY_SOCKET = new Socket("localhost", 4460);
-
-                POLICE_STREAM = new DataOutputStream(POLICE_SOCKET.getOutputStream());
-                EMERGENCY_STREAM = new DataOutputStream(EMERGENCY_SOCKET.getOutputStream());
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     /**
      * Notifica al cliente sobre la alarma que se ha presentado
      * @param idClient Id del cliente
@@ -108,40 +81,25 @@ public class NotificatorManager {
         final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName, tipoEvento);
         final String subject = "Informacion de su sistema";
 
-        if (tipoEvento.equals(Constants.SMOKE)) {
-            System.out.println("Notificar Emergencia");
-            if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
-                sendMessage(EMERGENCY_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
-            }
-            emergencyCounter++;
-        } else {
-            System.out.println("Notificar Policia");
-            if (ENABLE_EXTERNAL_SYSTEM_NOTIFICATION) {
-                sendMessage(POLICE_STREAM, "Se ha detectado " + tipoEvento + " en la propiedad de " + finalClientName);
-            }
-            policeCounter++;
-        }
-
         if (ENABLE_MAIL_NOTIFICATION) {
             new Thread() {
 
                 @Override
                 public void run() {
                     sendMail(finalCustomerMail, subject, mailBody);
+
+                    try {
+                        String response = NotifyWS.Notify(
+                                new URL("http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?wsdl"),
+                                "1", "1", "junio 23 de 2010", "wail", "3122046679", "calle 5 22 18", "Popayan");
+                        System.out.println(response);
+                    } catch (UnReportedException ex) {
+                        Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }.start();
-        }
-    }
-
-    private static void sendMessage(DataOutputStream dos, String message) {
-        try {
-            byte[] byteMessage = message.getBytes();
-            ByteBuffer bb = ByteBuffer.allocate(4 + byteMessage.length);
-            bb.putInt(byteMessage.length);
-            bb.put(byteMessage);
-            dos.write(bb.array());
-        } catch (IOException ex) {
-            Logger.getLogger(NotificatorManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

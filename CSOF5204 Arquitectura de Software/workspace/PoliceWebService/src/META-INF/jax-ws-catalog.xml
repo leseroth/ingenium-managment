@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?WSDL" uri="wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
+    <system systemId="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx" uri="xml-resources/web-service-references/PoliceService_1/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx"/>
+    <system systemId="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?wsdl" uri="xml-resources/web-service-references/PoliceService_3/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
+    <system systemId="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?WSDL" uri="xml-resources/web-service-references/PoliceService_4/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
 </catalog>

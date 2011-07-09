@@ -6,9 +6,9 @@ package com.ingenium.ash.util;
  */
 public class Constants {
     
-    public static final boolean SHOW_LOAD_BALANCER = true;
-    public static final boolean ENABLE_MAIL_NOTIFICATION = false;
-    public static final boolean EMULATE_EXTERNAL_SYSTEM_NOTIFICATION = true;
+    public static final boolean SHOW_LOAD_BALANCER = false;
+    public static final boolean ENABLE_MAIL_NOTIFICATION = true;
+    public static final boolean EMULATE_EXTERNAL_SYSTEM_NOTIFICATION = false;
     public static final boolean ENABLE_EXTERNAL_SYSTEM_NOTIFICATION = false;
 
     /**Respresenta el valor del sensor cuando se encuentra una señal de humo**/
