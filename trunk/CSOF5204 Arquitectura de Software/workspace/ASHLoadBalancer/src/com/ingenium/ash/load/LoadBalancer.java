@@ -37,6 +37,8 @@ public class LoadBalancer {
     private static final long DOS_TIME = 500;
     // Referencia al unico Balanceador de carga
     private static LoadBalancer reference;
+    // Mapa para informar a la casa que notifique al cliente
+    private static Map<Short, Byte> notificationMap;
 
     /**
      * Obtiene la unica referencia al balanceador de carga
@@ -56,6 +58,7 @@ public class LoadBalancer {
         messageCache = new HashMap<String, byte[]>();
         centralSystemList = new ArrayList<Object[]>();
         lastTimeHomeReport = new HashMap<Short, Long>();
+        notificationMap = new HashMap<Short, Byte>();
         centralSystemTokenPosition = 0;
     }
 
@@ -75,7 +78,8 @@ public class LoadBalancer {
             Object[] description = centralSystemList.get(centralSystemTokenPosition);
             dos = (DataOutputStream) description[LB_CS_SENDER_STREAM];
         } catch (Exception e) {
-            dos = getNextDataOutputStream();
+            centralSystemTokenPosition = 0;
+            dos = (DataOutputStream) centralSystemList.get(centralSystemTokenPosition)[LB_CS_SENDER_STREAM];
         }
         return dos;
     }
@@ -221,6 +225,11 @@ public class LoadBalancer {
                     try {
                         short homeIdentifier = dataInputStream.readShort();
                         int messageIdentifier = dataInputStream.readInt();
+                        byte outcome = dataInputStream.readByte();
+
+                        if (outcome == HM_STATUS_NOTIFY) {
+                            notificationMap.put(homeIdentifier, HM_STATUS_NOTIFY);
+                        }
 
                         removeMessageFromCache(generateIdentifier(homeIdentifier, centralSystemIdentifier, messageIdentifier));
                     } catch (IOException ex) {
@@ -240,8 +249,12 @@ public class LoadBalancer {
             }
         }.start();
     }
-    
-    public synchronized byte[] checkMessage(String id){
+
+    public static Map<Short, Byte> getNotificationMap() {
+        return notificationMap;
+    }
+
+    public synchronized byte[] checkMessage(String id) {
         return messageCache.get(id);
     }
 

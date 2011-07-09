@@ -6,7 +6,7 @@ package com.ingenium.ash.util;
  */
 public class Constants {
     
-    public static final boolean SHOW_LOAD_BALANCER = false;
+    public static final boolean SHOW_LOAD_BALANCER = true;
     public static final boolean ENABLE_MAIL_NOTIFICATION = false;
     public static final boolean EMULATE_EXTERNAL_SYSTEM_NOTIFICATION = true;
     public static final boolean ENABLE_EXTERNAL_SYSTEM_NOTIFICATION = false;
@@ -51,6 +51,10 @@ public class Constants {
     public static final int LB_HOME_SYSTEM_SOCKET_PORT = 4440;
     // Info de los item
     public static final int ITEM_SIZE = 6;
+    // Home module tiempo de reporte en milisegundos
+    public static final int HM_REPORT_TIME = 950;
+    public static final byte HM_STATUS_NORMAL = 1;
+    public static final byte HM_STATUS_NOTIFY = 2;
     // Maximo cantidad de segundos que se espera que se conteste la llamada
     public static final int MAX_SKYPE_SECONDS_WAIT = 30;
 }
