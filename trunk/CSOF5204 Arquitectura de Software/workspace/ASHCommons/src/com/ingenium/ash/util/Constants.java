@@ -55,6 +55,7 @@ public class Constants {
     public static final int HM_REPORT_TIME = 950;
     public static final byte HM_STATUS_NORMAL = 1;
     public static final byte HM_STATUS_NOTIFY = 2;
+    public static final byte HM_STATUS_UNVERIFIED = 3;
     // Maximo cantidad de segundos que se espera que se conteste la llamada
     public static final int MAX_SKYPE_SECONDS_WAIT = 30;
 }

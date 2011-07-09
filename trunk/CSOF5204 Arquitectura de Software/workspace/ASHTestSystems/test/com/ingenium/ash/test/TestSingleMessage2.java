@@ -6,7 +6,6 @@ package com.ingenium.ash.test;
 
 import com.ingenium.ash.load.LoadBalancer;
 import com.ingenium.ash.security.SignatureCypher;
-import com.ingenium.ash.security.SignatureVerifier;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import junit.framework.TestCase;
@@ -56,22 +55,15 @@ public class TestSingleMessage2 extends TestCase {
         int csId = 0;
         int msgId = MESSAGE_ID++;
         boolean dos = loadBalancer.verifyDenialOfService(homeId, System.currentTimeMillis());
-        
+
         boolean send = false;
 
         try {
             if (dos) {
                 System.out.println("Posible ataque de DOS detectado desde la casa " + homeId);
             } else {
-                boolean verified = (new SignatureVerifier()).verifySignature(payload, signedPayload);
-
-                if (verified) {
-                    send = true;
-                    csId = loadBalancer.redirectMessage(homeId, msgId, payload);
-                } else {
-                    System.out.println("No se pudo verificar la firma de la casa " + homeId);
-                    throw new IOException();
-                }
+                send = true;
+                csId = loadBalancer.redirectMessage(homeId, msgId, payload, signedPayload);
             }
         } catch (IOException ex) {
             System.out.println("Error en el test");

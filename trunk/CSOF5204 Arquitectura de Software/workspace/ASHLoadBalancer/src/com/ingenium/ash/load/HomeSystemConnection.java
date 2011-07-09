@@ -18,10 +18,8 @@ public class HomeSystemConnection implements Runnable {
     private int messageIdGenerator;
     private Socket socket;
     private LoadBalancer loadBalancer = LoadBalancer.getInstance();
-    private SignatureVerifier sigVerifier;
-
+    
     public HomeSystemConnection(Socket s) {
-        sigVerifier = new SignatureVerifier();
         socket = s;
     }
 
@@ -42,8 +40,7 @@ public class HomeSystemConnection implements Runnable {
         while (keepAlive) {
             try {
                 messageIdGenerator++;
-                long recievedTime = System.currentTimeMillis();
-
+                
                 short homeId = dataInputStream.readShort();
                 int payloadSize = dataInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
@@ -61,22 +58,22 @@ public class HomeSystemConnection implements Runnable {
                     socket.close();
                     throw new IOException();
                 } else {
-                    boolean verified = sigVerifier.verifySignature(payload, signedPayload);
-
-                    if (verified) {
-                        loadBalancer.redirectMessage(homeId, messageIdGenerator, payload);
-                    } else {
-                        System.out.println("No se pudo verificar la firma de la casa " + homeId);
-                        socket.close();
-                        throw new IOException();
-                    }
+                    loadBalancer.redirectMessage(homeId, messageIdGenerator, payload, signedPayload);
                 }
-                
+
                 Byte status = LoadBalancer.getNotificationMap().get(homeId);
-                if(status != null && status == HM_STATUS_NOTIFY) {
-                    LoadBalancer.getNotificationMap().remove(homeId);
-                    dataOutputStream.writeByte(HM_STATUS_NOTIFY);
-                    System.out.println("Notificar a la casa "+homeId);
+                if (status != null) {
+                    switch (status) {
+                        case HM_STATUS_NOTIFY:
+                            LoadBalancer.getNotificationMap().remove(homeId);
+                            dataOutputStream.writeByte(HM_STATUS_NOTIFY);
+                            System.out.println("Notificar a la casa " + homeId);
+                            break;
+                        case HM_STATUS_UNVERIFIED:
+                            System.out.println("No se pudo verificar la firma de la casa " + homeId);
+                            socket.close();
+                            throw new IOException();
+                    }
                 }
             } catch (IOException ex) {
                 String message = "Se ha perdido la conexion con la casa " + homeIdCache;
