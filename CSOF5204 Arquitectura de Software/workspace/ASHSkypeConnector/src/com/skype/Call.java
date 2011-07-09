@@ -52,7 +52,7 @@ public final class Call extends SkypeObject {
      * @param id whose associated Call object is to be returned.
      * @return Call object with ID == id.
      */
-    static Call getInstance(final String id) {
+    public static Call getInstance(final String id) {
         synchronized(calls) {
             if (!calls.containsKey(id)) {
                 calls.put(id, new Call(id));

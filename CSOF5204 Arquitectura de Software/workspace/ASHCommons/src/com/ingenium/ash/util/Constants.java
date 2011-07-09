@@ -51,4 +51,6 @@ public class Constants {
     public static final int LB_HOME_SYSTEM_SOCKET_PORT = 4440;
     // Info de los item
     public static final int ITEM_SIZE = 6;
+    // Maximo cantidad de segundos que se espera que se conteste la llamada
+    public static final int MAX_SKYPE_SECONDS_WAIT = 30;
 }
