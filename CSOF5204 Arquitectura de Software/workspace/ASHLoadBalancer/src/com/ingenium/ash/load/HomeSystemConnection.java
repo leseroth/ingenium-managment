@@ -2,10 +2,12 @@ package com.ingenium.ash.load;
 
 import com.ingenium.ash.security.SignatureVerifier;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.ingenium.ash.util.Constants.*;
 
 /**
  *
@@ -19,14 +21,17 @@ public class HomeSystemConnection implements Runnable {
     private SignatureVerifier sigVerifier;
 
     public HomeSystemConnection(Socket s) {
+        sigVerifier = new SignatureVerifier();
         socket = s;
     }
 
     @Override
     public void run() {
         DataInputStream dataInputStream = null;
+        DataOutputStream dataOutputStream = null;
         try {
             dataInputStream = new DataInputStream(socket.getInputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException ex) {
             Logger.getLogger(LoadBalancer.class.getName()).log(Level.SEVERE, "No se pudo obtener el ouputStream");
         }
@@ -65,6 +70,13 @@ public class HomeSystemConnection implements Runnable {
                         socket.close();
                         throw new IOException();
                     }
+                }
+                
+                Byte status = LoadBalancer.getNotificationMap().get(homeId);
+                if(status != null && status == HM_STATUS_NOTIFY) {
+                    LoadBalancer.getNotificationMap().remove(homeId);
+                    dataOutputStream.writeByte(HM_STATUS_NOTIFY);
+                    System.out.println("Notificar a la casa "+homeId);
                 }
             } catch (IOException ex) {
                 String message = "Se ha perdido la conexion con la casa " + homeIdCache;

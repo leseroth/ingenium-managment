@@ -61,13 +61,11 @@ public class EmailNotification {
     }
 
     public static void notificateClient(String customerMail, String clientName) {
-
-        final String finalClientName = clientName == null ? "Erik Arcos" : clientName;
-        final String finalCustomerMail = customerMail == null ? "ercos41@gmail.com" : customerMail;
-        final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, finalClientName);
+        
+        final String mailBody = processTemplate("" + NOTIFICATION_TEMPLATE, clientName);
         final String subject = "Informacion de su sistema";
 
-        sendMail(finalCustomerMail, subject, mailBody);
+        sendMail(customerMail, subject, mailBody);
     }
 
     private static void sendMail(String toAddress, String subject, String body) {

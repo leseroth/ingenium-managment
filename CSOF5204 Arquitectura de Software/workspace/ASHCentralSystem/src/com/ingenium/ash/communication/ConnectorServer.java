@@ -100,23 +100,29 @@ public class ConnectorServer implements Runnable {
     }
 
     private void processMessage(short homeId, int messageId, byte[] payload) {
-        //System.out.println();
         if (SHOW_LOAD_BALANCER) {
             System.out.println("home: " + homeId + " message:" + messageId);
         }
+
         int totalEvent = (payload.length - 2) / ITEM_SIZE;
+        byte status = HM_STATUS_NORMAL;
         for (int i = 0; i < totalEvent; i++) {
             byte[] itemStatus = Arrays.copyOfRange(payload, i * ITEM_SIZE, (i + 1) * ITEM_SIZE);
             //System.out.print(" " + itemStatus[0] + itemStatus[1] + itemStatus[2] + itemStatus[3] + itemStatus[4] + itemStatus[5]);
-            manager.processEvent(itemStatus);
+            byte response = manager.processEvent(itemStatus);
+            if (response == HM_STATUS_NOTIFY) {
+                status = HM_STATUS_NOTIFY;
+            }
         }
-        informLoadBalancer(homeId, messageId);
+
+        informLoadBalancer(homeId, messageId, status);
     }
 
-    private void informLoadBalancer(short homeId, int messageId) {
+    private void informLoadBalancer(short homeId, int messageId, byte status) {
         try {
             senderOutputStream.writeShort(homeId);
             senderOutputStream.writeInt(messageId);
+            senderOutputStream.writeByte(status);
         } catch (IOException ex) {
             Logger.getLogger(ConnectorServer.class.getName()).log(Level.SEVERE, null, ex);
         }
