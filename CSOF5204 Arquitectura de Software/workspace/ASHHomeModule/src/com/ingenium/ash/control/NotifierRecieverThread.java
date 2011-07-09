@@ -6,8 +6,7 @@ import com.ingenium.ash.notificator.SkypeNotification;
 import com.skype.Call.Status;
 import static com.ingenium.ash.util.Constants.*;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  *
@@ -30,7 +29,7 @@ public class NotifierRecieverThread implements Runnable {
         while (keepAlive) {
             try {
                 byte status = connClient.recieveMessage();
-                
+
                 if (status == HM_STATUS_NOTIFY) {
                     SkypeNotification.sendChatMessage(home.getOwnerSkype(), "Se ha detectado un evento en su hogar por favor conteste la siguiente videollamada para ver lo que esta sucediendo");
                     Thread.sleep(1000);
@@ -38,6 +37,7 @@ public class NotifierRecieverThread implements Runnable {
                     if (outcome != Status.INPROGRESS) {
                         EmailNotification.notificateClient(home.getOwnerEmail(), home.getOwner());
                     }
+                    System.out.println("Se inicio una llamada a las " + new Date() + " y su resultado fue " + outcome);
                 }
             } catch (IOException ex) {
                 keepAlive = false;
