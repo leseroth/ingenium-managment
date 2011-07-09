@@ -35,5 +35,73 @@
         <delete dir="${build.generated.dir}/jax-wsCache/PoliceService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-PoliceService"/>
+    <target name="wsimport-client-PoliceService_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PoliceService_1"/>
+        <property name="wsdl-PoliceService_1" location="xml-resources/web-service-references/PoliceService_1/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PoliceService_1" destdir="${build.generated.dir}/jax-wsCache/PoliceService_1" wsdl="${wsdl-PoliceService_1}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx" xendorsed="true">
+            <depends file="${wsdl-PoliceService_1}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PoliceService_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PoliceService_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PoliceService_1" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/PoliceService_1"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/"/>
+    </target>
+    <target name="wsimport-client-PoliceService_2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PoliceService_2"/>
+        <property name="wsdl-PoliceService_2" location="xml-resources/web-service-references/PoliceService_2/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PoliceService_2" destdir="${build.generated.dir}/jax-wsCache/PoliceService_2" wsdl="${wsdl-PoliceService_2}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?wsdl" xendorsed="true">
+            <depends file="${wsdl-PoliceService_2}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PoliceService_2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PoliceService_2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PoliceService_2" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/PoliceService_2"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
+    </target>
+    <target name="wsimport-client-PoliceService_3" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PoliceService_3"/>
+        <property name="wsdl-PoliceService_3" location="xml-resources/web-service-references/PoliceService_3/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PoliceService_3" destdir="${build.generated.dir}/jax-wsCache/PoliceService_3" wsdl="${wsdl-PoliceService_3}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?wsdl" xendorsed="true">
+            <depends file="${wsdl-PoliceService_3}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PoliceService_3"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PoliceService_3">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PoliceService_3" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/PoliceService_3"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
+    </target>
+    <target name="wsimport-client-PoliceService_4" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PoliceService_4"/>
+        <property name="wsdl-PoliceService_4" location="xml-resources/web-service-references/PoliceService_4/wsdl/192.168.0.12/ExternalSystemPolice/PoliceService.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PoliceService_4" destdir="${build.generated.dir}/jax-wsCache/PoliceService_4" wsdl="${wsdl-PoliceService_4}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?WSDL" xendorsed="true">
+            <depends file="${wsdl-PoliceService_4}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PoliceService_4"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PoliceService_4">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PoliceService_4" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/PoliceService_4"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-PoliceService, wsimport-client-PoliceService_1, wsimport-client-PoliceService_2, wsimport-client-PoliceService_3, wsimport-client-PoliceService_4"/>
 </project>

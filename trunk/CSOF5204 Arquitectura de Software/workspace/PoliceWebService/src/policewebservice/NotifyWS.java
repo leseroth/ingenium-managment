@@ -34,7 +34,7 @@ public class NotifyWS {
      * @return respuesta del sisitema de la policia para que sea procesada
      * @throws UnReportedException Se envia una excepción si no fue posible realizar la notificación
      */
-    public static String Notify(String homeId, String eventType, String time, String contactName, String contactPhone, String address, String city) throws UnReportedException {
+    public static String notify(String homeId, String eventType, String time, String contactName, String contactPhone, String address, String city) throws UnReportedException {
         try {
 
             //Preparar Mensaje
