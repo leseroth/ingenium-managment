@@ -1,6 +1,7 @@
 package com.ingenium.ash.communication;
 
 import com.ingenium.ash.manager.Manager;
+import com.ingenium.ash.security.SignatureVerifier;
 import java.net.*;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -20,6 +21,7 @@ public class ConnectorServer implements Runnable {
     private Socket reciever;
     private DataInputStream recieverInputStream;
     private DataOutputStream senderOutputStream;
+    private SignatureVerifier signatureVerifier;
 
     /**
      * Starts the server in the defined port
@@ -29,6 +31,7 @@ public class ConnectorServer implements Runnable {
      */
     public void startServer() {
         manager = new Manager();
+        signatureVerifier = new SignatureVerifier();
 
         try {
             reciever = new Socket(LB_LOCATION, LB_CENTRAL_SYSTEM_SOCKET_PORT);
@@ -74,8 +77,17 @@ public class ConnectorServer implements Runnable {
                 int payloadSize = recieverInputStream.readInt();
                 byte[] payload = new byte[payloadSize];
                 recieverInputStream.read(payload);
+                int signedPayloadSize = recieverInputStream.readInt();
+                byte[] signedPayload = new byte[signedPayloadSize];
+                recieverInputStream.read(signedPayload);
 
-                processMessage(homeId, messageId, payload);
+                boolean verified = signatureVerifier.verifySignature(payload, signedPayload);
+
+                if (verified) {
+                    processMessage(homeId, messageId, payload);
+                } else {
+                    informLoadBalancer(homeId, messageId, HM_STATUS_UNVERIFIED);
+                }
             } catch (SocketException se) {
                 //Logger.getLogger(ConnectorProcessor.class.getName()).log(Level.INFO, "Se ha cerrado el socket");
                 keepAlive = false;

@@ -53,12 +53,16 @@ public class SignatureVerifier {
             sig.update(originalData, 0, originalData.length);
             verified = sig.verify(signedData);
         } catch (SignatureException ex) {
+            ex.printStackTrace();
             Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
         } catch (InvalidKeyException ex) {
+            ex.printStackTrace();
             Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
         } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
             Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
         } catch (NoSuchProviderException ex) {
+            ex.printStackTrace();
             Logger.getLogger(SignatureVerifier.class.getName()).log(Level.SEVERE, null);
         } 
 
