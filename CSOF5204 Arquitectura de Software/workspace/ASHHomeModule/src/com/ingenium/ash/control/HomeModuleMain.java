@@ -17,7 +17,7 @@ public class HomeModuleMain {
     private ConnectorClient connClient;
     private String owner = "Erik Arcos";
     private String ownerEmail = "ercos41@gmail.com";
-    private String ownerSkype = "el_checho1";
+    private String ownerSkype = "willian.alejandro";
 
     public HomeModuleMain(short homeId) {
         homeIdentifier = homeId;
