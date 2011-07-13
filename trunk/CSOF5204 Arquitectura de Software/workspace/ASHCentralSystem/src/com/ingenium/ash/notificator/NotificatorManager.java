@@ -90,7 +90,7 @@ public class NotificatorManager {
 
                     try {
                         String response = NotifyWS.Notify(
-                                new URL("http://192.168.0.12/ExternalSystemPolice/PoliceService.asmx?wsdl"),
+                                new URL("http://157.253.224.51/ExternalSystemPolice/PoliceService.asmx?wsdl"),
                                 "1", "1", "junio 23 de 2010", "wail", "3122046679", "calle 5 22 18", "Popayan");
                         System.out.println(response);
                     } catch (UnReportedException ex) {

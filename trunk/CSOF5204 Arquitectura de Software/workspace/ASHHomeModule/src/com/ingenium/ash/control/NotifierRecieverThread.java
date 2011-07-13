@@ -7,6 +7,8 @@ import com.skype.Call.Status;
 import static com.ingenium.ash.util.Constants.*;
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,13 +33,27 @@ public class NotifierRecieverThread implements Runnable {
                 byte status = connClient.recieveMessage();
 
                 if (status == HM_STATUS_NOTIFY) {
-                    SkypeNotification.sendChatMessage(home.getOwnerSkype(), "Se ha detectado un evento en su hogar por favor conteste la siguiente videollamada para ver lo que esta sucediendo");
-                    Thread.sleep(1000);
-                    Status outcome = SkypeNotification.startVideoCall(home.getOwnerSkype());
-                    if (outcome != Status.INPROGRESS) {
-                        EmailNotification.notificateClient(home.getOwnerEmail(), home.getOwner());
-                    }
-                    System.out.println("Se inicio una llamada a las " + new Date() + " y su resultado fue " + outcome);
+
+                    new Thread() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                SkypeNotification.sendChatMessage(home.getOwnerSkype(), "Se ha detectado un evento en su hogar por favor conteste la siguiente videollamada para ver lo que esta sucediendo");
+                                Thread.sleep(1000);
+                                Status outcome = SkypeNotification.startVideoCall(home.getOwnerSkype());
+                                if (outcome != Status.INPROGRESS) {
+                                    EmailNotification.notificateClient(home.getOwnerEmail(), home.getOwner());
+                                }
+                                System.out.println("Se inicio una llamada a las " + new Date() + " y su resultado fue " + outcome);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(NotifierRecieverThread.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (Exception ex) {
+                                Logger.getLogger(NotifierRecieverThread.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }.start();
+
                 }
             } catch (IOException ex) {
                 keepAlive = false;
