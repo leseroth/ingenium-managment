@@ -1,0 +1,265 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 31 09:40:26 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ReplicacionPricat"
+               targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoPricat/ReplicacionPricat"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoPricat/ReplicacionPricat"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:ns3="http://marketplace.losalpes.com.co"
+         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionCorreoElectronico/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="replicacionpricat_client" partnerLinkType="client:ReplicacionPricat" myRole="ReplicacionPricatProvider"/>
+    <partnerLink name="GestionFacturacion" partnerRole="GestionFacturacion_Role"
+                 partnerLinkType="ns2:GestionFacturacion_PL"/>
+    <partnerLink name="GestionCliente" partnerRole="GestionCliente_Role"
+                 partnerLinkType="ns4:GestionCliente_PL"/>
+    <partnerLink name="GestionCorreoElectronico"
+                 partnerRole="GestionCorreoElectronico_Role"
+                 partnerLinkType="ns5:GestionCorreoElectronico_PL"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ReplicacionPricatRequestMessage"/>
+    <variable name="indiceIteracion" type="xsd:int"/>
+    <variable name="registrarTransaccion"
+              messageType="ns2:registrarTransaccionRequest"/>
+    <variable name="registrarTransaccionResponse"
+              messageType="ns2:registrarTransaccionResponse"/>
+    <variable name="consultarCuentaFacturacion"
+              messageType="ns2:consultarCuentaFacturacionClienteRequest"/>
+    <variable name="consultarCuentaFacturacionResponse"
+              messageType="ns2:consultarCuentaFacturacionClienteResponse"/>
+    <variable name="consultarComisionRequest"
+              messageType="ns4:ConsultarComisionRequest"/>
+    <variable name="consultarComisionResponse"
+              messageType="ns4:ConsultarComisionResponse"/>
+    <variable name="consultarClientesProductoRequest"
+              messageType="ns4:ConsultarClientesProductoRequest"/>
+    <variable name="consultarClientesProductoResponse"
+              messageType="ns4:ConsultarClientesProductoResponse"/>
+    <variable name="emailComercio" type="xsd:string"/>
+    <variable name="nombreComercio" type="xsd:string"/>
+    <variable name="enviarCorreoElectronicoRequest"
+              messageType="ns5:enviarCorreoElectronicoRequest"/>
+    <variable name="enviarCorreoElectronicoResponse"
+              messageType="ns5:enviarCorreoElectronicoResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ReplicacionPricat.wsdl) -->
+    <receive name="receiveInput" partnerLink="replicacionpricat_client" portType="client:ReplicacionPricat" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AsignarConsultarComerciosInteresados">
+      <copy>
+        <from expression="'comercio'"/>
+        <to variable="consultarClientesProductoRequest" part="parameters"
+            query="/ns3:consultarClientesProducto/ns3:tipoCliente"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nombreProducto"/>
+        <to variable="consultarClientesProductoRequest" part="parameters"
+            query="/ns3:consultarClientesProducto/ns3:nombreProducto"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarComerciosInteresados"
+            inputVariable="consultarClientesProductoRequest"
+            outputVariable="consultarClientesProductoResponse"
+            partnerLink="GestionCliente" portType="ns4:GestionCliente"
+            operation="ConsultarClientesProducto"/>
+    <assign name="AsignarIndice">
+      <copy>
+        <from expression="1"/>
+        <to variable="indiceIteracion"/>
+      </copy>
+    </assign>
+    <while name="While_2"
+           condition="bpws:getVariableData('indiceIteracion')  &lt;= count(bpws:getVariableData('consultarClientesProductoResponse','parameters','/ns3:consultarClientesProductoResponse/ns3:cliente'))">
+      <sequence>
+        <assign name="AsignarComercio">
+          <copy>
+            <from expression="/ns3:consultarClientesProductoResponse/ns3:cliente[position()=indiceIteracion]/email"/>
+            <to variable="emailComercio"/>
+          </copy>
+          <copy>
+            <from expression="/ns3:consultarClientesProductoResponse/ns3:cliente[position()=indice]/nombre"/>
+            <to variable="nombreComercio"/>
+          </copy>
+        </assign>
+        <scope name="Scope_2">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">EnviarCorreoELectronico</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <sequence>
+            <assign name="AsignarEnviarCorreoElectronico">
+              <copy>
+                <from variable="emailComercio"/>
+                <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:to"/>
+              </copy>
+              <copy>
+                <from expression="'info@marketplace.losalpes.com.co'"/>
+                <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:from"/>
+              </copy>
+              <copy>
+                <from expression="'marketplace2011'"/>
+                <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:password"/>
+              </copy>
+              <copy>
+                <from expression="'Producto nuevo disponible'"/>
+                <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:subject"/>
+              </copy>
+              <copy>
+                <from expression="concat('Estimado ',bpws:getVariableData('nombreComercio'),':\n\nNos es grato informarle que se encuentra disponible un nuevo producto en el que usted podría estar interesado. A continuación presentamos la información del producto.\n\nNombre: ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombreProducto'),'\nCategoría: ',bpws:getVariableData('inputVariable','payload','/client:process/client:categoriaProducto'),'\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
+                <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:message"/>
+              </copy>
+            </assign>
+            <invoke name="EnviarCorreoElectronico"
+                    inputVariable="enviarCorreoElectronicoRequest"
+                    outputVariable="enviarCorreoElectronicoResponse"
+                    partnerLink="GestionCorreoElectronico"
+                    portType="ns5:GestionCorreoElectronico"
+                    operation="enviarCorreoElectronico"/>
+          </sequence>
+        </scope>
+        <assign name="IncrementarIndice">
+          <copy>
+            <from expression="bpws:getVariableData('indiceIteracion')+1"/>
+            <to variable="indiceIteracion"/>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <scope name="Scope_1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">Facturar</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence>
+        <assign name="AsignarCalcularComision">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:nitFabricante"/>
+            <to variable="consultarComisionRequest" part="parameters"
+                query="/ns3:consultarComision/ns3:nit"/>
+          </copy>
+        </assign>
+        <invoke name="ConsultarComision"
+                inputVariable="consultarComisionRequest"
+                outputVariable="consultarComisionResponse"
+                portType="ns4:GestionCliente"
+                partnerLink="GestionCliente" operation="ConsultarComision"/>
+        <assign name="AsignarConsultarCuentaFact">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/client:process/client:nitFabricante"/>
+            <to variable="consultarCuentaFacturacion" part="parameters"
+                query="/ns3:consultarCuentaFacturacionCliente/ns3:nit"/>
+          </copy>
+        </assign>
+        <invoke name="ConsultarCuentaFacturacion"
+                inputVariable="consultarCuentaFacturacion"
+                outputVariable="consultarCuentaFacturacionResponse"
+                partnerLink="GestionFacturacion"
+                portType="ns2:GestionFacturacion"
+                operation="consultarCuentaFacturacionCliente"/>
+        <assign name="AsignarTransaccion">
+          <copy>
+            <from expression="xp20:current-date()"/>
+            <to variable="registrarTransaccion" part="parameters"
+                query="/ns3:registrarTransaccion/ns3:transaccion/fecha"/>
+          </copy>
+          <copy>
+            <from variable="consultarComisionResponse" part="parameters"
+                  query="/ns3:consultarComisionResponse/ns3:comision"/>
+            <to variable="registrarTransaccion" part="parameters"
+                query="/ns3:registrarTransaccion/ns3:transaccion/valor"/>
+          </copy>
+          <copy>
+            <from variable="consultarCuentaFacturacionResponse"
+                  part="parameters"
+                  query="/ns3:consultarCuentaFacturacionClienteResponse/ns3:cuenta/numReferencia"/>
+            <to variable="registrarTransaccion" part="parameters"
+                query="/ns3:registrarTransaccion/ns3:numCuenta"/>
+          </copy>
+          <copy>
+            <from expression="Cobro comisión replicación PRICAT"/>
+            <to variable="registrarTransaccion" part="parameters"
+                query="/ns3:registrarTransaccion/ns3:transaccion/descripcion"/>
+          </copy>
+          <copy>
+            <from expression="concat(concat(concat('PRI',xp20:year-from-dateTime(xp20:current-date())),xp20:month-from-dateTime(xp20:current-date())),xp20:day-from-dateTime(xp20:current-date()))"/>
+            <to variable="registrarTransaccion" part="parameters"
+                query="/ns3:registrarTransaccion/ns3:transaccion/referencia"/>
+          </copy>
+        </assign>
+        <invoke name="RegistrarTransaccion"
+                inputVariable="registrarTransaccion"
+                outputVariable="registrarTransaccionResponse"
+                partnerLink="GestionFacturacion"
+                portType="ns2:GestionFacturacion"
+                operation="registrarTransaccion"/>
+      </sequence>
+    </scope>
+  </sequence>
+</process>

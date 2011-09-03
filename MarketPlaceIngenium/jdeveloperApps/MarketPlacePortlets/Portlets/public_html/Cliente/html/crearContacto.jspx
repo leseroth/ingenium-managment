@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1" defaultCommand="cb1">
+      <fieldset>
+      <legend>Contacto</legend>
+      <af:panelFormLayout>
+      <af:inputText value="#{CrearContacto.contacto.tipoIdentificacion}" label="Tipo Id"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.numIdentificacion}" label="Numero"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.nombre}" label="Nombre"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.direccion}" label="Dirección"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.email}" label="E-mail"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.telefono}" label="Telefono"
+                    showRequired="true" required="true"/>
+      <af:inputText value="#{CrearContacto.contacto.celular}" label="Celular"/>
+      <af:commandButton text="Crear Contacto"
+                        action="#{CrearContacto.crearContacto_action}"
+                        id="cb1"/>
+            <af:commandButton text="Volver" id="cb2"/>
+          </af:panelFormLayout>
+      </fieldset>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:CrearContacto-->
+</jsp:root>

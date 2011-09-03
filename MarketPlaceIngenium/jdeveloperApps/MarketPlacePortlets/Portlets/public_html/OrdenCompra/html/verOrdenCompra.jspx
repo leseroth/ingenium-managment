@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Ver Orden de Compra">
+      <af:form id="f1" >
+      <fieldset>
+        <legend>Orden de Compra</legend>
+        <af:group  id="pfl1" >
+        <h:panelGrid columns="2">
+        <h:outputLabel value="Número de Seguimiento" id="ol1"/><h:outputText value="#{InfoPO.orden.numSeguimiento}"
+                                                          id="ot3"/>
+        <h:outputLabel value="Fecha Máxima Entrega" id="ol2"/><h:outputText value="#{InfoPO.orden.fechaMaximaEntrega}"
+                                                                    id="ot2"/>
+        <h:outputLabel value="Fecha Máxima Subasta" id="ol3"/><h:outputText value="#{InfoPO.orden.fechaMaximaSubasta}"
+                                                                      id="ot4"/>
+        
+        
+        <legend>Item</legend>
+        <h:panelGrid columns="2" id="pg1">
+        <h:outputLabel value="Nombre Producto" id="ol4"/>
+        <h:outputText value="#{InfoPO.orden.item.producto.nombre}" id="ot1"/>
+        <h:outputLabel value="Referencia" id="ol5"/>
+        <h:outputText value="#{InfoPO.orden.item.producto.referencia}"
+                      id="ot5"/>
+        <h:outputLabel value="Cantidad" id="ol6"/>
+        <h:outputText value="#{InfoPO.orden.item.cantidad}" id="ot6"/>
+        <h:outputLabel value="Valor" id="ol7"/>
+        <h:outputText  value="#{InfoPO.orden.item.valor}" id="ot7"/>
+        </h:panelGrid>
+        <legend>Subasta</legend>
+        <af:commandButton text="Ver subasta"
+                          action="#{InfoPO.verSubasta_action}"/>
+        </h:panelGrid>
+        </af:group>
+        </fieldset>
+        <af:commandButton text="Volver" id="cb1" action="#{InfoPO.cb1_action}"/>
+        <af:commandButton text="Ver Orden de Despacho" id="infoDA"
+                          action="#{InfoPO.infoDA_action}"/>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:InfoPO-->
+</jsp:root>

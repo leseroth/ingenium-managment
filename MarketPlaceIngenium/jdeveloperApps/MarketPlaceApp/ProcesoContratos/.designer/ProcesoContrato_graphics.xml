@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<graphics>
+   <diagram optimizeLayout="false" popupEditor="false" fixedWidthSwimlanes="true" roundedPartnerlinks="true" centerZoom="true" validateOnLoad="true" confirmBeforeDelete="true" selectedPartnerLinkColor="0,0,153" swimlaneBackground="240,240,240" swimlaneDividerBackground="218,218,218" graphBackground="255,255,255" selectedBorderBackground="49,105,198" connectedPartnerLinkColor="204,204,255" connectablePartnerLinkColor="0,0,255" unconnectedPartnerLinkColor="192,192,192"/>
+   <annotationfile/>
+   <iconize/>
+   <partnerlink_locations>
+      <partnerlink name="procesocontrato_client" x="1" y="624" side="left"/>
+      <partnerlink name="AprobarContrato" x="1" y="35" side="left"/>
+      <partnerlink name="GestionContrato" x="892" y="665" side="right"/>
+   </partnerlink_locations>
+   <graph_layout viewport="0,492,704,636" show_swimlanes="true">
+      <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick" type="pick"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence/pick" type="pick"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence/pick/onMessage" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence/pick/onMessage/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence/pick/onAlarm" type="onAlarm"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage/sequence/pick/onAlarm/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onAlarm" type="onAlarm"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onAlarm/sequence" type="sequence"/>
+   </graph_layout>
+   <bookmarks/>
+</graphics>

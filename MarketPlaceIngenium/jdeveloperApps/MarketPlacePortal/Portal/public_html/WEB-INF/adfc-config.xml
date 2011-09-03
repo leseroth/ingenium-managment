@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <managed-bean id="__1">
+    <managed-bean-name id="__2">cambioPassword</managed-bean-name>
+    <managed-bean-class id="__3">co.com.losalpes.marketplace.portal.beans.CambioPassword</managed-bean-class>
+    <managed-bean-scope id="__4">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__6">
+    <managed-bean-name id="__7">recuperaPassword</managed-bean-name>
+    <managed-bean-class id="__5">co.com.losalpes.marketplace.portal.beans.RecuperaPassword</managed-bean-class>
+    <managed-bean-scope id="__8">request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

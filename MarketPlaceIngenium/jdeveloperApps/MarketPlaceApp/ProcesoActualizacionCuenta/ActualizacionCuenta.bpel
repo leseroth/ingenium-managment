@@ -1,0 +1,199 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 31 09:39:22 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ActualizacionCuenta"
+               targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns2="http://marketplace.losalpes.com.co"
+         xmlns:ns3="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ns6="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns5="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:ns8="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns9="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ns7="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns4="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="actualizacioncuenta_client" partnerLinkType="client:ActualizacionCuenta" myRole="ActualizacionCuentaProvider"/>
+    <partnerLink name="GestionCliente" partnerRole="GestionCliente_Role"
+                 partnerLinkType="ns1:GestionCliente_PL"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ActualizacionCuentaRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ActualizacionCuentaResponseMessage"/>
+    <variable name="actualizarClienteRequest"
+              messageType="ns1:ModificarClienteRequest"/>
+    <variable name="actualizarClienteResponse"
+              messageType="ns1:ModificarClienteResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ActualizacionCuenta.wsdl) -->
+    <receive name="receiveInput" partnerLink="actualizacioncuenta_client" portType="client:ActualizacionCuenta" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="AsignarActualizarCliente">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nombre"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nit"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/nit"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:direccion"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/direccion"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:telefono"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/telefono"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:email"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/email"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:razonSocial"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/razonSocial"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:estado"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/estado"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:tipo"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/tipo"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:numIdentificacion"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:numIdentificacion"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:tipoIdentificacion"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:tipoIdentificacion"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:nombre"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:direccion"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:direccion"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:telefono"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:telefono"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:celular"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:celular"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:email"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:email"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:productos/client:nombre"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:productos/nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:productos/client:categoria"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:productos/categoria"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:contactos/client:idContacto"/>
+        <to variable="actualizarClienteRequest" part="parameters"
+            query="/ns2:modificarCliente/ns2:cliente/contactos/ns2:id"/>
+      </copy>
+    </assign>
+    <invoke name="ActualizarCliente" inputVariable="actualizarClienteRequest"
+            outputVariable="actualizarClienteResponse"
+            partnerLink="GestionCliente" portType="ns1:GestionCliente"
+            operation="ModificarCliente"/>
+    <assign name="AsignarResultado">
+      <copy>
+        <from expression="true()"/>
+        <to variable="outputVariable" part="payload"
+            query="/client:processResponse/client:resultado"/>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="actualizacioncuenta_client" portType="client:ActualizacionCuenta" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

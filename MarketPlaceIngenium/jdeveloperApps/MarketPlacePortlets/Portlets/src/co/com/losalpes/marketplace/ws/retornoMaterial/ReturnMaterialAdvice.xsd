@@ -1,0 +1,25 @@
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRetornoMaterial/ReturnMaterialAdvice"
+     xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="process">
+        <complexType>
+            <sequence>
+                <element name="causa" type="string"/>
+                <element name="fecha" type="date"/>
+                <element name="cantidadProducto" type="int" minOccurs="1" nillable="false"/>
+                <element name="valorProducto" type="long" minOccurs="1" nillable="false"/>
+                <element name="nombreProducto" type="string" minOccurs="1" nillable="false"/>
+                <element name="categoriaProducto" type="string" minOccurs="1" nillable="false"/>
+                <element name="referenciaProducto" type="string" minOccurs="0" nillable="false"/>
+                <element name="numSeguimientoPO" type="string"/>
+                <element name="numSeguimientoDA" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="numSeguimientoRMA" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

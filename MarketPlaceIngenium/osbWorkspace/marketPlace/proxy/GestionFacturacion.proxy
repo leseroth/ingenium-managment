@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con3:SoapBindingType" xmlns:con3="http://www.bea.com/wli/sb/services/bindings/config">
+      <con3:wsdl ref="marketPlace/proxy/wsdls/gestionFacturacion/GestionFacturacion"/>
+      <con3:port>
+        <con3:name>GestionFacturacionSOAP</con3:name>
+        <con3:namespace>http://marketplace.losalpes.com.co/GestionFacturacion</con3:namespace>
+      </con3:port>
+      <con3:selector type="SOAP body"/>
+      <con3:WSI-compliant>false</con3:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionFacturacion</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="registrarTransaccion">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode1">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7fad</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>registrarTransaccion</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7f26</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/RegistrarTransaccionRequest"/>
+                            <con2:param name="registrarTransaccion1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7f19</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/RegistrarTransaccionResponse"/>
+                            <con2:param name="registrarTransaccionResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="generarFacturaCorte">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7fa2</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>generarFacturaCorte</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7c28</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/GenerarFacturaCorteRequest"/>
+                            <con2:param name="generarFacturaCorte1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7f35</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/GenerarFacturaCorteResponse"/>
+                            <con2:param name="generarFacturaCorteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarCuentaFacturacion">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode3">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7f95</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarCuentaFacturacion</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7f08</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ConsultarCuentaFacturacionRequest"/>
+                            <con2:param name="consultarCuentaFacturacion1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7ef9</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ConsultarCuentaFacturacionResponse"/>
+                            <con2:param name="consultarCuentaFacturacionClienteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="crearCuentaFacturacion">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode4">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7f89</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>crearCuentaFacturacion</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7eed</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/CrearCuentaFacturacionRequest"/>
+                            <con2:param name="crearCuentaFacturacion1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7ee3</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/CrearCuentaFacturacionResponse"/>
+                            <con2:param name="crearCuentaFacturacionResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarCuentaFacturacionCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode5">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7f7c</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarCuentaFacturacionCliente</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7ed6</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ConsultarCuentaFacturacionClienteRequest"/>
+                            <con2:param name="consultarCuentaFacturacionCliente1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7ec5</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ConsultarCuentaFacturacionClienteResponse"/>
+                            <con2:param name="consultarCuentaFacturacionClienteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="cambiarEstadoCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode6">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7f6e</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>cambiarEstadoCliente</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7eb6</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/CambiarEstadoClienteRequest"/>
+                            <con2:param name="cambiarEstadoCliente1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7eac</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/CambiarEstadoClienteResponse"/>
+                            <con2:param name="cambiarEstadoClienteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="reportarClientesMorosos">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e92</con2:id>
+                    <con1:service ref="marketPlace/business/GestionFacturacion" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>reportarClientesMorosos</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7e9f</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ReportarClientesMorososRequest"/>
+                            <con2:param name="reportarClientesMorosos1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7758526994076117227-1e5fc9cf.1306b1f2779.-7e95</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionCtaFacturacion/ReportarClientesMorososResponse"/>
+                            <con2:param name="reportarClientesMorososResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

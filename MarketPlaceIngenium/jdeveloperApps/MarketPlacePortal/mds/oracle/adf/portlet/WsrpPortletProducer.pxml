@@ -1,0 +1,127 @@
+<?xml version = '1.0'?>
+<wsrpProducer xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
+   <Name>
+      <![CDATA[WsrpPortletProducer]]>
+   </Name>
+   <ProducerConnectionId>
+      <![CDATA[WsrpPortletProducer]]>
+   </ProducerConnectionId>
+   <DefaultPortletTimeout>30</DefaultPortletTimeout>
+   <RequiresInitCookie>
+      <![CDATA[perGroup]]>
+   </RequiresInitCookie>
+   <SupportedFeatures>
+      <value index="0">
+         <![CDATA[wsrp:import]]>
+      </value>
+      <value index="1">
+         <![CDATA[wsrp:export]]>
+      </value>
+      <value index="2">
+         <![CDATA[wsrp:events]]>
+      </value>
+      <value index="3">
+         <![CDATA[wlp:custom-data]]>
+      </value>
+      <value index="4">
+         <![CDATA[wlp:events]]>
+      </value>
+      <value index="5">
+         <![CDATA[wlp:laf]]>
+      </value>
+      <value index="6">
+         <![CDATA[wlp:swa]]>
+      </value>
+      <value index="7">
+         <![CDATA[wlp:get-reg-props]]>
+      </value>
+   </SupportedFeatures>
+   <RecommendedExportSize>0</RecommendedExportSize>
+   <CustomModeNames>
+      <value index="0">
+         
+      </value>
+      <value index="1">
+         
+      </value>
+      <value index="2">
+         
+      </value>
+      <value index="3">
+         
+      </value>
+      <value index="4">
+         
+      </value>
+      <value index="5">
+         
+      </value>
+      <value index="6">
+         
+      </value>
+      <value index="7">
+         
+      </value>
+      <value index="8">
+         
+      </value>
+      <value index="9">
+         
+      </value>
+      <value index="10">
+         
+      </value>
+   </CustomModeNames>
+   <UserCategories>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/userCategrories/Fabricante]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/userCategrories/Comercio]]>
+      </value>
+   </UserCategories>
+   <RegistrationHandle>
+      <![CDATA[C:be741987-dd35-4c43-9a5e-21c5b6b94f13]]>
+   </RegistrationHandle>
+   <RegistrationState null="true"/>
+   <PortletDefs>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletSubastas]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletOrdenCompra]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletCliente]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletDevolucion]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletRegistro]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletFactura]]>
+      </value>
+   </PortletDefs>
+   <OfferedPortlets>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/Subastas]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/OrdenCompra]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/Cliente]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/Devolucion]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/Registro]]>
+      </value>
+      <value>
+         <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/offeredPortlets/Factura]]>
+      </value>
+   </OfferedPortlets>
+<Portlets><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/Registro_1481d29c_0131_1000_8001_0a0a0a0a3c1a]]></value><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/Factura_149f5a0e_0131_1000_8002_0a0a0a0a3c1a]]></value><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/OrdenCompra_14a41883_0131_1000_8003_0a0a0a0a3c1a]]></value><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/Subastas_14a8a095_0131_1000_8004_0a0a0a0a3c1a]]></value><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/Cliente_14adabd3_0131_1000_8005_0a0a0a0a3c1a]]></value><value><![CDATA[/oracle/adf/portlet/WsrpPortletProducer/ap/Devolucion_14b2d72b_0131_1000_8006_0a0a0a0a3c1a]]></value></Portlets></wsrpProducer>

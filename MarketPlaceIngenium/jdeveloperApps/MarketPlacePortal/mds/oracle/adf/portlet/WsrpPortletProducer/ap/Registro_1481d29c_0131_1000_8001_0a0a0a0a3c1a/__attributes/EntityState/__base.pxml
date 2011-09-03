@@ -1,0 +1,5 @@
+<?xml version = '1.0'?>
+<keyedNullableString baseId="/oracle/adf/portlet/WsrpPortletProducer/ap/Registro_1481d29c_0131_1000_8001_0a0a0a0a3c1a" xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
+   <key index="0" value="__base"/>
+   <value null="true"/>
+</keyedNullableString>

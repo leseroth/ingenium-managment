@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.60.13" id="DataBindings" SeparateXMLFiles="false"
+             Package="co.com.losalpes.marketplace.portal" ClientType="Generic"
+             PageMapClass="oracle.jbo.uicli.mom.DynamicPageMapImpl"
+             BasePageDefPackageName="pageDefs">
+  <pageMap>
+    <page path="/oracle/webcenter/portalapp/pages/navigation-renderer.jspx"
+          usageId="portal_navigation_rendererPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/home.jspx"
+          usageId="portal_homePageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/login.jspx"
+          usageId="portal_loginPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/error.jspx"
+          usageId="portal_errorPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pagetemplates/pageTemplate_globe.jspx"
+          usageId="portal_pageTemplate_globePageDef"/>
+    <page path="/oracle/webcenter/portalapp/pagetemplates/pageTemplate_swooshy.jspx"
+          usageId="portal_pageTemplate_swooshyPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pagetemplates/templateRegistro.jspx"
+          usageId="co_com_losalpes_marketplace_portal_templateRegistroPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pagetemplates/template.jspx"
+          usageId="co_com_losalpes_marketplace_portal_templatePageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/registro.jspx"
+          usageId="co_com_losalpes_marketplace_portal_registroPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/ordenCompra.jspx"
+          usageId="co_com_losalpes_marketplace_portal_ordenCompraPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/factura.jspx"
+          usageId="co_com_losalpes_marketplace_portal_facturaPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/subastas.jspx"
+          usageId="co_com_losalpes_marketplace_portal_subastasPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/cliente.jspx"
+          usageId="co_com_losalpes_marketplace_portal_clientePageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/devolucion.jspx"
+          usageId="co_com_losalpes_marketplace_portal_devolucionPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/cambiarPassword.jspx"
+          usageId="co_com_losalpes_marketplace_portal_cambiarPasswordPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/recuperarPassword.jspx"
+          usageId="co_com_losalpes_marketplace_portal_recuperarPasswordPageDef"/>
+  </pageMap>
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/portlet/bindings"
+             className="oracle.adf.model.portlet.binding.PortletBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adfdtinternal.view.faces.portlet.PortletDefinitionDTFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageDefinitionUsages>
+    <page id="portal_navigation_rendererPageDef"
+          path="oracle.webcenter.portalapp.pages.navigation_rendererPageDef"/>
+    <page id="portal_homePageDef"
+          path="oracle.webcenter.portalapp.pages.homePageDef"/>
+    <page id="portal_loginPageDef"
+          path="oracle.webcenter.portalapp.pages.loginPageDef"/>
+    <page id="portal_errorPageDef"
+          path="oracle.webcenter.portalapp.pages.errorPageDef"/>
+    <page id="portal_pageTemplate_globePageDef"
+          path="oracle.webcenter.portalapp.pagetemplates.pageTemplate_globePageDef"/>
+    <page id="portal_pageTemplate_swooshyPageDef"
+          path="oracle.webcenter.portalapp.pagetemplates.pageTemplate_swooshyPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_templateRegistroPageDef"
+          path="oracle.webcenter.portalapp.pagetemplates.templateRegistroPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_templatePageDef"
+          path="oracle.webcenter.portalapp.pagetemplates.templatePageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_registroPageDef"
+          path="oracle.webcenter.portalapp.pages.registroPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_ordenCompraPageDef"
+          path="oracle.webcenter.portalapp.pages.ordenCompraPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_facturaPageDef"
+          path="oracle.webcenter.portalapp.pages.facturaPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_subastasPageDef"
+          path="oracle.webcenter.portalapp.pages.subastasPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_clientePageDef"
+          path="oracle.webcenter.portalapp.pages.clientePageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_devolucionPageDef"
+          path="oracle.webcenter.portalapp.pages.devolucionPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_cambiarPasswordPageDef"
+          path="oracle.webcenter.portalapp.pages.cambiarPasswordPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_recuperarPasswordPageDef"
+          path="oracle.webcenter.portalapp.pages.recuperarPasswordPageDef"/>
+  </pageDefinitionUsages>
+</Application>

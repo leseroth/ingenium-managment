@@ -1,0 +1,7 @@
+<?xml version = '1.0'?>
+<keyedNullableString baseId="/oracle/adf/portlet/WsrpPortletProducer/ap/Factura_149f5a0e_0131_1000_8002_0a0a0a0a3c1a" xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
+   <key index="0" value="__base"/>
+   <value>
+      <![CDATA[P:6acc07f4-f8d3-4f48-b382-0f72bf577d57]]>
+   </value>
+</keyedNullableString>

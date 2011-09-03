@@ -1,0 +1,4 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://portal.marketplace.losalpes.com.co:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement?wsdl"
+          uri="../co/com/losalpes/marketplace/ldap/LDAPAuthenticationManagementService.wsdl"/>
+</catalog>

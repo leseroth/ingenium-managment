@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>template</display-name>
+      </component>
+    </af:xmlContent>
+              <af:panelStretchLayout id="psl1" bottomHeight="85px"
+                               inlineStyle="border-color:transparent; "
+                               styleClass="AFStretchWidth" topHeight="110px">
+          <f:facet name="top">
+            <af:goImageLink icon="/images/header.PNG" id="i1" shortDesc=""
+                            destination="/faces/oracle/webcenter/portalapp/pages/home.jspx"
+                      styleClass="AFStretchWidth"/>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelStretchLayout id="psl2"
+                                   inlineStyle="border-color:transparent; "
+                                   styleClass="AFStretchWidth">
+              <f:facet name="center">
+              <af:facetRef facetName="content"></af:facetRef>
+              </f:facet>
+              <f:facet name="top">
+                <af:panelGroupLayout layout="default"
+                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl4"
+                                     inlineStyle="border-color:transparent; text-align:right;">
+                  <af:activeOutputText value="#{'Bienvenido '}#{securityContext.userName} "
+                                       id="aot1"
+                                       inlineStyle="font-family:Arial; font-size:10pt;" rendered="#{securityContext.authenticated}"/>
+                  <af:spacer width="20" height="0" id="s1"
+                             inlineStyle="border-color:transparent;"/>
+                  <af:goLink text="Cerrar sesión" id="gl1"
+                             destination="#{'/adfAuthentication?logout=true&amp;end_url=/faces/oracle/webcenter/portalapp/pages/home.jspx'} " rendered="#{securityContext.authenticated}"
+                             inlineStyle="font-family:Arial; font-size:10pt;"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+  </af:pageTemplateDef>
+</jsp:root>

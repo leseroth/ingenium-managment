@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="ContractManagerContractManagementService"
+                     namespaceURI="http://ws.contractmanager.marketplace.losalpes.com.co/"/>
+      <port-info>
+         <wsdl-port localpart="ContractManagerContractManagementPort"
+                    namespaceURI="http://ws.contractmanager.marketplace.losalpes.com.co/"/>
+         <runtime/>
+         <operations>
+            <operation name="registrarContrato"/>
+            <operation name="actualizarContrato"/>
+            <operation name="consultarContratosFabricante"/>
+            <operation name="consultarContrato"/>
+            <operation name="consultarContratosComercio"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

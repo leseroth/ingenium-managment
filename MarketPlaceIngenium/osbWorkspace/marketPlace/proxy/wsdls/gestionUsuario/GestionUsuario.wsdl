@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestionUsuario"
+	targetNamespace="http://marketplace.losalpes.com.co/GestionUsuario" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://marketplace.losalpes.com.co/GestionUsuario" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://marketplace.losalpes.com.co"
+				schemaLocation="GestionUsuario.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="registrarUsuarioRequest">
+		<wsdl:part name="parameters" element="xsd1:registrarUsuario"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="registrarUsuarioResponse">
+		<wsdl:part name="parameters" element="xsd1:registrarUsuarioResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GestionUsuarioPort">
+		<wsdl:operation name="registrarUsuario">
+			<wsdl:input message="tns:registrarUsuarioRequest"></wsdl:input>
+			<wsdl:output message="tns:registrarUsuarioResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionUsuarioSOAP" type="tns:GestionUsuarioPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="registrarUsuario">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionUsuario/registrarUsuario" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GestionUsuario">
+		<wsdl:port name="GestionUsuarioPort" binding="tns:GestionUsuarioSOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionUsuario" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
