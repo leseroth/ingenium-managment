@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+    <complexType name="EnviarCorreoElectronico">
+    	<sequence>
+    		<element name="to" type="string" minOccurs="1"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="cc" type="string" minOccurs="0"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="bcc" type="string" minOccurs="0"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="from" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="password" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="subject" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="message" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="attachments" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="EnviarCorreoElectronicoResponse">
+    	<sequence>
+    		<element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <element name="enviarCorreoElectronico" type="tns:EnviarCorreoElectronico"></element>
+
+    <element name="enviarCorreoElectronicoResponse" type="tns:EnviarCorreoElectronicoResponse"></element>
+</schema>

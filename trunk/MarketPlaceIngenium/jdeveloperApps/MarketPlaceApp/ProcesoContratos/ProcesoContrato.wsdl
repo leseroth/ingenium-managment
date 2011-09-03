@@ -1,0 +1,70 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ProcesoContrato"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato"
+     xmlns:cor="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato/correlationset"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <plnk:partnerLinkType name="ProcesoContrato">
+        <plnk:role name="ProcesoContratoProvider">
+            <plnk:portType name="client:ProcesoContrato"/>
+        </plnk:role>
+        <plnk:role name="ProcesoContratoRequester">
+            <plnk:portType name="client:ProcesoContratoCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="AceptarContrato">
+        <plnk:role name="AceptarContrato">
+            <plnk:portType name="client:AceptarContrato"/>
+        </plnk:role>
+        <plnk:role name="AceptarContratoRequester">
+            <plnk:portType name="client:AceptarContratoCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <bpws:propertyAlias propertyName="cor:contratoId" xmlns:ns1="http://oracle.com/sca/soapservice/MarketPlace/ProcesoContratos/AprobarContrato"
+         messageType="ns1:requestMessage" part="part1" query="/client:process/client:id"/>
+    <bpws:propertyAlias propertyName="cor:contratoId" messageType="ns1:registrarContratoResponse" part="parameters"
+         query="/ns1:registrarContratoResponse/return" xmlns:ns1="http://ws.contractmanager.marketplace.losalpes.com.co/"/>
+    <wsdl:import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato/correlationset"
+         location="ProcesoContrato_Properties.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato"
+                 schemaLocation="xsd/ProcesoContrato.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ProcesoContratoResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ProcesoContratoRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="ProcesoContratoCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:ProcesoContratoResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="ProcesoContrato">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ProcesoContratoRequestMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ghju">
+            <wsdl:input message="client:ProcesoContratoResponseMessage"/>
+            <wsdl:output message="client:ProcesoContratoResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="AceptarContratoCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:ProcesoContratoResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="AceptarContrato">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ProcesoContratoRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,105 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FOferta.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FSubasta.xsd"/>
+    <complexType name="CerrarSubasta">
+        <sequence>
+            <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CerrarSubastaResponse">
+        <sequence>
+            <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CrearSubasta">
+        <sequence>
+            <element name="po" type="tns:PurchaseOrder" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CrearSubastaResponse">
+        <sequence>
+            <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="DarGanadorSubasta">
+        <sequence>
+            <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="DarGanadorSubastaResponse">
+        <sequence>
+            <element name="fabricante" type="tns:Fabricante" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="RegistrarOferta">
+        <sequence>
+            <element name="oferta" type="tns:Oferta" minOccurs="1" maxOccurs="1"/>
+            <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="RegistrarOfertaResponse">
+        <sequence>
+            <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="AsignarFabricantesSubasta">
+        <sequence>
+            <element name="numSeguimientoSubasta" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="fabricantes" type="tns:Fabricante" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="AsignarFabricantesSubastaResponse">
+        <sequence>
+            <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarSubastasFabricante">
+        <sequence>
+            <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarSubastasFabricanteResponse">
+        <sequence>
+            <element name="subastas" type="tns:Subasta" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarFabricantesSubasta">
+        <sequence>
+            <element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarFabricantesSubastaResponse">
+        <sequence>
+            <element name="fabricantes" type="tns:Fabricante" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarSubastaOrdenCompra">
+        <sequence>
+            <element name="numSeguimientoPO" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarSubastaOrdenCompraResponse">
+        <sequence>
+            <element name="subasta" type="tns:Subasta"/>
+        </sequence>
+    </complexType>
+    <element name="cerrarSubasta" type="tns:CerrarSubasta"/>
+    <element name="cerrarSubastaResponse" type="tns:CerrarSubastaResponse"/>
+    <element name="crearSubasta" type="tns:CrearSubasta"/>
+    <element name="crearSubastaResponse" type="tns:CrearSubastaResponse"/>
+    <element name="darGanadorSubasta" type="tns:DarGanadorSubasta"/>
+    <element name="darGanadorSubastaResponse" type="tns:DarGanadorSubastaResponse"/>
+    <element name="registrarOferta" type="tns:RegistrarOferta"/>
+    <element name="registrarOfertaResponse" type="tns:RegistrarOfertaResponse"/>
+    <element name="asignarFabricantesSubasta" type="tns:AsignarFabricantesSubasta"/>
+    <element name="asignarFabricantesSubastaResponse" type="tns:AsignarFabricantesSubastaResponse"/>
+    <element name="consultarSubastasFabricante" type="tns:ConsultarSubastasFabricante"/>
+    <element name="consultarSubastasFabricanteResponse" type="tns:ConsultarSubastasFabricanteResponse"/>
+    <element name="consultarFabricantesSubasta" type="tns:ConsultarFabricantesSubasta"/>
+    <element name="consultarFabricantesSubastaResponse" type="tns:ConsultarFabricantesSubastaResponse"/>
+    <element name="consultarSubastaOrdenCompra" type="tns:ConsultarSubastaOrdenCompra"/>
+    <element name="consultarSubastaOrdenCompraResponse" type="tns:ConsultarSubastaOrdenCompraResponse"/>
+</schema>

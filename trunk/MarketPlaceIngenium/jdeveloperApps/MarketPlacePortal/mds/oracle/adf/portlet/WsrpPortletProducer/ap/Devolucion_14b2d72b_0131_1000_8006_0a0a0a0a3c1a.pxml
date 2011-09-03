@@ -1,0 +1,14 @@
+<?xml version = '1.0'?>
+<wsrpPortlet xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
+   <Name>
+      <![CDATA[Devolucion1]]>
+   </Name>
+   <IsOffered>false</IsOffered>
+   <IsCopyable>true</IsCopyable>
+   <PortletDef>
+      <![CDATA[/oracle/adf/portlet/WsrpPortletProducer/portletDefs/portletDevolucion]]>
+   </PortletDef>
+   <Producer>
+      <![CDATA[/oracle/adf/portlet/WsrpPortletProducer]]>
+   </Producer>
+</wsrpPortlet>

@@ -1,0 +1,42 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="SubastaInversa"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+     xmlns:ns2="http://marketplace.losalpes.com.co"
+     xmlns:ns1="http://marketplace.losalpes.com.co/GestionOfertas/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="SubastaInversa">
+        <plnk:role name="SubastaInversaProvider">
+            <plnk:portType name="client:SubastaInversa"/>
+        </plnk:role>
+        <plnk:role name="SubastaInversaRequester">
+            <plnk:portType name="client:SubastaInversaCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionOfertas" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+                 schemaLocation="xsd/SubastaInversa.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="SubastaInversaRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="SubastaInversaResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SubastaInversa">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:SubastaInversaRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="SubastaInversaCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:SubastaInversaResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

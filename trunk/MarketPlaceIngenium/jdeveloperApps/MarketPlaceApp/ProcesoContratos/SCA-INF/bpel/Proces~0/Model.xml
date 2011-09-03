@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="ProcesoContrato" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://ws.contractmanager.marketplace.losalpes.com.co/" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns2="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato/correlationset" xmlns:ns3="http://oracle.com/sca/soapservice/MarketPlace/ProcesoContratos/AprobarContrato" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" id="BpPrc0">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="procesocontrato_client" partnerLinkType="client:ProcesoContrato" myRole="ProcesoContratoProvider" partnerRole="ProcesoContratoRequester"/>
+        <partnerLink name="GestionContrato" partnerLinkType="ns1:ContractManagerContractManagement_PL" partnerRole="ContractManagerContractManagement_Role"/>
+        <partnerLink name="AprobarContrato" partnerLinkType="ns3:AprobarContrato" myRole="execute_ptt"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="client:ProcesoContratoRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:ProcesoContratoResponseMessage"/>
+        <variable name="CrearContrato_registrarContrato_InputVariable" messageType="ns1:registrarContrato"/>
+        <variable name="CrearContrato_registrarContrato_OutputVariable" messageType="ns1:registrarContratoResponse"/>
+        <variable name="RechazarContrato_actualizarContrato_InputVariable" messageType="ns1:actualizarContrato"/>
+        <variable name="RechazarContrato_actualizarContrato_OutputVariable" messageType="ns1:actualizarContratoResponse"/>
+        <variable name="ActualizarContratoFabricante_actualizarContrato_InputVariable" messageType="ns1:actualizarContrato"/>
+        <variable name="ActualizarContratoFabricante_actualizarContrato_OutputVariable" messageType="ns1:actualizarContratoResponse"/>
+        <variable name="RespuestaFabricante_AprobarDesaprobar_InputVariable" messageType="ns3:requestMessage"/>
+        <variable name="OnMessage_AprobarDesaprobar_InputVariable" messageType="ns3:requestMessage"/>
+        <variable name="OnMessage_CerrarContrato_InputVariable" messageType="ns3:requestMessage"/>
+        <variable name="CerrarContrato_actualizarContrato_InputVariable" messageType="ns1:actualizarContrato"/>
+        <variable name="CerrarContrato_actualizarContrato_OutputVariable" messageType="ns1:actualizarContratoResponse"/>
+        <variable name="ComercioCerrarContrato_actualizarContrato_InputVariable" messageType="ns1:actualizarContrato"/>
+        <variable name="ComercioCerrarContrato_actualizarContrato_OutputVariable" messageType="ns1:actualizarContratoResponse"/>
+    </variables>
+    <correlationSets>
+        <correlationSet name="ContratoID" properties="ns2:contratoId"/>
+    </correlationSets>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main" id="BpSeq0">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoContrato.wsdl) -->
+        <receive name="receiveInput" partnerLink="procesocontrato_client" portType="client:ProcesoContrato" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="AsignarVariablesContrato" id="BpAss0">
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:cantidad"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/cantidad"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:comercio/client:id"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/id"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:comercio/client:nit"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:comercio/client:nombre"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:duracion"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/duracion"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:estado"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/estado"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:fabricante/client:id"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/id"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:fabricante/client:nit"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:fabricante/client:nombre"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:fechaInicio"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fechaInicio"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:fechaRegistro"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fechaRegistro"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:id"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/id"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:periodicidad"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/periodicidad"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:precio"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/precio"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:producto/client:categoria"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/categoria"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:producto/client:id"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/id"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload" query="/client:process/client:producto/client:nombre"/>
+                <to variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/nombre"/>
+            </copy>
+        </assign>
+        <invoke name="CrearContrato" inputVariable="CrearContrato_registrarContrato_InputVariable" outputVariable="CrearContrato_registrarContrato_OutputVariable" partnerLink="GestionContrato" portType="ns1:ContractManagerContractManagement" operation="registrarContrato" bpelx:invokeAsDetail="no" id="BpInv0">
+            <correlations>
+                <correlation set="ContratoID" initiate="yes" pattern="in"/>
+            </correlations>
+        </invoke>
+        <pick name="Pick1" id="BpPck0">
+            <onMessage variable="OnMessage_AprobarDesaprobar_InputVariable" partnerLink="AprobarContrato" portType="ns3:execute_ptt" operation="AprobarDesaprobar" bpelx:conversionId="RespuestaFabricante" id="BpOMs0">
+                <correlations>
+                    <correlation set="ContratoID" initiate="no"/>
+                </correlations>
+                <sequence name="Sequence1" id="BpSeq1">
+                    <assign name="AsignarRespuestaFabricante" id="BpAss1">
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:cantidad"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/cantidad"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:comercio/client:id"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:comercio/client:nit"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:comercio/client:nombre"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:duracion"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/duracion"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:estado"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/estado"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:fabricante/client:id"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:fabricante/client:nit"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:fabricante/client:nombre"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:fechaInicio"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaInicio"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:fechaRegistro"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaRegistro"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:id"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:periodicidad"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/periodicidad"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:precio"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/precio"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:producto/client:categoria"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/categoria"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:producto/client:id"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="OnMessage_AprobarDesaprobar_InputVariable" part="part1" query="/client:process/client:producto/client:nombre"/>
+                            <to variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/nombre"/>
+                        </copy>
+                    </assign>
+                    <invoke name="ActualizarContratoFabricante" bpelx:invokeAsDetail="no" inputVariable="ActualizarContratoFabricante_actualizarContrato_InputVariable" outputVariable="ActualizarContratoFabricante_actualizarContrato_OutputVariable" partnerLink="GestionContrato" portType="ns1:ContractManagerContractManagement" operation="actualizarContrato" id="BpInv1"/>
+                    <pick name="Pick2" id="BpPck1">
+                        <onMessage variable="OnMessage_CerrarContrato_InputVariable" partnerLink="AprobarContrato" portType="ns3:execute_ptt" operation="CerrarContrato" id="BpOMs1">
+                            <correlations>
+                                <correlation set="ContratoID" initiate="no"/>
+                            </correlations>
+                            <sequence name="Sequence4" id="BpSeq2">
+                                <assign name="AsignarComercioCerrar" id="BpAss2">
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:cantidad"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/cantidad"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:comercio/client:id"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:comercio/client:nit"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:comercio/client:nombre"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:duracion"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/duracion"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:estado"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/estado"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:fabricante/client:id"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:fabricante/client:nit"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:fabricante/client:nombre"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:fechaInicio"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaInicio"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:fechaRegistro"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaRegistro"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:id"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:periodicidad"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/periodicidad"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:precio"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/precio"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:producto/client:categoria"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/categoria"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:producto/client:id"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="OnMessage_CerrarContrato_InputVariable" part="part1" query="/client:process/client:producto/client:nombre"/>
+                                        <to variable="ComercioCerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/nombre"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="ComercioCerrarContrato" bpelx:invokeAsDetail="no" inputVariable="ComercioCerrarContrato_actualizarContrato_InputVariable" outputVariable="ComercioCerrarContrato_actualizarContrato_OutputVariable" partnerLink="GestionContrato" portType="ns1:ContractManagerContractManagement" operation="actualizarContrato" id="BpInv2"/>
+                            </sequence>
+                        </onMessage>
+                        <onAlarm for="'PT5M'" id="BpOAl0">
+                            <sequence name="Sequence3" id="BpSeq3">
+                                <assign name="CerrarPorTiempo" id="BpAss3">
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/cantidad"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/cantidad"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/id"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nit"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nombre"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/duracion"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/duracion"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/id"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format(&quot;Cerrado&quot;)"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/estado"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nit"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nombre"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaInicio"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaInicio"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaRegistro"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaRegistro"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/id"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/periodicidad"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/periodicidad"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/precio"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/precio"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/categoria"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/categoria"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/id"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/id"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="ActualizarContratoFabricante_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/nombre"/>
+                                        <to variable="CerrarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/nombre"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="CerrarContrato" bpelx:invokeAsDetail="no" inputVariable="CerrarContrato_actualizarContrato_InputVariable" outputVariable="CerrarContrato_actualizarContrato_OutputVariable" partnerLink="GestionContrato" portType="ns1:ContractManagerContractManagement" operation="actualizarContrato" id="BpInv3"/>
+                            </sequence>
+                        </onAlarm>
+                    </pick>
+                </sequence>
+            </onMessage>
+            <onAlarm for="'PT5M30S'" id="BpOAl1">
+                <sequence name="Sequence2" id="BpSeq4">
+                    <assign name="AsignarPorTiempo" id="BpAss4">
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_OutputVariable" part="parameters" query="/ns1:registrarContratoResponse/return"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/periodicidad"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/periodicidad"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/precio"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/precio"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/categoria"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/categoria"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/id"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/producto/nombre"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/producto/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/cantidad"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/cantidad"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/id"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/nit"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/comercio/nombre"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/comercio/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/duracion"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/duracion"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/id"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/id"/>
+                        </copy>
+                        <copy>
+                            <from expression="ora:format(&quot;Rechazado&quot;)"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/estado"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/nit"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fabricante/nombre"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fabricante/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fechaInicio"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaInicio"/>
+                        </copy>
+                        <copy>
+                            <from variable="CrearContrato_registrarContrato_InputVariable" part="parameters" query="/ns1:registrarContrato/contratoBO/fechaRegistro"/>
+                            <to variable="RechazarContrato_actualizarContrato_InputVariable" part="parameters" query="/ns1:actualizarContrato/contratoBO/fechaRegistro"/>
+                        </copy>
+                    </assign>
+                    <invoke name="RechazarContrato" inputVariable="RechazarContrato_actualizarContrato_InputVariable" outputVariable="RechazarContrato_actualizarContrato_OutputVariable" partnerLink="GestionContrato" portType="ns1:ContractManagerContractManagement" operation="actualizarContrato" bpelx:invokeAsDetail="no" id="BpInv4"/>
+                </sequence>
+            </onAlarm>
+        </pick>
+        <invoke name="callbackClient" partnerLink="procesocontrato_client" portType="client:ProcesoContratoCallback" operation="processResponse" inputVariable="outputVariable" id="BpInv5"/>
+    </sequence>
+</process><!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sat Jul 30 16:28:19 GMT-05:00 2011
+  Author:  marketplace
+  Type: BPEL 1.1 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->

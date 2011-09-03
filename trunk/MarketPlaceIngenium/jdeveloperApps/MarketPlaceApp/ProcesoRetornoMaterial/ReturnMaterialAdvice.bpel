@@ -1,0 +1,412 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jun 09 17:00:04 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ReturnMaterialAdvice"
+               targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRetornoMaterial/ReturnMaterialAdvice"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRetornoMaterial/ReturnMaterialAdvice"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionPO"
+         xmlns:ns2="http://marketplace.losalpes.com.co"
+         xmlns:ns3="http://marketplace.losalpes.com.co/GestionDA"
+         xmlns:ns4="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionRMA"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:ns6="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="returnmaterialadvice_client" partnerLinkType="client:ReturnMaterialAdvice" myRole="ReturnMaterialAdviceProvider"/>
+    <partnerLink name="GestionPO" partnerRole="GestionPO_Role"
+                 partnerLinkType="ns1:GestionPO_PL"/>
+    <partnerLink name="GestionDA" partnerRole="GestionDA_Role"
+                 partnerLinkType="ns3:GestionDA_PL"/>
+    <partnerLink name="GestionRMA" partnerRole="GestionRMA_Role"
+                 partnerLinkType="ns5:GestionRMA_PL"/>
+    <partnerLink name="GestionFacturacion" partnerRole="GestionFacturacion_Role"
+                 partnerLinkType="ns6:GestionFacturacion_PL"/>
+    <partnerLink name="GestionCorreoElectronico"
+                 partnerRole="GestionCorreoElectronico_Role"
+                 partnerLinkType="ns7:GestionCorreoElectronico_PL"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ReturnMaterialAdviceRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ReturnMaterialAdviceResponseMessage"/>
+    <variable name="consultarPORequest" messageType="ns1:consultarPORequest"/>
+    <variable name="consultarPOResponse" messageType="ns1:consultarPOResponse"/>
+    <variable name="consultarDARequest" messageType="ns3:consultarDARequest"/>
+    <variable name="consultarDAResponse" messageType="ns3:consultarDAResponse"/>
+    <variable name="registrarRMARequest" messageType="ns5:registrarRMARequest"/>
+    <variable name="registrarRMAResponse"
+              messageType="ns5:registrarRMAResponse"/>
+    <variable name="consultarCuentaFacturacionClienteRequest"
+              messageType="ns6:consultarCuentaFacturacionClienteRequest"/>
+    <variable name="consultarCuentaFacturacionClienteResponse"
+              messageType="ns6:consultarCuentaFacturacionClienteResponse"/>
+    <variable name="registrarTransaccionRequest"
+              messageType="ns6:registrarTransaccionRequest"/>
+    <variable name="registrarTransaccionResponse"
+              messageType="ns6:registrarTransaccionResponse"/>
+    <variable name="enviarCorreoElectronicoRequest"
+              messageType="ns7:enviarCorreoElectronicoRequest"/>
+    <variable name="enviarCorreoElectronicoResponse"
+              messageType="ns7:enviarCorreoElectronicoResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ReturnMaterialAdvice.wsdl) -->
+    <receive name="receiveInput" partnerLink="returnmaterialadvice_client" portType="client:ReturnMaterialAdvice" operation="process" variable="inputVariable" createInstance="yes"/>
+
+    <!-- Generate reply to synchronous request -->
+    <assign name="AsignarConsultarPO">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:numSeguimientoPO"/>
+        <to variable="consultarPORequest" part="consultarPORequest"
+            query="/ns2:consultarPO/ns2:numSeguimiento"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarPO" inputVariable="consultarPORequest"
+            outputVariable="consultarPOResponse" partnerLink="GestionPO"
+            portType="ns1:GestionPO" operation="consultarPO"/>
+    <assign name="AsignarConsultarDA">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:numSeguimientoDA"/>
+        <to variable="consultarDARequest" part="parameters"
+            query="/ns2:consultarDA/ns2:numSeguimiento"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarDA" inputVariable="consultarDARequest"
+            outputVariable="consultarDAResponse" partnerLink="GestionDA"
+            portType="ns3:GestionDA" operation="consultarDA"/>
+    <switch name="Switch_1">
+      <case condition="not(bpws:getVariableData('consultarPOResponse','consultarPOResponse','/ns2:consultarPOResponse/ns2:purchaseOrder')) and not(bpws:getVariableData('consultarDAResponse','parameters','/ns2:consultarDAResponse/ns2:da'))">
+        <sequence>
+          <assign name="AsignarRMA">
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:causa"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/causa"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:fecha"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/fecha"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:cantidadProducto"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/items/cantidad"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:valorProducto"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/items/valor"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nombreProducto"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/items/producto/nombre"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:categoriaProducto"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/items/producto/categoria"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:numSeguimientoDA"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/avisoDespacho/numSeguimiento"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:numSeguimientoPO"/>
+              <to variable="registrarRMARequest" part="parameters"
+                  query="/ns2:registrarRMA/rma/ordenCompra/numSeguimiento"/>
+            </copy>
+          </assign>
+          <invoke name="RegistrarRMA" inputVariable="registrarRMARequest"
+                  outputVariable="registrarRMAResponse"
+                  partnerLink="GestionRMA" portType="ns5:GestionRMA"
+                  operation="registrarRMA"/>
+          <assign name="AsignarResultado">
+            <copy>
+              <from variable="registrarRMAResponse" part="parameters"
+                    query="/ns2:registrarRMAResponse/numSeguimiento"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:processResponse/client:numSeguimientoRMA"/>
+            </copy>
+          </assign>
+          <reply name="replyOutput" partnerLink="returnmaterialadvice_client"
+                 portType="client:ReturnMaterialAdvice" operation="process"
+                 variable="outputVariable"/>
+          <assign name="AsignarConsultarCuentaFacturacion">
+            <copy>
+              <from variable="consultarPOResponse" part="consultarPOResponse"
+                    query="/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/nit"/>
+              <to variable="consultarCuentaFacturacionClienteRequest"
+                  part="parameters"
+                  query="/ns2:consultarCuentaFacturacionCliente/ns2:nit"/>
+            </copy>
+          </assign>
+          <invoke name="ConsultarCuentaFacturacion"
+                  inputVariable="consultarCuentaFacturacionClienteRequest"
+                  outputVariable="consultarCuentaFacturacionClienteResponse"
+                  partnerLink="GestionFacturacion"
+                  portType="ns6:GestionFacturacion"
+                  operation="consultarCuentaFacturacionCliente"/>
+          <assign name="AsignarRegistrarTransaccion">
+            <copy>
+              <from variable="consultarCuentaFacturacionClienteResponse"
+                    part="parameters"
+                    query="/ns2:consultarCuentaFacturacionClienteResponse/ns2:cuenta/numReferencia"/>
+              <to variable="registrarTransaccionRequest" part="parameters"
+                  query="/ns2:registrarTransaccion/ns2:numCuenta"/>
+            </copy>
+            <copy>
+              <from expression="ora:getCurrentDate()"/>
+              <to variable="registrarTransaccionRequest" part="parameters"
+                  query="/ns2:registrarTransaccion/ns2:transaccion/fecha"/>
+            </copy>
+            <copy>
+              <from expression="'Retorno de comisión a razón de RMA'"/>
+              <to variable="registrarTransaccionRequest" part="parameters"
+                  query="/ns2:registrarTransaccion/ns2:transaccion/descripcion"/>
+            </copy>
+            <copy>
+              <from expression="concat('RMA',xp20:year-from-dateTime(xp20:current-date()),xp20:month-from-dateTime(xp20:current-date()),xp20:day-from-dateTime(xp20:current-date()))"/>
+              <to variable="registrarTransaccionRequest" part="parameters"
+                  query="/ns2:registrarTransaccion/ns2:transaccion/referencia"/>
+            </copy>
+            <copy>
+              <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:valorProducto')*bpws:getVariableData('inputVariable','payload','/client:process/client:cantidadProducto')*0.8"/>
+              <to variable="registrarTransaccionRequest" part="parameters"
+                  query="/ns2:registrarTransaccion/ns2:transaccion/valor"/>
+            </copy>
+          </assign>
+          <invoke name="RegistrarTransaccion"
+                  inputVariable="registrarTransaccionRequest"
+                  outputVariable="registrarTransaccionResponse"
+                  partnerLink="GestionFacturacion"
+                  portType="ns6:GestionFacturacion"
+                  operation="registrarTransaccion"/>
+          <scope name="Scope_2">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">EnviarCorreoElectronicoComercio</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence>
+              <assign name="AsignarEnviarCorreoElectronico">
+                <copy>
+                  <from expression="bpws:getVariableData('consultarPOResponse','consultarPOResponse','/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/email')"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                </copy>
+                <copy>
+                  <from expression="'info@marketplace.losalpes.com.co'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                </copy>
+                <copy>
+                  <from expression="'marketplace2011'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                </copy>
+                <copy>
+                  <from expression="'Aviso de devolución'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                </copy>
+                <copy>
+                  <from expression="concat('Estimado ',bpws:getVariableData('consultarPOResponse','consultarPOResponse','/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/nombre'),':\n\nHemos recibido un aviso de retorno de material a su favor. La comisión correspondiente al 80% del valor ha sido descontada.\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                </copy>
+              </assign>
+              <invoke name="EnviarCorreoElectronico"
+                      inputVariable="enviarCorreoElectronicoRequest"
+                      outputVariable="enviarCorreoElectronicoResponse"
+                      partnerLink="GestionCorreoElectronico"
+                      portType="ns7:GestionCorreoElectronico"
+                      operation="enviarCorreoElectronico"/>
+            </sequence>
+          </scope>
+          <scope name="Scope_3">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">EnviarCorreoElectronicoFabricante</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence>
+              <assign name="AsignarEnviarCorreoElectronico">
+                <copy>
+                  <from expression="bpws:getVariableData('consultarDAResponse','parameters','/ns2:consultarDAResponse/ns2:da/fabricante/email')"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                </copy>
+                <copy>
+                  <from expression="'info@marketplace.losalpes.com.co'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                </copy>
+                <copy>
+                  <from expression="'marketplace2011'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                </copy>
+                <copy>
+                  <from expression="'Aviso de devolución'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                </copy>
+                <copy>
+                  <from expression="concat(concat('Estimado ',bpws:getVariableData('consultarDAResponse','parameters','/ns2:consultarDAResponse/ns2:da/fabricante/nombre'),':\n\nHemos recibido un aviso de retorno de material proveniente de ',bpws:getVariableData('consultarPOResponse','consultarPOResponse','/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/nombre'),' sobre el aviso de despacho con número de seguimiento ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoDA'),'. El número de seguimiento del aviso de devolución radicado es ',bpws:getVariableData('registrarRMAResponse','parameters','/ns2:registrarRMAResponse/numSeguimiento'),'.\n\nCordialmente, \n\nEl equipo del MarketPlace de los Alpes'))"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                </copy>
+              </assign>
+              <invoke name="EnviarCorreoElectronico"
+                      inputVariable="enviarCorreoElectronicoRequest"
+                      outputVariable="enviarCorreoElectronicoResponse"
+                      partnerLink="GestionCorreoElectronico"
+                      portType="ns7:GestionCorreoElectronico"
+                      operation="enviarCorreoElectronico"/>
+            </sequence>
+          </scope>
+        </sequence>
+      </case>
+      <otherwise>
+        <sequence>
+          <assign name="AsignarResultado">
+            <copy>
+              <from expression="''"/>
+              <to variable="outputVariable" part="payload"
+                  query="/client:processResponse/client:numSeguimientoRMA"/>
+            </copy>
+          </assign>
+          <reply name="replyOutput" variable="outputVariable"
+                 partnerLink="returnmaterialadvice_client"
+                 portType="client:ReturnMaterialAdvice" operation="process"/>
+          <scope name="Scope_1">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">EnviarCorreoELectronico</bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence>
+              <assign name="AsignarEnviarCorreoElectronico">
+                <copy>
+                  <from variable="consultarPOResponse"
+                        part="consultarPOResponse"
+                        query="/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/email"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                </copy>
+                <copy>
+                  <from expression="'info@marketplace.losalpes.com.co'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                </copy>
+                <copy>
+                  <from expression="'marketplace2011'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                </copy>
+                <copy>
+                  <from expression="'Aviso de devolución'"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                </copy>
+                <copy>
+                  <from expression="concat('Estimado ', bpws:getVariableData('consultarPOResponse','consultarPOResponse','/ns2:consultarPOResponse/ns2:purchaseOrder/comercio/nombre'), ':\n\nLamentamos informarle que el aviso de devolución diligenciado para la orden de compra con numero de seguimiento ', bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoPO'), ' y aviso de despacho con numero de seguimiento ', bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoDA'), ' no ha sido aprobada por inconsistencias.\n\nCordialmente, \n\nEl equipo del MarketPlace de los Alpes')"/>
+                  <to variable="enviarCorreoElectronicoRequest"
+                      part="parameters"
+                      query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                </copy>
+              </assign>
+              <invoke name="EnviarCorreoElectronico"
+                      inputVariable="enviarCorreoElectronicoRequest"
+                      outputVariable="enviarCorreoElectronicoResponse"
+                      partnerLink="GestionCorreoElectronico"
+                      portType="ns7:GestionCorreoElectronico"
+                      operation="enviarCorreoElectronico"/>
+            </sequence>
+          </scope>
+        </sequence>
+      </otherwise>
+    </switch>
+  </sequence>
+</process>

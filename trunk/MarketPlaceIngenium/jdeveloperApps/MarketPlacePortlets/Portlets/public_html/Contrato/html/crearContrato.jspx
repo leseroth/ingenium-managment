@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1" defaultCommand="cb_crearContrato">
+      
+<fieldset>
+        <legend>Crear solicitud de contrato</legend>
+        <af:panelFormLayout>
+          <af:selectOneListbox label="Fabricante" size="10"
+                         value="#{CrearContrato.contrato.fabricante}"
+                         id="sol1Fabricante" required="true"
+                         inlineStyle="width:300.0px;" >
+              <f:selectItems value="#{CrearContrato.fabricantes}" id="si1Fabricante"/>
+          </af:selectOneListbox>
+          <af:inputDate value="#{CrearContrato.contrato.fechaInicio}" label="Fecha inicio"
+                        id="id2" required="true"/>
+          <af:inputDate value="#{CrearContrato.contrato.duracion}" label="Fecha final"
+                        id="id" required="true"/>
+          <af:selectOneListbox label="Periodicidad" size="10"
+                         value="#{CrearContrato.contrato.periodicidad}"
+                         id="sol1Periodicidad" required="true"
+                         inlineStyle="width:300.0px;"> 
+              <f:selectItems value="#{CrearContrato.periodicidad}" id="si1Periodicidad"/>
+          </af:selectOneListbox>           
+            
+            <af:panelGroupLayout>
+                <fieldset>
+                <legend>Producto</legend>
+                <af:panelFormLayout>
+                  <af:inputNumberSpinbox value="#{CrearContrato.contrato.cantidad}" label="Cantidad"
+                                         required="true" minimum="1"/>
+                  <af:selectOneListbox label="Producto" size="10"
+                                     value="#{CrearContrato.contrato.producto}"
+                                     id="sol1" required="true"
+                                     inlineStyle="width:300.0px;" >
+                    <f:selectItems value="#{CrearContrato.productos}" id="si1"/>
+                  </af:selectOneListbox>
+                  <af:outputLabel id="ot7" value="Valor"/>
+                  <af:outputText value="#{InfoContrato.contrato.precio}" id="ot8" />
+                </af:panelFormLayout>
+                </fieldset>
+              </af:panelGroupLayout>
+              <af:commandButton text="Crear solicitud de contrato" id="cb_crearContrato"
+                          action="#{CrearContrato.crearContrato_action}"/>
+            </af:panelFormLayout>
+          <af:commandButton text="Cancelar" id="cb1" immediate="true"
+                            action="#{CrearContrato.volver_action}"/>
+        </fieldset>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:CrearContratoBean-->
+</jsp:root>

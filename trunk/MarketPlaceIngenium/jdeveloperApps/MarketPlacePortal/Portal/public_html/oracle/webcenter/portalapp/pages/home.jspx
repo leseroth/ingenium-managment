@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:pe="http://xmlns.oracle.com/adf/pageeditor"
+          xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Home">
+      <af:form id="f1">    
+	<af:pageTemplate viewId="/oracle/webcenter/portalapp/pagetemplates/template.jspx" value="#{bindings.pageTemplateBinding.templateModel}" id="pt1">
+          <f:facet name="content">
+          <af:panelBox text="Seleccione lo que desea hacer">
+            <af:panelList  id="pl1" rows="3" maxColumns="5">
+             
+              
+                  <af:commandLink rendered="#{securityContext.userInRole['Comercio']}"
+                                  id="cl1" text="Ordenes de compra "
+                                  action="ordenCompra"/>                   
+          
+                  <af:commandLink action="facturas"
+                                  rendered="#{securityContext.userInRole['Comercio'] or  securityContext.userInRole['Fabricante']}"
+                                  id="cl2" text="Facturas "/>
+                    
+                  <af:commandLink action="subastas"
+                                                   rendered="#{securityContext.userInRole['Fabricante'] }"
+                                                   id="cl3"  text="Subastas Asociado ">
+                    
+                  </af:commandLink><af:commandLink action="ordenCompra"
+                                                   rendered="#{securityContext.userInRole['Fabricante'] }"
+                                                   id="cl4" text="Ordenes de Compra Ganadas ">
+                    
+                  </af:commandLink><af:commandLink action="RMA"
+                                                   rendered="#{securityContext.userInRole['Fabricante'] }"
+                                                   id="cl5" text="RMAs "/>
+                   <af:commandLink  action="actualizarCuenta"
+                                                   rendered="#{securityContext.userInRole['Comercio'] or securityContext.userInRole['Fabricante']}"
+                                                   id="cl6"
+                                                  text="Información de la cuenta"/>
+                  <af:commandLink  action="cambiarPassword"
+                                  rendered="#{securityContext.userName != 'weblogic'}"
+                                                   id="cl7"
+                                                  text="Cambiar Contraseña"/>
+            </af:panelList>
+</af:panelBox>
+
+            
+          </f:facet>
+        </af:pageTemplate>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

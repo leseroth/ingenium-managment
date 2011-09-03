@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>templateRegistro</display-name>
+      </component>
+    </af:xmlContent>
+              <af:panelStretchLayout id="psl1" bottomHeight="85px"
+                               inlineStyle="border-color:transparent; "
+                               styleClass="AFStretchWidth" topHeight="110px">
+          <f:facet name="top">
+            <af:goImageLink icon="/images/header.PNG" id="i1" shortDesc=""
+                            destination="/faces/index.jspx"
+                      styleClass="AFStretchWidth"/>
+          </f:facet>
+          <f:facet name="center">
+            <af:panelStretchLayout id="psl2"
+                                   inlineStyle="border-color:transparent; "
+                                   styleClass="AFStretchWidth">
+              <f:facet name="center">
+              <af:facetRef facetName="content"></af:facetRef>
+              </f:facet>
+              <f:facet name="top">
+                <af:panelGroupLayout layout="default"
+                                     xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                     id="pgl4"
+                                     inlineStyle="border-color:transparent; text-align:right;">
+                  <af:spacer width="20" height="0" id="s1"
+                             inlineStyle="border-color:transparent;"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+  </af:pageTemplateDef>
+</jsp:root>

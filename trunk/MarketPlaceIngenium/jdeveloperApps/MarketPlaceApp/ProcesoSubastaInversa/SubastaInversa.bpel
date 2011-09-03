@@ -1,0 +1,254 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Dec 24 15:02:17 GMT-05:00 2010
+  Author:  marketplace
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SubastaInversa"
+         targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://marketplace.losalpes.com.co"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://marketplace.losalpes.com.co/GestionOfertas"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="subastainversa_client" partnerLinkType="client:SubastaInversa" myRole="SubastaInversaProvider" partnerRole="SubastaInversaRequester"/>
+        <partnerLink name="GestionSubasta" partnerRole="GestionSubasta_Role"
+                     partnerLinkType="ns2:GestionSubasta_PL"/>
+        <partnerLink name="GestionCorreoElectronico"
+                     partnerRole="GestionCorreoElectronico_Role"
+                     partnerLinkType="ns4:GestionCorreoElectronico_PL"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable"
+                  messageType="client:SubastaInversaRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:SubastaInversaResponseMessage"/>
+        <variable name="registrarOferta"
+                  messageType="ns2:registrarOfertaRequest"/>
+        <variable name="registrarOfertaResponse"
+                  messageType="ns2:registrarOfertaResponse"/>
+        <variable name="consultarFabricantesSubasta"
+                  messageType="ns2:consultarFabricantesSubastaRequest"/>
+        <variable name="consultarFabricantesSubastaResponse"
+                  messageType="ns2:consultarFabricantesSubastaResponse"/>
+        <variable name="indice" type="xsd:int"/>
+        <variable name="nombreFabricante"
+                  type="xsd:string"/>
+        <variable name="emailFabricante" type="xsd:string"/>
+        <variable name="enviarCorreoElectronicoRequest"
+                  messageType="ns4:enviarCorreoElectronicoRequest"/>
+        <variable name="enviarCorreoElectronicoResponse"
+                  messageType="ns4:enviarCorreoElectronicoResponse"/>
+    </variables>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in SubastaInversa.wsdl) -->
+        <receive name="receiveInput" partnerLink="subastainversa_client" portType="client:SubastaInversa" operation="process"
+                 variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="AsignarOferta">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:numSeguimientoSubasta"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:numSeguimientoSub"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreFabricante"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/fabricante/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:valorProducto"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/item/valor"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaEntrega"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/horarioEntrega"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nitFabricante"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/fabricante/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:emailFabricante"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/fabricante/email"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:cantidadProducto"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/item/cantidad"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreProducto"/>
+                <to variable="registrarOferta" part="parameters"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:categoriaProducto"/>
+                <to variable="registrarOferta" part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/item/producto/categoria"/>
+            </copy>
+        </assign>
+        <invoke name="RegistrarOferta" inputVariable="registrarOferta"
+                outputVariable="registrarOfertaResponse"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="registrarOferta"/>
+        <assign name="AsignarResultado">
+            <copy>
+                <from variable="registrarOfertaResponse" part="parameters"
+                      query="/ns1:registrarOfertaResponse/ns1:resultado"/>
+                <to variable="outputVariable" part="payload"
+                    query="/client:processResponse/client:resultado"/>
+            </copy>
+        </assign>
+        <invoke name="callbackClient" partnerLink="subastainversa_client" portType="client:SubastaInversaCallback" operation="processResponse" inputVariable="outputVariable"/>
+        <assign name="AsignarConsultarFabricantes">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:numSeguimientoSubasta"/>
+                <to variable="consultarFabricantesSubasta" part="parameters"
+                    query="/ns1:consultarFabricantesSubasta/ns1:numSeguimiento"/>
+            </copy>
+        </assign>
+        <invoke name="ConsultarFabricantesSubasta"
+                inputVariable="consultarFabricantesSubasta"
+                outputVariable="consultarFabricantesSubastaResponse"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="consultarFabricantesSubasta"/>
+        <assign name="AsignarIndice">
+            <copy>
+                <from expression="0"/>
+                <to variable="indice"/>
+            </copy>
+        </assign>
+        <while name="While_1"
+               condition="bpws:getVariableData('indice') &lt; count(bpws:getVariableData('consultarFabricantesSubastaResponse','parameters','/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes'))">
+            <sequence>
+                <assign name="AsignarFabricante">
+                    <copy>
+                        <from expression="/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes[position()=indice]/nombre"/>
+                        <to variable="nombreFabricante"/>
+                    </copy>
+                    <copy>
+                        <from expression="/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes[position()=indice]/email"/>
+                        <to variable="emailFabricante"/>
+                    </copy>
+                </assign>
+                <scope name="Scope_1">
+                    <sequence>
+                        <assign name="AsignarEnviarCorreoElectronico">
+                            <copy>
+                                <from variable="emailFabricante"/>
+                                <to variable="enviarCorreoElectronicoRequest"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:to"/>
+                            </copy>
+                            <copy>
+                                <from expression="'subastas@marketplace.losalpes.com.co'"/>
+                                <to variable="enviarCorreoElectronicoRequest"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:from"/>
+                            </copy>
+                            <copy>
+                                <from expression="'marketplace2011'"/>
+                                <to variable="enviarCorreoElectronicoRequest"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:password"/>
+                            </copy>
+                            <copy>
+                                <from expression="concat('Registro de oferta en subasta ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'))"/>
+                                <to variable="enviarCorreoElectronicoRequest"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:subject"/>
+                            </copy>
+                            <copy>
+                                <from expression="concat('Estimado ',bpws:getVariableData('nombreFabricante'),':\n\nSe ha registrado una nueva oferta en la subasta con número de seguimiento ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'),', en la cual usted participa. Para obtener mayor información, favor ingresar en el portal del MarketPlace de los Alpes o a través del siguiente link: http://portal.marketplace.losalpes.com.co.\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
+                                <to variable="enviarCorreoElectronicoRequest"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:message"/>
+                            </copy>
+                        </assign>
+                        <invoke name="EnviarCorreoElectronico"
+                                inputVariable="enviarCorreoElectronicoRequest"
+                                outputVariable="enviarCorreoElectronicoResponse"
+                                partnerLink="GestionCorreoElectronico"
+                                portType="ns4:GestionCorreoElectronico"
+                                operation="enviarCorreoElectronico"/>
+                    </sequence>
+                </scope>
+                <assign name="IncrementarIndice">
+                    <copy>
+                        <from expression="bpws:getVariableData('indice')+1"/>
+                        <to variable="indice"/>
+                    </copy>
+                </assign>
+            </sequence>
+        </while>
+    </sequence>
+</process>

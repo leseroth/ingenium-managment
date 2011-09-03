@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="Comercio.xsd"></include>
+    <include schemaLocation="Item.xsd"></include>
+    <element name="po" type="tns:PurchaseOrder"></element>
+    
+    <complexType name="PurchaseOrder">
+    	<sequence>
+    		<element name="id" type="long" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+            <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1">
+    		</element>
+            <element name="item" type="tns:Item" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="fechaMaxima" type="dateTime" minOccurs="1"></element>
+    		<element name="tiempoSubasta" type="dateTime"
+    			minOccurs="1">
+    		</element>
+    		<element name="comercio" type="tns:Comercio"
+    			minOccurs="1">
+    		</element>
+
+    		<element name="fabricanteAtiende" type="tns:Fabricante"
+    			minOccurs="0" maxOccurs="1">
+    		</element>
+    		<element name="estado" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="fecha" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

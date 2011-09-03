@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestionPO"
+	targetNamespace="http://marketplace.losalpes.com.co/GestionPO"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://marketplace.losalpes.com.co/GestionPO"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://marketplace.losalpes.com.co"
+				schemaLocation="GestionPO.xsd">
+			</xsd:import>
+		</xsd:schema>    
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://marketplace.losalpes.com.co/GestionPO/">
+           
+        </xsd:schema>
+    </wsdl:types>
+	<wsdl:message name="consultarPORequest">
+		<wsdl:part name="consultarPORequest" element="xsd1:consultarPO"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarPOResponse">
+		<wsdl:part name="consultarPOResponse" element="xsd1:consultarPOResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarEstadoPORequest">
+		<wsdl:part name="actualizarEstadoPORequest" element="xsd1:actualizarEstadoPO"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarEstadoPOResponse">
+		<wsdl:part name="actualizarEstadoPOResponse" element="xsd1:actualizarEstadoPOResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="establecerFabricanteAtiendeRequest">
+		<wsdl:part name="establecerFabricanteAtiendeRequest"
+			element="xsd1:establecerFabricanteAtiende"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="establecerFabricanteAtiendeResponse">
+		<wsdl:part name="establecerFabricanteAtiendeResponse"
+			element="xsd1:establecerFabricanteAtiendeResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="registrarPORequest">
+		<wsdl:part name="registrarPORequest" element="xsd1:registrarPO"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="registrarPOResponse">
+		<wsdl:part name="registrarPOResponse" element="xsd1:registrarPOResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarComercioPORequest">
+		<wsdl:part name="parameters" element="xsd1:consultarComercioPO"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarComercioPOResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarComercioPOResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarPOFault">
+		<wsdl:part name="parameters" element="xsd1:consultarPOFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarPOsComercioRequest">
+        <wsdl:part name="parameters" element="xsd1:consultarPOsComercio"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarPOsComercioResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarPOsComercioResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="GestionPO">
+		<wsdl:operation name="consultarPO">
+			<wsdl:input message="tns:consultarPORequest"></wsdl:input>
+			<wsdl:output message="tns:consultarPOResponse"></wsdl:output>
+            <wsdl:fault name="fault" message="tns:consultarPOFault"></wsdl:fault>
+        </wsdl:operation>
+		<wsdl:operation name="actualizarEstadoPO">
+			<wsdl:input message="tns:actualizarEstadoPORequest"></wsdl:input>
+			<wsdl:output message="tns:actualizarEstadoPOResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="establecerFabricanteAtiende">
+			<wsdl:input message="tns:establecerFabricanteAtiendeRequest"></wsdl:input>
+			<wsdl:output message="tns:establecerFabricanteAtiendeResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registrarPO">
+			<wsdl:input message="tns:registrarPORequest"></wsdl:input>
+			<wsdl:output message="tns:registrarPOResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarComercioPO">
+			<wsdl:input message="tns:consultarComercioPORequest"></wsdl:input>
+			<wsdl:output message="tns:consultarComercioPOResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarPOsComercio">
+			<wsdl:input message="tns:consultarPOsComercioRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarPOsComercioResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionPOSOAP" type="tns:GestionPO">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="consultarPO">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/consultarPO" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault use="literal" name="fault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="actualizarEstadoPO">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/actualizarEstadoPO" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="establecerFabricanteAtiende">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/establecerFabricanteAtiende" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registrarPO">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/registrarPO" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarComercioPO">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/consultarComercioPO" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarPOsComercio">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionPO/consultarPOsComercio" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GestionPO">
+		<wsdl:port name="GestionPOSOAP" binding="tns:GestionPOSOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionPO" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,15 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="Fabricante.xsd"/>
+    <include schemaLocation="Producto.xsd"/>
+    <element name="item" type="tns:Item"/>
+    <complexType name="Item">
+        <sequence>
+            <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+            <element name="valor" type="long" minOccurs="0" maxOccurs="1"/>
+            <element name="cantidad" type="int" minOccurs="1" maxOccurs="1"/>
+            <element name="producto" type="tns:Producto" minOccurs="1"/>
+        </sequence>
+    </complexType>
+</schema>

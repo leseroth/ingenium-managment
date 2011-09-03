@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+    <element name="registrarUsuario" type="tns:RegistrarUsuario"></element>
+
+    <element name="registrarUsuarioResponse" type="tns:RegistrarUsuarioResponse"></element>
+
+    <complexType name="RegistrarUsuario">
+    	<sequence>
+    		<element name="nit" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="rol" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="RegistrarUsuarioResponse">
+    	<sequence>
+    		<element name="login" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="password" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestionRMA"
+	targetNamespace="http://marketplace.losalpes.com.co/GestionRMA"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://marketplace.losalpes.com.co/GestionRMA"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import schemaLocation="GestionRMA.xsd"
+				namespace="http://marketplace.losalpes.com.co" />
+		</xsd:schema>      
+    </wsdl:types>
+	<wsdl:message name="registrarRMARequest">
+		<wsdl:part name="parameters" element="xsd1:registrarRMA" />
+	</wsdl:message>
+	<wsdl:message name="registrarRMAResponse">
+		<wsdl:part name="parameters" element="xsd1:registrarRMAResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="consultarRMAsComercioRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarRMAsComercio"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarRMAsComercioResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarRMAsComercioResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarRMAsFabricanteRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarRMAsFabricante"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarRMAsFabricanteResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarRMAsFabricanteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GestionRMA">
+		<wsdl:operation name="registrarRMA">
+			<wsdl:input message="tns:registrarRMARequest" />
+			<wsdl:output message="tns:registrarRMAResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="consultarRMAsComercio">
+			<wsdl:input message="tns:consultarRMAsComercioRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarRMAsComercioResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarRMAsFabricante">
+			<wsdl:input message="tns:consultarRMAsFabricanteRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarRMAsFabricanteResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionRMASOAP" type="tns:GestionRMA">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="registrarRMA">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionRMA/registrarRMA" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="registrarRMA">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionRMA/registrarRMA" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarRMAsComercio">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionRMA/consultarRMAsComercio" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarRMAsFabricante">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionRMA/consultarRMAsFabricante" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GestionRMA">
+		<wsdl:port name="GestionRMASOAP" binding="tns:GestionRMASOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionRMA" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

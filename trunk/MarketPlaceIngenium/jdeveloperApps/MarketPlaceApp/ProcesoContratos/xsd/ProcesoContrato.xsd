@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ma="http://xmlns.oracle.com/MarketPlace/ProcesoContratos/ProcesoContrato">
+  <element name="process">
+    <complexType>
+      <sequence>
+        <element name="cantidad" type="int" minOccurs="0"/>
+        <element name="comercio" type="ma:comercioBO" minOccurs="0"/>
+        <element name="duracion" type="dateTime" minOccurs="0"/>
+        <element name="estado" type="string" minOccurs="0"/>
+        <element name="fabricante" type="ma:fabricanteBO" minOccurs="0"/>
+        <element name="fechaInicio" type="dateTime" minOccurs="0"/>
+        <element name="fechaRegistro" type="dateTime" minOccurs="0"/>
+        <element name="id" type="long" minOccurs="0"/>
+        <element name="periodicidad" type="string" minOccurs="0"/>
+        <element name="precio" type="long" minOccurs="0"/>
+        <element name="producto" type="ma:productoBO" minOccurs="0"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="processResponse">
+    <complexType>
+      <sequence>
+        <element name="result" type="long"/>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="productoBO">
+    <sequence>
+      <element name="categoria" type="string" minOccurs="0"/>
+      <element name="id" type="long" minOccurs="0"/>
+      <element name="nombre" type="string" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <complexType name="fabricanteBO">
+    <sequence>
+      <element name="id" type="long" minOccurs="0"/>
+      <element name="nit" type="string" minOccurs="0"/>
+      <element name="nombre" type="string" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <complexType name="comercioBO">
+    <sequence>
+      <element name="id" type="long" minOccurs="0"/>
+      <element name="nit" type="string" minOccurs="0"/>
+      <element name="nombre" type="string" minOccurs="0"/>
+    </sequence>
+  </complexType>
+
+</schema>

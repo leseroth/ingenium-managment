@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+      <af:panelFormLayout>
+      <af:inputText value="#{crearProducto.producto.nombre}" label="Nombre"/>
+      <af:inputText value="#{crearProducto.producto.categoria}" label="Categoria"/>
+      <af:inputText value="#{crearProducto.producto.referencia}" label="Referencia" rendered="#{crearProducto.fabricante}"/>
+          <af:commandButton text="Crear" id="cb1"
+                            action="#{crearProducto.crear_action}"/>
+          <af:commandButton text="volver" id="cb2"
+                            action="#{crearProducto.volver_action}"/>
+        </af:panelFormLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:crearProducto-->
+</jsp:root>

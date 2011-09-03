@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <nextCatalog catalog="nbproject/private/cache/retriever/catalog.xml"/>
+    <system systemId="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCorreoElectronico?wsdl" uri="wsdl/portal.marketplace.losalpes.com.co_7001/marketPlace/proxy/GestionCorreoElectronico.wsdl"/>
+    <system systemId="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCorreoElectronico?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionCorreoElectronico%2FGestionCorreoElectronico" uri="wsdl/portal.marketplace.losalpes.com.co_7001/marketPlace/proxy/GestionCorreoElectronico.schema/marketplace/proxy/wsdls/gestioncorreoelectronico/gestioncorreoelectronico.xsd"/>
+    <system systemId="http://localhost:7001/marketPlace/proxy/GestionCorreoElectronico?wsdl" uri="wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.wsdl"/>
+    <system systemId="http://localhost:7001/marketPlace/proxy/GestionCorreoElectronico?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionCorreoElectronico%2FGestionCorreoElectronico" uri="wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.schema/marketplace/proxy/wsdls/gestioncorreoelectronico/gestioncorreoelectronico.xsd"/>
+</catalog>
+
+
+

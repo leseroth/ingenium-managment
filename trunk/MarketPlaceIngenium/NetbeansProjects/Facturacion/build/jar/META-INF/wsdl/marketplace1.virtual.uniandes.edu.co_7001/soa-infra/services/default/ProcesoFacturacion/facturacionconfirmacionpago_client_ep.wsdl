@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions
+     name="FacturacionConfirmacionPago"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"
+     xmlns:ns1="http://marketplace.losalpes.com.co/GestionFacturacion"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://marketplace1.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoFacturacion!1.0/FacturacionConfirmacionPago.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="FacturacionConfirmacionPago">
+        <plnk:role name="FacturacionConfirmacionPagoProvider">
+            <plnk:portType name="client:FacturacionConfirmacionPago"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionFacturacion" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"
+                 schemaLocation="http://marketplace1.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoFacturacion/facturacionconfirmacionpago_client_ep?XSD=xsd/FacturacionConfirmacionPago.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="FacturacionConfirmacionPagoRequestMessage">
+        <wsdl:part name="corte" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="FacturacionConfirmacionPago">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:FacturacionConfirmacionPagoRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FacturacionConfirmacionPagoBinding" type="client:FacturacionConfirmacionPago">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="facturacionconfirmacionpago_client_ep">
+        <wsdl:port name="FacturacionConfirmacionPago_pt" binding="client:FacturacionConfirmacionPagoBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://marketplace1.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoFacturacion/facturacionconfirmacionpago_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+	<include schemaLocation="PurchaseOrder.xsd"/>
+	<include schemaLocation="Item.xsd"/>
+
+	<include schemaLocation="AvisoDespacho.xsd"/>
+
+
+
+    <element name="rma" type="tns:ReturnMaterialAdvice"/>
+
+    <complexType name="ReturnMaterialAdvice">
+    	<sequence>
+    		<element name="id" type="long" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="numSeguimiento" type="string" minOccurs="0"
+    			maxOccurs="1" />
+    		<element name="causa" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="fecha" type="dateTime" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+
+    		<element name="avisoDespacho" type="tns:DispatchAdvice"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="ordenCompra" type="tns:PurchaseOrder"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="items" type="tns:Item" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="comercio" type="tns:Comercio" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

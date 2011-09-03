@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="Contacto.xsd"></include>
+    <include schemaLocation="SolicitudRegistro.xsd"></include>
+    <include schemaLocation="CuentaFacturacion.xsd"></include>
+    <complexType name="Cliente">
+    	<sequence>
+    		<element name="id" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="nombre" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="nit" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="direccion" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="telefono" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="email" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="ctaFact" type="tns:CuentaFacturacion"
+    			minOccurs="0" maxOccurs="1">
+    		</element>
+    		<element name="solicitudes" type="tns:SolicitudRegistro"
+    			minOccurs="1" maxOccurs="unbounded">
+    		</element>
+    		<element name="contactos" type="tns:Contacto" minOccurs="1"
+    			maxOccurs="unbounded">
+    		</element>
+    		<element name="razonSocial" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="estado" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="tipo" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="comision" type="double" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    	</sequence></complexType>
+
+    <element name="cliente" type="tns:Cliente"></element>
+</schema>

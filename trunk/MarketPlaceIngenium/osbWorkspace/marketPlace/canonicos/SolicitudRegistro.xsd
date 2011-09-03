@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+
+
+    <include schemaLocation="Producto.xsd"></include>
+    <include schemaLocation="Documento.xsd"></include>
+    <element name="solicitudRegistro" type="tns:SolicitudRegistro"></element>
+
+    <complexType name="SolicitudRegistro">
+    	<sequence>
+            <element name="id" type="long" minOccurs="1" maxOccurs="1"></element>
+            <element name="numRadicacion" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="fecha" type="date" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="estado" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="causa" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="documentos" type="tns:Documento"
+    			minOccurs="1" maxOccurs="unbounded">
+    		</element>
+    		<element name="productos" type="tns:Producto" minOccurs="0"
+    			maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>
