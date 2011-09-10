@@ -10,7 +10,8 @@
       <af:form>
         <p>
           <af:commandButton text="Crear Orden de Compra" id="cb1"
-                            action="#{OrdenCompraListaBean.crear_action}"/>
+                            action="#{OrdenCompraListaBean.crear_action}"/><af:commandButton text="Compra Directa"
+                                                                                             id="cb2"/>
         </p>
         <p>
           <h:dataTable value="#{OrdenCompraListaBean.ordenes}" var="orden" 
@@ -45,7 +46,7 @@
                 <h:outputText value="Accion" id="ot2"/>
               </f:facet>
               <h:outputText value="#{orden.numSeguimiento}" id="ot9"/>
-              <af:commandButton text="verOrden" id="cb2"
+              <af:commandButton text="verOrden" id="cb3"
                                 action="#{OrdenCompraListaBean.verOrdenCompra_action}"/>
             </h:column>
           </h:dataTable>
