@@ -33,7 +33,7 @@
               <af:commandButton text="Crear Orden de Compra" id="cb_crearOrden"
                           action="#{crearOrdenCompra.crearOrden_action}"/>
             </af:panelFormLayout>
-          <af:commandButton text="commandButton 1" id="cb1"
+          <af:commandButton text="Cancelar" id="cb1"
                             action="#{crearOrdenCompra.volver_action}"/>
         </fieldset>
       </af:form>

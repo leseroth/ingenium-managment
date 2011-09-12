@@ -8,11 +8,11 @@
     <af:document id="d1">
       <af:form id="f1" defaultCommand="cb_crearOrden">
         <fieldset>
-          <legend>Crear Orden de Compra</legend>
+          <legend>Crear Orden de Compra Directa</legend>
           <af:panelFormLayout>
-            <af:selectOneChoice label="Selección Fabricante" required="true"
+            <af:selectOneChoice value="#{crearOrdenCompra.orden.fabricante}" label="Selección Fabricante" required="true"
                                 shortDesc="" id="soc1" autoSubmit="true">
-              <f:selectItems value="#{crearOrdenCompra.fabricantes}" id="si1"/>
+              <f:selectItems value="#{crearOrdenCompra.orden}" id="si1"/>
             </af:selectOneChoice>
             <af:inputDate value="#{crearOrdenCompra.orden.fechaMaximaEntrega}"
                           label="Fecha Maxima Entrega" id="id2"
