@@ -10,7 +10,7 @@
         <fieldset>
           <legend>Información Orden de Compra Directa</legend>
           <af:panelFormLayout>          
-            <af:table var="row" rowBandingInterval="0" id="t1">
+            <af:table value="" var="row" rowBandingInterval="0" id="t1">
               <af:column sortable="false" headerText="Fecha Máxima de Entrega"
                          id="c1">
                 <af:outputText value="#{row.col1}" id="ot1"/>
