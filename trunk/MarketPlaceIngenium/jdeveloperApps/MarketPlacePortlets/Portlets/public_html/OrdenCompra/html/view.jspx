@@ -11,7 +11,7 @@
           <af:commandButton text="Crear Orden de Compra" id="cb1"
                             action="#{OrdenCompraListaBean.crear_action}"/>           
           <af:commandButton text="Crear Orden de Compra Directa" id="cb2"
-                            action="#{OrdenCompraListaBean.crear_action}"/>
+                            action="#{OrdenCompraListaBean.crearOrdenDirecta_action}"/>
         </p>
         <p>
           <h:dataTable value="#{OrdenCompraListaBean.ordenes}" var="orden"

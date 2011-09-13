@@ -1,20 +1,16 @@
 package co.com.losalpes.marketplace.beans;
 
+
 import co.com.losalpes.marketplace.servicio.ServicioProxy;
-import co.com.losalpes.marketplace.vos.ItemVO;
 import co.com.losalpes.marketplace.vos.OrdenCompraVO;
 
 import java.security.Principal;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
-
 import javax.faces.context.FacesContext;
 
 
@@ -49,6 +45,11 @@ public class ListaOrdenesCompra {
     public String crear_action() {
        System.out.println("Crear Orden de Compra");
         return "crear";
+    }
+    
+    public String crearOrdenDirecta_action() {
+       System.out.println("Crear Orden de Compra Directa");
+        return "crearOrdenDirecta";
     }
 
     public void setOrdenes(List<OrdenCompraVO> ordenes) {

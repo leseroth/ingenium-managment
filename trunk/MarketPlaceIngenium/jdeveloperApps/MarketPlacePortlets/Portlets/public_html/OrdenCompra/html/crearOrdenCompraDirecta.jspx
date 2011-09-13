@@ -10,35 +10,35 @@
         <fieldset>
           <legend>Crear Orden de Compra Directa</legend>
           <af:panelFormLayout>
-            <af:selectOneChoice value="#{crearOrdenCompra.orden.fabricante}" label="Selección Fabricante" required="true"
+            <af:selectOneChoice value="#{crearOrdenCompraDirecta.orden.fabricanteAtiende}" label="Selección Fabricante" required="true"
                                 shortDesc="" id="soc1" autoSubmit="true">
-              <f:selectItems value="#{crearOrdenCompra.orden}" id="si1"/>
+              <f:selectItems value="#{crearOrdenCompraDirecta.listaFabricantes}" id="si1"/>
             </af:selectOneChoice>
-            <af:inputDate value="#{crearOrdenCompra.orden.fechaMaximaEntrega}"
+            <af:inputDate value="#{crearOrdenCompraDirecta.orden.fechaMaximaEntrega}"
                           label="Fecha Maxima Entrega" id="id2"
                           required="true"/>
             <af:panelGroupLayout>
               <fieldset>
                 <legend>Producto</legend>
                 <af:panelFormLayout>
-                  <af:inputNumberSpinbox value="#{crearOrdenCompra.orden.item.cantidad}"
+                  <af:inputNumberSpinbox value="#{crearOrdenCompraDirecta.orden.item.cantidad}"
                                          label="Cantidad" required="true"
                                          minimum="1"/>
                   <af:selectOneListbox label="Producto" size="10"
-                                       value="#{crearOrdenCompra.orden.item.producto}"
+                                       value="#{crearOrdenCompraDirecta.orden.item.producto}"
                                        id="sol1" required="true"
                                        inlineStyle="width:300.0px;">
-                    <f:selectItems value="#{crearOrdenCompra.productos}"
+                    <f:selectItems value="#{crearOrdenCompraDirecta.productos}"
                                    id="si2"/>
                   </af:selectOneListbox>
                 </af:panelFormLayout>
               </fieldset>
             </af:panelGroupLayout>
             <af:commandButton text="Crear Orden de Compra" id="cb_crearOrden"
-                              action="infoPOCompraDirecta.jspx"/>
+                              action="resumen"/>
           </af:panelFormLayout>
           <af:commandButton text="Cancelar" id="cb1"
-                            action="#{crearOrdenCompra.volver_action}"/>
+                            action="#{crearOrdenCompraDirecta.volver_action}"/>
         </fieldset>
       </af:form>
     </af:document>

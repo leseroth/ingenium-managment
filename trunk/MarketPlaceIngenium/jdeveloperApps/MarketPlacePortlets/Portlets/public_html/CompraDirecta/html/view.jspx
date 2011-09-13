@@ -7,7 +7,7 @@
   <f:view>
     <af:document>
       <af:form>
-        <h:dataTable value="#{listaCompraDirecta.compraDirecta}"
+        <h:dataTable value="#{listaCompraDirecta.comprasDirectas}"
                      binding="#{listaCompraDirecta.dt1}" var="compraDirecta"
                      id="dt1">
           <!--oracle-jdev-comment:Faces.RI.DT.Class.Key:co.com.losalpes.marketplace.vos.SubastaVO-->
@@ -21,14 +21,14 @@
             <f:facet name="header">
               <h:outputText value="Comercio" id="ot4"/>
             </f:facet>
-            <h:outputText value="#{compraDirecta.comercio}" id="ot5"/>
+            <h:outputText value="#{compraDirecta.comercio.nombre}" id="ot5"/>
           </h:column>
           <h:column id="c_ac">
             <f:facet name="header">
               <h:outputText value="Acciones"/>
             </f:facet>
             <af:commandButton text="Info Compra Directa"
-                              action="#{compraDirecta.verInfoCompraDirecta_action}"/>
+                              action="#{listaCompraDirecta.verInfoCompraDirecta_action}"/>
           </h:column>
         </h:dataTable>
       </af:form>

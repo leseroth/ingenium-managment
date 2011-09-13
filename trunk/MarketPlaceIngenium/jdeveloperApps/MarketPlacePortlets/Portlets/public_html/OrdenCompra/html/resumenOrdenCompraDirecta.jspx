@@ -10,33 +10,43 @@
         <fieldset>
           <legend>Información Orden de Compra Directa</legend>
           <af:panelFormLayout>          
-            <af:table value="" var="row" rowBandingInterval="0" id="t1">
-              <af:column sortable="false" headerText="Fecha Máxima de Entrega"
-                         id="c1">
-                <af:outputText value="#{row.col1}" id="ot1"/>
-              </af:column>
-              <af:column sortable="false" headerText="Fabricante que Atiende"
-                         id="c2">
-                <af:outputText value="#{row.col2}" id="ot5"/>
-              </af:column>
-              <af:column sortable="false" headerText="Producto" id="c5">
-                <af:outputText value="#{row.col3}" id="ot6"/>
-              </af:column>
-              <af:column sortable="false" headerText="Cantidad" id="c4">
-                <af:outputText value="#{row.col4}" id="ot3"/>
-              </af:column>
-              <af:column sortable="false" headerText="Precio Unidad" id="c3">
-                <af:outputText value="#{row.col5}" id="ot4"/>
-              </af:column>
-              <af:column sortable="false" headerText="Total" id="c6">
-                <af:outputText value="#{row.col6}" id="ot2"/>
-              </af:column>
-            </af:table>
+            <h:dataTable id="ListaOrdenes" value="#{crearOrdenCompraDirecta.ordenes}" var="row" >
+              <h:column id="c1">
+                <f:facet name="header">
+                  <h:outputText value="Fecha Máxima de Entrega" id="ot8"/>
+                </f:facet>
+                <af:outputText value="#{row.fechaMaximaEntrega}" id="ot1"/>
+              </h:column>
+              <h:column id="c2">
+                <f:facet name="header">
+                  <h:outputText value="Fabricante que Atiende" id="ot9"/>
+                </f:facet>
+                <af:outputText value="#{row.fabricanteAtiende.nombre}" id="ot5"/>
+              </h:column>
+              <h:column id="c5">
+                <f:facet name="header">
+                  <h:outputText value="Producto" id="ot10"/>
+                </f:facet>
+                <af:outputText value="#{row.item.producto.nombre}" id="ot6"/>
+              </h:column>
+              <h:column id="c4">
+                <f:facet name="header">
+                  <h:outputText value="Cantidad" id="ot11"/>
+                </f:facet>
+                <af:outputText value="#{row.item.cantidad}" id="ot3"/>
+              </h:column>
+              <h:column id="c3">
+                <f:facet name="header">
+                  <h:outputText value="Precio Unidad" id="ot12"/>
+                </f:facet>
+                <af:outputText value="#{row.item.valor}" id="ot4"/>
+              </h:column>
+            </h:dataTable>
             <af:commandButton text="Enviar Orden de Compra" id="cb_crearOrden"
-                              action="#{crearOrdenCompra.crearOrden_action}"/>
+                              action="#{crearOrdenCompraDirecta.crearOrden_action}"/>
           </af:panelFormLayout>
           <af:commandButton text="Cancelar" id="cb1"
-                            action="#{crearOrdenCompra.volver_action}"/>
+                            action="#{crearOrdenCompraDirecta.volver_action}"/>
         </fieldset>
       </af:form>
     </af:document>

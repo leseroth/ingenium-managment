@@ -2,6 +2,7 @@ package co.com.losalpes.marketplace.beans;
 
 
 import co.com.losalpes.marketplace.servicio.ServicioProxy;
+import co.com.losalpes.marketplace.vos.ClienteVO;
 import co.com.losalpes.marketplace.vos.ItemVO;
 import co.com.losalpes.marketplace.vos.OrdenCompraVO;
 import co.com.losalpes.marketplace.vos.ProductoVO;
@@ -17,18 +18,38 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 
-public class CrearOrdenCompra {
+public class CrearOrdenCompraDirecta {
     private OrdenCompraVO orden;
     private List<SelectItem> productos;
     private ServicioProxy servProxy;
+    private List<SelectItem> listaFabricantes;
+    private ClienteVO fabricante;
     
-    public CrearOrdenCompra() {
+    public CrearOrdenCompraDirecta() {
+        
         String username=FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         servProxy=ServicioProxy.getInstance();
         orden=new OrdenCompraVO();
         orden.setItem(new ItemVO());
         productos=new ArrayList<SelectItem>();
-        List<ProductoVO> productosVO=servProxy.getProductosByUsername(username);
+        listaFabricantes=new ArrayList<SelectItem>();
+        
+        List<ClienteVO> productosVO=servProxy.getFabricantes();
+        SelectItem tmpSelect;
+        if(productosVO!=null){
+          for(ClienteVO tmpCliente:productosVO){
+              tmpCliente=new ClienteVO();
+              tmpSelect=new SelectItem();
+              tmpSelect.setLabel(tmpCliente.getNombre());
+              tmpSelect.setValue(tmpCliente);
+              productos.add(tmpSelect);
+          }
+        }
+    }
+    
+    public void cargar_productos(){
+        productos=new ArrayList<SelectItem>();
+        List<ProductoVO> productosVO=fabricante.getProductos();
         SelectItem tmpSelect;
         if(productosVO!=null){
           for(ProductoVO tmpProd:productosVO){
@@ -67,6 +88,24 @@ public class CrearOrdenCompra {
 
     public List<SelectItem> getProductos() {
         return productos;
+    }
+
+    public List<SelectItem> getListaFabricantes() {
+        return listaFabricantes;
+    }
+    
+    public ClienteVO getFabricante() {
+        return fabricante;
+    }
+    
+    public void setFabricante(ClienteVO fabricante) {
+        this.fabricante = fabricante;
+    }
+    
+    public List<OrdenCompraVO> getOrdenes() {
+        List<OrdenCompraVO> ordenes = new ArrayList<OrdenCompraVO>();
+        ordenes.add(orden);
+        return ordenes;
     }
 
     public String volver_action() {
