@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee">
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee">
   <application>
     <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
   </application>
@@ -17,6 +17,10 @@
     <navigation-case>
       <from-outcome>verOrden</from-outcome>
       <to-view-id>/OrdenCompra/html/verOrdenCompra.jspx</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>crearOrdenDirecta</from-outcome>
+      <to-view-id>/OrdenCompra/html/crearOrdenCompraDirecta.jspx</to-view-id>
     </navigation-case>
   </navigation-rule>
   <managed-bean>
@@ -68,6 +72,11 @@
   <managed-bean>
     <managed-bean-name>crearOrdenCompra</managed-bean-name>
     <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOrdenCompra</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>crearOrdenCompraDirecta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOrdenCompraDirecta</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
@@ -172,6 +181,48 @@
     <navigation-case>
       <from-outcome>volver</from-outcome>
       <to-view-id>/Subastas/html/infoSubasta.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/OrdenCompra/html/crearOrdenCompraDirecta.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/OrdenCompra/html/view.jspx</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>resumen</from-outcome>
+      <to-view-id>/OrdenCompra/html/resumenOrdenCompraDirecta.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+   <navigation-rule>
+    <from-view-id>/OrdenCompra/html/resumenOrdenCompraDirecta.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/OrdenCompra/html/view.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <managed-bean>
+    <managed-bean-name>listaCompraDirecta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.ListaCompraDirecta</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <navigation-rule>
+    <from-view-id>/CompraDirecta/html/view.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>infoCompraDirecta</from-outcome>
+      <to-view-id>/CompraDirecta/html/infoCompraDirecta.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <managed-bean>
+    <managed-bean-name>infoCompraDirecta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.InfoCompraDirecta</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <navigation-rule>
+    <from-view-id>/CompraDirecta/html/infoCompraDirecta.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/CompraDirecta/html/view.jspx</to-view-id>
     </navigation-case>
   </navigation-rule>
 </faces-config>

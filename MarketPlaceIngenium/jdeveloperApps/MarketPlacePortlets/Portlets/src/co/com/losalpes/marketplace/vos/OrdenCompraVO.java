@@ -12,6 +12,7 @@ public class OrdenCompraVO {
     private Date fecha;
     private FabricanteVO fabricanteAtiende;
    private ItemVO item;
+   private ComercioVO comercio;
    
    
     public OrdenCompraVO() {
@@ -25,6 +26,14 @@ public class OrdenCompraVO {
     public long getId() {
         return id;
     }*/
+    
+   public void setComercio(ComercioVO comercio) {
+       this.comercio = comercio;
+   }
+
+   public ComercioVO getComercio() {
+       return comercio;
+   }
 
     public void setItem(ItemVO item) {
         this.item = item;

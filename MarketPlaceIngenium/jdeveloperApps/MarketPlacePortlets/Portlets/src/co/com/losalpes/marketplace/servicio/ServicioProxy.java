@@ -3,6 +3,7 @@ package co.com.losalpes.marketplace.servicio;
 
 import co.com.losalpes.marketplace.vos.AvisoDespachoVO;
 import co.com.losalpes.marketplace.vos.ClienteVO;
+import co.com.losalpes.marketplace.vos.ComercioVO;
 import co.com.losalpes.marketplace.vos.ContactoVO;
 import co.com.losalpes.marketplace.vos.CuentaFacturacionVO;
 import co.com.losalpes.marketplace.vos.DocumentoVO;
@@ -15,6 +16,11 @@ import co.com.losalpes.marketplace.vos.OrdenDevolucionVO;
 import co.com.losalpes.marketplace.vos.ProductoVO;
 import co.com.losalpes.marketplace.vos.SolicitudRegistroVO;
 import co.com.losalpes.marketplace.vos.SubastaVO;
+import co.com.losalpes.marketplace.ws.actualizacionCuenta.ActualizacionCuenta;
+import co.com.losalpes.marketplace.ws.actualizacionCuenta.ActualizacionCuenta_ptClient;
+import co.com.losalpes.marketplace.ws.avisoDespacho.DispatchAdvice_ptClient;
+import co.com.losalpes.marketplace.ws.confirmacionPago.ConfirmacionPago;
+import co.com.losalpes.marketplace.ws.confirmacionPago.ConfirmacionPago_ptClient;
 import co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente;
 import co.com.losalpes.marketplace.ws.gestionCliente.GestionClienteSOAPQSPortClient;
 import co.com.losalpes.marketplace.ws.gestionDA.GestionDA;
@@ -23,13 +29,30 @@ import co.com.losalpes.marketplace.ws.gestionFacturacion.GestionFacturacion;
 import co.com.losalpes.marketplace.ws.gestionFacturacion.GestionFacturacionSOAPClient;
 import co.com.losalpes.marketplace.ws.gestionPO.GestionPO;
 import co.com.losalpes.marketplace.ws.gestionPO.GestionPOSOAPClient;
+import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMA;
+import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMASOAPClient;
+import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta;
+import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubastaSOAPQSPortClient;
+import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagement;
+import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagementPortClient;
+import co.com.losalpes.marketplace.ws.ldap.UsuarioNoExisteException;
+import co.com.losalpes.marketplace.ws.ordenCompra.PurchaseOrder_ptClient;
+import co.com.losalpes.marketplace.ws.registro.RegistroEntidad;
+import co.com.losalpes.marketplace.ws.registro.RegistroEntidad_ptClient;
+import co.com.losalpes.marketplace.ws.registro.types.ContactoCliente;
+import co.com.losalpes.marketplace.ws.registro.types.ProductoSolicitud;
+import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat;
+import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat_ptClient;
+import co.com.losalpes.marketplace.ws.retornoMaterial.ReturnMaterialAdvice_ptClient;
+import co.com.losalpes.marketplace.ws.subastaInversa.SubastaInversa;
+import co.com.losalpes.marketplace.ws.subastaInversa.SubastaInversa_ptClient;
 import co.com.losalpes.marketplace.ws.types.Cliente;
-import co.com.losalpes.marketplace.ws.types.PurchaseOrder;
+import co.com.losalpes.marketplace.ws.types.Comercio;
 import co.com.losalpes.marketplace.ws.types.ConsultarCliente;
 import co.com.losalpes.marketplace.ws.types.ConsultarClienteResponse;
-import co.com.losalpes.marketplace.ws.types.ConsultarCuentaFacturacionCliente;
-import co.com.losalpes.marketplace.ws.types.ConsultarCuentaFacturacionClienteResponse;
 import co.com.losalpes.marketplace.ws.types.ConsultarPOsComercioResponse;
+import co.com.losalpes.marketplace.ws.types.ConsultarProductosCliente;
+import co.com.losalpes.marketplace.ws.types.ConsultarProductosClienteResponse;
 import co.com.losalpes.marketplace.ws.types.Contacto;
 import co.com.losalpes.marketplace.ws.types.CuentaFacturacion;
 import co.com.losalpes.marketplace.ws.types.DispatchAdvice;
@@ -39,40 +62,13 @@ import co.com.losalpes.marketplace.ws.types.Factura;
 import co.com.losalpes.marketplace.ws.types.Item;
 import co.com.losalpes.marketplace.ws.types.Oferta;
 import co.com.losalpes.marketplace.ws.types.Producto;
-import co.com.losalpes.marketplace.ws.registro.types.ProductoSolicitud;
 import co.com.losalpes.marketplace.ws.types.PurchaseOrder;
 import co.com.losalpes.marketplace.ws.types.ReturnMaterialAdvice;
 import co.com.losalpes.marketplace.ws.types.SolicitudRegistro;
 import co.com.losalpes.marketplace.ws.types.Subasta;
-import co.com.losalpes.marketplace.ws.registro.types.ContactoCliente;
-import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMA;
-import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMASOAPClient;
-import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta;
-import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubastaSOAPQSPortClient;
-import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagement;
-import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagementPortClient;
-import co.com.losalpes.marketplace.ws.ldap.UsuarioNoExisteException;
-
-import co.com.losalpes.marketplace.ws.ordenCompra.PurchaseOrder_ptClient;
-import co.com.losalpes.marketplace.ws.registro.RegistroEntidad_ptClient;
-import co.com.losalpes.marketplace.ws.retornoMaterial.ReturnMaterialAdvice_ptClient;
-import co.com.losalpes.marketplace.ws.subastaInversa.SubastaInversa_ptClient;
-import co.com.losalpes.marketplace.ws.avisoDespacho.DispatchAdvice_ptClient;
-import co.com.losalpes.marketplace.ws.actualizacionCuenta.ActualizacionCuenta_ptClient;
-import co.com.losalpes.marketplace.ws.confirmacionPago.ConfirmacionPago_ptClient;
-import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat_ptClient;
-import co.com.losalpes.marketplace.ws.registro.RegistroEntidad;
-import co.com.losalpes.marketplace.ws.subastaInversa.SubastaInversa;
-import co.com.losalpes.marketplace.ws.actualizacionCuenta.ActualizacionCuenta;
-import co.com.losalpes.marketplace.ws.confirmacionPago.ConfirmacionPago;
-import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat;
-
-import co.com.losalpes.marketplace.ws.types.ConsultarProductosCliente;
-import co.com.losalpes.marketplace.ws.types.ConsultarProductosClienteResponse;
 
 import java.security.InvalidParameterException;
 
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -81,8 +77,10 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.lang.NotImplementedException;
+
 
 public final class ServicioProxy {
     private static ServicioProxy INSTANCE=null;
@@ -364,10 +362,20 @@ public final class ServicioProxy {
         ocVO.setEstado(oc.getEstado());
         ocVO.setFechaMaximaEntrega(oc.getFechaMaxima().toGregorianCalendar().getTime());
         ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteAtiende()));
+        ocVO.setComercio(transformarComercio(oc.getComercio()));
         ocVO.setItem(transformarItem(oc.getItem()));
         ocVO.setFechaMaximaSubasta( oc.getTiempoSubasta().toGregorianCalendar().getTime());
         ocVO.setFecha(oc.getFechaMaxima().toGregorianCalendar().getTime());
         return ocVO;
+        }
+    private ComercioVO transformarComercio(Comercio f){
+        ComercioVO comVO=new ComercioVO();
+        comVO.setNit(f.getNit());
+        comVO.setNombre(f.getNombre());
+        comVO.setEmail( f.getEmail());
+        comVO.setTelefono(f.getTelefono());
+        comVO.setDireccion(f.getDireccion());
+        return comVO; 
         }
     private FabricanteVO transformarFabricante(Fabricante f){
         FabricanteVO fabVO=new FabricanteVO();
@@ -582,4 +590,24 @@ public final class ServicioProxy {
                                      String referencia) {
         getConfirmacionPago().process(numCuenta, valor, descripcion, referencia);
     }
+    
+    public List<ClienteVO> getFabricantes(){
+        List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+        
+        
+        
+        return clientes;
+        }
+    
+    public List<OrdenCompraVO> getComprasDirectasUsuario(String username){
+        String nit;
+        nit = this.getNitByUsername(username);
+        List<OrdenCompraVO> ordenesVO=new ArrayList<OrdenCompraVO>();
+        ConsultarPOsComercioResponse ccposr;
+        List<PurchaseOrder> pos = getGestionPO().consultarPOsComercio(nit);
+        for(PurchaseOrder po : pos){
+            ordenesVO.add(transformOrdenCompra(po));
+            }
+        return ordenesVO;
+        }
 }
