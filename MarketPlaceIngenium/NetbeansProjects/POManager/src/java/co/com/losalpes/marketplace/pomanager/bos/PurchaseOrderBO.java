@@ -26,6 +26,7 @@ public class PurchaseOrderBO implements Serializable {
      * Attribute comercio
      */
     private ComercioBO comercio;
+    private FabricanteBO fabricante;
     /**
      * Attribute items
      */
@@ -67,6 +68,7 @@ public class PurchaseOrderBO implements Serializable {
         this.estado = aEstado;
         this.comercio = aComercio;
         this.items = aItems;
+        this.fabricante = aFabricante;
     }
 
     /**
@@ -156,4 +158,14 @@ public class PurchaseOrderBO implements Serializable {
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
     }
+
+    public FabricanteBO getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(FabricanteBO fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    
 }

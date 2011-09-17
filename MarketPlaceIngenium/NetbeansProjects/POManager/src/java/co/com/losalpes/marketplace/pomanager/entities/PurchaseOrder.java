@@ -30,7 +30,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "getAllPOs", query = "SELECT P FROM PurchaseOrder P "),
     @NamedQuery(name = "getPoFromNumSeguimiento", query = "select p from PurchaseOrder p where p.numSeguimiento = :numSeguimiento"),
     @NamedQuery(name = "getComercioFromPo", query = "select p.comercio from PurchaseOrder p where p.numSeguimiento = :numSeguimiento"),
-    @NamedQuery(name = "getPOsComercio", query = "select po from PurchaseOrder po where po.comercio.nit = :nit")
+    @NamedQuery(name = "getPOsComercio", query = "select po from PurchaseOrder po where po.comercio.nit = :nit"),
+    @NamedQuery(name = "getPOsFabricante", query = "select po from PurchaseOrder po where po.fabricante.nit = :nit")
 })
 /**
  *
@@ -65,6 +66,11 @@ public class PurchaseOrder implements Serializable {
      */
     @OneToMany
     protected List<ItemPO> items;
+    /**
+     * Attribute fabricante
+     */
+    @OneToOne
+    protected Fabricante fabricante;
 
     /**
      * Default Constructor
@@ -87,12 +93,13 @@ public class PurchaseOrder implements Serializable {
     /**
      * Complex Constructor
      */
-    public PurchaseOrder(Long id, java.sql.Timestamp aEntrega, String aEstado, Comercio aComercio, List<ItemPO> aItems) {
+    public PurchaseOrder(Long id, java.sql.Timestamp aEntrega, String aEstado, Comercio aComercio, Fabricante aFabricante, List<ItemPO> aItems) {
         this.id = id;
         this.entrega = aEntrega;
         this.estado = aEstado;
         this.comercio = aComercio;
         this.items = aItems;
+        fabricante = aFabricante;
     }
 
     /**
@@ -104,6 +111,9 @@ public class PurchaseOrder implements Serializable {
             this.setEntrega(pOBO.getEntrega());
         this.setEstado(pOBO.getEstado());
         this.setComercio(new Comercio(pOBO.getComercio()));
+        if(pOBO.getFabricante() != null) {
+            this.setFabricante(new Fabricante(pOBO.getFabricante()));
+        }
 
         List<ItemPO> itemsFromBO = new ArrayList<ItemPO>();
 
@@ -125,6 +135,9 @@ public class PurchaseOrder implements Serializable {
         Comercio aComercio = this.getComercio();
         if (aComercio != null) {
             pOBO.setComercio(aComercio.toBO());
+        }
+        if(fabricante != null){
+            pOBO.setFabricante(fabricante.toBO());
         }
         Collection<ItemPOBO> itemsToBO = new ArrayList<ItemPOBO>();
         for (ItemPO element : this.getItems()) {
@@ -214,6 +227,14 @@ public class PurchaseOrder implements Serializable {
      */
     public void setItems(List<ItemPO> aItems) {
         this.items = aItems;
+    }
+
+    public Fabricante getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
     }
 
     @Override
