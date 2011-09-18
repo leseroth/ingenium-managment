@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:con="http://www.bea.com/wli/sb/services/security/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:env="http://www.bea.com/wli/config/env">
   <ser:coreEntry isProxy="false" isEnabled="true">
-  
-    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
-      <con:wsdl ref="marketPlace/business/wsdls/crmOnDemand/Account"/>
-      <con:port>
-        <con:name>Default</con:name>
-        <con:namespace>urn:crmondemand/ws/account/10/2004</con:namespace>
-      </con:port>
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con1:SoapBindingType" xmlns:con1="http://www.bea.com/wli/sb/services/bindings/config">
+      <con1:wsdl ref="marketPlace/business/wsdls/crmOnDemand/Account"/>
+      <con1:port>
+        <con1:name>Default</con1:name>
+        <con1:namespace>urn:crmondemand/ws/account/10/2004</con1:namespace>
+      </con1:port>
+      <con1:WSI-compliant>false</con1:WSI-compliant>
     </ser:binding>
     <ser:monitoring isEnabled="false">
       <ser:aggregationInterval>10</ser:aggregationInterval>
@@ -23,7 +23,7 @@
     <tran:provider-id>http</tran:provider-id>
     <tran:inbound>false</tran:inbound>
     <tran:URI>
-      <env:value>https://secure-ausomxgta.crmondemand.com/Services/Integration</env:value>
+      <env:value>https://secure-ausomxdsa.crmondemand.com/Services/Integration</env:value>
     </tran:URI>
     <tran:outbound-properties>
       <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>

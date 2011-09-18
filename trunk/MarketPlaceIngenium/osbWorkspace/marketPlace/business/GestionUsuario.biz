@@ -2,7 +2,7 @@
 <xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:env="http://www.bea.com/wli/config/env">
   <ser:coreEntry isProxy="false" isEnabled="true">
     <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
-      <con:wsdl ref="marketPlace/business/wsdls/LDAP/LDAPAuthenticationManagement"/>
+      <con:wsdl ref="marketPlace/business/LDAP/LDAPAuthenticationManagement"/>
       <con:port>
         <con:name>LDAPAuthenticationManagementPort</con:name>
         <con:namespace>http://ws.ldap.marketplace.losalpes.com.co/</con:namespace>
