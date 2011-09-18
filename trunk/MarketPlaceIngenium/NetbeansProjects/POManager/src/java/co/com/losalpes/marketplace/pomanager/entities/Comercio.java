@@ -1,110 +1,108 @@
 package co.com.losalpes.marketplace.pomanager.entities;
 
+import co.com.losalpes.marketplace.pomanager.MarketPlaceEntity;
 import co.com.losalpes.marketplace.pomanager.bos.ComercioBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
+/**
+ * Entidad del Comercio
+ * @author Erik
+ */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="getComercioByNit", query="select c from Comercio c where c.nit = :nit")
+    @NamedQuery(name = "getComercioByNit", query = "select c from Comercio c where c.nit = :nit")
 })
-/**
- * Comercio
- * @author
- */
-public class Comercio implements Serializable {
+public class Comercio implements Serializable, MarketPlaceEntity {
 
-    /**
-     * Attribute ComercioID
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    /**
-     * Attribute nombre
-     */
     @Column
     private String nombre;
-
     @Column
     private String nit;
 
     /**
-     * Default Constructor
+     * Constructor por defecto
      */
     public Comercio() {
-        
     }
 
     /**
-     * Simple Constructor
-     */
-    public Comercio(Long id, String aNombre, String nit) {
-        this.id = id;
-        this.nombre = aNombre;
-        this.nit = nit;
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param comercioBO
      */
     public Comercio(ComercioBO comercioBO) {
-        this.setId(comercioBO.getId());
-        this.setNombre(comercioBO.getNombre());
-        this.setNit(comercioBO.getNit());
+        id = comercioBO.getId();
+        nombre = comercioBO.getNombre();
+        nit = comercioBO.getNit();
     }
 
-    /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
-     */
+    @Override
     public ComercioBO toBO() {
-
         ComercioBO comercioBO = new ComercioBO();
-        comercioBO.setId(this.getId());
-        comercioBO.setNombre(this.getNombre());
-        comercioBO.setNit(this.getNit());
-
+        comercioBO.setId(getId());
+        comercioBO.setNombre(getNombre());
+        comercioBO.setNit(getNit());
         return comercioBO;
     }
+ 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (getId() != null ? getId().hashCode() : 0);
+        return hash;
+    }
 
-    /**
-     * Getter method for attribute comercioID
-     * @return attribute comercioID
-     */
-    public Long getId() {
-        return this.id;
+    @Override
+    public boolean equals(Object object) {
+        boolean equals = false;
+        if (object instanceof Comercio) {
+            Comercio other = (Comercio) object;
+            equals = getId() != null && other.getId() != null && getId().equals(other.getId());
+        }
+        return equals;
     }
 
     /**
-     * Setter method for attribute comercioID
-     * @param new value for attribute comercioID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    /**
+     * @return the nit
+     */
     public String getNit() {
         return nit;
     }
 
+    /**
+     * @param nit the nit to set
+     */
     public void setNit(String nit) {
         this.nit = nit;
     }

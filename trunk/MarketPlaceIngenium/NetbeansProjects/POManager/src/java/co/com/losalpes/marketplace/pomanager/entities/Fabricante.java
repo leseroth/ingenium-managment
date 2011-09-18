@@ -1,105 +1,109 @@
 package co.com.losalpes.marketplace.pomanager.entities;
 
+import co.com.losalpes.marketplace.pomanager.MarketPlaceEntity;
 import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
+/**
+ * Entidad de fabricante
+ * @author Erik
+ */
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P "),
-    @NamedQuery(name = "getFabricanteFromNit", query="select f from Fabricante f where f.nit = :nit")
+    @NamedQuery(name = "getFabricanteFromNit", query = "select f from Fabricante f where f.nit = :nit")
 })
-/**
- * Fabricante
- * @author 
- */
-public class Fabricante implements Serializable {
-    /**
-     * Attribute FabricanteID
-     */
+public class Fabricante implements Serializable, MarketPlaceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    /**
-     * Attribute nombre
-     */
+    private Long id;
     @Column
-    protected String nombre;
-
+    private String nombre;
     @Column
     private String nit;
+
     /**
-     * Default Constructor
+     * Constructor por defecto
      */
     public Fabricante() {
-        
     }
 
     /**
-     * Simple Constructor
-     */
-    public Fabricante(Long id, String aNombre) {
-        this.id = id;
-        this.nombre = aNombre;
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param fabricanteBO
      */
     public Fabricante(FabricanteBO fabricanteBO) {
-        this.setId(fabricanteBO.getId());
-        this.setNombre(fabricanteBO.getNombre());
+        id = fabricanteBO.getId();
+        nombre = fabricanteBO.getNombre();
+        nit = fabricanteBO.getNit();
     }
 
-    /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
-     */
+    @Override
     public FabricanteBO toBO() {
         FabricanteBO fabricanteBO = new FabricanteBO();
-        fabricanteBO.setId(this.getId());
-        fabricanteBO.setNombre(this.getNombre());
-
+        fabricanteBO.setId(getId());
+        fabricanteBO.setNombre(getNombre());
+        fabricanteBO.setNit(getNit());
         return fabricanteBO;
     }
 
-    /**
-     * Getter method for attribute fabricanteID
-     * @return attribute fabricanteID
-     */
-    public Long getId() {
-        return this.id;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (getId() != null ? getId().hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        boolean equals = false;
+        if (object instanceof Fabricante) {
+            Fabricante other = (Fabricante) object;
+            equals = getId() != null && other.getId() != null && getId().equals(other.getId());
+        }
+        return equals;
     }
 
     /**
-     * Setter method for attribute fabricanteID
-     * @param new value for attribute fabricanteID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    /**
+     * @return the nit
+     */
     public String getNit() {
         return nit;
     }
 
+    /**
+     * @param nit the nit to set
+     */
     public void setNit(String nit) {
         this.nit = nit;
     }

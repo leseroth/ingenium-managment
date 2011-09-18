@@ -57,7 +57,7 @@ public class DaManagementBean implements DaManagementRemote, DaManagementLocal {
 
         List<ItemPO> its = new ArrayList<ItemPO>();
         for (int i = 0; i < da.getItems().size(); i++) {
-            Producto p = new Producto(da.getItems().get(i).getProducto());
+            Producto p = new Producto(da.getItems().get(i).getProductoBO());
             em.persist(p);
             ItemPO it = new ItemPO(da.getItems().get(i));
             it.setProducto(p);
