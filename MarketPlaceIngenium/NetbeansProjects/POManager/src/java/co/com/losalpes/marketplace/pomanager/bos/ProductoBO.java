@@ -1,152 +1,105 @@
 package co.com.losalpes.marketplace.pomanager.bos;
 
+import co.com.losalpes.marketplace.pomanager.MarketPlaceBO;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
 
-/**
- * Producto
- * @author 
- */
-@SuppressWarnings({"serial", "unused"})
-public class ProductoBO implements Serializable{
-    /**
-     * Attribute categoria
-     */
-    private String categoria;
-    /**
-     * Attribute id
-     */
+public class ProductoBO implements Serializable, MarketPlaceBO {
+
     private Long id;
-    /**
-     * Attribute nombre
-     */
+    private String categoria;
     private String nombre;
-    /**
-     * Attribute precio
-     */
     private Long precio;
-    /**
-     * Attribute tiempoFabricacion
-     */
     private Date tiempoFabricacion;
+    private FabricanteBO fabricanteAtiendeBO;
 
     /**
-     * Fabricante que atiende el producto en una PO
-     */
-    private FabricanteBO fabricanteAtiende;
-
-    /**
-     * Basic Constructor
+     * Constructor por defecto
      */
     public ProductoBO() {
-        
     }
 
     /**
-     * Basic Constructor
-     */
-    public ProductoBO(String aCategoria, String aNombre, Long aPrecio, Date aTiempoFabricacion) {
-        this.categoria = aCategoria;
-        this.nombre = aNombre;
-        this.precio = aPrecio;
-        this.tiempoFabricacion = aTiempoFabricacion;
-    }
-
-    /**
-     * Simple Constructor
-     */
-    public ProductoBO(String aCategoria, Long aId, String aNombre, Long aPrecio, Date aTiempoFabricacion) {
-        this.categoria = aCategoria;
-        this.id = aId;
-        this.nombre = aNombre;
-        this.precio = aPrecio;
-        this.tiempoFabricacion = aTiempoFabricacion;
-    }
-
-    /**
-     * Getter method for attribute categoria
-     * @return attribute categoria
-     */
-    public String getCategoria() {
-        return this.categoria;
-    }
-
-    /**
-     * Setter method for attribute categoria
-     * @param new value for attribute categoria
-     */
-    public void setCategoria(String aCategoria) {
-        this.categoria = aCategoria;
-    }
-
-    /**
-     * Getter method for attribute id
-     * @return attribute id
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute id
-     * @param new value for attribute id
+     * @param id the id to set
      */
-    public void setId(Long aId) {
-        this.id = aId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    /**
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
-     * Getter method for attribute precio
-     * @return attribute precio
+     * @return the precio
      */
     public Long getPrecio() {
-        return this.precio;
+        return precio;
     }
 
     /**
-     * Setter method for attribute precio
-     * @param new value for attribute precio
+     * @param precio the precio to set
      */
-    public void setPrecio(Long aPrecio) {
-        this.precio = aPrecio;
+    public void setPrecio(Long precio) {
+        this.precio = precio;
     }
+
     /**
-     * Getter method for attribute tiempoFabricacion
-     * @return attribute tiempoFabricacion
+     * @return the tiempoFabricacion
      */
     public Date getTiempoFabricacion() {
-        return this.tiempoFabricacion;
+        return tiempoFabricacion;
     }
 
     /**
-     * Setter method for attribute tiempoFabricacion
-     * @param new value for attribute tiempoFabricacion
+     * @param tiempoFabricacion the tiempoFabricacion to set
      */
-    public void setTiempoFabricacion(Date aTiempoFabricacion) {
-        this.tiempoFabricacion = aTiempoFabricacion;
+    public void setTiempoFabricacion(Date tiempoFabricacion) {
+        this.tiempoFabricacion = tiempoFabricacion;
     }
 
-    public FabricanteBO getFabricanteAtiende() {
-        return fabricanteAtiende;
+    /**
+     * @return the fabricanteAtiendeBO
+     */
+    public FabricanteBO getFabricanteAtiendeBO() {
+        return fabricanteAtiendeBO;
     }
 
-    public void setFabricanteAtiende(FabricanteBO fabricanteAtiende) {
-        this.fabricanteAtiende = fabricanteAtiende;
+    /**
+     * @param fabricanteAtiendeBO the fabricanteAtiendeBO to set
+     */
+    public void setFabricanteAtiendeBO(FabricanteBO fabricanteAtiendeBO) {
+        this.fabricanteAtiendeBO = fabricanteAtiendeBO;
     }
 }

@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.pomanager.entities;
 
+import co.com.losalpes.marketplace.pomanager.MarketPlaceEntity;
 import co.com.losalpes.marketplace.pomanager.bos.ItemPOBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -24,7 +19,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
+/**
+ * Entidad de PurchaseOrder
+ * @author Erik
+ */
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllPOs", query = "SELECT P FROM PurchaseOrder P "),
@@ -33,210 +31,172 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "getPOsComercio", query = "select po from PurchaseOrder po where po.comercio.nit = :nit"),
     @NamedQuery(name = "getPOsFabricante", query = "select po from PurchaseOrder po where po.fabricante.nit = :nit")
 })
-/**
- *
- * @author marketplace
- */
-public class PurchaseOrder implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class PurchaseOrder implements Serializable, MarketPlaceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column
     private String numSeguimiento;
-    /**
-     * Attribute entrega
-     */
     @Column
     @Temporal(TemporalType.DATE)
     protected Date entrega;
-    /**
-     * Attribute estado
-     */
     @Column
     protected String estado;
-    /**
-     * Attribute comercio
-     */
     @OneToOne
     protected Comercio comercio;
-    /**
-     * Attribute items
-     */
-    @OneToMany
-    protected List<ItemPO> items;
-    /**
-     * Attribute fabricante
-     */
     @OneToOne
     protected Fabricante fabricante;
+    @OneToMany
+    protected List<ItemPO> items;
 
     /**
-     * Default Constructor
+     * Constructor por defecto
      */
     public PurchaseOrder() {
-        this.items = new ArrayList<ItemPO>();
+        items = new ArrayList<ItemPO>();
     }
 
     /**
-     * Simple Constructor
+     * Constructor desde BO
+     * @param purchaseOrderBO
      */
-    public PurchaseOrder(Long id, java.sql.Timestamp aEntrega, String aEstado) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = new Comercio();
-        this.items = new ArrayList<ItemPO>();
-    }
+    public PurchaseOrder(PurchaseOrderBO purchaseOrderBO) {
+        this();
+        id = purchaseOrderBO.getId();
+        numSeguimiento = purchaseOrderBO.getNumSeguimiento();
+        entrega = purchaseOrderBO.getEntrega();
+        estado = purchaseOrderBO.getEstado();
 
-    /**
-     * Complex Constructor
-     */
-    public PurchaseOrder(Long id, java.sql.Timestamp aEntrega, String aEstado, Comercio aComercio, Fabricante aFabricante, List<ItemPO> aItems) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = aComercio;
-        this.items = aItems;
-        fabricante = aFabricante;
-    }
-
-    /**
-     * BO Constructor
-     */
-    public PurchaseOrder(PurchaseOrderBO pOBO) {
-        this.setId(pOBO.getId());
-        if (pOBO.getEntrega() != null)
-            this.setEntrega(pOBO.getEntrega());
-        this.setEstado(pOBO.getEstado());
-        this.setComercio(new Comercio(pOBO.getComercio()));
-        if(pOBO.getFabricante() != null) {
-            this.setFabricante(new Fabricante(pOBO.getFabricante()));
+        if (purchaseOrderBO.getComercioBO() != null) {
+            comercio = new Comercio(purchaseOrderBO.getComercioBO());
         }
-
-        List<ItemPO> itemsFromBO = new ArrayList<ItemPO>();
-
-        for (ItemPOBO itemPOBO : pOBO.getItems()) {
-            itemsFromBO.add(new ItemPO(itemPOBO));
+        if (purchaseOrderBO.getFabricanteBO() != null) {
+            this.setFabricante(new Fabricante(purchaseOrderBO.getFabricanteBO()));
         }
-        this.setItems(itemsFromBO);
+        for (ItemPOBO itemPOBO : purchaseOrderBO.getItemPOBOList()) {
+            items.add(new ItemPO(itemPOBO));
+        }
     }
 
-    /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
-     */
+    @Override
     public PurchaseOrderBO toBO() {
-        PurchaseOrderBO pOBO = new PurchaseOrderBO();
-        pOBO.setId(this.getId());
-        pOBO.setEntrega(this.getEntrega());
-        pOBO.setEstado(this.getEstado());
-        Comercio aComercio = this.getComercio();
-        if (aComercio != null) {
-            pOBO.setComercio(aComercio.toBO());
+        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBO();
+        purchaseOrderBO.setId(getId());
+        purchaseOrderBO.setNumSeguimiento(getNumSeguimiento());
+        purchaseOrderBO.setEntrega(getEntrega());
+        purchaseOrderBO.setEstado(getEstado());
+        if (comercio != null) {
+            purchaseOrderBO.setComercioBO(comercio.toBO());
         }
-        if(fabricante != null){
-            pOBO.setFabricante(fabricante.toBO());
+        if (fabricante != null) {
+            purchaseOrderBO.setFabricanteBO(fabricante.toBO());
         }
-        Collection<ItemPOBO> itemsToBO = new ArrayList<ItemPOBO>();
-        for (ItemPO element : this.getItems()) {
-            itemsToBO.add(element.toBO());
+        for (ItemPO itemPO : items) {
+            purchaseOrderBO.getItemPOBOList().add(itemPO.toBO());
         }
-        pOBO.setItems(itemsToBO);
-        pOBO.setNumSeguimiento(this.getNumSeguimiento());
-
-        return pOBO;
+        return purchaseOrderBO;
     }
 
+    /**
+     * @return El id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id El id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return El numSeguimiento
+     */
     public String getNumSeguimiento() {
         return numSeguimiento;
     }
 
+    /**
+     * @param numSeguimiento El numSeguimiento
+     */
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
     }
 
     /**
-     * Getter method for attribute entrega
-     * @return attribute entrega
+     * @return El entrega
      */
     public Date getEntrega() {
-        return this.entrega;
+        return entrega;
     }
 
     /**
-     * Setter method for attribute entrega
-     * @param new value for attribute entrega
+     * @param entrega El entrega
      */
-    public void setEntrega(Date aEntrega) {
-        this.entrega = aEntrega;
+    public void setEntrega(Date entrega) {
+        this.entrega = entrega;
     }
 
     /**
-     * Getter method for attribute estado
-     * @return attribute estado
+     * @return El estado
      */
     public String getEstado() {
-        return this.estado;
+        return estado;
     }
 
     /**
-     * Setter method for attribute estado
-     * @param new value for attribute estado
+     * @param estado El estado
      */
-    public void setEstado(String aEstado) {
-        this.estado = aEstado;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     /**
-     * Getter method for attribute comercio
-     * @return attribute comercio
+     * @return El comercioBO
      */
     public Comercio getComercio() {
-        return this.comercio;
+        return comercio;
     }
 
     /**
-     * Setter method for attribute comercio
-     * @param new value for attribute comercio
+     * @param comercioBO El comercio
      */
-    public void setComercio(Comercio aComercio) {
-        this.comercio = aComercio;
+    public void setComercio(Comercio comercio) {
+        this.comercio = comercio;
     }
 
     /**
-     * Getter method for attribute items
-     * @return attribute items
+     * @return El fabricanteBO
      */
-    public List<ItemPO> getItems() {
-        return this.items;
-    }
-
-    /**
-     * Setter method for attribute items
-     * @param new value for attribute items
-     */
-    public void setItems(List<ItemPO> aItems) {
-        this.items = aItems;
-    }
-
     public Fabricante getFabricante() {
         return fabricante;
     }
 
+    /**
+     * @param fabricanteBO El fabricante
+     */
     public void setFabricante(Fabricante fabricante) {
         this.fabricante = fabricante;
     }
 
+    /**
+     * @return El items
+     */
+    public List<ItemPO> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items El items
+     */
+    public void setItems(List<ItemPO> items) {
+        this.items = items;
+    }
+
+    // Search methods
     @Override
     public int hashCode() {
         int hash = 0;
@@ -246,19 +206,11 @@ public class PurchaseOrder implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof PurchaseOrder)) {
-            return false;
+        boolean equals = false;
+        if (object instanceof PurchaseOrder) {
+            PurchaseOrder other = (PurchaseOrder) object;
+            equals = id != null && other.id != null && id.equals(other.id);
         }
-        PurchaseOrder other = (PurchaseOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return equals;
     }
-
-    @Override
-    public String toString() {
-        return "co.com.losalpes.marketplace.pomanager.entities.PurchaseOrder[id=" + id + "]";
-    }
-
 }

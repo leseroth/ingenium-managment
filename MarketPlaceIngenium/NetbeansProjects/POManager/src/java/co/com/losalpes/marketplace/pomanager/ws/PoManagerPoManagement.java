@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.com.losalpes.marketplace.pomanager.ws;
 
 import co.com.losalpes.marketplace.pomanager.beans.PoManagementLocal;
@@ -21,7 +17,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author marketplace
+ * @author Erik
  */
 @WebService()
 @Stateless()
@@ -31,8 +27,8 @@ public class PoManagerPoManagement {
     private PoManagementLocal ejbRef;
 
     @WebMethod(operationName = "registrarPO")
-    public String registrarPO(@WebParam(name = "po") PurchaseOrderBO po) {
-        return ejbRef.registrarPO(po);
+    public String registrarPO(@WebParam(name = "purchaseOrderBO") PurchaseOrderBO purchaseOrderBO) {
+        return ejbRef.registrarPO(purchaseOrderBO);
     }
 
     @WebMethod(operationName = "consultarPO")

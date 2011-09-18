@@ -15,6 +15,7 @@ import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteExcep
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,17 +61,17 @@ public class POManagementTest {
         ComercioBO com = new ComercioBO();
         com.setNit("nitPrueba");
         com.setNombre("nombrePrueba");
-        poBo.setComercio(com);
+        poBo.setComercioBO(com);
 
         ItemPOBO it = new ItemPOBO();
         it.setCantidad(1);
         ProductoBO prod = new ProductoBO();
         prod.setCategoria("categoriaPrueba");
         prod.setNombre("nombreProdPrueba");
-        it.setProducto(prod);
-        Collection<ItemPOBO> items = new ArrayList<ItemPOBO>();
+        it.setProductoBO(prod);
+        List<ItemPOBO> items = new ArrayList<ItemPOBO>();
         items.add(it);
-        poBo.setItems(items);
+        poBo.setItemPOBOList(items);
         beanLocal.registrarPO(poBo);
     }
 
@@ -87,17 +88,17 @@ public class POManagementTest {
         ComercioBO com = new ComercioBO();
         com.setNit("nitPrueba2");
         com.setNombre("nombrePrueba2");
-        poBo.setComercio(com);
+        poBo.setComercioBO(com);
 
         ItemPOBO it = new ItemPOBO();
         it.setCantidad(1);
         ProductoBO prod = new ProductoBO();
         prod.setCategoria("categoriaPrueba2");
         prod.setNombre("nombreProdPrueba2");
-        it.setProducto(prod);
-        Collection<ItemPOBO> items = new ArrayList<ItemPOBO>();
+        it.setProductoBO(prod);
+        List<ItemPOBO> items = new ArrayList<ItemPOBO>();
         items.add(it);
-        poBo.setItems(items);
+        poBo.setItemPOBOList(items);
         String numSeguimiento = beanLocal.registrarPO(poBo);
         Assert.assertEquals(numSeguimiento.substring(0, 3), "nom");
     }

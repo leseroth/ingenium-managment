@@ -15,13 +15,13 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
- * @author marketplace
+ * 
+ * @author Erik
  */
 @Local
 public interface PoManagementLocal {
 
-    public String registrarPO(PurchaseOrderBO po);
+    public String registrarPO(PurchaseOrderBO purchaseOrderBO);
 
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException;
 
