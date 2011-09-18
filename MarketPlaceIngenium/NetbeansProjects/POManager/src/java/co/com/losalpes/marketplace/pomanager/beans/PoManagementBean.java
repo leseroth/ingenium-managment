@@ -39,7 +39,10 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         PurchaseOrder p = new PurchaseOrder(po);
         String numSeguimiento = p.getComercio().getNombre().substring(0, 3) + System.currentTimeMillis();
         p.setNumSeguimiento(numSeguimiento);
-        Query q = em.createNamedQuery("getComercioByNit");
+        Query q = null;
+
+        // Registrar el comercio
+        q = em.createNamedQuery("getComercioByNit");
         q.setParameter("nit", po.getComercio().getNit());
         List<Comercio> com = (List<Comercio>) q.getResultList();
         if (com.isEmpty()) {
@@ -47,6 +50,19 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         } else {
             p.setComercio(com.get(0));
         }
+
+        // Registrar el fabricante si es orden directa
+        if (po.getFabricante() != null && po.getFabricante().getNit() != null) {
+            q = em.createNamedQuery("getFabricanteFromNit");
+            q.setParameter("nit", po.getFabricante().getNit());
+            List<Fabricante> fab = (List<Fabricante>) q.getResultList();
+            if (fab.isEmpty()) {
+                em.persist((p.getFabricante()));
+            } else {
+                p.setFabricante(fab.get(0));
+            }
+        }
+
         Collection<ItemPO> itms = p.getItems();
 
         for (ItemPO item : itms) {
@@ -141,7 +157,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         List<PurchaseOrder> poList = (List<PurchaseOrder>) q.getResultList();
         List<PurchaseOrderBO> poBoList = new ArrayList<PurchaseOrderBO>();
 
-        System.out.println("Total "+poList.size());
+        System.out.println("Total " + poList.size());
         for (PurchaseOrder po : poList) {
             poBoList.add(po.toBO());
         }
