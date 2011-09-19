@@ -10,7 +10,6 @@ import co.com.losalpes.marketplace.pomanager.entities.Fabricante;
 import co.com.losalpes.marketplace.pomanager.entities.ItemPO;
 import co.com.losalpes.marketplace.pomanager.entities.Producto;
 import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.FabricanteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.ArrayList;
@@ -36,20 +35,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
     private EntityManager em;
 
     /**
-     * Recibe el purchaseOrder, si esta presente el fabricante es una orden de compra directa.
-     * <ul>
-     * <li>Si el comercio no existe se crea</li>
-     * <li>Si el fabricante no existe se crea</li>
-     * <li>El producto siempre se crea</li>
-     * <li>Si el fabricante viene, se considera orden directa y se asocia al producto</li>
-     * <li> Si se debe crear el comercio debe tener nit y nombre</li>
-     * <li>Si se debe crear el fabricante debe tener nit y nombre</li>
-     * <li>La orden de compra no debe tener estado, numSeguimiento ni id</li>
-     * <li>El producto debe tener categoria, nombre y precio</li>
-     * </ul>
-     * @param purchaseOrderBO PurchaseOrderBO
-     * @return El numero de seguimiento
-     * @throws Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     * {@inheritDoc}
      */
     @Override
     public String registrarPO(PurchaseOrderBO purchaseOrderBO) throws BussinessException {
@@ -88,7 +74,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         // Registrar el fabricante si es orden directa
         Fabricante fab = purchaseOrder.getFabricante();
         if (fab != null) {
-            query = em.createNamedQuery("getFabricanteFromNit");
+            query = em.createNamedQuery("getFabricanteByNit");
             query.setParameter("nit", purchaseOrderBO.getFabricanteBO().getNit());
             List<Fabricante> fabList = (List<Fabricante>) query.getResultList();
             if (fabList.isEmpty()) {
@@ -128,6 +114,43 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         em.persist(purchaseOrder);
 
         return numSeguimiento;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<PurchaseOrderBO> consultarPOFabricantePorEstado(String nit, String estado) throws BussinessException {
+        // Verificar el estado
+        if (estado != null) {
+            PurchaseOrderState state = PurchaseOrderState.getState(estado);
+            if (state == null) {
+                throw new BussinessException(EXC_INCORRECT_STATE, estado);
+            }
+        }
+
+        Query query;
+        // Verificar que exista el fabricante
+        query = em.createNamedQuery("getFabricanteByNit");
+        query.setParameter("nit", nit);
+        if (query.getResultList().isEmpty()) {
+            throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Fabricante", "nit=" + nit);
+        }
+
+        // Cargar las ordenes de compra del fabricante
+        query = em.createNamedQuery("getPurchaseOrdersByNitFabricante");
+        query.setParameter("nit", nit);
+        List<PurchaseOrder> poFabricanteList = (List<PurchaseOrder>) query.getResultList();
+
+        // Crear el objeto de respuesta
+        List<PurchaseOrderBO> poBOFabricanteList = new ArrayList<PurchaseOrderBO>();
+        for (PurchaseOrder po : poFabricanteList) {
+            if (estado == null || estado.equals(po.getEstado())) {
+                poBOFabricanteList.add(po.toBO());
+            }
+        }
+
+        return poBOFabricanteList;
     }
 
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException {
@@ -204,23 +227,5 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
             throw new ClienteNoExisteException("El cliente especificado no tiene POs asociadas.");
         }
         return posBO;
-    }
-
-    public List<PurchaseOrderBO> consultarPOsFabricante(String nit) throws FabricanteNoExisteException {
-        Query q = em.createNamedQuery("getPOsFabricante");
-        q.setParameter("nit", nit);
-
-        List<PurchaseOrder> poList = (List<PurchaseOrder>) q.getResultList();
-        List<PurchaseOrderBO> poBoList = new ArrayList<PurchaseOrderBO>();
-
-        System.out.println("Total " + poList.size());
-        for (PurchaseOrder po : poList) {
-            poBoList.add(po.toBO());
-        }
-
-        if (poBoList.isEmpty()) {
-            throw new FabricanteNoExisteException("El fabricante especificado no tiene POs asociadas.");
-        }
-        return poBoList;
     }
 }

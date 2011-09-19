@@ -12,9 +12,12 @@ public class Constants {
     public static final String EXC_ENTITY_INCOMPLETE = "Falta informacion para crear el ?";
     public static final String EXC_ENTITY_DETACHED = "No se debe enviar id para ? al momento de crearlo";
     public static final String EXC_ENTITY_TOO_MUCH_INFO = "No se esperaba el campo ?  en ?";
-    public static final String EXC_COMERCIO_NO_EXISTE = "El comercio de nit ? no existe";
-    public static final String EXC_FABRICANTE_NO_EXISTE = "El fabricante de nit ? no existe";
+    public static final String EXC_ENTITY_INEXSISTENT = "La entidad ? identificada por ? no existe";
+    public static final String EXC_INCORRECT_STATE = "El estado ? no es un estado valido";
 
+    /**
+     * Enumeracion para almacenar los estados posibles de una orden de compra
+     */
     public enum PurchaseOrderState {
 
         SolicitadoComercio, AceptadoFabricante, ProcesadoFabricante, EntregadoFabricante,
