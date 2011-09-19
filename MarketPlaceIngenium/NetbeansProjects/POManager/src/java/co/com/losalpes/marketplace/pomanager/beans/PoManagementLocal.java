@@ -15,7 +15,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- * 
+ * Interfaz local de POManagement
  * @author Erik
  */
 @Local

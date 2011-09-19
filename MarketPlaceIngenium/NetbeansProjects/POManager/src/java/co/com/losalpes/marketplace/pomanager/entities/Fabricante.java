@@ -42,6 +42,9 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
         nit = fabricanteBO.getNit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FabricanteBO toBO() {
         FabricanteBO fabricanteBO = new FabricanteBO();
@@ -51,11 +54,17 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
         return fabricanteBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return !isEmptyString(nombre) && !isEmptyString(nit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -63,6 +72,9 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         boolean equals = false;

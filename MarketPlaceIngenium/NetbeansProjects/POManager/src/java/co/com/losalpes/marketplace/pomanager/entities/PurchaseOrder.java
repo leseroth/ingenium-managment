@@ -79,6 +79,9 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PurchaseOrderBO toBO() {
         PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBO();
@@ -98,9 +101,35 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
         return purchaseOrderBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object object) {
+        boolean equals = false;
+        if (object instanceof PurchaseOrder) {
+            PurchaseOrder other = (PurchaseOrder) object;
+            equals = id != null && other.id != null && id.equals(other.id);
+        }
+        return equals;
     }
 
     /**
@@ -199,23 +228,5 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
      */
     public void setItems(List<ItemPO> items) {
         this.items = items;
-    }
-
-    // Search methods
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        boolean equals = false;
-        if (object instanceof PurchaseOrder) {
-            PurchaseOrder other = (PurchaseOrder) object;
-            equals = id != null && other.id != null && id.equals(other.id);
-        }
-        return equals;
     }
 }
