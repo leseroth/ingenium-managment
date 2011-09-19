@@ -1,7 +1,7 @@
 package co.com.losalpes.marketplace.pomanager;
 
 /**
- *
+ * Interfaz empleada para identificar las entidades
  * @author Erik
  */
 public interface MarketPlaceEntity {

@@ -37,10 +37,17 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
 
     /**
      * Recibe el purchaseOrder, si esta presente el fabricante es una orden de compra directa.
-     * - Si el comercio no existe se crea
-     * - Si el fabricante no existe se crea
-     * - Si el producto del fabricante no existe se crea
-     * @param po PurchaseOrderBO
+     * <ul>
+     * <li>Si el comercio no existe se crea</li>
+     * <li>Si el fabricante no existe se crea</li>
+     * <li>El producto siempre se crea</li>
+     * <li>Si el fabricante viene, se considera orden directa y se asocia al producto</li>
+     * <li> Si se debe crear el comercio debe tener nit y nombre</li>
+     * <li>Si se debe crear el fabricante debe tener nit y nombre</li>
+     * <li>La orden de compra no debe tener estado, numSeguimiento ni id</li>
+     * <li>El producto debe tener categoria, nombre y precio</li>
+     * </ul>
+     * @param purchaseOrderBO PurchaseOrderBO
      * @return El numero de seguimiento
      * @throws Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
      */
