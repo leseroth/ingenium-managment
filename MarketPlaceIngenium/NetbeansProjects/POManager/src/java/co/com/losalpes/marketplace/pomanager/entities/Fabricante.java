@@ -5,6 +5,8 @@ import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import static co.com.losalpes.marketplace.pomanager.util.Util.*;
+
 /**
  * Entidad de fabricante
  * @author Erik
@@ -47,6 +49,11 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
         fabricanteBO.setNombre(getNombre());
         fabricanteBO.setNit(getNit());
         return fabricanteBO;
+    }
+
+    @Override
+    public boolean isInfoComplete() {
+        return !isEmptyString(nombre) && !isEmptyString(nit);
     }
 
     @Override

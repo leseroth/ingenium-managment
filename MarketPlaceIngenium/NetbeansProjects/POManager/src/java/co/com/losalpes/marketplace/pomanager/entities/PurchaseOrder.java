@@ -72,7 +72,7 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
             comercio = new Comercio(purchaseOrderBO.getComercioBO());
         }
         if (purchaseOrderBO.getFabricanteBO() != null) {
-            this.setFabricante(new Fabricante(purchaseOrderBO.getFabricanteBO()));
+            fabricante = new Fabricante(purchaseOrderBO.getFabricanteBO());
         }
         for (ItemPOBO itemPOBO : purchaseOrderBO.getItemPOBOList()) {
             items.add(new ItemPO(itemPOBO));
@@ -96,6 +96,11 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
             purchaseOrderBO.getItemPOBOList().add(itemPO.toBO());
         }
         return purchaseOrderBO;
+    }
+
+    @Override
+    public boolean isInfoComplete() {
+        return true;
     }
 
     /**

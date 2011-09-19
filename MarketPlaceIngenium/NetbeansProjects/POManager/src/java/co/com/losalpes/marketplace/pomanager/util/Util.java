@@ -16,4 +16,8 @@ public class Util {
         }
         return numSeguimiento;
     }
+
+    public static boolean isEmptyString(String str) {
+        return str == null || str.trim().length() == 0;
+    }
 }

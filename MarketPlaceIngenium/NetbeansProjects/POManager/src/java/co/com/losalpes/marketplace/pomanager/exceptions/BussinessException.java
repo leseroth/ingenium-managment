@@ -1,27 +1,38 @@
 package co.com.losalpes.marketplace.pomanager.exceptions;
 
+import javax.xml.ws.WebFault;
+
 /**
  *
  * @author Erik
  */
-public class BussinessException extends RuntimeException {
+@WebFault
+public class BussinessException extends Exception {
 
-    private static String createMessage(String msg, String... detail) {
-        if (detail.length != 0) {
-            String[] message = msg.split("?");
-            StringBuilder sb = new StringBuilder();
-            sb.append(message[0]);
-            for (int i = 1; i < message.length; i++) {
-                sb.append(detail[i - 1]);
-                sb.append(message[i]);
-            }
-            msg = sb.toString();
-        }
-
-        return msg;
+    public BussinessException(String msb, String... detail) {
+        super(createMessage(msb, detail));
     }
 
-    public BussinessException(String msg, String... detail) {
-        super(createMessage(msg, detail));
+    private static String createMessage(String msg, String... detail) {
+        StringBuilder sb = new StringBuilder(msg);
+        int counter = 0;
+
+        replace:
+        for (;;) {
+            int index = sb.indexOf("?");
+            if (index == -1) {
+                break replace;
+            } else {
+                if (counter >= detail.length) {
+                    break replace;
+                } else {
+                    sb.deleteCharAt(index);
+                    sb.insert(index, detail[counter]);
+                    counter++;
+                }
+            }
+        }
+
+        return sb.toString();
     }
 }

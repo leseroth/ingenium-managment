@@ -5,6 +5,7 @@ import co.com.losalpes.marketplace.pomanager.bos.ComercioBO;
 import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.FabricanteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
@@ -27,7 +28,7 @@ public class PoManagerPoManagement {
     private PoManagementLocal ejbRef;
 
     @WebMethod(operationName = "registrarPO")
-    public String registrarPO(@WebParam(name = "purchaseOrderBO") PurchaseOrderBO purchaseOrderBO) {
+    public String registrarPO(@WebParam(name = "purchaseOrderBO") PurchaseOrderBO purchaseOrderBO) throws BussinessException {
         return ejbRef.registrarPO(purchaseOrderBO);
     }
 

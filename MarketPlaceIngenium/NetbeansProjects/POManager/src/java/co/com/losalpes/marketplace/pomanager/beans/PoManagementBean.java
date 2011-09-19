@@ -9,11 +9,10 @@ import co.com.losalpes.marketplace.pomanager.entities.Comercio;
 import co.com.losalpes.marketplace.pomanager.entities.Fabricante;
 import co.com.losalpes.marketplace.pomanager.entities.ItemPO;
 import co.com.losalpes.marketplace.pomanager.entities.Producto;
-import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.FabricanteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
-import co.com.losalpes.marketplace.pomanager.util.Util;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,6 +23,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import static co.com.losalpes.marketplace.pomanager.util.Constants.*;
+import static co.com.losalpes.marketplace.pomanager.util.Util.*;
 
 /**
  * 
@@ -37,51 +37,89 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
 
     /**
      * Recibe el purchaseOrder, si esta presente el fabricante es una orden de compra directa.
-     * - El comercio debe existir y tener un nit unico
-     * - El fabricante debe existir y tener un nit unico
-     * - El producto se crea en caso de no existir en la base de datos local
+     * - Si el comercio no existe se crea
+     * - Si el fabricante no existe se crea
+     * - Si el producto del fabricante no existe se crea
      * @param po PurchaseOrderBO
      * @return El numero de seguimiento
      * @throws Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
      */
-    public String registrarPO(PurchaseOrderBO po) throws BussinessException {
-        PurchaseOrder purchaseOrder = new PurchaseOrder(po);
+    @Override
+    public String registrarPO(PurchaseOrderBO purchaseOrderBO) throws BussinessException {
+
+        PurchaseOrder purchaseOrder = new PurchaseOrder(purchaseOrderBO);
         Query query = null;
 
+        // Validar que venga la informacion que es
+        if (purchaseOrder.getEstado() != null || purchaseOrder.getNumSeguimiento() != null || purchaseOrder.getId() != null) {
+            throw new BussinessException(EXC_ENTITY_TOO_MUCH_INFO, "estado, numSeguimiento, id", "PurchaseOrder");
+        }
+
         // Buscar el comercio
+        Comercio com = purchaseOrder.getComercio();
         query = em.createNamedQuery("getComercioByNit");
-        query.setParameter("nit", po.getComercioBO().getNit());
+        query.setParameter("nit", com.getNit());
         List<Comercio> comList = (List<Comercio>) query.getResultList();
         if (comList.isEmpty()) {
-            throw new BussinessException(EXC_COMERCIO_NO_EXISTE, po.getComercioBO().getNit());
+            if (com.isInfoComplete()) {
+                if (com.getId() == null) {
+                    em.persist(com);
+                } else {
+                    throw new BussinessException(EXC_ENTITY_DETACHED, "Comercio");
+                }
+            } else {
+                throw new BussinessException(EXC_ENTITY_INCOMPLETE, "Comercio");
+            }
         } else {
             purchaseOrder.setComercio(comList.get(0));
         }
 
         // Asignar numero de seguimiento
-        String numSeguimiento = Util.getNumSeguimiento(purchaseOrder.getComercio());
+        String numSeguimiento = getNumSeguimiento(purchaseOrder.getComercio());
         purchaseOrder.setNumSeguimiento(numSeguimiento);
 
         // Registrar el fabricante si es orden directa
-        if (po.getFabricanteBO() != null) {
+        Fabricante fab = purchaseOrder.getFabricante();
+        if (fab != null) {
             query = em.createNamedQuery("getFabricanteFromNit");
-            query.setParameter("nit", po.getFabricanteBO().getNit());
+            query.setParameter("nit", purchaseOrderBO.getFabricanteBO().getNit());
             List<Fabricante> fabList = (List<Fabricante>) query.getResultList();
             if (fabList.isEmpty()) {
-                throw new BussinessException(EXC_FABRICANTE_NO_EXISTE, po.getFabricanteBO().getNit());
+                if (fab.isInfoComplete()) {
+                    if (fab.getId() == null) {
+                        em.persist(fab);
+                    } else {
+                        throw new BussinessException(EXC_ENTITY_DETACHED, "Fabricante");
+                    }
+                } else {
+                    throw new BussinessException(EXC_ENTITY_INCOMPLETE, "Fabricante");
+                }
             } else {
-                purchaseOrder.setFabricante(fabList.get(0));
+                fab = fabList.get(0);
+                purchaseOrder.setFabricante(fab);
             }
         }
 
         // Registrar los items
-        Collection<ItemPO> itms = purchaseOrder.getItems();
-        for (ItemPO itemPO : itms) {
+        for (ItemPO itemPO : purchaseOrder.getItems()) {
             Producto producto = itemPO.getProducto();
-            em.find(Producto.class, producto.getId());
+            //Si era compra directa, asociar el fabricante
+            if (fab != null) {
+                producto.setFabricanteAtiende(fab);
+            } else {
+                producto.setFabricanteAtiende(null);
+            }
+            if (producto.isInfoComplete()) {
+                em.persist(producto);
+            } else {
+                throw new BussinessException(EXC_ENTITY_INCOMPLETE, "Producto");
+            }
             em.persist(itemPO);
         }
+
+        purchaseOrder.setEstado(PurchaseOrderState.SolicitadoComercio.toString());
         em.persist(purchaseOrder);
+
         return numSeguimiento;
     }
 
