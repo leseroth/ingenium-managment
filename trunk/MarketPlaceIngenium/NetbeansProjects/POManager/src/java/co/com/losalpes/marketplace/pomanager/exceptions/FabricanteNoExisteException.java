@@ -1,17 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.pomanager.exceptions;
 
 /**
- *
- * @author marketplace
+ * 
+ * @author Erik
  */
-public class FabricanteNoExisteException extends Exception{
+public class FabricanteNoExisteException extends Exception {
 
-    public FabricanteNoExisteException(String msg){
+    public FabricanteNoExisteException(String msg) {
         super(msg);
     }
 }

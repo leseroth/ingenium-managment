@@ -49,6 +49,11 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
     }
 
     @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (getId() != null ? getId().hashCode() : 0);

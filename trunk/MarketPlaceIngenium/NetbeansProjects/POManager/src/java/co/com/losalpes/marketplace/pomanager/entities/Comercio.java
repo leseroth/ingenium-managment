@@ -5,6 +5,8 @@ import co.com.losalpes.marketplace.pomanager.bos.ComercioBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import static co.com.losalpes.marketplace.pomanager.util.Util.*;
+
 /**
  * Entidad del Comercio
  * @author Erik
@@ -47,7 +49,12 @@ public class Comercio implements Serializable, MarketPlaceEntity {
         comercioBO.setNit(getNit());
         return comercioBO;
     }
- 
+
+    @Override
+    public boolean isInfoComplete() {
+        return !isEmptyString(nombre) && !isEmptyString(nit);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

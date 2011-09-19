@@ -92,6 +92,11 @@ public class ReturnMaterialAdvice implements Serializable, MarketPlaceEntity {
         return returnMaterialAdviceBO;
     }
 
+    @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
     /**
      * @return El id
      */

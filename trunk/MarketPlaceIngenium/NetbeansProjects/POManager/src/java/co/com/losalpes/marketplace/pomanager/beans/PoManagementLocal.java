@@ -11,6 +11,7 @@ import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.FabricanteNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,7 +22,7 @@ import javax.ejb.Local;
 @Local
 public interface PoManagementLocal {
 
-    public String registrarPO(PurchaseOrderBO purchaseOrderBO);
+    public String registrarPO(PurchaseOrderBO purchaseOrderBO) throws BussinessException;
 
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException;
 

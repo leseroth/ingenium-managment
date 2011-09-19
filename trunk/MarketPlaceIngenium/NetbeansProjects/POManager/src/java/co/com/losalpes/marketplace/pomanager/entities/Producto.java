@@ -6,9 +6,12 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+import static co.com.losalpes.marketplace.pomanager.util.Util.*;
+
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getAllProductos", query = "SELECT P FROM Producto P ")
+    @NamedQuery(name = "getAllProductos", query = "select p from Producto p "),
+    @NamedQuery(name = "getProductsByFabricante", query = "select p from Producto p where fabricanteAtiende.nit = :nit ")
 })
 public class Producto implements Serializable, MarketPlaceEntity {
 
@@ -24,7 +27,7 @@ public class Producto implements Serializable, MarketPlaceEntity {
     @Column
     @Temporal(value = TemporalType.TIME)
     private Date tiempoFabricacion;
-    @OneToOne
+    @OneToOne(optional = true)
     private Fabricante fabricanteAtiende;
 
     /**
@@ -42,19 +45,28 @@ public class Producto implements Serializable, MarketPlaceEntity {
         nombre = productoBO.getNombre();
         precio = productoBO.getPrecio();
         tiempoFabricacion = productoBO.getTiempoFabricacion();
-        fabricanteAtiende = new Fabricante(productoBO.getFabricanteAtiendeBO());
+        if (productoBO.getFabricanteAtiendeBO() != null) {
+            fabricanteAtiende = new Fabricante(productoBO.getFabricanteAtiendeBO());
+        }
     }
 
     @Override
     public ProductoBO toBO() {
         ProductoBO productoBO = new ProductoBO();
-        productoBO.setId(getId());
-        productoBO.setCategoria(getCategoria());
-        productoBO.setNombre(getNombre());
-        productoBO.setPrecio(getPrecio());
-        productoBO.setTiempoFabricacion(getTiempoFabricacion());
-        productoBO.setFabricanteAtiendeBO(getFabricanteAtiende().toBO());
+        productoBO.setId(id);
+        productoBO.setCategoria(categoria);
+        productoBO.setNombre(nombre);
+        productoBO.setPrecio(precio);
+        productoBO.setTiempoFabricacion(tiempoFabricacion);
+        if (fabricanteAtiende != null) {
+            productoBO.setFabricanteAtiendeBO(fabricanteAtiende.toBO());
+        }
         return productoBO;
+    }
+
+    @Override
+    public boolean isInfoComplete() {
+        return !isEmptyString(nombre) && !isEmptyString(categoria) && precio != null;
     }
 
     @Override
