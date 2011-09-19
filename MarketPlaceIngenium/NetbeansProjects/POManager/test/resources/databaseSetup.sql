@@ -44,14 +44,14 @@ insert into producto(id,categoria,nombre,precio,fabricanteAtiende_id)
 --Crear PurchaseOrders Directo
 insert into itempo(id,cantidad,producto_id) values (1,100,2011);
 insert into purchaseorder(id,estado,numSeguimiento,comercio_id,fabricante_id)
-  values(1,'Solicitado','num001',101,201);
+  values(1,'SolicitadoComercio','num001',101,201);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (1,1);
 
 insert into itempo(id,cantidad,producto_id) values (2,110,2012);
 insert into itempo(id,cantidad,producto_id) values (3,120,2013);
 insert into itempo(id,cantidad,producto_id) values (4,130,2014);
 insert into purchaseorder(id,estado,numSeguimiento,comercio_id,fabricante_id)
-  values(2,'Solicitado','num002',101,201);
+  values(2,'SolicitadoComercio','num002',101,201);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (2,2);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (2,3);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (2,4);
@@ -59,12 +59,12 @@ insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (2,4);
 -- Crear purchaseOrder normal
 insert into itempo(id,cantidad,producto_id) values (5,200,2021);
 insert into purchaseorder(id,estado,numSeguimiento,comercio_id)
-  values(3,'Solicitado','num003',102);
+  values(3,'SolicitadoComercio','num003',102);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (3,5);
 
 insert into itempo(id,cantidad,producto_id) values (6,210,2022);
 insert into itempo(id,cantidad,producto_id) values (7,220,2023);
 insert into purchaseorder(id,estado,numSeguimiento,comercio_id)
-  values(4,'Solicitado','num004',102);
+  values(4,'SolicitadoComercio','num004',102);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (4,6);
 insert into purchaseorder_itempo(PurchaseOrder_id,items_id) values (4,7);

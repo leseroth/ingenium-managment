@@ -13,8 +13,8 @@ import static co.com.losalpes.marketplace.pomanager.util.Util.*;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P "),
-    @NamedQuery(name = "getFabricanteFromNit", query = "select f from Fabricante f where f.nit = :nit")
+    @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P "), //Verificar
+    @NamedQuery(name = "getFabricanteByNit", query = "select f from Fabricante f where f.nit = :nit")
 })
 public class Fabricante implements Serializable, MarketPlaceEntity {
 
