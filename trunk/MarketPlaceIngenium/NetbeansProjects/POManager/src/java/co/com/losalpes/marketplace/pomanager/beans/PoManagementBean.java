@@ -25,7 +25,7 @@ import static co.com.losalpes.marketplace.pomanager.util.Constants.*;
 import static co.com.losalpes.marketplace.pomanager.util.Util.*;
 
 /**
- * 
+ * Bean que implementa los metodos del servicio web relacionado a las ordenes de compra
  * @author Erik
  */
 @Stateless

@@ -85,6 +85,9 @@ public class DispatchAdvice implements Serializable, MarketPlaceEntity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DispatchAdviceBO toBO() {
         DispatchAdviceBO dispatchAdviceBO = new DispatchAdviceBO();
@@ -106,11 +109,17 @@ public class DispatchAdvice implements Serializable, MarketPlaceEntity {
         return dispatchAdviceBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -118,6 +127,9 @@ public class DispatchAdvice implements Serializable, MarketPlaceEntity {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         boolean equals = false;

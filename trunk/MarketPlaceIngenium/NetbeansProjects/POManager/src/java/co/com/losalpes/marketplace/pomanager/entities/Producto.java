@@ -50,6 +50,9 @@ public class Producto implements Serializable, MarketPlaceEntity {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductoBO toBO() {
         ProductoBO productoBO = new ProductoBO();
@@ -64,11 +67,17 @@ public class Producto implements Serializable, MarketPlaceEntity {
         return productoBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return !isEmptyString(nombre) && !isEmptyString(categoria) && precio != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -76,6 +85,9 @@ public class Producto implements Serializable, MarketPlaceEntity {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         boolean equals = false;

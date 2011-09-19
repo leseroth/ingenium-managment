@@ -8,13 +8,13 @@ public interface MarketPlaceEntity {
 
     /**
      * Convierte la entidad en su respectivo BussinesObject
-     * @return
+     * @return El business object que representa a esta entidad
      */
     public MarketPlaceBO toBO();
 
     /**
      * Determina si la informacion presente en el objeto es suficiente para almacenarlo
-     * @return
+     * @return true si la informacion esta completa
      */
     public boolean isInfoComplete();
 }

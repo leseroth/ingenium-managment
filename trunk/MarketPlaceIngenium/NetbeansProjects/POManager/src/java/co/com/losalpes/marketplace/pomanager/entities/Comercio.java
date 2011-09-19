@@ -41,6 +41,9 @@ public class Comercio implements Serializable, MarketPlaceEntity {
         nit = comercioBO.getNit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ComercioBO toBO() {
         ComercioBO comercioBO = new ComercioBO();
@@ -50,11 +53,17 @@ public class Comercio implements Serializable, MarketPlaceEntity {
         return comercioBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return !isEmptyString(nombre) && !isEmptyString(nit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -62,6 +71,9 @@ public class Comercio implements Serializable, MarketPlaceEntity {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         boolean equals = false;

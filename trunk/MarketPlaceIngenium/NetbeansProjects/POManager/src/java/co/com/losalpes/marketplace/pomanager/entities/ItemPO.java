@@ -39,6 +39,9 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
         producto = new Producto(itemPOBO.getProductoBO());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ItemPOBO toBO() {
         ItemPOBO itemPOBO = new ItemPOBO();
@@ -48,11 +51,17 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
         return itemPOBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -60,6 +69,9 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object object) {
         boolean equals = false;

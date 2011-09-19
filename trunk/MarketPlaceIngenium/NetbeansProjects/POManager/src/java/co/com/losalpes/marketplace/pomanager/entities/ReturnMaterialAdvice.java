@@ -71,6 +71,9 @@ public class ReturnMaterialAdvice implements Serializable, MarketPlaceEntity {
         da = new DispatchAdvice(returnMaterialAdviceBO.getDispatchAdviceBO());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ReturnMaterialAdviceBO toBO() {
         ReturnMaterialAdviceBO returnMaterialAdviceBO = new ReturnMaterialAdviceBO();
@@ -92,9 +95,35 @@ public class ReturnMaterialAdvice implements Serializable, MarketPlaceEntity {
         return returnMaterialAdviceBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInfoComplete() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object object) {
+        boolean equals = false;
+        if (object instanceof ReturnMaterialAdvice) {
+            ReturnMaterialAdvice other = (ReturnMaterialAdvice) object;
+            equals = id != null && other.id != null && id.equals(other.id);
+        }
+        return equals;
     }
 
     /**
@@ -193,22 +222,5 @@ public class ReturnMaterialAdvice implements Serializable, MarketPlaceEntity {
      */
     public void setDa(DispatchAdvice da) {
         this.da = da;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        boolean equals = false;
-        if (object instanceof ReturnMaterialAdvice) {
-            ReturnMaterialAdvice other = (ReturnMaterialAdvice) object;
-            equals = id != null && other.id != null && id.equals(other.id);
-        }
-        return equals;
     }
 }
