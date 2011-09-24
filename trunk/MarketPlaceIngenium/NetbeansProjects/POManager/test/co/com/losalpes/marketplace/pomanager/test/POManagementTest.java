@@ -13,7 +13,6 @@ import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
