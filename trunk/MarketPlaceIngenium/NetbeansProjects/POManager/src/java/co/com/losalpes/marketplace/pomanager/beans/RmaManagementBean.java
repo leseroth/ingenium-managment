@@ -11,9 +11,7 @@ import co.com.losalpes.marketplace.pomanager.entities.ItemPO;
 import co.com.losalpes.marketplace.pomanager.entities.Producto;
 import co.com.losalpes.marketplace.pomanager.entities.PurchaseOrder;
 import co.com.losalpes.marketplace.pomanager.entities.ReturnMaterialAdvice;
-import co.com.losalpes.marketplace.pomanager.exceptions.AvisoDespachoNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,19 +29,19 @@ public class RmaManagementBean implements RmaManagementRemote, RmaManagementLoca
     @PersistenceContext
     private EntityManager em;
 
-    public String registrarRMA(ReturnMaterialAdviceBO rma) throws OrdenCompraNoExisteException, AvisoDespachoNoExisteException {
+    public String registrarRMA(ReturnMaterialAdviceBO rma) throws BussinessException {
         Query q = em.createNamedQuery("getPoFromNumSeguimiento");
         q.setParameter("numSeguimiento", rma.getPurchaseOrderBO().getNumSeguimiento());
         List<PurchaseOrder> po = (List<PurchaseOrder>) q.getResultList();
         if (po.isEmpty()) {
-            throw new OrdenCompraNoExisteException("La orden de compra con el número de seguimiento " +
+            throw new BussinessException("La orden de compra con el número de seguimiento " +
                     rma.getPurchaseOrderBO().getNumSeguimiento() + " no existe.");
         }
         q = em.createNamedQuery("getDaFromNumSeguimiento");
         q.setParameter("numSeguimiento", rma.getDispatchAdviceBO().getNumSeguimiento());
         List<DispatchAdvice> da = (List<DispatchAdvice>) q.getResultList();
         if (da.isEmpty()) {
-            throw new AvisoDespachoNoExisteException("El aviso de despacho con el número de seguimiento " +
+            throw new BussinessException("El aviso de despacho con el número de seguimiento " +
                     rma.getDispatchAdviceBO().getNumSeguimiento() + " no existe.");
         }
         ReturnMaterialAdvice rm = new ReturnMaterialAdvice(rma);
@@ -65,12 +63,12 @@ public class RmaManagementBean implements RmaManagementRemote, RmaManagementLoca
         return numSeguimiento;
     }
 
-    public List<ReturnMaterialAdviceBO> consultarRMAsComercio(String nit) throws ClienteNoExisteException {
+    public List<ReturnMaterialAdviceBO> consultarRMAsComercio(String nit) throws BussinessException {
         Query q = em.createNamedQuery("getRMAsComercio");
         q.setParameter("nit", nit);
         List<ReturnMaterialAdvice> rmas = (List<ReturnMaterialAdvice>) q.getResultList();
         if (rmas.isEmpty()) {
-            throw new ClienteNoExisteException("El cliente especificado no tiene RMAs asociadas");
+            throw new BussinessException("El cliente especificado no tiene RMAs asociadas");
         }
         List<ReturnMaterialAdviceBO> rmasBO = new ArrayList<ReturnMaterialAdviceBO>();
         for (int i = 0; i < rmas.size(); i++) {
@@ -79,12 +77,12 @@ public class RmaManagementBean implements RmaManagementRemote, RmaManagementLoca
         return rmasBO;
     }
 
-    public List<ReturnMaterialAdviceBO> consultarRMAsFabricante(String nit) throws ClienteNoExisteException {
+    public List<ReturnMaterialAdviceBO> consultarRMAsFabricante(String nit) throws BussinessException {
         Query q = em.createNamedQuery("getRMAsFabricante");
         q.setParameter("nit", nit);
         List<ReturnMaterialAdvice> rmas = (List<ReturnMaterialAdvice>) q.getResultList();
         if (rmas.isEmpty()) {
-            throw new ClienteNoExisteException("El cliente especificado no tiene RMAs asociadas");
+            throw new BussinessException("El cliente especificado no tiene RMAs asociadas");
         }
         List<ReturnMaterialAdviceBO> rmasBO = new ArrayList<ReturnMaterialAdviceBO>();
         for (int i = 0; i < rmas.size(); i++) {

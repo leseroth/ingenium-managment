@@ -9,8 +9,6 @@ import co.com.losalpes.marketplace.pomanager.entities.Comercio;
 import co.com.losalpes.marketplace.pomanager.entities.Fabricante;
 import co.com.losalpes.marketplace.pomanager.entities.ItemPO;
 import co.com.losalpes.marketplace.pomanager.entities.Producto;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -194,18 +192,18 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         return updated;
     }
 
-    public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException {
+    public PurchaseOrderBO consultarPO(String numSeguimiento) throws BussinessException {
         Query q = em.createNamedQuery("getPoFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
         List<PurchaseOrder> po = (List<PurchaseOrder>) q.getResultList();
         if (po.isEmpty()) {
-            throw new OrdenCompraNoExisteException("La orden de compra con el número de seguimiento " +
+            throw new BussinessException("La orden de compra con el número de seguimiento " +
                     numSeguimiento + " no existe");
         }
         return po.get(0).toBO();
     }
 
-    public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws OrdenCompraNoExisteException {
+    public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws BussinessException {
         try {
             Query q = em.createNamedQuery("getPoFromNumSeguimiento");
             q.setParameter("numSeguimiento", numSeguimiento);
@@ -225,23 +223,23 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
             }
             em.flush();
         } catch (Exception ex) {
-            throw new OrdenCompraNoExisteException("La orden de compra con el número de seguimiento " +
+            throw new BussinessException("La orden de compra con el número de seguimiento " +
                     numSeguimiento + " no existe");
         }
         return true;
     }
 
-    public ComercioBO consultarComercioPorPO(String numSeguimiento) throws OrdenCompraNoExisteException {
+    public ComercioBO consultarComercioPorPO(String numSeguimiento) throws BussinessException {
         Query q = em.createNamedQuery("getPoFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
         List<PurchaseOrder> pos = (List<PurchaseOrder>) q.getResultList();
         if (pos.isEmpty()) {
-            throw new OrdenCompraNoExisteException("La orden de compra con el número de seguimiento " + numSeguimiento + " no existe.");
+            throw new BussinessException("La orden de compra con el número de seguimiento " + numSeguimiento + " no existe.");
         }
         return pos.get(0).getComercio().toBO();
     }
 
-    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws ClienteNoExisteException {
+    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException {
         Query q = em.createNamedQuery("getAllPOs");
         List<PurchaseOrder> pos = (List<PurchaseOrder>) q.getResultList();
         List<PurchaseOrderBO> posBO = new ArrayList<PurchaseOrderBO>();
@@ -251,7 +249,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
             }
         }
         if (posBO.isEmpty()) {
-            throw new ClienteNoExisteException("El cliente especificado no tiene POs asociadas.");
+            throw new BussinessException("El cliente especificado no tiene POs asociadas.");
         }
         return posBO;
     }

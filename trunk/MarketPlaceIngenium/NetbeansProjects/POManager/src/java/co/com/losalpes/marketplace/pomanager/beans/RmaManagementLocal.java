@@ -6,9 +6,7 @@
 package co.com.losalpes.marketplace.pomanager.beans;
 
 import co.com.losalpes.marketplace.pomanager.bos.ReturnMaterialAdviceBO;
-import co.com.losalpes.marketplace.pomanager.exceptions.AvisoDespachoNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -18,9 +16,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface RmaManagementLocal {
-    public String registrarRMA(ReturnMaterialAdviceBO rma) throws OrdenCompraNoExisteException, AvisoDespachoNoExisteException;
+    public String registrarRMA(ReturnMaterialAdviceBO rma) throws BussinessException;
 
-    public List<ReturnMaterialAdviceBO> consultarRMAsComercio(String nit) throws ClienteNoExisteException;
+    public List<ReturnMaterialAdviceBO> consultarRMAsComercio(String nit) throws BussinessException;
 
-    public List<ReturnMaterialAdviceBO> consultarRMAsFabricante(String nit) throws ClienteNoExisteException;
+    public List<ReturnMaterialAdviceBO> consultarRMAsFabricante(String nit) throws BussinessException;
 }

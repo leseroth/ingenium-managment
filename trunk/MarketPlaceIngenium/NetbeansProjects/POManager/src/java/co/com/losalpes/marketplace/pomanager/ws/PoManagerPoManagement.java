@@ -6,8 +6,6 @@ import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -91,13 +89,13 @@ public class PoManagerPoManagement {
     }
 
     @WebMethod(operationName = "consultarPO")
-    public PurchaseOrderBO consultarPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws OrdenCompraNoExisteException {
+    public PurchaseOrderBO consultarPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarPO(numSeguimiento);
     }
 
     @WebMethod(operationName = "establecerFabricanteAtiende")
     public boolean establecerFabricanteAtiende(@WebParam(name = "numSeguimiento") String numSeguimiento, @WebParam(name = "fabricante") FabricanteBO fabricante,
-            @WebParam(name = "productosAtiende") List<ProductoBO> productosAtiende) throws OrdenCompraNoExisteException {
+            @WebParam(name = "productosAtiende") List<ProductoBO> productosAtiende) throws BussinessException {
         return ejbRef.establecerFabricanteAtiende(numSeguimiento, fabricante, productosAtiende);
     }
 
@@ -105,7 +103,7 @@ public class PoManagerPoManagement {
      * Web service operation
      */
     @WebMethod(operationName = "consultarComercioPorPO")
-    public ComercioBO consultarComercioPorPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws OrdenCompraNoExisteException {
+    public ComercioBO consultarComercioPorPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarComercioPorPO(numSeguimiento);
     }
 
@@ -113,7 +111,7 @@ public class PoManagerPoManagement {
      * Web service operation
      */
     @WebMethod(operationName = "consultarPOsComercio")
-    public java.util.List<PurchaseOrderBO> consultarPOsComercio(@WebParam(name = "nit") String nit) throws ClienteNoExisteException {
+    public java.util.List<PurchaseOrderBO> consultarPOsComercio(@WebParam(name = "nit") String nit) throws BussinessException {
         return ejbRef.consultarPOsComercio(nit);
     }
 }

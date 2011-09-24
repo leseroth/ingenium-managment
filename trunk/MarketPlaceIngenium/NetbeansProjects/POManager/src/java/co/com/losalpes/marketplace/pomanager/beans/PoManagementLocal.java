@@ -8,8 +8,6 @@ import co.com.losalpes.marketplace.pomanager.bos.ComercioBO;
 import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.List;
 import javax.ejb.Local;
@@ -70,11 +68,11 @@ public interface PoManagementLocal {
      */
     public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws BussinessException;
 
-    public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException;
+    public PurchaseOrderBO consultarPO(String numSeguimiento) throws BussinessException;
 
-    public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws OrdenCompraNoExisteException;
+    public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws BussinessException;
 
-    public ComercioBO consultarComercioPorPO(String numSeguimiento) throws OrdenCompraNoExisteException;
+    public ComercioBO consultarComercioPorPO(String numSeguimiento) throws BussinessException;
 
-    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws ClienteNoExisteException;
+    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException;
 }

@@ -5,7 +5,7 @@
 
 package co.com.losalpes.marketplace.pomanager.ws;
 
-import co.com.losalpes.marketplace.pomanager.exceptions.*;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import co.com.losalpes.marketplace.pomanager.beans.RmaManagementLocal;
 import co.com.losalpes.marketplace.pomanager.bos.ReturnMaterialAdviceBO;
 import javax.ejb.EJB;
@@ -26,7 +26,7 @@ public class PoManagerRmaManagement {
 
     @WebMethod(operationName = "registrarRMA")
     public String registrarRMA(@WebParam(name = "rma")
-    ReturnMaterialAdviceBO rma) throws OrdenCompraNoExisteException, AvisoDespachoNoExisteException {
+    ReturnMaterialAdviceBO rma) throws BussinessException {
         return ejbRef.registrarRMA(rma);
     }
 
@@ -35,7 +35,7 @@ public class PoManagerRmaManagement {
      */
     @WebMethod(operationName = "consultarRMAsComercio")
     public java.util.List<ReturnMaterialAdviceBO> consultarRMAsComercio(@WebParam(name = "nit")
-    String nit) throws ClienteNoExisteException {
+    String nit) throws BussinessException {
         return ejbRef.consultarRMAsComercio(nit);
     }
 
@@ -44,7 +44,7 @@ public class PoManagerRmaManagement {
      */
     @WebMethod(operationName = "consultarRMAsFabricante")
     public java.util.List<ReturnMaterialAdviceBO> consultarRMAsFabricante(@WebParam(name = "nit")
-    String nit) throws ClienteNoExisteException {
+    String nit) throws BussinessException {
         return ejbRef.consultarRMAsFabricante(nit);
     }
 }
