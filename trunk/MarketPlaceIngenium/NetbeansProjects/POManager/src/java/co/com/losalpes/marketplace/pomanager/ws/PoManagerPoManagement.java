@@ -33,7 +33,7 @@ public class PoManagerPoManagement {
      * <li>Si el fabricante no existe se crea</li>
      * <li>El producto siempre se crea</li>
      * <li>Si el fabricante viene, se considera orden directa y se asocia al producto</li>
-     * <li> Si se debe crear el comercio debe tener nit y nombre</li>
+     * <li>Si se debe crear el comercio debe tener nit y nombre</li>
      * <li>Si se debe crear el fabricante debe tener nit y nombre</li>
      * <li>La orden de compra no debe tener estado, numSeguimiento ni id</li>
      * <li>El producto debe tener categoria, nombre y precio</li>
