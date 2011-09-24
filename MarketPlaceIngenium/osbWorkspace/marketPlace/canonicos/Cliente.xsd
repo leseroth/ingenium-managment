@@ -27,9 +27,9 @@
     			minOccurs="0" maxOccurs="1">
     		</element>
     		<element name="solicitudes" type="tns:SolicitudRegistro"
-    			minOccurs="1" maxOccurs="unbounded">
+    			minOccurs="0" maxOccurs="unbounded">
     		</element>
-    		<element name="contactos" type="tns:Contacto" minOccurs="1"
+    		<element name="contactos" type="tns:Contacto" minOccurs="0"
     			maxOccurs="unbounded">
     		</element>
     		<element name="razonSocial" type="string" minOccurs="0"

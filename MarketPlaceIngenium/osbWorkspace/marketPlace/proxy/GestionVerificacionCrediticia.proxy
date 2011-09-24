@@ -63,12 +63,7 @@
         </con:actions>
       </con:stage>
     </con:pipeline>
-    <con:pipeline type="response" name="PipelineDataCredito_response">
-      <con:stage name="stage1">
-        <con:context/>
-        <con:actions/>
-      </con:stage>
-    </con:pipeline>
+    <con:pipeline type="response" name="PipelineDataCredito_response"></con:pipeline>
     <con:pipeline type="request" name="PipelineConfecamaras_request">
       <con:stage name="transformation">
         <con:context>
@@ -92,29 +87,7 @@
         </con:actions>
       </con:stage>
     </con:pipeline>
-    <con:pipeline type="response" name="PipelineConfecamaras_response">
-      <con:stage name="tranformatonResponse">
-        <con:context>
-          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
-        </con:context>
-        <con:actions>
-          <con2:replace varName="body" contents-only="true">
-            <con1:id>_ActionId-8292972538174936266-d91da25.12f186f4959.-69f7</con1:id>
-            <con2:location>
-              <con1:xpathText>.</con1:xpathText>
-            </con2:location>
-            <con2:expr>
-              <con1:xqueryTransform>
-                <con1:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarComfecamaraResponse"/>
-                <con1:param name="vcResponse1">
-                  <con1:path>$body/*</con1:path>
-                </con1:param>
-              </con1:xqueryTransform>
-            </con2:expr>
-          </con2:replace>
-        </con:actions>
-      </con:stage>
-    </con:pipeline>
+    <con:pipeline type="response" name="PipelineConfecamaras_response"></con:pipeline>
     <con:pipeline type="request" name="PipelinePairNode1_request">
       <con:stage name="transformation">
         <con:context/>

@@ -1,8 +1,9 @@
+xquery version "1.0" encoding "Cp1252";
 (:: pragma bea:global-element-parameter parameter="$serviceRequestWS_ServiceRequestQueryPage_Output1" element="ns0:ServiceRequestWS_ServiceRequestQueryPage_Output" location="../../../business/wsdls/crmOnDemand/ServiceRequest.wsdl" ::)
 
+declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdSolicitud/";
 declare namespace ns1 = "urn:/crmondemand/xml/servicerequest";
 declare namespace ns0 = "urn:crmondemand/ws/servicerequest/10/2004";
-declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdSolicitud/";
 
 declare function xf:ConsultarIdSolicitud($serviceRequestWS_ServiceRequestQueryPage_Output1 as element(ns0:ServiceRequestWS_ServiceRequestQueryPage_Output))
     as xs:string {
