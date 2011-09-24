@@ -14,17 +14,19 @@ public class Constants {
     public static final String EXC_ENTITY_TOO_MUCH_INFO = "No se esperaba el campo ?  en ?";
     public static final String EXC_ENTITY_INEXSISTENT = "La entidad ? identificada por ? no existe";
     public static final String EXC_INCORRECT_STATE = "El estado ? no es un estado valido";
+    public static final String EXC_INCORRECT_ARGUMENT = "Los siguientes argumentos tienen valores no validos: ?";
+    public static final String EXC_PO_STATE_UPDATE = "Error en la actualizacion de estado: ?";
 
     /**
      * Enumeracion para almacenar los estados posibles de una orden de compra
      */
     public enum PurchaseOrderState {
 
-        SolicitadoComercio, AceptadoFabricante, ProcesadoFabricante, EntregadoFabricante,
-        AceptadoComercio, RechazadoComercio, RecibidoFabricante;
+        SolicitadoComercio, AceptadoFabricante, RechazadoFabricante, ProcesadoFabricante,
+        EntregadoFabricante, AceptadoComercio, RechazadoComercio, RecibidoFabricante;
 
-        public boolean isValidStateChange(PurchaseOrderState before, PurchaseOrderState after) {
-            return before.compareTo(after) >= 0;
+        public static boolean isValidStateChange(PurchaseOrderState before, PurchaseOrderState after) {
+            return before.compareTo(after) < 0;
         }
 
         public static PurchaseOrderState getState(String strState) {

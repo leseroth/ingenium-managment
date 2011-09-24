@@ -153,6 +153,47 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         return poBOFabricanteList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws BussinessException {
+        boolean updated = false;
+
+        if (numSeguimiento == null) {
+            throw new BussinessException(EXC_INCORRECT_ARGUMENT, "numSeguimiento=null");
+        } else {
+            PurchaseOrderState stateAfter = PurchaseOrderState.getState(estado);
+
+            if (stateAfter == null) {
+                throw new BussinessException(EXC_INCORRECT_STATE, estado);
+            }
+
+            Query q = em.createNamedQuery("getPurchaseOrderByNumSeguimiento");
+            q.setParameter("numSeguimiento", numSeguimiento);
+            List<PurchaseOrder> poList = q.getResultList();
+            PurchaseOrder po = null;
+            if (poList.isEmpty()) {
+                throw new BussinessException(EXC_PO_STATE_UPDATE, "No existe el numero de seguimiento " + numSeguimiento);
+            } else if (poList.size() != 1) {
+                throw new BussinessException(EXC_PO_STATE_UPDATE, "Esta repetido el numero de seguimiento " + numSeguimiento);
+            } else {
+                po = poList.get(0);
+            }
+
+            PurchaseOrderState stateBefore = PurchaseOrderState.getState(po.getEstado());
+            if (PurchaseOrderState.isValidStateChange(stateBefore, stateAfter)) {
+                po.setEstado(stateAfter.toString());
+                em.persist(po);
+                em.flush();
+                updated = true;
+            } else {
+                throw new BussinessException(EXC_PO_STATE_UPDATE, "No se puede pasar de " + stateBefore +" a "+stateAfter);
+            }
+        }
+
+        return updated;
+    }
+
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException {
         Query q = em.createNamedQuery("getPoFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
@@ -162,20 +203,6 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
                     numSeguimiento + " no existe");
         }
         return po.get(0).toBO();
-    }
-
-    public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws OrdenCompraNoExisteException {
-        try {
-            Query q = em.createNamedQuery("getPoFromNumSeguimiento");
-            q.setParameter("numSeguimiento", numSeguimiento);
-            PurchaseOrder po = (PurchaseOrder) q.getSingleResult();
-            po.setEstado(estado);
-            em.flush();
-        } catch (Exception ex) {
-            throw new OrdenCompraNoExisteException("La orden de compra con el número de seguimiento " +
-                    numSeguimiento + " no existe");
-        }
-        return false;
     }
 
     public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws OrdenCompraNoExisteException {

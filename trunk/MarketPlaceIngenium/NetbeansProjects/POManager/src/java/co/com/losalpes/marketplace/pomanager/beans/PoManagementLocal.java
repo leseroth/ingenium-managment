@@ -54,9 +54,23 @@ public interface PoManagementLocal {
      */
     public List<PurchaseOrderBO> consultarPOFabricantePorEstado(String nit, String estado) throws BussinessException;
 
-    public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException;
+    /**
+     * Actualiza el estado de una PurchaseOrder por el numero de seguimiento.
+     * <ul>
+     * <li>El numero de seguimiento debe existir</li>
+     * <li>El estado debe ser un estado valido</li>
+     * <li>La transicion de estados debe ser valida, es decir no se puede pacar de AceptadoFabricante a SolicitadoComercio</li>
+     * <li>El numero de seguimiento y el estado son obligatorios</li>
+     * </ul>
+     * @param numSeguimiento Numero de seguimiento de la orden de compra
+     * @param estado Nuevo estado de la orden de compra
+     * @return true en caso de que la actualizacion haya sido correcta, false en caso contrario
+     * @throws BussinessException En caso de que alguna de las condiciones no se cumpla
+     * @see co.com.losalpes.marketplace.pomanager.util.PurchaseOrderState
+     */
+    public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws BussinessException;
 
-    public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws OrdenCompraNoExisteException;
+    public PurchaseOrderBO consultarPO(String numSeguimiento) throws OrdenCompraNoExisteException;
 
     public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws OrdenCompraNoExisteException;
 

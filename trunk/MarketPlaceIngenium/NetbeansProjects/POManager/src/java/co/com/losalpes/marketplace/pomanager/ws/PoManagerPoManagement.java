@@ -69,14 +69,30 @@ public class PoManagerPoManagement {
         return ejbRef.consultarPOFabricantePorEstado(nit, estado);
     }
 
+    /**
+     * Actualiza el estado de una PurchaseOrder por el numero de seguimiento.
+     * <ul>
+     * <li>El numero de seguimiento debe existir</li>
+     * <li>El estado debe ser un estado valido</li>
+     * <li>La transicion de estados debe ser valida, es decir no se puede pacar de AceptadoFabricante a SolicitadoComercio</li>
+     * <li>El numero de seguimiento y el estado son obligatorios</li>
+     * </ul>
+     * @param numSeguimiento Numero de seguimiento de la orden de compra
+     * @param estado Nuevo estado de la orden de compra
+     * @return true en caso de que la actualizacion haya sido correcta, false en caso contrario
+     * @throws BussinessException En caso de que alguna de las condiciones no se cumpla
+     * @see co.com.losalpes.marketplace.pomanager.util.PurchaseOrderState
+     */
+    @WebMethod(operationName = "actualizarEstadoPO")
+    public boolean actualizarEstadoPO(
+            @WebParam(name = "numSeguimiento") String numSeguimiento, @WebParam(name = "estado") String estado)
+            throws BussinessException {
+        return ejbRef.actualizarEstadoPO(numSeguimiento, estado);
+    }
+
     @WebMethod(operationName = "consultarPO")
     public PurchaseOrderBO consultarPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws OrdenCompraNoExisteException {
         return ejbRef.consultarPO(numSeguimiento);
-    }
-
-    @WebMethod(operationName = "actualizarEstadoPO")
-    public boolean actualizarEstadoPO(@WebParam(name = "numSeguimiento") String numSeguimiento, @WebParam(name = "estado") String estado) throws OrdenCompraNoExisteException {
-        return ejbRef.actualizarEstadoPO(numSeguimiento, estado);
     }
 
     @WebMethod(operationName = "establecerFabricanteAtiende")
