@@ -13,7 +13,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <cus:Name><xsl:value-of select="nombre"></xsl:value-of></cus:Name>
         <cus:stCategoria><xsl:value-of select="categoria"></xsl:value-of></cus:stCategoria>
         <cus:stTipo><xsl:value-of select="tipo"></xsl:value-of></cus:stTipo>         
-        <cus:plEstado>Activo</cus:plEstado>        
+        <cus:plEstado><xsl:value-of select="estado"></xsl:value-of></cus:plEstado>        
         <cus:stReferencia><xsl:value-of select="referencia"></xsl:value-of></cus:stReferencia>       
         </cus:CustomObject3>
         </xsl:for-each>

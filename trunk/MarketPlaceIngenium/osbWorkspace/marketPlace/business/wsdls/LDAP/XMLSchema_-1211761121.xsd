@@ -26,6 +26,10 @@
 
 <xs:element name="obtenerNitUsuarioResponse" type="tns:obtenerNitUsuarioResponse"></xs:element>
 
+<xs:element name="recuperarClave" type="tns:recuperarClave"></xs:element>
+
+<xs:element name="recuperarClaveResponse" type="tns:recuperarClaveResponse"></xs:element>
+
 <xs:complexType name="autenticar">
 <xs:sequence>
 <xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
@@ -41,6 +45,7 @@
 
 <xs:complexType name="usuarioBO">
 <xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
 <xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
@@ -53,18 +58,6 @@
 <xs:complexType name="UsuarioNoExisteException">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="obtenerNitUsuario">
-<xs:sequence>
-<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="obtenerNitUsuarioResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -87,6 +80,31 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="obtenerNitUsuario">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerNitUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClave">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClaveResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="cambiarClave">
 <xs:sequence>
 <xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
@@ -105,6 +123,7 @@
 <xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="rol" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

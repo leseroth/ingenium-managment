@@ -6,9 +6,16 @@
 
     <complexType name="RegistrarUsuario">
     	<sequence>
-    		<element name="nit" type="string" minOccurs="1" maxOccurs="1"></element>
-    		<element name="rol" type="string" minOccurs="1" maxOccurs="1"></element>
-    		<element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="nit" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="rol" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="nombre" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="email" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     

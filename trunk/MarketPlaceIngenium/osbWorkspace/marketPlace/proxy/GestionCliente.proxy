@@ -3,10 +3,10 @@
   <ser:coreEntry isProxy="true" isEnabled="true">
     <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
       <con4:wsdl ref="marketPlace/proxy/wsdls/GestionCliente/GestionCliente"/>
-      <con4:binding>
+      <con4:port>
         <con4:name>GestionClienteSOAP</con4:name>
         <con4:namespace>http://marketplace.losalpes.com.co/GestionCliente</con4:namespace>
-      </con4:binding>
+      </con4:port>
       <con4:selector type="SOAP body"/>
       <con4:WSI-compliant>false</con4:WSI-compliant>
     </ser:binding>
@@ -63,7 +63,7 @@
 	<wsse:Security>
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
    </soap-env:Header>]]></con1:xqueryText>
@@ -134,7 +134,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -217,7 +217,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -296,7 +296,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -359,7 +359,7 @@
             <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7a9e</con1:id>
             <con3:expr>
               <con1:xsltTransform>
-                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoRequest"/>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoModificarClienteRequest"/>
                 <con1:input>$body/*</con1:input>
               </con1:xsltTransform>
             </con3:expr>
@@ -516,7 +516,7 @@
 	<wsse:Security>
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
    </soap-env:Header>]]></con2:xqueryText>
@@ -719,7 +719,7 @@
 	<wsse:Security>
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
    </soap-env:Header>]]></con2:xqueryText>
@@ -796,7 +796,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -975,7 +975,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -1114,7 +1114,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -1253,7 +1253,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -1392,7 +1392,7 @@
 	<wsse:Security>
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
    </soap-env:Header>]]></con2:xqueryText>
@@ -1703,7 +1703,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -1869,6 +1869,78 @@
               </con:pipeline-node>
             </con:flow>
           </con:branch>
+          <con:branch name="ModificarContacto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode6">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e18</con1:id>
+                    <con2:service ref="marketPlace/business/GestionContacto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>ContactUpdate</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e00</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7dd0</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7df1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoRequest"/>
+                            <con1:param name="modificarContacto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7de0</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoResponse"/>
+                            <con1:param name="contactWS_ContactUpdate_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
           <con:branch name="ActualizarEstadoCliente">
             <con:operator>equals</con:operator>
             <con:value/>
@@ -1910,7 +1982,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -2101,6 +2173,84 @@
               </con:route-node>
             </con:flow>
           </con:branch>
+          <con:branch name="ConsultarContacto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="ConsultarContacto">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e76</con1:id>
+                    <con2:service ref="marketPlace/business/GestionContacto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>ContactQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e5b</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e5d</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e45</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarContactoRequest"/>
+                            <con1:param name="consultarContacto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:assign varName="respuesta">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7b6e</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>$body/*</con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e34</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarContactoResponse"/>
+                            <con1:param name="contactWS_ContactQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
           <con:branch name="ConsultarComision">
             <con:operator>equals</con:operator>
             <con:value/>
@@ -2122,7 +2272,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -2210,6 +2360,78 @@
               </con:route-node>
             </con:flow>
           </con:branch>
+          <con:branch name="CrearProductos">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7dc4</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3Insert</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7da9</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d7d</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d7b</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosRequest"/>
+                            <con1:param name="crearProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d69</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3Insert_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
           <con:branch name="CerrarSolicitud">
             <con:operator>equals</con:operator>
             <con:value/>
@@ -2259,7 +2481,7 @@
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
                 <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Uniandes1</wsse:Password>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -2324,6 +2546,220 @@
                 <con:request>PipelinePairNode7_request</con:request>
                 <con:response>PipelinePairNode7_response</con:response>
               </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarProducto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode8">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d2c</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3QueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d20</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cf7</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cfb</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductoRequest"/>
+                            <con1:param name="consultarProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ce4</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductoResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ModificarProducto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode9">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ccd</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3Update</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cbf</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cb1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ca1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ModificarProductoRequest"/>
+                            <con1:param name="modificarProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7c96</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ModificarProductoResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3Update_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarClientes">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode10">
+                <con:context/>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e86</con1:id>
+                    <con2:service ref="marketPlace/business/GestionCliente" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>AccountQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e4d</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e3a</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e73</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClientesRequest"/>
+                            <con1:param name="consultarClientes1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e63</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClientesResponse"/>
+                            <con1:param name="accountWS_AccountQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
             </con:flow>
           </con:branch>
           <con:default-branch>

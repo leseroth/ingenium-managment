@@ -11,6 +11,7 @@ declare function xf:CrearUsuarioRequest($registrarUsuario1 as element(ns0:regist
             <nit>{ data($registrarUsuario1/nit) }</nit>
             <rol>{ data($registrarUsuario1/rol) }</rol>
             <nombre>{ data($registrarUsuario1/nombre) }</nombre>
+            <email>{ data($registrarUsuario1/email) }</email>
         </ns1:crearUsuario>
 };
 

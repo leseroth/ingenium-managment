@@ -11,10 +11,87 @@
 			<xsd:import namespace="http://marketplace.losalpes.com.co"
 				schemaLocation="GestionCliente.xsd">
 			</xsd:import>
-			<xsd:import
-				namespace="http://ws.transact.marketplace.losalpes.com.co/"
-				schemaLocation="../../../business/wsdls/transactManager/XMLSchema_765612391.xsd">
-			</xsd:import></xsd:schema>    
+			</xsd:schema>    
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://marketplace.losalpes.com.co/GestionCliente">
+        	<xsd:element name="ConsultarContacto">
+        		<xsd:complexType>
+        			<xsd:sequence>
+        				<xsd:element name="in" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ConsultarContactoResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="CrearProductos">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="in" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="CrearProductosResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ModificarContacto">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="in" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ModificarContactoResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ConsultarProducto">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="in" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ConsultarProductoResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ModificarProducto">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="in" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="ModificarProductoResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element></xsd:schema>
     </wsdl:types>
 	<wsdl:message name="CrearClienteRequest">
 		<wsdl:part name="parameters" element="ma:crearCliente"></wsdl:part>
@@ -33,6 +110,12 @@
 	</wsdl:message>
 	<wsdl:message name="ConsultarClienteResponse">
 		<wsdl:part name="parameters" element="ma:consultarClienteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesRequest">
+		<wsdl:part name="parameters" element="ma:consultarClientes"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesResponse">
+		<wsdl:part name="parameters" element="ma:consultarClientesResponse"></wsdl:part>
 	</wsdl:message>
 	<wsdl:message name="ConsultarComisionRequest">
 		<wsdl:part name="parameters" element="ma:consultarComision"></wsdl:part>
@@ -94,6 +177,36 @@
 	<wsdl:message name="ConsultarProductosClienteResponse">
 		<wsdl:part name="parameters" element="ma:consultarProductosClienteResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="ConsultarContactoRequest">
+		<wsdl:part name="parameters" element="ma:consultarContacto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarContactoResponse">
+		<wsdl:part name="parameters" element="ma:consultarContactoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CrearProductosRequest">
+		<wsdl:part name="parameters" element="ma:crearProducto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CrearProductosResponse">
+		<wsdl:part name="parameters" element="ma:crearProductoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarContactoRequest">
+		<wsdl:part name="parameters" element="ma:modificarContacto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarContactoResponse">
+		<wsdl:part name="parameters" element="ma:modificarContactoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarProductoRequest">
+		<wsdl:part name="parameters" element="ma:consultarProducto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarProductoResponse">
+		<wsdl:part name="parameters" element="ma:consultarProductoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarProductoRequest">
+		<wsdl:part name="parameters" element="ma:modificarProducto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarProductoResponse">
+		<wsdl:part name="parameters" element="ma:modificarProductoResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:portType name="GestionCliente">
 		<wsdl:operation name="CrearCliente">
 			<wsdl:input message="tns:CrearClienteRequest" />
@@ -106,6 +219,10 @@
 		<wsdl:operation name="ConsultarCliente">
 			<wsdl:input message="tns:ConsultarClienteRequest"></wsdl:input>
 			<wsdl:output message="tns:ConsultarClienteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientes">
+			<wsdl:input message="tns:ConsultarClientesRequest"></wsdl:input>
+			<wsdl:output message="tns:ConsultarClientesResponse"></wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="ConsultarComision">
 			<wsdl:input message="tns:ConsultarComisionRequest"></wsdl:input>
@@ -147,6 +264,26 @@
 					<wsdl:input message="tns:ConsultarProductosClienteRequest"></wsdl:input>
 					<wsdl:output message="tns:ConsultarProductosClienteResponse"></wsdl:output>
 				</wsdl:operation>
+				<wsdl:operation name="ConsultarContacto">
+					<wsdl:input message="tns:ConsultarContactoRequest"></wsdl:input>
+					<wsdl:output message="tns:ConsultarContactoResponse"></wsdl:output>
+				</wsdl:operation>
+				<wsdl:operation name="CrearProductos">
+					<wsdl:input message="tns:CrearProductosRequest"></wsdl:input>
+					<wsdl:output message="tns:CrearProductosResponse"></wsdl:output>
+				</wsdl:operation>
+				<wsdl:operation name="ModificarContacto">
+					<wsdl:input message="tns:ModificarContactoRequest"></wsdl:input>
+					<wsdl:output message="tns:ModificarContactoResponse"></wsdl:output>
+				</wsdl:operation>
+				<wsdl:operation name="ConsultarProducto">
+					<wsdl:input message="tns:ConsultarProductoRequest"></wsdl:input>
+					<wsdl:output message="tns:ConsultarProductoResponse"></wsdl:output>
+				</wsdl:operation>
+				<wsdl:operation name="ModificarProducto">
+					<wsdl:input message="tns:ModificarProductoRequest"></wsdl:input>
+					<wsdl:output message="tns:ModificarProductoResponse"></wsdl:output>
+				</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="GestionClienteSOAP" type="tns:GestionCliente">
 
@@ -182,6 +319,19 @@
 
 			<soap:operation
 				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientes">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes" />
 			<wsdl:input>
 
 				<soap:body use="literal" />
@@ -309,8 +459,60 @@
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="ConsultarProductosCliente">
+
 			<soap:operation
 				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarContacto">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarContacto" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CrearProductos">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearProductos" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModificarContacto">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarProducto">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProducto" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -318,6 +520,17 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="ModificarProducto">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
 	</wsdl:binding>
 
 	<wsdl:service name="GestionCliente">

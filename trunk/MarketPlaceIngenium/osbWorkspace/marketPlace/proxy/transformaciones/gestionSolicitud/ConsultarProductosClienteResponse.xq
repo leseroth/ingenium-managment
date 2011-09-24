@@ -10,25 +10,25 @@ declare function xf:ConsultarProductosClienteResponse($customObject3WS_CustomObj
     as element(ns0:consultarProductosClienteResponse) {
         <ns0:consultarProductosClienteResponse>
             {
-                for $CustomObject3 in $customObject3WS_CustomObject3QueryPage_Output1/ns2:ListOfCustomObject3/ns2:CustomObject3,
-                    $ListOfCustomObject3 in $customObject3WS_CustomObject3QueryPage_Output1/ns2:ListOfCustomObject3
+            	for $ListOfCustomObject3 in $customObject3WS_CustomObject3QueryPage_Output1/ns2:ListOfCustomObject3,
+                    $CustomObject3 in $ListOfCustomObject3/ns2:CustomObject3
                 return
                     <ns0:productos>
                         {
-                            for $CustomObject3Id in $ListOfCustomObject3/ns2:CustomObject3[1]/ns2:CustomObject3Id
+                            for $CustomObject3Id in $CustomObject3/ns2:CustomObject3Id
                             return
                                 <id>{ data($CustomObject3Id) }</id>
                         }
-                        <nombre>{ data($ListOfCustomObject3/ns2:CustomObject3[1]/ns2:Name) }</nombre>
-                        <categoria>{ data($ListOfCustomObject3/ns2:CustomObject3[1]/ns2:stCategoria) }</categoria>
+                        <nombre>{ data($CustomObject3/ns2:Name) }</nombre>
+                        <categoria>{ data($CustomObject3/ns2:stCategoria) }</categoria>
                         {
-                            for $stTipo in $ListOfCustomObject3/ns2:CustomObject3[1]/ns2:stTipo
+                            for $stTipo in $CustomObject3/ns2:stTipo
                             return
                                 <tipo>{ data($stTipo) }</tipo>
                         }
-                        <estado>{ data($ListOfCustomObject3/ns2:CustomObject3[1]/ns2:plEstado) }</estado>
+                        <estado>{ data($CustomObject3/ns2:plEstado) }</estado>
                         {
-                            for $stReferencia in $ListOfCustomObject3/ns2:CustomObject3[1]/ns2:stReferencia
+                            for $stReferencia in $CustomObject3/ns2:stReferencia
                             return
                                 <referencia>{ data($stReferencia) }</referencia>
                         }

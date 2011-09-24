@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCorreoElectronico/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionCorreoElectronico" targetNamespace="http://marketplace.losalpes.com.co/GestionCorreoElectronico/" xmlns:xsd1="http://marketplace.losalpes.com.co">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCorreoElectronico" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionCorreoElectronico" targetNamespace="http://marketplace.losalpes.com.co/GestionCorreoElectronico" xmlns:xsd1="http://marketplace.losalpes.com.co">
   <wsdl:types>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     	<xsd:import namespace="http://marketplace.losalpes.com.co"
