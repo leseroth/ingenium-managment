@@ -1,4 +1,4 @@
-package co.com.losalpes.marketplace.pomanager.exceptions;
+package co.com.losalpes.marketplace.mailer.exceptions;
 
 import javax.xml.ws.WebFault;
 

@@ -1,36 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.mailer.bos;
 
 import java.util.List;
 
 /**
- *
+ * Representa un email a ser enviado
  * @author marketplace
  */
 public class EmailBO {
 
     private List<String> to;
-    private String from;
-    private String password;
     private List<String> cc;
     private List<String> bcc;
+    private String from;
+    private String password;
     private String subject;
     private String message;
-    private List<AttachmentBO> attachments;
+    private List<String> attachments;
 
-    public EmailBO(){
-
+    /**
+     * Constructor por defecto
+     */
+    public EmailBO() {
     }
 
-    public List<AttachmentBO> getAttachments() {
+    public List<String> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<AttachmentBO> attachments) {
+    public void setAttachments(List<String> attachments) {
         this.attachments = attachments;
     }
 
