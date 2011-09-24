@@ -400,17 +400,39 @@
       <xs:element name="return" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="actualizarEstadoPO" bindingOperationName="actualizarEstadoPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="actualizarEstadoPO" bindingOperationName="actualizarEstadoPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ActualizacionCorrecta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:actualizarEstadoPO>
-         <!--Optional:-->
-         <numSeguimiento>gero et</numSeguimiento>
-         <!--Optional:-->
-         <estado>sonoras imperio</estado>
+         <numSeguimiento>num004</numSeguimiento>
+         <estado>RechazadoFabricante</estado>
       </ws:actualizarEstadoPO>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarComercioPorPO" bindingOperationName="consultarComercioPorPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IncorrectoEstado"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarEstadoPO>
+         <numSeguimiento>num001</numSeguimiento>
+         <estado>EstadoQueNoExiste</estado>
+      </ws:actualizarEstadoPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IncorrectoCambio"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarEstadoPO>
+         <numSeguimiento>num003</numSeguimiento>
+         <estado>SolicitadoComercio</estado>
+      </ws:actualizarEstadoPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IncorrectoNumSeguimiento"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarEstadoPO>
+         <numSeguimiento>numSeguimientoMalo</numSeguimiento>
+         <estado>RechazadoFabricante</estado>
+      </ws:actualizarEstadoPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarComercioPorPO" bindingOperationName="consultarComercioPorPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:consultarComercioPorPO>
