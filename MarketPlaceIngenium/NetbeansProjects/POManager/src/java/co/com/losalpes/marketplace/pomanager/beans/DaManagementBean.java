@@ -10,9 +10,7 @@ import co.com.losalpes.marketplace.pomanager.entities.Fabricante;
 import co.com.losalpes.marketplace.pomanager.entities.ItemPO;
 import co.com.losalpes.marketplace.pomanager.entities.Producto;
 import co.com.losalpes.marketplace.pomanager.entities.PurchaseOrder;
-import co.com.losalpes.marketplace.pomanager.exceptions.AvisoDespachoNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.ClienteNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,7 +28,7 @@ public class DaManagementBean implements DaManagementRemote, DaManagementLocal {
     @PersistenceContext
     private EntityManager em;
 
-    public String registrarDA(DispatchAdviceBO da, String numSeguimientoPo) throws OrdenCompraNoExisteException {
+    public String registrarDA(DispatchAdviceBO da, String numSeguimientoPo) throws BussinessException {
         DispatchAdvice aviso = new DispatchAdvice(da);
         String numSeguimiento = "DA-" + numSeguimientoPo + "-" + System.currentTimeMillis();
         da.setNumSeguimiento(numSeguimiento);
@@ -39,7 +37,7 @@ public class DaManagementBean implements DaManagementRemote, DaManagementLocal {
         q.setParameter("numSeguimiento", numSeguimientoPo);
         List<PurchaseOrder> po = (List<PurchaseOrder>) q.getResultList();
         if (po.isEmpty()) {
-            throw new OrdenCompraNoExisteException("La orden de compra especificada no existe");
+            throw new BussinessException("La orden de compra especificada no existe");
         }
         da.setPo(po.get(0).toBO());
 
@@ -70,23 +68,23 @@ public class DaManagementBean implements DaManagementRemote, DaManagementLocal {
         return numSeguimiento;
     }
 
-    public DispatchAdviceBO consultarDA(String numSeguimiento) throws AvisoDespachoNoExisteException {
+    public DispatchAdviceBO consultarDA(String numSeguimiento) throws BussinessException {
         Query q = em.createNamedQuery("getDaFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
         DispatchAdvice da = (DispatchAdvice) q.getSingleResult();
         if (da == null) {
-            throw new AvisoDespachoNoExisteException("El aviso de despacho con el número de seguimiento " +
+            throw new BussinessException("El aviso de despacho con el número de seguimiento " +
                     numSeguimiento + " no existe.");
         }
         return da.toBO();
     }
 
-    public List<DispatchAdviceBO> consultarDAsFabricante(String nit) throws ClienteNoExisteException {
+    public List<DispatchAdviceBO> consultarDAsFabricante(String nit) throws BussinessException {
         Query q = em.createNamedQuery("getDaByFabricante");
         q.setParameter("nit", nit);
         List<DispatchAdvice> das = (List<DispatchAdvice>) q.getResultList();
         if (das.isEmpty()) {
-            throw new ClienteNoExisteException("El cliente especificado no tiene DAs asociadas");
+            throw new BussinessException("El cliente especificado no tiene DAs asociadas");
         }
         List<DispatchAdviceBO> dasBO = new ArrayList<DispatchAdviceBO>();
         for (int i = 0; i < das.size(); i++) {
@@ -95,18 +93,18 @@ public class DaManagementBean implements DaManagementRemote, DaManagementLocal {
         return dasBO;
     }
 
-    public DispatchAdviceBO consultarDAnumSeguimientoPO(String numSeguimiento) throws AvisoDespachoNoExisteException, OrdenCompraNoExisteException {
+    public DispatchAdviceBO consultarDAnumSeguimientoPO(String numSeguimiento) throws BussinessException {
         Query q = em.createNamedQuery("getPoFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
         List<PurchaseOrder> pos = (List<PurchaseOrder>) q.getResultList();
         if (pos.isEmpty()) {
-            throw new OrdenCompraNoExisteException("La orden de compra especificada no existe");
+            throw new BussinessException("La orden de compra especificada no existe");
         }
         q = em.createNamedQuery("getDaByNumSeguimientoPO");
         q.setParameter("numSeguimiento", numSeguimiento);
         List<DispatchAdvice> das = (List<DispatchAdvice>) q.getResultList();
         if (das.isEmpty()) {
-            throw new AvisoDespachoNoExisteException("No existe aviso de despacho asociado a la PO especificada");
+            throw new BussinessException("No existe aviso de despacho asociado a la PO especificada");
         }
         return das.get(0).toBO();
     }
