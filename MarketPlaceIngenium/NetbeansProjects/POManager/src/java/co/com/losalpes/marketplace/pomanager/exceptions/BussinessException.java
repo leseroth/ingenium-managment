@@ -7,7 +7,7 @@ import javax.xml.ws.WebFault;
  * @author Erik
  */
 @WebFault
-public class BussinessException extends RuntimeException {
+public class BussinessException extends Exception {
 
     public BussinessException(String msb, String... detail) {
         super(createMessage(msb, detail));

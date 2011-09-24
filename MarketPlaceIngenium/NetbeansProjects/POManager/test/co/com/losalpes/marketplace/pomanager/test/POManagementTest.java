@@ -11,6 +11,7 @@ import co.com.losalpes.marketplace.pomanager.bos.FabricanteBO;
 import co.com.losalpes.marketplace.pomanager.bos.ItemPOBO;
 import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,7 +53,7 @@ public class POManagementTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws BussinessException {
         PurchaseOrderBO poBo = new PurchaseOrderBO();
         poBo.setEntrega(new Date());
         poBo.setEstado("PRUEBA");
@@ -79,7 +80,7 @@ public class POManagementTest {
     }
 
     @Test
-    public void registrarPO(){
+    public void registrarPO() throws BussinessException{
     PurchaseOrderBO poBo = new PurchaseOrderBO();
         poBo.setEntrega(new Date());
         poBo.setEstado("PRUEBA");
