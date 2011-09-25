@@ -2,12 +2,13 @@
 <xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
   <ser:coreEntry isProxy="true" isEnabled="true">
     <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
-      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionPO/GestionPO"/>
+      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionPO/PoManagerPoManagementService"/>
       <con4:port>
-        <con4:name>GestionPOSOAP</con4:name>
-        <con4:namespace>http://marketplace.losalpes.com.co/GestionPO</con4:namespace>
+        <con4:name>PoManagerPoManagementPort</con4:name>
+        <con4:namespace>http://ws.pomanager.marketplace.losalpes.com.co/</con4:namespace>
       </con4:port>
       <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
     </ser:binding>
     <ser:monitoring isEnabled="false">
       <ser:aggregationInterval>10</ser:aggregationInterval>
@@ -111,28 +112,15 @@
             <con:value/>
             <con:flow>
               <con:route-node name="RouteNode1">
-                <con:context/>
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
                 <con:actions>
                   <con1:route>
                     <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-78ad</con2:id>
                     <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con1:operation>actualizarEstadoPO</con1:operation>
-                    <con1:outboundTransform>
-                      <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-721e</con2:id>
-                        <con3:location>
-                          <con2:xpathText>.</con2:xpathText>
-                        </con3:location>
-                        <con3:expr>
-                          <con2:xqueryTransform>
-                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/ActualizarEstadoPORequest"/>
-                            <con2:param name="actualizarEstadoPO1">
-                              <con2:path>$body/*</con2:path>
-                            </con2:param>
-                          </con2:xqueryTransform>
-                        </con3:expr>
-                      </con3:replace>
-                    </con1:outboundTransform>
+                    <con1:outboundTransform></con1:outboundTransform>
                     <con1:responseTransform/>
                   </con1:route>
                 </con:actions>
@@ -144,23 +132,22 @@
             <con:value/>
             <con:flow>
               <con:route-node name="RouteNode2">
-                <con:context/>
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
                 <con:actions>
                   <con1:route>
                     <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-7876</con2:id>
                     <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con1:operation>registrarPO</con1:operation>
                     <con1:outboundTransform>
-                      <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-71ae</con2:id>
-                        <con3:location>
-                          <con2:xpathText>.</con2:xpathText>
-                        </con3:location>
+                      <con3:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-3614027752594144527-51798254.1329c639244.-7f33</con2:id>
                         <con3:expr>
                           <con2:xqueryTransform>
-                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/RegistrarPORequest"/>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/PODirect"/>
                             <con2:param name="registrarPO1">
-                              <con2:path>$body/*</con2:path>
+                              <con2:path>$body/ws1:registrarPO</con2:path>
                             </con2:param>
                           </con2:xqueryTransform>
                         </con3:expr>
@@ -350,6 +337,24 @@
                         </con3:expr>
                       </con3:replace>
                     </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarPOFabricantePorEstado">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-908920760597468382--2a6a25d7.13279c079c7.-7fef</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarPOFabricantePorEstado</con1:operation>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
                   </con1:route>
                 </con:actions>
               </con:route-node>
