@@ -1,0 +1,55 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="PurchaseOrderDirect"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+     xmlns:cor="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="PurchaseOrderDirect">
+        <plnk:role name="PurchaseOrderDirectProvider">
+            <plnk:portType name="client:PurchaseOrderDirect"/>
+        </plnk:role>
+        <plnk:role name="PurchaseOrderDirectRequester">
+            <plnk:portType name="client:PurchaseOrderDirectCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <bpws:propertyAlias propertyName="cor:NumSeguimiento" messageType="ns1:registrarPOResponse" part="parameters"
+         query="/ns1:registrarPOResponse/return" xmlns:ns1="http://ws.pomanager.marketplace.losalpes.com.co/"/>
+    <bpws:propertyAlias propertyName="cor:NumSegumientoAprobar" messageType="client:PurchaseOrderDirectAprobar"
+         part="abcde" query="/client:aprobacion/client:numSeguimiento"/>
+    <bpws:propertyAlias propertyName="cor:NumSeguimiento" messageType="client:PurchaseOrderDirectAprobar"
+         part="abcde" query="/client:aprobacion/client:numSeguimiento"/>
+    <wsdl:import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset"
+         location="PurchaseOrderDirect_Properties.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+                 schemaLocation="xsd/PurchaseOrderDirect.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="PurchaseOrderDirectResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:message name="PurchaseOrderDirectRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="PurchaseOrderDirectAprobar">
+        <wsdl:part name="abcde" element="client:aprobacion"/>
+    </wsdl:message>
+    <wsdl:portType name="PurchaseOrderDirectCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:PurchaseOrderDirectResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PurchaseOrderDirect">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:PurchaseOrderDirectRequestMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="Aprobar">
+            <wsdl:input message="client:PurchaseOrderDirectAprobar"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
