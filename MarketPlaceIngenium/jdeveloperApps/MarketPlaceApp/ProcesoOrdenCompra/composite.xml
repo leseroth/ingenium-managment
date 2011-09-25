@@ -12,8 +12,6 @@
            xmlns:ui="http://xmlns.oracle.com/soa/designer/">
   <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoOrdenCompra/PurchaseOrder"
           location="PurchaseOrder.wsdl" importType="wsdl"/>
-  <import namespace="http://marketplace.losalpes.com.co/GestionPO"
-          location="GestionPO.wsdl" importType="wsdl"/>
   <import namespace="http://marketplace.losalpes.com.co/GestionOfertas"
           location="GestionSubasta.wsdl" importType="wsdl"/>
   <import namespace="http://marketplace.losalpes.com.co/GestionCliente"
@@ -22,18 +20,35 @@
           location="BAM.wsdl" importType="wsdl"/>
   <import namespace="http://marketplace.losalpes.com.co/GestionCorreoElectronico/"
           location="GestionCorreoElectronico.wsdl" importType="wsdl"/>
+  <import namespace="http://ws.pomanager.marketplace.losalpes.com.co/"
+          location="PoManagerPoManagementService.wsdl" importType="wsdl"/>
+  <import namespace="http://ws.pomanager.marketplace.losalpes.com.co/"
+          location="PoManagerPoManagementServiceWrapper.wsdl"
+          importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+          location="PurchaseOrderDirect.wsdl" importType="wsdl"/>
+  <import namespace="http://ws.pomanager.marketplace.losalpes.com.co/"
+          location="PoManagerPoManagementServiceWrapper1.wsdl"
+          importType="wsdl"/>
   <service name="purchaseorder_client_ep" ui:wsdlLocation="PurchaseOrder.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace_jws/ProcesoOrdenCompra/PurchaseOrder#wsdl.interface(PurchaseOrder)"/>
     <binding.ws port="http://xmlns.oracle.com/MarketPlace_jws/ProcesoOrdenCompra/PurchaseOrder#wsdl.endpoint(purchaseorder_client_ep/PurchaseOrder_pt)"/>
   </service>
+  <service name="purchaseorderdirect_client_ep"
+           ui:wsdlLocation="PurchaseOrderDirect.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect#wsdl.interface(PurchaseOrderDirect)"
+                    callbackInterface="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect#wsdl.interface(PurchaseOrderDirectCallback)"/>
+    <binding.ws port="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect#wsdl.endpoint(purchaseorderdirect_client_ep/PurchaseOrderDirect_pt)"/>
+    <callback>
+      <binding.ws port="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect#wsdl.endpoint(purchaseorderdirect_client_ep/PurchaseOrderDirectCallback_pt)"/>
+    </callback>
+  </service>
   <component name="PurchaseOrder">
     <implementation.bpel src="PurchaseOrder.bpel"/>
   </component>
-  <reference name="GestionPO" ui:wsdlLocation="GestionPO.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionPO#wsdl.interface(GestionPO)"/>
-    <binding.ws port="http://marketplace.losalpes.com.co/GestionPO#wsdl.endpoint(GestionPO/GestionPOSOAP)"
-                location="GestionPO.wsdl" soapVersion="1.1"/>
-  </reference>
+  <component name="PurchaseOrderDirect" version="1.1">
+    <implementation.bpel src="PurchaseOrderDirect.bpel"/>
+  </component>
   <reference name="GestionSubasta" ui:wsdlLocation="GestionSubasta.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
     <binding.ws port="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.endpoint(GestionSubastaSOAPQSService/GestionSubastaSOAPQSPort)"
@@ -54,13 +69,18 @@
     <binding.ws port="http://marketplace.losalpes.com.co/GestionCorreoElectronico/#wsdl.endpoint(GestionCorreoElectronico/GestionCorreoElectronicoSOAP)"
                 location="GestionCorreoElectronico.wsdl" soapVersion="1.1"/>
   </reference>
+  <reference name="GestionPO"
+             ui:wsdlLocation="PoManagerPoManagementService.wsdl">
+    <interface.wsdl interface="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.interface(PoManagerPoManagement)"/>
+    <binding.ws port="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.endpoint(PoManagerPoManagementService/PoManagerPoManagementPort)"
+                location="PoManagerPoManagementService.wsdl" soapVersion="1.1">
+      <property name="weblogic.wsee.wsat.transaction.flowOption"
+                type="xs:string" many="false">WSDLDriven</property>
+    </binding.ws>
+  </reference>
   <wire>
     <source.uri>purchaseorder_client_ep</source.uri>
     <target.uri>PurchaseOrder/purchaseorder_client</target.uri>
-  </wire>
-  <wire>
-    <source.uri>PurchaseOrder/GestionPO</source.uri>
-    <target.uri>GestionPO</target.uri>
   </wire>
   <wire>
     <source.uri>PurchaseOrder/GestionSubasta</source.uri>
@@ -77,5 +97,17 @@
   <wire>
     <source.uri>PurchaseOrder/GestionCorreoElectronico</source.uri>
     <target.uri>GestionCorreoElectronico</target.uri>
+  </wire>
+  <wire>
+    <source.uri>PurchaseOrder/GestionPO</source.uri>
+    <target.uri>GestionPO</target.uri>
+  </wire>
+  <wire>
+    <source.uri>purchaseorderdirect_client_ep</source.uri>
+    <target.uri>PurchaseOrderDirect/purchaseorderdirect_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>PurchaseOrderDirect/GestionPO</source.uri>
+    <target.uri>GestionPO</target.uri>
   </wire>
 </composite>
