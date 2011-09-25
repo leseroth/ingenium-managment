@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Properties;
 import javax.ejb.Stateless;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -52,22 +54,28 @@ public class MailerEmailManagementBean implements MailerEmailManagementRemote, M
         }
 
         if (!bienFormados.isEmpty() || !bienFormadosCC.isEmpty() || !bienFormadosBCC.isEmpty()) {
-            EmailBO email = new EmailBO();
-            email.setSubject(subject);
-            email.setTo(bienFormados);
-            email.setCc(bienFormadosCC);
-            email.setBcc(bienFormadosBCC);
-            email.setMessage(message);
-            email.setFrom(remitente);
-            email.setPassword(password);
-            email.setAttachments(attachments);
-            enviarCorreo(email);
+            try {
+                EmailBO email = new EmailBO();
+                email.setSubject(subject);
+                email.setTo(bienFormados);
+                email.setCc(bienFormadosCC);
+                email.setBcc(bienFormadosBCC);
+                email.setMessage(message);
+                email.setFrom(remitente);
+                email.setPassword(password);
+                email.setAttachments(attachments);
+                response = enviarCorreo(email);
+            } catch (AddressException ex) {
+                throw new BussinessException(EXC_EMAIL_SEND, ex.getMessage());
+            } catch (MessagingException ex) {
+                throw new BussinessException(EXC_EMAIL_SEND, ex.getMessage());
+            }
         }
 
         if (malFormados.isEmpty()) {
-            response = "Correos enviados";
+            response = "Correos enviados " + response;
         } else {
-            response = "Los siguientes correos destino estan mal formados y no han podido ser enviados: ";
+            response = response + " Los siguientes correos destino estan mal formados y no han podido ser enviados: ";
             for (String correoMalFormado : malFormados) {
                 response += " " + correoMalFormado;
             }
@@ -101,67 +109,79 @@ public class MailerEmailManagementBean implements MailerEmailManagementRemote, M
      * @param correoElectronico Correo a enviar
      * @throws BussinessException Excepcion al adjuntar un correo o enviar el mensaje
      */
-    private void enviarCorreo(EmailBO correoElectronico) throws BussinessException {
-        try {
-            Properties props = new Properties();
-            props.setProperty("mail.smtp.host", "smtp.gmail.com");
-            props.setProperty("mail.smtp.starttls.enable", "true");
-            props.setProperty("mail.smtp.port", "25");
-            props.setProperty("mail.smtp.user", correoElectronico.getFrom());
-            props.setProperty("mail.smtp.auth", "true");
+    private String enviarCorreo(EmailBO correoElectronico) throws AddressException, MessagingException {
+        String response = "";
 
-            Session session = Session.getDefaultInstance(props);
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(correoElectronico.getFrom()));
-            mimeMessage.setSubject(correoElectronico.getSubject());
-            mimeMessage.setContent(correoElectronico.getMessage(), "text/html");
 
-            for (String to : correoElectronico.getTo()) {
-                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.user", correoElectronico.getFrom());
+        props.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.setFrom(new InternetAddress(correoElectronico.getFrom()));
+        mimeMessage.setSubject(correoElectronico.getSubject());
+        mimeMessage.setContent(correoElectronico.getMessage(), "text/html");
+
+        for (String to : correoElectronico.getTo()) {
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        }
+
+        for (String cc : correoElectronico.getCc()) {
+            mimeMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
+        }
+
+        for (String bcc : correoElectronico.getBcc()) {
+            mimeMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(bcc));
+        }
+
+        List<String> archivosAdjuntos = correoElectronico.getAttachments();
+        if (archivosAdjuntos != null && !archivosAdjuntos.isEmpty()) {
+            List<MimeBodyPart> attachmentList = new ArrayList<MimeBodyPart>();
+
+            for (String archivo : archivosAdjuntos) {
+                MimeBodyPart attachment = null;
+                try {
+                    attachment = null;
+                    File file = new File(archivo);
+                    if (file.exists()) {
+                        attachment = new MimeBodyPart();
+                        attachment.attachFile(file);
+                    } else {
+                        response = response + "No se puede enviar: " + archivo + " ";
+                    }
+                } catch (Exception ex) {
+                    response = response + "No se puede enviar: " + archivo + " ";
+                    attachment = null;
+                }
+                if (attachment != null) {
+                    attachmentList.add(attachment);
+                }
             }
 
-            for (String cc : correoElectronico.getCc()) {
-                mimeMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(cc));
-            }
-
-            for (String bcc : correoElectronico.getBcc()) {
-                mimeMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(bcc));
-            }
-
-            List<String> archivosAdjuntos = correoElectronico.getAttachments();
-            if (archivosAdjuntos != null && archivosAdjuntos.size() > 0) {
+            if (!attachmentList.isEmpty()) {
                 MimeBodyPart messageContent = new MimeBodyPart();
                 messageContent.setContent(correoElectronico.getMessage(), "text/html");
-
                 MimeMultipart mainMultipart = new MimeMultipart();
                 mainMultipart.addBodyPart(messageContent);
-
-                for (String archivo : archivosAdjuntos) {
-                    File file = new File(archivo);
-                    try {
-                        MimeBodyPart atachment = new MimeBodyPart();
-                        atachment.attachFile(file);
-                        mainMultipart.addBodyPart(atachment);
-
-                    } catch (Exception e) {
-                        throw new BussinessException(EXC_ATTACHMENT, archivo);
-                    }
+                for (MimeBodyPart attachment : attachmentList) {
+                    mainMultipart.addBodyPart(attachment);
                 }
-
                 mimeMessage.setContent(mainMultipart);
             }
-
-            mimeMessage.setHeader("X-Mailer", "MarketPlace de los Alpes");
-            mimeMessage.setSentDate(new Date());
-            // Lo enviamos.
-            Transport t = session.getTransport("smtp");
-            t.connect(correoElectronico.getFrom(), correoElectronico.getPassword());
-            t.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-            t.close();
-        } catch (BussinessException be) {
-            throw be;
-        } catch (Exception e) {
-            throw new BussinessException(EXC_EMAIL_SEND, e.getMessage());
         }
+
+        mimeMessage.setHeader("X-Mailer", "MarketPlace de los Alpes");
+        mimeMessage.setSentDate(new Date());
+        // Lo enviamos.
+        Transport t = session.getTransport("smtp");
+        t.connect(correoElectronico.getFrom(), correoElectronico.getPassword());
+        t.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+        t.close();
+
+        return response;
     }
 }
