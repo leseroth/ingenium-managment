@@ -2,11 +2,12 @@
 <xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:env="http://www.bea.com/wli/config/env">
   <ser:coreEntry isProxy="false" isEnabled="true">
     <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
-      <con:wsdl ref="marketPlace/business/wsdls/poManager/PoManagerPoManagement"/>
+      <con:wsdl ref="marketPlace/business/wsdls/poManager/PoManagerPoManagementService"/>
       <con:port>
         <con:name>PoManagerPoManagementPort</con:name>
         <con:namespace>http://ws.pomanager.marketplace.losalpes.com.co/</con:namespace>
       </con:port>
+      <con:WSI-compliant>false</con:WSI-compliant>
     </ser:binding>
     <ser:monitoring isEnabled="false">
       <ser:aggregationInterval>10</ser:aggregationInterval>
@@ -22,7 +23,7 @@
     <tran:provider-id>http</tran:provider-id>
     <tran:inbound>false</tran:inbound>
     <tran:URI>
-      <env:value>http://portal.marketplace.losalpes.com.co:8148/PoManagerPoManagementService/PoManagerPoManagement</env:value>
+      <env:value>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</env:value>
     </tran:URI>
     <tran:outbound-properties>
       <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
