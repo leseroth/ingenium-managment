@@ -12,7 +12,6 @@ import co.com.losalpes.marketplace.pomanager.bos.ItemPOBO;
 import co.com.losalpes.marketplace.pomanager.bos.ProductoBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,13 +107,13 @@ public class POManagementTest {
         try {
             PurchaseOrderBO po = beanLocal.consultarPO("numSeguimiento");
             Assert.fail();
-        } catch (OrdenCompraNoExisteException ex) {
+        } catch (BussinessException ex) {
             
         }
         try{
             PurchaseOrderBO po = beanLocal.consultarPO("nom125478536589");
             Assert.assertEquals(po.getNumSeguimiento(), "nom125478536589");
-        } catch(OrdenCompraNoExisteException ex) {
+        } catch(BussinessException ex) {
             Logger.getLogger(POManagementTest.class.getName()).log(Level.SEVERE, null, ex);
             Assert.fail();
         }
@@ -126,7 +125,7 @@ public class POManagementTest {
             beanLocal.actualizarEstadoPO("nom125478536589", "PRUEBA_ACTUALIZAR");
             PurchaseOrderBO po = beanLocal.consultarPO("nom125478536589");
             Assert.assertEquals(po.getEstado(), "PRUEBA_ACTUALIZAR");
-        } catch (OrdenCompraNoExisteException ex) {
+        } catch (BussinessException ex) {
             Logger.getLogger(POManagementTest.class.getName()).log(Level.SEVERE, null, ex);
             Assert.fail();
         }
@@ -146,7 +145,7 @@ public class POManagementTest {
             productos.add(prod);
             
             beanLocal.establecerFabricanteAtiende("nom125478536589", fabricante, productos);
-        } catch (OrdenCompraNoExisteException ex) {
+        } catch (BussinessException ex) {
             Logger.getLogger(POManagementTest.class.getName()).log(Level.SEVERE, null, ex);
             Assert.fail();
         }

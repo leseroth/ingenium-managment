@@ -7,8 +7,7 @@ package co.com.losalpes.marketplace.pomanager.test;
 
 import co.com.losalpes.marketplace.pomanager.beans.RmaManagementLocal;
 import co.com.losalpes.marketplace.pomanager.bos.ReturnMaterialAdviceBO;
-import co.com.losalpes.marketplace.pomanager.exceptions.AvisoDespachoNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,12 +57,9 @@ public class RmaManagementTest {
         try {
             ReturnMaterialAdviceBO rma = new ReturnMaterialAdviceBO();
             beanLocal.registrarRMA(rma);
-        } catch (OrdenCompraNoExisteException ex) {
+        } catch (BussinessException ex) {
             Logger.getLogger(RmaManagementTest.class.getName()).log(Level.SEVERE, null, ex);
             Assert.fail("No se debe lanzar la excepción de PO no existente");
-        } catch (AvisoDespachoNoExisteException ex) {
-            Logger.getLogger(RmaManagementTest.class.getName()).log(Level.SEVERE, null, ex);
-            Assert.fail("No se debe lanzar la excepción de DA no existente");
-        }
+        } 
     }
 }

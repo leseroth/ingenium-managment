@@ -9,8 +9,7 @@ import co.com.losalpes.marketplace.pomanager.beans.DaManagementLocal;
 import co.com.losalpes.marketplace.pomanager.beans.PoManagementLocal;
 import co.com.losalpes.marketplace.pomanager.bos.DispatchAdviceBO;
 import co.com.losalpes.marketplace.pomanager.bos.PurchaseOrderBO;
-import co.com.losalpes.marketplace.pomanager.exceptions.AvisoDespachoNoExisteException;
-import co.com.losalpes.marketplace.pomanager.exceptions.OrdenCompraNoExisteException;
+import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -52,7 +51,7 @@ public class DaManagementTest {
     }
 
     @Before
-    public void setUp() throws OrdenCompraNoExisteException {
+    public void setUp() throws BussinessException {
         DispatchAdviceBO da = new DispatchAdviceBO();
         String camiones = "camion1;camion2";
         da.setCamiones(camiones);
@@ -71,7 +70,7 @@ public class DaManagementTest {
     }
 
     @Test
-    public void registrarDA() throws OrdenCompraNoExisteException {
+    public void registrarDA() throws BussinessException {
         DispatchAdviceBO da = new DispatchAdviceBO();
         String camiones = "camion1;camion2";
         da.setCamiones(camiones);
@@ -87,7 +86,7 @@ public class DaManagementTest {
         try {
             DispatchAdviceBO da = beanLocal.consultarDA(numSeguimiento);
             Assert.assertTrue(da.getMontoOperacion() == 2000000L);
-        } catch (AvisoDespachoNoExisteException ex) {
+        } catch (BussinessException ex) {
             Logger.getLogger(DaManagementTest.class.getName()).log(Level.SEVERE, null, ex);
             Assert.fail("El DA si existe");
         }
@@ -95,7 +94,7 @@ public class DaManagementTest {
         try{
             DispatchAdviceBO da = beanLocal.consultarDA("numSeguimientoNoExiste");
             Assert.fail("El DA no existe.");
-        } catch(AvisoDespachoNoExisteException ex){
+        } catch(BussinessException ex){
             Logger.getLogger(DaManagementTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
