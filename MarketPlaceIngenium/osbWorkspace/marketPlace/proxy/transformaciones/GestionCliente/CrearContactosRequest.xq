@@ -23,19 +23,13 @@ declare function xf:CrearContactosRequest($crearContacto1 as element(ns0:crearCo
                                         return
                                             <ns1:CellularPhone>{ data($celular) }</ns1:CellularPhone>
                                     }
-                                    <ns1:ContactEmail>{ data($contactos/ns0:email) }</ns1:ContactEmail>
+                                    <ns1:ContactEmail>{ data($contactos/ns0:email) }</ns1:ContactEmail>                                   
                                     <ns1:ContactFirstName>{ data($contactos/ns0:nombre) }</ns1:ContactFirstName>
                                     <ns1:JobTitle>Titulo</ns1:JobTitle>
                                     <ns1:ContactLastName>{ data($contactos/ns0:nombre) }</ns1:ContactLastName>
                                     <ns1:WorkPhone>{ data($contactos/ns0:telefono) }</ns1:WorkPhone>
                                     <ns1:plTipo_de_Identificacin>{ data($contactos/ns0:tipoIdentificacion) }</ns1:plTipo_de_Identificacin>
-                                    {
-                                        for $estado in $contactos/ns0:estado
-                                        return
-                                            <ns1:plEstado_Contacto>{ data($estado) }</ns1:plEstado_Contacto>
-                                    }
                                     <ns1:stNmero_de_Identificacin>{ data($contactos/ns0:numIdentificacion) }</ns1:stNmero_de_Identificacin>
-                                    <ns1:stDireccion>{ data($contactos/ns0:direccion) }</ns1:stDireccion>
                                     <ns1:HomePhone>{ data($contactos/ns0:telefono) }</ns1:HomePhone>
                                 </ns1:Contact>
                         }

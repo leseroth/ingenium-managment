@@ -50,7 +50,7 @@
 			<element name="cliente" type="tns:Cliente"></element>
 		</sequence>
 	</complexType>
-
+	
 	<complexType name="ConsultarClientes">
 		<sequence>
 			<element name="tipoCliente" type="string"></element>
@@ -91,19 +91,9 @@
 		</sequence>
 	</complexType>
 
-	<complexType name="ModificarContacto">
-		<sequence>
-			<element name="contactos" type="tns:Contacto" minOccurs="1"
-				maxOccurs="1">
-			</element>
-		</sequence>
-	</complexType>
+	<complexType name="ModificarContacto"></complexType>
 
-	<complexType name="ModificarContactoResponse">
-		<sequence>
-			<element name="respuesta" type="boolean" minOccurs="1" maxOccurs="1"></element>
-		</sequence>
-	</complexType>
+	<complexType name="ModificarContactoResponse"></complexType>
 
 	<element name="actualizarEstadoCliente" type="tns:ActualizarEstadoCliente"></element>
 
@@ -310,81 +300,4 @@
     <element name="consultarProductosCliente" type="tns:ConsultarProductosCliente"></element>
 
     <element name="consultarProductosClienteResponse" type="tns:ConsultarProductosClienteResponse"></element>
-
-    <complexType name="ConsultarContacto">
-    	<sequence>
-    		<element name="documento" type="string" minOccurs="1"
-    			maxOccurs="1">
-    		</element>
-    		<element name="tipoDocumento" type="string" minOccurs="1" maxOccurs="1"></element>
-    	</sequence>
-    </complexType>
-    
-    <complexType name="ConsultarContactoResponse">
-    	<sequence>
-    		<element name="contacto" type="tns:Contacto" minOccurs="1" maxOccurs="1"></element>
-    	</sequence>
-    </complexType>
-    
-    <complexType name="CrearProducto">
-    	<sequence>
-    		<element name="idCliente" type="string" minOccurs="1" maxOccurs="1"></element>
-    		<element name="productos" type="tns:Producto" minOccurs="1" maxOccurs="unbounded"></element>
-    	</sequence>
-    </complexType>
-    
-    <complexType name="CrearProductoResponse">
-    	<sequence>
-    		<element name="respuesta" type="boolean" minOccurs="1" maxOccurs="unbounded"></element>
-    	</sequence>
-    </complexType>
-    
-    
-
-    
-
-    <element name="crearProducto" type="tns:CrearProducto"></element>
-
-    <element name="crearProductoResponse" type="tns:CrearProductoResponse"></element>
-
-    <element name="consultarContacto" type="tns:ConsultarContacto"></element>
-
-    <element name="consultarContactoResponse" type="tns:ConsultarContactoResponse"></element>
-
-    <complexType name="ModificarProducto">
-    	<sequence>
-    		<element name="producto" type="tns:Producto" minOccurs="1" maxOccurs="1"></element>
-    	</sequence>
-    </complexType>
-    
-    <complexType name="ModificarProductoResponse">
-    	<sequence>
-    		<element name="respuesta" type="boolean" minOccurs="1" maxOccurs="1"></element>
-    	</sequence>
-    </complexType>
-    
-    <element name="modificarProducto" type="tns:ModificarProducto"></element>
-    
-    <element name="modificarProductoResponse"
-    	type="tns:ModificarProductoResponse">
-    </element>
-
-    <complexType name="ConsultarProducto">
-    	<sequence>
-    		<element name="idCliente" type="string"></element>
-    		<element name="nombreProducto" type="string"></element>
-    	</sequence>
-    </complexType>
-    
-    <complexType name="ConsultarProductoResponse">
-    	<sequence>
-    		<element name="producto" type="tns:Producto"></element>
-    	</sequence>
-    </complexType>
-    
-    <element name="consultarProducto" type="tns:ConsultarProducto"></element>
-    
-    <element name="consultarProductoResponse"
-    	type="tns:ConsultarProductoResponse">
-    </element>
 </schema>
