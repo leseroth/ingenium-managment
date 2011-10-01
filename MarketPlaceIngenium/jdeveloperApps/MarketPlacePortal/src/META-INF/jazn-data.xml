@@ -1003,6 +1003,11 @@
                             </permission>
                             <permission>
                                 <class>oracle.webcenter.security.auth.HierarchicalResourcePermission</class>
+                                <name>serviceID=oracle.webcenter.page,scopeID=s8bba98ff_4cbb_40b8_beee_296c916a23ed,resourceID=/oracle/webcenter/portalapp/pages/ordenCompraDirecta.jspx</name>
+                                <actions>personalize,view</actions>
+                            </permission>
+                            <permission>
+                                <class>oracle.webcenter.security.auth.HierarchicalResourcePermission</class>
                                 <name>serviceID=oracle.webcenter.page,scopeID=s8bba98ff_4cbb_40b8_beee_296c916a23ed,resourceID=/oracle/webcenter/portalapp/pages/factura.jspx</name>
                                 <actions>personalize,view</actions>
                             </permission>
@@ -1122,6 +1127,11 @@
                             <permission>
                                 <class>oracle.webcenter.security.auth.HierarchicalResourcePermission</class>
                                 <name>serviceID=oracle.webcenter.page,scopeID=s8bba98ff_4cbb_40b8_beee_296c916a23ed,resourceID=/oracle/webcenter/portalapp/pages/subastas.jspx</name>
+                                <actions>create,delete,grant,personalize,update,view</actions>
+                            </permission>
+                            <permission>
+                                <class>oracle.webcenter.security.auth.HierarchicalResourcePermission</class>
+                                <name>serviceID=oracle.webcenter.page,scopeID=s8bba98ff_4cbb_40b8_beee_296c916a23ed,resourceID=/oracle/webcenter/portalapp/pages/ordenCompraDirecta.jspx</name>
                                 <actions>create,delete,grant,personalize,update,view</actions>
                             </permission>
                             <permission>

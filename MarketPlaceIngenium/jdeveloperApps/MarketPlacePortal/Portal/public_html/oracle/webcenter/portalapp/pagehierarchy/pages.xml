@@ -11,6 +11,9 @@
   <pageDef contentMRef="/oracle/webcenter/portalapp/pages/ordenCompra.jspx"
            hidden="false" shared="false" hasSubPages="false" id="ordenCompra"
            overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/ordenCompraDirecta.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="ordenCompraDirecta"
+           overridePolicy="true"/>
   <pageDef contentMRef="/oracle/webcenter/portalapp/pages/registro.jspx"
            hidden="false" shared="false" hasSubPages="false" id="registro"
            overridePolicy="false"/>

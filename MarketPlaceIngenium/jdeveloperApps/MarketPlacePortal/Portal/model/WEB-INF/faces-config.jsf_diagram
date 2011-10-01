@@ -63,7 +63,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B23,74.01758,141.08998,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B19,72.08008,141.38263,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page10">
@@ -82,7 +82,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B50,88.01758,166.98883,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B44,84.83008,167.89574,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page12">
@@ -115,7 +115,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B77,102.01758,190.27718,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B69,97.58008,191.76826,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page17">
@@ -134,7 +134,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B91,109.01758,201.2471,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B94,110.33008,213.89352,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page19">
@@ -153,7 +153,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B9,67.01758,126.649414,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B6,65.70508,126.649414,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page21">
@@ -172,7 +172,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B64,95.01758,178.88899,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B56,91.20508,180.09393,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page23">
@@ -236,7 +236,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B36,81.01758,154.449,20.0,87.0,B50</property>
+         name="sdm:polyPoints">B31,78.45508,155.0493,20.0,87.0,B50</property>
    </NavigationCase>
    <Page
       id="Page30">
@@ -245,4 +245,44 @@
       <property
          name="jspName">/pages/recuperarPassword</property>
    </Page>
+   <Page
+      id="Page38">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="jspName">/pages_ordenCompraD</property>
+   </Page>
+   <Page
+      id="Page40">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="jspName">/pages_ordenCompraDi</property>
+   </Page>
+   <Page
+      id="Page42">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="jspName">/pages_ordenCompraDirect</property>
+   </Page>
+   <Page
+      id="Page44">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="jspName">/pages_ordenCompraDirecta</property>
+   </Page>
+   <NavigationCase
+      islink="true"
+      id="NavigationCase45"
+      from="Page2"
+      to="Page44">
+      <property
+         name="fromOutcome">ordenCompraDirecta</property>
+      <property
+         name="description">Navigation Case</property>
+      <property
+         name="sdm:polyPoints">B81,103.95508,203.01128,20.0,87.0,B50</property>
+   </NavigationCase>
 </SDM>

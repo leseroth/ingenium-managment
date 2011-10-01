@@ -62,5 +62,10 @@
       <from-outcome>recuperarPassword</from-outcome>
       <to-view-id>/pages/recuperarPassword</to-view-id>
     </navigation-case>
+    <navigation-case>
+      <from-outcome>ordenCompraDirecta</from-outcome>
+      <to-view-id>/pages_ordenCompraDirecta</to-view-id>
+      <redirect/>
+    </navigation-case>
   </navigation-rule>
 </faces-config>
