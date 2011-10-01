@@ -1,7 +1,0 @@
-<?xml version = '1.0'?>
-<keyedNullableString baseId="/oracle/adf/portlet/WsrpPortletProducer/ap/Subastas_14a8a095_0131_1000_8004_0a0a0a0a3c1a" xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
-   <key index="0" value="__base"/>
-   <value>
-      <![CDATA[P:3699f796-c1f2-4cc1-82c7-c90f8b060b52]]>
-   </value>
-</keyedNullableString>

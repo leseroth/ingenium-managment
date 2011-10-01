@@ -1,7 +1,0 @@
-<?xml version = '1.0'?>
-<keyedNullableString baseId="/oracle/adf/portlet/WsrpPortletProducer2/ap/Contrato_a95073ae_0131_1000_8004_0a0a0a0a8068" xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
-   <key index="0" value="__base"/>
-   <value>
-      <![CDATA[P:f8740bb4-c7ed-4849-b630-cda691099ae8]]>
-   </value>
-</keyedNullableString>

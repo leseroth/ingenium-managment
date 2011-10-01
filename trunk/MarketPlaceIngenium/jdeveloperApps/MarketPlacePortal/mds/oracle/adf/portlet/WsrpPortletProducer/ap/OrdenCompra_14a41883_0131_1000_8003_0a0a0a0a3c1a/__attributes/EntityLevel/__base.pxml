@@ -1,7 +1,0 @@
-<?xml version = '1.0'?>
-<keyedNullableString baseId="/oracle/adf/portlet/WsrpPortletProducer/ap/OrdenCompra_14a41883_0131_1000_8003_0a0a0a0a3c1a" xmlns="http://xmlns.oracle.com/mds/portlet/client/v1/schema">
-   <key index="0" value="__base"/>
-   <value>
-      <![CDATA[S]]>
-   </value>
-</keyedNullableString>
