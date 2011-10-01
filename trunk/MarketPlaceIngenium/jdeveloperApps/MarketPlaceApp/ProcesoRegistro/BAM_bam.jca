@@ -6,7 +6,7 @@
       <property name="DataObjectName" value="/Cliente"/>
       <property name="OperationType" value="Upsert"/>
       <property name="InBatch" value="false"/>
-      <property name="Keys" value="_nit"/>
+      <property name="Keys" value="_fecha,_nit"/>
     </interaction-spec>
   </endpoint-interaction>
 

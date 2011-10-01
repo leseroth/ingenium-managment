@@ -10,7 +10,7 @@
                     callbackInterface="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect#wsdl.interface(PurchaseOrderDirectCallback)"/>
   </service>
   <reference name="GestionPO"
-             ui:wsdlLocation="PoManagerPoManagementServiceWrapper1.wsdl">
+             ui:wsdlLocation="PoManagerPoManagementServiceWrapper3.wsdl">
     <interface.wsdl interface="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.interface(PoManagerPoManagement)"/>
   </reference>
 </componentType>
