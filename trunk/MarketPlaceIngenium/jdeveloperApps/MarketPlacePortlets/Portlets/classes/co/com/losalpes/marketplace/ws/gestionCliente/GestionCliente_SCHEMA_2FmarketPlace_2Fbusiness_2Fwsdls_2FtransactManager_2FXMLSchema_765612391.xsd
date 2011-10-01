@@ -1,0 +1,176 @@
+<xs:schema version="1.0" targetNamespace="http://ws.transact.marketplace.losalpes.com.co/" xmlns:tns="http://ws.transact.marketplace.losalpes.com.co/"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="SubastaCerradaException" type="tns:SubastaCerradaException"/>
+    <xs:element name="SubastaNoExisteException" type="tns:SubastaNoExisteException"/>
+    <xs:element name="asignarFabricantesSubasta" type="tns:asignarFabricantesSubasta"/>
+    <xs:element name="asignarFabricantesSubastaResponse" type="tns:asignarFabricantesSubastaResponse"/>
+    <xs:element name="cerrarSubasta" type="tns:cerrarSubasta"/>
+    <xs:element name="cerrarSubastaResponse" type="tns:cerrarSubastaResponse"/>
+    <xs:element name="consultarFabricantesSubasta" type="tns:consultarFabricantesSubasta"/>
+    <xs:element name="consultarFabricantesSubastaResponse" type="tns:consultarFabricantesSubastaResponse"/>
+    <xs:element name="consultarSubastaOrdenCompra" type="tns:consultarSubastaOrdenCompra"/>
+    <xs:element name="consultarSubastaOrdenCompraResponse" type="tns:consultarSubastaOrdenCompraResponse"/>
+    <xs:element name="consultarSubastasFabricante" type="tns:consultarSubastasFabricante"/>
+    <xs:element name="consultarSubastasFabricanteResponse" type="tns:consultarSubastasFabricanteResponse"/>
+    <xs:element name="crearSubasta" type="tns:crearSubasta"/>
+    <xs:element name="crearSubastaResponse" type="tns:crearSubastaResponse"/>
+    <xs:element name="darGanadorSubasta" type="tns:darGanadorSubasta"/>
+    <xs:element name="darGanadorSubastaResponse" type="tns:darGanadorSubastaResponse"/>
+    <xs:element name="registrarOferta" type="tns:registrarOferta"/>
+    <xs:element name="registrarOfertaResponse" type="tns:registrarOfertaResponse"/>
+    <xs:complexType name="consultarFabricantesSubasta">
+        <xs:sequence>
+            <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultarFabricantesSubastaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="fabricanteBO">
+        <xs:sequence>
+            <xs:element name="email" type="xs:string" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="nit" type="xs:string" minOccurs="0"/>
+            <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubastaNoExisteException">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultarSubastasFabricante">
+        <xs:sequence>
+            <xs:element name="nit" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultarSubastasFabricanteResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:subastaBO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="subastaBO">
+        <xs:sequence>
+            <xs:element name="fabricantes" type="tns:fabricanteBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="mejor" type="tns:ofertaBO" minOccurs="0"/>
+            <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+            <xs:element name="ofertas" type="tns:ofertaBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ofertaBO">
+        <xs:sequence>
+            <xs:element name="fabricante" type="tns:fabricanteBO" minOccurs="0"/>
+            <xs:element name="fechaEntrega" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+            <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+            <xs:element name="productoOfrecido" type="tns:productoBO" minOccurs="0"/>
+            <xs:element name="valor" type="xs:long" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="productoBO">
+        <xs:sequence>
+            <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="purchaseOrderBO">
+        <xs:sequence>
+            <xs:element name="comercio" type="tns:comercioBO" minOccurs="0"/>
+            <xs:element name="entrega" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="estado" type="xs:string" minOccurs="0"/>
+            <xs:element name="fabricante" type="tns:fabricanteBO" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="item" type="tns:itemPOBO" minOccurs="0"/>
+            <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="comercioBO">
+        <xs:sequence>
+            <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="nit" type="xs:string" minOccurs="0"/>
+            <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+            <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="itemPOBO">
+        <xs:sequence>
+            <xs:element name="cantidad" type="xs:int" minOccurs="0"/>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="producto" type="tns:productoBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultarSubastaOrdenCompra">
+        <xs:sequence>
+            <xs:element name="numSeguimientoPO" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="consultarSubastaOrdenCompraResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:subastaBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cerrarSubasta">
+        <xs:sequence>
+            <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cerrarSubastaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="darGanadorSubasta">
+        <xs:sequence>
+            <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="darGanadorSubastaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="tns:fabricanteBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="crearSubasta">
+        <xs:sequence>
+            <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="crearSubastaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="asignarFabricantesSubasta">
+        <xs:sequence>
+            <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+            <xs:element name="fabricantes" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="asignarFabricantesSubastaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubastaCerradaException">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="registrarOferta">
+        <xs:sequence>
+            <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+            <xs:element name="oferta" type="tns:ofertaBO" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="registrarOfertaResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

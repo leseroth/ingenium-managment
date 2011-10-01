@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N0:definitions name="GestionCliente" targetNamespace="http://marketplace.losalpes.com.co/GestionCliente" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://marketplace.losalpes.com.co" xmlns:WL5G3N2="http://marketplace.losalpes.com.co/GestionCliente" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:ma="http://marketplace.losalpes.com.co" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCliente" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://ws.transact.marketplace.losalpes.com.co/">
+      <xsd:import namespace="http://marketplace.losalpes.com.co" schemaLocation="GestionCliente.xsd">
+			</xsd:import>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://marketplace.losalpes.com.co/GestionCliente" xmlns:ma="http://marketplace.losalpes.com.co" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCliente" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://ws.transact.marketplace.losalpes.com.co/">
+      <xsd:element name="ConsultarContacto">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarContactoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CrearProductos">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CrearProductosResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ModificarContacto">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ModificarContactoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarProducto">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarProductoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ModificarProducto">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ModificarProductoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="CrearClienteRequest">
+    <WL5G3N0:part element="WL5G3N1:crearCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CrearClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:crearClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CrearContactosRequest">
+    <WL5G3N0:part element="WL5G3N1:crearContacto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CrearContactosResponse">
+    <WL5G3N0:part element="WL5G3N1:crearContactoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClienteRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClientesRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarClientes" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClientesResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarClientesResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarComisionRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarComision" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarComisionResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarComisionResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarClienteRequest">
+    <WL5G3N0:part element="WL5G3N1:modificarCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:modificarClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarComisionRequest">
+    <WL5G3N0:part element="WL5G3N1:modificarComision" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarComisionResponse">
+    <WL5G3N0:part element="WL5G3N1:modificarComisionResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClientesProductoRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarClientesProducto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarClientesProductoResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarClientesProductoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="RadicarSolicitudRequest">
+    <WL5G3N0:part element="WL5G3N1:radicarSolicitud" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="RadicarSolicitudResponse">
+    <WL5G3N0:part element="WL5G3N1:radicarSolicitudResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarSolicitudRequest">
+    <WL5G3N0:part element="WL5G3N1:actualizarSolicitud" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarSolicitudResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarSolicitudResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarEstadoClienteRequest">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarEstadoClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarEstadoSolicitudRequest">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoSolicitud" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ActualizarEstadoSolicitudResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoSolicitudResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CerrarSolicitudRequest">
+    <WL5G3N0:part element="WL5G3N1:cerrarSolicitud" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CerrarSolicitudResponse">
+    <WL5G3N0:part element="WL5G3N1:cerrarSolicitudResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarProductosClienteRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarProductosCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarProductosClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarProductosClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarContactoRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarContacto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarContactoResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarContactoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CrearProductosRequest">
+    <WL5G3N0:part element="WL5G3N1:crearProducto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="CrearProductosResponse">
+    <WL5G3N0:part element="WL5G3N1:crearProductoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarContactoRequest">
+    <WL5G3N0:part element="WL5G3N1:modificarContacto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarContactoResponse">
+    <WL5G3N0:part element="WL5G3N1:modificarContactoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarProductoRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarProducto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ConsultarProductoResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarProductoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarProductoRequest">
+    <WL5G3N0:part element="WL5G3N1:modificarProducto" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ModificarProductoResponse">
+    <WL5G3N0:part element="WL5G3N1:modificarProductoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="GestionCliente">
+    <WL5G3N0:operation name="CrearCliente">
+      <WL5G3N0:input message="WL5G3N2:CrearClienteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:CrearClienteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CrearContactos">
+      <WL5G3N0:input message="WL5G3N2:CrearContactosRequest"/>
+      <WL5G3N0:output message="WL5G3N2:CrearContactosResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarCliente">
+      <WL5G3N0:input message="WL5G3N2:ConsultarClienteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarClienteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarClientes">
+      <WL5G3N0:input message="WL5G3N2:ConsultarClientesRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarClientesResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarComision">
+      <WL5G3N0:input message="WL5G3N2:ConsultarComisionRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarComisionResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarCliente">
+      <WL5G3N0:input message="WL5G3N2:ModificarClienteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ModificarClienteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarComision">
+      <WL5G3N0:input message="WL5G3N2:ModificarComisionRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ModificarComisionResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarClientesProducto">
+      <WL5G3N0:input message="WL5G3N2:ConsultarClientesProductoRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarClientesProductoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="RadicarSolicitud">
+      <WL5G3N0:input message="WL5G3N2:RadicarSolicitudRequest"/>
+      <WL5G3N0:output message="WL5G3N2:RadicarSolicitudResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarSolicitud">
+      <WL5G3N0:input message="WL5G3N2:ActualizarSolicitudRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ActualizarSolicitudResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarEstadoCliente">
+      <WL5G3N0:input message="WL5G3N2:ActualizarEstadoClienteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ActualizarEstadoClienteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarEstadoSolicitud">
+      <WL5G3N0:input message="WL5G3N2:ActualizarEstadoSolicitudRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ActualizarEstadoSolicitudResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CerrarSolicitud">
+      <WL5G3N0:input message="WL5G3N2:CerrarSolicitudRequest"/>
+      <WL5G3N0:output message="WL5G3N2:CerrarSolicitudResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarProductosCliente">
+      <WL5G3N0:input message="WL5G3N2:ConsultarProductosClienteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarProductosClienteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarContacto">
+      <WL5G3N0:input message="WL5G3N2:ConsultarContactoRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarContactoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CrearProductos">
+      <WL5G3N0:input message="WL5G3N2:CrearProductosRequest"/>
+      <WL5G3N0:output message="WL5G3N2:CrearProductosResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarContacto">
+      <WL5G3N0:input message="WL5G3N2:ModificarContactoRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ModificarContactoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarProducto">
+      <WL5G3N0:input message="WL5G3N2:ConsultarProductoRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ConsultarProductoResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarProducto">
+      <WL5G3N0:input message="WL5G3N2:ModificarProductoRequest"/>
+      <WL5G3N0:output message="WL5G3N2:ModificarProductoResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="GestionClienteSOAP" type="WL5G3N2:GestionCliente">
+    <WL5G3N3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="CrearCliente">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CrearContactos">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearContactos"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarCliente">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarClientes">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarComision">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarCliente">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarCliente"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarComision">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarClientesProducto">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientesProducto"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="RadicarSolicitud">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/RadicarSolicitud"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarSolicitud">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarEstadoCliente">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ActualizarEstadoSolicitud">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CerrarSolicitud">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarProductosCliente">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarContacto">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarContacto"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="CrearProductos">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearProductos"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarContacto">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ConsultarProducto">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProducto"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ModificarProducto">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="GestionCliente">
+    <WL5G3N0:port binding="WL5G3N2:GestionClienteSOAP" name="GestionClienteSOAP">
+      <WL5G3N3:address location="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

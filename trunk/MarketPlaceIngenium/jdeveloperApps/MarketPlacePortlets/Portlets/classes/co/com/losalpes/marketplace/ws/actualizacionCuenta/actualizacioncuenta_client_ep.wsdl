@@ -1,0 +1,51 @@
+<wsdl:definitions
+     name="ActualizacionCuenta"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoActualizacionCuenta!1.0/ActualizacionCuenta.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="ActualizacionCuenta">
+        <plnk:role name="ActualizacionCuentaProvider">
+            <plnk:portType name="client:ActualizacionCuenta"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+                 schemaLocation="../../../../losalpes/marketplace/ws/actualizacionCuenta/ActualizacionCuenta.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ActualizacionCuentaRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="ActualizacionCuentaResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ActualizacionCuenta">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ActualizacionCuentaRequestMessage"/>
+            <wsdl:output message="client:ActualizacionCuentaResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ActualizacionCuentaBinding" type="client:ActualizacionCuenta">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="actualizacioncuenta_client_ep">
+        <wsdl:port name="ActualizacionCuenta_pt" binding="client:ActualizacionCuentaBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoActualizacionCuenta/actualizacioncuenta_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

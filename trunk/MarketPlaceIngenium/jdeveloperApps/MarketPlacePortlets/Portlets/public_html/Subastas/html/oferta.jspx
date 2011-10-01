@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1">
+      <af:panelFormLayout>
+        <af:inputDate label="Fecha de Entrega" value="#{crearOferta.oferta.fechaEntrega}"/>
+        <af:inputNumberSpinbox label="Valor Ofrecido" value="#{crearOferta.oferta.item.valor}"/>
+        <af:commandButton text="Crear Oferta"
+                          action="#{crearOferta.crearOferta_action}"/>
+      </af:panelFormLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:crearOferta-->
+</jsp:root>

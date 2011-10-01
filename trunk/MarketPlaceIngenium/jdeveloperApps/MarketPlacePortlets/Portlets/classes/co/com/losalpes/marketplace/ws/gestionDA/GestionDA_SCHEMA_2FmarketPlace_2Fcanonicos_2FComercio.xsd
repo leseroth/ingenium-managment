@@ -1,0 +1,18 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="GestionDA_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
+    <include schemaLocation="GestionDA_SCHEMA_2FmarketPlace_2Fcanonicos_2FReturnMaterialAdvice.xsd"/>
+    <element name="comercio" type="tns:Comercio"/>
+    <complexType name="Comercio">
+        <sequence>
+            <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+            <element name="nombre" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="nit" type="string" maxOccurs="1" minOccurs="1"/>
+            <element name="direccion" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="telefono" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="pos" type="tns:PurchaseOrder" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>
