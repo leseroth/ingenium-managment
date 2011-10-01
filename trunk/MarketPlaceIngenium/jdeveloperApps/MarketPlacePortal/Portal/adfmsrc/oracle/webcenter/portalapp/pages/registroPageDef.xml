@@ -14,7 +14,7 @@
     <page path="oracle.webcenter.portalapp.pagetemplates.templateRegistroPageDef"
           id="pageTemplateBinding" Refresh="ifNeeded"/>
     <portlet id="Registro1_1"
-             portletInstance="/oracle/adf/portlet/WsrpPortletProducer/ap/Registro_1481d29c_0131_1000_8001_0a0a0a0a3c1a"
+             portletInstance="/oracle/adf/portlet/WsrpPortletProducer3/ap/Registro_5ae8adf8_0132_1000_8002_0a0a0a0ae0cb"
              class="oracle.adf.model.portlet.binding.PortletBinding"
              retainPortletHeader="false"
              listenForAutoDeliveredPortletEvents="true"

@@ -37,6 +37,10 @@
           usageId="co_com_losalpes_marketplace_portal_cambiarPasswordPageDef"/>
     <page path="/oracle/webcenter/portalapp/pages/recuperarPassword.jspx"
           usageId="co_com_losalpes_marketplace_portal_recuperarPasswordPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/ordenCompraDirecta.jspx"
+          usageId="co_com_losalpes_marketplace_portal_ordenCompraDirectaPageDef"/>
+    <page path="/oracle/webcenter/portalapp/pages/compraDirecta.jspx"
+          usageId="co_com_losalpes_marketplace_portal_compraDirectaPageDef"/>
   </pageMap>
   <definitionFactories>
     <factory nameSpace="http://xmlns.oracle.com/portlet/bindings"
@@ -79,5 +83,9 @@
           path="oracle.webcenter.portalapp.pages.cambiarPasswordPageDef"/>
     <page id="co_com_losalpes_marketplace_portal_recuperarPasswordPageDef"
           path="oracle.webcenter.portalapp.pages.recuperarPasswordPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_ordenCompraDirectaPageDef"
+          path="oracle.webcenter.portalapp.pages.ordenCompraDirectaPageDef"/>
+    <page id="co_com_losalpes_marketplace_portal_compraDirectaPageDef"
+          path="oracle.webcenter.portalapp.pages.compraDirectaPageDef"/>
   </pageDefinitionUsages>
 </Application>

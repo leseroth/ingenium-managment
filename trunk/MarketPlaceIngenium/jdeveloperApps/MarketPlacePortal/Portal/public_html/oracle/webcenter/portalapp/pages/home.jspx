@@ -26,6 +26,10 @@
                   <af:commandLink action="subastas"
                                                    rendered="#{securityContext.userInRole['Fabricante'] }"
                                                    id="cl3"  text="Subastas Asociado ">
+                  
+                  </af:commandLink><af:commandLink action="ordenCompraDirecta"
+                                                   rendered="#{securityContext.userInRole['Fabricante'] }"
+                                                   id="cl8"  text="Compra directa ">                                 
                     
                   </af:commandLink><af:commandLink action="ordenCompra"
                                                    rendered="#{securityContext.userInRole['Fabricante'] }"
