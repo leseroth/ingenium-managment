@@ -7,9 +7,6 @@
   <service name="registroentidad_client" ui:wsdlLocation="RegistroEntidad.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad#wsdl.interface(RegistroEntidad)"/>
   </service>
-  <reference name="GestionCliente" ui:wsdlLocation="GestionCliente.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
-  </reference>
   <reference name="VerificacionCrediticia"
              ui:wsdlLocation="VerificacionCrediticia.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/VerificacionCrediticia#wsdl.interface(VerificacionCrediticia)"/>
@@ -26,6 +23,9 @@
   </reference>
   <reference name="GestionCorreoElectronico"
              ui:wsdlLocation="GestionCorreoElectronico.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico/#wsdl.interface(GestionCorreoElectronico)"/>
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico#wsdl.interface(GestionCorreoElectronico)"/>
+  </reference>
+  <reference name="GestionCliente" ui:wsdlLocation="GestionClienteWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
   </reference>
 </componentType>
