@@ -1,0 +1,178 @@
+<WL5G3N0:definitions
+     name="GestionSubasta"
+     targetNamespace="http://marketplace.losalpes.com.co/GestionOfertas"
+     xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:WL5G3N2="http://marketplace.losalpes.com.co/GestionOfertas"
+     xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:WL5G3N1="http://marketplace.losalpes.com.co"
+    >
+    <WL5G3N0:types>
+        <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionOfertas"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsd1="http://marketplace.losalpes.com.co">
+            <xsd:import namespace="http://marketplace.losalpes.com.co" schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionSubasta_2FGestionSubasta.xsd"/>
+        </xsd:schema>
+    </WL5G3N0:types>
+    <WL5G3N0:message name="registrarOfertaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:registrarOferta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="registrarOfertaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:registrarOfertaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="cerrarSubastaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:cerrarSubasta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="cerrarSubastaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:cerrarSubastaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="darGanadorSubastaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:darGanadorSubasta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="darGanadorSubastaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:darGanadorSubastaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="crearSubastaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:crearSubasta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="crearSubastaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:crearSubastaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarSubastasFabricanteRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarSubastasFabricante"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarSubastasFabricanteResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarSubastasFabricanteResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="asignarFabricantesSubastaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:asignarFabricantesSubasta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="asignarFabricantesSubastaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:asignarFabricantesSubastaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarFabricantesSubastaRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarFabricantesSubasta"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarFabricantesSubastaResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarFabricantesSubastaResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarSubastaOrdenCompraRequest">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarSubastaOrdenCompra"/>
+    </WL5G3N0:message>
+    <WL5G3N0:message name="consultarSubastaOrdenCompraResponse">
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarSubastaOrdenCompraResponse"/>
+    </WL5G3N0:message>
+    <WL5G3N0:portType name="GestionSubasta">
+        <WL5G3N0:operation name="registrarOferta">
+            <WL5G3N0:input message="WL5G3N2:registrarOfertaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:registrarOfertaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="cerrarSubasta">
+            <WL5G3N0:input message="WL5G3N2:cerrarSubastaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:cerrarSubastaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="darGanadorSubasta">
+            <WL5G3N0:input message="WL5G3N2:darGanadorSubastaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:darGanadorSubastaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="crearSubasta">
+            <WL5G3N0:input message="WL5G3N2:crearSubastaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:crearSubastaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarSubastasFabricante">
+            <WL5G3N0:input message="WL5G3N2:consultarSubastasFabricanteRequest"/>
+            <WL5G3N0:output message="WL5G3N2:consultarSubastasFabricanteResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="asignarFabricantesSubasta">
+            <WL5G3N0:input message="WL5G3N2:asignarFabricantesSubastaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:asignarFabricantesSubastaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarFabricantesSubasta">
+            <WL5G3N0:input message="WL5G3N2:consultarFabricantesSubastaRequest"/>
+            <WL5G3N0:output message="WL5G3N2:consultarFabricantesSubastaResponse"/>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+            <WL5G3N0:input message="WL5G3N2:consultarSubastaOrdenCompraRequest"/>
+            <WL5G3N0:output message="WL5G3N2:consultarSubastaOrdenCompraResponse"/>
+        </WL5G3N0:operation>
+    </WL5G3N0:portType>
+    <WL5G3N0:binding name="GestionSubastaSOAP" type="WL5G3N2:GestionSubasta">
+        <WL5G3N3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <WL5G3N0:operation name="registrarOferta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="cerrarSubasta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/cerrarSubasta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="darGanadorSubasta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/darGanadorSubasta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="crearSubasta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/crearSubasta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarSubastasFabricante">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="asignarFabricantesSubasta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/asignarFabricantesSubasta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarFabricantesSubasta">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+        <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+            <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastaOrdenCompra"/>
+            <WL5G3N0:input>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:input>
+            <WL5G3N0:output>
+                <WL5G3N3:body use="literal"/>
+            </WL5G3N0:output>
+        </WL5G3N0:operation>
+    </WL5G3N0:binding>
+    <WL5G3N0:service name="GestionSubastaSOAPQSService">
+        <WL5G3N0:port name="GestionSubastaSOAPQSPort" binding="WL5G3N2:GestionSubastaSOAP">
+            <WL5G3N3:address location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta"/>
+        </WL5G3N0:port>
+    </WL5G3N0:service>
+</WL5G3N0:definitions>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:form id="f1" defaultCommand="cb_crearOrden">
+        <fieldset>
+          <legend>Información Orden de Compra Directa</legend>
+          <af:panelFormLayout>          
+            <h:dataTable id="ListaOrdenes" value="#{crearOrdenCompraDirecta.ordenes}" var="orden"  binding="#{crearOrdenCompraDirecta.dt1}">
+              <h:column id="c1">
+                <f:facet name="header">
+                  <h:outputText value="Fecha Máxima de Entrega" id="ot8"/>
+                </f:facet>
+                <af:outputText id="ot1" value="#{orden.fechaMaximaEntrega}"/>
+              </h:column>
+              <h:column id="c2">
+                <f:facet name="header">
+                  <h:outputText value="Fabricante que Atiende" id="ot9"/>
+                </f:facet>
+                <af:outputText id="ot5" value="#{orden.fabricanteAtiende.nombre}"/>
+              </h:column>
+              <h:column id="c5">
+                <f:facet name="header">
+                  <h:outputText value="Producto" id="ot10"/>
+                </f:facet>
+                <af:outputText value="#{orden.item.producto.nombre}" id="ot6"/>
+              </h:column>
+              <h:column id="c4">
+                <f:facet name="header">
+                  <h:outputText value="Cantidad" id="ot11"/>
+                </f:facet>
+                <af:outputText value="#{orden.item.cantidad}" id="ot3"/>
+              </h:column>
+              <h:column id="c3">
+                <f:facet name="header">
+                  <h:outputText value="Precio Unidad" id="ot12"/>
+                </f:facet>
+                <af:outputText value="#{orden.item.valor}" id="ot4"/>
+              </h:column>
+            </h:dataTable>
+            <af:commandButton text="Enviar Orden de Compra" id="cb_crearOrden"
+                              action="#{crearOrdenCompraDirecta.crearOrden_action}"/>
+          </af:panelFormLayout>
+          <af:commandButton text="Cancelar" id="cb1" immediate="true"
+                            action="#{crearOrdenCompraDirecta.volver_action}"/>
+        </fieldset>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:crearOrdenCompra-->
+</jsp:root>

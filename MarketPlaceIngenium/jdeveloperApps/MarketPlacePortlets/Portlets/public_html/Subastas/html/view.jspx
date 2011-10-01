@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+
+  <f:view>
+    <af:document>
+      <af:form>
+      <p>
+          <af:commandButton text="Ordenes de Compra Directa" id="cb1"
+                            action="compraDirecta"/> 
+        </p>
+        <h:dataTable value="#{listaSubasta.subastas}"
+                     binding="#{listaSubasta.dt1}" var="subasta" id="dt1">
+          <!--oracle-jdev-comment:Faces.RI.DT.Class.Key:co.com.losalpes.marketplace.vos.SubastaVO-->
+          <h:column id="c2">
+            <f:facet name="header">
+              <h:outputText value="Num Seguimiento" id="ot8"/>
+            </f:facet>
+            <h:outputText value="#{subasta.numSeguimiento}" id="ot4"/>
+          </h:column>
+          <h:column id="c4">
+            <f:facet name="header">
+              <h:outputText value="Fecha Inicio" id="ot3"/>
+            </f:facet>
+            <h:outputText value="#{subasta.fechaInicio}" id="ot5"/>
+          </h:column>
+          <h:column id="c3">
+            <f:facet name="header">
+              <h:outputText value="Fecha Terminacion" id="ot1"/>
+            </f:facet>
+            <h:outputText value="#{subasta.fechaTerminacion}" id="ot7"/>
+          </h:column>
+          <h:column id="c1">
+            <f:facet name="header">
+              <h:outputText value="Orden Compra" id="ot2"/>
+            </f:facet>
+            <h:outputText value="#{subasta.ordenCompra.numSeguimiento}" id="ot6"/>
+          </h:column>
+          <h:column id="c_ac">
+          <f:facet name="header">
+            <h:outputText value="Acciones"/>
+          </f:facet>
+          <af:commandButton text="Info Subasta"
+                            action="#{listaSubasta.verInfoSubasta_action}"/>
+          </h:column>
+        </h:dataTable>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:listaSubasta-->
+</jsp:root>
