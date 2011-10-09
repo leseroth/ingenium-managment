@@ -1,37 +1,24 @@
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
 import javax.persistence.*;
 import co.com.losalpes.marketplace.transact.bos.*;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllProductos", query = "SELECT P FROM Producto P "),
     @NamedQuery(name = "findByNombre", query = "SELECT P FROM Producto P where nombre=:nombre ")
 })
-/**
- * Producto
- * @author 
- */
-public class Producto implements Serializable {
-    
-    /**
-     * Attribute ProductoID
-     */
+public class Producto implements Serializable, MarketPlaceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    /**
-     * Attribute categoria
-     */
+    private Long id;
     @Column
-    protected String categoria;
-    /**
-     * Attribute nombre
-     */
+    private String categoria;
     @Column
-    protected String nombre;
+    private String nombre;
 
     /**
      * Default Constructor
@@ -40,82 +27,74 @@ public class Producto implements Serializable {
     }
 
     /**
-     * Simple Constructor
-     */
-    public Producto(Long id, String aCategoria, String aId, String aNombre) {
-        this.id = id;
-        this.categoria = aCategoria;
-        this.nombre = aNombre;
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param productoBO
      */
     public Producto(ProductoBO productoBO) {
-        this.setId(productoBO.getId());
-        this.setCategoria(productoBO.getCategoria());
-        this.setNombre(productoBO.getNombre());
+        id = productoBO.getId();
+        categoria = productoBO.getCategoria();
+        nombre = productoBO.getNombre();
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public ProductoBO toBO() {
-
         ProductoBO productoBO = new ProductoBO();
-        productoBO.setId(this.getId());
-        productoBO.setCategoria(this.getCategoria());
-        productoBO.setNombre(this.getNombre());
-
+        productoBO.setId(getId());
+        productoBO.setCategoria(getCategoria());
+        productoBO.setNombre(getNombre());
         return productoBO;
     }
 
     /**
-     * Getter method for attribute productoID
-     * @return attribute productoID
+     * {@inheritDoc}
      */
-    public Long getId() {
-        return this.id;
+    @Override
+    public boolean isInfoComplete() {
+        return true;
     }
 
     /**
-     * Setter method for attribute productoID
-     * @param new value for attribute productoID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute categoria
-     * @return attribute categoria
+     * @return the categoria
      */
     public String getCategoria() {
-        return this.categoria;
+        return categoria;
     }
 
     /**
-     * Setter method for attribute categoria
-     * @param new value for attribute categoria
+     * @param categoria the categoria to set
      */
-    public void setCategoria(String aCategoria) {
-        this.categoria = aCategoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

@@ -1,100 +1,119 @@
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import co.com.losalpes.marketplace.transact.bos.FabricanteBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
+import static co.com.losalpes.marketplace.transact.util.Util.*;
+
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P"),
     @NamedQuery(name = "getFabricanteFromNit", query = "select f from Fabricante f where f.nit = :nit")
 })
-/**
- * Fabricante
- * @author 
- */
-public class Fabricante implements Serializable {
+public class Fabricante implements Serializable, MarketPlaceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-
+    private Long id;
     @Column
-    protected String nombre;
-
+    private String nombre;
     @Column
     private String nit;
-
     @Column
     private String email;
 
+    /**
+     * Basic Constructor
+     */
     public Fabricante() {
     }
 
-    public Fabricante(Long id, String aNombre, String nit, String email) {
-        this.id = id;
-        this.nombre = aNombre;
-        this.nit = nit;
-        this.email = email;
-    }
-
+    /**
+     * Constructor desde BO
+     * @param fabricanteBO
+     */
     public Fabricante(FabricanteBO fabricanteBO) {
-        this.setId(fabricanteBO.getId());
-        this.setNombre(fabricanteBO.getNombre());
-        this.setNit(fabricanteBO.getNit());
-        this.setEmail(fabricanteBO.getEmail());
+        id = fabricanteBO.getId();
+        nombre = fabricanteBO.getNombre();
+        nit = fabricanteBO.getNit();
+        email = fabricanteBO.getEmail();
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public FabricanteBO toBO() {
         FabricanteBO fabricanteBO = new FabricanteBO();
-        fabricanteBO.setId(this.getId());
-        fabricanteBO.setNombre(this.getNombre());
-        fabricanteBO.setNit(this.getNit());
-        fabricanteBO.setEmail(this.getEmail());
+        fabricanteBO.setId(getId());
+        fabricanteBO.setNombre(getNombre());
+        fabricanteBO.setNit(getNit());
+        fabricanteBO.setEmail(getEmail());
         return fabricanteBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    /**
+     * @return the nit
+     */
     public String getNit() {
         return nit;
     }
 
+    /**
+     * @param nit the nit to set
+     */
     public void setNit(String nit) {
         this.nit = nit;
     }
 
+    /**
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }

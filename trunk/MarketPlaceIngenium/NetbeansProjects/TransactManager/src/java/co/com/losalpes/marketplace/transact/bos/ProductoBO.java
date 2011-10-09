@@ -1,29 +1,12 @@
-//Package declaration
 package co.com.losalpes.marketplace.transact.bos;
 
-//Imports required by this class
+import co.com.losalpes.marketplace.transact.MarketPlaceBO;
 import java.io.Serializable;
 
-//Start of user code Start additional imports
-//End of user code
-/**
- * Producto
- * @author
- */
-@SuppressWarnings({"serial", "unused"})
-public class ProductoBO implements Serializable {
+public class ProductoBO implements Serializable, MarketPlaceBO {
 
-    /**
-     * Attribute id
-     */
     private Long id;
-    /**
-     * Attribute categoria
-     */
     private String categoria;
-    /**
-     * Attribute nombre
-     */
     private String nombre;
 
     /**
@@ -33,59 +16,44 @@ public class ProductoBO implements Serializable {
     }
 
     /**
-     * Basic Constructor
-     */
-    public ProductoBO(String aCategoria, Long aId, String aNombre) {
-        this.categoria = aCategoria;
-        this.id = aId;
-        this.nombre = aNombre;
-    }
-
-    /**
-     * Getter method for attribute categoria
-     * @return attribute categoria
-     */
-    public String getCategoria() {
-        return this.categoria;
-    }
-
-    /**
-     * Setter method for attribute categoria
-     * @param new value for attribute categoria
-     */
-    public void setCategoria(String aCategoria) {
-        this.categoria = aCategoria;
-    }
-
-    /**
-     * Getter method for attribute id
-     * @return attribute id
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute id
-     * @param new value for attribute id
+     * @param id the id to set
      */
-    public void setId(Long aId) {
-        this.id = aId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    /**
+     * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
+     * @param nombre the nombre to set
      */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

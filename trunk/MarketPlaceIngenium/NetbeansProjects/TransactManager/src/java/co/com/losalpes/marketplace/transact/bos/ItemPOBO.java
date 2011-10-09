@@ -1,25 +1,12 @@
 package co.com.losalpes.marketplace.transact.bos;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceBO;
 import java.io.Serializable;
 
-/**
- * ItemPO
- * @author 
- */
-@SuppressWarnings({"serial", "unused"})
-public class ItemPOBO implements Serializable {
+public class ItemPOBO implements Serializable, MarketPlaceBO {
 
-    /**
-     * Attribute id
-     */
     private Long id;
-    /**
-     * Attribute cantidad
-     */
     private Integer cantidad;
-    /**
-     * Attribute productos
-     */
     private ProductoBO producto;
 
     /**
@@ -29,65 +16,43 @@ public class ItemPOBO implements Serializable {
     }
 
     /**
-     * Basic Constructor
-     */
-    public ItemPOBO(Integer aCantidad) {
-        this.cantidad = aCantidad;
-    }
-
-    /**
-     * Simple Constructor
-     */
-    public ItemPOBO(Long id, Integer aCantidad) {
-        this.id = id;
-        this.cantidad = aCantidad;
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public ItemPOBO(Long id, Integer aCantidad, ProductoBO aProducto) {
-        this.id = id;
-        this.cantidad = aCantidad;
-        this.producto = aProducto;
-    }
-
-    /**
-     * Getter method for attribute itemPOID
-     * @return attribute itemPOID
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute itemPOID
-     * @param new value for attribute itemPOID
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute cantidad
-     * @return attribute cantidad
+     * @return the cantidad
      */
     public Integer getCantidad() {
-        return this.cantidad;
+        return cantidad;
     }
 
     /**
-     * Setter method for attribute cantidad
-     * @param new value for attribute cantidad
+     * @param cantidad the cantidad to set
      */
-    public void setCantidad(Integer aCantidad) {
-        this.cantidad = aCantidad;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
+    /**
+     * @return the producto
+     */
     public ProductoBO getProducto() {
         return producto;
     }
 
+    /**
+     * @param producto the producto to set
+     */
     public void setProducto(ProductoBO producto) {
         this.producto = producto;
     }

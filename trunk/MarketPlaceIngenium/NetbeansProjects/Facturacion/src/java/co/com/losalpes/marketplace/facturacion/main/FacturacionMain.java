@@ -34,7 +34,7 @@ public class FacturacionMain {
                         com.oracle.xmlns.marketplace_jws.procesofacturacion.facturacionconfirmacionpago.FacturacionConfirmacionPago port = service.getFacturacionConfirmacionPagoPt();
                         port.process(corte);
                     } catch (Exception ex) {
-                        // TODO handle custom exceptions here
+                        
                     }
                 }
                 //Se ejecuta cada 24 horas (86400000)

@@ -1,38 +1,17 @@
 package co.com.losalpes.marketplace.transact.bos;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceBO;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * Oferta
- * @author 
- */
-@SuppressWarnings({"serial", "unused"})
-public class OfertaBO implements Serializable {
-    /**
-     * Attribute OfertaID
-     */
+public class OfertaBO implements Serializable, MarketPlaceBO {
+
     private Long id;
-    /**
-     * Attribute valor
-     */
-    private Long valor;
-    /**
-     * Attribute idSubasta
-     */
-    private String idSubasta;
-    /**
-     * Attribute tiempoOferta
-     */
     private Date fechaEntrega;
-    /**
-     * Attribute fabricante
-     */
-    private FabricanteBO fabricante;
-
-    private ProductoBO productoOfrecido;
-
     private String numSeguimiento;
+    private Long valor;
+    private FabricanteBO fabricante;
+    private ProductoBO productoOfrecido;
 
     /**
      * Basic Constructor
@@ -41,90 +20,86 @@ public class OfertaBO implements Serializable {
     }
 
     /**
-     * Getter method for attribute ofertaID
-     * @return attribute ofertaID
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute ofertaID
-     * @param new value for attribute ofertaID
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute valor
-     * @return attribute valor
+     * @return the fechaEntrega
      */
-    public Long getValor() {
-        return this.valor;
-    }
-
-    /**
-     * Setter method for attribute valor
-     * @param new value for attribute valor
-     */
-    public void setValor(Long aValor) {
-        this.valor = aValor;
-    }
-
-    /**
-     * Getter method for attribute idSubasta
-     * @return attribute idSubasta
-     */
-    public String getIdSubasta() {
-        return this.idSubasta;
-    }
-
-    /**
-     * Setter method for attribute idSubasta
-     * @param new value for attribute idSubasta
-     */
-    public void setIdSubasta(String aIdSubasta) {
-        this.idSubasta = aIdSubasta;
-    }
-
-    /**
-     * Getter method for attribute fabricante
-     * @return attribute fabricante
-     */
-    public FabricanteBO getFabricante() {
-        return this.fabricante;
-    }
-
-    /**
-     * Setter method for attribute fabricante
-     * @param new value for attribute fabricante
-     */
-    public void setFabricante(FabricanteBO aFabricante) {
-        this.fabricante = aFabricante;
-    }
-
-    public ProductoBO getProductoOfrecido() {
-        return productoOfrecido;
-    }
-
-    public void setProductoOfrecido(ProductoBO productoOfrecido) {
-        this.productoOfrecido = productoOfrecido;
-    }
-
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
+    /**
+     * @param fechaEntrega the fechaEntrega to set
+     */
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
+    /**
+     * @return the numSeguimiento
+     */
     public String getNumSeguimiento() {
         return numSeguimiento;
     }
 
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
+    }
+
+    /**
+     * @return the valor
+     */
+    public Long getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Long valor) {
+        this.valor = valor;
+    }
+
+    /**
+     * @return the fabricante
+     */
+    public FabricanteBO getFabricante() {
+        return fabricante;
+    }
+
+    /**
+     * @param fabricante the fabricante to set
+     */
+    public void setFabricante(FabricanteBO fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    /**
+     * @return the productoOfrecido
+     */
+    public ProductoBO getProductoOfrecido() {
+        return productoOfrecido;
+    }
+
+    /**
+     * @param productoOfrecido the productoOfrecido to set
+     */
+    public void setProductoOfrecido(ProductoBO productoOfrecido) {
+        this.productoOfrecido = productoOfrecido;
     }
 }

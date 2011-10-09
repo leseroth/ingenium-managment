@@ -1,5 +1,6 @@
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
@@ -7,44 +8,27 @@ import java.util.ArrayList;
 import co.com.losalpes.marketplace.transact.bos.*;
 import java.util.List;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllSubastas", query = "select s from Subasta s"),
     @NamedQuery(name = "getSubastaFromNumSeguimiento", query = "select s from Subasta s where s.numSeguimiento = :numSeguimiento"),
     @NamedQuery(name = "getSubastaFromOrdenCompra", query = "select s from Subasta s where s.po.numSeguimiento = :numSeguimientoPO")
 })
-/**
- * Subasta
- * @author 
- */
-public class Subasta implements Serializable {
-    
+public class Subasta implements Serializable, MarketPlaceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    
+    private Long id;
+    @Column
+    private boolean activa;
     @Column
     private String numSeguimiento;
-    /**
-     * Attribute mejor
-     */
     @OneToOne
-    protected Oferta mejor;
-
-    @Column
-    boolean activa;
-    /**
-     * Attribute ofertas
-     */
+    private Oferta mejor;
+    @OneToOne
+    private PurchaseOrder po;
     @OneToMany
-    protected Collection<Oferta> ofertas;
-    /**
-     * Attribute po
-     */
-    @OneToOne
-    protected PurchaseOrder po;
-
+    private Collection<Oferta> ofertas;
     @OneToMany
     private List<Fabricante> fabricantes;
 
@@ -52,166 +36,160 @@ public class Subasta implements Serializable {
      * Default Constructor
      */
     public Subasta() {
-        this.ofertas = new ArrayList<Oferta>();
-        this.mejor = new Oferta();
+        ofertas = new ArrayList<Oferta>();
+        fabricantes = new ArrayList<Fabricante>();
     }
 
     /**
-     * Simple Constructor
-     */
-    public Subasta(Long id) {
-        this.id = id;
-        this.mejor = new Oferta();
-        this.ofertas = new ArrayList<Oferta>();
-        this.po = new PurchaseOrder();
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public Subasta(Long id, Oferta mejor, Collection<Oferta> aOfertas, PurchaseOrder aPo) {
-        this.id = id;
-        this.mejor = mejor;
-        this.ofertas = aOfertas;
-        this.po = aPo;
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param subastaBO
      */
     public Subasta(SubastaBO subastaBO) {
-        this.setId(subastaBO.getId());
-        this.setMejor(new Oferta(subastaBO.getMejor()));
+        id = subastaBO.getId();
+        activa = subastaBO.isActiva();
+        numSeguimiento = subastaBO.getNumSeguimiento();
 
-        Collection<Oferta> ofertasFromBO = new ArrayList<Oferta>();
-
+        if (subastaBO.getMejor() != null) {
+            mejor = new Oferta(subastaBO.getMejor());
+        }
+        if (subastaBO.getPo() != null) {
+            po = new PurchaseOrder(subastaBO.getPo());
+        }
         for (OfertaBO ofertaBO : subastaBO.getOfertas()) {
-            ofertasFromBO.add(new Oferta(ofertaBO));
+            ofertas.add(new Oferta(ofertaBO));
         }
-        this.setOfertas(ofertasFromBO);
-        this.setPo(new PurchaseOrder(subastaBO.getPo()));
-        this.setNumSeguimiento(subastaBO.getNumSeguimiento());
-        List<Fabricante> fabs = new ArrayList<Fabricante>();
-        for(int i = 0; i < subastaBO.getFabricantes().size(); i++){
-            fabs.add(new Fabricante(subastaBO.getFabricantes().get(i)));
+        for (FabricanteBO fabricanteBO : subastaBO.getFabricantes()) {
+            fabricantes.add(new Fabricante(fabricanteBO));
         }
-        this.setFabricantes(fabs);
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public SubastaBO toBO() {
         SubastaBO subastaBO = new SubastaBO();
-        subastaBO.setId(id);
-        subastaBO.setNumSeguimiento(numSeguimiento);
-        subastaBO.setMejor(mejor.toBO());
-        
-        Collection<OfertaBO> ofertasToBO = new ArrayList<OfertaBO>();
-        for (Oferta element : this.getOfertas()) {
-            ofertasToBO.add(element.toBO());
-        }
-        subastaBO.setOfertas(ofertasToBO);
+        subastaBO.setId(getId());
+        subastaBO.setActiva(isActiva());
+        subastaBO.setNumSeguimiento(getNumSeguimiento());
 
-        PurchaseOrder aPo = this.getPo();
-        if (aPo != null) {
-            subastaBO.setPo(aPo.toBO());
+        if (getMejor() != null) {
+            subastaBO.setMejor(getMejor().toBO());
         }
-
-        List<FabricanteBO> fabsBO = new ArrayList<FabricanteBO>();
-        for(int i = 0; i < fabricantes.size(); i++){
-            fabsBO.add(fabricantes.get(i).toBO());
+        if (getPo() != null) {
+            subastaBO.setPo(getPo().toBO());
         }
-        subastaBO.setFabricantes(fabsBO);
-
+        for (Oferta oferta : getOfertas()) {
+            subastaBO.getOfertas().add(oferta.toBO());
+        }
+        for (Fabricante fabricante : getFabricantes()) {
+            subastaBO.getFabricantes().add(fabricante.toBO());
+        }
         return subastaBO;
     }
 
     /**
-     * Getter method for attribute id
-     * @return attribute id
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
+    /**
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute id
-     * @param new value for attribute id
+     * @param id the id to set
      */
-    public void setId(Long aid) {
-        this.id = aid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
-     * Getter method for attribute mejor
-     * @return attribute mejor
+     * @return the activa
+     */
+    public boolean isActiva() {
+        return activa;
+    }
+
+    /**
+     * @param activa the activa to set
+     */
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    /**
+     * @return the numSeguimiento
+     */
+    public String getNumSeguimiento() {
+        return numSeguimiento;
+    }
+
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
+    public void setNumSeguimiento(String numSeguimiento) {
+        this.numSeguimiento = numSeguimiento;
+    }
+
+    /**
+     * @return the mejor
      */
     public Oferta getMejor() {
-        return this.mejor;
+        return mejor;
     }
 
     /**
-     * Setter method for attribute mejor
-     * @param new value for attribute mejor
+     * @param mejor the mejor to set
      */
     public void setMejor(Oferta mejor) {
         this.mejor = mejor;
     }
 
     /**
-     * Getter method for attribute ofertas
-     * @return attribute ofertas
-     */
-    public Collection<Oferta> getOfertas() {
-        return this.ofertas;
-    }
-
-    /**
-     * Setter method for attribute ofertas
-     * @param new value for attribute ofertas
-     */
-    public void setOfertas(Collection<Oferta> aOfertas) {
-        this.ofertas = aOfertas;
-    }
-
-    /**
-     * Getter method for attribute po
-     * @return attribute po
+     * @return the po
      */
     public PurchaseOrder getPo() {
-        return this.po;
+        return po;
     }
 
     /**
-     * Setter method for attribute po
-     * @param new value for attribute po
+     * @param po the po to set
      */
-    public void setPo(PurchaseOrder aPo) {
-        this.po = aPo;
+    public void setPo(PurchaseOrder po) {
+        this.po = po;
     }
 
-    public boolean isActiva() {
-        return activa;
+    /**
+     * @return the ofertas
+     */
+    public Collection<Oferta> getOfertas() {
+        return ofertas;
     }
 
-    public void setActiva(boolean activa) {
-        this.activa = activa;
+    /**
+     * @param ofertas the ofertas to set
+     */
+    public void setOfertas(Collection<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 
-    public String getNumSeguimiento() {
-        return numSeguimiento;
-    }
-
-    public void setNumSeguimiento(String numSeguimiento) {
-        this.numSeguimiento = numSeguimiento;
-    }
-
+    /**
+     * @return the fabricantes
+     */
     public List<Fabricante> getFabricantes() {
         return fabricantes;
     }
 
+    /**
+     * @param fabricantes the fabricantes to set
+     */
     public void setFabricantes(List<Fabricante> fabricantes) {
         this.fabricantes = fabricantes;
     }

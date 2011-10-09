@@ -1,141 +1,121 @@
 package co.com.losalpes.marketplace.transact.bos;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceBO;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- * subasta
- * @author 
- */
-@SuppressWarnings({"serial", "unused"})
-public class SubastaBO implements Serializable {
+public class SubastaBO implements Serializable, MarketPlaceBO {
 
-    /**
-     * Attribute subastaID
-     */
     private Long id;
+    private boolean activa;
     private String numSeguimiento;
-    /**
-     * Attribute mejor
-     */
     private OfertaBO mejor;
-    /**
-     * Attribute ofertas
-     */
-    private Collection<OfertaBO> ofertas;
-    /**
-     * Attribute po
-     */
     private PurchaseOrderBO po;
-
+    private List<OfertaBO> ofertas;
     private List<FabricanteBO> fabricantes;
 
     /**
      * Basic Constructor
      */
     public SubastaBO() {
-        this.ofertas = new ArrayList<OfertaBO>();
-        this.fabricantes = new ArrayList<FabricanteBO>();
+        ofertas = new ArrayList<OfertaBO>();
+        fabricantes = new ArrayList<FabricanteBO>();
     }
 
     /**
-     * Simple Constructor
-     */
-    public SubastaBO(Long id) {
-        this.id = id;
-        this.mejor = new OfertaBO();
-        this.ofertas = new ArrayList<OfertaBO>();
-        this.po = new PurchaseOrderBO();
-        this.fabricantes = new ArrayList<FabricanteBO>();
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public SubastaBO(Long id, OfertaBO mejor, Collection<OfertaBO> aOfertas, PurchaseOrderBO aPo) {
-        this.id = id;
-        this.mejor = mejor;
-        this.ofertas = aOfertas;
-        this.po = aPo;
-        this.fabricantes = new ArrayList<FabricanteBO>();
-    }
-
-    /**
-     * Getter method for attribute id
-     * @return attribute id
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute id
-     * @param new value for attribute id
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute mejor
-     * @return attribute mejor
+     * @return the activa
      */
-    public OfertaBO getMejor() {
-        return this.mejor;
+    public boolean isActiva() {
+        return activa;
     }
 
     /**
-     * Setter method for attribute mejor
-     * @param new value for attribute mejor
+     * @param activa the activa to set
+     */
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    /**
+     * @return the numSeguimiento
+     */
+    public String getNumSeguimiento() {
+        return numSeguimiento;
+    }
+
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
+    public void setNumSeguimiento(String numSeguimiento) {
+        this.numSeguimiento = numSeguimiento;
+    }
+
+    /**
+     * @return the mejor
+     */
+    public OfertaBO getMejor() {
+        return mejor;
+    }
+
+    /**
+     * @param mejor the mejor to set
      */
     public void setMejor(OfertaBO mejor) {
         this.mejor = mejor;
     }
 
     /**
-     * Getter method for attribute ofertas
-     * @return attribute ofertas
-     */
-    public Collection<OfertaBO> getOfertas() {
-        return this.ofertas;
-    }
-
-    /**
-     * Setter method for attribute ofertas
-     * @param new value for attribute ofertas
-     */
-    public void setOfertas(Collection<OfertaBO> aOfertas) {
-        this.ofertas = aOfertas;
-    }
-
-    /**
-     * Getter method for attribute po
-     * @return attribute po
+     * @return the po
      */
     public PurchaseOrderBO getPo() {
-        return this.po;
+        return po;
     }
 
     /**
-     * Setter method for attribute po
-     * @param new value for attribute po
+     * @param po the po to set
      */
-    public void setPo(PurchaseOrderBO aPo) {
-        this.po = aPo;
+    public void setPo(PurchaseOrderBO po) {
+        this.po = po;
     }
 
-    public String getNumSeguimiento() {
-        return numSeguimiento;
+    /**
+     * @return the ofertas
+     */
+    public List<OfertaBO> getOfertas() {
+        return ofertas;
     }
 
-    public void setNumSeguimiento(String numSeguimiento) {
-        this.numSeguimiento = numSeguimiento;
+    /**
+     * @param ofertas the ofertas to set
+     */
+    public void setOfertas(List<OfertaBO> ofertas) {
+        this.ofertas = ofertas;
     }
 
+    /**
+     * @return the fabricantes
+     */
     public List<FabricanteBO> getFabricantes() {
         return fabricantes;
     }
 
+    /**
+     * @param fabricantes the fabricantes to set
+     */
     public void setFabricantes(List<FabricanteBO> fabricantes) {
         this.fabricantes = fabricantes;
     }

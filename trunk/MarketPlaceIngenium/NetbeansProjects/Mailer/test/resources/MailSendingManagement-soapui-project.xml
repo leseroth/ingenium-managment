@@ -119,4 +119,16 @@
          <attachments>c:/archivo_adjunto.png</attachments>
       </ws:sendMail>
    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.mailer.marketplace.losalpes.com.co/MailSendingManagement/sendMailRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="EnvioAdjuntoIncorrecto"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/MailSendingManagementService/MailSendingManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.mailer.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:sendMail>
+         <to>ercos41@gmail.com</to>
+         <subject>Mensaje de prueba</subject>
+         <message>Mensaje de prueba enviado</message>
+         <from>ingenium.uniandes@gmail.com</from>
+         <password>ingenium2011</password>
+         <attachments>c:/archivo.inexistente</attachments>
+      </ws:sendMail>
+   </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.mailer.marketplace.losalpes.com.co/MailSendingManagement/sendMailRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

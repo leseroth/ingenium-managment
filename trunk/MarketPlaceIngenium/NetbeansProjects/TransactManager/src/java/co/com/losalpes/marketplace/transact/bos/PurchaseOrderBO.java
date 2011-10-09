@@ -1,174 +1,121 @@
 package co.com.losalpes.marketplace.transact.bos;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceBO;
 import java.io.Serializable;
 import java.util.*;
-/**
- * PO
- * @author 
- */
-public class PurchaseOrderBO implements Serializable {
-    /**
-     * Attribute id
-     */
+
+public class PurchaseOrderBO implements Serializable, MarketPlaceBO {
+
     private Long id;
-
-    private String numSeguimiento;
-
-    /**
-     * Attribute entrega
-     */
     private Date entrega;
-    /**
-     * Attribute estado
-     */
     private String estado;
-    /**
-     * Attribute comercio
-     */
+    private String numSeguimiento;
     private ComercioBO comercio;
-    /**
-     * Attribute fabricante
-     */
     private FabricanteBO fabricante;
-    /**
-     * Attribute items
-     */
-    private ItemPOBO item;
+    private List<ItemPOBO> itemPOBOList;
 
     /**
      * Basic Constructor
      */
     public PurchaseOrderBO() {
+        itemPOBOList = new ArrayList<ItemPOBO>();
     }
 
     /**
-     * Basic Constructor
-     */
-    public PurchaseOrderBO(java.sql.Date aEntrega, String aEstado, ItemPOBO aItem) {
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.item = aItem;
-    }
-
-    /**
-     * Simple Constructor
-     */
-    public PurchaseOrderBO(Long id, java.sql.Date aEntrega, String aEstado, String numSeguimiento) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = new ComercioBO();
-        this.fabricante = new FabricanteBO();
-        this.item = new ItemPOBO();
-        this.numSeguimiento = numSeguimiento;
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public PurchaseOrderBO(Long id, java.sql.Date aEntrega, String aEstado, ComercioBO aComercio, FabricanteBO aFabricante, ItemPOBO aItem, String numSeguimiento) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = aComercio;
-        this.fabricante = aFabricante;
-        this.item = aItem;
-        this.numSeguimiento = numSeguimiento;
-    }
-
-    /**
-     * Getter method for attribute pOID
-     * @return attribute pOID
+     * @return the id
      */
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     /**
-     * Setter method for attribute pOID
-     * @param new value for attribute pOID
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return the entrega
+     */
+    public Date getEntrega() {
+        return entrega;
+    }
+
+    /**
+     * @param entrega the entrega to set
+     */
+    public void setEntrega(Date entrega) {
+        this.entrega = entrega;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the numSeguimiento
+     */
     public String getNumSeguimiento() {
         return numSeguimiento;
     }
 
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
     }
 
     /**
-     * Getter method for attribute entrega
-     * @return attribute entrega
-     */
-    public Date getEntrega() {
-        return this.entrega;
-    }
-
-    /**
-     * Setter method for attribute entrega
-     * @param new value for attribute entrega
-     */
-    public void setEntrega(Date aEntrega) {
-        this.entrega = aEntrega;
-    }
-
-    /**
-     * Getter method for attribute estado
-     * @return attribute estado
-     */
-    public String getEstado() {
-        return this.estado;
-    }
-
-    /**
-     * Setter method for attribute estado
-     * @param new value for attribute estado
-     */
-    public void setEstado(String aEstado) {
-        this.estado = aEstado;
-    }
-
-    /**
-     * Getter method for attribute comercio
-     * @return attribute comercio
+     * @return the comercio
      */
     public ComercioBO getComercio() {
-        return this.comercio;
+        return comercio;
     }
 
     /**
-     * Setter method for attribute comercio
-     * @param new value for attribute comercio
+     * @param comercio the comercio to set
      */
-    public void setComercio(ComercioBO aComercio) {
-        this.comercio = aComercio;
+    public void setComercio(ComercioBO comercio) {
+        this.comercio = comercio;
     }
 
     /**
-     * Getter method for attribute fabricante
-     * @return attribute fabricante
+     * @return the fabricante
      */
     public FabricanteBO getFabricante() {
-        return this.fabricante;
+        return fabricante;
     }
 
     /**
-     * Setter method for attribute fabricante
-     * @param new value for attribute fabricante
+     * @param fabricante the fabricante to set
      */
-    public void setFabricante(FabricanteBO aFabricante) {
-        this.fabricante = aFabricante;
+    public void setFabricante(FabricanteBO fabricante) {
+        this.fabricante = fabricante;
     }
 
-    public ItemPOBO getItem() {
-        return item;
+    /**
+     * @return the itemPOBOList
+     */
+    public List<ItemPOBO> getItemPOBOList() {
+        return itemPOBOList;
     }
 
-    public void setItem(ItemPOBO item) {
-        this.item = item;
+    /**
+     * @param itemPOBOList the itemPOBOList to set
+     */
+    public void setItemPOBOList(List<ItemPOBO> itemPOBOList) {
+        this.itemPOBOList = itemPOBOList;
     }
 }

@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import co.com.losalpes.marketplace.transact.bos.ItemPOBO;
 import co.com.losalpes.marketplace.transact.bos.PurchaseOrderBO;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,204 +16,171 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author marketplace
- */
 @Entity
-public class PurchaseOrder implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class PurchaseOrder implements Serializable, MarketPlaceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column
     private String numSeguimiento;
-    /**
-     * Attribute entrega
-     */
-    @Temporal(TemporalType.DATE)
-    protected Date entrega;
-    /**
-     * Attribute estado
-     */
     @Column
-    protected String estado;
-    /**
-     * Attribute comercio
-     */
+    @Temporal(value = TemporalType.DATE)
+    private Date entrega;
+    @Column
+    private String estado;
     @OneToOne
-    protected Comercio comercio;
-    /**
-     * Attribute items
-     */
+    private Comercio comercio;
     @OneToOne
-    protected ItemPO item;
+    private Fabricante fabricante;
+    @OneToMany
+    protected List<ItemPO> items;
 
     /**
      * Default Constructor
      */
     public PurchaseOrder() {
-
     }
 
     /**
-     * Simple Constructor
+     * Constructor desde BO
+     * @param purchaseOrderBO
      */
-    public PurchaseOrder(Long id, Date aEntrega, String aEstado) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = new Comercio();
-        this.item = new ItemPO();
+    public PurchaseOrder(PurchaseOrderBO purchaseOrderBO) {
+        id = purchaseOrderBO.getId();
+        entrega = purchaseOrderBO.getEntrega();
+        estado = purchaseOrderBO.getEstado();
+        numSeguimiento = purchaseOrderBO.getNumSeguimiento();
+        if (purchaseOrderBO.getComercio() != null) {
+            comercio = new Comercio(purchaseOrderBO.getComercio());
+        }
+        if (purchaseOrderBO.getFabricante() != null) {
+            fabricante = new Fabricante(purchaseOrderBO.getFabricante());
+        }
+        for (ItemPOBO itemPOBO : purchaseOrderBO.getItemPOBOList()) {
+            items.add(new ItemPO(itemPOBO));
+        }
     }
 
     /**
-     * Complex Constructor
+     * {@inheritDoc}
      */
-    public PurchaseOrder(Long id, Date aEntrega, String aEstado, Comercio aComercio, ItemPO aItem, String numSeguimiento) {
-        this.id = id;
-        this.entrega = aEntrega;
-        this.estado = aEstado;
-        this.comercio = aComercio;
-        this.item = aItem;
-        this.numSeguimiento = numSeguimiento;
-    }
-
-    /**
-     * BO Constructor
-     */
-    public PurchaseOrder(PurchaseOrderBO pOBO) {
-        this.setId(pOBO.getId());
-        this.setEntrega(pOBO.getEntrega());
-        this.setEstado(pOBO.getEstado());
-        this.setComercio(new Comercio(pOBO.getComercio()));
-        this.setItem(new ItemPO(pOBO.getItem()));
-        this.setNumSeguimiento(pOBO.getNumSeguimiento());
-    }
-
-    /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
-     */
+    @Override
     public PurchaseOrderBO toBO() {
-
-        PurchaseOrderBO pOBO = new PurchaseOrderBO();
-        pOBO.setId(this.getId());
-        pOBO.setEntrega(this.getEntrega());
-        pOBO.setEstado(this.getEstado());
-        pOBO.setNumSeguimiento(this.getNumSeguimiento());
-
-        Comercio aComercio = this.getComercio();
-        if (aComercio != null)
-            pOBO.setComercio(aComercio.toBO());
-
-       pOBO.setItem(item.toBO());
-        return pOBO;
+        PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBO();
+        purchaseOrderBO.setId(getId());
+        purchaseOrderBO.setEntrega(getEntrega());
+        purchaseOrderBO.setEstado(getEstado());
+        purchaseOrderBO.setNumSeguimiento(getNumSeguimiento());
+        if (getComercio() != null) {
+            purchaseOrderBO.setComercio(getComercio().toBO());
+        }
+        if (getFabricante() != null) {
+            purchaseOrderBO.setFabricante(getFabricante().toBO());
+        }
+        for (ItemPO itemPO : items) {
+            purchaseOrderBO.getItemPOBOList().add(itemPO.toBO());
+        }
+        return purchaseOrderBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return the entrega
+     */
+    public Date getEntrega() {
+        return entrega;
+    }
+
+    /**
+     * @param entrega the entrega to set
+     */
+    public void setEntrega(Date entrega) {
+        this.entrega = entrega;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the numSeguimiento
+     */
     public String getNumSeguimiento() {
         return numSeguimiento;
     }
 
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
     }
 
     /**
-     * Getter method for attribute entrega
-     * @return attribute entrega
-     */
-    public Date getEntrega() {
-        return this.entrega;
-    }
-
-    /**
-     * Setter method for attribute entrega
-     * @param new value for attribute entrega
-     */
-    public void setEntrega(Date aEntrega) {
-        this.entrega = aEntrega;
-    }
-
-    /**
-     * Getter method for attribute estado
-     * @return attribute estado
-     */
-    public String getEstado() {
-        return this.estado;
-    }
-
-    /**
-     * Setter method for attribute estado
-     * @param new value for attribute estado
-     */
-    public void setEstado(String aEstado) {
-        this.estado = aEstado;
-    }
-
-    /**
-     * Getter method for attribute comercio
-     * @return attribute comercio
+     * @return the comercio
      */
     public Comercio getComercio() {
-        return this.comercio;
+        return comercio;
     }
 
     /**
-     * Setter method for attribute comercio
-     * @param new value for attribute comercio
+     * @param comercio the comercio to set
      */
-    public void setComercio(Comercio aComercio) {
-        this.comercio = aComercio;
+    public void setComercio(Comercio comercio) {
+        this.comercio = comercio;
     }
 
     /**
-     * Getter method for attribute items
-     * @return attribute items
+     * @return the fabricante
      */
-    public ItemPO getItem() {
-        return this.item;
+    public Fabricante getFabricante() {
+        return fabricante;
     }
 
     /**
-     * Setter method for attribute items
-     * @param new value for attribute items
+     * @param fabricante the fabricante to set
      */
-    public void setItem(ItemPO aItem) {
-        this.item = aItem;
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public List<ItemPO> getItems() {
+        return items;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof PurchaseOrder)) {
-            return false;
-        }
-        PurchaseOrder other = (PurchaseOrder) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setItems(List<ItemPO> items) {
+        this.items = items;
     }
-
-    @Override
-    public String toString() {
-        return "co.com.losalpes.marketplace.transact.entities.PurchaseOrder[id=" + id + "]";
-    }
-
 }
