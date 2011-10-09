@@ -5,10 +5,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 import co.com.losalpes.marketplace.transact.bos.*;
 
+import static co.com.losalpes.marketplace.transact.util.Util.*;
+
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getAllProductos", query = "SELECT P FROM Producto P "),
-    @NamedQuery(name = "findByNombre", query = "SELECT P FROM Producto P where nombre=:nombre ")
+    @NamedQuery(name = "findByCategoriaNombre", query = "select p from Producto p where nombre = :nombre and categoria = :categoria"),
+    @NamedQuery(name = "getAllProductos", query = "SELECT P FROM Producto P "), // Verificar
+    @NamedQuery(name = "findByNombre", query = "SELECT P FROM Producto P where nombre=:nombre ") // Verificar
 })
 public class Producto implements Serializable, MarketPlaceEntity {
 
@@ -53,7 +56,7 @@ public class Producto implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return true;
+        return !isEmptyString(nombre) && !isEmptyString(categoria);
     }
 
     /**

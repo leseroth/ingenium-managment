@@ -1,17 +1,14 @@
 package co.com.losalpes.marketplace.transact.entities;
 
 import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
-import co.com.losalpes.marketplace.transact.bos.ItemPOBO;
 import co.com.losalpes.marketplace.transact.bos.PurchaseOrderBO;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,9 +29,7 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
     @OneToOne
     private Comercio comercio;
     @OneToOne
-    private Fabricante fabricante;
-    @OneToMany
-    protected List<ItemPO> items;
+    private ItemPO item;
 
     /**
      * Default Constructor
@@ -51,14 +46,11 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
         entrega = purchaseOrderBO.getEntrega();
         estado = purchaseOrderBO.getEstado();
         numSeguimiento = purchaseOrderBO.getNumSeguimiento();
-        if (purchaseOrderBO.getComercio() != null) {
-            comercio = new Comercio(purchaseOrderBO.getComercio());
+        if (purchaseOrderBO.getComercioBO() != null) {
+            comercio = new Comercio(purchaseOrderBO.getComercioBO());
         }
-        if (purchaseOrderBO.getFabricante() != null) {
-            fabricante = new Fabricante(purchaseOrderBO.getFabricante());
-        }
-        for (ItemPOBO itemPOBO : purchaseOrderBO.getItemPOBOList()) {
-            items.add(new ItemPO(itemPOBO));
+        if (purchaseOrderBO.getItemPOBO() != null) {
+            item = new ItemPO(purchaseOrderBO.getItemPOBO());
         }
     }
 
@@ -68,18 +60,15 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
     @Override
     public PurchaseOrderBO toBO() {
         PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBO();
-        purchaseOrderBO.setId(getId());
-        purchaseOrderBO.setEntrega(getEntrega());
-        purchaseOrderBO.setEstado(getEstado());
-        purchaseOrderBO.setNumSeguimiento(getNumSeguimiento());
-        if (getComercio() != null) {
-            purchaseOrderBO.setComercio(getComercio().toBO());
+        purchaseOrderBO.setId(id);
+        purchaseOrderBO.setEntrega(entrega);
+        purchaseOrderBO.setEstado(estado);
+        purchaseOrderBO.setNumSeguimiento(numSeguimiento);
+        if (comercio != null) {
+            purchaseOrderBO.setComercioBO(comercio.toBO());
         }
-        if (getFabricante() != null) {
-            purchaseOrderBO.setFabricante(getFabricante().toBO());
-        }
-        for (ItemPO itemPO : items) {
-            purchaseOrderBO.getItemPOBOList().add(itemPO.toBO());
+        if (item != null) {
+            purchaseOrderBO.setItemPOBO(item.toBO());
         }
         return purchaseOrderBO;
     }
@@ -104,6 +93,20 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the numSeguimiento
+     */
+    public String getNumSeguimiento() {
+        return numSeguimiento;
+    }
+
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
+    public void setNumSeguimiento(String numSeguimiento) {
+        this.numSeguimiento = numSeguimiento;
     }
 
     /**
@@ -135,20 +138,6 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
     }
 
     /**
-     * @return the numSeguimiento
-     */
-    public String getNumSeguimiento() {
-        return numSeguimiento;
-    }
-
-    /**
-     * @param numSeguimiento the numSeguimiento to set
-     */
-    public void setNumSeguimiento(String numSeguimiento) {
-        this.numSeguimiento = numSeguimiento;
-    }
-
-    /**
      * @return the comercio
      */
     public Comercio getComercio() {
@@ -163,24 +152,16 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
     }
 
     /**
-     * @return the fabricante
+     * @return the item
      */
-    public Fabricante getFabricante() {
-        return fabricante;
+    public ItemPO getItem() {
+        return item;
     }
 
     /**
-     * @param fabricante the fabricante to set
+     * @param item the item to set
      */
-    public void setFabricante(Fabricante fabricante) {
-        this.fabricante = fabricante;
-    }
-
-    public List<ItemPO> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemPO> items) {
-        this.items = items;
+    public void setItem(ItemPO item) {
+        this.item = item;
     }
 }

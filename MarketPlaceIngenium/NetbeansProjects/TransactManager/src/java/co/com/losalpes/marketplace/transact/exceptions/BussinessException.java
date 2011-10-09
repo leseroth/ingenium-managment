@@ -1,4 +1,4 @@
-package co.com.losalpes.marketplace.pomanager.exceptions;
+package co.com.losalpes.marketplace.transact.exceptions;
 
 import javax.ejb.ApplicationException;
 import javax.xml.ws.WebFault;

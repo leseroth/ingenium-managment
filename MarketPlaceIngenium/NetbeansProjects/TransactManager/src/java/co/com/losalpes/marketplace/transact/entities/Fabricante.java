@@ -5,12 +5,10 @@ import co.com.losalpes.marketplace.transact.bos.FabricanteBO;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import static co.com.losalpes.marketplace.transact.util.Util.*;
-
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P"),
-    @NamedQuery(name = "getFabricanteFromNit", query = "select f from Fabricante f where f.nit = :nit")
+    @NamedQuery(name = "getFabricanteByNit", query = "select f from Fabricante f where f.nit = :nit"),
+    @NamedQuery(name = "getAllFabricantes", query = "SELECT P FROM Fabricante P") // Verificar
 })
 public class Fabricante implements Serializable, MarketPlaceEntity {
 

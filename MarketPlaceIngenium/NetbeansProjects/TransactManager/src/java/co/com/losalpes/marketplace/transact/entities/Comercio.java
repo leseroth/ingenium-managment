@@ -19,7 +19,8 @@ import static co.com.losalpes.marketplace.transact.util.Util.*;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "consultarComercio", query = "select c from Comercio c")
+    @NamedQuery(name = "getComercioByNit", query = "select c from Comercio c where c.nit = :nit"),
+    @NamedQuery(name = "consultarComercio", query = "select c from Comercio c") // Verificar
 })
 public class Comercio implements Serializable, MarketPlaceEntity {
 

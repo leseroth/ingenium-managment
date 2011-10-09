@@ -42,8 +42,8 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         fechaEntrega = ofertaBO.getFechaEntrega();
         numSeguimiento = ofertaBO.getNumSeguimiento();
         valor = ofertaBO.getValor();
-        fabricante = new Fabricante(ofertaBO.getFabricante());
-        productoOfrecido = new Producto(ofertaBO.getProductoOfrecido());
+        fabricante = new Fabricante(ofertaBO.getFabricanteBO());
+        productoOfrecido = new Producto(ofertaBO.getProductoOfrecidoBO());
     }
 
     /**
@@ -57,10 +57,10 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         ofertaBO.setNumSeguimiento(getNumSeguimiento());
         ofertaBO.setValor(getValor());
         if (getProductoOfrecido() != null) {
-            ofertaBO.setProductoOfrecido(getProductoOfrecido().toBO());
+            ofertaBO.setProductoOfrecidoBO(getProductoOfrecido().toBO());
         }
         if (getFabricante() != null) {
-            ofertaBO.setFabricante(getFabricante().toBO());
+            ofertaBO.setFabricanteBO(getFabricante().toBO());
         }
         return ofertaBO;
     }
