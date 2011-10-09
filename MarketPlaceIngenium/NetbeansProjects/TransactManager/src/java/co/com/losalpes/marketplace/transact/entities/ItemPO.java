@@ -1,120 +1,98 @@
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Collection;
 import co.com.losalpes.marketplace.transact.bos.*;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllItemPOs", query = "SELECT P FROM ItemPO P ")
 })
-/**
- * ItemPO
- * @author
- */
-public class ItemPO implements Serializable {
+public class ItemPO implements Serializable, MarketPlaceEntity {
 
-    /**
-     * Attribute ItemPOID
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    /**
-     * Attribute cantidad
-     */
+    private Long id;
     @Column
-    protected Integer cantidad;
-    /**
-     * Attribute productos
-     */
+    private Integer cantidad;
     @OneToOne
-    protected Producto producto;
+    private Producto producto;
 
     /**
      * Default Constructor
      */
     public ItemPO() {
-        
     }
 
     /**
-     * Simple Constructor
-     */
-    public ItemPO(Long id, Integer aCantidad) {
-        this.id = id;
-        this.cantidad = aCantidad;
-
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public ItemPO(Long id, Integer aCantidad, Collection<ItemPO> aProductos) {
-        this.id = id;
-        this.cantidad = aCantidad;
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param itemPOBO
      */
     public ItemPO(ItemPOBO itemPOBO) {
-        this.setId(itemPOBO.getId());
-        this.setCantidad(itemPOBO.getCantidad());
+        id = itemPOBO.getId();
+        cantidad = itemPOBO.getCantidad();
         producto = new Producto(itemPOBO.getProducto());
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public ItemPOBO toBO() {
-
         ItemPOBO itemPOBO = new ItemPOBO();
-        itemPOBO.setId(this.getId());
-        itemPOBO.setCantidad(this.getCantidad());
-        itemPOBO.setProducto(producto.toBO());
+        itemPOBO.setId(getId());
+        itemPOBO.setCantidad(getCantidad());
+        itemPOBO.setProducto(getProducto().toBO());
         return itemPOBO;
     }
 
     /**
-     * Getter method for attribute itemPOID
-     * @return attribute itemPOID
+     * {@inheritDoc}
      */
-    public Long getId() {
-        return this.id;
+    @Override
+    public boolean isInfoComplete() {
+        return true;
     }
 
     /**
-     * Setter method for attribute itemPOID
-     * @param new value for attribute itemPOID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute cantidad
-     * @return attribute cantidad
+     * @return the cantidad
      */
     public Integer getCantidad() {
-        return this.cantidad;
+        return cantidad;
     }
 
     /**
-     * Setter method for attribute cantidad
-     * @param new value for attribute cantidad
+     * @param cantidad the cantidad to set
      */
-    public void setCantidad(Integer aCantidad) {
-        this.cantidad = aCantidad;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
+    /**
+     * @return the producto
+     */
     public Producto getProducto() {
         return producto;
     }
 
+    /**
+     * @param producto the producto to set
+     */
     public void setProducto(Producto producto) {
         this.producto = producto;
     }

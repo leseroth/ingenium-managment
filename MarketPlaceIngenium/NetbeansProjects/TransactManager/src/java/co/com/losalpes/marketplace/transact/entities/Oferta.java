@@ -1,8 +1,8 @@
 package co.com.losalpes.marketplace.transact.entities;
 
+import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
 import javax.persistence.*;
-
 import co.com.losalpes.marketplace.transact.bos.*;
 import java.util.Date;
 
@@ -10,148 +10,150 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "getAllOfertas", query = "SELECT P FROM Oferta P ")
 })
-/**
- * Oferta
- * @author 
- */
-public class Oferta implements Serializable {
+public class Oferta implements Serializable, MarketPlaceEntity {
 
-    /**
-     * Attribute id
-     */
-    @Id
+    @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    
-    /**
-     * Attribute tiempoOferta
-     */
+    private Long id;
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    protected Date fechaEntrega;
-    /**
-     * Attribute fabricante
-     */
-    @OneToOne
-    protected Fabricante fabricante;
-
-    @OneToOne
-    private Producto productoOfrecido;
-
-    @Column
-    private Long valor;
-
+    @Temporal(value = javax.persistence.TemporalType.DATE)
+    private Date fechaEntrega;
     @Column
     private String numSeguimiento;
+    @Column
+    private Long valor;
+    @OneToOne
+    private Fabricante fabricante;
+    @OneToOne
+    private Producto productoOfrecido;
 
     /**
      * Default Constructor
      */
     public Oferta() {
-       this.numSeguimiento = ""+System.currentTimeMillis();
     }
 
     /**
-     * Complex Constructor
-     */
-    public Oferta(Long id, Date aTiempoOferta, Fabricante aFabricante, Producto prod, Long valor) {
-        this.id = id;
-        this.fechaEntrega = aTiempoOferta;
-        this.fabricante = aFabricante;
-        this.productoOfrecido = prod;
-        this.valor = valor;
-        this.numSeguimiento = ""+System.currentTimeMillis();
-    }
-
-    /**
-     * BO Constructor
+     * Constructor desde BO
+     * @param ofertaBO
      */
     public Oferta(OfertaBO ofertaBO) {
-        this.setId(ofertaBO.getId());
-        this.setFechaEntrega(ofertaBO.getFechaEntrega());
-        this.setFabricante(new Fabricante(ofertaBO.getFabricante()));
-        this.setProductoOfrecido(new Producto(ofertaBO.getProductoOfrecido()));
-        this.setNumSeguimiento(ofertaBO.getNumSeguimiento());
+        id = ofertaBO.getId();
+        fechaEntrega = ofertaBO.getFechaEntrega();
+        numSeguimiento = ofertaBO.getNumSeguimiento();
+        valor = ofertaBO.getValor();
+        fabricante = new Fabricante(ofertaBO.getFabricante());
+        productoOfrecido = new Producto(ofertaBO.getProductoOfrecido());
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public OfertaBO toBO() {
         OfertaBO ofertaBO = new OfertaBO();
-        ofertaBO.setId(this.getId());
-        ofertaBO.setFechaEntrega(this.getFechaEntrega());
-        ofertaBO.setProductoOfrecido(productoOfrecido.toBO());
-        ofertaBO.setNumSeguimiento(this.getNumSeguimiento());
-        Fabricante aFabricante = this.getFabricante();
-        if (aFabricante != null) {
-            ofertaBO.setFabricante(aFabricante.toBO());
+        ofertaBO.setId(getId());
+        ofertaBO.setFechaEntrega(getFechaEntrega());
+        ofertaBO.setNumSeguimiento(getNumSeguimiento());
+        ofertaBO.setValor(getValor());
+        if (getProductoOfrecido() != null) {
+            ofertaBO.setProductoOfrecido(getProductoOfrecido().toBO());
+        }
+        if (getFabricante() != null) {
+            ofertaBO.setFabricante(getFabricante().toBO());
         }
         return ofertaBO;
     }
 
     /**
-     * Getter method for attribute ofertaID
-     * @return attribute ofertaID
+     * {@inheritDoc}
      */
-    public Long getId() {
-        return this.id;
+    @Override
+    public boolean isInfoComplete() {
+        return true;
     }
 
     /**
-     * Setter method for attribute ofertaID
-     * @param new value for attribute ofertaID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute fabricante
-     * @return attribute fabricante
+     * @return the fechaEntrega
      */
-    public Fabricante getFabricante() {
-        return this.fabricante;
-    }
-
-    /**
-     * Setter method for attribute fabricante
-     * @param new value for attribute fabricante
-     */
-    public void setFabricante(Fabricante aFabricante) {
-        this.fabricante = aFabricante;
-    }
-
-    public Producto getProductoOfrecido() {
-        return productoOfrecido;
-    }
-
-    public void setProductoOfrecido(Producto productoOfrecido) {
-        this.productoOfrecido = productoOfrecido;
-    }
-
     public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(Date frechaEntrega) {
-        this.fechaEntrega = frechaEntrega;
+    /**
+     * @param fechaEntrega the fechaEntrega to set
+     */
+    public void setFechaEntrega(Date fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
     }
 
-    public Long getValor() {
-        return valor;
-    }
-
-    public void setValor(Long valor) {
-        this.valor = valor;
-    }
-
+    /**
+     * @return the numSeguimiento
+     */
     public String getNumSeguimiento() {
         return numSeguimiento;
     }
 
+    /**
+     * @param numSeguimiento the numSeguimiento to set
+     */
     public void setNumSeguimiento(String numSeguimiento) {
         this.numSeguimiento = numSeguimiento;
+    }
+
+    /**
+     * @return the valor
+     */
+    public Long getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Long valor) {
+        this.valor = valor;
+    }
+
+    /**
+     * @return the fabricante
+     */
+    public Fabricante getFabricante() {
+        return fabricante;
+    }
+
+    /**
+     * @param fabricante the fabricante to set
+     */
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    /**
+     * @return the productoOfrecido
+     */
+    public Producto getProductoOfrecido() {
+        return productoOfrecido;
+    }
+
+    /**
+     * @param productoOfrecido the productoOfrecido to set
+     */
+    public void setProductoOfrecido(Producto productoOfrecido) {
+        this.productoOfrecido = productoOfrecido;
     }
 }

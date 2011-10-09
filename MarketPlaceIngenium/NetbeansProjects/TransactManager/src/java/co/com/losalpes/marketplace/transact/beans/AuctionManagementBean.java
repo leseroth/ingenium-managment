@@ -34,17 +34,18 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
     @PersistenceContext
     private EntityManager em;
 
+    // TODO revisar esta implementacion
     public String crearSubasta(PurchaseOrderBO po) {
         PurchaseOrder p = new PurchaseOrder(po);
         em.persist(p.getComercio());
         em.flush();
 
-        ItemPO item = p.getItem();
-        Producto prod = item.getProducto();
-        em.persist(prod);
-        em.flush();
-        em.persist(item);
-        em.flush();
+//        ItemPO item = p.getItem();
+//        Producto prod = item.getProducto();
+//        em.persist(prod);
+//        em.flush();
+//        em.persist(item);
+//        em.flush();
 
         em.persist(p);
         em.flush();

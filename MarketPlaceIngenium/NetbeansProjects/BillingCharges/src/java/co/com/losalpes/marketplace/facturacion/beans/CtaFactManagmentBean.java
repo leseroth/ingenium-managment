@@ -87,7 +87,7 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
 
                 try { // Call Web Service Operation
                     co.com.losalpes.marketplace.gestioncorreoelectronico.GestionCorreoElectronico port = service.getGestionCorreoElectronicoSOAP();
-                    // TODO initialize WS operation arguments here
+
                     List<String> to = new ArrayList<String>();
                     to.add(cuenta.getCliente().getEmail());
                     String from = "info@marketplace.losalpes.com.co";
