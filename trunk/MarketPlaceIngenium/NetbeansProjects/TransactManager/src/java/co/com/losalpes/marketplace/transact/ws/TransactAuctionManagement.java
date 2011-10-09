@@ -66,6 +66,11 @@ public class TransactAuctionManagement {
         return ejbRef.asignarFabricantesSubasta(numSeguimientoSubasta, fabricantes);
     }
 
+    @WebMethod(operationName = "consultarSubastasFabricante")
+    public java.util.List<SubastaBO> consultarSubastasFabricante(@WebParam(name = "nit") String nit) throws BussinessException {
+        return ejbRef.consultarSubastasFabricante(nit);
+    }
+
     @WebMethod(operationName = "darGanadorSubasta")
     public FabricanteBO darGanadorSubasta(@WebParam(name = "idSubasta") String idSubasta)
             throws BussinessException {
@@ -76,11 +81,6 @@ public class TransactAuctionManagement {
     public boolean cerrarSubasta(@WebParam(name = "idSubasta") String idSubasta)
             throws BussinessException {
         return ejbRef.cerrarSubasta(idSubasta);
-    }
-
-    @WebMethod(operationName = "consultarSubastasFabricante")
-    public java.util.List<SubastaBO> consultarSubastasFabricante(@WebParam(name = "nit") String nit) {
-        return ejbRef.consultarSubastasFabricante(nit);
     }
 
     @WebMethod(operationName = "consultarFabricantesSubasta")

@@ -49,13 +49,13 @@ public interface AuctionManagementLocal {
      */
     public Boolean asignarFabricantesSubasta(String numSeguimientoSubasta, List<FabricanteBO> fabricantes) throws BussinessException;
     
+    public List<SubastaBO> consultarSubastasFabricante(String nit) throws BussinessException ;
+
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException;
 
     public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;
 
     public boolean cerrarSubasta(String numSeguimientoSubasta) throws BussinessException;
-
-    public List<SubastaBO> consultarSubastasFabricante(String nit);
 
     public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimiento) throws BussinessException;
 
