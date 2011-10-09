@@ -17,7 +17,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getSubastaFromNumSeguimiento", query = "select s from Subasta s where s.numSeguimiento = :numSeguimiento"), 
+    @NamedQuery(name = "getSubastaFromNumSeguimiento", query = "select s from Subasta s where s.numSeguimiento = :numSeguimiento"),
+    @NamedQuery(name = "getSubastasByActiva", query = "select s from Subasta s where s.activa = :activa"),
     @NamedQuery(name = "getAllSubastas", query = "select s from Subasta s"), // Verificar
     @NamedQuery(name = "getSubastaFromOrdenCompra", query = "select s from Subasta s where s.po.numSeguimiento = :numSeguimientoPO") // Verificar
 })

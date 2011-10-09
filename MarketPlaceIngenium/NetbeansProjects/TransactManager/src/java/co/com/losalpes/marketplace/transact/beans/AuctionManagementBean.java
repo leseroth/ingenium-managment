@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import static co.com.losalpes.marketplace.transact.util.Constants.*;
+import static co.com.losalpes.marketplace.transact.util.Util.*;
 
 /**
  *
@@ -168,6 +169,45 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<SubastaBO> consultarSubastasFabricante(String nitFabricante) throws BussinessException {
+
+        if (isEmptyString(nitFabricante)) {
+            throw new BussinessException(EXC_INCORRECT_ARGUMENT, "nitFabricante = " + nitFabricante);
+        }
+
+        Query query = null;
+
+        query = em.createNamedQuery("getFabricanteByNit");
+        query.setParameter("nit", nitFabricante);
+        if (query.getResultList().isEmpty()) {
+            throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Fabricante", nitFabricante);
+        }
+
+        query = em.createNamedQuery("getSubastasByActiva");
+        query.setParameter("activa", true);
+        List<Subasta> subastaList = (List<Subasta>) query.getResultList();
+        List<SubastaBO> subastaBOResponseList = new ArrayList<SubastaBO>();
+
+        iteraSubasta:
+        for (Subasta subasta : subastaList) {
+            List<Fabricante> fabricanteList = subasta.getFabricantes();
+
+            iteraFabricanteSubasta:
+            for (Fabricante fabricante : fabricanteList) {
+                if (nitFabricante.equals(fabricante.getNit())) {
+                    subastaBOResponseList.add(subasta.toBO());
+                    break iteraFabricanteSubasta;
+                }
+            }
+        }
+
+        return subastaBOResponseList;
+    }
+
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException {
         Query q = em.createNamedQuery("getSubastaFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimientoSubasta);
@@ -223,22 +263,6 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         }
         s.setActiva(false);
         return true;
-    }
-
-    public List<SubastaBO> consultarSubastasFabricante(String nit) {
-        Query q = em.createNamedQuery("getAllSubastas");
-        List<Subasta> subs = (List<Subasta>) q.getResultList();
-        List<SubastaBO> subsBO = new ArrayList<SubastaBO>();
-        for (int i = 0; i < subs.size(); i++) {
-            List<Fabricante> fabs = subs.get(i).getFabricantes();
-            for (int j = 0; j < fabs.size(); j++) {
-                if (fabs.get(j).getNit().equals(nit)) {
-                    subsBO.add(subs.get(i).toBO());
-                    break;
-                }
-            }
-        }
-        return subsBO;
     }
 
     public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimiento) throws BussinessException {
