@@ -10,8 +10,8 @@ public class OfertaBO implements Serializable, MarketPlaceBO {
     private Date fechaEntrega;
     private String numSeguimiento;
     private Long valor;
-    private FabricanteBO fabricante;
-    private ProductoBO productoOfrecido;
+    private FabricanteBO fabricanteBO;
+    private ProductoBO productoOfrecidoBO;
 
     /**
      * Basic Constructor
@@ -76,30 +76,30 @@ public class OfertaBO implements Serializable, MarketPlaceBO {
     }
 
     /**
-     * @return the fabricante
+     * @return the fabricanteBO
      */
-    public FabricanteBO getFabricante() {
-        return fabricante;
+    public FabricanteBO getFabricanteBO() {
+        return fabricanteBO;
     }
 
     /**
-     * @param fabricante the fabricante to set
+     * @param fabricanteBO the fabricanteBO to set
      */
-    public void setFabricante(FabricanteBO fabricante) {
-        this.fabricante = fabricante;
+    public void setFabricanteBO(FabricanteBO fabricanteBO) {
+        this.fabricanteBO = fabricanteBO;
     }
 
     /**
-     * @return the productoOfrecido
+     * @return the productoOfrecidoBO
      */
-    public ProductoBO getProductoOfrecido() {
-        return productoOfrecido;
+    public ProductoBO getProductoOfrecidoBO() {
+        return productoOfrecidoBO;
     }
 
     /**
-     * @param productoOfrecido the productoOfrecido to set
+     * @param productoOfrecidoBO the productoOfrecidoBO to set
      */
-    public void setProductoOfrecido(ProductoBO productoOfrecido) {
-        this.productoOfrecido = productoOfrecido;
+    public void setProductoOfrecidoBO(ProductoBO productoOfrecidoBO) {
+        this.productoOfrecidoBO = productoOfrecidoBO;
     }
 }

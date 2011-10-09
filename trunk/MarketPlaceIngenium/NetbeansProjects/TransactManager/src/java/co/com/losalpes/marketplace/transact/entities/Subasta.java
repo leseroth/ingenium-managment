@@ -2,17 +2,24 @@ package co.com.losalpes.marketplace.transact.entities;
 
 import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Collection;
 import java.util.ArrayList;
 import co.com.losalpes.marketplace.transact.bos.*;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "getAllSubastas", query = "select s from Subasta s"),
-    @NamedQuery(name = "getSubastaFromNumSeguimiento", query = "select s from Subasta s where s.numSeguimiento = :numSeguimiento"),
-    @NamedQuery(name = "getSubastaFromOrdenCompra", query = "select s from Subasta s where s.po.numSeguimiento = :numSeguimientoPO")
+    @NamedQuery(name = "getSubastaFromNumSeguimiento", query = "select s from Subasta s where s.numSeguimiento = :numSeguimiento"), 
+    @NamedQuery(name = "getAllSubastas", query = "select s from Subasta s"), // Verificar
+    @NamedQuery(name = "getSubastaFromOrdenCompra", query = "select s from Subasta s where s.po.numSeguimiento = :numSeguimientoPO") // Verificar
 })
 public class Subasta implements Serializable, MarketPlaceEntity {
 
@@ -28,7 +35,7 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     @OneToOne
     private PurchaseOrder po;
     @OneToMany
-    private Collection<Oferta> ofertas;
+    private List<Oferta> ofertas;
     @OneToMany
     private List<Fabricante> fabricantes;
 
@@ -49,16 +56,16 @@ public class Subasta implements Serializable, MarketPlaceEntity {
         activa = subastaBO.isActiva();
         numSeguimiento = subastaBO.getNumSeguimiento();
 
-        if (subastaBO.getMejor() != null) {
-            mejor = new Oferta(subastaBO.getMejor());
+        if (subastaBO.getMejorOfertaBO() != null) {
+            mejor = new Oferta(subastaBO.getMejorOfertaBO());
         }
-        if (subastaBO.getPo() != null) {
-            po = new PurchaseOrder(subastaBO.getPo());
+        if (subastaBO.getPurchaseOrderBO() != null) {
+            po = new PurchaseOrder(subastaBO.getPurchaseOrderBO());
         }
-        for (OfertaBO ofertaBO : subastaBO.getOfertas()) {
+        for (OfertaBO ofertaBO : subastaBO.getOfertaBOList()) {
             ofertas.add(new Oferta(ofertaBO));
         }
-        for (FabricanteBO fabricanteBO : subastaBO.getFabricantes()) {
+        for (FabricanteBO fabricanteBO : subastaBO.getFabricanteBOList()) {
             fabricantes.add(new Fabricante(fabricanteBO));
         }
     }
@@ -74,16 +81,16 @@ public class Subasta implements Serializable, MarketPlaceEntity {
         subastaBO.setNumSeguimiento(getNumSeguimiento());
 
         if (getMejor() != null) {
-            subastaBO.setMejor(getMejor().toBO());
+            subastaBO.setMejorOfertaBO(getMejor().toBO());
         }
         if (getPo() != null) {
-            subastaBO.setPo(getPo().toBO());
+            subastaBO.setPurchaseOrderBO(getPo().toBO());
         }
         for (Oferta oferta : getOfertas()) {
-            subastaBO.getOfertas().add(oferta.toBO());
+            subastaBO.getOfertaBOList().add(oferta.toBO());
         }
         for (Fabricante fabricante : getFabricantes()) {
-            subastaBO.getFabricantes().add(fabricante.toBO());
+            subastaBO.getFabricanteBOList().add(fabricante.toBO());
         }
         return subastaBO;
     }
@@ -169,14 +176,14 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     /**
      * @return the ofertas
      */
-    public Collection<Oferta> getOfertas() {
+    public List<Oferta> getOfertas() {
         return ofertas;
     }
 
     /**
      * @param ofertas the ofertas to set
      */
-    public void setOfertas(Collection<Oferta> ofertas) {
+    public void setOfertas(List<Oferta> ofertas) {
         this.ofertas = ofertas;
     }
 

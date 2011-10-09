@@ -10,15 +10,13 @@ public class PurchaseOrderBO implements Serializable, MarketPlaceBO {
     private Date entrega;
     private String estado;
     private String numSeguimiento;
-    private ComercioBO comercio;
-    private FabricanteBO fabricante;
-    private List<ItemPOBO> itemPOBOList;
+    private ComercioBO comercioBO;
+    private ItemPOBO itemPOBO;
 
     /**
      * Basic Constructor
      */
     public PurchaseOrderBO() {
-        itemPOBOList = new ArrayList<ItemPOBO>();
     }
 
     /**
@@ -78,44 +76,30 @@ public class PurchaseOrderBO implements Serializable, MarketPlaceBO {
     }
 
     /**
-     * @return the comercio
+     * @return the comercioBO
      */
-    public ComercioBO getComercio() {
-        return comercio;
+    public ComercioBO getComercioBO() {
+        return comercioBO;
     }
 
     /**
-     * @param comercio the comercio to set
+     * @param comercioBO the comercioBO to set
      */
-    public void setComercio(ComercioBO comercio) {
-        this.comercio = comercio;
+    public void setComercioBO(ComercioBO comercioBO) {
+        this.comercioBO = comercioBO;
     }
 
     /**
-     * @return the fabricante
+     * @return the itemPOBO
      */
-    public FabricanteBO getFabricante() {
-        return fabricante;
+    public ItemPOBO getItemPOBO() {
+        return itemPOBO;
     }
 
     /**
-     * @param fabricante the fabricante to set
+     * @param itemPOBO the itemPOBO to set
      */
-    public void setFabricante(FabricanteBO fabricante) {
-        this.fabricante = fabricante;
-    }
-
-    /**
-     * @return the itemPOBOList
-     */
-    public List<ItemPOBO> getItemPOBOList() {
-        return itemPOBOList;
-    }
-
-    /**
-     * @param itemPOBOList the itemPOBOList to set
-     */
-    public void setItemPOBOList(List<ItemPOBO> itemPOBOList) {
-        this.itemPOBOList = itemPOBOList;
+    public void setItemPOBO(ItemPOBO itemPOBO) {
+        this.itemPOBO = itemPOBO;
     }
 }

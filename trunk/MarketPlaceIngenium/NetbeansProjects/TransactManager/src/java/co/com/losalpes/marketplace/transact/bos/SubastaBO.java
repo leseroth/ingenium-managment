@@ -9,17 +9,17 @@ public class SubastaBO implements Serializable, MarketPlaceBO {
     private Long id;
     private boolean activa;
     private String numSeguimiento;
-    private OfertaBO mejor;
-    private PurchaseOrderBO po;
-    private List<OfertaBO> ofertas;
-    private List<FabricanteBO> fabricantes;
+    private OfertaBO mejorOfertaBO;
+    private PurchaseOrderBO purchaseOrderBO;
+    private List<OfertaBO> ofertaBOList;
+    private List<FabricanteBO> fabricanteBOList;
 
     /**
      * Basic Constructor
      */
     public SubastaBO() {
-        ofertas = new ArrayList<OfertaBO>();
-        fabricantes = new ArrayList<FabricanteBO>();
+        ofertaBOList = new ArrayList<OfertaBO>();
+        fabricanteBOList = new ArrayList<FabricanteBO>();
     }
 
     /**
@@ -65,58 +65,58 @@ public class SubastaBO implements Serializable, MarketPlaceBO {
     }
 
     /**
-     * @return the mejor
+     * @return the mejorOfertaBO
      */
-    public OfertaBO getMejor() {
-        return mejor;
+    public OfertaBO getMejorOfertaBO() {
+        return mejorOfertaBO;
     }
 
     /**
-     * @param mejor the mejor to set
+     * @param mejorOfertaBO the mejorOfertaBO to set
      */
-    public void setMejor(OfertaBO mejor) {
-        this.mejor = mejor;
+    public void setMejorOfertaBO(OfertaBO mejorOfertaBO) {
+        this.mejorOfertaBO = mejorOfertaBO;
     }
 
     /**
-     * @return the po
+     * @return the purchaseOrderBO
      */
-    public PurchaseOrderBO getPo() {
-        return po;
+    public PurchaseOrderBO getPurchaseOrderBO() {
+        return purchaseOrderBO;
     }
 
     /**
-     * @param po the po to set
+     * @param purchaseOrderBO the purchaseOrderBO to set
      */
-    public void setPo(PurchaseOrderBO po) {
-        this.po = po;
+    public void setPurchaseOrderBO(PurchaseOrderBO purchaseOrderBO) {
+        this.purchaseOrderBO = purchaseOrderBO;
     }
 
     /**
-     * @return the ofertas
+     * @return the ofertaBOList
      */
-    public List<OfertaBO> getOfertas() {
-        return ofertas;
+    public List<OfertaBO> getOfertaBOList() {
+        return ofertaBOList;
     }
 
     /**
-     * @param ofertas the ofertas to set
+     * @param ofertaBOList the ofertaBOList to set
      */
-    public void setOfertas(List<OfertaBO> ofertas) {
-        this.ofertas = ofertas;
+    public void setOfertaBOList(List<OfertaBO> ofertaBOList) {
+        this.ofertaBOList = ofertaBOList;
     }
 
     /**
-     * @return the fabricantes
+     * @return the fabricanteBOList
      */
-    public List<FabricanteBO> getFabricantes() {
-        return fabricantes;
+    public List<FabricanteBO> getFabricanteBOList() {
+        return fabricanteBOList;
     }
 
     /**
-     * @param fabricantes the fabricantes to set
+     * @param fabricanteBOList the fabricanteBOList to set
      */
-    public void setFabricantes(List<FabricanteBO> fabricantes) {
-        this.fabricantes = fabricantes;
+    public void setFabricanteBOList(List<FabricanteBO> fabricanteBOList) {
+        this.fabricanteBOList = fabricanteBOList;
     }
 }

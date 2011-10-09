@@ -32,7 +32,7 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
     public ItemPO(ItemPOBO itemPOBO) {
         id = itemPOBO.getId();
         cantidad = itemPOBO.getCantidad();
-        producto = new Producto(itemPOBO.getProducto());
+        producto = new Producto(itemPOBO.getProductoBO());
     }
 
     /**
@@ -43,7 +43,7 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
         ItemPOBO itemPOBO = new ItemPOBO();
         itemPOBO.setId(getId());
         itemPOBO.setCantidad(getCantidad());
-        itemPOBO.setProducto(getProducto().toBO());
+        itemPOBO.setProductoBO(getProducto().toBO());
         return itemPOBO;
     }
 
@@ -52,7 +52,7 @@ public class ItemPO implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return true;
+        return cantidad != null && cantidad != 0 && producto != null;
     }
 
     /**

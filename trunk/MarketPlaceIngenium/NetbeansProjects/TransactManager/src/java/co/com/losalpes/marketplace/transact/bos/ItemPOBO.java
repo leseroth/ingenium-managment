@@ -7,7 +7,7 @@ public class ItemPOBO implements Serializable, MarketPlaceBO {
 
     private Long id;
     private Integer cantidad;
-    private ProductoBO producto;
+    private ProductoBO productoBO;
 
     /**
      * Basic Constructor
@@ -44,16 +44,16 @@ public class ItemPOBO implements Serializable, MarketPlaceBO {
     }
 
     /**
-     * @return the producto
+     * @return the productoBO
      */
-    public ProductoBO getProducto() {
-        return producto;
+    public ProductoBO getProductoBO() {
+        return productoBO;
     }
 
     /**
-     * @param producto the producto to set
+     * @param productoBO the productoBO to set
      */
-    public void setProducto(ProductoBO producto) {
-        this.producto = producto;
+    public void setProductoBO(ProductoBO productoBO) {
+        this.productoBO = productoBO;
     }
 }
