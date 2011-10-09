@@ -18,6 +18,7 @@ public class Constants {
     public static final String EXC_INCORRECT_ARGUMENT = "Los siguientes argumentos tienen valores no validos: ?";
     public static final String EXC_PO_STATE_UPDATE = "Error en la actualizacion de estado: ?";
     public static final String EXC_DUPLICATED_FIELD = "El campo ? con valor ? ya existe en ?";
+    public static final String EXC_SUBASTA = "Error en subasta con numSeguimiento ? : ?";
 
     /**
      * Enumeracion para almacenar los estados posibles de una orden de compra

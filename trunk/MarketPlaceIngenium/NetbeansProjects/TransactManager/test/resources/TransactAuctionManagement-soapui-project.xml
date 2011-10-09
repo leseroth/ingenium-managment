@@ -395,58 +395,113 @@
       <xs:element name="return" type="xs:boolean" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="asignarFabricantesSubasta" bindingOperationName="asignarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="asignarFabricantesSubasta" bindingOperationName="asignarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="AsignarFabricantes"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:asignarFabricantesSubasta>
-         <!--Optional:-->
-         <numSeguimientoSubasta>gero et</numSeguimientoSubasta>
-         <!--Zero or more repetitions:-->
+         <numSeguimientoSubasta>num001</numSeguimientoSubasta>
          <fabricantes>
-            <!--Optional:-->
-            <email>sonoras imperio</email>
-            <!--Optional:-->
-            <id>10</id>
-            <!--Optional:-->
-            <nit>quae divum incedo</nit>
-            <!--Optional:-->
-            <nombre>verrantque per auras</nombre>
+            <nit>fab203</nit>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+            <nit>nitNuevo101</nit>
+            <nombre>Fabricante Nuevo 101</nombre>
+         </fabricantes>
+         <fabricantes>
+            <nit>fab201</nit>
          </fabricantes>
       </ws:asignarFabricantesSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="cerrarSubasta" bindingOperationName="cerrarSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="AsignarFabricanteCon1Malo"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
-      <ws:cerrarSubasta>
-         <!--Optional:-->
-         <idSubasta>gero et</idSubasta>
-      </ws:cerrarSubasta>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num002</numSeguimientoSubasta>
+         <fabricantes>
+            <nit>fab203</nit>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+         </fabricantes>
+         <fabricantes>
+            <nit>fab201</nit>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/cerrarSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarFabricantesSubasta" bindingOperationName="consultarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ErrorSubastaCerrada"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
-      <ws:consultarFabricantesSubasta>
-         <!--Optional:-->
-         <numSeguimiento>gero et</numSeguimiento>
-      </ws:consultarFabricantesSubasta>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num004</numSeguimientoSubasta>
+         <fabricantes>
+            <nit>fab203</nit>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+            <nit>nitNuevo101</nit>
+            <nombre>Fabricante Nuevo 101</nombre>
+         </fabricantes>
+         <fabricantes>
+            <nit>fab201</nit>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarFabricantesSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarSubastaOrdenCompra" bindingOperationName="consultarSubastaOrdenCompra" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ErrorSubastaAbiertaPeroAsignada"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
-      <ws:consultarSubastaOrdenCompra>
-         <!--Optional:-->
-         <numSeguimientoPO>gero et</numSeguimientoPO>
-      </ws:consultarSubastaOrdenCompra>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num001</numSeguimientoSubasta>
+         <fabricantes>
+            <nit>fab202</nit>
+         </fabricantes>
+         <fabricantes>
+            <nit>fab204</nit>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarSubastaOrdenCompraRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarSubastasFabricante" bindingOperationName="consultarSubastasFabricante" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ErrorNingunFabricante"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
-      <ws:consultarSubastasFabricante>
-         <!--Optional:-->
-         <nit>gero et</nit>
-      </ws:consultarSubastasFabricante>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num003</numSeguimientoSubasta>
+      </ws:asignarFabricantesSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarSubastasFabricanteRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="crearSubasta" bindingOperationName="crearSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="CrearSubasta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ErrorTodosLosFabricantesMal"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num005</numSeguimientoSubasta>
+         <fabricantes>
+            <email>test@test.com</email>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ErrorNumSegNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>numeroRaro</numSeguimientoSubasta>
+         <fabricantes>
+            <nit>fab203</nit>
+         </fabricantes>
+         <fabricantes>
+            <email>test@test.com</email>
+            <nit>nitNuevo101</nit>
+            <nombre>Fabricante Nuevo 101</nombre>
+         </fabricantes>
+         <fabricantes>
+            <nit>fab201</nit>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="cerrarSubasta" bindingOperationName="cerrarSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarFabricantesSubasta" bindingOperationName="consultarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarSubastaOrdenCompra" bindingOperationName="consultarSubastaOrdenCompra" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarSubastasFabricante" bindingOperationName="consultarSubastasFabricante" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="crearSubasta" bindingOperationName="crearSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="CrearSubasta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:crearSubasta>
@@ -564,12 +619,4 @@
          </po>
       </ws:crearSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <ws:darGanadorSubasta>
-         <!--Optional:-->
-         <idSubasta>gero et</idSubasta>
-      </ws:darGanadorSubasta>
-   </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/darGanadorSubastaRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

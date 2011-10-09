@@ -3,7 +3,15 @@ package co.com.losalpes.marketplace.transact.entities;
 import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import co.com.losalpes.marketplace.transact.bos.FabricanteBO;
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+import static co.com.losalpes.marketplace.transact.util.Util.*;
 
 @Entity
 @NamedQueries({
@@ -57,7 +65,7 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return true;
+        return !isEmptyString(nit) && !isEmptyString(nombre) && !isEmptyString(email);
     }
 
     /**
