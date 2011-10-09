@@ -48,4 +48,8 @@ insert into subasta(id, activa, numSeguimiento, po_id) values (3, true, 'num003'
 
 insert into itempo(id,cantidad,producto_id) values (4,210,2022);
 insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(4,'SolicitadoComercio','num004',102,4);
-insert into subasta(id, activa, numSeguimiento, po_id) values (4, true, 'num004', 4);
+insert into subasta(id, activa, numSeguimiento, po_id) values (4, false, 'num004', 4);
+
+insert into itempo(id,cantidad,producto_id) values (5,210,2022);
+insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(5,'SolicitadoComercio','num004',102,5);
+insert into subasta(id, activa, numSeguimiento, po_id) values (5, true, 'num004', 5);

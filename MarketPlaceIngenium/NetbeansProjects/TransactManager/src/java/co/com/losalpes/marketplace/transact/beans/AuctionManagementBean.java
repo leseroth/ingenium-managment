@@ -110,36 +110,62 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         return numSeguimiento;
     }
 
-    public Boolean asignarFabricantesSubasta(String numSeguimientoSubasta, List<FabricanteBO> fabricantes) throws BussinessException {
-        Query q = em.createNamedQuery("getSubastaFromNumSeguimiento");
-        q.setParameter("numSeguimiento", numSeguimientoSubasta);
-        List<Subasta> sub = (List<Subasta>) q.getResultList();
-        if (sub.isEmpty()) {
-            throw new BussinessException("La subasta identificada con el número de seguimiento " +
-                    numSeguimientoSubasta + " no existe");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean asignarFabricantesSubasta(String numSeguimientoSubasta, List<FabricanteBO> fabricanteBOList) throws BussinessException {
+        Query query = null;
+
+        query = em.createNamedQuery("getSubastaFromNumSeguimiento");
+        query.setParameter("numSeguimiento", numSeguimientoSubasta);
+        List<Subasta> subastaList = (List<Subasta>) query.getResultList();
+
+        if (subastaList.isEmpty()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "No existe");
+        } else if (subastaList.size() > 1) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Existe mas de una subasta con ese numero de seguimiento");
         }
-        if (!sub.get(0).isActiva()) {
-            throw new BussinessException("La subasta identificada con el número de seguimiento " +
-                    numSeguimientoSubasta + " está cerrada");
+
+        Subasta subasta = subastaList.get(0);
+        if (!subasta.isActiva()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Se encuentra cerrada");
+        } else if (!subasta.getFabricantes().isEmpty()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Ya se habian asignado los fabricantes de esta subasta");
         }
-        List<Fabricante> fabs = new ArrayList<Fabricante>();
-        for (int i = 0; i < fabricantes.size(); i++) {
-            q = em.createNamedQuery("getFabricanteFromNit");
-            q.setParameter("nit", fabricantes.get(i).getNit());
-            List<Fabricante> fabrics = (List<Fabricante>) q.getResultList();
-            if (fabrics.isEmpty()) {
-                Fabricante f = new Fabricante();
-                f.setNombre(fabricantes.get(i).getNombre());
-                f.setNit(fabricantes.get(i).getNit());
-                f.setEmail(fabricantes.get(i).getEmail());
-                em.persist(f);
-                fabs.add(f);
+
+        for (FabricanteBO fabricanteBO : fabricanteBOList) {
+            query = em.createNamedQuery("getFabricanteByNit");
+            query.setParameter("nit", fabricanteBO.getNit());
+
+            List<Fabricante> fabricanteList = (List<Fabricante>) query.getResultList();
+            Fabricante fabricante = null;
+
+            if (fabricanteList.isEmpty()) {
+                fabricante = new Fabricante(fabricanteBO);
+                fabricante.setId(null);
+                if (fabricante.isInfoComplete()) {
+                    em.persist(fabricante);
+                } else {
+                    System.err.println("***** MARKETPLACE ***** No se pudo crear el fabricante " + fabricante.getNit());
+                    fabricante = null;
+                }
             } else {
-                fabs.add(fabrics.get(0));
+                fabricante = fabricanteList.get(0);
+            }
+
+            if (fabricante != null) {
+                subasta.getFabricantes().add(fabricante);
             }
         }
-        sub.get(0).setFabricantes(fabs);
-        return true;
+
+        boolean result = !subasta.getFabricantes().isEmpty();
+        if (!result) {
+            subasta.setActiva(false);
+            em.persist(subasta);
+        }
+
+        return result;
     }
 
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException {

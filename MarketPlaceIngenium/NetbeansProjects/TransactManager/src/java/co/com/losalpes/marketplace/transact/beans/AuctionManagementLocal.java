@@ -30,8 +30,25 @@ public interface AuctionManagementLocal {
      */
     public String crearSubasta(PurchaseOrderBO po) throws BussinessException;
 
+    /**
+     * Recibe el numero de seguimiento de una subasta y le asigna los fabricantes indicados
+     * <ul>
+     * <li>El numero de seguimiento debe existir</li>
+     * <li>No deben existir en la base de datos mas de una subasta con ese numero de seguimiento</li>
+     * <li>Si el fabricante no existe se crea</li>
+     * <li>La informacion del fabricante debe estar completa para poder ser adicionado a la lista</li>
+     * <li>Un fabricante debe tener nit, nombre y email para poder ser creado</li>
+     * <li>La subasta solo asigna a los fabricantes que existian o los que fue posible crear</li>
+     * <li>La subasta no debe tener ningun fabricante registrado</li>
+     * <li>Si ningun fabricante se puede asignar a la subasta esta finaliza y pasa a estar inactiva</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de segumiento
+     * @param fabricantes Lista de fabricantes
+     * @return true en caso de que el proceso termine correctamente, false en caso de que no se haya podido asignar ningun fabricante a la subasta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
     public Boolean asignarFabricantesSubasta(String numSeguimientoSubasta, List<FabricanteBO> fabricantes) throws BussinessException;
-
+    
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException;
 
     public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;

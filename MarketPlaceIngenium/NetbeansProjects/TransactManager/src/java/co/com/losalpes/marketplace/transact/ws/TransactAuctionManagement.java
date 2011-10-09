@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.com.losalpes.marketplace.transact.ws;
 
 import co.com.losalpes.marketplace.transact.beans.AuctionManagementLocal;
@@ -48,6 +44,28 @@ public class TransactAuctionManagement {
         return ejbRef.crearSubasta(po);
     }
 
+    /**
+     * Recibe el numero de seguimiento de una subasta y le asigna los fabricantes indicados
+     * <ul>
+     * <li>El numero de seguimiento debe existir</li>
+     * <li>No deben existir en la base de datos mas de una subasta con ese numero de seguimiento</li>
+     * <li>Si el fabricante no existe se crea</li>
+     * <li>La informacion del fabricante debe estar completa para poder ser adicionado a la lista</li>
+     * <li>Un fabricante debe tener nit, nombre y email para poder ser creado</li>
+     * <li>La subasta solo asigna a los fabricantes que existian o los que fue posible crear</li>
+     * <li>La subasta no debe tener ningun fabricante registrado</li>
+     * <li>Si ningun fabricante se puede asignar a la subasta esta finaliza y pasa a estar inactiva</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de segumiento
+     * @param fabricantes Lista de fabricantes
+     * @return true en caso de que el proceso termine correctamente, false en caso de que no se haya podido asignar ningun fabricante a la subasta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
+    @WebMethod(operationName = "asignarFabricantesSubasta")
+    public Boolean asignarFabricantesSubasta(@WebParam(name = "numSeguimientoSubasta") String numSeguimientoSubasta, @WebParam(name = "fabricantes") java.util.List<FabricanteBO> fabricantes) throws BussinessException {
+        return ejbRef.asignarFabricantesSubasta(numSeguimientoSubasta, fabricantes);
+    }
+
     @WebMethod(operationName = "darGanadorSubasta")
     public FabricanteBO darGanadorSubasta(@WebParam(name = "idSubasta") String idSubasta)
             throws BussinessException {
@@ -60,33 +78,16 @@ public class TransactAuctionManagement {
         return ejbRef.cerrarSubasta(idSubasta);
     }
 
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "consultarSubastasFabricante")
     public java.util.List<SubastaBO> consultarSubastasFabricante(@WebParam(name = "nit") String nit) {
         return ejbRef.consultarSubastasFabricante(nit);
     }
 
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "asignarFabricantesSubasta")
-    public Boolean asignarFabricantesSubasta(@WebParam(name = "numSeguimientoSubasta") String numSeguimientoSubasta, @WebParam(name = "fabricantes") java.util.List<FabricanteBO> fabricantes) throws BussinessException {
-        return ejbRef.asignarFabricantesSubasta(numSeguimientoSubasta, fabricantes);
-    }
-
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "consultarFabricantesSubasta")
     public java.util.List<FabricanteBO> consultarFabricantesSubasta(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarFabricantesSubasta(numSeguimiento);
     }
 
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "consultarSubastaOrdenCompra")
     public SubastaBO consultarSubastaOrdenCompra(@WebParam(name = "numSeguimientoPO") String numSeguimientoPO) throws BussinessException {
         return ejbRef.consultarSubastaOrdenCompra(numSeguimientoPO);
