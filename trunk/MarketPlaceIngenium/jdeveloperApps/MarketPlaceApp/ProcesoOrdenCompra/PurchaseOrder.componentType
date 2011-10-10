@@ -7,9 +7,6 @@
   <service name="purchaseorder_client" ui:wsdlLocation="PurchaseOrder.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace_jws/ProcesoOrdenCompra/PurchaseOrder#wsdl.interface(PurchaseOrder)"/>
   </service>
-  <reference name="GestionPO" ui:wsdlLocation="GestionPO.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionPO#wsdl.interface(GestionPO)"/>
-  </reference>
   <reference name="GestionSubasta" ui:wsdlLocation="GestionSubasta.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
   </reference>
@@ -20,7 +17,10 @@
     <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/bam/MarketPlace/ProcesoOrdenCompra/BAM#wsdl.interface(writetoBAM_ptt)"/>
   </reference>
   <reference name="GestionCorreoElectronico"
-             ui:wsdlLocation="GestionCorreoElectronico.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico/#wsdl.interface(GestionCorreoElectronico)"/>
+             ui:wsdlLocation="GestionCorreoElectronicoWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico#wsdl.interface(GestionCorreoElectronico)"/>
+  </reference>
+  <reference name="GestionPO" ui:wsdlLocation="GestionPOWrapper.wsdl">
+    <interface.wsdl interface="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.interface(PoManagerPoManagement)"/>
   </reference>
 </componentType>
