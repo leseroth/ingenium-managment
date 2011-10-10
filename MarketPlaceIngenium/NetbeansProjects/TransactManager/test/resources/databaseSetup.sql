@@ -51,5 +51,26 @@ insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(
 insert into subasta(id, activa, numSeguimiento, po_id) values (4, false, 'num004', 4);
 
 insert into itempo(id,cantidad,producto_id) values (5,210,2022);
-insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(5,'SolicitadoComercio','num004',102,5);
-insert into subasta(id, activa, numSeguimiento, po_id) values (5, true, 'num004', 5);
+insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(5,'SolicitadoComercio','num005',102,5);
+insert into subasta(id, activa, numSeguimiento, po_id) values (5, true, 'num005', 5);
+
+insert into itempo(id,cantidad,producto_id) values (6,210,2022);
+insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(6,'SolicitadoComercio','num006',102,6);
+insert into subasta(id, activa, numSeguimiento, po_id) values (6, true, 'num006', 6);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 201);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 202);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 203);
+
+insert into itempo(id,cantidad,producto_id) values (7,210,2022);
+insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(7,'SolicitadoComercio','num007',102,7);
+insert into subasta(id, activa, numSeguimiento, po_id) values (7, false, 'num007', 7);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 201);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 202);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 203);
+
+insert into itempo(id,cantidad,producto_id) values (8,210,2022);
+insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(8,'SolicitadoComercio','num008',102,8);
+insert into subasta(id, activa, numSeguimiento, po_id) values (8, true, 'num008', 8);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 201);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 202);
+insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 203);

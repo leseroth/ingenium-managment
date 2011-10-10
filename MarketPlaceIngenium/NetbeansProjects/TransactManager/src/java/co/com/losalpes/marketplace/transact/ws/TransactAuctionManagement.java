@@ -45,7 +45,7 @@ public class TransactAuctionManagement {
     }
 
     /**
-     * Recibe el numero de seguimiento de una subasta y le asigna los fabricantes indicados
+     * Recibe el numero de seguimiento de una subasta y le asigna los fabricantes indicados.
      * <ul>
      * <li>El numero de seguimiento debe existir</li>
      * <li>No deben existir en la base de datos mas de una subasta con ese numero de seguimiento</li>
@@ -66,6 +66,18 @@ public class TransactAuctionManagement {
         return ejbRef.asignarFabricantesSubasta(numSeguimientoSubasta, fabricantes);
     }
 
+    /**
+     * Recibe el nit del fabricante y retorna las subastas activas que tiene creadas.
+     * <ul>
+     * <li>El nit del fabricante debe existir</li>
+     * <li>El nit es un campo obligatorio en la consulta</li>
+     * <li>Si no existen subastas para el fabricante se retorna una lista vacia</li>
+     * <li>Solo se retornan subastas que continuen activas</li>
+     * </ul>
+     * @param nit Nit del fabricante
+     * @return La lista de SubastaBO activas que corresponden al fabricante consultado
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
     @WebMethod(operationName = "consultarSubastasFabricante")
     public java.util.List<SubastaBO> consultarSubastasFabricante(@WebParam(name = "nit") String nit) throws BussinessException {
         return ejbRef.consultarSubastasFabricante(nit);
