@@ -507,9 +507,9 @@
       <ws:crearSubasta>
          <po>
             <comercioBO>
-               <nit>com101</nit>
+		<nit>800800888</nit>
+		<nombre>Comercio 101</nombre>	
             </comercioBO>
-            <entrega>2011-11-15T11:52:58</entrega>
             <itemPOBO>
                <cantidad>3</cantidad>
                <productoBO>
