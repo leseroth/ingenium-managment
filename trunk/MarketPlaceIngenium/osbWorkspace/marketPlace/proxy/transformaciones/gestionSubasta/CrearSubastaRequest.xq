@@ -8,39 +8,41 @@ declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/ge
 declare function xf:CrearSubastaRequest($crearSubasta1 as element(ns0:crearSubasta))
     as element(ns1:crearSubasta) {
         <ns1:crearSubasta>
-            <po>
-                <comercio>
-                    {
-                        for $direccion in $crearSubasta1/ns0:po/comercio/direccion
-                        return
-                            <direccion>{ data($direccion) }</direccion>
-                    }
-                    <nit>{ data($crearSubasta1/ns0:po/comercio/nit) }</nit>
-                    <nombre>{ data($crearSubasta1/ns0:po/comercio/nombre) }</nombre>
-                    {
-                        for $telefono in $crearSubasta1/ns0:po/comercio/telefono
-                        return
-                            <telefono>{ data($telefono) }</telefono>
-                    }
-                </comercio>
-                <entrega>{ data($crearSubasta1/ns0:po/fechaMaxima) }</entrega>
-                <estado>{ data($crearSubasta1/ns0:po/estado) }</estado>
-                <item>
-                    {
-                        for $cantidad in $crearSubasta1/ns0:po/item/cantidad
-                        return
-                            <cantidad>{ data($cantidad) }</cantidad>
-                    }
-                    <producto>
+            {
+                let $po := $crearSubasta1/ns0:po
+                return
+                    <po>
                         {
-                            for $categoria in $crearSubasta1/ns0:po/item/producto/categoria
+                            let $comercio := $po/comercio
                             return
-                                <categoria>{ data($categoria) }</categoria>
+                                <comercioBO>
+                                    <nit>{ data($comercio/nit) }</nit>
+                                </comercioBO>
                         }
-                        <nombre>{ data($crearSubasta1/ns0:po/item/producto/nombre) }</nombre>
-                    </producto>
-                </item>
-            </po>
+                        <entrega>{ data($po/fechaMaxima) }</entrega>
+                        <estado>{ data($po/estado) }</estado>
+                        {
+                            let $item := $po/item
+                            return
+                                <itemPOBO>
+                                    <cantidad>{ data($item/cantidad) }</cantidad>
+                                    {
+                                        let $producto := $item/producto
+                                        return
+                                            <productoBO>
+                                                <categoria>{ data($producto/categoria) }</categoria>
+                                                <nombre>{ data($producto/nombre) }</nombre>
+                                            </productoBO>
+                                    }
+                                </itemPOBO>
+                        }
+                        {
+                            for $numSeguimiento in $po/numSeguimiento
+                            return
+                                <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
+                        }
+                    </po>
+            }
         </ns1:crearSubasta>
 };
 
