@@ -50,8 +50,6 @@
       with the client role are automatically set using WS-Addressing.
     -->
     <partnerLink name="purchaseorder_client" partnerLinkType="client:PurchaseOrder" myRole="PurchaseOrderProvider"/>
-    <partnerLink name="GestionPO" partnerRole="GestionPO_Role"
-                 partnerLinkType="ns1:GestionPO_PL"/>
     <partnerLink name="GestionSubasta" partnerRole="GestionSubasta_Role"
                  partnerLinkType="ns3:GestionSubasta_PL"/>
     <partnerLink name="GestionCliente" partnerRole="GestionCliente_Role"
@@ -59,8 +57,10 @@
     <partnerLink name="BAM" partnerRole="writetoBAM_role"
                  partnerLinkType="ns6:writetoBAM_plt"/>
     <partnerLink name="GestionCorreoElectronico"
-                 partnerRole="GestionCorreoElectronico_Role"
-                 partnerLinkType="ns8:GestionCorreoElectronico_PL"/>
+                 partnerLinkType="ns8:GestionCorreoElectronico"
+                 partnerRole="GestionCorreoElectronico"/>
+    <partnerLink name="GestionPO" partnerLinkType="ns1:GestionPO"
+                 partnerRole="PoManagerPoManagement"/>
   </partnerLinks>
 
   <!-- 

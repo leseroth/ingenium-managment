@@ -31,6 +31,7 @@
       <hash><url n="URL" path="ProcesoAvisoDespacho/ProcesoAvisoDespacho.jpr"/></hash>
       <hash><url n="URL" path="ProcesoFacturacion/ProcesoFacturacion.jpr"/></hash>
       <hash><url n="URL" path="ProcesoOrdenCompra/ProcesoOrdenCompra.jpr"/></hash>
+      <hash><url n="URL" path="ProcesoOrdenCompraDirecta/ProcesoOrdenCompraDirecta.jpr"/></hash>
       <hash><url n="URL" path="ProcesoPricat/ProcesoPricat.jpr"/></hash>
       <hash><url n="URL" path="ProcesoRegistro/ProcesoRegistro.jpr"/></hash>
       <hash><url n="URL" path="ProcesoRetornoMaterial/ProcesoRetornoMaterial.jpr"/></hash>

@@ -1,6 +1,6 @@
-8/10/2011 12:07:01 AM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+9/10/2011 07:28:07 PM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
 INFO: XMLSchema incremental build enabled.
-8/10/2011 12:07:01 AM com.collaxa.cube.CubeLogger info
+9/10/2011 07:28:07 PM com.collaxa.cube.CubeLogger info
 INFO: validando "PurchaseOrderDirect.bpel" ...
 oracle.jrf.UnknownPlatformException: JRF is unable to determine the current application server platform.
 	at oracle.jrf.ServerPlatformSupportFactory.getInstance(ServerPlatformSupportFactory.java:79)
