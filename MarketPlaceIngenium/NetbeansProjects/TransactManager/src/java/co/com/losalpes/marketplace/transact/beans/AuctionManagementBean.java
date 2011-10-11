@@ -257,6 +257,56 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimientoSubasta) throws BussinessException {
+        Query query = null;
+
+        query = em.createNamedQuery("getSubastaFromNumSeguimiento");
+        query.setParameter("numSeguimiento", numSeguimientoSubasta);
+        List<Subasta> subastaList = (List<Subasta>) query.getResultList();
+
+        if (subastaList.isEmpty()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "No existe");
+        } else if (subastaList.size() > 1) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Existe mas de una subasta con ese numero de seguimiento");
+        }
+
+        Subasta subasta = subastaList.get(0);
+
+        List<FabricanteBO> fabricantes = new ArrayList<FabricanteBO>();
+        for (Fabricante fab : subasta.getFabricantes()) {
+            FabricanteBO fabBO = fab.toBO();
+            fabricantes.add(fabBO);
+        }
+        return fabricantes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean cerrarSubasta(String numSeguimiento) throws BussinessException {
+        Query query = null;
+
+        query = em.createNamedQuery("getSubastaFromNumSeguimiento");
+        query.setParameter("numSeguimiento", numSeguimiento);
+        List<Subasta> subastaList = (List<Subasta>) query.getResultList();
+
+        if (subastaList.isEmpty()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimiento, "No existe");
+        } else if (subastaList.size() > 1) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimiento, "Existe mas de una subasta con ese numero de seguimiento");
+        }
+
+        Subasta subasta = subastaList.get(0);
+        subasta.setActiva(false);
+        em.persist(subasta);
+        return true;
+    }
+
     public FabricanteBO darGanadorSubasta(String numSeguimiento) throws BussinessException {
         Query q = em.createNamedQuery("getSubastaFromNumSeguimiento");
         q.setParameter("numSeguimiento", numSeguimiento);
@@ -265,34 +315,6 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
             throw new BussinessException("La subasta identificada con el nùmero de seguimiento " + numSeguimiento + " no existe.");
         }
         return sub.getMejor().getFabricante().toBO();
-    }
-
-    public boolean cerrarSubasta(String numSeguimiento) throws BussinessException {
-        Subasta s = em.find(Subasta.class, numSeguimiento);
-        if (s == null) {
-            throw new BussinessException("La subasta identificada con el nùmero de seguimiento " + numSeguimiento + " no existe.");
-        }
-        s.setActiva(false);
-        return true;
-    }
-
-    public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimiento) throws BussinessException {
-        Query q = em.createNamedQuery("getSubastaFromNumSeguimiento");
-        q.setParameter("numSeguimiento", numSeguimiento);
-        List<Subasta> subs = (List<Subasta>) q.getResultList();
-        if (subs.isEmpty()) {
-            throw new BussinessException("La subasta especificada no existe");
-        }
-        List<FabricanteBO> fabs = new ArrayList<FabricanteBO>();
-        for (int i = 0; i < subs.get(0).getFabricantes().size(); i++) {
-            Fabricante f = subs.get(0).getFabricantes().get(i);
-            FabricanteBO fab = new FabricanteBO();
-            fab.setNit(f.getNit());
-            fab.setNombre(f.getNombre());
-            fab.setEmail(f.getEmail());
-            fabs.add(fab);
-        }
-        return fabs;
     }
 
     public SubastaBO consultarSubastaOrdenCompra(String numSeguimientoPO) throws BussinessException {
