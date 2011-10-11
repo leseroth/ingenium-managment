@@ -107,21 +107,43 @@ public class TransactAuctionManagement {
         return ejbRef.registrarOferta(numSeguimientoSubasta, oferta);
     }
 
-    @WebMethod(operationName = "darGanadorSubasta")
-    public FabricanteBO darGanadorSubasta(@WebParam(name = "idSubasta") String idSubasta)
-            throws BussinessException {
-        return ejbRef.darGanadorSubasta(idSubasta);
+    /**
+     * Retorna la lista de fabricantes asociados a una subasta.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * <li>La unica manera en que la lista retornada este vacia es que la subasta este cerrada porque no habia fabricantes o que aun no hayan sido asignados</li>
+     * <li>No importa el estado de la subasta</li>
+     * </ul>
+     * @param numSeguimiento Numero de seguimiento de la subasta
+     * @return Lista de fabricantes de la subasta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
+    @WebMethod(operationName = "consultarFabricantesSubasta")
+    public java.util.List<FabricanteBO> consultarFabricantesSubasta(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
+        return ejbRef.consultarFabricantesSubasta(numSeguimiento);
     }
 
+    /**
+     * Cierra una subasta pasandola al estado inactiva.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de seguimiento de la subasta
+     * @return true en caso de que la actualizacion sea correcta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
     @WebMethod(operationName = "cerrarSubasta")
     public boolean cerrarSubasta(@WebParam(name = "idSubasta") String idSubasta)
             throws BussinessException {
         return ejbRef.cerrarSubasta(idSubasta);
     }
 
-    @WebMethod(operationName = "consultarFabricantesSubasta")
-    public java.util.List<FabricanteBO> consultarFabricantesSubasta(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
-        return ejbRef.consultarFabricantesSubasta(numSeguimiento);
+    @WebMethod(operationName = "darGanadorSubasta")
+    public FabricanteBO darGanadorSubasta(@WebParam(name = "idSubasta") String idSubasta)
+            throws BussinessException {
+        return ejbRef.darGanadorSubasta(idSubasta);
     }
 
     @WebMethod(operationName = "consultarSubastaOrdenCompra")

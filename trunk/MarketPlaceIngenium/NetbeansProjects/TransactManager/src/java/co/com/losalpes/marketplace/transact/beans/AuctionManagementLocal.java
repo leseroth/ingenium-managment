@@ -61,7 +61,7 @@ public interface AuctionManagementLocal {
      * @return La lista de SubastaBO activas que corresponden al fabricante consultado
      * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
      */
-    public List<SubastaBO> consultarSubastasFabricante(String nit) throws BussinessException ;
+    public List<SubastaBO> consultarSubastasFabricante(String nit) throws BussinessException;
 
     /**
      * Registra la oferta de un fabricante.
@@ -81,11 +81,33 @@ public interface AuctionManagementLocal {
      */
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException;
 
-    public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;
+    /**
+     * Retorna la lista de fabricantes asociados a una subasta.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * <li>La unica manera en que la lista retornada este vacia es que la subasta este cerrada porque no habia fabricantes o que aun no hayan sido asignados</li>
+     * <li>No importa el estado de la subasta</li>
+     * </ul>
+     * @param numSeguimiento Numero de seguimiento de la subasta
+     * @return Lista de fabricantes de la subasta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
+    public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimiento) throws BussinessException;
 
+    /**
+     * Cierra una subasta pasandola al estado inactiva.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de seguimiento de la subasta
+     * @return true en caso de que la actualizacion sea correcta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
     public boolean cerrarSubasta(String numSeguimientoSubasta) throws BussinessException;
 
-    public List<FabricanteBO> consultarFabricantesSubasta(String numSeguimiento) throws BussinessException;
+    public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;
 
     public SubastaBO consultarSubastaOrdenCompra(String numSeguimientoPO) throws BussinessException;
 }
