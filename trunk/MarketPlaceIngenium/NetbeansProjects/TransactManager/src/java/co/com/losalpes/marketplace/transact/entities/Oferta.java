@@ -6,6 +6,8 @@ import javax.persistence.*;
 import co.com.losalpes.marketplace.transact.bos.*;
 import java.util.Date;
 
+import static co.com.losalpes.marketplace.transact.util.Util.*;
+
 @Entity
 @NamedQueries({
     @NamedQuery(name = "getAllOfertas", query = "SELECT P FROM Oferta P ")
@@ -42,8 +44,12 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         fechaEntrega = ofertaBO.getFechaEntrega();
         numSeguimiento = ofertaBO.getNumSeguimiento();
         valor = ofertaBO.getValor();
-        fabricante = new Fabricante(ofertaBO.getFabricanteBO());
-        productoOfrecido = new Producto(ofertaBO.getProductoOfrecidoBO());
+        if (ofertaBO.getFabricanteBO() != null) {
+            fabricante = new Fabricante(ofertaBO.getFabricanteBO());
+        }
+        if (ofertaBO.getProductoOfrecidoBO() != null) {
+            productoOfrecido = new Producto(ofertaBO.getProductoOfrecidoBO());
+        }
     }
 
     /**
@@ -52,15 +58,15 @@ public class Oferta implements Serializable, MarketPlaceEntity {
     @Override
     public OfertaBO toBO() {
         OfertaBO ofertaBO = new OfertaBO();
-        ofertaBO.setId(getId());
-        ofertaBO.setFechaEntrega(getFechaEntrega());
-        ofertaBO.setNumSeguimiento(getNumSeguimiento());
-        ofertaBO.setValor(getValor());
-        if (getProductoOfrecido() != null) {
-            ofertaBO.setProductoOfrecidoBO(getProductoOfrecido().toBO());
+        ofertaBO.setId(id);
+        ofertaBO.setFechaEntrega(fechaEntrega);
+        ofertaBO.setNumSeguimiento(numSeguimiento);
+        ofertaBO.setValor(valor);
+        if (productoOfrecido != null) {
+            ofertaBO.setProductoOfrecidoBO(productoOfrecido.toBO());
         }
-        if (getFabricante() != null) {
-            ofertaBO.setFabricanteBO(getFabricante().toBO());
+        if (fabricante != null) {
+            ofertaBO.setFabricanteBO(fabricante.toBO());
         }
         return ofertaBO;
     }
@@ -70,7 +76,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return true;
+        return fechaEntrega != null && !isEmptyString(numSeguimiento) && !isEmptyLong(valor) && fabricante != null;
     }
 
     /**
