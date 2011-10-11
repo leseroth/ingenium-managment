@@ -58,6 +58,14 @@
       </ns25:All>
     </ns25:ExactlyOne>
   </ns25:Policy>
+  <ns29:Policy wsu:Id="TransactAuctionManagementPortBinding_registrarOferta_WSAT_Policy" xmlns:ns29="http://www.w3.org/ns/ws-policy">
+    <ns29:ExactlyOne>
+      <ns29:All>
+        <ns30:ATAlwaysCapability xmlns:ns30="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+        <ns31:ATAssertion ns29:Optional="true" ns32:Optional="true" xmlns:ns32="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns31="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+      </ns29:All>
+    </ns29:ExactlyOne>
+  </ns29:Policy>
   <types>
     <xsd:schema>
       <xsd:import namespace="http://ws.transact.marketplace.losalpes.com.co/" schemaLocation="http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement?xsd=1"/>
@@ -78,6 +86,18 @@
   <message name="asignarFabricantesSubastaResponse">
     <part name="parameters" element="tns:asignarFabricantesSubastaResponse"/>
   </message>
+  <message name="consultarSubastasFabricante">
+    <part name="parameters" element="tns:consultarSubastasFabricante"/>
+  </message>
+  <message name="consultarSubastasFabricanteResponse">
+    <part name="parameters" element="tns:consultarSubastasFabricanteResponse"/>
+  </message>
+  <message name="registrarOferta">
+    <part name="parameters" element="tns:registrarOferta"/>
+  </message>
+  <message name="registrarOfertaResponse">
+    <part name="parameters" element="tns:registrarOfertaResponse"/>
+  </message>
   <message name="darGanadorSubasta">
     <part name="parameters" element="tns:darGanadorSubasta"/>
   </message>
@@ -89,12 +109,6 @@
   </message>
   <message name="cerrarSubastaResponse">
     <part name="parameters" element="tns:cerrarSubastaResponse"/>
-  </message>
-  <message name="consultarSubastasFabricante">
-    <part name="parameters" element="tns:consultarSubastasFabricante"/>
-  </message>
-  <message name="consultarSubastasFabricanteResponse">
-    <part name="parameters" element="tns:consultarSubastasFabricanteResponse"/>
   </message>
   <message name="consultarFabricantesSubasta">
     <part name="parameters" element="tns:consultarFabricantesSubasta"/>
@@ -119,6 +133,16 @@
       <output message="tns:asignarFabricantesSubastaResponse"/>
       <fault message="tns:BussinessException" name="BussinessException"/>
     </operation>
+    <operation name="consultarSubastasFabricante">
+      <input message="tns:consultarSubastasFabricante"/>
+      <output message="tns:consultarSubastasFabricanteResponse"/>
+      <fault message="tns:BussinessException" name="BussinessException"/>
+    </operation>
+    <operation name="registrarOferta">
+      <input message="tns:registrarOferta"/>
+      <output message="tns:registrarOfertaResponse"/>
+      <fault message="tns:BussinessException" name="BussinessException"/>
+    </operation>
     <operation name="darGanadorSubasta">
       <input message="tns:darGanadorSubasta"/>
       <output message="tns:darGanadorSubastaResponse"/>
@@ -128,10 +152,6 @@
       <input message="tns:cerrarSubasta"/>
       <output message="tns:cerrarSubastaResponse"/>
       <fault message="tns:BussinessException" name="BussinessException"/>
-    </operation>
-    <operation name="consultarSubastasFabricante">
-      <input message="tns:consultarSubastasFabricante"/>
-      <output message="tns:consultarSubastasFabricanteResponse"/>
     </operation>
     <operation name="consultarFabricantesSubasta">
       <input message="tns:consultarFabricantesSubasta"/>
@@ -147,7 +167,7 @@
   <binding name="TransactAuctionManagementPortBinding" type="tns:TransactAuctionManagement">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
     <operation name="crearSubasta">
-      <ns29:PolicyReference URI="#TransactAuctionManagementPortBinding_crearSubasta_WSAT_Policy" xmlns:ns29="http://www.w3.org/ns/ws-policy"/>
+      <ns33:PolicyReference URI="#TransactAuctionManagementPortBinding_crearSubasta_WSAT_Policy" xmlns:ns33="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -160,33 +180,7 @@
       </fault>
     </operation>
     <operation name="asignarFabricantesSubasta">
-      <ns30:PolicyReference URI="#TransactAuctionManagementPortBinding_asignarFabricantesSubasta_WSAT_Policy" xmlns:ns30="http://www.w3.org/ns/ws-policy"/>
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-      <fault name="BussinessException">
-        <soap:fault name="BussinessException" use="literal"/>
-      </fault>
-    </operation>
-    <operation name="darGanadorSubasta">
-      <ns31:PolicyReference URI="#TransactAuctionManagementPortBinding_darGanadorSubasta_WSAT_Policy" xmlns:ns31="http://www.w3.org/ns/ws-policy"/>
-      <soap:operation soapAction=""/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-      <fault name="BussinessException">
-        <soap:fault name="BussinessException" use="literal"/>
-      </fault>
-    </operation>
-    <operation name="cerrarSubasta">
-      <ns32:PolicyReference URI="#TransactAuctionManagementPortBinding_cerrarSubasta_WSAT_Policy" xmlns:ns32="http://www.w3.org/ns/ws-policy"/>
+      <ns34:PolicyReference URI="#TransactAuctionManagementPortBinding_asignarFabricantesSubasta_WSAT_Policy" xmlns:ns34="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -199,7 +193,7 @@
       </fault>
     </operation>
     <operation name="consultarSubastasFabricante">
-      <ns33:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarSubastasFabricante_WSAT_Policy" xmlns:ns33="http://www.w3.org/ns/ws-policy"/>
+      <ns35:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarSubastasFabricante_WSAT_Policy" xmlns:ns35="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -207,9 +201,51 @@
       <output>
         <soap:body use="literal"/>
       </output>
+      <fault name="BussinessException">
+        <soap:fault name="BussinessException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="registrarOferta">
+      <ns36:PolicyReference URI="#TransactAuctionManagementPortBinding_registrarOferta_WSAT_Policy" xmlns:ns36="http://www.w3.org/ns/ws-policy"/>
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="BussinessException">
+        <soap:fault name="BussinessException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="darGanadorSubasta">
+      <ns37:PolicyReference URI="#TransactAuctionManagementPortBinding_darGanadorSubasta_WSAT_Policy" xmlns:ns37="http://www.w3.org/ns/ws-policy"/>
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="BussinessException">
+        <soap:fault name="BussinessException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="cerrarSubasta">
+      <ns38:PolicyReference URI="#TransactAuctionManagementPortBinding_cerrarSubasta_WSAT_Policy" xmlns:ns38="http://www.w3.org/ns/ws-policy"/>
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="BussinessException">
+        <soap:fault name="BussinessException" use="literal"/>
+      </fault>
     </operation>
     <operation name="consultarFabricantesSubasta">
-      <ns34:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarFabricantesSubasta_WSAT_Policy" xmlns:ns34="http://www.w3.org/ns/ws-policy"/>
+      <ns39:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarFabricantesSubasta_WSAT_Policy" xmlns:ns39="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -222,7 +258,7 @@
       </fault>
     </operation>
     <operation name="consultarSubastaOrdenCompra">
-      <ns35:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarSubastaOrdenCompra_WSAT_Policy" xmlns:ns35="http://www.w3.org/ns/ws-policy"/>
+      <ns40:PolicyReference URI="#TransactAuctionManagementPortBinding_consultarSubastaOrdenCompra_WSAT_Policy" xmlns:ns40="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -257,6 +293,8 @@
   <xs:element name="crearSubastaResponse" type="tns:crearSubastaResponse"/>
   <xs:element name="darGanadorSubasta" type="tns:darGanadorSubasta"/>
   <xs:element name="darGanadorSubastaResponse" type="tns:darGanadorSubastaResponse"/>
+  <xs:element name="registrarOferta" type="tns:registrarOferta"/>
+  <xs:element name="registrarOfertaResponse" type="tns:registrarOfertaResponse"/>
   <xs:complexType name="consultarFabricantesSubasta">
     <xs:sequence>
       <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
@@ -382,6 +420,17 @@
   <xs:complexType name="crearSubastaResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOferta">
+    <xs:sequence>
+      <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+      <xs:element name="oferta" type="tns:ofertaBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOfertaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="asignarFabricantesSubasta">
@@ -646,4 +695,18 @@
          </po>
       </ws:crearSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="registrarOferta" bindingOperationName="registrarOferta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="RegistrarOferta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num006</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>fab201</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-11-15T11:52:58</fechaEntrega>
+            <valor>10</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

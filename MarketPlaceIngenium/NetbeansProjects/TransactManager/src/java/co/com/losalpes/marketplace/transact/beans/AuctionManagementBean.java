@@ -208,41 +208,52 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         return subastaBOResponseList;
     }
 
-    public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException {
-        Query q = em.createNamedQuery("getSubastaFromNumSeguimiento");
-        q.setParameter("numSeguimiento", numSeguimientoSubasta);
-        List<Subasta> sub = (List<Subasta>) q.getResultList();
-        if (sub.isEmpty()) {
-            throw new BussinessException("La subasta identificada con el número de seguimiento " +
-                    numSeguimientoSubasta + " no existe");
-        }
-        if (!sub.get(0).isActiva()) {
-            throw new BussinessException("La subasta identificada con el número de seguimiento " +
-                    numSeguimientoSubasta + " está cerrada");
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO ofertaBO) throws BussinessException {
+        Query query = null;
+
+        query = em.createNamedQuery("getSubastaFromNumSeguimiento");
+        query.setParameter("numSeguimiento", numSeguimientoSubasta);
+        List<Subasta> subastaList = (List<Subasta>) query.getResultList();
+
+        if (subastaList.isEmpty()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "No existe");
+        } else if (subastaList.size() > 1) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Existe mas de una subasta con ese numero de seguimiento");
         }
 
-        q = em.createNamedQuery("getFabricanteFromNit");
-        q.setParameter("nit", oferta.getFabricanteBO().getNit());
-        List<Fabricante> fabs = (List<Fabricante>) q.getResultList();
-        if (fabs.isEmpty()) {
-            Fabricante f = new Fabricante();
-            f.setNombre(oferta.getFabricanteBO().getNombre());
-            f.setNit(oferta.getFabricanteBO().getNit());
-            f.setEmail(oferta.getFabricanteBO().getEmail());
-            em.persist(f);
-            fabs.add(f);
-        }
-        Oferta of = new Oferta(oferta);
-        of.setFabricante(fabs.get((0)));
-        of.setFechaEntrega(oferta.getFechaEntrega());
-        of.setProductoOfrecido(new Producto(oferta.getProductoOfrecidoBO()));
-        em.persist(of);
-
-        Oferta offer = sub.get(0).getMejor();
-        if (offer.getValor() < oferta.getValor()) {
-            sub.get(0).setMejor(new Oferta(oferta));
+        Subasta subasta = subastaList.get(0);
+        if (!subasta.isActiva()) {
+            throw new BussinessException(EXC_SUBASTA, numSeguimientoSubasta, "Se encuentra cerrada");
         }
 
+        Fabricante fabricante = null;
+        String nitFabricante = ofertaBO.getFabricanteBO().getNit();
+        iteraFabricante:
+        for (Fabricante fab : subasta.getFabricantes()) {
+            if (fab.getNit().equals(nitFabricante)) {
+                fabricante = fab;
+                break iteraFabricante;
+            }
+        }
+        if (fabricante == null) {
+            throw new BussinessException(EXC_FABRICANTE_NO_ASOCIADO_SUBASTA, nitFabricante, numSeguimientoSubasta);
+        }
+
+        Oferta oferta = new Oferta(ofertaBO);
+        oferta.setFabricante(fabricante);
+        oferta.setId(null);
+        oferta.setNumSeguimiento(numSeguimientoSubasta);
+        if (oferta.isInfoComplete()) {
+            em.persist(oferta);
+            subasta.getOfertas().add(oferta);
+            em.persist(subasta);
+        } else {
+            throw new BussinessException(EXC_ENTITY_INCOMPLETE, "Oferta");
+        }
         return true;
     }
 

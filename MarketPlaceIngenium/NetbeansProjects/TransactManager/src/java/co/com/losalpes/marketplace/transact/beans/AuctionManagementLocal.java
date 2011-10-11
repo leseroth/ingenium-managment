@@ -12,7 +12,7 @@ import javax.ejb.Local;
 public interface AuctionManagementLocal {
 
     /**
-     * Recibe el purchaseOrder, si esta presente el fabricante es una orden de compra directa.
+     * Recibe el purchaseOrder.
      * <ul>
      * <li>Crea el registro en PurchaseOrder y en Subasta</li>
      * <li>El numero de seguimiento debe estar presente como correlacion con POManager y no estar repetido</li>
@@ -63,6 +63,22 @@ public interface AuctionManagementLocal {
      */
     public List<SubastaBO> consultarSubastasFabricante(String nit) throws BussinessException ;
 
+    /**
+     * Registra la oferta de un fabricante.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * <li>La subasta debe estar activa</li>
+     * <li>El fabricante se consulta por el nit, y debe existir</li>
+     * <li>El fabricante debe poder ofertar en esta subasta</li>
+     * <li>Para crear la oferta debe tener fecha de entrega, numSeguimiento, valor y fabricante</li>
+     * <li>Si la oferta no tiene numero de seguimiento se usa el primer parametro recibido</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de seguimiento de la subasta
+     * @param oferta Oferta a crear
+     * @return true en caso de que se cree correctamente la oferta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
     public boolean registrarOferta(String numSeguimientoSubasta, OfertaBO oferta) throws BussinessException;
 
     public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;

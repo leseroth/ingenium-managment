@@ -2,6 +2,7 @@ package co.com.losalpes.marketplace.transact.ws;
 
 import co.com.losalpes.marketplace.transact.beans.AuctionManagementLocal;
 import co.com.losalpes.marketplace.transact.bos.FabricanteBO;
+import co.com.losalpes.marketplace.transact.bos.OfertaBO;
 import co.com.losalpes.marketplace.transact.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.transact.bos.SubastaBO;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
@@ -23,7 +24,7 @@ public class TransactAuctionManagement {
     private AuctionManagementLocal ejbRef;
 
     /**
-     * Recibe el purchaseOrder, si esta presente el fabricante es una orden de compra directa.
+     * Recibe el purchaseOrder.
      * <ul>
      * <li>Crea el registro en PurchaseOrder y en Subasta</li>
      * <li>El numero de seguimiento debe estar presente como correlacion con POManager y no estar repetido</li>
@@ -81,6 +82,29 @@ public class TransactAuctionManagement {
     @WebMethod(operationName = "consultarSubastasFabricante")
     public java.util.List<SubastaBO> consultarSubastasFabricante(@WebParam(name = "nit") String nit) throws BussinessException {
         return ejbRef.consultarSubastasFabricante(nit);
+    }
+
+    /**
+     * Registra la oferta de un fabricante.
+     * <ul>
+     * <li>La subasta identificada por el numero de seguimiento indicado debe existir</li>
+     * <li>No puede haber dos subastas con el mismo numero de seguimiento</li>
+     * <li>La subasta debe estar activa</li>
+     * <li>El fabricante se consulta por el nit, y debe existir</li>
+     * <li>El fabricante debe poder ofertar en esta subasta</li>
+     * <li>Para crear la oferta debe tener fecha de entrega, numSeguimiento, valor y fabricante</li>
+     * <li>Si la oferta no tiene numero de seguimiento se usa el primer parametro recibido</li>
+     * </ul>
+     * @param numSeguimientoSubasta Numero de seguimiento de la subasta
+     * @param oferta Oferta a crear
+     * @return true en caso de que se cree correctamente la oferta
+     * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     */
+    @WebMethod(operationName = "registrarOferta")
+    public boolean registrarOferta(
+            @WebParam(name = "numSeguimientoSubasta") String numSeguimientoSubasta, @WebParam(name = "oferta") OfertaBO oferta)
+            throws BussinessException {
+        return ejbRef.registrarOferta(numSeguimientoSubasta, oferta);
     }
 
     @WebMethod(operationName = "darGanadorSubasta")

@@ -20,4 +20,8 @@ public class Util {
     public static boolean isEmptyString(String str) {
         return str == null || str.trim().length() == 0;
     }
+
+    public static boolean isEmptyLong(Long lng) {
+        return lng == null || lng == 0;
+    }
 }
