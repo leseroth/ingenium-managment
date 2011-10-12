@@ -28,8 +28,9 @@ import co.com.losalpes.marketplace.ws.gestionDA.GestionDA;
 import co.com.losalpes.marketplace.ws.gestionDA.GestionDASOAPQSPortClient;
 import co.com.losalpes.marketplace.ws.gestionFacturacion.GestionFacturacion;
 import co.com.losalpes.marketplace.ws.gestionFacturacion.GestionFacturacionSOAPClient;
-import co.com.losalpes.marketplace.ws.gestionPO.GestionPO;
-import co.com.losalpes.marketplace.ws.gestionPO.GestionPOSOAPClient;
+import co.com.losalpes.marketplace.ws.gestionPO.ClienteNoExisteException;
+import co.com.losalpes.marketplace.ws.gestionPO.PoManagerPoManagement;
+import co.com.losalpes.marketplace.ws.gestionPO.PoManagerPoManagementPortClient;
 import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMA;
 import co.com.losalpes.marketplace.ws.gestionRMA.GestionRMASOAPClient;
 import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta;
@@ -76,8 +77,10 @@ import co.com.losalpes.marketplace.ws.types.PurchaseOrderBO;
 import co.com.losalpes.marketplace.ws.types.ReturnMaterialAdvice;
 import co.com.losalpes.marketplace.ws.types.SolicitudRegistro;
 import co.com.losalpes.marketplace.ws.types.Subasta;
+import co.com.losalpes.marketplace.ws.ordenCompraDirecta.types.Aprobacion;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.types.Process;
 
+import co.com.losalpes.marketplace.ws.types.BussinessException;
 import co.com.losalpes.marketplace.ws.types.FabricanteBO;
 
 import java.security.InvalidParameterException;
@@ -98,7 +101,7 @@ import org.apache.commons.lang.NotImplementedException;
 public final class ServicioProxy {
     private static ServicioProxy INSTANCE=null;
     private LDAPAuthenticationManagement ldap;
-    private GestionPO gestionPO;
+    private PoManagerPoManagement gestionPO;
     private GestionDA gestionDA;
     private GestionRMA gestionRMA;
     private GestionSubasta gestionSubasta;
@@ -129,9 +132,9 @@ public final class ServicioProxy {
         }
         return ldap;    
     }
-    private GestionPO getGestionPO(){
+    private PoManagerPoManagement getGestionPO(){
         if(gestionPO==null){
-            gestionPO=GestionPOSOAPClient.getGestionPO();        
+            gestionPO=PoManagerPoManagementPortClient.getGestionPO();        
         }
         return gestionPO;
     }
@@ -224,11 +227,15 @@ public final class ServicioProxy {
         }
     public List<OrdenCompraVO> getOrdenCompraByNitComercio(String nit){
         List<OrdenCompraVO> ordenesVO=new ArrayList<OrdenCompraVO>();
-        ConsultarPOsComercioResponse ccposr;
-        List<PurchaseOrder> pos = getGestionPO().consultarPOsComercio(nit);
-        for(PurchaseOrder po : pos){
-            ordenesVO.add(transformOrdenCompra(po));
-            }
+        ConsultarPOsComercioResponse ccposr;               
+        try {
+            List<PurchaseOrderBO> pos;
+            pos = getGestionPO().consultarPOsComercio(nit);
+            for(PurchaseOrderBO po : pos){
+                ordenesVO.add(transformOrdenCompra(po));
+                }
+        } catch (ClienteNoExisteException e) {
+        }        
         return ordenesVO;
         }
   public List<OrdenCompraVO> getOrdenCompraByNitFabricante(String nit){
@@ -616,15 +623,13 @@ public final class ServicioProxy {
             try {
                 List<PurchaseOrderBO> ordenesFabricante = getGestionPO().consultarPOFabricantePorEstado(nit, EstadoCompraDirectaConstants.SOLICITADO_COMERCIO);
                 if(ordenesFabricante != null){
-                    System.out.println("ordenesFabricante.size "+ordenesFabricante.size());
                     for(PurchaseOrderBO s:ordenesFabricante){
                         OrdenCompraVO ocVO = transformOrdenCompra(s);
                         ordenesVO.add(ocVO);
-                        System.out.println("compraDirecta > "+ocVO.getNumSeguimiento());
                     }   
                 } 
             }catch(Exception e){    
-                System.out.println("Error al consultar las ordenes de compra");
+                System.out.println("Error al consultar las ordenes de compra: "+e.getMessage()+"- : "+e.getStackTrace().toString());
             }
             return ordenesVO;
         }
@@ -718,15 +723,18 @@ public final class ServicioProxy {
         if(oc==null)return null;
         OrdenCompraVO ocVO=new OrdenCompraVO();
         ocVO.setEstado(oc.getEstado());
-        ocVO.setFechaMaximaEntrega(oc.getEntrega().toGregorianCalendar().getTime());
-        ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricante()));
-        ocVO.setComercio(transformarComercio(oc.getComercio()));
-        ocVO.setItem(transformarItem(oc.getItem()));
+        ocVO.setFechaMaximaEntrega(oc.getEntrega()!=null?oc.getEntrega().toGregorianCalendar().getTime():null);
+        ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteBO()));
+        ocVO.setComercio(transformarComercio(oc.getComercioBO()));
+        if(oc.getItemPOBOList() != null && oc.getItemPOBOList().size() > 0){
+            ocVO.setItem(transformarItem(oc.getItemPOBOList().iterator().next()));  
+        }        
         ocVO.setNumSeguimiento(oc.getNumSeguimiento());
         return ocVO;
         }
     
     private FabricanteVO transformarFabricante(FabricanteBO f){
+            if(f==null)return null;
         FabricanteVO fabVO=new FabricanteVO();
         fabVO.setNit(f.getNit());
         fabVO.setNombre(f.getNombre());
@@ -735,6 +743,7 @@ public final class ServicioProxy {
         }
     
     private ComercioVO transformarComercio(ComercioBO f){
+            if(f==null)return null;
         ComercioVO comVO=new ComercioVO();
         comVO.setNit(f.getNit());
         comVO.setNombre(f.getNombre());
@@ -745,21 +754,32 @@ public final class ServicioProxy {
     
     private ItemVO transformarItem(ItemPOBO item){
         if(item==null)return null;
+            System.out.println("item.getProducto(): "+item.getProductoBO()+" item.getCantidad(): "+item.getCantidad());
         ItemVO itemVO=new ItemVO();         
-        itemVO.setProducto(transformarProducto( item.getProducto()));
+        itemVO.setProducto(transformarProducto( item.getProductoBO()));
         itemVO.setCantidad(item.getCantidad());
         return itemVO;
         }
     
     private ProductoVO transformarProducto(ProductoBO p){
-        if(p==null)return null;
+        if(p==null)return null;            
         ProductoVO productoVO=new ProductoVO();
-        productoVO.setReferencia (String.valueOf( p.getId()));
+        productoVO.setReferencia (p.getId()!=null?String.valueOf( p.getId()):null);
         productoVO.setNombre(p.getNombre());
         productoVO.setCategoria( p.getCategoria());
         return productoVO;
         }
     
+    public void aceptarCompraDirecta(String numSeguimiento, String estado, Long precio){
+        if(numSeguimiento==null||estado==null){  
+                throw new InvalidParameterException("Debe enviarse el numero de seguimiento y el estado del producto");
+            }             
+            Aprobacion aprobacion = new Aprobacion();
+            aprobacion.setNumSeguimiento(numSeguimiento);
+            aprobacion.setEstado(estado);
+            aprobacion.setPrecioProducto(precio);
+            getPurchaseOrderDirect().aprobar(aprobacion);
+        }
 }
 
 
