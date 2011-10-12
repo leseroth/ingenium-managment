@@ -1,76 +1,79 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <jdevws:WebServiceProxy xmlns:jdevws="http://xmlns.oracle.com/jdeveloper/10130/webserviceproxy">
    <list n="CHILD_NODES">
-      <url path="GestionPO.wsdl"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionPO_2FGestionPO.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FReturnMaterialAdvice.xsd"/>
-      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
-      <url path="../types/RegistrarPOResponse.java"/>
-      <url path="../types/RegistrarPO.java"/>
-      <url path="../types/ConsultarPOResponse.java"/>
-      <url path="../types/Item.java"/>
-      <url path="GestionPO_Service.java"/>
-      <url path="../types/EstablecerFabricanteAtiende.java"/>
+      <url path="PoManagerPoManagementService.xml"/>
+      <url path="PoManagerPoManagementService.wsdl"/>
+      <url path="GestionPO_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionPO_2FPoManagerPoManagementService_schema1.xsd"/>
+      <url path="../types/PurchaseOrderBO.java"/>
       <url path="../types/ConsultarPOsComercioResponse.java"/>
-      <url path="../types/ObjectFactory.java"/>
-      <url path="../types/ActualizarEstadoPOResponse.java"/>
-      <url path="../types/ConsultarPOFault.java"/>
-      <url path="GestionPO.java"/>
+      <url path="../types/ClienteNoExisteException.java"/>
       <url path="../types/EstablecerFabricanteAtiendeResponse.java"/>
-      <url path="GestionPOSOAPClient.java"/>
       <url path="../types/ConsultarPOsComercio.java"/>
-      <url path="ConsultarPOFault.java"/>
-      <url path="../types/PurchaseOrder.java"/>
-      <url path="../types/ConsultarComercioPO.java"/>
-      <url path="../types/DispatchAdvice.java"/>
-      <url path="../types/ConsultarComercioPOResponse.java"/>
-      <url path="../types/ReturnMaterialAdvice.java"/>
-      <url path="../types/Producto.java"/>
+      <url path="PoManagerPoManagementService.java"/>
+      <url path="../types/FabricanteBO.java"/>
+      <url path="../types/ItemPOBO.java"/>
+      <url path="OrdenCompraNoExisteException.java"/>
       <url path="../types/package-info.java"/>
+      <url path="../types/ConsultarPOFabricantePorEstado.java"/>
+      <url path="../types/RegistrarPOResponse.java"/>
+      <url path="../types/BussinessException.java"/>
+      <url path="../types/OrdenCompraNoExisteException.java"/>
+      <url path="ClienteNoExisteException.java"/>
+      <url path="../types/ProductoBO.java"/>
+      <url path="../types/ConsultarComercioPorPOResponse.java"/>
+      <url path="PoManagerPoManagementPortClient.java"/>
+      <url path="../types/ConsultarComercioPorPO.java"/>
       <url path="../types/ActualizarEstadoPO.java"/>
-      <url path="../types/Comercio.java"/>
-      <url path="../types/Fabricante.java"/>
+      <url path="../types/ConsultarPOFabricantePorEstadoResponse.java"/>
+      <url path="PoManagerPoManagement.java"/>
+      <url path="../types/EstablecerFabricanteAtiende.java"/>
+      <url path="../types/ConsultarPOResponse.java"/>
+      <url path="../types/ActualizarEstadoPOResponse.java"/>
+      <url path="../types/ObjectFactory.java"/>
+      <url path="../types/ComercioBO.java"/>
+      <url path="BussinessException.java"/>
       <url path="../types/ConsultarPO.java"/>
+      <url path="../types/RegistrarPO.java"/>
    </list>
    <hash n="DATA_MODEL">
       <value n="ATTACHMENT_ENCODING" v="MTOM"/>
       <list n="LOCAL_FILES"/>
       <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy"/>
+      <url n="ORACLE_WEBSERVICES_XML" path="PoManagerPoManagementService.xml"/>
       <hash n="PROPERTY_GROUPS">
          <hash n="WSDL_TO_JAVA_PROPERTIES">
             <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.WSDLToJavaProperties"/>
-            <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="co.com.losalpes.marketplace.ws.gestionPO"/>
+            <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="co.com.losalpes.marketplace.ws.gestioPO"/>
             <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="co.com.losalpes.marketplace.ws.types"/>
          </hash>
       </hash>
       <value n="PROXY_ASYNC_METHODS" v="FOR_ENABLED"/>
       <list n="PROXY_CLIENTS">
-         <url path="GestionPOSOAPClient.java"/>
+         <url path="PoManagerPoManagementPortClient.java"/>
       </list>
       <value n="PROXY_MAPPING_URL"/>
-      <url n="PROXY_ORIGINAL_WSDL_URL" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionPO" query="wsdl"/>
+      <url n="PROXY_ORIGINAL_WSDL_URL" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionPO" query="wsdl"/>
       <hash n="PROXY_PORTS">
-         <hash n="GestionPOSOAP">
+         <hash n="PoManagerPoManagementPort">
             <value n="ACCESSES_DOC_WRAPPPED" v="true"/>
             <value n="ACCESSES_RPC_ENCODED" v="false"/>
-            <value n="CLASS_NAME" v="co.com.losalpes.marketplace.ws.gestionPO.GestionPO"/>
+            <value n="CLASS_NAME" v="co.com.losalpes.marketplace.ws.gestioPO.PoManagerPoManagement"/>
             <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyPort"/>
-            <value n="NAME" v="GestionPOSOAP"/>
+            <value n="NAME" v="PoManagerPoManagementPort"/>
             <hash n="OPERATIONS">
                <hash n="actualizarEstadoPO">
                   <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyOperation"/>
                   <hash n="PROPERTY_GROUPS"/>
                </hash>
-               <hash n="consultarComercioPO">
+               <hash n="consultarComercioPorPO">
                   <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyOperation"/>
                   <hash n="PROPERTY_GROUPS"/>
                </hash>
                <hash n="consultarPO">
+                  <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyOperation"/>
+                  <hash n="PROPERTY_GROUPS"/>
+               </hash>
+               <hash n="consultarPOFabricantePorEstado">
                   <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyOperation"/>
                   <hash n="PROPERTY_GROUPS"/>
                </hash>
@@ -87,43 +90,60 @@
                   <hash n="PROPERTY_GROUPS"/>
                </hash>
             </hash>
-            <hash n="PROPERTY_GROUPS"/>
-            <url n="PROXY_ORIGINAL_PORT_ENDPOINT" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionPO"/>
+            <hash n="PROPERTY_GROUPS">
+               <hash n="WS_CLIENT_POLICY">
+                  <value n="addressing"/>
+                  <list n="management"/>
+                  <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.policy.PolicyClientModel"/>
+                  <value n="mtom"/>
+                  <hash n="POLICY_OVERRIDE_PROPERTIES"/>
+                  <list n="security"/>
+                  <value n="wsrm"/>
+               </hash>
+            </hash>
+            <url n="PROXY_ORIGINAL_PORT_ENDPOINT" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionPO"/>
          </hash>
       </hash>
-      <value n="PROXY_SERVICE_NAME" v="GestionPO"/>
-      <value n="PROXY_SERVICE_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionPO"/>
-      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
+      <value n="PROXY_SERVICE_NAME" v="PoManagerPoManagementService"/>
+      <value n="PROXY_SERVICE_NAMESPACE" v="http://ws.pomanager.marketplace.losalpes.com.co/"/>
+      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
       <list n="PROXY_WSDL_IMPORT_LIST">
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionPO_2FGestionPO.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FReturnMaterialAdvice.xsd"/>
-         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+         <url path="GestionPO_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionPO_2FPoManagerPoManagementService_schema1.xsd"/>
       </list>
-      <url n="PROXY_WSDL_URL" path="GestionPO.wsdl"/>
+      <url n="PROXY_WSDL_URL" path="PoManagerPoManagementService.wsdl"/>
       <hash n="REFERENCED_WEBSERVICE">
          <list n="BD_">
             <hash>
-               <value n="BOUND_PORT_TYPE" v="{http://marketplace.losalpes.com.co/GestionPO}GestionPO"/>
+               <value n="BOUND_PORT_TYPE" v="{http://ws.pomanager.marketplace.losalpes.com.co/}PoManagerPoManagement"/>
                <value n="DEFAULT_NAME" v="false"/>
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPBinding"/>
-               <value n="NAME" v="{http://marketplace.losalpes.com.co/GestionPO}GestionPOSOAP"/>
+               <value n="NAME" v="{http://ws.pomanager.marketplace.losalpes.com.co/}PoManagerPoManagementPortBinding"/>
                <list n="OP_BINDINGS">
                   <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/consultarPO"/>
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="void.consultarPO.java.lang.String.javax.xml.ws.Holder&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrder>.javax.xml.ws.Holder&lt;java.lang.String>"/>
+                     <value n="BOUND_OPERATION" v="java.lang.String.registrarPO.co.com.losalpes.marketplace.ws.types.PurchaseOrderBO"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/actualizarEstadoPO"/>
+                     <value n="BD_SOAP_INPUT_USE" v="1"/>
+                     <value n="BD_SOAP_OUTPUT_USE" v="1"/>
+                     <value n="BD_SOAP_STYLE" v="1"/>
+                     <value n="BOUND_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrderBO>.consultarPOFabricantePorEstado.java.lang.String.java.lang.String"/>
+                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
+                     <hash n="PROPERTY_GROUPS"/>
+                  </hash>
+                  <hash>
+                     <value n="BD_SOAP_INPUT_USE" v="1"/>
+                     <value n="BD_SOAP_OUTPUT_USE" v="1"/>
+                     <value n="BD_SOAP_STYLE" v="1"/>
+                     <value n="BOUND_OPERATION" v="co.com.losalpes.marketplace.ws.types.PurchaseOrderBO.consultarPO.java.lang.String"/>
+                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
+                     <hash n="PROPERTY_GROUPS"/>
+                  </hash>
+                  <hash>
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
@@ -132,38 +152,26 @@
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/establecerFabricanteAtiende"/>
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="boolean.establecerFabricanteAtiende.java.lang.String.co.com.losalpes.marketplace.ws.types.Fabricante.co.com.losalpes.marketplace.ws.types.Item"/>
+                     <value n="BOUND_OPERATION" v="boolean.establecerFabricanteAtiende.java.lang.String.co.com.losalpes.marketplace.ws.types.FabricanteBO.java.util.List&lt;co.com.losalpes.marketplace.ws.types.ProductoBO>"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/registrarPO"/>
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="java.lang.String.registrarPO.co.com.losalpes.marketplace.ws.types.PurchaseOrder"/>
+                     <value n="BOUND_OPERATION" v="co.com.losalpes.marketplace.ws.types.ComercioBO.consultarComercioPorPO.java.lang.String"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/consultarComercioPO"/>
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="co.com.losalpes.marketplace.ws.types.Comercio.consultarComercioPO.java.lang.String"/>
-                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
-                     <hash n="PROPERTY_GROUPS"/>
-                  </hash>
-                  <hash>
-                     <value n="BD_SOAP_ACTION" v="http://marketplace.losalpes.com.co/GestionPO/consultarPOsComercio"/>
-                     <value n="BD_SOAP_INPUT_USE" v="1"/>
-                     <value n="BD_SOAP_OUTPUT_USE" v="1"/>
-                     <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrder>.consultarPOsComercio.java.lang.String"/>
+                     <value n="BOUND_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrderBO>.consultarPOsComercio.java.lang.String"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -172,17 +180,27 @@
             </hash>
          </list>
          <list n="BINDING_FILES"/>
-         <value n="GUID" v="be812879-0130-1000-801b-0a0a0a0ac188"/>
+         <value n="GUID" v="f2623fa3-0132-1000-8002-0a0a0a0add5a"/>
          <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy$ProxyJavaWebService"/>
          <list n="PO_">
             <hash>
                <value n="DEFAULT_NAME" v="false"/>
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPPort"/>
-               <value n="NAME" v="GestionPOSOAP"/>
-               <value n="PORT_BINDING_NAME" v="{http://marketplace.losalpes.com.co/GestionPO}GestionPOSOAP"/>
+               <value n="NAME" v="PoManagerPoManagementPort"/>
+               <value n="PORT_BINDING_NAME" v="{http://ws.pomanager.marketplace.losalpes.com.co/}PoManagerPoManagementPortBinding"/>
                <list n="PORT_OPS">
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="void.consultarPO.java.lang.String.javax.xml.ws.Holder&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrder>.javax.xml.ws.Holder&lt;java.lang.String>"/>
+                     <value n="EXPOSED_BD_OPERATION" v="java.lang.String.registrarPO.co.com.losalpes.marketplace.ws.types.PurchaseOrderBO"/>
+                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
+                     <hash n="PROPERTY_GROUPS"/>
+                  </hash>
+                  <hash>
+                     <value n="EXPOSED_BD_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrderBO>.consultarPOFabricantePorEstado.java.lang.String.java.lang.String"/>
+                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
+                     <hash n="PROPERTY_GROUPS"/>
+                  </hash>
+                  <hash>
+                     <value n="EXPOSED_BD_OPERATION" v="co.com.losalpes.marketplace.ws.types.PurchaseOrderBO.consultarPO.java.lang.String"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -192,34 +210,29 @@
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="boolean.establecerFabricanteAtiende.java.lang.String.co.com.losalpes.marketplace.ws.types.Fabricante.co.com.losalpes.marketplace.ws.types.Item"/>
+                     <value n="EXPOSED_BD_OPERATION" v="boolean.establecerFabricanteAtiende.java.lang.String.co.com.losalpes.marketplace.ws.types.FabricanteBO.java.util.List&lt;co.com.losalpes.marketplace.ws.types.ProductoBO>"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="java.lang.String.registrarPO.co.com.losalpes.marketplace.ws.types.PurchaseOrder"/>
+                     <value n="EXPOSED_BD_OPERATION" v="co.com.losalpes.marketplace.ws.types.ComercioBO.consultarComercioPorPO.java.lang.String"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="co.com.losalpes.marketplace.ws.types.Comercio.consultarComercioPO.java.lang.String"/>
-                     <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
-                     <hash n="PROPERTY_GROUPS"/>
-                  </hash>
-                  <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrder>.consultarPOsComercio.java.lang.String"/>
+                     <value n="EXPOSED_BD_OPERATION" v="java.util.List&lt;co.com.losalpes.marketplace.ws.types.PurchaseOrderBO>.consultarPOsComercio.java.lang.String"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                </list>
                <hash n="PROPERTY_GROUPS"/>
-               <url n="URL" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionPO"/>
+               <url n="URL" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionPO"/>
             </hash>
          </list>
          <hash n="PROPERTY_GROUPS">
             <hash n="WSDL_TO_JAVA_PROPERTIES">
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.WSDLToJavaProperties"/>
-               <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="co.com.losalpes.marketplace.ws.gestionPO"/>
+               <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="co.com.losalpes.marketplace.ws.gestioPO"/>
                <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="co.com.losalpes.marketplace.ws.types"/>
             </hash>
          </hash>
@@ -228,17 +241,17 @@
                <value n="AUTO_SERVICE_INTERFACE"/>
                <value n="DEFAULT_NAME" v="false"/>
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.JavaPortType"/>
-               <value n="NAME" v="{http://marketplace.losalpes.com.co/GestionPO}GestionPO"/>
+               <value n="NAME" v="{http://ws.pomanager.marketplace.losalpes.com.co/}PoManagerPoManagement"/>
                <hash n="PROPERTY_GROUPS"/>
-               <value n="PT_CLASS" v="co.com.losalpes.marketplace.ws.gestionPO.GestionPOImpl"/>
-               <value n="PT_SERVICE_INTERFACE" v="co.com.losalpes.marketplace.ws.gestionPO.GestionPO"/>
+               <value n="PT_CLASS" v="co.com.losalpes.marketplace.ws.gestioPO.PoManagerPoManagementImpl"/>
+               <value n="PT_SERVICE_INTERFACE" v="co.com.losalpes.marketplace.ws.gestioPO.PoManagerPoManagement"/>
             </hash>
          </list>
-         <url n="TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
+         <url n="TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
          <value n="WS_ORIG_GEN_DIRECTION" v="TOP_DOWN"/>
-         <value n="WS_TARGET_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionPO"/>
-         <value n="WS_URI" v="GestionPO"/>
-         <url n="WS_WSDL_FILE" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionPO" query="wsdl"/>
+         <value n="WS_TARGET_NAMESPACE" v="http://ws.pomanager.marketplace.losalpes.com.co/"/>
+         <value n="WS_URI" v="PoManagerPoManagementService"/>
+         <url n="WS_WSDL_FILE" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionPO" query="wsdl"/>
       </hash>
       <value n="SERVICE_ASYNC" v="false"/>
       <value n="USE_WSDL_LOCATION" v="true"/>

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="cantidad" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="producto" type="{http://ws.transact.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
+ *         &lt;element name="productoBO" type="{http://ws.pomanager.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "itemPOBO", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+@XmlType(name = "itemPOBO", propOrder = {
     "cantidad",
     "id",
-    "producto"
+    "productoBO"
 })
 public class ItemPOBO {
 
     protected Integer cantidad;
     protected Long id;
-    protected ProductoBO producto;
+    protected ProductoBO productoBO;
 
     /**
      * Gets the value of the cantidad property.
@@ -95,8 +95,8 @@ public class ItemPOBO {
      *     {@link ProductoBO }
      *     
      */
-    public ProductoBO getProducto() {
-        return producto;
+    public ProductoBO getProductoBO() {
+        return productoBO;
     }
 
     /**
@@ -107,8 +107,8 @@ public class ItemPOBO {
      *     {@link ProductoBO }
      *     
      */
-    public void setProducto(ProductoBO value) {
-        this.producto = value;
+    public void setProductoBO(ProductoBO value) {
+        this.productoBO = value;
     }
 
 }

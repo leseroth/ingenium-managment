@@ -3,20 +3,21 @@ package co.com.losalpes.marketplace.ws.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for consultarPOsComercio complex type.
+ * <p>Java class for consultarComercioPorPOResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="consultarPOsComercio">
+ * &lt;complexType name="consultarComercioPorPOResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nit" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws.pomanager.marketplace.losalpes.com.co/}comercioBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "consultarPOsComercio", propOrder = {
-    "nit"
+@XmlType(name = "consultarComercioPorPOResponse", propOrder = {
+    "_return"
 })
-public class ConsultarPOsComercio {
+public class ConsultarComercioPorPOResponse {
 
-    protected String nit;
+    @XmlElement(name = "return")
+    protected ComercioBO _return;
 
     /**
-     * Gets the value of the nit property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ComercioBO }
      *     
      */
-    public String getNit() {
-        return nit;
+    public ComercioBO getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the nit property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ComercioBO }
      *     
      */
-    public void setNit(String value) {
-        this.nit = value;
+    public void setReturn(ComercioBO value) {
+        this._return = value;
     }
 
 }
