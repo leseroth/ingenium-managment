@@ -8,17 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ConsultarPOResponse complex type.
+ * <p>Java class for consultarPOResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ConsultarPOResponse">
+ * &lt;complexType name="consultarPOResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="purchaseOrder" type="{http://marketplace.losalpes.com.co}PurchaseOrder"/>
- *         &lt;element name="mensaje" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="return" type="{http://ws.pomanager.marketplace.losalpes.com.co/}purchaseOrderBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,63 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ConsultarPOResponse", propOrder = {
-    "purchaseOrder",
-    "mensaje"
+@XmlType(name = "consultarPOResponse", propOrder = {
+    "_return"
 })
 public class ConsultarPOResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected PurchaseOrder purchaseOrder;
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected String mensaje;
+    @XmlElement(name = "return")
+    protected PurchaseOrderBO _return;
 
     /**
-     * Gets the value of the purchaseOrder property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link PurchaseOrder }
+     *     {@link PurchaseOrderBO }
      *     
      */
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
+    public PurchaseOrderBO getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the purchaseOrder property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
-     *     {@link PurchaseOrder }
+     *     {@link PurchaseOrderBO }
      *     
      */
-    public void setPurchaseOrder(PurchaseOrder value) {
-        this.purchaseOrder = value;
-    }
-
-    /**
-     * Gets the value of the mensaje property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    /**
-     * Sets the value of the mensaje property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMensaje(String value) {
-        this.mensaje = value;
+    public void setReturn(PurchaseOrderBO value) {
+        this._return = value;
     }
 
 }

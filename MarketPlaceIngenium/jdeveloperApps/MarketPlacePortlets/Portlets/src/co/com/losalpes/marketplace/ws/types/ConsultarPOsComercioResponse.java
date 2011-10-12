@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ConsultarPOsComercioResponse complex type.
+ * <p>Java class for consultarPOsComercioResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ConsultarPOsComercioResponse">
+ * &lt;complexType name="consultarPOsComercioResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pos" type="{http://marketplace.losalpes.com.co}PurchaseOrder" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws.pomanager.marketplace.losalpes.com.co/}purchaseOrderBO" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ConsultarPOsComercioResponse", propOrder = {
-    "pos"
+@XmlType(name = "consultarPOsComercioResponse", propOrder = {
+    "_return"
 })
 public class ConsultarPOsComercioResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
-    protected List<PurchaseOrder> pos;
+    @XmlElement(name = "return")
+    protected List<PurchaseOrderBO> _return;
 
     /**
-     * Gets the value of the pos property.
+     * Gets the value of the return property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pos property.
+     * This is why there is not a <CODE>set</CODE> method for the return property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPos().add(newItem);
+     *    getReturn().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link PurchaseOrder }
+     * {@link PurchaseOrderBO }
      * 
      * 
      */
-    public List<PurchaseOrder> getPos() {
-        if (pos == null) {
-            pos = new ArrayList<PurchaseOrder>();
+    public List<PurchaseOrderBO> getReturn() {
+        if (_return == null) {
+            _return = new ArrayList<PurchaseOrderBO>();
         }
-        return this.pos;
+        return this._return;
     }
 
 }

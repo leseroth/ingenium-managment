@@ -1,8 +1,11 @@
 
 package co.com.losalpes.marketplace.ws.types;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -18,12 +21,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="comercio" type="{http://ws.transact.marketplace.losalpes.com.co/}comercioBO" minOccurs="0"/>
+ *         &lt;element name="comercioBO" type="{http://ws.pomanager.marketplace.losalpes.com.co/}comercioBO" minOccurs="0"/>
  *         &lt;element name="entrega" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="fabricante" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" minOccurs="0"/>
+ *         &lt;element name="fabricanteBO" type="{http://ws.pomanager.marketplace.losalpes.com.co/}fabricanteBO" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="item" type="{http://ws.transact.marketplace.losalpes.com.co/}itemPOBO" minOccurs="0"/>
+ *         &lt;element name="itemPOBOList" type="{http://ws.pomanager.marketplace.losalpes.com.co/}itemPOBO" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -34,24 +37,25 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "purchaseOrderBO", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "comercio",
+@XmlType(name = "purchaseOrderBO", propOrder = {
+    "comercioBO",
     "entrega",
     "estado",
-    "fabricante",
+    "fabricanteBO",
     "id",
-    "item",
+    "itemPOBOList",
     "numSeguimiento"
 })
 public class PurchaseOrderBO {
 
-    protected ComercioBO comercio;
+    protected ComercioBO comercioBO;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar entrega;
     protected String estado;
-    protected FabricanteBO fabricante;
+    protected FabricanteBO fabricanteBO;
     protected Long id;
-    protected ItemPOBO item;
+    @XmlElement(nillable = true)
+    protected List<ItemPOBO> itemPOBOList;
     protected String numSeguimiento;
 
     /**
@@ -62,8 +66,8 @@ public class PurchaseOrderBO {
      *     {@link ComercioBO }
      *     
      */
-    public ComercioBO getComercio() {
-        return comercio;
+    public ComercioBO getComercioBO() {
+        return comercioBO;
     }
 
     /**
@@ -74,8 +78,8 @@ public class PurchaseOrderBO {
      *     {@link ComercioBO }
      *     
      */
-    public void setComercio(ComercioBO value) {
-        this.comercio = value;
+    public void setComercioBO(ComercioBO value) {
+        this.comercioBO = value;
     }
 
     /**
@@ -134,8 +138,8 @@ public class PurchaseOrderBO {
      *     {@link FabricanteBO }
      *     
      */
-    public FabricanteBO getFabricante() {
-        return fabricante;
+    public FabricanteBO getFabricanteBO() {
+        return fabricanteBO;
     }
 
     /**
@@ -146,8 +150,8 @@ public class PurchaseOrderBO {
      *     {@link FabricanteBO }
      *     
      */
-    public void setFabricante(FabricanteBO value) {
-        this.fabricante = value;
+    public void setFabricanteBO(FabricanteBO value) {
+        this.fabricanteBO = value;
     }
 
     /**
@@ -175,27 +179,32 @@ public class PurchaseOrderBO {
     }
 
     /**
-     * Gets the value of the item property.
+     * Gets the value of the itemPOBOList property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ItemPOBO }
-     *     
-     */
-    public ItemPOBO getItem() {
-        return item;
-    }
-
-    /**
-     * Sets the value of the item property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the itemPOBOList property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ItemPOBO }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getItemPOBOList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ItemPOBO }
+     * 
+     * 
      */
-    public void setItem(ItemPOBO value) {
-        this.item = value;
+    public List<ItemPOBO> getItemPOBOList() {
+        if (itemPOBOList == null) {
+            itemPOBOList = new ArrayList<ItemPOBO>();
+        }
+        return this.itemPOBOList;
     }
 
     /**

@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for consultarPOsComercio complex type.
+ * <p>Java class for consultarComercioPorPO complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="consultarPOsComercio">
+ * &lt;complexType name="consultarComercioPorPO">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nit" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "consultarPOsComercio", propOrder = {
-    "nit"
+@XmlType(name = "consultarComercioPorPO", propOrder = {
+    "numSeguimiento"
 })
-public class ConsultarPOsComercio {
+public class ConsultarComercioPorPO {
 
-    protected String nit;
+    protected String numSeguimiento;
 
     /**
-     * Gets the value of the nit property.
+     * Gets the value of the numSeguimiento property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNit() {
-        return nit;
+    public String getNumSeguimiento() {
+        return numSeguimiento;
     }
 
     /**
-     * Sets the value of the nit property.
+     * Sets the value of the numSeguimiento property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNit(String value) {
-        this.nit = value;
+    public void setNumSeguimiento(String value) {
+        this.numSeguimiento = value;
     }
 
 }

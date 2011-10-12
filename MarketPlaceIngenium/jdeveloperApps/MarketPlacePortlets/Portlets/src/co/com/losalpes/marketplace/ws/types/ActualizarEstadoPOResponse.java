@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ActualizarEstadoPOResponse complex type.
+ * <p>Java class for actualizarEstadoPOResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ActualizarEstadoPOResponse">
+ * &lt;complexType name="actualizarEstadoPOResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="respuesta" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,28 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ActualizarEstadoPOResponse", propOrder = {
-    "respuesta"
+@XmlType(name = "actualizarEstadoPOResponse", propOrder = {
+    "_return"
 })
 public class ActualizarEstadoPOResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
-    protected boolean respuesta;
+    @XmlElement(name = "return")
+    protected boolean _return;
 
     /**
-     * Gets the value of the respuesta property.
+     * Gets the value of the return property.
      * 
      */
-    public boolean isRespuesta() {
-        return respuesta;
+    public boolean isReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the respuesta property.
+     * Sets the value of the return property.
      * 
      */
-    public void setRespuesta(boolean value) {
-        this.respuesta = value;
+    public void setReturn(boolean value) {
+        this._return = value;
     }
 
 }

@@ -2,7 +2,8 @@ package co.com.losalpes.marketplace.ws.gestionPO;
 
 import javax.xml.ws.WebFault;
 
-@WebFault(faultBean="hh.BussinessException", targetNamespace="http://ws.pomanager.marketplace.losalpes.com.co/",
+@WebFault(faultBean="co.com.losalpes.marketplace.ws.types.BussinessException",
+  targetNamespace="http://ws.pomanager.marketplace.losalpes.com.co/",
   name="BussinessException")
 public class BussinessException
   extends Exception
@@ -17,7 +18,8 @@ public class BussinessException
   }
 
   public BussinessException(String message,
-                            co.com.losalpes.marketplace.ws.types.BussinessException faultInfo, Throwable t)
+                            co.com.losalpes.marketplace.ws.types.BussinessException faultInfo,
+                            Throwable t)
   {
     super(message,t);
     this.faultInfo = faultInfo;

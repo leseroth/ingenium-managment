@@ -3,21 +3,20 @@ package co.com.losalpes.marketplace.ws.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for RegistrarPO complex type.
+ * <p>Java class for registrarPO complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="RegistrarPO">
+ * &lt;complexType name="registrarPO">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="purchaseOrder" type="{http://marketplace.losalpes.com.co}PurchaseOrder"/>
+ *         &lt;element name="purchaseOrderBO" type="{http://ws.pomanager.marketplace.losalpes.com.co/}purchaseOrderBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RegistrarPO", propOrder = {
-    "purchaseOrder"
+@XmlType(name = "registrarPO", propOrder = {
+    "purchaseOrderBO"
 })
 public class RegistrarPO {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected PurchaseOrder purchaseOrder;
+    protected PurchaseOrderBO purchaseOrderBO;
 
     /**
-     * Gets the value of the purchaseOrder property.
+     * Gets the value of the purchaseOrderBO property.
      * 
      * @return
      *     possible object is
-     *     {@link PurchaseOrder }
+     *     {@link PurchaseOrderBO }
      *     
      */
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
+    public PurchaseOrderBO getPurchaseOrderBO() {
+        return purchaseOrderBO;
     }
 
     /**
-     * Sets the value of the purchaseOrder property.
+     * Sets the value of the purchaseOrderBO property.
      * 
      * @param value
      *     allowed object is
-     *     {@link PurchaseOrder }
+     *     {@link PurchaseOrderBO }
      *     
      */
-    public void setPurchaseOrder(PurchaseOrder value) {
-        this.purchaseOrder = value;
+    public void setPurchaseOrderBO(PurchaseOrderBO value) {
+        this.purchaseOrderBO = value;
     }
 
 }
