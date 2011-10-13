@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>99</line>
+      <col/>
+      <file>OrdenCompraSubasta.bpel</file>
+      <msg>
+         <![CDATA[el tipo de valor <from> "{http://www.w3.org/2001/XMLSchema}date" no es compatible con el tipo de valor <to> "{http://www.w3.org/2001/XMLSchema}dateTime"]]>
+      </msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>99</line>
+      <col/>
+      <file>OrdenCompraSubasta.bpel</file>
+      <msg>
+         <![CDATA[el tipo de valor <from> "{http://www.w3.org/2001/XMLSchema}string" no es compatible con el tipo de valor <to> "{http://www.w3.org/2001/XMLSchema}long"]]>
+      </msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>99</line>
+      <col/>
+      <file>OrdenCompraSubasta.bpel</file>
+      <msg>
+         <![CDATA[el tipo de valor <from> "{http://www.w3.org/2001/XMLSchema}date" no es compatible con el tipo de valor <to> "{http://www.w3.org/2001/XMLSchema}dateTime"]]>
+      </msg>
+   </Fault>
+</Faults>
