@@ -1,5 +1,5 @@
-(:: pragma bea:global-element-parameter parameter="$actualizarEstadoPO1" element="ns1:actualizarEstadoPO" location="../../wsdls/gestionPO/GestionPO.xsd" ::)
-(:: pragma bea:global-element-return element="ns0:actualizarEstadoPO" location="../../../business/wsdls/poManager/XMLSchema_-633731609.xsd" ::)
+(:: pragma bea:global-element-parameter parameter="$actualizarEstadoPO1" element="ns1:actualizarEstadoPO" location="../../wsdls/gestionPO/PoManagerPoManagementService_schema1.xsd" ::)
+(:: pragma bea:global-element-return element="ns0:actualizarEstadoPO" location="../../../business/wsdls/poManager/PoManagerPoManagementService_schema1.xsd" ::)
 
 declare namespace ns1 = "http://marketplace.losalpes.com.co";
 declare namespace ns0 = "http://ws.pomanager.marketplace.losalpes.com.co/";
