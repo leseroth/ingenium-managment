@@ -35,11 +35,6 @@ declare function xf:EnviarCorreoElectronicoRequest($enviarCorreoElectronico1 as 
             }
             <from>{ data($enviarCorreoElectronico1/ns0:from) }</from>
             <password>{ data($enviarCorreoElectronico1/ns0:password) }</password>
-            {
-                for $attachments in $enviarCorreoElectronico1/ns0:attachments
-                return
-                    <attachments>{ data($attachments) }</attachments>
-            }
         </ns1:sendMail>
 };
 
