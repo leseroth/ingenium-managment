@@ -9,18 +9,18 @@ declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/Ge
 declare function xf:ConsultarClientesProductoResquest($consultarClientesProducto1 as element(ns0:consultarClientesProducto))
     as element(ns1:AccountWS_AccountQueryPage_Input) {
         <ns1:AccountWS_AccountQueryPage_Input>
-        <ns0:UseChildAnd>true</ns0:UseChildAnd>
             <ns2:ListOfAccount>
                 <ns2:Account>
-                	<ns2:AccountId></ns2:AccountId>
-                	<ns2:AccountName></ns2:AccountName> 
-                	<ns2:stNit></ns2:stNit> 
-                	<ns2:stCorreo_Electronico></ns2:stCorreo_Electronico>                	
-                	<ns2:Status>='Activo'</ns2:Status>
-                    <ns2:AccountType>{ concat("='",data($consultarClientesProducto1/ns0:tipoCliente),"'") }</ns2:AccountType>
+                    <ns2:AccountId/>
+                	<ns2:AccountType>{ concat("='",data($consultarClientesProducto1/ns0:tipoCliente),"'") }</ns2:AccountType>
+                    <ns2:Status>='Activo'</ns2:Status>
+                	<ns2:stNit/>
+                	<ns2:AccountName/>
+                	<ns2:stCorreo_Electronico/>
                     <ns2:ListOfCustomObject3>
                         <ns2:CustomObject3>
                             <ns2:Name>{ concat("='",data($consultarClientesProducto1/ns0:nombreProducto),"'") }</ns2:Name>
+                            <ns2:Type>{ concat("='",data($consultarClientesProducto1/ns0:tipoCategoria),"'") }</ns2:Type>
                         </ns2:CustomObject3>
                     </ns2:ListOfCustomObject3>
                 </ns2:Account>
