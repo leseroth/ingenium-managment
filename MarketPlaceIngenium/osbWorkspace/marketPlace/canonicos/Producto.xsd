@@ -5,7 +5,9 @@
     <include schemaLocation="Fabricante.xsd"></include>
     <complexType name="Producto">
     	<sequence>
-    		<element name="id" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="id" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
     		<element name="nombre" type="string" minOccurs="1"></element>
     		<element name="categoria" type="string" minOccurs="1"
     			maxOccurs="1">
@@ -17,7 +19,10 @@
     		<element name="estado" type="string" minOccurs="1"
     			maxOccurs="1">
     		</element>
-    		<element name="referencia" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="referencia" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="pesoLibras" type="string" maxOccurs="1" minOccurs="0"></element>
     	</sequence>
     </complexType>
 
