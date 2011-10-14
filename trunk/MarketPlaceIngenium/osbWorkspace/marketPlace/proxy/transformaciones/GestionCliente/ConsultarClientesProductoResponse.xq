@@ -9,16 +9,18 @@ declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/Ge
 declare function xf:ConsultarClientesProductoResponse($accountWS_AccountQueryPage_Output1 as element(ns1:AccountWS_AccountQueryPage_Output))
     as element(ns0:consultarClientesProductoResponse) {
         <ns0:consultarClientesProductoResponse>
-            <ns0:cliente>
-                <id>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:AccountId) }</id>
-                <nombre>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:AccountName) }</nombre>
-                <nit>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:stNit) }</nit>
-                {
-                    for $stCorreo_Electronico in $accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:stCorreo_Electronico
+            {
+                    for $Account in $accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account
                     return
-                        <email>{ data($stCorreo_Electronico) }</email>
-                }
+            <ns0:cliente>
+                <id>{ data($Account/ns2:AccountId) }</id>
+                <nombre>{ data($Account/ns2:AccountName) }</nombre>
+                <nit>{ data($Account/ns2:stNit) }</nit>
+                <email>{ data($Account/ns2:stCorreo_Electronico) }</email>
+                <codigoPostal>{ data($Account/ns2:stCodigoPostal) }</codigoPostal>
+                <codigoPais>{ data($Account/ns2:stCodigoPais) }</codigoPais>
             </ns0:cliente>
+            }
         </ns0:consultarClientesProductoResponse>
 };
 

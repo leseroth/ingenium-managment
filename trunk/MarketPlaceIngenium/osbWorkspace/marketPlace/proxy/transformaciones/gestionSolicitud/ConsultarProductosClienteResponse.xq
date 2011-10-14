@@ -32,6 +32,7 @@ declare function xf:ConsultarProductosClienteResponse($customObject3WS_CustomObj
                             return
                                 <referencia>{ data($stReferencia) }</referencia>
                         }
+                        <pesoLibras>{ data($CustomObject3/ns2:nPeso) }</pesoLibras>
                     </ns0:productos>
             }
         </ns0:consultarProductosClienteResponse>

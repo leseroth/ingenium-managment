@@ -23,6 +23,8 @@ declare function xf:ConsultarClientesProductoResquest($consultarClientesProducto
                             <ns2:Type>{ concat("='",data($consultarClientesProducto1/ns0:tipoCategoria),"'") }</ns2:Type>
                         </ns2:CustomObject3>
                     </ns2:ListOfCustomObject3>
+                    <ns2:stCodigoPostal/>
+                    <ns2:stCodigoPais/>
                 </ns2:Account>
             </ns2:ListOfAccount>
         </ns1:AccountWS_AccountQueryPage_Input>

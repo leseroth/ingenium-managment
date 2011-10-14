@@ -22,7 +22,8 @@ declare function xf:ConsultarClienteRequest($consultarCliente1 as element(ns0:co
                		<ns2:AccountType></ns2:AccountType>
                		<ns2:stNmero_Matricula></ns2:stNmero_Matricula>
                		<ns2:stRazon_Social></ns2:stRazon_Social>  
-               		<ns2:nComision></ns2:nComision>               
+               		<ns2:nComision></ns2:nComision>   
+               		<ns2:stCorreo_Electronico/>            
               <ns2:ListOfContact>
                   <ns2:Contact>               
                      <ns2:ContactFirstName></ns2:ContactFirstName>                     

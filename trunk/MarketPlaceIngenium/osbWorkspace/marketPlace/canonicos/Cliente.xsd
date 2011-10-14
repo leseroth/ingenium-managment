@@ -38,10 +38,16 @@
     		<element name="estado" type="string" minOccurs="0"
     			maxOccurs="1">
     		</element>
-    		<element name="tipo" type="string" minOccurs="0" maxOccurs="1"></element>
+    		<element name="tipo" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
     		<element name="comision" type="double" minOccurs="0"
     			maxOccurs="1">
     		</element>
+    		<element name="codigoPostal" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="codigoPais" type="string" maxOccurs="1" minOccurs="0"></element>
     	</sequence></complexType>
 
     <element name="cliente" type="tns:Cliente"></element>
