@@ -41,10 +41,10 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     @OneToOne
     private PurchaseOrder po;
     @Column
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date fechaCreacionSubasta;
     @Column
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date fechaMaxSubasta;
     @OneToMany
     private List<Oferta> ofertas;

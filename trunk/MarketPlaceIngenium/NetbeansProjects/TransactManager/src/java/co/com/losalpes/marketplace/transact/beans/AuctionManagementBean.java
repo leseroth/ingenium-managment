@@ -13,6 +13,7 @@ import co.com.losalpes.marketplace.transact.entities.PurchaseOrder;
 import co.com.losalpes.marketplace.transact.entities.Subasta;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,7 +37,7 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
      * {@inheritDoc}
      */
     @Override
-    public String crearSubasta(PurchaseOrderBO purchaseOrderBO) throws BussinessException {
+    public String crearSubasta(PurchaseOrderBO purchaseOrderBO, Date fechaMax) throws BussinessException {
         PurchaseOrder purchaseOrder = new PurchaseOrder(purchaseOrderBO);
         Query query = null;
 
@@ -106,6 +107,8 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         subasta.setPo(purchaseOrder);
         subasta.setActiva(true);
         subasta.setNumSeguimiento(numSeguimiento);
+        subasta.setFechaMaxSubasta(fechaMax);
+        subasta.setFechaCreacionSubasta(new Date());
         em.persist(subasta);
 
         return numSeguimiento;

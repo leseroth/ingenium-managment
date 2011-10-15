@@ -5,6 +5,7 @@ import co.com.losalpes.marketplace.transact.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.transact.bos.OfertaBO;
 import co.com.losalpes.marketplace.transact.bos.SubastaBO;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -25,10 +26,11 @@ public interface AuctionManagementLocal {
      * <li>El item debe tener cantidad</li>
      * </ul>
      * @param po PurchaseOrderBO
+     * @param fechaMax Fecha maxima de finalizacion de la subasta
      * @return El numero de seguimiento
      * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
      */
-    public String crearSubasta(PurchaseOrderBO po) throws BussinessException;
+    public String crearSubasta(PurchaseOrderBO po, Date fechaMax) throws BussinessException;
 
     /**
      * Recibe el numero de seguimiento de una subasta y le asigna los fabricantes indicados.
