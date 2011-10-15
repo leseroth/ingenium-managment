@@ -21,3 +21,5 @@ alter table subasta add fechaCreacionSubasta datetime ;
 alter table subasta add fechaMaxSubasta datetime;
 
 alter table purchaseorder change entrega entrega datetime;
+
+alter table oferta change fechaEntrega fechaEntrega datetime;

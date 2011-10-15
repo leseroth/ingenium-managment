@@ -18,7 +18,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
-    @Temporal(value = javax.persistence.TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date fechaEntrega;
     @Column
     private String numSeguimiento;
