@@ -468,9 +468,12 @@
             <email>test@test.com</email>
             <nit>nitNuevo101</nit>
             <nombre>Fabricante Nuevo 101</nombre>
+            <direccion>Calle 15 Carrera 15</direccion>
+            <codPostal>110125</codPostal>
+            <codPais>CO</codPais>
          </fabricantes>
          <fabricantes>
-            <nit>fab201</nit>
+            <nit>700700777</nit>
          </fabricantes>
       </ws:asignarFabricantesSubasta>
    </soapenv:Body>
@@ -486,7 +489,7 @@
             <email>test@test.com</email>
          </fabricantes>
          <fabricantes>
-            <nit>fab201</nit>
+            <nit>700700777</nit>
          </fabricantes>
       </ws:asignarFabricantesSubasta>
    </soapenv:Body>
@@ -504,7 +507,7 @@
             <nombre>Fabricante Nuevo 101</nombre>
          </fabricantes>
          <fabricantes>
-            <nit>fab201</nit>
+            <nit>700700777</nit>
          </fabricantes>
       </ws:asignarFabricantesSubasta>
    </soapenv:Body>
@@ -514,7 +517,7 @@
       <ws:asignarFabricantesSubasta>
          <numSeguimientoSubasta>num001</numSeguimientoSubasta>
          <fabricantes>
-            <nit>fab202</nit>
+            <nit>600600666</nit>
          </fabricantes>
          <fabricantes>
             <nit>fab204</nit>
@@ -558,7 +561,7 @@
             <nombre>Fabricante Nuevo 101</nombre>
          </fabricantes>
          <fabricantes>
-            <nit>fab201</nit>
+            <nit>700700777</nit>
          </fabricantes>
       </ws:asignarFabricantesSubasta>
    </soapenv:Body>
