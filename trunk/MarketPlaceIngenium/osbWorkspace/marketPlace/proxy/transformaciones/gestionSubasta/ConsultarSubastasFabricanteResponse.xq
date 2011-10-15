@@ -3,90 +3,57 @@
 
 declare namespace ns1 = "http://ws.transact.marketplace.losalpes.com.co/";
 declare namespace ns0 = "http://marketplace.losalpes.com.co";
-declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastasFabricanteResponse/";
+declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastasFabricanteResponse12/";
 
-declare function xf:ConsultarSubastasFabricanteResponse($consultarSubastasFabricanteResponse1 as element(ns1:consultarSubastasFabricanteResponse))
+declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabricanteResponse1 as element(ns1:consultarSubastasFabricanteResponse))
     as element(ns0:consultarSubastasFabricanteResponse) {
         <ns0:consultarSubastasFabricanteResponse>
             {
                 for $return in $consultarSubastasFabricanteResponse1/return
                 return
                     <ns0:subastas>
-                        <numSeguimiento>{ data($return/numSeguimiento) }</numSeguimiento>
                         {
-                            let $po := $return/po
+                            for $numSeguimiento in $return/numSeguimiento
+                            return
+                                <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
+                        }
+                        {
+                            let $purchaseOrderBO := $return/purchaseOrderBO
                             return
                                 <ordenCompra>
-                                    <fechaMaxima>{ data($po/entrega) }</fechaMaxima>
-                                    <estado>{ data($po/estado) }</estado>
+                                    {
+                                        for $id in $purchaseOrderBO/id
+                                        return
+                                            <id>{ data($id) }</id>
+                                    }
+                                    {
+                                        for $numSeguimiento in $purchaseOrderBO/numSeguimiento
+                                        return
+                                            <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
+                                    }
                                 </ordenCompra>
                         }
                         {
-                            let $mejor := $return/mejor
+                            for $mejorOfertaBO in $return/mejorOfertaBO
                             return
                                 <mejor>
-                                    <idSubasta>{ data($mejor/idSubasta) }</idSubasta>
-                                    <horarioEntrega>{ data($mejor/fechaEntrega) }</horarioEntrega>
                                     {
-                                        let $fabricante := $mejor/fabricante
+                                        for $id in $mejorOfertaBO/id
                                         return
-                                            <fabricante>
-                                                <nombre>{ data($fabricante/nombre) }</nombre>
-                                                <nit>{ data($fabricante/nit) }</nit>
-                                                {
-                                                    for $email in $fabricante/email
-                                                    return
-                                                        <email>{ data($email) }</email>
-                                                }
-                                            </fabricante>
+                                            <id>{ data($id) }</id>
                                     }
-                                    <item>
-                                        <valor>{ data($mejor/valor) }</valor>
-                                        {
-                                            let $productoOfrecido := $mejor/productoOfrecido
-                                            return
-                                                <producto>
-                                                    <nombre>{ data($productoOfrecido/nombre) }</nombre>
-                                                    {
-                                                        for $categoria in $productoOfrecido/categoria
-                                                        return
-                                                            <categoria>{ data($categoria) }</categoria>
-                                                    }
-                                                </producto>
-                                        }
-                                    </item>
+                                    <numSeguimiento>{ data($mejorOfertaBO/numSeguimiento) }</numSeguimiento>
+                                    {
+                                        let $fabricanteBO := $mejorOfertaBO/fabricanteBO
+                                        return
+                                            <fabricante/>
+                                    }
                                 </mejor>
                         }
                         {
-                            for $ofertas in $return/ofertas
+                            for $ofertaBOList in $return/ofertaBOList
                             return
-                                <ofertas>
-                                    <idSubasta>{ data($ofertas/idSubasta) }</idSubasta>
-                                    <horarioEntrega>{ data($ofertas/fechaEntrega) }</horarioEntrega>
-                                    {
-                                        let $fabricante := $ofertas/fabricante
-                                        return
-                                            <fabricante>
-                                                <nombre>{ data($fabricante/nombre) }</nombre>
-                                                <nit>{ data($fabricante/nit) }</nit>
-                                            </fabricante>
-                                    }
-                                    <item>
-                                        <valor>{ data($ofertas/valor) }</valor>
-                                        {
-                                            let $productoOfrecido := $ofertas/productoOfrecido
-                                            return
-                                                <producto>
-                                                    <nombre>{ data($productoOfrecido/nombre) }</nombre>
-                                                    {
-                                                        for $categoria in $productoOfrecido/categoria
-                                                        return
-                                                            <categoria>{ data($categoria) }</categoria>
-                                                    }
-                                                </producto>
-                                        }
-                                    </item>
-                                </ofertas>
+                                <ofertas/>
                         }
                     </ns0:subastas>
             }
@@ -95,4 +62,4 @@ declare function xf:ConsultarSubastasFabricanteResponse($consultarSubastasFabric
 
 declare variable $consultarSubastasFabricanteResponse1 as element(ns1:consultarSubastasFabricanteResponse) external;
 
-xf:ConsultarSubastasFabricanteResponse($consultarSubastasFabricanteResponse1)
+xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabricanteResponse1)

@@ -25,11 +25,17 @@
 <message name="consultarSubastasFabricanteResponse">
 <part name="parameters" element="tns:consultarSubastasFabricanteResponse"/>
 </message>
-<message name="darGanadorSubasta">
-<part name="parameters" element="tns:darGanadorSubasta"/>
+<message name="registrarOferta">
+<part name="parameters" element="tns:registrarOferta"/>
 </message>
-<message name="darGanadorSubastaResponse">
-<part name="parameters" element="tns:darGanadorSubastaResponse"/>
+<message name="registrarOfertaResponse">
+<part name="parameters" element="tns:registrarOfertaResponse"/>
+</message>
+<message name="consultarFabricantesSubasta">
+<part name="parameters" element="tns:consultarFabricantesSubasta"/>
+</message>
+<message name="consultarFabricantesSubastaResponse">
+<part name="parameters" element="tns:consultarFabricantesSubastaResponse"/>
 </message>
 <message name="cerrarSubasta">
 <part name="parameters" element="tns:cerrarSubasta"/>
@@ -37,11 +43,11 @@
 <message name="cerrarSubastaResponse">
 <part name="parameters" element="tns:cerrarSubastaResponse"/>
 </message>
-<message name="consultarFabricantesSubasta">
-<part name="parameters" element="tns:consultarFabricantesSubasta"/>
+<message name="darGanadorSubasta">
+<part name="parameters" element="tns:darGanadorSubasta"/>
 </message>
-<message name="consultarFabricantesSubastaResponse">
-<part name="parameters" element="tns:consultarFabricantesSubastaResponse"/>
+<message name="darGanadorSubastaResponse">
+<part name="parameters" element="tns:darGanadorSubastaResponse"/>
 </message>
 <message name="consultarSubastaOrdenCompra">
 <part name="parameters" element="tns:consultarSubastaOrdenCompra"/>
@@ -65,9 +71,14 @@
 <output message="tns:consultarSubastasFabricanteResponse"/>
 <fault message="tns:BussinessException" name="BussinessException"/>
 </operation>
-<operation name="darGanadorSubasta">
-<input message="tns:darGanadorSubasta"/>
-<output message="tns:darGanadorSubastaResponse"/>
+<operation name="registrarOferta">
+<input message="tns:registrarOferta"/>
+<output message="tns:registrarOfertaResponse"/>
+<fault message="tns:BussinessException" name="BussinessException"/>
+</operation>
+<operation name="consultarFabricantesSubasta">
+<input message="tns:consultarFabricantesSubasta"/>
+<output message="tns:consultarFabricantesSubastaResponse"/>
 <fault message="tns:BussinessException" name="BussinessException"/>
 </operation>
 <operation name="cerrarSubasta">
@@ -75,9 +86,9 @@
 <output message="tns:cerrarSubastaResponse"/>
 <fault message="tns:BussinessException" name="BussinessException"/>
 </operation>
-<operation name="consultarFabricantesSubasta">
-<input message="tns:consultarFabricantesSubasta"/>
-<output message="tns:consultarFabricantesSubastaResponse"/>
+<operation name="darGanadorSubasta">
+<input message="tns:darGanadorSubasta"/>
+<output message="tns:darGanadorSubastaResponse"/>
 <fault message="tns:BussinessException" name="BussinessException"/>
 </operation>
 <operation name="consultarSubastaOrdenCompra">
@@ -89,7 +100,6 @@
 <binding name="TransactAuctionManagementPortBinding" type="tns:TransactAuctionManagement">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="crearSubasta">
-
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -125,7 +135,19 @@
 <soap:fault name="BussinessException" use="literal"/>
 </fault>
 </operation>
-<operation name="darGanadorSubasta">
+<operation name="registrarOferta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="BussinessException">
+<soap:fault name="BussinessException" use="literal"/>
+</fault>
+</operation>
+<operation name="consultarFabricantesSubasta">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -149,7 +171,7 @@
 <soap:fault name="BussinessException" use="literal"/>
 </fault>
 </operation>
-<operation name="consultarFabricantesSubasta">
+<operation name="darGanadorSubasta">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
