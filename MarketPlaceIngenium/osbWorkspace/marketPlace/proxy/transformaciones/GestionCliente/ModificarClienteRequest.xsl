@@ -18,7 +18,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <acc:AccountType><xsl:value-of select="tns:modificarCliente/tns:cliente/tipo"></xsl:value-of></acc:AccountType>
         <acc:stRazon_Social><xsl:value-of select="tns:modificarCliente/tns:cliente/razonSocial"></xsl:value-of></acc:stRazon_Social>
         <acc:stCorreo_Electronico><xsl:value-of select="tns:modificarCliente/tns:cliente/email"></xsl:value-of></acc:stCorreo_Electronico>
-        <acc:nComision><xsl:value-of select="tns:modificarCliente/tns:cliente/comision"></xsl:value-of></acc:nComision>     
+        <acc:nComision><xsl:value-of select="tns:modificarCliente/tns:cliente/comision"></xsl:value-of></acc:nComision>
+        <acc:stCodigoPostal><xsl:value-of select="tns:modificarCliente/tns:cliente/codigoPostal"></xsl:value-of></acc:stCodigoPostal> 
+        <acc:stCodigoPais><xsl:value-of select="tns:modificarCliente/tns:cliente/codigoPais"></xsl:value-of></acc:stCodigoPais>     
     </acc:Account> 
     </acc:ListOfAccount> 
     </ns:AccountWS_AccountUpdate_Input>

@@ -70,6 +70,8 @@ declare function xf:ConsultarClientesResponse($accountWS_AccountQueryPage_Output
                                 <tipo>{ data($AccountType) }</tipo>
                         }
                         <comision>{ string(data($Account/ns2:nComision )) }</comision>
+                        <codigoPostal>{ data($Account/ns2:stCodigoPostal) }</codigoPostal> 
+               	        <codigoPais>{ data($Account/ns2:stCodigoPais) }</codigoPais>
                     </ns0:cliente>
             }
         </ns0:consultarClientesResponse>

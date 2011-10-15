@@ -16,7 +16,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <acc:Status>Activo</acc:Status>
         <acc:AccountType><xsl:value-of select="tns:crearCliente/tns:cliente/tipo"></xsl:value-of></acc:AccountType>
         <acc:stRazon_Social><xsl:value-of select="tns:crearCliente/tns:cliente/razonSocial"></xsl:value-of></acc:stRazon_Social>
-        <acc:nComision><xsl:value-of select="tns:crearCliente/tns:cliente/comision"></xsl:value-of></acc:nComision>     
+        <acc:nComision><xsl:value-of select="tns:crearCliente/tns:cliente/comision"></xsl:value-of></acc:nComision>
+        <acc:stCodigoPostal><xsl:value-of select="tns:crearCliente/tns:cliente/codigoPostal"></xsl:value-of></acc:stCodigoPostal> 
+        <acc:stCodigoPais><xsl:value-of select="tns:crearCliente/tns:cliente/codigoPais"></xsl:value-of></acc:stCodigoPais>   
     </acc:Account>
     </acc:ListOfAccount>
     </ns:AccountWS_AccountInsert_Input>
