@@ -10,6 +10,9 @@ public class SubastaBO implements Serializable, MarketPlaceBO {
     private boolean activa;
     private String numSeguimiento;
     private OfertaBO mejorOfertaBO;
+    private String mensaje;
+    private Date fechaCreacionSubasta;
+    private Date fechaMaxSubasta;
     private PurchaseOrderBO purchaseOrderBO;
     private List<OfertaBO> ofertaBOList;
     private List<FabricanteBO> fabricanteBOList;
@@ -76,6 +79,48 @@ public class SubastaBO implements Serializable, MarketPlaceBO {
      */
     public void setMejorOfertaBO(OfertaBO mejorOfertaBO) {
         this.mejorOfertaBO = mejorOfertaBO;
+    }
+
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    /**
+     * @return the fechaCreacionSubasta
+     */
+    public Date getFechaCreacionSubasta() {
+        return fechaCreacionSubasta;
+    }
+
+    /**
+     * @param fechaCreacionSubasta the fechaCreacionSubasta to set
+     */
+    public void setFechaCreacionSubasta(Date fechaCreacionSubasta) {
+        this.fechaCreacionSubasta = fechaCreacionSubasta;
+    }
+
+    /**
+     * @return the fechaMaxSubasta
+     */
+    public Date getFechaMaxSubasta() {
+        return fechaMaxSubasta;
+    }
+
+    /**
+     * @param fechaMaxSubasta the fechaMaxSubasta to set
+     */
+    public void setFechaMaxSubasta(Date fechaMaxSubasta) {
+        this.fechaMaxSubasta = fechaMaxSubasta;
     }
 
     /**

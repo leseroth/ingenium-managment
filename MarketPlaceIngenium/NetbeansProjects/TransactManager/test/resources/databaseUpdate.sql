@@ -12,3 +12,10 @@ alter table comercio add codPais varchar(255);
 alter table fabricante add direccion varchar(255);
 alter table fabricante add codPostal varchar(255);
 alter table fabricante add codPais varchar(255);
+
+alter table subasta add mensaje varchar(255);
+
+alter table oferta add mensaje varchar(255);date
+
+alter table subasta add fechaCreacionSubasta varchar(255);
+alter table subasta add fechaMaxSubasta varchar(255);
