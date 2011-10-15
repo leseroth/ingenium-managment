@@ -6,9 +6,9 @@
 	<element name="process">
 	<complexType>
             <sequence>
-				<element name="fechaMaximaEntrega" type="date"/>
+				<element name="fechaMaximaEntrega" type="dateTime"/>
         <element name="fechaMaximaSubasta" type="dateTime"/>
-        <element name="fecha" type="date"/>
+        <element name="fecha" type="dateTime"/>
         <element name="nitComercio" nillable="false" type="string"/>
         <element name="nombreComercio" type="string"/>
         <element name="emailComercio" type="string"/>
