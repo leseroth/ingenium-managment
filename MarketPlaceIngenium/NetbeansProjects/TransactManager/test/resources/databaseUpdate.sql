@@ -15,7 +15,9 @@ alter table fabricante add codPais varchar(255);
 
 alter table subasta add mensaje varchar(255);
 
-alter table oferta add mensaje varchar(255);date
+alter table oferta add mensaje varchar(255);
 
-alter table subasta add fechaCreacionSubasta varchar(255);
-alter table subasta add fechaMaxSubasta varchar(255);
+alter table subasta add fechaCreacionSubasta datetime ;
+alter table subasta add fechaMaxSubasta datetime;
+
+alter table purchaseorder change entrega entrega datetime;

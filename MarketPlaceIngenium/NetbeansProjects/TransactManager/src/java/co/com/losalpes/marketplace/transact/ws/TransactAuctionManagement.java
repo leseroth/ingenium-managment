@@ -6,6 +6,7 @@ import co.com.losalpes.marketplace.transact.bos.OfertaBO;
 import co.com.losalpes.marketplace.transact.bos.PurchaseOrderBO;
 import co.com.losalpes.marketplace.transact.bos.SubastaBO;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -37,12 +38,14 @@ public class TransactAuctionManagement {
      * <li>El item debe tener cantidad</li>
      * </ul>
      * @param po PurchaseOrderBO
+     * @param fechaMax Fecha maxima de finalizacion de la subasta
      * @return El numero de seguimiento
      * @throws BussinessException Una excepcion de negocio en caso de que no se cumplan las condiciones anteriores
+     * @throws BussinessException
      */
     @WebMethod(operationName = "crearSubasta")
-    public String crearSubasta(@WebParam(name = "po") PurchaseOrderBO po) throws BussinessException {
-        return ejbRef.crearSubasta(po);
+    public String crearSubasta(@WebParam(name = "po") PurchaseOrderBO po, @WebParam(name = "fechaMax") Date fechaMax) throws BussinessException {
+        return ejbRef.crearSubasta(po, fechaMax);
     }
 
     /**

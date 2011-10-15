@@ -22,7 +22,7 @@ public class PurchaseOrder implements Serializable, MarketPlaceEntity {
     @Column
     private String numSeguimiento;
     @Column
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date entrega;
     @Column
     private String estado;
