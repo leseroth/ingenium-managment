@@ -21,6 +21,7 @@ declare function xf:ConsultarProducto($consultarProducto1 as element(ns0:consult
 		                	<ns2:stCategoria></ns2:stCategoria>
 		                	<ns2:stTipo></ns2:stTipo>
 		                	<ns2:stReferencia></ns2:stReferencia>
+		                	<ns2:stPesoLibras></ns2:stPesoLibras>
                         </ns2:CustomObject3>
                 }
             </ns2:ListOfCustomObject3>

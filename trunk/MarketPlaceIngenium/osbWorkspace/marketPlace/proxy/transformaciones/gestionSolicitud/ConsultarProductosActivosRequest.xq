@@ -17,6 +17,7 @@ declare function xf:ConsultarProductosActivosRequest($string1 as xs:string)
         			<ns1:stCategoria></ns1:stCategoria>
         			<ns1:stTipo></ns1:stTipo>
         			<ns1:stReferencia></ns1:stReferencia>
+        			<ns1:stPesoLibras></ns1:stPesoLibras>
         		</ns1:CustomObject3>
         	</ns1:ListOfCustomObject3>
         </ns0:CustomObject3WS_CustomObject3QueryPage_Input>

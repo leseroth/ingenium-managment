@@ -36,6 +36,7 @@ declare function xf:CrearProductosRequest($crearProducto1 as element(ns0:crearPr
                                         return
                                             <ns2:stReferencia>{ data($referencia) }</ns2:stReferencia>
                                     }
+                                    <ns2:stPesoLibras>{ data($productos/pesoLibras) }</ns2:stPesoLibras>
                                 </ns2:CustomObject3>
                         }
                     </ns2:ListOfCustomObject3>

@@ -29,6 +29,7 @@ declare function xf:ModificarProductoRequest($modificarProducto1 as element(ns0:
                         return
                             <ns2:stReferencia>{ data($referencia) }</ns2:stReferencia>
                     }
+                    <ns2:stPesoLibras>{ data($modificarProducto1/ns0:producto/pesoLibras) }</ns2:stPesoLibras>
                 </ns2:CustomObject3>
             </ns2:ListOfCustomObject3>
         </ns1:CustomObject3WS_CustomObject3Update_Input>
