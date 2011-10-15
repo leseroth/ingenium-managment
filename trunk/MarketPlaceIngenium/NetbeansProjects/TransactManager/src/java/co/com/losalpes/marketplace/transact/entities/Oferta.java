@@ -24,6 +24,8 @@ public class Oferta implements Serializable, MarketPlaceEntity {
     private String numSeguimiento;
     @Column
     private Long valor;
+    @Column
+    private String mensaje;
     @OneToOne
     private Fabricante fabricante;
     @OneToOne
@@ -44,6 +46,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         fechaEntrega = ofertaBO.getFechaEntrega();
         numSeguimiento = ofertaBO.getNumSeguimiento();
         valor = ofertaBO.getValor();
+        mensaje = ofertaBO.getMensaje();
         if (ofertaBO.getFabricanteBO() != null) {
             fabricante = new Fabricante(ofertaBO.getFabricanteBO());
         }
@@ -62,6 +65,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         ofertaBO.setFechaEntrega(fechaEntrega);
         ofertaBO.setNumSeguimiento(numSeguimiento);
         ofertaBO.setValor(valor);
+        ofertaBO.setMensaje(mensaje);
         if (productoOfrecido != null) {
             ofertaBO.setProductoOfrecidoBO(productoOfrecido.toBO());
         }
@@ -76,7 +80,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return fechaEntrega != null && !isEmptyString(numSeguimiento) && !isEmptyLong(valor) && fabricante != null;
+        return getFechaEntrega() != null && !isEmptyString(numSeguimiento) && !isEmptyLong(valor) && getFabricante() != null;
     }
 
     /**
@@ -133,6 +137,20 @@ public class Oferta implements Serializable, MarketPlaceEntity {
      */
     public void setValor(Long valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     /**

@@ -4,6 +4,7 @@ import co.com.losalpes.marketplace.transact.MarketPlaceEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import co.com.losalpes.marketplace.transact.bos.*;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
@@ -31,10 +34,18 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     private boolean activa;
     @Column
     private String numSeguimiento;
+    @Column
+    private String mensaje;
     @OneToOne
     private Oferta mejor;
     @OneToOne
     private PurchaseOrder po;
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    private Date fechaCreacionSubasta;
+    @Column
+    @Temporal(value = TemporalType.DATE)
+    private Date fechaMaxSubasta;
     @OneToMany
     private List<Oferta> ofertas;
     @OneToMany
@@ -56,6 +67,8 @@ public class Subasta implements Serializable, MarketPlaceEntity {
         id = subastaBO.getId();
         activa = subastaBO.isActiva();
         numSeguimiento = subastaBO.getNumSeguimiento();
+        fechaCreacionSubasta = subastaBO.getFechaCreacionSubasta();
+        fechaMaxSubasta = subastaBO.getFechaMaxSubasta();
 
         if (subastaBO.getMejorOfertaBO() != null) {
             mejor = new Oferta(subastaBO.getMejorOfertaBO());
@@ -77,20 +90,22 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     @Override
     public SubastaBO toBO() {
         SubastaBO subastaBO = new SubastaBO();
-        subastaBO.setId(getId());
-        subastaBO.setActiva(isActiva());
-        subastaBO.setNumSeguimiento(getNumSeguimiento());
+        subastaBO.setId(id);
+        subastaBO.setActiva(activa);
+        subastaBO.setNumSeguimiento(numSeguimiento);
+        subastaBO.setFechaCreacionSubasta(fechaCreacionSubasta);
+        subastaBO.setFechaMaxSubasta(fechaMaxSubasta);
 
-        if (getMejor() != null) {
-            subastaBO.setMejorOfertaBO(getMejor().toBO());
+        if (mejor != null) {
+            subastaBO.setMejorOfertaBO(mejor.toBO());
         }
-        if (getPo() != null) {
-            subastaBO.setPurchaseOrderBO(getPo().toBO());
+        if (po != null) {
+            subastaBO.setPurchaseOrderBO(po.toBO());
         }
-        for (Oferta oferta : getOfertas()) {
+        for (Oferta oferta : ofertas) {
             subastaBO.getOfertaBOList().add(oferta.toBO());
         }
-        for (Fabricante fabricante : getFabricantes()) {
+        for (Fabricante fabricante : fabricantes) {
             subastaBO.getFabricanteBOList().add(fabricante.toBO());
         }
         return subastaBO;
@@ -147,6 +162,20 @@ public class Subasta implements Serializable, MarketPlaceEntity {
     }
 
     /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    /**
      * @return the mejor
      */
     public Oferta getMejor() {
@@ -172,6 +201,34 @@ public class Subasta implements Serializable, MarketPlaceEntity {
      */
     public void setPo(PurchaseOrder po) {
         this.po = po;
+    }
+
+    /**
+     * @return the fechaCreacionSubasta
+     */
+    public Date getFechaCreacionSubasta() {
+        return fechaCreacionSubasta;
+    }
+
+    /**
+     * @param fechaCreacionSubasta the fechaCreacionSubasta to set
+     */
+    public void setFechaCreacionSubasta(Date fechaCreacionSubasta) {
+        this.fechaCreacionSubasta = fechaCreacionSubasta;
+    }
+
+    /**
+     * @return the fechaMaxSubasta
+     */
+    public Date getFechaMaxSubasta() {
+        return fechaMaxSubasta;
+    }
+
+    /**
+     * @param fechaMaxSubasta the fechaMaxSubasta to set
+     */
+    public void setFechaMaxSubasta(Date fechaMaxSubasta) {
+        this.fechaMaxSubasta = fechaMaxSubasta;
     }
 
     /**
