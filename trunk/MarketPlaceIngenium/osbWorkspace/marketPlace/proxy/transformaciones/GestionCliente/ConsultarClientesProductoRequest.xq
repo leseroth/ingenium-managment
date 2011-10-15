@@ -22,7 +22,8 @@ declare function xf:ConsultarClientesProductoResquest($consultarClientesProducto
                     <ns2:ListOfCustomObject3>
                         <ns2:CustomObject3>
                             <ns2:Name>{ concat("='",data($consultarClientesProducto1/ns0:nombreProducto),"'") }</ns2:Name>
-                            <ns2:Type>{ concat("='",data($consultarClientesProducto1/ns0:tipoCategoria),"'") }</ns2:Type>
+                            <ns2:stCategoria>{ concat("='",data($consultarClientesProducto1/ns0:tipoCategoria),"'") }</ns2:stCategoria>
+                            <ns2:stPesoLibras/>
                         </ns2:CustomObject3>
                     </ns2:ListOfCustomObject3>
                     <ns2:stCodigoPostal/>
