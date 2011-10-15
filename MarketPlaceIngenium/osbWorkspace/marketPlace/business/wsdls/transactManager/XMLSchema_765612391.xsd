@@ -30,6 +30,10 @@
 
 <xs:element name="darGanadorSubastaResponse" type="tns:darGanadorSubastaResponse"></xs:element>
 
+<xs:element name="registrarOferta" type="tns:registrarOferta"></xs:element>
+
+<xs:element name="registrarOfertaResponse" type="tns:registrarOfertaResponse"></xs:element>
+
 <xs:complexType name="consultarFabricantesSubasta">
 <xs:sequence>
 <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"></xs:element>
@@ -174,6 +178,19 @@
 <xs:complexType name="crearSubastaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarOferta">
+<xs:sequence>
+<xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="oferta" type="tns:ofertaBO" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarOfertaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

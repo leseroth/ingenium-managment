@@ -319,8 +319,8 @@
                       </con3:replace>
                     </con1:outboundTransform>
                     <con1:responseTransform>
-                      <con3:replace contents-only="true" varName="body">
-                        <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7fd6</con2:id>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f92</con2:id>
                         <con3:location>
                           <con2:xpathText>.</con2:xpathText>
                         </con3:location>
