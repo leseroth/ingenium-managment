@@ -28,6 +28,7 @@ declare function xf:ConsultarProductoResponse($customObject3WS_CustomObject3Quer
                     return
                         <referencia>{ data($stReferencia) }</referencia>
                 }
+                <pesoLibras>{ data($customObject3WS_CustomObject3QueryPage_Output1/ns2:ListOfCustomObject3/ns2:CustomObject3[1]/ns2:stPesoLibras) }</pesoLibras>
             </ns0:producto>
         </ns0:consultarProductoResponse>
 };
