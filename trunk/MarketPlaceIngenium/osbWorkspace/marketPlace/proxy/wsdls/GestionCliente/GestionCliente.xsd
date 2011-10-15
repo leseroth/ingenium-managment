@@ -183,7 +183,6 @@
     		<element name="tipoCliente" type="string" minOccurs="1"
     			maxOccurs="1">
     		</element>
-    		<element name="tipoCategoria" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
