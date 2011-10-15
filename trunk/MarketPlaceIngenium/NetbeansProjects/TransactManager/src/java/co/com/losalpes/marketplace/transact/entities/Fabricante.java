@@ -29,6 +29,12 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
     private String nit;
     @Column
     private String email;
+    @Column
+    private String direccion;
+    @Column
+    private String codPostal;
+    @Column
+    private String codPais;
 
     /**
      * Basic Constructor
@@ -45,6 +51,9 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
         nombre = fabricanteBO.getNombre();
         nit = fabricanteBO.getNit();
         email = fabricanteBO.getEmail();
+        direccion = fabricanteBO.getDireccion();
+        codPostal = fabricanteBO.getCodPostal();
+        codPais = fabricanteBO.getCodPais();
     }
 
     /**
@@ -53,10 +62,13 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
     @Override
     public FabricanteBO toBO() {
         FabricanteBO fabricanteBO = new FabricanteBO();
-        fabricanteBO.setId(getId());
-        fabricanteBO.setNombre(getNombre());
-        fabricanteBO.setNit(getNit());
-        fabricanteBO.setEmail(getEmail());
+        fabricanteBO.setId(id);
+        fabricanteBO.setNombre(nombre);
+        fabricanteBO.setNit(nit);
+        fabricanteBO.setEmail(email);
+        fabricanteBO.setDireccion(getDireccion());
+        fabricanteBO.setCodPais(getCodPais());
+        fabricanteBO.setCodPostal(getCodPostal());
         return fabricanteBO;
     }
 
@@ -65,7 +77,7 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return !isEmptyString(nit) && !isEmptyString(nombre) && !isEmptyString(email);
+        return !isEmptyString(nit) && !isEmptyString(nombre) && !isEmptyString(email) && !isEmptyString(direccion) && !isEmptyString(codPostal) && !isEmptyString(codPais);
     }
 
     /**
@@ -122,5 +134,47 @@ public class Fabricante implements Serializable, MarketPlaceEntity {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the codPostal
+     */
+    public String getCodPostal() {
+        return codPostal;
+    }
+
+    /**
+     * @param codPostal the codPostal to set
+     */
+    public void setCodPostal(String codPostal) {
+        this.codPostal = codPostal;
+    }
+
+    /**
+     * @return the codPais
+     */
+    public String getCodPais() {
+        return codPais;
+    }
+
+    /**
+     * @param codPais the codPais to set
+     */
+    public void setCodPais(String codPais) {
+        this.codPais = codPais;
     }
 }

@@ -35,6 +35,12 @@ public class Comercio implements Serializable, MarketPlaceEntity {
     private String direccion;
     @Column
     private String telefono;
+    @Column
+    private String email;
+    @Column
+    private String codPostal;
+    @Column
+    private String codPais;
 
     /**
      * Constructor por defecto
@@ -46,12 +52,15 @@ public class Comercio implements Serializable, MarketPlaceEntity {
      * Constructor desde BO
      * @param comercioBO
      */
-    public Comercio(ComercioBO comercio) {
-        id = comercio.getId();
-        nit = comercio.getNit();
-        nombre = comercio.getNombre();
-        direccion = comercio.getDireccion();
-        telefono = comercio.getTelefono();
+    public Comercio(ComercioBO comercioBO) {
+        id = comercioBO.getId();
+        nit = comercioBO.getNit();
+        nombre = comercioBO.getNombre();
+        direccion = comercioBO.getDireccion();
+        telefono = comercioBO.getTelefono();
+        email = comercioBO.getEmail();
+        codPais = comercioBO.getCodPais();
+        codPostal = comercioBO.getCodPostal();
     }
 
     /**
@@ -60,11 +69,14 @@ public class Comercio implements Serializable, MarketPlaceEntity {
     @Override
     public ComercioBO toBO() {
         ComercioBO comercioBO = new ComercioBO();
-        comercioBO.setId(getId());
-        comercioBO.setNit(getNit());
-        comercioBO.setNombre(getNombre());
-        comercioBO.setDireccion(getDireccion());
-        comercioBO.setTelefono(getTelefono());
+        comercioBO.setId(id);
+        comercioBO.setNit(nit);
+        comercioBO.setNombre(nombre);
+        comercioBO.setDireccion(direccion);
+        comercioBO.setTelefono(telefono);
+        comercioBO.setEmail(email);
+        comercioBO.setCodPais(codPais);
+        comercioBO.setCodPostal(codPostal);
         return comercioBO;
     }
 
@@ -73,7 +85,7 @@ public class Comercio implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return !isEmptyString(nombre) && !isEmptyString(nit);
+        return !isEmptyString(nombre) && !isEmptyString(nit) && !isEmptyString(email) && !isEmptyString(direccion) && !isEmptyString(codPostal) && !isEmptyString(codPais);
     }
 
     /**
@@ -144,5 +156,47 @@ public class Comercio implements Serializable, MarketPlaceEntity {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the codPostal
+     */
+    public String getCodPostal() {
+        return codPostal;
+    }
+
+    /**
+     * @param codPostal the codPostal to set
+     */
+    public void setCodPostal(String codPostal) {
+        this.codPostal = codPostal;
+    }
+
+    /**
+     * @return the codPais
+     */
+    public String getCodPais() {
+        return codPais;
+    }
+
+    /**
+     * @param codPais the codPais to set
+     */
+    public void setCodPais(String codPais) {
+        this.codPais = codPais;
     }
 }

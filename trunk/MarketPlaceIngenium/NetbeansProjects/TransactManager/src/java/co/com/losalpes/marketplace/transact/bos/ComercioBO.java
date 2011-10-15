@@ -14,6 +14,9 @@ public class ComercioBO implements Serializable, MarketPlaceBO {
     private String nombre;
     private String direccion;
     private String telefono;
+    private String email;
+    private String codPostal;
+    private String codPais;
 
     /**
      * Basic Constructor
@@ -89,5 +92,47 @@ public class ComercioBO implements Serializable, MarketPlaceBO {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the codPostal
+     */
+    public String getCodPostal() {
+        return codPostal;
+    }
+
+    /**
+     * @param codPostal the codPostal to set
+     */
+    public void setCodPostal(String codPostal) {
+        this.codPostal = codPostal;
+    }
+
+    /**
+     * @return the codPais
+     */
+    public String getCodPais() {
+        return codPais;
+    }
+
+    /**
+     * @param codPais the codPais to set
+     */
+    public void setCodPais(String codPais) {
+        this.codPais = codPais;
     }
 }
