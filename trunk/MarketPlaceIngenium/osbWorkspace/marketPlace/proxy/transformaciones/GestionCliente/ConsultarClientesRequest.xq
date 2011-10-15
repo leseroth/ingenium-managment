@@ -20,7 +20,10 @@ declare function xf:ConsultarClientesRequest($consultarClientes1 as element(ns0:
                		<ns2:Status></ns2:Status>
                		<ns2:AccountType>{concat("='",data($consultarClientes1/ns0:tipoCliente),"'")}</ns2:AccountType>
                		<ns2:stNmero_Matricula></ns2:stNmero_Matricula>
-               		<ns2:stRazon_Social></ns2:stRazon_Social>  
+               		<ns2:stRazon_Social></ns2:stRazon_Social> 
+               		<ns2:stCorreo_Electronico/>  
+               		<ns2:stCodigoPostal/> 
+               		<ns2:stCodigoPais/>
                		<ns2:nComision></ns2:nComision>               
 		              <ns2:ListOfContact>
 		                  <ns2:Contact>               

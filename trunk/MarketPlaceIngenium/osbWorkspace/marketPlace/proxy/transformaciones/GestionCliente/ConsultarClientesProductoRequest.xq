@@ -17,6 +17,8 @@ declare function xf:ConsultarClientesProductoResquest($consultarClientesProducto
                 	<ns2:stNit/>
                 	<ns2:AccountName/>
                 	<ns2:stCorreo_Electronico/>
+                	<ns2:stCodigoPostal/> 
+               		<ns2:stCodigoPais/>
                     <ns2:ListOfCustomObject3>
                         <ns2:CustomObject3>
                             <ns2:Name>{ concat("='",data($consultarClientesProducto1/ns0:nombreProducto),"'") }</ns2:Name>

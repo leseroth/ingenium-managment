@@ -13,6 +13,8 @@ declare function xf:ConsultarClienteResponse($accountWS_AccountQueryPage_Output1
                 <id>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:AccountId) }</id>
                 <nombre>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:AccountName) }</nombre>
                 <nit>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:stNit) }</nit>
+                <codigoPostal>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:stCodigoPostal) }</codigoPostal> 
+               	<codigoPais>{ data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:stCodigoPais) }</codigoPais>
                 {
                     for $Location in $accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:Location
                     return
