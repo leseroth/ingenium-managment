@@ -22,6 +22,8 @@ public class Producto implements Serializable, MarketPlaceEntity {
     private String categoria;
     @Column
     private String nombre;
+    @Column
+    private String peso;
 
     /**
      * Default Constructor
@@ -37,6 +39,7 @@ public class Producto implements Serializable, MarketPlaceEntity {
         id = productoBO.getId();
         categoria = productoBO.getCategoria();
         nombre = productoBO.getNombre();
+        peso = productoBO.getPeso();
     }
 
     /**
@@ -45,9 +48,10 @@ public class Producto implements Serializable, MarketPlaceEntity {
     @Override
     public ProductoBO toBO() {
         ProductoBO productoBO = new ProductoBO();
-        productoBO.setId(getId());
-        productoBO.setCategoria(getCategoria());
-        productoBO.setNombre(getNombre());
+        productoBO.setId(id);
+        productoBO.setCategoria(categoria);
+        productoBO.setNombre(nombre);
+        productoBO.setPeso(peso);
         return productoBO;
     }
 
@@ -56,7 +60,7 @@ public class Producto implements Serializable, MarketPlaceEntity {
      */
     @Override
     public boolean isInfoComplete() {
-        return !isEmptyString(nombre) && !isEmptyString(categoria);
+        return !isEmptyString(nombre) && !isEmptyString(categoria) && !isEmptyString(peso);
     }
 
     /**
@@ -99,5 +103,19 @@ public class Producto implements Serializable, MarketPlaceEntity {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the peso
+     */
+    public String getPeso() {
+        return peso;
+    }
+
+    /**
+     * @param peso the peso to set
+     */
+    public void setPeso(String peso) {
+        this.peso = peso;
     }
 }

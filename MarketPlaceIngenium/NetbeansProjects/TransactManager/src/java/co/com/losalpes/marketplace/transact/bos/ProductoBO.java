@@ -8,6 +8,7 @@ public class ProductoBO implements Serializable, MarketPlaceBO {
     private Long id;
     private String categoria;
     private String nombre;
+    private String peso;
 
     /**
      * Basic Constructor
@@ -55,5 +56,19 @@ public class ProductoBO implements Serializable, MarketPlaceBO {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the peso
+     */
+    public String getPeso() {
+        return peso;
+    }
+
+    /**
+     * @param peso the peso to set
+     */
+    public void setPeso(String peso) {
+        this.peso = peso;
     }
 }
