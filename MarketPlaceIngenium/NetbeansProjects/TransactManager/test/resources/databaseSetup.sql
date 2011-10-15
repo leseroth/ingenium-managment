@@ -10,15 +10,18 @@ delete from oferta;
 delete from purchaseorder;
 
 --Crear comercios
-insert into comercio(id,nit,nombre) values (101,'com101','Comercio 101');
+insert into comercio(id,nit,nombre,direccion,email,codPais,codPostal)
+  values (101,'800800888','Carulla','calle85 carrera 15','samigory@gmail.com','US','90210');
 insert into comercio(id,nit,nombre) values (102,'com102','Comercio 102');
 insert into comercio(id,nit,nombre) values (103,'com103','Comercio 103');
 insert into comercio(id,nit,nombre) values (104,'com104','Comercio 104');
 insert into comercio(id,nit,nombre) values (105,'com105','Comercio 105');
 
 --Crear fabricantes
-insert into fabricante(id,nit,nombre) values (201,'fab201','Fabricante 201');
-insert into fabricante(id,nit,nombre) values (202,'fab202','Fabricante 202');
+insert into fabricante(id,nit,nombre,direccion,email,codPais,codPostal)
+  values (201,'700700777','Alpina','Calle 128','samigori15@hotmail.com','CO','110121');
+insert into fabricante(id,nit,nombre,direccion,email,codPais,codPostal)
+  values (202,'600600666','Zenu','Carrera 98 60-34','samigori15@hotmail.com','US','98103');
 insert into fabricante(id,nit,nombre) values (203,'fab203','Fabricante 203');
 insert into fabricante(id,nit,nombre) values (204,'fab204','Fabricante 204');
 insert into fabricante(id,nit,nombre) values (205,'fab205','Fabricante 205');
