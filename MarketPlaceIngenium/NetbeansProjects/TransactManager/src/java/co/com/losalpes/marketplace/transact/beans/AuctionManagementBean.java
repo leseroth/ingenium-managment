@@ -250,6 +250,7 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         oferta.setFabricante(fabricante);
         oferta.setId(null);
         oferta.setNumSeguimiento(numSeguimientoSubasta);
+        oferta.setProductoOfrecido(null);
         if (oferta.isInfoComplete()) {
             em.persist(oferta);
             subasta.getOfertas().add(oferta);

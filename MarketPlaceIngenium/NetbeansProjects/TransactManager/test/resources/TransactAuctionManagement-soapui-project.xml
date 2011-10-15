@@ -597,7 +597,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <ws:consultarSubastasFabricante>
-         <nit>fab202</nit>
+         <nit>600600666</nit>
       </ws:consultarSubastasFabricante>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarSubastasFabricanteRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IncorrectoNit"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
@@ -752,7 +752,7 @@
          <numSeguimientoSubasta>num006</numSeguimientoSubasta>
          <oferta>
             <fabricanteBO>
-               <nit>fab201</nit>
+               <nit>700700777</nit>
             </fabricanteBO>
             <fechaEntrega>2011-11-15T11:52:58</fechaEntrega>
             <valor>10</valor>
