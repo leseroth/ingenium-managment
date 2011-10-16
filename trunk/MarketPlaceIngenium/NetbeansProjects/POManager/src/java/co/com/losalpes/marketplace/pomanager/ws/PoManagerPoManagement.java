@@ -88,6 +88,21 @@ public class PoManagerPoManagement {
         return ejbRef.actualizarEstadoPO(numSeguimiento, estado);
     }
 
+    /**
+     * Consulta las ordenes de compra asociadas a un comercio teniendo en cuenta su nit.
+     * <ul>
+     * <li>El nit debe existir</li>
+     * <li>Si el comercio no tiene ordenes de compra asociadas se retorna una lista vacia</li>
+     * </ul>
+     * @param nit Nit del Comercio
+     * @return Lista de ordenes de compra del comercio
+     * @throws BussinessException En caso de que haya alguna excepcion de negocio
+     */
+    @WebMethod(operationName = "consultarPOsComercio")
+    public java.util.List<PurchaseOrderBO> consultarPOsComercio(@WebParam(name = "nit") String nit) throws BussinessException {
+        return ejbRef.consultarPOsComercio(nit);
+    }
+
     @WebMethod(operationName = "consultarPO")
     public PurchaseOrderBO consultarPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarPO(numSeguimiento);
@@ -105,13 +120,5 @@ public class PoManagerPoManagement {
     @WebMethod(operationName = "consultarComercioPorPO")
     public ComercioBO consultarComercioPorPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarComercioPorPO(numSeguimiento);
-    }
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "consultarPOsComercio")
-    public java.util.List<PurchaseOrderBO> consultarPOsComercio(@WebParam(name = "nit") String nit) throws BussinessException {
-        return ejbRef.consultarPOsComercio(nit);
     }
 }

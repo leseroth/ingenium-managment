@@ -11,16 +11,16 @@ delete from comercio;
 delete from fabricante;
 
 --Crear comercios
-insert into comercio(id,nit,nombre) values (101,'com101','Comercio 101');
+insert into comercio(id,nit,nombre) values (101,'800800888','Carulla');
 insert into comercio(id,nit,nombre) values (102,'com102','Comercio 102');
 insert into comercio(id,nit,nombre) values (103,'com103','Comercio 103');
 insert into comercio(id,nit,nombre) values (104,'com104','Comercio 104');
 insert into comercio(id,nit,nombre) values (105,'com105','Comercio 105');
 
 --Crear fabricantes
-insert into fabricante(id,nit,nombre) values (201,'fab201','Fabricante 201');
-insert into fabricante(id,nit,nombre) values (202,'fab202','Fabricante 202');
-insert into fabricante(id,nit,nombre) values (203,'fab203','Fabricante 203');
+insert into fabricante(id,nit,nombre) values (201,'700700777','Alpina');
+insert into fabricante(id,nit,nombre) values (202,'600600666','Zenu');
+insert into fabricante(id,nit,nombre) values (203,'500500555','Nestle');
 insert into fabricante(id,nit,nombre) values (204,'fab204','Fabricante 204');
 insert into fabricante(id,nit,nombre) values (205,'fab205','Fabricante 205');
 

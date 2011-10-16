@@ -68,11 +68,21 @@ public interface PoManagementLocal {
      */
     public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws BussinessException;
 
+    /**
+     * Consulta las ordenes de compra asociadas a un comercio teniendo en cuenta su nit.
+     * <ul>
+     * <li>El nit debe existir</li>
+     * <li>Si el comercio no tiene ordenes de compra asociadas se retorna una lista vacia</li>
+     * </ul>
+     * @param nit Nit del Comercio
+     * @return Lista de ordenes de compra del comercio
+     * @throws BussinessException En caso de que haya alguna excepcion de negocio
+     */
+    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException;
+
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws BussinessException;
 
     public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws BussinessException;
 
     public ComercioBO consultarComercioPorPO(String numSeguimiento) throws BussinessException;
-
-    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException;
 }
