@@ -12,6 +12,8 @@ import co.com.losalpes.marketplace.transact.entities.Producto;
 import co.com.losalpes.marketplace.transact.entities.PurchaseOrder;
 import co.com.losalpes.marketplace.transact.entities.Subasta;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
+import com.ecocoma.service.shipping.fedex.FedExService;
+import com.ecocoma.service.shipping.fedex.FedExServiceSoap;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -259,6 +261,33 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
             throw new BussinessException(EXC_ENTITY_INCOMPLETE, "Oferta");
         }
         return true;
+    }
+
+    public void calculateBestOffer(Subasta subasta, Oferta oferta) {
+        Comercio comercio = subasta.getPo().getComercio();
+        Fabricante fabricante = oferta.getFabricante();
+        Producto producto = subasta.getPo().getItem().getProducto();
+        int cantidad = subasta.getPo().getItem().getCantidad();
+        long valorUnitario = oferta.getValor();
+
+        String senderPostalCode = fabricante.getCodPostal();
+        String senderCountryCode = fabricante.getCodPais();
+        String recipientPostalCode = comercio.getCodPostal();
+        String recipientCountryCode = comercio.getCodPais();
+        String totalPackageWeight = Integer.parseInt(producto.getPeso()) * cantidad + "";
+        String declaredValue = valorUnitario * cantidad + "";
+
+        try { // Call Web Service Operation
+            FedExService serviceFedEx = new FedExService();
+            FedExServiceSoap port = serviceFedEx.getFedExServiceSoap();
+            com.ecocoma.service.shipping.fedex.Shipping shipping = port.getFedExRate(ECOCOMA_KEY, null, null, senderPostalCode, senderCountryCode, recipientPostalCode, recipientCountryCode, totalPackageWeight, declaredValue);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.err.println("Error al llamar al web service de ecocoma de fedex " + ex);
+        }
+
+
+
     }
 
     /**
