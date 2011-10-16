@@ -27,10 +27,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "getPurchaseOrdersByNitFabricante", query = "select po from PurchaseOrder po where po.fabricante.nit = :nit"),
     @NamedQuery(name = "getPurchaseOrderByNumSeguimiento", query = "select po from PurchaseOrder po where po.numSeguimiento = :numSeguimiento"),
-
+    @NamedQuery(name = "getPurchaseOrdersByNitComercio", query = "select po from PurchaseOrder po where po.comercio.nit = :nit"),
+    
     @NamedQuery(name = "getAllPOs", query = "SELECT P FROM PurchaseOrder P "), //Verificar
-    @NamedQuery(name = "getComercioFromPo", query = "select p.comercio from PurchaseOrder p where p.numSeguimiento = :numSeguimiento"),//Verificar
-    @NamedQuery(name = "getPOsComercio", query = "select po from PurchaseOrder po where po.comercio.nit = :nit")//Verificar
+    @NamedQuery(name = "getComercioFromPo", query = "select p.comercio from PurchaseOrder p where p.numSeguimiento = :numSeguimiento")//Verificar
 })
 public class PurchaseOrder implements Serializable, MarketPlaceEntity {
 

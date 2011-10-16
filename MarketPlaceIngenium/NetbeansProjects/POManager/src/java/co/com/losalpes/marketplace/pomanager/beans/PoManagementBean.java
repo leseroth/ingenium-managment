@@ -185,11 +185,28 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
                 em.flush();
                 updated = true;
             } else {
-                throw new BussinessException(EXC_PO_STATE_UPDATE, "No se puede pasar de " + stateBefore +" a "+stateAfter);
+                throw new BussinessException(EXC_PO_STATE_UPDATE, "No se puede pasar de " + stateBefore + " a " + stateAfter);
             }
         }
 
         return updated;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException {
+        Query query = em.createNamedQuery("getPurchaseOrdersByNitComercio");
+        query.setParameter("nit", nit);
+
+        List<PurchaseOrder> poComercioList = (List<PurchaseOrder>) query.getResultList();
+        List<PurchaseOrderBO> poBOComercioList = new ArrayList<PurchaseOrderBO>();
+        for (PurchaseOrder po : poComercioList) {
+            poBOComercioList.add(po.toBO());
+        }
+        
+        return poBOComercioList;
     }
 
     public PurchaseOrderBO consultarPO(String numSeguimiento) throws BussinessException {
@@ -237,20 +254,5 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
             throw new BussinessException("La orden de compra con el número de seguimiento " + numSeguimiento + " no existe.");
         }
         return pos.get(0).getComercio().toBO();
-    }
-
-    public List<PurchaseOrderBO> consultarPOsComercio(String nit) throws BussinessException {
-        Query q = em.createNamedQuery("getAllPOs");
-        List<PurchaseOrder> pos = (List<PurchaseOrder>) q.getResultList();
-        List<PurchaseOrderBO> posBO = new ArrayList<PurchaseOrderBO>();
-        for (int i = 0; i < pos.size(); i++) {
-            if (pos.get(i).getComercio().getNit().equals(nit)) {
-                posBO.add(pos.get(i).toBO());
-            }
-        }
-        if (posBO.isEmpty()) {
-            throw new BussinessException("El cliente especificado no tiene POs asociadas.");
-        }
-        return posBO;
     }
 }

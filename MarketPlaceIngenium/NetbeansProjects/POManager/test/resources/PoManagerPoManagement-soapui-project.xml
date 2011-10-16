@@ -432,13 +432,34 @@
          <estado>RechazadoFabricante</estado>
       </ws:actualizarEstadoPO>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarComercioPorPO" bindingOperationName="consultarComercioPorPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarPO" bindingOperationName="consultarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarPOsComercio" bindingOperationName="consultarPOsComercio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="establecerFabricanteAtiende" bindingOperationName="establecerFabricanteAtiende" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="registrarPO" bindingOperationName="registrarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="OrdenDeCompra"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarComercioPorPO" bindingOperationName="consultarComercioPorPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarPO" bindingOperationName="consultarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="consultarPOsComercio" bindingOperationName="consultarPOsComercio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ComercioConPOs"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPOsComercio>
+         <nit>800800888</nit>
+      </ws:consultarPOsComercio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPOsComercioRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ComercioSinPOs"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPOsComercio>
+         <nit>com104</nit>
+      </ws:consultarPOsComercio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPOsComercioRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ComercioNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPOsComercio>
+         <nit>nitRaroDeComercio</nit>
+      </ws:consultarPOsComercio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPOsComercioRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="establecerFabricanteAtiende" bindingOperationName="establecerFabricanteAtiende" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="registrarPO" bindingOperationName="registrarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="OrdenDeCompra"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/PoManagerPoManagementService/PoManagerPoManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:registrarPO>
          <purchaseOrderBO>
             <comercioBO>
-               <nit>com101</nit>
+               <nit>800800888</nit>
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <itemPOBOList>
@@ -458,11 +479,11 @@
       <ws:registrarPO>
          <purchaseOrderBO>
             <comercioBO>
-               <nit>com101</nit>
+               <nit>800800888</nit>
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <fabricanteBO>
-               <nit>fab201</nit>
+               <nit>700700777</nit>
             </fabricanteBO>
             <itemPOBOList>
                <cantidad>3</cantidad>
@@ -505,7 +526,7 @@
       <ws:registrarPO>
          <purchaseOrderBO>
             <comercioBO>
-               <nit>com101</nit>
+               <nit>800800888</nit>
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <fabricanteBO>
@@ -533,7 +554,7 @@
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <fabricanteBO>
-               <nit>fab201</nit>
+               <nit>700700777</nit>
             </fabricanteBO>
             <itemPOBOList>
                <cantidad>3</cantidad>
@@ -552,7 +573,7 @@
       <ws:registrarPO>
          <purchaseOrderBO>
             <comercioBO>
-               <nit>com101</nit>
+               <nit>800800888</nit>
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <fabricanteBO>
@@ -576,11 +597,11 @@
          <purchaseOrderBO>
             <estado>estado</estado>
             <comercioBO>
-               <nit>com101</nit>
+               <nit>800800888</nit>
             </comercioBO>
             <entrega>2004-02-14T13:44:14</entrega>
             <fabricanteBO>
-               <nit>fab201</nit>
+               <nit>700700777</nit>
             </fabricanteBO>
             <itemPOBOList>
                <cantidad>3</cantidad>
