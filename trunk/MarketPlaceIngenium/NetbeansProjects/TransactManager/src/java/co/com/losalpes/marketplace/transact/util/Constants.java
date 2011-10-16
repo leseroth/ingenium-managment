@@ -6,6 +6,11 @@ package co.com.losalpes.marketplace.transact.util;
  */
 public class Constants {
 
+    // ECOCOMA key
+    /**
+     * Si expira actualizar desde http://www.ecocoma.com/shipping_webservice.aspx
+     */
+    public static final String ECOCOMA_KEY = "SHP-S83480927O";
     // PurchaseOrder
     public static final String NUM_SEGUIMIENTO_SEPARATOR = "-";
     // Excepciones

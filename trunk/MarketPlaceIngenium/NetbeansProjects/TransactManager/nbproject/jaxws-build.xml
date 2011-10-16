@@ -24,4 +24,29 @@
                 JAX-WS WSIMPORT SECTION
                 ===================
             -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <mkdir dir="${classes.dir}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${j2ee.platform.wsimport.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-fedex" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/fedex"/>
+        <property name="wsdl-fedex" location="${meta.inf}/xml-resources/web-service-references/fedex/wsdl/service.ecocoma.com/shipping/fedex.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/fedex" destdir="${build.generated.dir}/jax-wsCache/fedex" wsdl="${wsdl-fedex}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://service.ecocoma.com/shipping/fedex.asmx?WSDL" xnocompile="true">
+            <depends file="${wsdl-fedex}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/fedex"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/fedex">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-fedex" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/fedex"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/com/ecocoma/service/shipping/fedex"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-fedex"/>
 </project>
