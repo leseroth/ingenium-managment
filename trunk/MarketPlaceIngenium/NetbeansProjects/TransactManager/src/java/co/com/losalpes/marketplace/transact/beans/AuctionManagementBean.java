@@ -12,9 +12,14 @@ import co.com.losalpes.marketplace.transact.entities.Producto;
 import co.com.losalpes.marketplace.transact.entities.PurchaseOrder;
 import co.com.losalpes.marketplace.transact.entities.Subasta;
 import co.com.losalpes.marketplace.transact.exceptions.BussinessException;
+import co.com.losalpes.marketplace.transact.util.PostageComparator;
 import com.ecocoma.service.shipping.fedex.FedExService;
 import com.ecocoma.service.shipping.fedex.FedExServiceSoap;
+import com.ecocoma.service.shipping.fedex.Postage;
+import com.ecocoma.service.shipping.fedex.Shipping;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -254,6 +259,7 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         oferta.setNumSeguimiento(numSeguimientoSubasta);
         oferta.setProductoOfrecido(null);
         if (oferta.isInfoComplete()) {
+            calculateBestOffer(subasta, oferta);
             em.persist(oferta);
             subasta.getOfertas().add(oferta);
             em.persist(subasta);
@@ -263,31 +269,110 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         return true;
     }
 
-    public void calculateBestOffer(Subasta subasta, Oferta oferta) {
+    /**
+     * Permite determinar cual subasta es mejor deacuerdo a las siguientes reglas.
+     * <ul>
+     * <li>Para ser considerada dentro del proceso la fecha de entrega debe ser menor a la fecha de entrega de la orden de compra</li>
+     * <li>Se consulta el servicio de fedex para determinar las opciones de envio disponible</li>
+     * <li>Si es la primera oferta y se puede enviar antes de la fecha de la orden de compra se considera la mejor</li>
+     * <li>Se selecciona la opcion de envio cuya fecha de entrega sea mas cercana (y por tanto economica) a la fecha de entrega de la orden de compra</li>
+     * <li>Se determina el valor total multiplicando la cantidad por el precio unitario y sumando el precio de envio</li>
+     * <li>Si ya existe una oferta mejor, se comparan los precios para determinar cual es la mejor</li>
+     * <li>La oferta almacena su estado y la forma de envio seleccionada</li>
+     * </ul>
+     * @param subasta Subasta a evaluar
+     * @param oferta Oferta a evaluar
+     */
+    protected void calculateBestOffer(Subasta subasta, Oferta oferta) {
         Comercio comercio = subasta.getPo().getComercio();
         Fabricante fabricante = oferta.getFabricante();
         Producto producto = subasta.getPo().getItem().getProducto();
         int cantidad = subasta.getPo().getItem().getCantidad();
         long valorUnitario = oferta.getValor();
 
-        String senderPostalCode = fabricante.getCodPostal();
-        String senderCountryCode = fabricante.getCodPais();
-        String recipientPostalCode = comercio.getCodPostal();
-        String recipientCountryCode = comercio.getCodPais();
-        String totalPackageWeight = Integer.parseInt(producto.getPeso()) * cantidad + "";
-        String declaredValue = valorUnitario * cantidad + "";
+        if (subasta.getPo().getEntrega().after(oferta.getFechaEntrega())) {
+            String senderPostalCode = fabricante.getCodPostal();
+            String senderCountryCode = fabricante.getCodPais();
+            String recipientPostalCode = comercio.getCodPostal();
+            String recipientCountryCode = comercio.getCodPais();
+            String totalPackageWeight = Integer.parseInt(producto.getPeso()) * cantidad + "";
+            String declaredValue = valorUnitario * cantidad + "";
+            Shipping shipping = null;
+            System.out.println("<" + ECOCOMA_KEY + "+" + senderPostalCode + "+" + senderCountryCode + "+" + recipientPostalCode + "+" + recipientCountryCode + "+" + totalPackageWeight + "+" + declaredValue + ">");
 
-        try { // Call Web Service Operation
-            FedExService serviceFedEx = new FedExService();
-            FedExServiceSoap port = serviceFedEx.getFedExServiceSoap();
-            com.ecocoma.service.shipping.fedex.Shipping shipping = port.getFedExRate(ECOCOMA_KEY, null, null, senderPostalCode, senderCountryCode, recipientPostalCode, recipientCountryCode, totalPackageWeight, declaredValue);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.err.println("Error al llamar al web service de ecocoma de fedex " + ex);
+            try { // Call Web Service Operation
+                FedExService serviceFedEx = new FedExService();
+                FedExServiceSoap port = serviceFedEx.getFedExServiceSoap();
+                shipping = port.getFedExRate(ECOCOMA_KEY, null, null, senderPostalCode, senderCountryCode, recipientPostalCode, recipientCountryCode, totalPackageWeight, declaredValue);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.err.println("Error al llamar al web service de ecocoma de fedex " + ex);
+            }
+
+            List<Postage> postageList = shipping.getPackage().getPostage();
+
+            if (postageList.isEmpty()) {
+                oferta.setEstadoOferta(OFFER_NO_SEND_OPTION);
+            } else {
+                Collections.sort(postageList, new PostageComparator());
+                Postage bestPostage = null;
+
+                iteraPost:
+                for (Postage postage : postageList) {
+                    int days = getFedexTime(postage.getMailService());
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(oferta.getFechaEntrega());
+                    calendar.add(Calendar.DATE, days);
+                    if (subasta.getPo().getEntrega().after(calendar.getTime())) {
+                        bestPostage = postage;
+                        break iteraPost;
+                    }
+                }
+
+                if (bestPostage == null) {
+                    oferta.setEstadoOferta(OFFER_NO_SEND_OPTION);
+                } else {
+                    String rate = bestPostage.getRate();
+                    Double rateDouble = null;
+                    if (rate.indexOf(",") != -1) {
+                        rate = rate.replaceAll(",", "");
+                        rateDouble = Double.parseDouble(rate) / 2000;
+                    } else {
+                        rateDouble = Double.parseDouble(rate);
+                    }
+                    long valorOferta = (long) (Long.parseLong(declaredValue) + rateDouble);
+                    Oferta mejorOferta = subasta.getMejor();
+                    oferta.setMensaje(bestPostage.getMailService() + " [ Valor Total en Dolares : " + valorOferta + " ]");
+
+                    if (subasta.getOfertas() == null || subasta.getOfertas().isEmpty() || mejorOferta == null) {
+                        subasta.setMejor(oferta);
+                        oferta.setEstadoOferta(OFFER_FIRST);
+                        subasta.setMensaje(createMessage(OFFER_BEST_CURRENT, "" + valorOferta, fabricante.getNombre()));
+                    } else {
+                        String mensajeMejor = mejorOferta.getMensaje();
+                        mensajeMejor = mensajeMejor.substring(mensajeMejor.lastIndexOf(":") + 1, mensajeMejor.lastIndexOf("]")).trim();
+                        long valorMejor = Long.parseLong(mensajeMejor);
+                        if (valorMejor < valorOferta) {
+                            oferta.setEstadoOferta(createMessage(OFFER_NOT_BEST, "" + valorMejor, mejorOferta.getFabricante().getNombre()));
+                        } else {
+                            mejorOferta.setEstadoOferta(createMessage(OFFER_OVERCOMED, "" + valorOferta, fabricante.getNombre()));
+                            em.persist(mejorOferta);
+
+                            subasta.setMejor(oferta);
+                            oferta.setEstadoOferta(createMessage(OFFER_BEST, "" + valorMejor, mejorOferta.getFabricante().getNombre()));
+                            subasta.setMensaje(createMessage(OFFER_BEST_CURRENT, "" + valorOferta, fabricante.getNombre()));
+                        }
+                    }
+                }
+            }
+
+        } else {
+            oferta.setEstadoOferta(OFFER_INVALID_TIME);
         }
 
-
-
+        if (isEmptyString(subasta.getMensaje())) {
+            subasta.setMensaje(OFFER_ALL_INVALID);
+        }
     }
 
     /**
