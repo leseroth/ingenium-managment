@@ -16,7 +16,33 @@ declare function xf:CrearSubastaRequest($crearSubasta1 as element(ns0:crearSubas
                             let $comercio := $po/comercio
                             return
                                 <comercioBO>
+                                    {
+                                        for $codPais in $comercio/codPais
+                                        return
+                                            <codPais>{ data($codPais) }</codPais>
+                                    }
+                                    {
+                                        for $codPostal in $comercio/codPostal
+                                        return
+                                            <codPostal>{ data($codPostal) }</codPostal>
+                                    }
+                                    {
+                                        for $direccion in $comercio/direccion
+                                        return
+                                            <direccion>{ data($direccion) }</direccion>
+                                    }
+                                    {
+                                        for $email in $comercio/email
+                                        return
+                                            <email>{ data($email) }</email>
+                                    }
                                     <nit>{ data($comercio/nit) }</nit>
+                                    <nombre>{ data($comercio/nombre) }</nombre>
+                                    {
+                                        for $telefono in $comercio/telefono
+                                        return
+                                            <telefono>{ data($telefono) }</telefono>
+                                    }
                                 </comercioBO>
                         }
                         <entrega>{ data($po/fechaMaxima) }</entrega>
@@ -42,6 +68,11 @@ declare function xf:CrearSubastaRequest($crearSubasta1 as element(ns0:crearSubas
                                 <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
                         }
                     </po>
+            }
+            {
+                for $fechaMaxSubasta in $crearSubasta1/ns0:fechaMaxSubasta
+                return
+                    <fechaMax>{ data($fechaMaxSubasta) }</fechaMax>
             }
         </ns1:crearSubasta>
 };

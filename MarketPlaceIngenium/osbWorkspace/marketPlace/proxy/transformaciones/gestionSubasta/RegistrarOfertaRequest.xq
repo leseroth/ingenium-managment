@@ -16,31 +16,16 @@ declare function xf:RegistrarOfertaRequest($registrarOferta1 as element(ns0:regi
                         {
                             let $fabricante := $oferta/fabricante
                             return
-                                <fabricante>
-                                    {
-                                        for $email in $fabricante/email
-                                        return
-                                            <email>{ data($email) }</email>
-                                    }
+                                <fabricanteBO>
                                     <nit>{ data($fabricante/nit) }</nit>
-                                    <nombre>{ data($fabricante/nombre) }</nombre>
-                                </fabricante>
+                                </fabricanteBO>
                         }
                         <fechaEntrega>{ data($oferta/horarioEntrega) }</fechaEntrega>
-                        <numSeguimiento>{ data($registrarOferta1/ns0:numSeguimientoSub) }</numSeguimiento>
                         {
-                            let $producto := $oferta/item/producto
+                            for $valor in $oferta/item/valor
                             return
-                                <productoOfrecido>
-                                    {
-                                        for $categoria in $producto/categoria
-                                        return
-                                            <categoria>{ data($categoria) }</categoria>
-                                    }
-                                    <nombre>{ data($producto/nombre) }</nombre>
-                                </productoOfrecido>
+                                <valor>{ data($valor) }</valor>
                         }
-                        <valor>{ data($oferta/item/valor) }</valor>
                     </oferta>
             }
         </ns1:registrarOferta>

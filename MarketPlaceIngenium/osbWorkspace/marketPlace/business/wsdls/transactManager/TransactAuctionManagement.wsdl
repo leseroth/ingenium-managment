@@ -198,7 +198,6 @@
 </binding>
 <service name="TransactAuctionManagementService">
 <port name="TransactAuctionManagementPort" binding="tns:TransactAuctionManagementPortBinding">
-<soap:address location="http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement"/>
 </port>
 </service>
 </definitions>
