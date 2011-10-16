@@ -25,3 +25,5 @@ alter table purchaseorder change entrega entrega datetime;
 alter table oferta change fechaEntrega fechaEntrega datetime;
 
 alter table oferta add estadoOferta varchar(255);
+alter table oferta modify mensaje VARCHAR(2500) ;
+alter table subasta modify mensaje VARCHAR(2500) ;
