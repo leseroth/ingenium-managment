@@ -26,6 +26,8 @@ public class Oferta implements Serializable, MarketPlaceEntity {
     private Long valor;
     @Column
     private String mensaje;
+    @Column
+    private String estadoOferta;
     @OneToOne
     private Fabricante fabricante;
     @OneToOne
@@ -47,6 +49,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         numSeguimiento = ofertaBO.getNumSeguimiento();
         valor = ofertaBO.getValor();
         mensaje = ofertaBO.getMensaje();
+        estadoOferta = ofertaBO.getEstadoOferta();
         if (ofertaBO.getFabricanteBO() != null) {
             fabricante = new Fabricante(ofertaBO.getFabricanteBO());
         }
@@ -66,6 +69,7 @@ public class Oferta implements Serializable, MarketPlaceEntity {
         ofertaBO.setNumSeguimiento(numSeguimiento);
         ofertaBO.setValor(valor);
         ofertaBO.setMensaje(mensaje);
+        ofertaBO.setEstadoOferta(estadoOferta);
         if (productoOfrecido != null) {
             ofertaBO.setProductoOfrecidoBO(productoOfrecido.toBO());
         }
@@ -151,6 +155,20 @@ public class Oferta implements Serializable, MarketPlaceEntity {
      */
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    /**
+     * @return the estadoOferta
+     */
+    public String getEstadoOferta() {
+        return estadoOferta;
+    }
+
+    /**
+     * @param estadoOferta the estadoOferta to set
+     */
+    public void setEstadoOferta(String estadoOferta) {
+        this.estadoOferta = estadoOferta;
     }
 
     /**
