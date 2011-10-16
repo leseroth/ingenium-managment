@@ -13,7 +13,11 @@
              ui:wsdlLocation="PoManagerPoManagementServiceWrapper.wsdl">
     <interface.wsdl interface="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.interface(PoManagerPoManagement)"/>
   </reference>
-  <reference name="GestionSubasta" ui:wsdlLocation="GestionSubastaWrapper.wsdl">
+  <reference name="GestionSubasta"
+             ui:wsdlLocation="GestionSubastaWrapper1.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
+  </reference>
+  <reference name="GestionCliente" ui:wsdlLocation="GestionClienteWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
   </reference>
 </componentType>

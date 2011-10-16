@@ -4,11 +4,12 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="ordencomprasubasta_client" x="0" y="322" side="left"/>
-      <partnerlink name="GestionPOSubasta" x="717" y="278" side="right"/>
-      <partnerlink name="GestionSubasta" x="717" y="461" side="right"/>
+      <partnerlink name="ordencomprasubasta_client" x="0" y="505" side="left"/>
+      <partnerlink name="GestionPOSubasta" x="827" y="278" side="right"/>
+      <partnerlink name="GestionSubasta" x="827" y="587" side="right"/>
+      <partnerlink name="GestionCliente" x="827" y="644" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,150,843,540" show_swimlanes="true">
+   <graph_layout viewport="0,75,953,550" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
    </graph_layout>
