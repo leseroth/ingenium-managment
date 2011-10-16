@@ -23,3 +23,5 @@ alter table subasta add fechaMaxSubasta datetime;
 alter table purchaseorder change entrega entrega datetime;
 
 alter table oferta change fechaEntrega fechaEntrega datetime;
+
+alter table oferta add estadoOferta varchar(255);

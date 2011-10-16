@@ -13,6 +13,7 @@ public class OfertaBO implements Serializable, MarketPlaceBO {
     private FabricanteBO fabricanteBO;
     private ProductoBO productoOfrecidoBO;
     private String mensaje;
+    private String estadoOferta;
 
     /**
      * Basic Constructor
@@ -116,5 +117,19 @@ public class OfertaBO implements Serializable, MarketPlaceBO {
      */
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    /**
+     * @return the estadoOferta
+     */
+    public String getEstadoOferta() {
+        return estadoOferta;
+    }
+
+    /**
+     * @param estadoOferta the estadoOferta to set
+     */
+    public void setEstadoOferta(String estadoOferta) {
+        this.estadoOferta = estadoOferta;
     }
 }
