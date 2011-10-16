@@ -48,6 +48,9 @@
 
 <xs:complexType name="fabricanteBO">
 <xs:sequence>
+<xs:element name="codPais" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="codPostal" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
 <xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
@@ -77,8 +80,11 @@
 <xs:sequence>
 <xs:element name="activa" type="xs:boolean"></xs:element>
 <xs:element name="fabricanteBOList" type="tns:fabricanteBO" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="fechaCreacionSubasta" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="fechaMaxSubasta" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
 <xs:element name="mejorOfertaBO" type="tns:ofertaBO" minOccurs="0"></xs:element>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="ofertaBOList" type="tns:ofertaBO" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 <xs:element name="purchaseOrderBO" type="tns:purchaseOrderBO" minOccurs="0"></xs:element>
@@ -90,6 +96,7 @@
 <xs:element name="fabricanteBO" type="tns:fabricanteBO" minOccurs="0"></xs:element>
 <xs:element name="fechaEntrega" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="productoOfrecidoBO" type="tns:productoBO" minOccurs="0"></xs:element>
 <xs:element name="valor" type="xs:long" minOccurs="0"></xs:element>
@@ -101,6 +108,7 @@
 <xs:element name="categoria" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="peso" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -117,7 +125,10 @@
 
 <xs:complexType name="comercioBO">
 <xs:sequence>
+<xs:element name="codPais" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="codPostal" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
 <xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
@@ -172,6 +183,7 @@
 <xs:complexType name="crearSubasta">
 <xs:sequence>
 <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"></xs:element>
+<xs:element name="fechaMax" type="xs:dateTime" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
