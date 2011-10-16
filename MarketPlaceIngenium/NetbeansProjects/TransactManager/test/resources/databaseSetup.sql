@@ -22,7 +22,8 @@ insert into fabricante(id,nit,nombre,direccion,email,codPais,codPostal)
   values (201,'700700777','Alpina','Calle 128','samigori15@hotmail.com','CO','110121');
 insert into fabricante(id,nit,nombre,direccion,email,codPais,codPostal)
   values (202,'600600666','Zenu','Carrera 98 60-34','samigori15@hotmail.com','US','98103');
-insert into fabricante(id,nit,nombre) values (203,'fab203','Fabricante 203');
+insert into fabricante(id,nit,nombre,direccion,email,codPais,codPostal)
+  values (203,'500500555','Nestle', 'Carrera 15 100-25', 'ercos41@gmail.com','US','33157');
 insert into fabricante(id,nit,nombre) values (204,'fab204','Fabricante 204');
 insert into fabricante(id,nit,nombre) values (205,'fab205','Fabricante 205');
 
@@ -33,7 +34,7 @@ insert into producto(id,categoria,nombre) values(2012,'Lacteos','Kumis');
 insert into producto(id,categoria,nombre) values(2013,'Lacteos','Leche');
 insert into producto(id,categoria,nombre) values(2014,'Lacteos','Queso');
 insert into producto(id,categoria,nombre) values(2021,'Papeleria','Cuaderno');
-insert into producto(id,categoria,nombre) values(2022,'Papeleria','Libreta');
+insert into producto(id,categoria,nombre,peso) values(2022,'Papeleria','Libreta','1');
 insert into producto(id,categoria,nombre) values(2023,'Papeleria','Lapicero');
 
 --Crear PurchaseOrders y subastas
@@ -71,8 +72,9 @@ insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 201);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 202);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 203);
 
-insert into itempo(id,cantidad,producto_id) values (8,210,2022);
-insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(8,'SolicitadoComercio','num008',102,8);
+insert into itempo(id,cantidad,producto_id) values (8,100,2022);
+insert into purchaseorder(id,estado,numSeguimiento, entrega, comercio_id, item_id)
+  values(8,'SolicitadoComercio','num008','2011-10-20 11:00:00',101,8);
 insert into subasta(id, activa, numSeguimiento, po_id) values (8, true, 'num008', 8);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 201);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 202);

@@ -462,7 +462,7 @@
       <ws:asignarFabricantesSubasta>
          <numSeguimientoSubasta>num001</numSeguimientoSubasta>
          <fabricantes>
-            <nit>fab203</nit>
+            <nit>500500555</nit>
          </fabricantes>
          <fabricantes>
             <email>test@test.com</email>
@@ -483,7 +483,7 @@
       <ws:asignarFabricantesSubasta>
          <numSeguimientoSubasta>num002</numSeguimientoSubasta>
          <fabricantes>
-            <nit>fab203</nit>
+            <nit>500500555</nit>
          </fabricantes>
          <fabricantes>
             <email>test@test.com</email>
@@ -499,7 +499,7 @@
       <ws:asignarFabricantesSubasta>
          <numSeguimientoSubasta>num004</numSeguimientoSubasta>
          <fabricantes>
-            <nit>fab203</nit>
+            <nit>500500555</nit>
          </fabricantes>
          <fabricantes>
             <email>test@test.com</email>
@@ -553,7 +553,7 @@
       <ws:asignarFabricantesSubasta>
          <numSeguimientoSubasta>numeroRaro</numSeguimientoSubasta>
          <fabricantes>
-            <nit>fab203</nit>
+            <nit>500500555</nit>
          </fabricantes>
          <fabricantes>
             <email>test@test.com</email>
@@ -745,16 +745,86 @@
          <fechaMax>2011-11-01T03:15:53-05:00</fechaMax>
       </ws:crearSubasta>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="registrarOferta" bindingOperationName="registrarOferta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="RegistrarOferta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="registrarOferta" bindingOperationName="registrarOferta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="2PrimerOferta"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:registrarOferta>
-         <numSeguimientoSubasta>num006</numSeguimientoSubasta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>600600666</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-10-10T11:52:58</fechaEntrega>
+            <valor>10</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="3OfertaPeorQueLaPrimera"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
          <oferta>
             <fabricanteBO>
                <nit>700700777</nit>
             </fabricanteBO>
-            <fechaEntrega>2011-11-15T11:52:58</fechaEntrega>
+            <fechaEntrega>2011-10-10T11:52:58</fechaEntrega>
+            <valor>15</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="4OfertaMejorQueLaPrimera"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>500500555</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-10-15T11:52:58</fechaEntrega>
+            <valor>8</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="5FechaSuperiorALaDeEntrega"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>600600666</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-10-22T11:52:58</fechaEntrega>
+            <valor>10</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="6FechaDeEnvioSuperaEntrega"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>700700777</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-10-20T10:00:00</fechaEntrega>
+            <valor>4</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="1OfertaSuperaFechaEntrega"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/TransactAuctionManagementService/TransactAuctionManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <numSeguimientoSubasta>num008</numSeguimientoSubasta>
+         <oferta>
+            <fabricanteBO>
+               <nit>500500555</nit>
+            </fabricanteBO>
+            <fechaEntrega>2011-10-25T11:52:58</fechaEntrega>
             <valor>10</valor>
          </oferta>
       </ws:registrarOferta>

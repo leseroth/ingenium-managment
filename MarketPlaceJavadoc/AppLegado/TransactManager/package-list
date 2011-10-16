@@ -5,3 +5,4 @@ co.com.losalpes.marketplace.transact.entities
 co.com.losalpes.marketplace.transact.exceptions
 co.com.losalpes.marketplace.transact.util
 co.com.losalpes.marketplace.transact.ws
+com.ecocoma.service.shipping.fedex

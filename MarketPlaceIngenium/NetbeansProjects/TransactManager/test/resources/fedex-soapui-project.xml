@@ -309,17 +309,43 @@
          </fed:options>
       </fed:GetExtendedFedExRate>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.ecocoma.com/shipping/fedex/GetExtendedFedExRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://service.ecocoma.com/shipping/fedex/GetFedExRate" name="GetFedExRate" bindingOperationName="GetFedExRate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://service.ecocoma.com/shipping/fedex.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fed="http://service.ecocoma.com/shipping/fedex">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.ecocoma.com/shipping/fedex/GetExtendedFedExRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://service.ecocoma.com/shipping/fedex/GetFedExRate" name="GetFedExRate" bindingOperationName="GetFedExRate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request6Zenu"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://service.ecocoma.com/shipping/fedex.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fed="http://service.ecocoma.com/shipping/fedex">
    <soapenv:Header/>
    <soapenv:Body>
       <fed:GetFedExRate>
-         <fed:KeyID>SHP-S83480927O</fed:KeyID>
-         <fed:SenderPostalCode>90210</fed:SenderPostalCode>
+         <fed:KeyID>SHP-S82148661O</fed:KeyID>
+         <fed:SenderPostalCode>98103</fed:SenderPostalCode>
          <fed:SenderCountryCode>US</fed:SenderCountryCode>
-         <fed:RecipientPostalCode>110121</fed:RecipientPostalCode>
-         <fed:RecipientCountryCode>CO</fed:RecipientCountryCode>
-         <fed:TotalPackageWeight>15</fed:TotalPackageWeight>
-         <fed:DeclaredValue>1500</fed:DeclaredValue>
+         <fed:RecipientPostalCode>90210</fed:RecipientPostalCode>
+         <fed:RecipientCountryCode>US</fed:RecipientCountryCode>
+         <fed:TotalPackageWeight>100</fed:TotalPackageWeight>
+         <fed:DeclaredValue>1000</fed:DeclaredValue>
+      </fed:GetFedExRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.ecocoma.com/shipping/fedex/GetFedExRate"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request7Alpina"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://service.ecocoma.com/shipping/fedex.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fed="http://service.ecocoma.com/shipping/fedex">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <fed:GetFedExRate>
+         <fed:KeyID>SHP-S82148661O</fed:KeyID>
+         <fed:SenderPostalCode>110121</fed:SenderPostalCode>
+         <fed:SenderCountryCode>CO</fed:SenderCountryCode>
+         <fed:RecipientPostalCode>90210</fed:RecipientPostalCode>
+         <fed:RecipientCountryCode>US</fed:RecipientCountryCode>
+         <fed:TotalPackageWeight>100</fed:TotalPackageWeight>
+         <fed:DeclaredValue>500</fed:DeclaredValue>
+      </fed:GetFedExRate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.ecocoma.com/shipping/fedex/GetFedExRate"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request5Nestle"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://service.ecocoma.com/shipping/fedex.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fed="http://service.ecocoma.com/shipping/fedex">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <fed:GetFedExRate>
+         <fed:KeyID>SHP-S82148661O</fed:KeyID>
+         <fed:SenderPostalCode>33157</fed:SenderPostalCode>
+         <fed:SenderCountryCode>US</fed:SenderCountryCode>
+         <fed:RecipientPostalCode>90210</fed:RecipientPostalCode>
+         <fed:RecipientCountryCode>US</fed:RecipientCountryCode>
+         <fed:TotalPackageWeight>100</fed:TotalPackageWeight>
+         <fed:DeclaredValue>800</fed:DeclaredValue>
       </fed:GetFedExRate>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.ecocoma.com/shipping/fedex/GetFedExRate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
