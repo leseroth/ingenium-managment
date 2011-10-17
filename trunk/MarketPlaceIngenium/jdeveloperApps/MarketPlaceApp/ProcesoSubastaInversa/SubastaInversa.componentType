@@ -8,11 +8,11 @@
     <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa#wsdl.interface(SubastaInversa)"
                     callbackInterface="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa#wsdl.interface(SubastaInversaCallback)"/>
   </service>
-  <reference name="GestionSubasta" ui:wsdlLocation="GestionSubasta.wsdl">
+  <reference name="GestionSubasta" ui:wsdlLocation="GestionSubastaWrapper.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
   </reference>
   <reference name="GestionCorreoElectronico"
-             ui:wsdlLocation="GestionCorreoElectronico.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico/#wsdl.interface(GestionCorreoElectronico)"/>
+             ui:wsdlLocation="GestionCorreoElectronicoWrapper1.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico#wsdl.interface(GestionCorreoElectronico)"/>
   </reference>
 </componentType>

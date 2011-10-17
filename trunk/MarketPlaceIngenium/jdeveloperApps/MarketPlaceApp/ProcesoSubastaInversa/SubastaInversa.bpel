@@ -32,7 +32,8 @@
          xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
-         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/">
+         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@
                      partnerLinkType="ns2:GestionSubasta_PL"/>
         <partnerLink name="GestionCorreoElectronico"
                      partnerRole="GestionCorreoElectronico_Role"
-                     partnerLinkType="ns4:GestionCorreoElectronico_PL"/>
+                     partnerLinkType="ns5:GestionCorreoElectronico_PL"/>
     </partnerLinks>
 
     <!-- 
@@ -79,10 +80,14 @@
         <variable name="nombreFabricante"
                   type="xsd:string"/>
         <variable name="emailFabricante" type="xsd:string"/>
-        <variable name="enviarCorreoElectronicoRequest"
-                  messageType="ns4:enviarCorreoElectronicoRequest"/>
-        <variable name="enviarCorreoElectronicoResponse"
-                  messageType="ns4:enviarCorreoElectronicoResponse"/>
+        <variable name="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
+                  messageType="ns5:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoElectronico_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns5:enviarCorreoElectronicoResponse"/>
+        <variable name="RegistrarOferta_registrarOferta_InputVariable"
+                  messageType="ns2:registrarOfertaRequest"/>
+        <variable name="RegistrarOferta_registrarOferta_OutputVariable"
+                  messageType="ns2:registrarOfertaResponse"/>
     </variables>
 
     <!-- 
@@ -104,64 +109,41 @@
             <copy>
                 <from variable="inputVariable" part="payload"
                       query="/client:process/client:numSeguimientoSubasta"/>
-                <to variable="registrarOferta" part="parameters"
+                <to variable="RegistrarOferta_registrarOferta_InputVariable"
+                    part="parameters"
                     query="/ns1:registrarOferta/ns1:numSeguimientoSub"/>
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"
-                      query="/client:process/client:nombreFabricante"/>
-                <to variable="registrarOferta" part="parameters"
-                    query="/ns1:registrarOferta/ns1:oferta/fabricante/nombre"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:valorProducto"/>
-                <to variable="registrarOferta" part="parameters"
-                    query="/ns1:registrarOferta/ns1:oferta/item/valor"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
                       query="/client:process/client:fechaEntrega"/>
-                <to variable="registrarOferta" part="parameters"
+                <to variable="RegistrarOferta_registrarOferta_InputVariable"
+                    part="parameters"
                     query="/ns1:registrarOferta/ns1:oferta/horarioEntrega"/>
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"
                       query="/client:process/client:nitFabricante"/>
-                <to variable="registrarOferta" part="parameters"
+                <to variable="RegistrarOferta_registrarOferta_InputVariable"
+                    part="parameters"
                     query="/ns1:registrarOferta/ns1:oferta/fabricante/nit"/>
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"
-                      query="/client:process/client:emailFabricante"/>
-                <to variable="registrarOferta" part="parameters"
-                    query="/ns1:registrarOferta/ns1:oferta/fabricante/email"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:cantidadProducto"/>
-                <to variable="registrarOferta" part="parameters"
-                    query="/ns1:registrarOferta/ns1:oferta/item/cantidad"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:nombreProducto"/>
-                <to variable="registrarOferta" part="parameters"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:categoriaProducto"/>
-                <to variable="registrarOferta" part="parameters"
-                    query="/ns1:registrarOferta/ns1:oferta/item/producto/categoria"/>
+                      query="/client:process/client:valorProducto"/>
+                <to variable="RegistrarOferta_registrarOferta_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarOferta/ns1:oferta/item/valor"/>
             </copy>
         </assign>
-        <invoke name="RegistrarOferta" inputVariable="registrarOferta"
-                outputVariable="registrarOfertaResponse"
+        <invoke name="RegistrarOferta"
+                inputVariable="RegistrarOferta_registrarOferta_InputVariable"
+                outputVariable="RegistrarOferta_registrarOferta_OutputVariable"
                 partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
-                operation="registrarOferta"/>
+                operation="registrarOferta" bpelx:invokeAsDetail="no"/>
         <assign name="AsignarResultado">
             <copy>
-                <from variable="registrarOfertaResponse" part="parameters"
+                <from variable="RegistrarOferta_registrarOferta_OutputVariable"
+                      part="parameters"
                       query="/ns1:registrarOfertaResponse/ns1:resultado"/>
                 <to variable="outputVariable" part="payload"
                     query="/client:processResponse/client:resultado"/>
@@ -183,20 +165,20 @@
                 operation="consultarFabricantesSubasta"/>
         <assign name="AsignarIndice">
             <copy>
-                <from expression="0"/>
+                <from expression="ora:format('1')"/>
                 <to variable="indice"/>
             </copy>
         </assign>
         <while name="While_1"
-               condition="bpws:getVariableData('indice') &lt; count(bpws:getVariableData('consultarFabricantesSubastaResponse','parameters','/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes'))">
+               condition="bpws:getVariableData('indice') &lt; count(bpws:getVariableData('consultarFabricantesSubastaResponse','parameters','/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes'))+1">
             <sequence>
                 <assign name="AsignarFabricante">
                     <copy>
-                        <from expression="/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes[position()=indice]/nombre"/>
+                        <from expression="$consultarFabricantesSubastaResponse.parameters/ns1:fabricantes[position() = $indice]/nombre"/>
                         <to variable="nombreFabricante"/>
                     </copy>
                     <copy>
-                        <from expression="/ns1:consultarFabricantesSubastaResponse/ns1:fabricantes[position()=indice]/email"/>
+                        <from expression="$consultarFabricantesSubastaResponse.parameters/ns1:fabricantes[position() = $indice]/email"/>
                         <to variable="emailFabricante"/>
                     </copy>
                 </assign>
@@ -204,42 +186,49 @@
                     <sequence>
                         <assign name="AsignarEnviarCorreoElectronico">
                             <copy>
-                                <from variable="emailFabricante"/>
-                                <to variable="enviarCorreoElectronicoRequest"
-                                    part="parameters"
-                                    query="/ns1:enviarCorreoElectronico/ns1:to"/>
-                            </copy>
-                            <copy>
-                                <from expression="'subastas@marketplace.losalpes.com.co'"/>
-                                <to variable="enviarCorreoElectronicoRequest"
+                                <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
                                     part="parameters"
                                     query="/ns1:enviarCorreoElectronico/ns1:from"/>
                             </copy>
                             <copy>
-                                <from expression="'marketplace2011'"/>
-                                <to variable="enviarCorreoElectronicoRequest"
+                                <from expression="ora:format('ingenium2011')"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
                                     part="parameters"
                                     query="/ns1:enviarCorreoElectronico/ns1:password"/>
                             </copy>
                             <copy>
-                                <from expression="concat('Registro de oferta en subasta ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'))"/>
-                                <to variable="enviarCorreoElectronicoRequest"
+                                <from expression="ora:format('Nueva oferta en Subasta')"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
                                     part="parameters"
                                     query="/ns1:enviarCorreoElectronico/ns1:subject"/>
                             </copy>
                             <copy>
-                                <from expression="concat('Estimado ',bpws:getVariableData('nombreFabricante'),':\n\nSe ha registrado una nueva oferta en la subasta con número de seguimiento ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'),', en la cual usted participa. Para obtener mayor información, favor ingresar en el portal del MarketPlace de los Alpes o a través del siguiente link: http://portal.marketplace.losalpes.com.co.\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
-                                <to variable="enviarCorreoElectronicoRequest"
+                                <from expression="ora:format('Han realizado una nueva oferta en la subasta {0}. Te vas a dejar ganar? Oferta Ya',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'))"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
                                     part="parameters"
                                     query="/ns1:enviarCorreoElectronico/ns1:message"/>
                             </copy>
+                            <copy>
+                                <from variable="emailFabricante"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:to"/>
+                            </copy>
+                            <copy>
+                                <from expression="ora:format('ercos41@gmail.com')"/>
+                                <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
+                                    part="parameters"
+                                    query="/ns1:enviarCorreoElectronico/ns1:cc"/>
+                            </copy>
                         </assign>
                         <invoke name="EnviarCorreoElectronico"
-                                inputVariable="enviarCorreoElectronicoRequest"
-                                outputVariable="enviarCorreoElectronicoResponse"
+                                inputVariable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
+                                outputVariable="EnviarCorreoElectronico_enviarCorreoElectronico_OutputVariable"
                                 partnerLink="GestionCorreoElectronico"
-                                portType="ns4:GestionCorreoElectronico"
-                                operation="enviarCorreoElectronico"/>
+                                portType="ns5:GestionCorreoElectronico"
+                                operation="enviarCorreoElectronico"
+                                bpelx:invokeAsDetail="no"/>
                     </sequence>
                 </scope>
                 <assign name="IncrementarIndice">
