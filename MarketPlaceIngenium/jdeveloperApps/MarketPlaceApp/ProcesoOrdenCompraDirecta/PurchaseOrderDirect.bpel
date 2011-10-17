@@ -33,7 +33,8 @@
          xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/"
          xmlns:ns5="http://marketplace.losalpes.com.co"
          xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/http/MarketPlace/ProcesoOrdenCompra/Mailer"
-         xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
+         xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +85,7 @@
                   messageType="ns7:enviarCorreoElectronicoRequest"/>
         <variable name="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable"
                   messageType="ns7:enviarCorreoElectronicoResponse"/>
+        <variable name="MensajeMail" type="xsd:string"/>
     </variables>
     <correlationSets>
         <correlationSet name="NumSegumiento"
@@ -191,6 +193,30 @@
                 outputVariable="ActualizarEstado_actualizarEstadoPO_OutputVariable"
                 partnerLink="GestionPO" portType="ns1:PoManagerPoManagement"
                 operation="actualizarEstadoPO" bpelx:invokeAsDetail="no"/>
+        <switch name="Switch1">
+            <case condition="bpws:getVariableData('Aprobar_Aprobar_InputVariable','abcde','/client:aprobacion/client:estado') = 'AceptadoFabricante'">
+                <bpelx:annotation>
+                    <bpelx:pattern>Si fue aceptado</bpelx:pattern>
+                    <bpelx:general>
+                        <bpelx:property name="userLabel">Aceptado</bpelx:property>
+                    </bpelx:general>
+                </bpelx:annotation>
+                <assign name="SolicitudAceptada">
+                    <copy>
+                        <from expression="ora:format('El fabricante con nit {0} ha ACEPTADO  su solicitud del producto: {1}. Numero de seguimiento: {2} ',bpws:getVariableData('inputVariable','payload','/client:process/client:nitFabricante'),bpws:getVariableData('inputVariable','payload','/client:process/client:nombreProducto'),bpws:getVariableData('RegistrarPO_registrarPO_OutputVariable','parameters','/ns1:registrarPOResponse/return'))"/>
+                        <to variable="MensajeMail"/>
+                    </copy>
+                </assign>
+            </case>
+            <otherwise>
+                <assign name="SolicitudRechazada">
+                    <copy>
+                        <from expression="ora:format('El fabricante con nit {0} ha RECHAZADO  su solicitud del producto: {1}. Numero de seguimiento: {2} ',bpws:getVariableData('inputVariable','payload','/client:process/client:nitFabricante'),bpws:getVariableData('inputVariable','payload','/client:process/client:nombreProducto'),bpws:getVariableData('RegistrarPO_registrarPO_OutputVariable','parameters','/ns1:registrarPOResponse/return'))"/>
+                        <to variable="MensajeMail"/>
+                    </copy>
+                </assign>
+            </otherwise>
+        </switch>
         <assign name="Assign4">
             <copy>
                 <from variable="inputVariable" part="payload"
@@ -224,22 +250,22 @@
                     query="/ns5:enviarCorreoElectronico/ns5:password"/>
             </copy>
             <copy>
-                <from expression="ora:format('Confirmación de Fabricante - {0}',$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
+                <from expression="ora:format('Respuesta  de Fabricante - {0}',$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
                     part="parameters"
                     query="/ns5:enviarCorreoElectronico/ns5:subject"/>
-            </copy>
-            <copy>
-                <from expression="ora:format('El fabricante con nit {0} ha aceptado su solicitud. Numero de seguimiento: {1} ',$inputVariable.payload/client:nitFabricante,$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
-                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
-                    part="parameters"
-                    query="/ns5:enviarCorreoElectronico/ns5:message"/>
             </copy>
             <copy>
                 <from expression="ora:format('')"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
                     part="parameters"
                     query="/ns5:enviarCorreoElectronico/ns5:attachments"/>
+            </copy>
+            <copy>
+                <from variable="MensajeMail"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns5:enviarCorreoElectronico/ns5:message"/>
             </copy>
         </assign>
         <invoke name="EnviarCorreoComercio"

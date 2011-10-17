@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<process name="PurchaseOrderDirect" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns2="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/http/MarketPlace/ProcesoOrdenCompra/GestionMAiler" xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/" xmlns:ns5="http://marketplace.losalpes.com.co" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/http/MarketPlace/ProcesoOrdenCompra/Mailer" xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico" id="BpPrc0">
+<process name="PurchaseOrderDirect" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns2="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset" xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/http/MarketPlace/ProcesoOrdenCompra/GestionMAiler" xmlns:ns4="http://marketplace.losalpes.com.co/GestionCorreoElectronico/" xmlns:ns5="http://marketplace.losalpes.com.co" xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/http/MarketPlace/ProcesoOrdenCompra/Mailer" xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="BpPrc0">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +39,7 @@
         <variable name="InvokeMailerComercio_enviarCorreoElectronico_OutputVariable" messageType="ns7:enviarCorreoElectronicoResponse"/>
         <variable name="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" messageType="ns7:enviarCorreoElectronicoRequest"/>
         <variable name="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable" messageType="ns7:enviarCorreoElectronicoResponse"/>
+        <variable name="MensajeMail" type="xsd:string"/>
     </variables>
     <correlationSets>
         <correlationSet name="NumSegumiento" properties="ns2:NumSeguimiento"/>
@@ -108,7 +109,31 @@
             </copy>
         </assign>
         <invoke name="ActualizarEstado" inputVariable="ActualizarEstado_actualizarEstadoPO_InputVariable" outputVariable="ActualizarEstado_actualizarEstadoPO_OutputVariable" partnerLink="GestionPO" portType="ns1:PoManagerPoManagement" operation="actualizarEstadoPO" bpelx:invokeAsDetail="no" id="BpInv1"/>
-        <assign name="Assign4" id="BpAss2">
+        <switch name="Switch1" id="BpSwt0">
+            <case condition="bpws:getVariableData('Aprobar_Aprobar_InputVariable','abcde','/client:aprobacion/client:estado') = 'AceptadoFabricante'">
+                <bpelx:annotation>
+                    <bpelx:pattern>Si fue aceptado</bpelx:pattern>
+                    <bpelx:general>
+                        <bpelx:property name="userLabel">Aceptado</bpelx:property>
+                    </bpelx:general>
+                </bpelx:annotation>
+                <assign name="SolicitudAceptada" id="BpAss2">
+                    <copy>
+                        <from expression="ora:format('El fabricante con nit {0} ha ACEPTADO  su solicitud del producto: {1}. Numero de seguimiento: {2} ',bpws:getVariableData('inputVariable','payload','/client:process/client:nitFabricante'),bpws:getVariableData('inputVariable','payload','/client:process/client:nombreProducto'),bpws:getVariableData('RegistrarPO_registrarPO_OutputVariable','parameters','/ns1:registrarPOResponse/return'))"/>
+                        <to variable="MensajeMail"/>
+                    </copy>
+                </assign>
+            </case>
+            <otherwise>
+                <assign name="SolicitudRechazada" id="BpAss3">
+                    <copy>
+                        <from expression="ora:format('El fabricante con nit {0} ha RECHAZADO  su solicitud del producto: {1}. Numero de seguimiento: {2} ',bpws:getVariableData('inputVariable','payload','/client:process/client:nitFabricante'),bpws:getVariableData('inputVariable','payload','/client:process/client:nombreProducto'),bpws:getVariableData('RegistrarPO_registrarPO_OutputVariable','parameters','/ns1:registrarPOResponse/return'))"/>
+                        <to variable="MensajeMail"/>
+                    </copy>
+                </assign>
+            </otherwise>
+        </switch>
+        <assign name="Assign4" id="BpAss4">
             <copy>
                 <from variable="inputVariable" part="payload" query="/client:process/client:emailComercio"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:to"/>
@@ -130,16 +155,16 @@
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:password"/>
             </copy>
             <copy>
-                <from expression="ora:format('Confirmación de Fabricante - {0}',$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
+                <from expression="ora:format('Respuesta  de Fabricante - {0}',$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:subject"/>
-            </copy>
-            <copy>
-                <from expression="ora:format('El fabricante con nit {0} ha aceptado su solicitud. Numero de seguimiento: {1} ',$inputVariable.payload/client:nitFabricante,$RegistrarPO_registrarPO_OutputVariable.parameters/return)"/>
-                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:message"/>
             </copy>
             <copy>
                 <from expression="ora:format('')"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:attachments"/>
+            </copy>
+            <copy>
+                <from variable="MensajeMail"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" part="parameters" query="/ns5:enviarCorreoElectronico/ns5:message"/>
             </copy>
         </assign>
         <invoke name="EnviarCorreoComercio" inputVariable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable" outputVariable="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable" partnerLink="Mailer" portType="ns7:GestionCorreoElectronico" operation="enviarCorreoElectronico" bpelx:invokeAsDetail="no" id="BpInv2"/>
