@@ -7,16 +7,10 @@
  <element name="process">
 		<complexType>
 			<sequence>
-        <element name="fecha" type="dateTime" nillable="false" minOccurs="1"/>
         <element name="fechaEntrega" type="dateTime" maxOccurs="1"/>
         <element name="numSeguimientoSubasta" type="string"/>
         <element name="nitFabricante" nillable="false" type="string"/>
-        <element name="nombreFabricante" type="string"/>
-        <element name="emailFabricante" type="string"/>
-        <element name="cantidadProducto" type="int" minOccurs="1" nillable="false"/>
         <element name="valorProducto" type="long" minOccurs="1" nillable="false"/>
-        <element name="nombreProducto" type="string" minOccurs="1" nillable="false"/>
-        <element name="categoriaProducto" type="string" minOccurs="1" nillable="false"/>
       </sequence>
 		</complexType>
 	</element>
