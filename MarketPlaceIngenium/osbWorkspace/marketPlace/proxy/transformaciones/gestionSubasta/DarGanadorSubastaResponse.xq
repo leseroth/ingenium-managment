@@ -12,9 +12,24 @@ declare function xf:DarGanadorSubastaResponse($darGanadorSubastaResponse1 as ele
                 <nombre>{ data($darGanadorSubastaResponse1/return/nombre) }</nombre>
                 <nit>{ data($darGanadorSubastaResponse1/return/nit) }</nit>
                 {
+                    for $direccion in $darGanadorSubastaResponse1/return/direccion
+                    return
+                        <direccion>{ data($direccion) }</direccion>
+                }
+                {
                     for $email in $darGanadorSubastaResponse1/return/email
                     return
                         <email>{ data($email) }</email>
+                }
+                {
+                    for $codPais in $darGanadorSubastaResponse1/return/codPais
+                    return
+                        <codPais>{ data($codPais) }</codPais>
+                }
+                {
+                    for $codPostal in $darGanadorSubastaResponse1/return/codPostal
+                    return
+                        <codPostal>{ data($codPostal) }</codPostal>
                 }
             </ns0:fabricante>
         </ns0:darGanadorSubastaResponse>

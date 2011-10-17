@@ -151,6 +151,7 @@
               <con:route-node name="RouteNode3">
                 <con:context>
                   <con2:varNsDecl namespace="http://marketplace.losalpes.com.co/" prefix="mar"/>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar1"/>
                 </con:context>
                 <con:actions>
                   <con1:route>
@@ -159,7 +160,7 @@
                     <con1:operation>darGanadorSubasta</con1:operation>
                     <con1:outboundTransform>
                       <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7b67</con2:id>
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f28</con2:id>
                         <con3:location>
                           <con2:xpathText>.</con2:xpathText>
                         </con3:location>
@@ -175,7 +176,7 @@
                     </con1:outboundTransform>
                     <con1:responseTransform>
                       <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7b5a</con2:id>
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f0b</con2:id>
                         <con3:location>
                           <con2:xpathText>.</con2:xpathText>
                         </con3:location>
