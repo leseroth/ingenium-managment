@@ -93,6 +93,7 @@
 
 <xs:complexType name="ofertaBO">
 <xs:sequence>
+<xs:element name="estadoOferta" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="fabricanteBO" type="tns:fabricanteBO" minOccurs="0"></xs:element>
 <xs:element name="fechaEntrega" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
