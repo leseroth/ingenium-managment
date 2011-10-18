@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="nombreProducto" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="tipoCliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="tipoCategoria" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,7 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ConsultarClientesProducto", propOrder = {
     "nombreProducto",
-    "tipoCliente"
+    "tipoCliente",
+    "tipoCategoria"
 })
 public class ConsultarClientesProducto {
 
@@ -38,6 +40,8 @@ public class ConsultarClientesProducto {
     protected String nombreProducto;
     @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
     protected String tipoCliente;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
+    protected String tipoCategoria;
 
     /**
      * Gets the value of the nombreProducto property.
@@ -85,6 +89,30 @@ public class ConsultarClientesProducto {
      */
     public void setTipoCliente(String value) {
         this.tipoCliente = value;
+    }
+
+    /**
+     * Gets the value of the tipoCategoria property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTipoCategoria() {
+        return tipoCategoria;
+    }
+
+    /**
+     * Sets the value of the tipoCategoria property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTipoCategoria(String value) {
+        this.tipoCategoria = value;
     }
 
 }

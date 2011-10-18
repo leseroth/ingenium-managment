@@ -18,12 +18,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="fabricante" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" minOccurs="0"/>
+ *         &lt;element name="fabricanteBO" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" minOccurs="0"/>
  *         &lt;element name="fechaEntrega" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="idSubasta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="productoOfrecido" type="{http://ws.transact.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
+ *         &lt;element name="productoOfrecidoBO" type="{http://ws.transact.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
  *         &lt;element name="valor" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -35,47 +34,45 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ofertaBO", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "fabricante",
+    "fabricanteBO",
     "fechaEntrega",
     "id",
-    "idSubasta",
     "numSeguimiento",
-    "productoOfrecido",
+    "productoOfrecidoBO",
     "valor"
 })
 public class OfertaBO {
 
-    protected FabricanteBO fabricante;
+    protected FabricanteBO fabricanteBO;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar fechaEntrega;
     protected Long id;
-    protected String idSubasta;
     protected String numSeguimiento;
-    protected ProductoBO productoOfrecido;
+    protected ProductoBO productoOfrecidoBO;
     protected Long valor;
 
     /**
-     * Gets the value of the fabricante property.
+     * Gets the value of the fabricanteBO property.
      * 
      * @return
      *     possible object is
      *     {@link FabricanteBO }
      *     
      */
-    public FabricanteBO getFabricante() {
-        return fabricante;
+    public FabricanteBO getFabricanteBO() {
+        return fabricanteBO;
     }
 
     /**
-     * Sets the value of the fabricante property.
+     * Sets the value of the fabricanteBO property.
      * 
      * @param value
      *     allowed object is
      *     {@link FabricanteBO }
      *     
      */
-    public void setFabricante(FabricanteBO value) {
-        this.fabricante = value;
+    public void setFabricanteBO(FabricanteBO value) {
+        this.fabricanteBO = value;
     }
 
     /**
@@ -127,30 +124,6 @@ public class OfertaBO {
     }
 
     /**
-     * Gets the value of the idSubasta property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIdSubasta() {
-        return idSubasta;
-    }
-
-    /**
-     * Sets the value of the idSubasta property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIdSubasta(String value) {
-        this.idSubasta = value;
-    }
-
-    /**
      * Gets the value of the numSeguimiento property.
      * 
      * @return
@@ -175,27 +148,27 @@ public class OfertaBO {
     }
 
     /**
-     * Gets the value of the productoOfrecido property.
+     * Gets the value of the productoOfrecidoBO property.
      * 
      * @return
      *     possible object is
      *     {@link ProductoBO }
      *     
      */
-    public ProductoBO getProductoOfrecido() {
-        return productoOfrecido;
+    public ProductoBO getProductoOfrecidoBO() {
+        return productoOfrecidoBO;
     }
 
     /**
-     * Sets the value of the productoOfrecido property.
+     * Sets the value of the productoOfrecidoBO property.
      * 
      * @param value
      *     allowed object is
      *     {@link ProductoBO }
      *     
      */
-    public void setProductoOfrecido(ProductoBO value) {
-        this.productoOfrecido = value;
+    public void setProductoOfrecidoBO(ProductoBO value) {
+        this.productoOfrecidoBO = value;
     }
 
     /**

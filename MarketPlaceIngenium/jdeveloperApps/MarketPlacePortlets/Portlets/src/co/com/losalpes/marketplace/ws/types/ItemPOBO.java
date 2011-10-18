@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="cantidad" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="productoBO" type="{http://ws.pomanager.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
+ *         &lt;element name="productoBO" type="{http://ws.transact.marketplace.losalpes.com.co/}productoBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "itemPOBO", propOrder = {
+@XmlType(name = "itemPOBO", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
     "cantidad",
     "id",
     "productoBO"
@@ -88,7 +88,7 @@ public class ItemPOBO {
     }
 
     /**
-     * Gets the value of the producto property.
+     * Gets the value of the productoBO property.
      * 
      * @return
      *     possible object is
@@ -100,7 +100,7 @@ public class ItemPOBO {
     }
 
     /**
-     * Sets the value of the producto property.
+     * Sets the value of the productoBO property.
      * 
      * @param value
      *     allowed object is

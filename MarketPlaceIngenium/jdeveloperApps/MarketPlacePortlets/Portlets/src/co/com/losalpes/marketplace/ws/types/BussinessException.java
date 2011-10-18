@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "BussinessException", propOrder = {
+@XmlType(name = "BussinessException", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
     "message"
 })
 public class BussinessException {
