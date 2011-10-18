@@ -19,12 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="fabricantes" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="activa" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="fabricanteBOList" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="mejor" type="{http://ws.transact.marketplace.losalpes.com.co/}ofertaBO" minOccurs="0"/>
+ *         &lt;element name="mejorOfertaBO" type="{http://ws.transact.marketplace.losalpes.com.co/}ofertaBO" minOccurs="0"/>
  *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ofertas" type="{http://ws.transact.marketplace.losalpes.com.co/}ofertaBO" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="po" type="{http://ws.transact.marketplace.losalpes.com.co/}purchaseOrderBO" minOccurs="0"/>
+ *         &lt;element name="ofertaBOList" type="{http://ws.transact.marketplace.losalpes.com.co/}ofertaBO" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="purchaseOrderBO" type="{http://ws.transact.marketplace.losalpes.com.co/}purchaseOrderBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,37 +36,55 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subastaBO", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "fabricantes",
+    "activa",
+    "fabricanteBOList",
     "id",
-    "mejor",
+    "mejorOfertaBO",
     "numSeguimiento",
-    "ofertas",
-    "po"
+    "ofertaBOList",
+    "purchaseOrderBO"
 })
 public class SubastaBO {
 
+    protected boolean activa;
     @XmlElement(nillable = true)
-    protected List<FabricanteBO> fabricantes;
+    protected List<FabricanteBO> fabricanteBOList;
     protected Long id;
-    protected OfertaBO mejor;
+    protected OfertaBO mejorOfertaBO;
     protected String numSeguimiento;
     @XmlElement(nillable = true)
-    protected List<OfertaBO> ofertas;
-    protected PurchaseOrderBO po;
+    protected List<OfertaBO> ofertaBOList;
+    protected PurchaseOrderBO purchaseOrderBO;
 
     /**
-     * Gets the value of the fabricantes property.
+     * Gets the value of the activa property.
+     * 
+     */
+    public boolean isActiva() {
+        return activa;
+    }
+
+    /**
+     * Sets the value of the activa property.
+     * 
+     */
+    public void setActiva(boolean value) {
+        this.activa = value;
+    }
+
+    /**
+     * Gets the value of the fabricanteBOList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fabricantes property.
+     * This is why there is not a <CODE>set</CODE> method for the fabricanteBOList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFabricantes().add(newItem);
+     *    getFabricanteBOList().add(newItem);
      * </pre>
      * 
      * 
@@ -75,11 +94,11 @@ public class SubastaBO {
      * 
      * 
      */
-    public List<FabricanteBO> getFabricantes() {
-        if (fabricantes == null) {
-            fabricantes = new ArrayList<FabricanteBO>();
+    public List<FabricanteBO> getFabricanteBOList() {
+        if (fabricanteBOList == null) {
+            fabricanteBOList = new ArrayList<FabricanteBO>();
         }
-        return this.fabricantes;
+        return this.fabricanteBOList;
     }
 
     /**
@@ -107,27 +126,27 @@ public class SubastaBO {
     }
 
     /**
-     * Gets the value of the mejor property.
+     * Gets the value of the mejorOfertaBO property.
      * 
      * @return
      *     possible object is
      *     {@link OfertaBO }
      *     
      */
-    public OfertaBO getMejor() {
-        return mejor;
+    public OfertaBO getMejorOfertaBO() {
+        return mejorOfertaBO;
     }
 
     /**
-     * Sets the value of the mejor property.
+     * Sets the value of the mejorOfertaBO property.
      * 
      * @param value
      *     allowed object is
      *     {@link OfertaBO }
      *     
      */
-    public void setMejor(OfertaBO value) {
-        this.mejor = value;
+    public void setMejorOfertaBO(OfertaBO value) {
+        this.mejorOfertaBO = value;
     }
 
     /**
@@ -155,18 +174,18 @@ public class SubastaBO {
     }
 
     /**
-     * Gets the value of the ofertas property.
+     * Gets the value of the ofertaBOList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ofertas property.
+     * This is why there is not a <CODE>set</CODE> method for the ofertaBOList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getOfertas().add(newItem);
+     *    getOfertaBOList().add(newItem);
      * </pre>
      * 
      * 
@@ -176,35 +195,35 @@ public class SubastaBO {
      * 
      * 
      */
-    public List<OfertaBO> getOfertas() {
-        if (ofertas == null) {
-            ofertas = new ArrayList<OfertaBO>();
+    public List<OfertaBO> getOfertaBOList() {
+        if (ofertaBOList == null) {
+            ofertaBOList = new ArrayList<OfertaBO>();
         }
-        return this.ofertas;
+        return this.ofertaBOList;
     }
 
     /**
-     * Gets the value of the po property.
+     * Gets the value of the purchaseOrderBO property.
      * 
      * @return
      *     possible object is
      *     {@link PurchaseOrderBO }
      *     
      */
-    public PurchaseOrderBO getPo() {
-        return po;
+    public PurchaseOrderBO getPurchaseOrderBO() {
+        return purchaseOrderBO;
     }
 
     /**
-     * Sets the value of the po property.
+     * Sets the value of the purchaseOrderBO property.
      * 
      * @param value
      *     allowed object is
      *     {@link PurchaseOrderBO }
      *     
      */
-    public void setPo(PurchaseOrderBO value) {
-        this.po = value;
+    public void setPurchaseOrderBO(PurchaseOrderBO value) {
+        this.purchaseOrderBO = value;
     }
 
 }

@@ -26,12 +26,14 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="telefono" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ctaFact" type="{http://marketplace.losalpes.com.co}CuentaFacturacion" minOccurs="0"/>
- *         &lt;element name="solicitudes" type="{http://marketplace.losalpes.com.co}SolicitudRegistro" maxOccurs="unbounded"/>
- *         &lt;element name="contactos" type="{http://marketplace.losalpes.com.co}Contacto" maxOccurs="unbounded"/>
+ *         &lt;element name="solicitudes" type="{http://marketplace.losalpes.com.co}SolicitudRegistro" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="contactos" type="{http://marketplace.losalpes.com.co}Contacto" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="razonSocial" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="comision" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="codigoPostal" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codigoPais" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -54,7 +56,9 @@ import javax.xml.bind.annotation.XmlType;
     "razonSocial",
     "estado",
     "tipo",
-    "comision"
+    "comision",
+    "codigoPostal",
+    "codigoPais"
 })
 public class Cliente {
 
@@ -67,14 +71,14 @@ public class Cliente {
     protected String telefono;
     protected String email;
     protected CuentaFacturacion ctaFact;
-    @XmlElement(required = true)
     protected List<SolicitudRegistro> solicitudes;
-    @XmlElement(required = true)
     protected List<Contacto> contactos;
     protected String razonSocial;
     protected String estado;
     protected String tipo;
     protected Double comision;
+    protected String codigoPostal;
+    protected String codigoPais;
 
     /**
      * Gets the value of the id property.
@@ -396,6 +400,54 @@ public class Cliente {
      */
     public void setComision(Double value) {
         this.comision = value;
+    }
+
+    /**
+     * Gets the value of the codigoPostal property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    /**
+     * Sets the value of the codigoPostal property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodigoPostal(String value) {
+        this.codigoPostal = value;
+    }
+
+    /**
+     * Gets the value of the codigoPais property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodigoPais() {
+        return codigoPais;
+    }
+
+    /**
+     * Sets the value of the codigoPais property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodigoPais(String value) {
+        this.codigoPais = value;
     }
 
 }
