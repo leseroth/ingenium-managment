@@ -59,23 +59,28 @@ insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(
 insert into subasta(id, activa, numSeguimiento, po_id) values (5, true, 'num005', 5);
 
 insert into itempo(id,cantidad,producto_id) values (6,210,2022);
-insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(6,'SolicitadoComercio','num006',102,6);
-insert into subasta(id, activa, numSeguimiento, po_id) values (6, true, 'num006', 6);
+insert into purchaseorder(id, estado, numSeguimiento, entrega, comercio_id, item_id)
+  values(6, 'SolicitadoComercio', 'num006', '2011-10-20 11:00:00', 102, 6);
+insert into subasta(id, activa, numSeguimiento, fechaCreacionSubasta, fechaMaxSubasta, po_id)
+  values (6, true, 'num006', '2011-10-10 11:00:00', '2011-10-15 11:00:00', 6);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 201);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 202);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (6, 203);
 
 insert into itempo(id,cantidad,producto_id) values (7,210,2022);
-insert into purchaseorder(id,estado,numSeguimiento,comercio_id, item_id) values(7,'SolicitadoComercio','num007',102,7);
-insert into subasta(id, activa, numSeguimiento, po_id) values (7, false, 'num007', 7);
+insert into purchaseorder(id, estado, numSeguimiento, entrega, comercio_id, item_id)
+  values(7, 'SolicitadoComercio', 'num007', '2011-10-20 11:00:00', 102, 7);
+insert into subasta(id, activa, numSeguimiento, fechaCreacionSubasta, fechaMaxSubasta, po_id)
+  values (7, false, 'num007', '2011-10-10 11:00:00', '2011-10-15 11:00:00', 7);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 201);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 202);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (7, 203);
 
 insert into itempo(id,cantidad,producto_id) values (8,100,2022);
-insert into purchaseorder(id,estado,numSeguimiento, entrega, comercio_id, item_id)
-  values(8,'SolicitadoComercio','num008','2011-10-20 11:00:00',101,8);
-insert into subasta(id, activa, numSeguimiento, po_id) values (8, true, 'num008', 8);
+insert into purchaseorder(id, estado, numSeguimiento, entrega, comercio_id, item_id)
+  values(8, 'SolicitadoComercio', 'num008', '2011-10-20 11:00:00', 101, 8);
+insert into subasta(id, activa, numSeguimiento, fechaCreacionSubasta, fechaMaxSubasta, po_id)
+  values (8, true, 'num008', '2011-10-10 11:00:00', '2011-10-15 11:00:00', 8);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 201);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 202);
 insert into subasta_fabricante(Subasta_id,fabricantes_id) values (8, 203);
