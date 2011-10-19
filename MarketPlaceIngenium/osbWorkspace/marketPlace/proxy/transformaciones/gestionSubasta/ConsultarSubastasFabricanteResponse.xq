@@ -22,38 +22,49 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                             return
                                 <ordenCompra>
                                     {
-                                        for $id in $purchaseOrderBO/id
+                                        let $itemPOBO := $purchaseOrderBO/itemPOBO
                                         return
-                                            <id>{ data($id) }</id>
-                                    }
-                                    {
-                                        for $numSeguimiento in $purchaseOrderBO/numSeguimiento
-                                        return
-                                            <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
+                                            <item>
+                                                <cantidad>{ data($itemPOBO/cantidad) }</cantidad>
+                                                {
+                                                    let $productoBO := $itemPOBO/productoBO
+                                                    return
+                                                        <producto>
+                                                            <nombre>{ data($productoBO/nombre) }</nombre>
+                                                            <categoria>{ data($productoBO/categoria) }</categoria>
+                                                            {
+                                                                for $peso in $productoBO/peso
+                                                                return
+                                                                    <pesoLibras>{ data($peso) }</pesoLibras>
+                                                            }
+                                                        </producto>
+                                                }
+                                            </item>
                                     }
                                 </ordenCompra>
                         }
                         {
-                            for $mejorOfertaBO in $return/mejorOfertaBO
-                            return
-                                <mejor>
-                                    {
-                                        for $id in $mejorOfertaBO/id
-                                        return
-                                            <id>{ data($id) }</id>
-                                    }
-                                    <numSeguimiento>{ data($mejorOfertaBO/numSeguimiento) }</numSeguimiento>
-                                    {
-                                        let $fabricanteBO := $mejorOfertaBO/fabricanteBO
-                                        return
-                                            <fabricante/>
-                                    }
-                                </mejor>
-                        }
-                        {
                             for $ofertaBOList in $return/ofertaBOList
                             return
-                                <ofertas/>
+                                <ofertas>
+                                    <numSeguimiento>{ data($ofertaBOList/numSeguimiento) }</numSeguimiento>
+                                    <horarioEntrega>{ data($ofertaBOList/fechaEntrega) }</horarioEntrega>
+                                    {
+                                        for $mensaje in $ofertaBOList/mensaje
+                                        return
+                                            <mensaje>{ data($mensaje) }</mensaje>
+                                    }
+                                    {
+                                        for $valor in $ofertaBOList/valor
+                                        return
+                                            <valor>{ data($valor) }</valor>
+                                    }
+                                    {
+                                        for $estadoOferta in $ofertaBOList/estadoOferta
+                                        return
+                                            <estadoOferta>{ data($estadoOferta) }</estadoOferta>
+                                    }
+                                </ofertas>
                         }
                     </ns0:subastas>
             }
