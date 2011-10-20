@@ -12,11 +12,14 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                 for $return in $consultarSubastasFabricanteResponse1/return
                 return
                     <ns0:subastas>
+                        <activa>{ data($return/activa) }</activa>
                         {
                             for $numSeguimiento in $return/numSeguimiento
                             return
                                 <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
                         }
+                        <fechaInicio>{ data($return/fechaCreacionSubasta) }</fechaInicio>
+                        <fechaTerminacion>{ data($return/fechaMaxSubasta) }</fechaTerminacion>
                         {
                             let $purchaseOrderBO := $return/purchaseOrderBO
                             return
@@ -41,7 +44,101 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                                                 }
                                             </item>
                                     }
+                                    {
+                                        let $comercioBO := $purchaseOrderBO/comercioBO
+                                        return
+                                            <comercio>
+                                                <nombre>{ data($comercioBO/nombre) }</nombre>
+                                                <nit>{ data($comercioBO/nit) }</nit>
+                                            </comercio>
+                                    }
+                                    <estado>{ data($purchaseOrderBO/estado) }</estado>
+                                    <fecha>{ data($purchaseOrderBO/entrega) }</fecha>
                                 </ordenCompra>
+                        }
+                        {
+                            for $mejorOfertaBO in $return/mejorOfertaBO
+                            return
+                                <mejor>
+                                    <numSeguimiento>{ data($mejorOfertaBO/numSeguimiento) }</numSeguimiento>
+                                    <horarioEntrega>{ data($mejorOfertaBO/fechaEntrega) }</horarioEntrega>
+                                    {
+                                        let $fabricanteBO := $mejorOfertaBO/fabricanteBO
+                                        return
+                                            <fabricante>
+                                                <nombre>{ data($fabricanteBO/nombre) }</nombre>
+                                                <nit>{ data($fabricanteBO/nit) }</nit>
+                                                {
+                                                    for $direccion in $fabricanteBO/direccion
+                                                    return
+                                                        <direccion>{ data($direccion) }</direccion>
+                                                }
+                                                {
+                                                    for $email in $fabricanteBO/email
+                                                    return
+                                                        <email>{ data($email) }</email>
+                                                }
+                                                {
+                                                    for $codPais in $fabricanteBO/codPais
+                                                    return
+                                                        <codPais>{ data($codPais) }</codPais>
+                                                }
+                                                {
+                                                    for $codPostal in $fabricanteBO/codPostal
+                                                    return
+                                                        <codPostal>{ data($codPostal) }</codPostal>
+                                                }
+                                            </fabricante>
+                                    }
+                                    {
+                                        for $mensaje in $mejorOfertaBO/mensaje
+                                        return
+                                            <mensaje>{ data($mensaje) }</mensaje>
+                                    }
+                                    {
+                                        for $valor in $mejorOfertaBO/valor
+                                        return
+                                            <valor>{ data($valor) }</valor>
+                                    }
+                                    {
+                                        for $estadoOferta in $mejorOfertaBO/estadoOferta
+                                        return
+                                            <estadoOferta>{ data($estadoOferta) }</estadoOferta>
+                                    }
+                                </mejor>
+                        }
+                        {
+                            for $mensaje in $return/mensaje
+                            return
+                                <mensaje>{ data($mensaje) }</mensaje>
+                        }
+                        {
+                            for $fabricanteBOList in $return/fabricanteBOList
+                            return
+                                <fabricante>
+                                    <nombre>{ data($fabricanteBOList/nombre) }</nombre>
+                                    <nit>{ data($fabricanteBOList/nit) }</nit>
+                                    {
+                                        for $direccion in $fabricanteBOList/direccion
+                                        return
+                                            <direccion>{ data($direccion) }</direccion>
+                                    }
+                                    {
+                                        for $email in $fabricanteBOList/email
+                                        return
+                                            <email>{ data($email) }</email>
+                                    }
+                                    {
+                                        for $codPais in $fabricanteBOList/codPais
+                                        return
+                                            <codPais>{ data($codPais) }</codPais>
+                                    }
+                                    {
+                                        for $codPostal in $fabricanteBOList/codPostal
+                                        return
+                                            <codPostal>{ data($codPostal) }</codPostal>
+                                    }
+                                </fabricante>
                         }
                         {
                             for $ofertaBOList in $return/ofertaBOList
@@ -49,6 +146,34 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                                 <ofertas>
                                     <numSeguimiento>{ data($ofertaBOList/numSeguimiento) }</numSeguimiento>
                                     <horarioEntrega>{ data($ofertaBOList/fechaEntrega) }</horarioEntrega>
+                                    {
+                                        let $fabricanteBO := $ofertaBOList/fabricanteBO
+                                        return
+                                            <fabricante>
+                                                <nombre>{ data($fabricanteBO/nombre) }</nombre>
+                                                <nit>{ data($fabricanteBO/nit) }</nit>
+                                                {
+                                                    for $direccion in $fabricanteBO/direccion
+                                                    return
+                                                        <direccion>{ data($direccion) }</direccion>
+                                                }
+                                                {
+                                                    for $email in $fabricanteBO/email
+                                                    return
+                                                        <email>{ data($email) }</email>
+                                                }
+                                                {
+                                                    for $codPais in $fabricanteBO/codPais
+                                                    return
+                                                        <codPais>{ data($codPais) }</codPais>
+                                                }
+                                                {
+                                                    for $codPostal in $fabricanteBO/codPostal
+                                                    return
+                                                        <codPostal>{ data($codPostal) }</codPostal>
+                                                }
+                                            </fabricante>
+                                    }
                                     {
                                         for $mensaje in $ofertaBOList/mensaje
                                         return
