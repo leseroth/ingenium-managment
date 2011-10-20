@@ -65,8 +65,8 @@
                         </con3:location>
                         <con3:expr>
                           <con2:xqueryTransform>
-                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/DarGanadorSubastaRequest"/>
-                            <con2:param name="darGanadorSubasta1">
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/CerrarSubastaRequest"/>
+                            <con2:param name="cerrarSubasta1">
                               <con2:path>$body/*</con2:path>
                             </con2:param>
                           </con2:xqueryTransform>
@@ -303,6 +303,7 @@
                   <con1:route>
                     <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7fee</con2:id>
                     <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarFabricantesSubasta</con1:operation>
                     <con1:outboundTransform>
                       <con3:replace varName="body" contents-only="true">
                         <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7fe1</con2:id>
