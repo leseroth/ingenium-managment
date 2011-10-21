@@ -15,9 +15,24 @@ declare function xf:ConsultarFabricantesSubastaResponse($consultarFabricantesSub
                         <nombre>{ data($return/nombre) }</nombre>
                         <nit>{ data($return/nit) }</nit>
                         {
+                            for $direccion in $return/direccion
+                            return
+                                <direccion>{ data($direccion) }</direccion>
+                        }
+                        {
                             for $email in $return/email
                             return
                                 <email>{ data($email) }</email>
+                        }
+                        {
+                            for $codPais in $return/codPais
+                            return
+                                <codPais>{ data($codPais) }</codPais>
+                        }
+                        {
+                            for $codPostal in $return/codPostal
+                            return
+                                <codPostal>{ data($codPostal) }</codPostal>
                         }
                     </ns0:fabricantes>
             }
