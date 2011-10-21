@@ -26,7 +26,9 @@
               <h:outputText value="Acciones"/>
             </f:facet>
             <af:commandButton text="Detalle Compra Directa"
-                              action="#{listaCompraDirecta.verInfoCompraDirecta_action}"/>
+                            action="infoCompraDirecta">
+                            <f:setPropertyActionListener target="#{infoCompraDirecta.compraDirecta}" value="#{compraDirecta}" />
+            </af:commandButton>
           </h:column>
         </h:dataTable>
       </af:form>
