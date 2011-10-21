@@ -8,30 +8,34 @@ declare namespace xf = "http://tempuri.org/marketPlace/proxy/transformaciones/ge
 declare function xf:DarGanadorSubastaResponse($darGanadorSubastaResponse1 as element(ns1:darGanadorSubastaResponse))
     as element(ns0:darGanadorSubastaResponse) {
         <ns0:darGanadorSubastaResponse>
-            <ns0:fabricante>
-                <nombre>{ data($darGanadorSubastaResponse1/return/nombre) }</nombre>
-                <nit>{ data($darGanadorSubastaResponse1/return/nit) }</nit>
-                {
-                    for $direccion in $darGanadorSubastaResponse1/return/direccion
-                    return
-                        <direccion>{ data($direccion) }</direccion>
-                }
-                {
-                    for $email in $darGanadorSubastaResponse1/return/email
-                    return
-                        <email>{ data($email) }</email>
-                }
-                {
-                    for $codPais in $darGanadorSubastaResponse1/return/codPais
-                    return
-                        <codPais>{ data($codPais) }</codPais>
-                }
-                {
-                    for $codPostal in $darGanadorSubastaResponse1/return/codPostal
-                    return
-                        <codPostal>{ data($codPostal) }</codPostal>
-                }
-            </ns0:fabricante>
+            {
+                let $return := $darGanadorSubastaResponse1/return
+                return
+                    <ns0:fabricante>
+                        <nombre>{ data($return/nombre) }</nombre>
+                        <nit>{ data($return/nit) }</nit>
+                        {
+                            for $direccion in $return/direccion
+                            return
+                                <direccion>{ data($direccion) }</direccion>
+                        }
+                        {
+                            for $email in $return/email
+                            return
+                                <email>{ data($email) }</email>
+                        }
+                        {
+                            for $codPais in $return/codPais
+                            return
+                                <codPais>{ data($codPais) }</codPais>
+                        }
+                        {
+                            for $codPostal in $return/codPostal
+                            return
+                                <codPostal>{ data($codPostal) }</codPostal>
+                        }
+                    </ns0:fabricante>
+            }
         </ns0:darGanadorSubastaResponse>
 };
 
