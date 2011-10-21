@@ -12,6 +12,8 @@
         <af:inputNumberSpinbox label="Valor Ofrecido" value="#{crearOferta.oferta.item.valor}"/>
         <af:commandButton text="Crear Oferta"
                           action="#{crearOferta.crearOferta_action}"/>
+        <af:commandButton text="Volver" id="cb12"
+                            action="volver"/>
       </af:panelFormLayout>
       </af:form>
     </af:document>
