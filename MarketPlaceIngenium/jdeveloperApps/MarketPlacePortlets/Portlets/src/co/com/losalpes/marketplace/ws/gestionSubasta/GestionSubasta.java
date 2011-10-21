@@ -1,9 +1,5 @@
 package co.com.losalpes.marketplace.ws.gestionSubasta;
 
-import co.com.losalpes.marketplace.ws.types.Fabricante;
-import co.com.losalpes.marketplace.ws.types.ObjectFactory;
-import co.com.losalpes.marketplace.ws.types.PurchaseOrder;
-
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -12,6 +8,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
@@ -21,11 +18,11 @@ import javax.xml.ws.ResponseWrapper;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebService(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
+@WebService(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
   targetNamespace="http://marketplace.losalpes.com.co/GestionOfertas",
   name="GestionSubasta")
 @XmlSeeAlso(
-  { ObjectFactory.class })
+  { co.com.losalpes.marketplace.ws.types.ObjectFactory.class })
 public interface GestionSubasta
 {
   @WebMethod(action="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta")
@@ -62,7 +59,7 @@ public interface GestionSubasta
   @RequestWrapper(localName="darGanadorSubasta", targetNamespace="http://marketplace.losalpes.com.co",
     className="co.com.losalpes.marketplace.ws.types.DarGanadorSubasta")
   @WebResult(targetNamespace="http://marketplace.losalpes.com.co", name="fabricante")
-  public Fabricante darGanadorSubasta(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
+  public co.com.losalpes.marketplace.ws.types.Fabricante darGanadorSubasta(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       name="numSeguimientoSub")
     String numSeguimientoSub);
 
@@ -76,7 +73,9 @@ public interface GestionSubasta
   @WebResult(targetNamespace="http://marketplace.losalpes.com.co", name="numSeguimientoSub")
   public String crearSubasta(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       name="po")
-    PurchaseOrder po);
+    co.com.losalpes.marketplace.ws.types.PurchaseOrder po,
+    @WebParam(targetNamespace="http://marketplace.losalpes.com.co", name="fechaMaxSubasta")
+    XMLGregorianCalendar fechaMaxSubasta);
 
   @WebMethod(action="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante")
   @Action(input="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante",
@@ -102,7 +101,7 @@ public interface GestionSubasta
       name="numSeguimientoSubasta")
     String numSeguimientoSubasta, @WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       name="fabricantes")
-    List<Fabricante> fabricantes);
+    List<co.com.losalpes.marketplace.ws.types.Fabricante> fabricantes);
 
   @WebMethod(action="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta")
   @Action(input="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta",
@@ -112,7 +111,7 @@ public interface GestionSubasta
   @RequestWrapper(localName="consultarFabricantesSubasta",
     targetNamespace="http://marketplace.losalpes.com.co", className="co.com.losalpes.marketplace.ws.types.ConsultarFabricantesSubasta")
   @WebResult(targetNamespace="http://marketplace.losalpes.com.co", name="fabricantes")
-  public List<Fabricante> consultarFabricantesSubasta(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
+  public List<co.com.losalpes.marketplace.ws.types.Fabricante> consultarFabricantesSubasta(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       name="numSeguimiento")
     String numSeguimiento);
 

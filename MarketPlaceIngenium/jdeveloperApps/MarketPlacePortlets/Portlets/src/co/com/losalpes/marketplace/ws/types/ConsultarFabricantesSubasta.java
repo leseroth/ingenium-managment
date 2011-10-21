@@ -3,20 +3,21 @@ package co.com.losalpes.marketplace.ws.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for consultarFabricantesSubasta complex type.
+ * <p>Java class for ConsultarFabricantesSubasta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="consultarFabricantesSubasta">
+ * &lt;complexType name="ConsultarFabricantesSubasta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,11 +27,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "consultarFabricantesSubasta", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+@XmlType(name = "ConsultarFabricantesSubasta", propOrder = {
     "numSeguimiento"
 })
 public class ConsultarFabricantesSubasta {
 
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
     protected String numSeguimiento;
 
     /**

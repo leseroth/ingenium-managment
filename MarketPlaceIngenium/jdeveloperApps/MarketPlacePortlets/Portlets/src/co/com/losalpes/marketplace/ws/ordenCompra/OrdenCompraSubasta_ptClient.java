@@ -1,6 +1,4 @@
-package co.com.losalpes.marketplace.ws.ordenCompraDirecta;
-
-import co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect;
+package co.com.losalpes.marketplace.ws.ordenCompra;
 
 import com.sun.xml.ws.api.addressing.AddressingVersion;
 import com.sun.xml.ws.api.addressing.WSEndpointReference;
@@ -16,17 +14,17 @@ import javax.xml.ws.WebServiceRef;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-public class PurchaseOrderDirect_ptClient
+public class OrdenCompraSubasta_ptClient
 {
   @WebServiceRef
-  private static Purchaseorderdirect_client_ep purchaseorderdirect_client_ep;
+  private static Ordencomprasubasta_client_ep ordencomprasubasta_client_ep;
 
   private static final AddressingVersion WS_ADDR_VER = AddressingVersion.W3C;
 
-    public static PurchaseOrderDirect getOrdenCompraDirecta()
+  public static OrdenCompraSubasta getOrdenCompra()
   {
-    purchaseorderdirect_client_ep = new Purchaseorderdirect_client_ep();
-    PurchaseOrderDirect purchaseOrderDirect = purchaseorderdirect_client_ep.getPurchaseOrderDirect_pt();
-    return purchaseOrderDirect;
+    ordencomprasubasta_client_ep = new Ordencomprasubasta_client_ep();
+    OrdenCompraSubasta ordenCompraSubasta = ordencomprasubasta_client_ep.getOrdenCompraSubasta_pt();
+    return ordenCompraSubasta;
   }
 }

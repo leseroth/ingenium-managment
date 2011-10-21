@@ -4,6 +4,8 @@ package co.com.losalpes.marketplace.beans;
 import co.com.losalpes.marketplace.servicio.ServicioProxy;
 import co.com.losalpes.marketplace.vos.OrdenCompraVO;
 
+import co.com.losalpes.marketplace.vos.SubastaVO;
+
 import java.security.Principal;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import javax.portlet.PortletRequest;
 
 
 public class ListaCompraDirecta {
@@ -50,13 +54,5 @@ public class ListaCompraDirecta {
 
     public HtmlDataTable getDt1() {
         return dt1;
-    }
-
-    public String verInfoCompraDirecta_action() {
-      OrdenCompraVO sub=(OrdenCompraVO)dt1.getRowData();
-      ExternalContext ec=FacesContext.getCurrentInstance().getExternalContext();
-      Map<String,Object> m=ec.getRequestMap();
-      m.put("compraDirecta", sub);
-        return "infoCompraDirecta";
     }
 }

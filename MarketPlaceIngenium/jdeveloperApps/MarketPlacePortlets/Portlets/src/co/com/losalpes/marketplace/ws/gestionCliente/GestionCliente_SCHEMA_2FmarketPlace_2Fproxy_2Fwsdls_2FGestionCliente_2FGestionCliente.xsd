@@ -34,6 +34,16 @@
             <element name="cliente" type="tns:Cliente"/>
         </sequence>
     </complexType>
+    <complexType name="ConsultarClientes">
+        <sequence>
+            <element name="tipoCliente" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarClientesResponse">
+        <sequence>
+            <element name="cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
     <complexType name="ActualizarEstadoCliente">
         <sequence>
             <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
@@ -62,6 +72,8 @@
     <element name="actualizarEstadoClienteResponse" type="tns:ActualizarEstadoClienteResponse"/>
     <element name="consultarCliente" type="tns:ConsultarCliente"/>
     <element name="consultarClienteResponse" type="tns:ConsultarClienteResponse"/>
+    <element name="consultarClientes" type="tns:ConsultarClientes"/>
+    <element name="consultarClientesResponse" type="tns:ConsultarClientesResponse"/>
     <element name="crearCliente" type="tns:CrearCliente"/>
     <element name="crearClienteResponse" type="tns:CrearClienteResponse"/>
     <element name="crearContacto" type="tns:CrearContacto"/>
@@ -99,6 +111,7 @@
         <sequence>
             <element name="nombreProducto" type="string" minOccurs="1" maxOccurs="1"/>
             <element name="tipoCliente" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="tipoCategoria" type="string" maxOccurs="1" minOccurs="1"/>
         </sequence>
     </complexType>
     <complexType name="ConsultarClientesProductoResponse">

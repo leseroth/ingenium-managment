@@ -1,11 +1,11 @@
-<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoOrdenCompra/PurchaseOrder"
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompraSubasta/OrdenCompraSubasta"
      xmlns="http://www.w3.org/2001/XMLSchema">
     <element name="process">
         <complexType>
             <sequence>
-                <element name="fechaMaximaEntrega" type="date"/>
+                <element name="fechaMaximaEntrega" type="dateTime"/>
                 <element name="fechaMaximaSubasta" type="dateTime"/>
-                <element name="fecha" type="date"/>
+                <element name="fecha" type="dateTime"/>
                 <element name="nitComercio" nillable="false" type="string"/>
                 <element name="nombreComercio" type="string"/>
                 <element name="emailComercio" type="string"/>
@@ -20,7 +20,7 @@
     <element name="processResponse">
         <complexType>
             <sequence>
-                <element name="numSeguimientoPO" type="string"/>
+                <element name="numeroSeguimientoPO" type="string"/>
             </sequence>
         </complexType>
     </element>

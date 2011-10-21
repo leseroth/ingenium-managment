@@ -12,12 +12,14 @@
             <element name="telefono" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="ctaFact" type="tns:CuentaFacturacion" minOccurs="0" maxOccurs="1"/>
-            <element name="solicitudes" type="tns:SolicitudRegistro" minOccurs="1" maxOccurs="unbounded"/>
-            <element name="contactos" type="tns:Contacto" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="solicitudes" type="tns:SolicitudRegistro" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="contactos" type="tns:Contacto" minOccurs="0" maxOccurs="unbounded"/>
             <element name="razonSocial" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="estado" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="tipo" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="comision" type="double" minOccurs="0" maxOccurs="1"/>
+            <element name="codigoPostal" type="string" maxOccurs="1" minOccurs="0"/>
+            <element name="codigoPais" type="string" maxOccurs="1" minOccurs="0"/>
         </sequence>
     </complexType>
     <element name="cliente" type="tns:Cliente"/>

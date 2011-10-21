@@ -3,21 +3,22 @@ package co.com.losalpes.marketplace.ws.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for registrarOferta complex type.
+ * <p>Java class for RegistrarOferta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="registrarOferta">
+ * &lt;complexType name="RegistrarOferta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="numSeguimientoSubasta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="oferta" type="{http://ws.transact.marketplace.losalpes.com.co/}ofertaBO" minOccurs="0"/>
+ *         &lt;element name="oferta" type="{http://marketplace.losalpes.com.co}Oferta"/>
+ *         &lt;element name="numSeguimientoSub" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,48 +28,26 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "registrarOferta", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "numSeguimientoSubasta",
-    "oferta"
+@XmlType(name = "RegistrarOferta", propOrder = {
+    "oferta",
+    "numSeguimientoSub"
 })
 public class RegistrarOferta {
 
-    protected String numSeguimientoSubasta;
-    protected OfertaBO oferta;
-
-    /**
-     * Gets the value of the numSeguimientoSubasta property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNumSeguimientoSubasta() {
-        return numSeguimientoSubasta;
-    }
-
-    /**
-     * Sets the value of the numSeguimientoSubasta property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNumSeguimientoSubasta(String value) {
-        this.numSeguimientoSubasta = value;
-    }
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
+    protected Oferta oferta;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
+    protected String numSeguimientoSub;
 
     /**
      * Gets the value of the oferta property.
      * 
      * @return
      *     possible object is
-     *     {@link OfertaBO }
+     *     {@link Oferta }
      *     
      */
-    public OfertaBO getOferta() {
+    public Oferta getOferta() {
         return oferta;
     }
 
@@ -77,11 +56,35 @@ public class RegistrarOferta {
      * 
      * @param value
      *     allowed object is
-     *     {@link OfertaBO }
+     *     {@link Oferta }
      *     
      */
-    public void setOferta(OfertaBO value) {
+    public void setOferta(Oferta value) {
         this.oferta = value;
+    }
+
+    /**
+     * Gets the value of the numSeguimientoSub property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNumSeguimientoSub() {
+        return numSeguimientoSub;
+    }
+
+    /**
+     * Sets the value of the numSeguimientoSub property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumSeguimientoSub(String value) {
+        this.numSeguimientoSub = value;
     }
 
 }

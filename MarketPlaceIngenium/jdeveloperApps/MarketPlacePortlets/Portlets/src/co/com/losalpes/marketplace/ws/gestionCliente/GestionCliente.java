@@ -1,7 +1,5 @@
 package co.com.losalpes.marketplace.ws.gestionCliente;
 
-import co.com.losalpes.marketplace.ws.types.ObjectFactory;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -18,11 +16,11 @@ import javax.xml.ws.Action;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebService(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl",
+@WebService(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl",
   targetNamespace="http://marketplace.losalpes.com.co/GestionCliente",
   name="GestionCliente")
 @XmlSeeAlso(
-  { ObjectFactory.class })
+  { co.com.losalpes.marketplace.ws.types.ObjectFactory.class })
 @SOAPBinding(style=Style.DOCUMENT, parameterStyle=ParameterStyle.BARE)
 public interface GestionCliente
 {
@@ -55,6 +53,16 @@ public interface GestionCliente
   public co.com.losalpes.marketplace.ws.types.ConsultarClienteResponse consultarCliente(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       partName="parameters", name="consultarCliente")
     co.com.losalpes.marketplace.ws.types.ConsultarCliente parameters);
+
+  @WebMethod(operationName="ConsultarClientes", action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes")
+  @SOAPBinding(parameterStyle=ParameterStyle.BARE)
+  @Action(input="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes",
+    output="http://marketplace.losalpes.com.co/GestionCliente/GestionCliente/ConsultarClientesResponse")
+  @WebResult(targetNamespace="http://marketplace.losalpes.com.co",
+    partName="parameters", name="consultarClientesResponse")
+  public co.com.losalpes.marketplace.ws.types.ConsultarClientesResponse consultarClientes(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
+      partName="parameters", name="consultarClientes")
+    co.com.losalpes.marketplace.ws.types.ConsultarClientes parameters);
 
   @WebMethod(operationName="ConsultarComision", action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision")
   @SOAPBinding(parameterStyle=ParameterStyle.BARE)
@@ -155,14 +163,4 @@ public interface GestionCliente
   public co.com.losalpes.marketplace.ws.types.ConsultarProductosClienteResponse consultarProductosCliente(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
       partName="parameters", name="consultarProductosCliente")
     co.com.losalpes.marketplace.ws.types.ConsultarProductosCliente parameters);
-  
-    @WebMethod(operationName="ConsultarClientes", action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes")
-    @SOAPBinding(parameterStyle=ParameterStyle.BARE)
-    @Action(input="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes",
-      output="http://marketplace.losalpes.com.co/GestionCliente/GestionCliente/ConsultarClientesResponse")
-    @WebResult(targetNamespace="http://marketplace.losalpes.com.co",
-      partName="parameters", name="consultarClientesResponse")
-    public co.com.losalpes.marketplace.ws.types.ConsultarClientesResponse consultarClientes(@WebParam(targetNamespace="http://marketplace.losalpes.com.co",
-        partName="parameters", name="consultarClientes")
-      co.com.losalpes.marketplace.ws.types.ConsultarClientes parameters);
 }

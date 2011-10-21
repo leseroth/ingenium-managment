@@ -38,7 +38,8 @@ import co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubastaSOAPQSPortCli
 import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagement;
 import co.com.losalpes.marketplace.ws.ldap.LDAPAuthenticationManagementPortClient;
 import co.com.losalpes.marketplace.ws.ldap.UsuarioNoExisteException;
-import co.com.losalpes.marketplace.ws.ordenCompra.PurchaseOrder_ptClient;
+import co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta;
+import co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta_ptClient;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect_ptClient;
 import co.com.losalpes.marketplace.ws.registro.RegistroEntidad;
@@ -109,7 +110,7 @@ public final class ServicioProxy {
     private GestionFacturacion gestionFacturacion; 
     private SubastaInversa subastaInversa;
     private RegistroEntidad registroEntidad;
-    private co.com.losalpes.marketplace.ws.ordenCompra.PurchaseOrder purchaseOrder;
+    private co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta purchaseOrder;
     private co.com.losalpes.marketplace.ws.avisoDespacho.DispatchAdvice dispatchAdvice;
     private co.com.losalpes.marketplace.ws.retornoMaterial.ReturnMaterialAdvice returnMaterialAdvice;
     private co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect purchaseOrderDirect;
@@ -180,9 +181,9 @@ public final class ServicioProxy {
             }
         return registroEntidad;
         }
-    private co.com.losalpes.marketplace.ws.ordenCompra.PurchaseOrder getPurchaseOrder(){
+    private co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta getPurchaseOrder(){
         if(purchaseOrder==null){
-                purchaseOrder=PurchaseOrder_ptClient.getOrdenCompra();
+                purchaseOrder=OrdenCompraSubasta_ptClient.getOrdenCompra();
             }
         return purchaseOrder;
         }
@@ -326,7 +327,6 @@ public final class ServicioProxy {
           }
           
       ClienteVO comercio=getClienteByUsername(username);
-          comercio.setEmail("samigory@gmail.com");
       getPurchaseOrder().process(toXMLGregorianCalendar(orden.getFechaMaximaEntrega()), toXMLGregorianCalendar(orden.getFechaMaximaSubasta()), toXMLGregorianCalendar(new Date()), comercio.getNit(), comercio.getNombre(), comercio.getEmail(), comercio.getDireccion(), comercio.getTelefono(), orden.getItem().getCantidad(), orden.getItem().getProducto().getNombre(), orden.getItem().getProducto().getCategoria());
       }
   public void persistir(AvisoDespachoVO ad, String nombreUsuarioFabricante){
@@ -384,15 +384,18 @@ public final class ServicioProxy {
         if(oc==null)return null;
         OrdenCompraVO ocVO=new OrdenCompraVO();
         ocVO.setEstado(oc.getEstado());
-        ocVO.setFechaMaximaEntrega(oc.getFechaMaxima().toGregorianCalendar().getTime());
+        ocVO.setFechaMaximaEntrega(oc.getFechaMaxima()!=null?oc.getFechaMaxima().toGregorianCalendar().getTime():null);
         ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteAtiende()));
         ocVO.setComercio(transformarComercio(oc.getComercio()));
         ocVO.setItem(transformarItem(oc.getItem()));
-        ocVO.setFechaMaximaSubasta( oc.getTiempoSubasta().toGregorianCalendar().getTime());
-        ocVO.setFecha(oc.getFechaMaxima().toGregorianCalendar().getTime());
+        ocVO.setFechaMaximaSubasta(oc.getTiempoSubasta()!= null?oc.getTiempoSubasta().toGregorianCalendar().getTime():null);
+        ocVO.setFecha(oc.getFechaMaxima()!=null?oc.getFechaMaxima().toGregorianCalendar().getTime():null);
         return ocVO;
         }
     private ComercioVO transformarComercio(Comercio f){
+            if(f == null){
+                return null;
+            }
         ComercioVO comVO=new ComercioVO();
         comVO.setNit(f.getNit());
         comVO.setNombre(f.getNombre());
@@ -402,6 +405,9 @@ public final class ServicioProxy {
         return comVO; 
         }
     private FabricanteVO transformarFabricante(Fabricante f){
+        if(f == null){
+            return null;
+        }
         FabricanteVO fabVO=new FabricanteVO();
         fabVO.setNit(f.getNit());
         fabVO.setNombre(f.getNombre());
@@ -432,6 +438,7 @@ public final class ServicioProxy {
         return productoVO;
         }
     private AvisoDespachoVO transformarAvisoDespacho(DispatchAdvice da){
+            if(da==null)return null;
         AvisoDespachoVO daVO=new AvisoDespachoVO();
         String camiones=da.getCamiones();
           List<String> camionesL=new ArrayList<String>();
@@ -458,10 +465,11 @@ public final class ServicioProxy {
         getReturnMaterialAdvice().process(rma.getCausa(), toXMLGregorianCalendar(rma.getFecha()), rma.getItem().getCantidad(), rma.getItem().getValor(), rma.getItem().getProducto().getNombre(), rma.getItem().getProducto().getCategoria(), rma.getItem().getProducto().getReferencia(), rma.getNumSeguimiento(), rma.getAvisoDespacho().getNumSeguimiento());
         }
     private OrdenDevolucionVO transformarRMA(ReturnMaterialAdvice rma){
+            if(rma==null)return null;
         OrdenDevolucionVO rmaVO=new OrdenDevolucionVO();
         rmaVO.setAvisoDespacho(transformarAvisoDespacho(rma.getAvisoDespacho()));
         rmaVO.setCausa( rma.getCausa());
-        rmaVO.setFecha(rma.getFecha().toGregorianCalendar().getTime());
+        rmaVO.setFecha(rma.getFecha()!=null?rma.getFecha().toGregorianCalendar().getTime():null);
     
         rmaVO.setItem(transformarItem(rma.getItems()));
         rmaVO.setNumSeguimiento(rma.getNumSeguimiento());
@@ -493,9 +501,10 @@ public final class ServicioProxy {
         }
     
     private OfertaVO transformarOferta(Oferta of){
+            if(of==null)return null;
         OfertaVO ofVO=new OfertaVO();
         ofVO.setFabricante(transformarFabricante(of.getFabricante()));
-        ofVO.setFechaEntrega(of.getHorarioEntrega().toGregorianCalendar().getTime());
+        ofVO.setFechaEntrega(of.getHorarioEntrega()!=null?of.getHorarioEntrega().toGregorianCalendar().getTime():null);
         ofVO.setItem(transformarItem(of.getItem()));
         return ofVO;
         }
@@ -541,6 +550,7 @@ public final class ServicioProxy {
         return cuentaVO;
         }
     private SolicitudRegistroVO transformarSolicitudRegistro(SolicitudRegistro sr){
+            if(sr==null)return null;
         SolicitudRegistroVO srvo=new SolicitudRegistroVO();
         srvo.setCausa(sr.getCausa());
         List<DocumentoVO> documentos=new ArrayList<DocumentoVO>();
@@ -593,6 +603,7 @@ public final class ServicioProxy {
 
         }
     private ContactoCliente transformarContactoCliente(ContactoVO contactoVO){
+            if(contactoVO==null)return null;
         ContactoCliente cc=new ContactoCliente();
         cc.setCelular(contactoVO.getCelular());
         cc.setDireccion(contactoVO.getDireccion());
@@ -604,6 +615,7 @@ public final class ServicioProxy {
         return cc;
         }
     private ProductoSolicitud transformarProductoSolicitud(ProductoVO p){
+            if(p==null)return null;
         ProductoSolicitud ps=new ProductoSolicitud();
         ps.setCategoria(p.getCategoria());
         ps.setNombre(p.getNombre());
@@ -646,6 +658,7 @@ public final class ServicioProxy {
             return clientes;
         }
     private FabricanteVO transformarFabricante(Cliente f){
+            if(f==null)return null;
         FabricanteVO fabVO=new FabricanteVO();
         fabVO.setNit(f.getNit());
         fabVO.setNombre(f.getNombre());
@@ -675,7 +688,6 @@ public final class ServicioProxy {
             }
             
             ClienteVO comercio=getClienteByUsername(username);
-            comercio.setEmail("samigory@gmail.com");
             Process process = transformarOrdenCompraDirecta(orden);
             process.setDireccionComercio(comercio.getDireccion());
             process.setEmailComercio(comercio.getEmail());
@@ -693,11 +705,12 @@ public final class ServicioProxy {
         }
     
     private Process transformarOrdenCompraDirecta(OrdenCompraVO orden){
+            if(orden==null)return null;
             Process process=new Process();
             process.setCantidadProducto(orden.getItem().getCantidad());
             process.setCategoriaProducto(orden.getItem().getProducto().getCategoria());
             process.setFecha(toXMLGregorianCalendar(orden.getFecha()));
-            process.setFechaMaximaEntrega(toXMLGregorianCalendar(orden.getFecha()));
+            process.setFechaMaximaEntrega(toXMLGregorianCalendar(orden.getFechaMaximaEntrega()));
             process.setNitFabricante(orden.getFabricanteAtiende().getNit());
             process.setNombreProducto(orden.getItem().getProducto().getNombre());
             
@@ -727,8 +740,8 @@ public final class ServicioProxy {
         ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteBO()));
         ocVO.setComercio(transformarComercio(oc.getComercioBO()));
         if(oc.getItemPOBOList() != null && oc.getItemPOBOList().size() > 0){
-            ocVO.setItem(transformarItem(oc.getItemPOBOList().iterator().next()));  
-        }        
+        ocVO.setItem(transformarItem(oc.getItemPOBOList().iterator().next())); 
+        }
         ocVO.setNumSeguimiento(oc.getNumSeguimiento());
         return ocVO;
         }
