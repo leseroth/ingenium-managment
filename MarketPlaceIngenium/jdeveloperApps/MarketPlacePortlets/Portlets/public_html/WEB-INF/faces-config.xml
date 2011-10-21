@@ -65,11 +65,6 @@
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
   <managed-bean>
-    <managed-bean-name>infoSubasta</managed-bean-name>
-    <managed-bean-class>co.com.losalpes.marketplace.beans.InfoSubastas</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
-  </managed-bean>
-  <managed-bean>
     <managed-bean-name>crearOrdenCompra</managed-bean-name>
     <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOrdenCompra</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
@@ -107,38 +102,6 @@
       <to-view-id>/OrdenCompra/html/view.jspx</to-view-id>
     </navigation-case>
   </navigation-rule>
-  <navigation-rule>
-    <from-view-id>/Subastas/html/view.jspx</from-view-id>
-    <navigation-case>
-      <from-outcome>infoSubasta</from-outcome>
-      <to-view-id>/Subastas/html/infoSubasta.jspx</to-view-id>
-    </navigation-case>
-    <navigation-case>
-      <from-outcome>compraDirecta</from-outcome>
-      <to-view-id>/Subastas/html/viewOrig.jspx</to-view-id>
-    </navigation-case>
-  </navigation-rule>
-  <managed-bean>
-    <managed-bean-name>listaSubasta</managed-bean-name>
-    <managed-bean-class>co.com.losalpes.marketplace.beans.ListaSubastas</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
-  </managed-bean>
-  <navigation-rule>
-    <from-view-id>/Subastas/html/infoSubasta.jspx</from-view-id>
-    <navigation-case>
-      <from-outcome>realizarOferta</from-outcome>
-      <to-view-id>/Subastas/html/oferta.jspx</to-view-id>
-    </navigation-case>
-    <navigation-case>
-      <from-outcome>volver</from-outcome>
-      <to-view-id>/OrdenCompra/html/verOrdenCompra.jspx</to-view-id>
-    </navigation-case>
-  </navigation-rule>
-  <managed-bean>
-    <managed-bean-name>crearOferta</managed-bean-name>
-    <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOferta</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
-  </managed-bean>
   <managed-bean>
     <managed-bean-name>devolucionListaBean</managed-bean-name>
     <managed-bean-class>co.com.losalpes.marketplace.beans.DevolucionLista</managed-bean-class>
@@ -178,13 +141,6 @@
     <navigation-case>
       <from-outcome>volver</from-outcome>
       <to-view-id>/OrdenCompra/html/view.jspx</to-view-id>
-    </navigation-case>
-  </navigation-rule>
-  <navigation-rule>
-    <from-view-id>/Subastas/html/oferta.jspx</from-view-id>
-    <navigation-case>
-      <from-outcome>volver</from-outcome>
-      <to-view-id>/Subastas/html/infoSubasta.jspx</to-view-id>
     </navigation-case>
   </navigation-rule>
   <navigation-rule>
@@ -231,7 +187,7 @@
   <managed-bean>
     <managed-bean-name>infoCompraDirecta</managed-bean-name>
     <managed-bean-class>co.com.losalpes.marketplace.beans.InfoCompraDirecta</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
+    <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
   <navigation-rule>
     <from-view-id>/OrdenCompraDirecta/html/infoCompraDirecta.jspx</from-view-id>
@@ -247,12 +203,67 @@
       <from-outcome>infoCompraDirecta</from-outcome>
       <to-view-id>/Subastas/html/infoCompraDirecta.jspx</to-view-id>
     </navigation-case>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/Subastas/html/view.jspx</to-view-id>
+    </navigation-case>
   </navigation-rule>
   <navigation-rule>
     <from-view-id>/Subastas/html/infoCompraDirecta.jspx</from-view-id>
     <navigation-case>
       <from-outcome>volver</from-outcome>
       <to-view-id>/Subastas/html/viewOrig.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  
+  <managed-bean>
+    <managed-bean-name>infoSubasta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.InfoSubastas</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>  
+  <managed-bean>
+    <managed-bean-name>listaSubasta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.ListaSubastas</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>crearOferta</managed-bean-name>
+    <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOferta</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+   
+  <navigation-rule>
+    <from-view-id>/Subastas/html/view.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>infoSubasta</from-outcome>
+      <to-view-id>/Subastas/html/infoSubasta.jspx</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>compraDirecta</from-outcome>
+      <to-view-id>/Subastas/html/viewOrig.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/Subastas/html/infoSubasta.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>realizarOferta</from-outcome>
+      <to-view-id>/Subastas/html/oferta.jspx</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/OrdenCompra/html/verOrdenCompra.jspx</to-view-id>
+    </navigation-case>
+    <navigation-case>
+      <from-outcome>volverFabricante</from-outcome>
+      <to-view-id>/Subastas/html/view.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule> 
+  <navigation-rule>
+    <from-view-id>/Subastas/html/oferta.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>volver</from-outcome>
+      <to-view-id>/Subastas/html/infoSubasta.jspx</to-view-id>
     </navigation-case>
   </navigation-rule>
   
