@@ -25,6 +25,11 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                             return
                                 <ordenCompra>
                                     {
+                                        for $numSeguimiento in $purchaseOrderBO/numSeguimiento
+                                        return
+                                            <numSeguimiento>{ data($numSeguimiento) }</numSeguimiento>
+                                    }
+                                    {
                                         let $itemPOBO := $purchaseOrderBO/itemPOBO
                                         return
                                             <item>
