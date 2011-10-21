@@ -9,10 +9,12 @@
       <af:form>
         <p>
           <af:commandButton text="Crear Orden de Compra" id="cb1"
-                            action="#{OrdenCompraListaBean.crear_action}"/>     
+                            action="#{OrdenCompraListaBean.crear_action}"
+                            rendered="#{OrdenCompraListaBean.comercio}"/>     
           <af:outputText id="space" value="   "/>
           <af:commandButton text="Crear Orden de Compra Directa" id="cb2"
-                            action="#{OrdenCompraListaBean.crearOrdenDirecta_action}"/>
+                            action="#{OrdenCompraListaBean.crearOrdenDirecta_action}"
+                            rendered="#{OrdenCompraListaBean.comercio}"/>
         </p>
         <p>
           <h:dataTable value="#{OrdenCompraListaBean.ordenes}" var="orden"
