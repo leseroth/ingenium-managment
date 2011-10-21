@@ -9,6 +9,7 @@ import co.com.losalpes.marketplace.vos.SubastaVO;
 import java.security.InvalidParameterException;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -19,15 +20,10 @@ public class InfoCompraDirecta {
     private ServicioProxy servProxy;
     private Long precio;
     
-    public InfoCompraDirecta() {                              
-        ExternalContext ec=FacesContext.getCurrentInstance().getExternalContext();
-        if((OrdenCompraVO)ec.getRequestMap().get("compraDirecta")!=null)
-         this.setCompraDirecta( (OrdenCompraVO)ec.getRequestMap().get("compraDirecta"));
-    }
-
     public boolean aprobarRechazarCompra(String estado) {
         boolean creada=false;
-        try{            
+        try{              
+            servProxy=ServicioProxy.getInstance();
             servProxy.aceptarCompraDirecta(compraDirecta.getNumSeguimiento(), estado, precio);
             creada=true;
         }catch(InvalidParameterException ipe){
@@ -38,14 +34,18 @@ public class InfoCompraDirecta {
     
     public String aprobar() {
         if(aprobarRechazarCompra(EstadoCompraDirectaConstants.ACEPTADO_FABRICANTE)){
-              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Orden de compra aprobada!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Orden de compra aprobada!"));
+            precio= null;
+            compraDirecta = new OrdenCompraVO();
         }
         return "volver";
     }
     
     public String rechazar() {
         if(aprobarRechazarCompra(EstadoCompraDirectaConstants.RECHAZADO_FABRICANTE)){
-              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Orden de compra rechazada!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Orden de compra rechazada!"));
+            precio= null;
+            compraDirecta = new OrdenCompraVO();
         }
         return "volver";
     }

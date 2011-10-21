@@ -12,10 +12,10 @@ public class GestionClienteSOAPQSPortClient
   @WebServiceRef
   private static GestionClienteSOAPQSService gestionClienteSOAPQSService;
 
-  public static GestionCliente getGestionCliente()
-  {
-    gestionClienteSOAPQSService = new GestionClienteSOAPQSService();
-    GestionCliente gestionCliente = gestionClienteSOAPQSService.getGestionClienteSOAPQSPort();
-    return gestionCliente;
-  }
+    public static GestionCliente getGestionCliente()
+    {
+      gestionClienteSOAPQSService = new GestionClienteSOAPQSService();
+      GestionCliente gestionCliente = gestionClienteSOAPQSService.getGestionClienteSOAPQSPort();
+      return gestionCliente;
+    }
 }

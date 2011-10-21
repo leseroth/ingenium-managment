@@ -36,7 +36,7 @@
         <WL5G3N0:part name="parameters" element="WL5G3N1:consultarClientes"/>
     </WL5G3N0:message>
     <WL5G3N0:message name="ConsultarClientesResponse">
-        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarClientesResponses"/>
+        <WL5G3N0:part name="parameters" element="WL5G3N1:consultarClientesResponse"/>
     </WL5G3N0:message>
     <WL5G3N0:message name="ConsultarComisionRequest">
         <WL5G3N0:part name="parameters" element="WL5G3N1:consultarComision"/>
@@ -287,7 +287,7 @@
     </WL5G3N0:binding>
     <WL5G3N0:service name="GestionClienteSOAPQSService">
         <WL5G3N0:port name="GestionClienteSOAPQSPort" binding="WL5G3N2:GestionClienteSOAP">
-            <WL5G3N3:address location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente"/>
+            <WL5G3N3:address location="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente"/>
         </WL5G3N0:port>
     </WL5G3N0:service>
 </WL5G3N0:definitions>

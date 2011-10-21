@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for registrarOfertaResponse complex type.
+ * <p>Java class for RegistrarOfertaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="registrarOfertaResponse">
+ * &lt;complexType name="RegistrarOfertaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="resultado" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,28 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "registrarOfertaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "_return"
+@XmlType(name = "RegistrarOfertaResponse", propOrder = {
+    "resultado"
 })
 public class RegistrarOfertaResponse {
 
-    @XmlElement(name = "return")
-    protected boolean _return;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
+    protected boolean resultado;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the resultado property.
      * 
      */
-    public boolean isReturn() {
-        return _return;
+    public boolean isResultado() {
+        return resultado;
     }
 
     /**
-     * Sets the value of the return property.
+     * Sets the value of the resultado property.
      * 
      */
-    public void setReturn(boolean value) {
-        this._return = value;
+    public void setResultado(boolean value) {
+        this.resultado = value;
     }
 
 }

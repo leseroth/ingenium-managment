@@ -32,7 +32,7 @@ public class ListaSubastas {
         String username=userPrincipal.getName();
 
         servProxy=ServicioProxy.getInstance();
-        subastas=new ArrayList<SubastaVO>(); //servProxy.getSubastasUsuario(username);
+        subastas=servProxy.getSubastasUsuario(username);
         dt1=new HtmlDataTable();
     }
 
@@ -50,13 +50,5 @@ public class ListaSubastas {
 
     public HtmlDataTable getDt1() {
         return dt1;
-    }
-
-    public String verInfoSubasta_action() {
-      SubastaVO sub=(SubastaVO)dt1.getRowData();
-      ExternalContext ec=FacesContext.getCurrentInstance().getExternalContext();
-      Map<String,Object> m=ec.getRequestMap();
-      m.put("subasta", sub);
-        return "infoSubasta";
     }
 }

@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebServiceClient(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
+@WebServiceClient(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
   targetNamespace="http://marketplace.losalpes.com.co/GestionOfertas",
   name="GestionSubastaSOAPQSService")
 public class GestionSubastaSOAPQSService
@@ -37,12 +37,12 @@ public class GestionSubastaSOAPQSService
       if (baseUrl == null)
       {
         wsdlLocationURL =
-            GestionSubastaSOAPQSService.class.getResource("http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
+            GestionSubastaSOAPQSService.class.getResource("http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
         if (wsdlLocationURL == null)
         {
           baseUrl = new File(".").toURL();
           wsdlLocationURL =
-              new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
+              new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
         }
       }
       else
@@ -51,13 +51,13 @@ public class GestionSubastaSOAPQSService
          baseUrl = new URL(baseUrl, baseUrl.getPath() + "/");
 }
                 wsdlLocationURL =
-            new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
+            new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl");
       }
     }
     catch (MalformedURLException e)
     {
       logger.log(Level.ALL,
-          "Failed to create wsdlLocationURL using http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
+          "Failed to create wsdlLocationURL using http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl",
           e);
     }
   }

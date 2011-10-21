@@ -1,7 +1,9 @@
 package co.com.losalpes.marketplace.beans;
 
 
+import co.com.losalpes.marketplace.constants.TipoClienteConstants;
 import co.com.losalpes.marketplace.servicio.ServicioProxy;
+import co.com.losalpes.marketplace.utils.UsuariosUtils;
 import co.com.losalpes.marketplace.vos.OrdenCompraVO;
 
 import java.security.Principal;
@@ -11,7 +13,10 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import javax.portlet.PortletRequest;
 
 
 public class ListaOrdenesCompra {
@@ -19,6 +24,8 @@ public class ListaOrdenesCompra {
     HtmlDataTable dt1=new HtmlDataTable();
     private String nit;
     private ServicioProxy servProxy;
+    private boolean comercio;
+    
     public ListaOrdenesCompra() {
         
         Principal userPrincipal=FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
@@ -29,26 +36,30 @@ public class ListaOrdenesCompra {
                                                   "Error al obtener el nombre del usuario"));
             System.err.println("Error obteniendo el 'principal' del usuario."); 
             return;
-        }
+        }        
+        
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        Object request = ec.getRequest();
+        String usuario = ((PortletRequest)request).getUserPrincipal().getName();
+        
         servProxy=ServicioProxy.getInstance();
-        String usuario=userPrincipal.getName();
-        boolean comercio=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Comercio");
-        boolean fabricante=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Fabricante");
         nit=servProxy.getNitByUsername(usuario);
-        System.out.println("NIT: "+nit);
-        if(comercio)
-        ordenes= servProxy.getOrdenCompraByNitComercio(nit);
-        if(fabricante)
+        
+        String rol = UsuariosUtils.getInstance().obtenerRolUsuario(usuario);
+        if (rol.equals(TipoClienteConstants.COMERCIO)) {            
+            comercio = true;
+            ordenes= servProxy.getOrdenCompraByNitComercio(nit);
+        }
+        if (rol.equals(TipoClienteConstants.FABRICANTE)) {            
             ordenes=servProxy.getOrdenCompraByNitFabricante(nit);
+        }
     }
 
     public String crear_action() {
-       System.out.println("Crear Orden de Compra");
         return "crear";
     }
     
     public String crearOrdenDirecta_action() {
-       System.out.println("Crear Orden de Compra Directa");
         return "crearOrdenDirecta";
     }
 
@@ -63,8 +74,8 @@ public class ListaOrdenesCompra {
     public String verOrdenCompra_action() {
         OrdenCompraVO po = (OrdenCompraVO)dt1.getRowData();
         Map<String, Object> req= FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
-       Map<String, Object> ses= FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-       ses.remove("InfoPO");
+        Map<String, Object> ses= FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        ses.remove("InfoPO");
         req.put("PurchaseOrder", po);
         return "verOrden";
     }
@@ -75,5 +86,9 @@ public class ListaOrdenesCompra {
 
     public HtmlDataTable getDt1() {
         return dt1;
+    }
+
+    public boolean isComercio() {
+        return comercio;
     }
 }

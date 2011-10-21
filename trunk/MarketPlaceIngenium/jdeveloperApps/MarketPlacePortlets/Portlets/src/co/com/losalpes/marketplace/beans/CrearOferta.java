@@ -17,21 +17,12 @@ public class CrearOferta {
     private SubastaVO subasta;
     public CrearOferta() {
         oferta=new OfertaVO();
-        ExternalContext ec=FacesContext.getCurrentInstance().getExternalContext();
-         subasta = (SubastaVO)ec.getRequestMap().get("subasta");
-        ItemVO item=subasta.getOrdenCompra().getItem();
-        oferta.setItem(item);
     }
 
     public String crearOferta_action() {
         ServicioProxy servProxy = ServicioProxy.getInstance();
-        ExternalContext ec =
-            FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         boolean creada = false;
-        if (this.subasta == null) {
-
-            subasta = (SubastaVO)ec.getRequestMap().get("subasta");
-        }
         this.getOferta().setFabricante((FabricanteVO)servProxy.getClienteByUsername(ec.getUserPrincipal().getName()));
         try {
             servProxy.persistir(this.subasta, this.getOferta());
@@ -44,7 +35,7 @@ public class CrearOferta {
         if (creada)
             FacesContext.getCurrentInstance().addMessage(null,
                                                          new FacesMessage("Oferta Creada!"));
-        return "inicioSubasta";
+        return "volver";
     }
 
     public void setOferta(OfertaVO oferta) {
@@ -54,4 +45,16 @@ public class CrearOferta {
     public OfertaVO getOferta() {
         return oferta;
     }
+    
+    public void setSubasta(SubastaVO subasta) {
+        this.subasta = subasta;
+        oferta=new OfertaVO();
+        ItemVO item=this.subasta.getOrdenCompra().getItem();
+        oferta.setItem(item);
+    }
+
+    public SubastaVO getSubasta() {
+        return subasta;
+    }
+
 }

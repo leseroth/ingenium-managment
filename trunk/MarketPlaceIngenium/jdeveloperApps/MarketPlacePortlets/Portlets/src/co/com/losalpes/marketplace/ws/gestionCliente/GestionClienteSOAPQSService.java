@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebServiceClient(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl",
+@WebServiceClient(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl",
   targetNamespace="http://marketplace.losalpes.com.co/GestionCliente",
   name="GestionClienteSOAPQSService")
 public class GestionClienteSOAPQSService
@@ -37,12 +37,12 @@ public class GestionClienteSOAPQSService
       if (baseUrl == null)
       {
         wsdlLocationURL =
-            GestionClienteSOAPQSService.class.getResource("http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl");
+            GestionClienteSOAPQSService.class.getResource("http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl");
         if (wsdlLocationURL == null)
         {
           baseUrl = new File(".").toURL();
           wsdlLocationURL =
-              new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl");
+              new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl");
         }
       }
       else
@@ -51,13 +51,13 @@ public class GestionClienteSOAPQSService
          baseUrl = new URL(baseUrl, baseUrl.getPath() + "/");
 }
                 wsdlLocationURL =
-            new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl");
+            new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl");
       }
     }
     catch (MalformedURLException e)
     {
       logger.log(Level.ALL,
-          "Failed to create wsdlLocationURL using http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente?wsdl",
+          "Failed to create wsdlLocationURL using http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl",
           e);
     }
   }

@@ -1,52 +1,54 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <jdevws:WebServiceProxy xmlns:jdevws="http://xmlns.oracle.com/jdeveloper/10130/webserviceproxy">
    <list n="CHILD_NODES">
+      <url path="GestionSubastaSOAPQSService.xml"/>
       <url path="GestionSubastaSOAPQSService.wsdl"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FSubasta.xsd"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionSubasta_2FGestionSubasta.xsd"/>
       <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FOferta.xsd"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionSubasta_2FGestionSubasta.xsd"/>
       <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FReturnMaterialAdvice.xsd"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
-      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
       <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FSubasta.xsd"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
       <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
-      <url path="../types/CerrarSubastaResponse.java"/>
-      <url path="../types/Item.java"/>
-      <url path="../types/RegistrarOferta.java"/>
-      <url path="../types/RegistrarOfertaResponse.java"/>
-      <url path="../types/ConsultarSubastaOrdenCompra.java"/>
-      <url path="../types/ObjectFactory.java"/>
+      <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+      <url path="../types/Fabricante.java"/>
       <url path="../types/ConsultarFabricantesSubasta.java"/>
-      <url path="../types/ConsultarSubastaOrdenCompraResponse.java"/>
-      <url path="../types/PurchaseOrder.java"/>
-      <url path="../types/CerrarSubasta.java"/>
-      <url path="../types/Subasta.java"/>
+      <url path="../types/DarGanadorSubasta.java"/>
+      <url path="../types/Comercio.java"/>
+      <url path="../types/RegistrarOfertaResponse.java"/>
       <url path="../types/DispatchAdvice.java"/>
-      <url path="../types/ConsultarFabricantesSubastaResponse.java"/>
+      <url path="../types/AsignarFabricantesSubastaResponse.java"/>
+      <url path="../types/CerrarSubastaResponse.java"/>
+      <url path="../types/ConsultarSubastasFabricante.java"/>
+      <url path="GestionSubasta.java"/>
+      <url path="../types/DarGanadorSubastaResponse.java"/>
+      <url path="../types/ConsultarSubastaOrdenCompra.java"/>
+      <url path="../types/ConsultarSubastasFabricanteResponse.java"/>
+      <url path="GestionSubastaSOAPQSService.java"/>
+      <url path="GestionSubastaSOAPQSPortClient.java"/>
+      <url path="../types/package-info.java"/>
+      <url path="../types/Oferta.java"/>
+      <url path="../types/ConsultarSubastaOrdenCompraResponse.java"/>
       <url path="../types/CrearSubastaResponse.java"/>
       <url path="../types/ReturnMaterialAdvice.java"/>
-      <url path="../types/Producto.java"/>
-      <url path="../types/package-info.java"/>
-      <url path="../types/AsignarFabricantesSubastaResponse.java"/>
+      <url path="../types/PurchaseOrder.java"/>
+      <url path="../types/ConsultarFabricantesSubastaResponse.java"/>
+      <url path="../types/Subasta.java"/>
       <url path="../types/AsignarFabricantesSubasta.java"/>
-      <url path="../types/DarGanadorSubastaResponse.java"/>
-      <url path="GestionSubastaSOAPQSService.java"/>
-      <url path="../types/Oferta.java"/>
-      <url path="../types/Comercio.java"/>
-      <url path="GestionSubastaSOAPQSPortClient.java"/>
-      <url path="../types/Fabricante.java"/>
-      <url path="GestionSubasta.java"/>
-      <url path="../types/DarGanadorSubasta.java"/>
+      <url path="../types/Producto.java"/>
+      <url path="../types/RegistrarOferta.java"/>
       <url path="../types/CrearSubasta.java"/>
-      <url path="../types/ConsultarSubastasFabricante.java"/>
-      <url path="../types/ConsultarSubastasFabricanteResponse.java"/>
+      <url path="../types/Item.java"/>
+      <url path="../types/ObjectFactory.java"/>
+      <url path="../types/CerrarSubasta.java"/>
    </list>
    <hash n="DATA_MODEL">
       <value n="ATTACHMENT_ENCODING" v="MTOM"/>
       <list n="LOCAL_FILES"/>
       <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy"/>
+      <url n="ORACLE_WEBSERVICES_XML" path="GestionSubastaSOAPQSService.xml"/>
       <hash n="PROPERTY_GROUPS">
          <hash n="WSDL_TO_JAVA_PROPERTIES">
             <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.WSDLToJavaProperties"/>
@@ -59,7 +61,7 @@
          <url path="GestionSubastaSOAPQSPortClient.java"/>
       </list>
       <value n="PROXY_MAPPING_URL"/>
-      <url n="PROXY_ORIGINAL_WSDL_URL" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionSubasta" query="wsdl"/>
+      <url n="PROXY_ORIGINAL_WSDL_URL" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionSubasta" query="wsdl"/>
       <hash n="PROXY_PORTS">
          <hash n="GestionSubastaSOAPQSPort">
             <value n="ACCESSES_DOC_WRAPPPED" v="true"/>
@@ -101,24 +103,34 @@
                   <hash n="PROPERTY_GROUPS"/>
                </hash>
             </hash>
-            <hash n="PROPERTY_GROUPS"/>
-            <url n="PROXY_ORIGINAL_PORT_ENDPOINT" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionSubasta"/>
+            <hash n="PROPERTY_GROUPS">
+               <hash n="WS_CLIENT_POLICY">
+                  <value n="addressing"/>
+                  <list n="management"/>
+                  <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.policy.PolicyClientModel"/>
+                  <value n="mtom"/>
+                  <hash n="POLICY_OVERRIDE_PROPERTIES"/>
+                  <list n="security"/>
+                  <value n="wsrm"/>
+               </hash>
+            </hash>
+            <url n="PROXY_ORIGINAL_PORT_ENDPOINT" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionSubasta"/>
          </hash>
       </hash>
       <value n="PROXY_SERVICE_NAME" v="GestionSubastaSOAPQSService"/>
       <value n="PROXY_SERVICE_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionOfertas"/>
-      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
+      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
       <list n="PROXY_WSDL_IMPORT_LIST">
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FSubasta.xsd"/>
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionSubasta_2FGestionSubasta.xsd"/>
          <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FOferta.xsd"/>
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fproxy_2Fwsdls_2FgestionSubasta_2FGestionSubasta.xsd"/>
          <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FReturnMaterialAdvice.xsd"/>
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
-         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FComercio.xsd"/>
          <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FSubasta.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FProducto.xsd"/>
          <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
+         <url path="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
       </list>
       <url n="PROXY_WSDL_URL" path="GestionSubastaSOAPQSService.wsdl"/>
       <hash n="REFERENCED_WEBSERVICE">
@@ -161,7 +173,7 @@
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="java.lang.String.crearSubasta.co.com.losalpes.marketplace.ws.types.PurchaseOrder"/>
+                     <value n="BOUND_OPERATION" v="java.lang.String.crearSubasta.co.com.losalpes.marketplace.ws.types.PurchaseOrder.javax.xml.datatype.XMLGregorianCalendar"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -206,7 +218,7 @@
             </hash>
          </list>
          <list n="BINDING_FILES"/>
-         <value n="GUID" v="be879faa-0130-1000-8021-0a0a0a0ac188"/>
+         <value n="GUID" v="1804f321-0133-1000-8002-0a0a0a0a0651"/>
          <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy$ProxyJavaWebService"/>
          <list n="PO_">
             <hash>
@@ -231,7 +243,7 @@
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="java.lang.String.crearSubasta.co.com.losalpes.marketplace.ws.types.PurchaseOrder"/>
+                     <value n="EXPOSED_BD_OPERATION" v="java.lang.String.crearSubasta.co.com.losalpes.marketplace.ws.types.PurchaseOrder.javax.xml.datatype.XMLGregorianCalendar"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -257,7 +269,7 @@
                   </hash>
                </list>
                <hash n="PROPERTY_GROUPS"/>
-               <url n="URL" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionSubasta"/>
+               <url n="URL" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionSubasta"/>
             </hash>
          </list>
          <hash n="PROPERTY_GROUPS">
@@ -278,11 +290,11 @@
                <value n="PT_SERVICE_INTERFACE" v="co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta"/>
             </hash>
          </list>
-         <url n="TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
+         <url n="TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
          <value n="WS_ORIG_GEN_DIRECTION" v="TOP_DOWN"/>
          <value n="WS_TARGET_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionOfertas"/>
          <value n="WS_URI" v="GestionSubastaSOAPQSService"/>
-         <url n="WS_WSDL_FILE" protocol="http" host="portal.marketplace.losalpes.com.co" port="7001" path="/marketPlace/proxy/GestionSubasta" query="wsdl"/>
+         <url n="WS_WSDL_FILE" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionSubasta" query="wsdl"/>
       </hash>
       <value n="SERVICE_ASYNC" v="false"/>
       <value n="USE_WSDL_LOCATION" v="true"/>

@@ -17,6 +17,7 @@
     <complexType name="CrearSubasta">
         <sequence>
             <element name="po" type="tns:PurchaseOrder" minOccurs="1" maxOccurs="1"/>
+            <element name="fechaMaxSubasta" type="dateTime" minOccurs="0"/>
         </sequence>
     </complexType>
     <complexType name="CrearSubastaResponse">

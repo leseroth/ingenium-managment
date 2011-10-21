@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for darGanadorSubastaResponse complex type.
+ * <p>Java class for DarGanadorSubastaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="darGanadorSubastaResponse">
+ * &lt;complexType name="DarGanadorSubastaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" minOccurs="0"/>
+ *         &lt;element name="fabricante" type="{http://marketplace.losalpes.com.co}Fabricante"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "darGanadorSubastaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "_return"
+@XmlType(name = "DarGanadorSubastaResponse", propOrder = {
+    "fabricante"
 })
 public class DarGanadorSubastaResponse {
 
-    @XmlElement(name = "return")
-    protected FabricanteBO _return;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
+    protected Fabricante fabricante;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the fabricante property.
      * 
      * @return
      *     possible object is
-     *     {@link FabricanteBO }
+     *     {@link Fabricante }
      *     
      */
-    public FabricanteBO getReturn() {
-        return _return;
+    public Fabricante getFabricante() {
+        return fabricante;
     }
 
     /**
-     * Sets the value of the return property.
+     * Sets the value of the fabricante property.
      * 
      * @param value
      *     allowed object is
-     *     {@link FabricanteBO }
+     *     {@link Fabricante }
      *     
      */
-    public void setReturn(FabricanteBO value) {
-        this._return = value;
+    public void setFabricante(Fabricante value) {
+        this.fabricante = value;
     }
 
 }
