@@ -30,7 +30,8 @@
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns2="http://marketplace.losalpes.com.co/GestionOfertas"
          xmlns:ns3="http://marketplace.losalpes.com.co"
-         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCliente">
+         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +55,12 @@
         <partnerLink name="GestionCliente"
                      partnerLinkType="ns4:GestionCliente_PL"
                      partnerRole="GestionCliente_Role"/>
+        <partnerLink name="GestionCorreoElectronico"
+                     partnerLinkType="ns5:GestionCorreoElectronico_PL"
+                     partnerRole="GestionCorreoElectronico_Role"/>
+        <partnerLink name="GestionSubastaNew"
+                     partnerLinkType="ns2:GestionSubasta_PL"
+                     partnerRole="GestionSubasta_Role"/>
     </partnerLinks>
 
     <!-- 
@@ -92,6 +99,26 @@
                   messageType="ns2:asignarFabricantesSubastaRequest"/>
         <variable name="AsignarFabricantes_asignarFabricantesSubasta_OutputVariable"
                   messageType="ns2:asignarFabricantesSubastaResponse"/>
+        <variable name="CerrarSubasta_cerrarSubasta_InputVariable"
+                  messageType="ns2:cerrarSubastaRequest"/>
+        <variable name="CerrarSubasta_cerrarSubasta_OutputVariable"
+                  messageType="ns2:cerrarSubastaResponse"/>
+        <variable name="darGanadorSubasta_darGanadorSubasta_InputVariable"
+                  messageType="ns2:darGanadorSubastaRequest"/>
+        <variable name="darGanadorSubasta_darGanadorSubasta_OutputVariable"
+                  messageType="ns2:darGanadorSubastaResponse"/>
+        <variable name="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                  messageType="ns5:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns5:enviarCorreoElectronicoResponse"/>
+        <variable name="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                  messageType="ns5:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoFabricante_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns5:enviarCorreoElectronicoResponse"/>
+        <variable name="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                  messageType="ns2:consultarSubastaOrdenCompraRequest"/>
+        <variable name="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                  messageType="ns2:consultarSubastaOrdenCompraResponse"/>
     </variables>
 
     <!-- 
@@ -337,6 +364,138 @@
                 outputVariable="AsignarFabricantes_asignarFabricantesSubasta_OutputVariable"
                 partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
                 operation="asignarFabricantesSubasta"/>
+        <wait name="EsperarFechaSubastaFinal"
+              until="bpws:getVariableData('inputVariable','payload','/client:process/client:fechaMaximaSubasta')"/>
+        <assign name="AsiggnarCerrarSubasta">
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="CerrarSubasta_cerrarSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:cerrarSubasta/ns3:numSeguimientoSub"/>
+            </copy>
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                    part="parameters"
+                    query="/ns3:consultarSubastaOrdenCompra/ns3:numSeguimientoPO"/>
+            </copy>
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="darGanadorSubasta_darGanadorSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:darGanadorSubasta/ns3:numSeguimientoSub"/>
+            </copy>
+        </assign>
+        <invoke name="CerrarSubasta" bpelx:invokeAsDetail="no"
+                inputVariable="CerrarSubasta_cerrarSubasta_InputVariable"
+                outputVariable="CerrarSubasta_cerrarSubasta_OutputVariable"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="cerrarSubasta"/>
+        <invoke name="RecuperarSubasta"
+                inputVariable="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                outputVariable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable" partnerLink="GestionSubastaNew"
+                portType="ns2:GestionSubasta"
+                operation="consultarSubastaOrdenCompra"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="AsignarEnviarCorreo">
+            <copy>
+                <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:from"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:emailComercio"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:bcc"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:from"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium2011')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:password"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Una de sus subastas ha finalizado.&lt;br/>A continuación se adjunta información de la misma:&lt;br/>&lt;br/>Numero seguimiento:{0}&lt;br/>Correo fabricante ganador: {1}&lt;br/> Informacion para el envio: {2}&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/fabricante/email,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/mensaje)"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:message"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Una de sus subastas ha finalizado.&lt;br/>A continuación se adjunta información de la misma:&lt;br/>&lt;br/>Numero seguimiento:{0}&lt;br/>Correo fabricante ganador: {1}&lt;br/> Informacion para el envio: {2}&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/fabricante/email,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/mensaje)"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:message"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium2011')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:password"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('SUBASTA {0} TERMINADA',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub)"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:subject"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('SUBASTA {0} TERMINADA',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub)"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:subject"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ercos41@gmail.com')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:cc"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ercos41@gmail.com')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:cc"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('widrobo@gmail.com')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:to"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('widrobo@gmail.com')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:to"/>
+            </copy>
+        </assign>
+        <invoke name="EnviarCorreoComercio" bpelx:invokeAsDetail="no"
+                inputVariable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                outputVariable="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns5:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico"/>
+        <invoke name="EnviarCorreoFabricante"
+                inputVariable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                outputVariable="EnviarCorreoFabricante_enviarCorreoElectronico_OutputVariable"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns5:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico" bpelx:invokeAsDetail="no"/>
         <invoke name="callbackClient" partnerLink="ordencomprasubasta_client" portType="client:OrdenCompraSubastaCallback" operation="processResponse" inputVariable="outputVariable"/>
     </sequence>
 </process>
