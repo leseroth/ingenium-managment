@@ -13,5 +13,5 @@
             <plnk:portType name="WL5G3N2:GestionSubasta"/>
         </plnk:role>
     </plnk:partnerLinkType>
-    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionOfertas" location="http://localhost:7001/marketPlace/proxy/GestionSubasta?wsdl"/>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionOfertas" location="http://localhost:7001//marketPlace/proxy/GestionSubasta?wsdl"/>
 </wsdl:definitions>
