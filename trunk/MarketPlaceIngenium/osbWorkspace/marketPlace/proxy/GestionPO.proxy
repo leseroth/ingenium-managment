@@ -251,44 +251,16 @@
             <con:value/>
             <con:flow>
               <con:route-node name="RouteNode5">
-                <con:context/>
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
                 <con:actions>
                   <con1:route>
-                    <con2:id>_ActionId-2151830623257592258--6f02f9d4.13032dbf23d.-7fba</con2:id>
+                    <con2:id>_ActionId-8286317879278327853-6dbc408a.1332945928b.-7fa8</con2:id>
                     <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                     <con1:operation>consultarPOsComercio</con1:operation>
-                    <con1:outboundTransform>
-                      <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-2151830623257592258--6f02f9d4.13032dbf23d.-7f77</con2:id>
-                        <con3:location>
-                          <con2:xpathText>.</con2:xpathText>
-                        </con3:location>
-                        <con3:expr>
-                          <con2:xqueryTransform>
-                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/ConsultarPOsComercioRequest"/>
-                            <con2:param name="consultarPOsComercio1">
-                              <con2:path>$body/*</con2:path>
-                            </con2:param>
-                          </con2:xqueryTransform>
-                        </con3:expr>
-                      </con3:replace>
-                    </con1:outboundTransform>
-                    <con1:responseTransform>
-                      <con3:replace varName="body" contents-only="true">
-                        <con2:id>_ActionId-2151830623257592258--6f02f9d4.13032dbf23d.-7f68</con2:id>
-                        <con3:location>
-                          <con2:xpathText>.</con2:xpathText>
-                        </con3:location>
-                        <con3:expr>
-                          <con2:xqueryTransform>
-                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/consultarPOsComercioResponse"/>
-                            <con2:param name="consultarPOsComercioResponse1">
-                              <con2:path>$body/*</con2:path>
-                            </con2:param>
-                          </con2:xqueryTransform>
-                        </con3:expr>
-                      </con3:replace>
-                    </con1:responseTransform>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
                   </con1:route>
                 </con:actions>
               </con:route-node>
