@@ -204,7 +204,7 @@
                                     query="/ns1:enviarCorreoElectronico/ns1:subject"/>
                             </copy>
                             <copy>
-                                <from expression="ora:format('Han realizado una nueva oferta en la subasta {0}. Te vas a dejar ganar? Oferta Ya',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'))"/>
+                                <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes Informa:&lt;br/>Han realizado una nueva oferta en la subasta {0}.&lt;br/>Para verificar quien va ganando la subasta ingresa al sitio web del marketplace.&lt;br/> Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/html>&lt;/body>',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoSubasta'))"/>
                                 <to variable="EnviarCorreoElectronico_enviarCorreoElectronico_InputVariable"
                                     part="parameters"
                                     query="/ns1:enviarCorreoElectronico/ns1:message"/>
