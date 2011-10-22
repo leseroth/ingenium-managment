@@ -472,13 +472,17 @@
                     query="/ns3:enviarCorreoElectronico/ns3:cc"/>
             </copy>
             <copy>
-                <from expression="ora:format('widrobo@gmail.com')"/>
+                <from variable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                      part="parameters"
+                      query="/ns3:consultarSubastaOrdenCompraResponse/ns3:subasta/ordenCompra/comercio/email"/>
                 <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
                     part="parameters"
                     query="/ns3:enviarCorreoElectronico/ns3:to"/>
             </copy>
             <copy>
-                <from expression="ora:format('widrobo@gmail.com')"/>
+                <from variable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                      part="parameters"
+                      query="/ns3:consultarSubastaOrdenCompraResponse/ns3:subasta/mejor/fabricante/email"/>
                 <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
                     part="parameters"
                     query="/ns3:enviarCorreoElectronico/ns3:to"/>
