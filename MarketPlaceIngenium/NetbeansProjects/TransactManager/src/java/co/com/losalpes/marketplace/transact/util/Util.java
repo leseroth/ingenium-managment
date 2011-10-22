@@ -1,5 +1,15 @@
 package co.com.losalpes.marketplace.transact.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static co.com.losalpes.marketplace.transact.util.Constants.*;
+
 /**
  *
  * @author Erik
@@ -86,5 +96,51 @@ public class Util {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Lee la llave de uso desde la pagina web de ecocoma
+     * (http://www.ecocoma.com/shipping_webservice.aspx)
+     * para poder acceder a los servicios web de FedEx
+     */
+    public static void updateEcocomaKey() {
+        String key = null;
+        InputStreamReader isReader = null;
+        BufferedReader bReader = null;
+
+        try {
+            URL url = new URL("http://www.ecocoma.com/shipping_webservice.aspx");
+            isReader = new InputStreamReader(url.openStream());
+            bReader = new BufferedReader(isReader);
+            keySearcher:
+            for (;;) {
+                String line = bReader.readLine();
+                if (line != null && line.indexOf("KeyID :") != -1) {
+                    int start = line.lastIndexOf(">SHP") + 1;
+                    int end = line.lastIndexOf("</span>");
+                    key = line.substring(start, end);
+                    break keySearcher;
+                }
+            }
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (bReader != null) {
+                    bReader.close();
+                }
+                if (isReader != null) {
+                    isReader.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        ECOCOMA_KEY = key;
+        System.out.println("***** Marketplace : Actualizada la llave de ecocoma " + ECOCOMA_KEY + " *****");
     }
 }

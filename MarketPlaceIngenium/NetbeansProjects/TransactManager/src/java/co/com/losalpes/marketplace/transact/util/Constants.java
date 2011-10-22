@@ -10,7 +10,7 @@ public class Constants {
     /**
      * Si expira actualizar desde http://www.ecocoma.com/shipping_webservice.aspx
      */
-    public static final String ECOCOMA_KEY = "SHP-S82148661O";
+    public static String ECOCOMA_KEY = "SHP-S82148661O";
     // PurchaseOrder
     public static final String NUM_SEGUIMIENTO_SEPARATOR = "-";
     // Excepciones

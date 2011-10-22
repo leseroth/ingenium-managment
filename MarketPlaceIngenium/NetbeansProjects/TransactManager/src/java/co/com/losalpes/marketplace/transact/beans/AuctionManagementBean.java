@@ -284,36 +284,29 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
      * @param oferta Oferta a evaluar
      */
     protected void calculateBestOffer(Subasta subasta, Oferta oferta) {
-        Comercio comercio = subasta.getPo().getComercio();
-        Fabricante fabricante = oferta.getFabricante();
-        Producto producto = subasta.getPo().getItem().getProducto();
-        int cantidad = subasta.getPo().getItem().getCantidad();
-        long valorUnitario = oferta.getValor();
 
         if (subasta.getPo().getEntrega().after(oferta.getFechaEntrega())) {
-            String senderPostalCode = fabricante.getCodPostal();
-            String senderCountryCode = fabricante.getCodPais();
-            String recipientPostalCode = comercio.getCodPostal();
-            String recipientCountryCode = comercio.getCodPais();
-            String totalPackageWeight = Integer.parseInt(producto.getPeso()) * cantidad + "";
-            String declaredValue = valorUnitario * cantidad + "";
-            Shipping shipping = null;
-            System.out.println("<" + ECOCOMA_KEY + "+" + senderPostalCode + "+" + senderCountryCode + "+" + recipientPostalCode + "+" + recipientCountryCode + "+" + totalPackageWeight + "+" + declaredValue + ">");
+            Comercio comercio = subasta.getPo().getComercio();
+            Fabricante fabricante = oferta.getFabricante();
+            Producto producto = subasta.getPo().getItem().getProducto();
 
-            try { // Call Web Service Operation
-                FedExService serviceFedEx = new FedExService();
-                FedExServiceSoap port = serviceFedEx.getFedExServiceSoap();
-                shipping = port.getFedExRate(ECOCOMA_KEY, null, null, senderPostalCode, senderCountryCode, recipientPostalCode, recipientCountryCode, totalPackageWeight, declaredValue);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                System.err.println("Error al llamar al web service de ecocoma de fedex " + ex);
-            }
+            int cantidad = subasta.getPo().getItem().getCantidad();
+            String weight = Integer.parseInt(producto.getPeso()) * cantidad + "";
+            String declaredValue = oferta.getValor() * cantidad + "";
 
-            List<Postage> postageList = shipping.getPackage().getPostage();
+            List<Postage> postageList = getAvailableShippings(comercio, fabricante, oferta, producto, weight, declaredValue);
 
             if (postageList.isEmpty()) {
                 oferta.setEstadoOferta(OFFER_NO_SEND_OPTION);
-            } else {
+            } else if (postageList.size() == 1) {
+                Postage post = postageList.get(0);
+                if (post.getCode().equals("ERR") && post.getMailService().equals("Invalid domain or key")) {
+                    updateEcocomaKey();
+                    postageList = getAvailableShippings(comercio, fabricante, oferta, producto, weight, declaredValue);
+                }
+            }
+
+            if (!postageList.isEmpty()) {
                 Collections.sort(postageList, new PostageComparator());
                 Postage bestPostage = null;
 
@@ -373,6 +366,28 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         if (isEmptyString(subasta.getMensaje())) {
             subasta.setMensaje(OFFER_ALL_INVALID);
         }
+    }
+
+    protected List<Postage> getAvailableShippings(Comercio comercio, Fabricante fabricante, Oferta oferta, Producto producto, String weight, String declaredValue) {
+
+        String senderPostalCode = fabricante.getCodPostal();
+        String senderCountryCode = fabricante.getCodPais();
+        String recipientPostalCode = comercio.getCodPostal();
+        String recipientCountryCode = comercio.getCodPais();
+
+        Shipping shipping = null;
+        System.out.println("<" + ECOCOMA_KEY + "+" + senderPostalCode + "+" + senderCountryCode + "+" + recipientPostalCode + "+" + recipientCountryCode + "+" + weight + "+" + declaredValue + ">");
+
+        try { // Call Web Service Operation
+            FedExService serviceFedEx = new FedExService();
+            FedExServiceSoap port = serviceFedEx.getFedExServiceSoap();
+            shipping = port.getFedExRate(ECOCOMA_KEY, null, null, senderPostalCode, senderCountryCode, recipientPostalCode, recipientCountryCode, weight, declaredValue);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.err.println("Error al llamar al web service de ecocoma de fedex " + ex);
+        }
+
+        return shipping.getPackage().getPostage();
     }
 
     /**
