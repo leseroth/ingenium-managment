@@ -11,6 +11,8 @@
             <element name="direccion" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="telefono" type="string" minOccurs="0" maxOccurs="1"/>
             <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="codPais" type="string" minOccurs="0"/>
+            <element name="codPostal" type="string" minOccurs="0"/>
             <element name="pos" type="tns:PurchaseOrder" minOccurs="0" maxOccurs="unbounded"/>
             <element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
         </sequence>

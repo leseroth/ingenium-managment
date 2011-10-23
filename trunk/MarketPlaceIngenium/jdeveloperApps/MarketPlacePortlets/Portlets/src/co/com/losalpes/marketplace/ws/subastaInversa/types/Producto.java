@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="referencia" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="pesoLibras" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,7 +39,8 @@ import javax.xml.bind.annotation.XmlType;
     "categoria",
     "tipo",
     "estado",
-    "referencia"
+    "referencia",
+    "pesoLibras"
 })
 public class Producto {
 
@@ -51,6 +53,7 @@ public class Producto {
     @XmlElement(required = true)
     protected String estado;
     protected String referencia;
+    protected String pesoLibras;
 
     /**
      * Gets the value of the id property.
@@ -194,6 +197,30 @@ public class Producto {
      */
     public void setReferencia(String value) {
         this.referencia = value;
+    }
+
+    /**
+     * Gets the value of the pesoLibras property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPesoLibras() {
+        return pesoLibras;
+    }
+
+    /**
+     * Sets the value of the pesoLibras property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPesoLibras(String value) {
+        this.pesoLibras = value;
     }
 
 }

@@ -8,7 +8,7 @@
      xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
     >
     <wsdl:documentation>
-        <abstractWSDL>http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa!1.0/SubastaInversa.wsdl</abstractWSDL>
+        <abstractWSDL>http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa!1.77/SubastaInversa.wsdl</abstractWSDL>
     </wsdl:documentation>
     <plnk:partnerLinkType name="SubastaInversa">
         <plnk:role name="SubastaInversaRequester">
@@ -67,7 +67,7 @@
     </wsdl:binding>
     <wsdl:service name="subastainversa_client_ep">
         <wsdl:port name="SubastaInversa_pt" binding="client:SubastaInversaBinding">
-            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep"/>
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

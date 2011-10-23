@@ -25,6 +25,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="horarioEntrega" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="fabricante" type="{http://marketplace.losalpes.com.co}Fabricante"/>
  *         &lt;element name="item" type="{http://marketplace.losalpes.com.co}Item"/>
+ *         &lt;element name="mensaje" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="valor" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="estadoOferta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +43,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "idSubasta",
     "horarioEntrega",
     "fabricante",
-    "item"
+    "item",
+    "mensaje",
+    "valor",
+    "estadoOferta"
 })
 public class Oferta {
 
@@ -56,6 +62,9 @@ public class Oferta {
     protected Fabricante fabricante;
     @XmlElement(required = true)
     protected Item item;
+    protected String mensaje;
+    protected Long valor;
+    protected String estadoOferta;
 
     /**
      * Gets the value of the id property.
@@ -199,6 +208,78 @@ public class Oferta {
      */
     public void setItem(Item value) {
         this.item = value;
+    }
+
+    /**
+     * Gets the value of the mensaje property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * Sets the value of the mensaje property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMensaje(String value) {
+        this.mensaje = value;
+    }
+
+    /**
+     * Gets the value of the valor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getValor() {
+        return valor;
+    }
+
+    /**
+     * Sets the value of the valor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setValor(Long value) {
+        this.valor = value;
+    }
+
+    /**
+     * Gets the value of the estadoOferta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEstadoOferta() {
+        return estadoOferta;
+    }
+
+    /**
+     * Sets the value of the estadoOferta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEstadoOferta(String value) {
+        this.estadoOferta = value;
     }
 
 }

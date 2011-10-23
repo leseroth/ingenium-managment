@@ -21,12 +21,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="activa" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="numSeguimiento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="fechaInicio" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="fechaTerminacion" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="fechaInicio" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="fechaTerminacion" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="ordenCompra" type="{http://marketplace.losalpes.com.co}PurchaseOrder"/>
  *         &lt;element name="mejor" type="{http://marketplace.losalpes.com.co}Oferta" minOccurs="0"/>
+ *         &lt;element name="mensaje" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="fabricante" type="{http://marketplace.losalpes.com.co}Fabricante" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="ofertas" type="{http://marketplace.losalpes.com.co}Oferta" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -38,28 +41,51 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Subasta", propOrder = {
+    "activa",
     "id",
     "numSeguimiento",
     "fechaInicio",
     "fechaTerminacion",
     "ordenCompra",
     "mejor",
+    "mensaje",
+    "fabricante",
     "ofertas"
 })
 public class Subasta {
 
+    protected boolean activa;
     protected Long id;
     protected String numSeguimiento;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "date")
+    @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar fechaInicio;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "date")
+    @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar fechaTerminacion;
     @XmlElement(required = true)
     protected PurchaseOrder ordenCompra;
     protected Oferta mejor;
+    protected String mensaje;
+    @XmlElement(nillable = true)
+    protected List<Fabricante> fabricante;
     protected List<Oferta> ofertas;
+
+    /**
+     * Gets the value of the activa property.
+     * 
+     */
+    public boolean isActiva() {
+        return activa;
+    }
+
+    /**
+     * Sets the value of the activa property.
+     * 
+     */
+    public void setActiva(boolean value) {
+        this.activa = value;
+    }
 
     /**
      * Gets the value of the id property.
@@ -203,6 +229,59 @@ public class Subasta {
      */
     public void setMejor(Oferta value) {
         this.mejor = value;
+    }
+
+    /**
+     * Gets the value of the mensaje property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * Sets the value of the mensaje property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMensaje(String value) {
+        this.mensaje = value;
+    }
+
+    /**
+     * Gets the value of the fabricante property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the fabricante property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFabricante().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Fabricante }
+     * 
+     * 
+     */
+    public List<Fabricante> getFabricante() {
+        if (fabricante == null) {
+            fabricante = new ArrayList<Fabricante>();
+        }
+        return this.fabricante;
     }
 
     /**
