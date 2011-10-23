@@ -12,6 +12,7 @@
         <af:outputLabel value="Fecha Terminación"/><af:outputText value="#{infoSubasta.subasta.fechaTerminacion}"/>
         <af:outputLabel value="Número de Seguimiento"/><af:outputText value="#{infoSubasta.subasta.numSeguimiento}"/>
         <af:outputLabel value="Orden de Compra"/><af:outputText value="#{infoSubasta.subasta.ordenCompra.numSeguimiento}"/>
+        <af:outputLabel value="Producto"/><af:outputText value="#{infoSubasta.subasta.ordenCompra.item.producto.nombre}"/>
         <legend>Ofertas</legend>
           <h:dataTable value="#{infoSubasta.subasta.ofertas}" var="oferta"
                          id="dt1">
@@ -22,17 +23,23 @@
                 </f:facet>
                 <h:outputText value="#{oferta.fechaEntrega}" id="ot4"/>
               </h:column>
-              <h:column id="c1">
-                <f:facet name="header">
-                  <h:outputText value="Item" id="ot1"/>
-                </f:facet>
-                <h:outputText value="#{oferta.item}" id="ot3"/>
-              </h:column>
               <h:column id="c3">
                 <f:facet name="header">
                   <h:outputText value="Fabricante" id="ot2"/>
                 </f:facet>
-                <h:outputText value="#{oferta.fabricante}" id="ot6"/>
+                <h:outputText value="#{oferta.fabricante.nombre}" id="ot6"/>
+              </h:column>
+              <h:column id="c4">
+                <f:facet name="header">
+                  <h:outputText value="Estado" id="ot3"/>
+                </f:facet>
+                <h:outputText value="#{oferta.fabricante.nombre}" id="ot8"/>
+              </h:column>
+              <h:column id="c5">
+                <f:facet name="header">
+                  <h:outputText value="Mensaje" id="ot9"/>
+                </f:facet>
+                <h:outputText value="#{oferta.fabricante.nombre}" id="ot7"/>
               </h:column>
             </h:dataTable>
             <legend>Mejor Oferta</legend> 
