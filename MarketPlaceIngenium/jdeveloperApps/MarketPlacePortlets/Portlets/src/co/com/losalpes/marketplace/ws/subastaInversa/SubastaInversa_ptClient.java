@@ -25,14 +25,6 @@ public class SubastaInversa_ptClient
   {
     subastainversa_client_ep = new Subastainversa_client_ep();
     SubastaInversa subastaInversa = subastainversa_client_ep.getSubastaInversa_pt();
-    // Get the request context to set the outgoing addressing properties
-    WSBindingProvider wsbp = (WSBindingProvider)subastaInversa;
-    WSEndpointReference replyTo =
-      new WSEndpointReference("http://<replace with the URL of the callback service>", WS_ADDR_VER);
-    String uuid = "uuid:" + UUID.randomUUID();
-
-    wsbp.setOutboundHeaders( new StringHeader(WS_ADDR_VER.messageIDTag, uuid), replyTo.createHeader(WS_ADDR_VER.replyToTag));
-
     return subastaInversa;
   }
 }

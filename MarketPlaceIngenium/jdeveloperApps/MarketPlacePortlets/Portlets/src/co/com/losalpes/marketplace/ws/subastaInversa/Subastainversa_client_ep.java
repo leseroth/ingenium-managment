@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebServiceClient(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
+@WebServiceClient(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
   targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
   name="subastainversa_client_ep")
 public class Subastainversa_client_ep
@@ -37,12 +37,12 @@ public class Subastainversa_client_ep
       if (baseUrl == null)
       {
         wsdlLocationURL =
-            Subastainversa_client_ep.class.getResource("http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
+            Subastainversa_client_ep.class.getResource("http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
         if (wsdlLocationURL == null)
         {
           baseUrl = new File(".").toURL();
           wsdlLocationURL =
-              new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
+              new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
         }
       }
       else
@@ -51,13 +51,13 @@ public class Subastainversa_client_ep
          baseUrl = new URL(baseUrl, baseUrl.getPath() + "/");
 }
                 wsdlLocationURL =
-            new URL(baseUrl, "http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
+            new URL(baseUrl, "http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL");
       }
     }
     catch (MalformedURLException e)
     {
       logger.log(Level.ALL,
-          "Failed to create wsdlLocationURL using http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
+          "Failed to create wsdlLocationURL using http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
           e);
     }
   }

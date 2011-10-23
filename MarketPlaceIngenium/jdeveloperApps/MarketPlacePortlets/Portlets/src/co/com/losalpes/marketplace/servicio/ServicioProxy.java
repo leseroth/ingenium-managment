@@ -374,12 +374,12 @@ public final class ServicioProxy {
       if(oferta==null||oferta.getItem()==null||oferta.getItem().getProducto()==null){
             throw new InvalidParameterException("No puede persistir una oferta sin item o sin producto");
           }
-      XMLGregorianCalendar fecha=toXMLGregorianCalendar(subasta.getFechaInicio());
-      XMLGregorianCalendar fechaEntrega=toXMLGregorianCalendar( subasta.getFechaTerminacion());
+      XMLGregorianCalendar fechaEntrega=toXMLGregorianCalendar( oferta.getFechaEntrega());
       FabricanteVO fabricante=oferta.getFabricante();
       
-      getSubastaInversa().process(fecha, fechaEntrega, subasta.getNumSeguimiento(),fabricante.getNit(), fabricante.getNombre(), fabricante.getEmail(), oferta.getItem().getCantidad(), oferta.getItem().getValor(), oferta.getItem().getProducto().getNombre(), oferta.getItem().getProducto().getCategoria());
+      getSubastaInversa().process(fechaEntrega, subasta.getNumSeguimiento(), fabricante.getNit(), oferta.getItem().getValor());          
       }
+  
     private OrdenCompraVO transformOrdenCompra(PurchaseOrder oc){
         if(oc==null)return null;
         OrdenCompraVO ocVO=new OrdenCompraVO();

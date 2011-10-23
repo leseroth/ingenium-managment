@@ -15,7 +15,7 @@ import javax.xml.ws.RequestWrapper;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 110329.0915.20612)
 
-@WebService(wsdlLocation="http://portal.marketplace.losalpes.com.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
+@WebService(wsdlLocation="http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep?WSDL",
   targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
   name="SubastaInversa")
 @XmlSeeAlso(
@@ -28,24 +28,12 @@ public interface SubastaInversa
     className="co.com.losalpes.marketplace.ws.subastaInversa.types.Process")
   @Oneway
   public void process(@WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="fecha")
-    XMLGregorianCalendar fecha, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
       name="fechaEntrega")
     XMLGregorianCalendar fechaEntrega, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
       name="numSeguimientoSubasta")
     String numSeguimientoSubasta, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
       name="nitFabricante")
     String nitFabricante, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="nombreFabricante")
-    String nombreFabricante, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="emailFabricante")
-    String emailFabricante, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="cantidadProducto")
-    int cantidadProducto, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
       name="valorProducto")
-    long valorProducto, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="nombreProducto")
-    String nombreProducto, @WebParam(targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa",
-      name="categoriaProducto")
-    String categoriaProducto);
+    long valorProducto);
 }

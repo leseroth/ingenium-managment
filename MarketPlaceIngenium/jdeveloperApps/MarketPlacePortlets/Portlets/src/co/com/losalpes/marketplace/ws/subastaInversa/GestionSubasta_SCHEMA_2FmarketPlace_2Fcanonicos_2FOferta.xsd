@@ -10,6 +10,9 @@
             <element name="horarioEntrega" type="dateTime" minOccurs="1"/>
             <element name="fabricante" type="tns:Fabricante" minOccurs="1"/>
             <element name="item" type="tns:Item" minOccurs="1" maxOccurs="1"/>
+            <element name="mensaje" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="valor" type="long" minOccurs="0"/>
+            <element name="estadoOferta" type="string" minOccurs="0"/>
         </sequence>
     </complexType>
     <element name="oferta" type="tns:Oferta"/>
