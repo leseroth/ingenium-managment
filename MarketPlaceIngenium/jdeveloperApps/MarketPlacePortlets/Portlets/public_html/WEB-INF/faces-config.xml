@@ -230,7 +230,7 @@
   <managed-bean>
     <managed-bean-name>crearOferta</managed-bean-name>
     <managed-bean-class>co.com.losalpes.marketplace.beans.CrearOferta</managed-bean-class>
-    <managed-bean-scope>request</managed-bean-scope>
+    <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
    
   <navigation-rule>
