@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:tns="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AvisoDespachoNoExisteException" type="tns:AvisoDespachoNoExisteException"/>
+
+  <xs:element name="ClienteNoExisteException" type="tns:ClienteNoExisteException"/>
+
+  <xs:element name="OrdenCompraNoExisteException" type="tns:OrdenCompraNoExisteException"/>
+
+  <xs:element name="consultarDA" type="tns:consultarDA"/>
+
+  <xs:element name="consultarDAResponse" type="tns:consultarDAResponse"/>
+
+  <xs:element name="consultarDAnumSeguimientoPO" type="tns:consultarDAnumSeguimientoPO"/>
+
+  <xs:element name="consultarDAnumSeguimientoPOResponse" type="tns:consultarDAnumSeguimientoPOResponse"/>
+
+  <xs:element name="consultarDAsFabricante" type="tns:consultarDAsFabricante"/>
+
+  <xs:element name="consultarDAsFabricanteResponse" type="tns:consultarDAsFabricanteResponse"/>
+
+  <xs:element name="consultarFabricantesConocidos" type="tns:consultarFabricantesConocidos"/>
+
+  <xs:element name="consultarFabricantesConocidosResponse" type="tns:consultarFabricantesConocidosResponse"/>
+
+  <xs:element name="consultarProductosFabricante" type="tns:consultarProductosFabricante"/>
+
+  <xs:element name="consultarProductosFabricanteResponse" type="tns:consultarProductosFabricanteResponse"/>
+
+  <xs:element name="registrarDA" type="tns:registrarDA"/>
+
+  <xs:element name="registrarDAResponse" type="tns:registrarDAResponse"/>
+
+  <xs:complexType name="consultarDA">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarDAResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:dispatchAdviceBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dispatchAdviceBO">
+    <xs:sequence>
+      <xs:element name="camiones" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricante" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="fechaEmision" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="fechaLlegada" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="items" type="tns:itemPOBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="montoOperacion" type="xs:long" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="fabricanteBO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemPOBO">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="producto" type="tns:productoBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="productoBO">
+    <xs:sequence>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricanteAtiende" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="precio" type="xs:long" minOccurs="0"/>
+      <xs:element name="tiempoFabricacion" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseOrderBO">
+    <xs:sequence>
+      <xs:element name="comercio" type="tns:comercioBO" minOccurs="0"/>
+      <xs:element name="entrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="items" type="tns:itemPOBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="comercioBO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AvisoDespachoNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarProductosFabricante">
+    <xs:sequence>
+      <xs:element name="nitFabricante" type="xs:string" minOccurs="0"/>
+      <xs:element name="nitComercio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarProductosFabricanteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:productoBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarDAsFabricante">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarDAsFabricanteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:dispatchAdviceBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ClienteNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarFabricantesConocidos">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarFabricantesConocidosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarDA">
+    <xs:sequence>
+      <xs:element name="da" type="tns:dispatchAdviceBO" minOccurs="0"/>
+      <xs:element name="numSeguimientoPo" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarDAResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OrdenCompraNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarDAnumSeguimientoPO">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="consultarDAnumSeguimientoPOResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:dispatchAdviceBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

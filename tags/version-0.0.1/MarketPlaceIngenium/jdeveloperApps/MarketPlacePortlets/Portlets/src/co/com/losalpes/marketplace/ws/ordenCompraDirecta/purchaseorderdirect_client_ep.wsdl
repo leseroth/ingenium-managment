@@ -1,0 +1,92 @@
+<wsdl:definitions
+     name="PurchaseOrderDirect"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+     xmlns:cor="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoOrdenCompra!1.0/PurchaseOrderDirect.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="PurchaseOrderDirect">
+        <plnk:role name="PurchaseOrderDirectProvider">
+            <plnk:portType name="client:PurchaseOrderDirect"/>
+        </plnk:role>
+        <plnk:role name="PurchaseOrderDirectRequester">
+            <plnk:portType name="client:PurchaseOrderDirectCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <bpws:propertyAlias xmlns:ns1="http://ws.pomanager.marketplace.losalpes.com.co/" propertyName="cor:NumSeguimiento"
+         messageType="ns1:registrarPOResponse" part="parameters" query="/ns1:registrarPOResponse/return"/>
+    <bpws:propertyAlias propertyName="cor:NumSegumientoAprobar" messageType="client:PurchaseOrderDirectAprobar"
+         part="abcde" query="/client:aprobacion/client:numSeguimiento"/>
+    <bpws:propertyAlias propertyName="cor:NumSeguimiento" messageType="client:PurchaseOrderDirectAprobar"
+         part="abcde" query="/client:aprobacion/client:numSeguimiento"/>
+    <wsp:Policy xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+         wsu:Id="wsaddr_policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"/>
+    </wsp:Policy>
+    <wsdl:import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect/correlationset"
+         location="properties.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"
+                 schemaLocation="PurchaseOrderDirect.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="PurchaseOrderDirectResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:message name="PurchaseOrderDirectRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="PurchaseOrderDirectAprobar">
+        <wsdl:part name="abcde" element="client:aprobacion"/>
+    </wsdl:message>
+    <wsdl:portType name="PurchaseOrderDirectCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:PurchaseOrderDirectResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PurchaseOrderDirect">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:PurchaseOrderDirectRequestMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="Aprobar">
+            <wsdl:input message="client:PurchaseOrderDirectAprobar"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PurchaseOrderDirectBinding" type="client:PurchaseOrderDirect">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wsaddr_policy"
+             wsdl:required="false"/>
+        <wsdl:operation name="process">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="Aprobar">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="Aprobar"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PurchaseOrderDirectCallbackBinding" type="client:PurchaseOrderDirectCallback">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="processResponse">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="processResponse"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="purchaseorderdirect_client_ep">
+        <wsdl:port name="PurchaseOrderDirect_pt" binding="client:PurchaseOrderDirectBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://localhost:7001/soa-infra/services/default/ProcesoOrdenCompra/purchaseorderdirect_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

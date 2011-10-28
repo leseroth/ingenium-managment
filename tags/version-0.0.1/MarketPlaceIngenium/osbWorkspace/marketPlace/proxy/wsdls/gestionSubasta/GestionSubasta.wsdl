@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GestionSubasta"
+	targetNamespace="http://marketplace.losalpes.com.co/GestionOfertas"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionOfertas"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://marketplace.losalpes.com.co" schemaLocation="GestionSubasta.xsd">
+			</xsd:import>
+		</xsd:schema>
+    </wsdl:types>
+	<wsdl:message name="registrarOfertaRequest">
+		<wsdl:part name="parameters" element="xsd1:registrarOferta" />
+	</wsdl:message>
+	<wsdl:message name="registrarOfertaResponse">
+		<wsdl:part name="parameters" element="xsd1:registrarOfertaResponse" />
+	</wsdl:message>
+	<wsdl:message name="cerrarSubastaRequest">
+		<wsdl:part name="parameters" element="xsd1:cerrarSubasta" />
+	</wsdl:message>
+	<wsdl:message name="cerrarSubastaResponse">
+		<wsdl:part name="parameters" element="xsd1:cerrarSubastaResponse" />
+	</wsdl:message>
+	<wsdl:message name="darGanadorSubastaRequest">
+		<wsdl:part name="parameters" element="xsd1:darGanadorSubasta" />
+	</wsdl:message>
+	<wsdl:message name="darGanadorSubastaResponse">
+		<wsdl:part name="parameters" element="xsd1:darGanadorSubastaResponse" />
+	</wsdl:message>
+	<wsdl:message name="crearSubastaRequest">
+		<wsdl:part name="parameters" element="xsd1:crearSubasta" />
+	</wsdl:message>
+	<wsdl:message name="crearSubastaResponse">
+		<wsdl:part name="parameters" element="xsd1:crearSubastaResponse" />
+	</wsdl:message>
+	<wsdl:message name="consultarSubastasFabricanteRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarSubastasFabricante"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarSubastasFabricanteResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarSubastasFabricanteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="asignarFabricantesSubastaRequest">
+		<wsdl:part name="parameters" element="xsd1:asignarFabricantesSubasta"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="asignarFabricantesSubastaResponse">
+		<wsdl:part name="parameters" element="xsd1:asignarFabricantesSubastaResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarFabricantesSubastaRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarFabricantesSubasta"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarFabricantesSubastaResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarFabricantesSubastaResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarSubastaOrdenCompraRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarSubastaOrdenCompra"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarSubastaOrdenCompraResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarSubastaOrdenCompraResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GestionSubasta">
+		<wsdl:operation name="registrarOferta">
+			<wsdl:input message="tns:registrarOfertaRequest" />
+			<wsdl:output message="tns:registrarOfertaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cerrarSubasta">
+			<wsdl:input message="tns:cerrarSubastaRequest" />
+			<wsdl:output message="tns:cerrarSubastaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="darGanadorSubasta">
+			<wsdl:input message="tns:darGanadorSubastaRequest" />
+			<wsdl:output message="tns:darGanadorSubastaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="crearSubasta">
+			<wsdl:input message="tns:crearSubastaRequest" />
+			<wsdl:output message="tns:crearSubastaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="consultarSubastasFabricante">
+			<wsdl:input message="tns:consultarSubastasFabricanteRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarSubastasFabricanteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="asignarFabricantesSubasta">
+			<wsdl:input message="tns:asignarFabricantesSubastaRequest"></wsdl:input>
+			<wsdl:output message="tns:asignarFabricantesSubastaResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarFabricantesSubasta">
+			<wsdl:input message="tns:consultarFabricantesSubastaRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarFabricantesSubastaResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarSubastaOrdenCompra">
+			<wsdl:input message="tns:consultarSubastaOrdenCompraRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarSubastaOrdenCompraResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionSubastaSOAP" type="tns:GestionSubasta">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="registrarOferta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cerrarSubasta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/cerrarSubasta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="darGanadorSubasta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/darGanadorSubasta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="crearSubasta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/crearSubasta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarSubastasFabricante">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="asignarFabricantesSubasta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/asignarFabricantesSubasta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarFabricantesSubasta">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarSubastaOrdenCompra">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastaOrdenCompra" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GestionSubasta">
+		<wsdl:port binding="tns:GestionSubastaSOAP" name="GestionSubastaSOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionOfertas" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

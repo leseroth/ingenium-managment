@@ -1,0 +1,46 @@
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta"
+     xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ma="http://xmlns.oracle.com/MarketPlace_jws/ProcesoActualizacionCuenta/ActualizacionCuenta">
+    <element name="process">
+        <complexType>
+            <sequence>
+                <element name="nit" nillable="false" type="string"/>
+                <element name="nombre" type="string"/>
+                <element name="direccion" type="string"/>
+                <element name="telefono" type="string"/>
+                <element name="email" type="string"/>
+                <element name="tipo" type="string"/>
+                <element name="calificacion" type="double"/>
+                <element name="razonSocial" type="string"/>
+                <element name="estado" type="string"/>
+                <element name="contactos" maxOccurs="unbounded" minOccurs="1" nillable="false" type="ma:ContactoActualizacion"/>
+                <element name="productos" maxOccurs="unbounded" minOccurs="1" nillable="false" type="ma:ProductoActualizacion"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="ContactoActualizacion">
+        <sequence>
+            <element name="idContacto" type="string"/>
+            <element name="numIdentificacion" type="string"/>
+            <element name="tipoIdentificacion" type="string"/>
+            <element name="nombre" type="string"/>
+            <element name="direccion" type="string"/>
+            <element name="telefono" type="string" minOccurs="0"/>
+            <element name="celular" type="string" minOccurs="0"/>
+            <element name="email" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ProductoActualizacion">
+        <sequence>
+            <element name="nombre" type="string" minOccurs="1" nillable="false"/>
+            <element name="categoria" type="string" minOccurs="1" nillable="false"/>
+            <element name="referencia" type="string" minOccurs="0" nillable="false"/>
+        </sequence>
+    </complexType>
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="resultado" type="boolean"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

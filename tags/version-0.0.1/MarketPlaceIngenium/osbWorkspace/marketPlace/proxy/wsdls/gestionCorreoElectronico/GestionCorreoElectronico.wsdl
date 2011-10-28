@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCorreoElectronico" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionCorreoElectronico" targetNamespace="http://marketplace.losalpes.com.co/GestionCorreoElectronico" xmlns:xsd1="http://marketplace.losalpes.com.co">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    	<xsd:import namespace="http://marketplace.losalpes.com.co"
+    		schemaLocation="GestionCorreoElectronico.xsd">
+    	</xsd:import></xsd:schema></wsdl:types>
+  <wsdl:message name="enviarCorreoElectronicoRequest">
+    <wsdl:part element="xsd1:enviarCorreoElectronico" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="enviarCorreoElectronicoResponse">
+    <wsdl:part element="xsd1:enviarCorreoElectronicoResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="GestionCorreoElectronico">
+    <wsdl:operation name="enviarCorreoElectronico">
+      <wsdl:input message="tns:enviarCorreoElectronicoRequest"/>
+      <wsdl:output message="tns:enviarCorreoElectronicoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GestionCorreoElectronicoSOAP"
+  	type="tns:GestionCorreoElectronico">
+
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="enviarCorreoElectronico">
+
+  		<soap:operation
+  			soapAction="http://marketplace.losalpes.com.co/GestionCorreoElectronico/enviarCorreoElectronico" />
+  		<wsdl:input>
+
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GestionCorreoElectronico">
+    <wsdl:port binding="tns:GestionCorreoElectronicoSOAP" name="GestionCorreoElectronicoSOAP">
+      <soap:address location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCorreoElectronico"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT. --><xs:schema xmlns:tns="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.ldap.marketplace.losalpes.com.co/">
+
+<xs:element name="EstadoNoExisteException" type="tns:EstadoNoExisteException"></xs:element>
+
+<xs:element name="RolNoExisteException" type="tns:RolNoExisteException"></xs:element>
+
+<xs:element name="UsuarioNoExisteException" type="tns:UsuarioNoExisteException"></xs:element>
+
+<xs:element name="actualizarEstadoUsuario" type="tns:actualizarEstadoUsuario"></xs:element>
+
+<xs:element name="actualizarEstadoUsuarioResponse" type="tns:actualizarEstadoUsuarioResponse"></xs:element>
+
+<xs:element name="autenticar" type="tns:autenticar"></xs:element>
+
+<xs:element name="autenticarResponse" type="tns:autenticarResponse"></xs:element>
+
+<xs:element name="cambiarClave" type="tns:cambiarClave"></xs:element>
+
+<xs:element name="cambiarClaveResponse" type="tns:cambiarClaveResponse"></xs:element>
+
+<xs:element name="crearUsuario" type="tns:crearUsuario"></xs:element>
+
+<xs:element name="crearUsuarioResponse" type="tns:crearUsuarioResponse"></xs:element>
+
+<xs:element name="obtenerNitUsuario" type="tns:obtenerNitUsuario"></xs:element>
+
+<xs:element name="obtenerNitUsuarioResponse" type="tns:obtenerNitUsuarioResponse"></xs:element>
+
+<xs:element name="recuperarClave" type="tns:recuperarClave"></xs:element>
+
+<xs:element name="recuperarClaveResponse" type="tns:recuperarClaveResponse"></xs:element>
+
+<xs:complexType name="autenticar">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="autenticarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuarioBO" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuarioBO">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="id" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="rol" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="UsuarioNoExisteException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarEstadoUsuario">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarEstadoUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="EstadoNoExisteException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerNitUsuario">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerNitUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClave">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClaveResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cambiarClave">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nuevaClave" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cambiarClaveResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearUsuario">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="rol" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuarioBO" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RolNoExisteException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

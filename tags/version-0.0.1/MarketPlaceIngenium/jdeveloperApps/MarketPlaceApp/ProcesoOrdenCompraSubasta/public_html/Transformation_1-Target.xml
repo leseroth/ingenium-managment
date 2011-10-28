@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd1:asignarFabricantesSubasta xmlns:xsd1="http://marketplace.losalpes.com.co">
+   <xsd1:numSeguimientoSubasta>numSeguimientoSub403</xsd1:numSeguimientoSubasta>
+   <xsd1:fabricantes>
+      <nit>nit406</nit>
+   </xsd1:fabricantes>
+   <xsd1:fabricantes>
+      <nit>nit540</nit>
+   </xsd1:fabricantes>
+   <xsd1:fabricantes>
+      <nit>nit674</nit>
+   </xsd1:fabricantes>
+</xsd1:asignarFabricantesSubasta>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="GestionDA" 
+	targetNamespace="http://marketplace.losalpes.com.co/GestionDA"
+ 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://marketplace.losalpes.com.co/GestionDA"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://marketplace.losalpes.com.co"
+				schemaLocation="GestionDA.xsd">
+			</xsd:import>
+		</xsd:schema>
+    </wsdl:types>
+	<wsdl:message name="registrarDARequest">
+		<wsdl:part element="xsd1:registrarDA" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="registrarDAResponse">
+		<wsdl:part element="xsd1:registrarDAResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="consultarDARequest">
+		<wsdl:part name="parameters" element="xsd1:consultarDA"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarDAResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarDAResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarDAsFabricanteRequest">
+		<wsdl:part name="parameters" element="xsd1:consultarDAsFabricante"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarDAsFabricanteResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarDAsFabricanteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarDAnumSeguimientoPORequest">
+		<wsdl:part name="parameters" element="xsd1:consultarDAnumSeguimientoPO"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarDAnumSeguimientoPOResponse">
+		<wsdl:part name="parameters" element="xsd1:consultarDAnumSeguimientoPOResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GestionDA">
+		<wsdl:operation name="registrarDA">
+			<wsdl:input message="tns:registrarDARequest" />
+			<wsdl:output message="tns:registrarDAResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="consultarDA">
+			<wsdl:input message="tns:consultarDARequest"></wsdl:input>
+			<wsdl:output message="tns:consultarDAResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarDAsFabricante">
+			<wsdl:input message="tns:consultarDAsFabricanteRequest"></wsdl:input>
+			<wsdl:output message="tns:consultarDAsFabricanteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarDAnumSeguimientoPO">
+			<wsdl:input message="tns:consultarDAnumSeguimientoPORequest"></wsdl:input>
+			<wsdl:output message="tns:consultarDAnumSeguimientoPOResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionDASOAP" type="tns:GestionDA">
+
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="registrarDA">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionDA/registrarDA" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarDA">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionDA/consultarDA" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarDAsFabricante">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionDA/consultarDAsFabricante" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarDAnumSeguimientoPO">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionDA/consultarDAnumSeguimientoPO" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="GestionDA">
+		<wsdl:port binding="tns:GestionDASOAP" name="GestionDASOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionDA" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

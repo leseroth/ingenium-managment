@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="purchaseorderdirect_client_ep"
+                     namespaceURI="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"/>
+      <port-info>
+         <wsdl-port localpart="PurchaseOrderDirect_pt"
+                    namespaceURI="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompra/PurchaseOrderDirect"/>
+         <runtime/>
+         <operations>
+            <operation name="process"/>
+            <operation name="aprobar"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

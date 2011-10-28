@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="VerificacionCrediticia"
+	targetNamespace="http://marketplace.losalpes.com.co/VerificacionCrediticia"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/VerificacionCrediticia"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="http://marketplace.losalpes.com.co">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://marketplace.losalpes.com.co"
+				schemaLocation="GestionVerificacionCrediticia.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="VerificarComfecamarasRequest">
+		<wsdl:part element="xsd1:verificarComfecamara" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="VerificarComfecamarasResponse">
+		<wsdl:part element="xsd1:verificarComfecamaraResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="VerificarDataCreditoRequest">
+		<wsdl:part name="parameters" element="xsd1:verificarDataCredito" />
+	</wsdl:message>
+	<wsdl:message name="VerificarDataCreditoResponse">
+		<wsdl:part name="parameters" element="xsd1:verificarDataCreditoResponse" />
+	</wsdl:message>
+	<wsdl:message name="VerificarListaAntilavadoRequest">
+		<wsdl:part name="parameters" element="xsd1:verificarListaAntilavado" />
+	</wsdl:message>
+	<wsdl:message name="VerificarListaAntilavadoResponse">
+		<wsdl:part name="parameters" element="xsd1:verificarListaAntilavadoResponse" />
+	</wsdl:message>
+	<wsdl:message name="VerificarListaClintonRequest">
+		<wsdl:part name="parameters" element="xsd1:verificarListaClinton" />
+	</wsdl:message>
+	<wsdl:message name="VerificarListaClintonResponse">
+		<wsdl:part name="parameters" element="xsd1:verificarListaClintonResponse" />
+	</wsdl:message>
+	<wsdl:portType name="VerificacionCrediticia">
+		<wsdl:operation name="VerificarComfecamaras">
+			<wsdl:input message="tns:VerificarComfecamarasRequest" />
+			<wsdl:output message="tns:VerificarComfecamarasResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="VerificarDataCredito">
+			<wsdl:input message="tns:VerificarDataCreditoRequest" />
+			<wsdl:output message="tns:VerificarDataCreditoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="VerificarListaAntilavado">
+			<wsdl:input message="tns:VerificarListaAntilavadoRequest" />
+			<wsdl:output message="tns:VerificarListaAntilavadoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="VerificarListaClinton">
+			<wsdl:input message="tns:VerificarListaClintonRequest" />
+			<wsdl:output message="tns:VerificarListaClintonResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="VerificacionCrediticiaSOAP" type="tns:VerificacionCrediticia">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="VerificarComfecamaras">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/VerificacionCrediticia/VerificarComfecamaras" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VerificarDataCredito">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/VerificacionCrediticia/VerificarDataCredito" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VerificarListaAntilavado">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/VerificacionCrediticia/VerificarListaAntilavado" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VerificarListaClinton">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/VerificacionCrediticia/VerificarListaClinton" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="VerificacionCrediticia">
+		<wsdl:port binding="tns:VerificacionCrediticiaSOAP" name="VerificacionCrediticiaSOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/VerificacionCrediticia" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

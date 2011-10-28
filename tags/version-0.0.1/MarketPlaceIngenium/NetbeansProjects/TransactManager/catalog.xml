@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/PoManagementService/PoManagement?wsdl" uri="src/conf/xml-resources/web-service-references/PoManagement/wsdl/localhost_8080/PoManagementService/PoManagement.wsdl"/>
+    <system systemId="http://localhost:8080/PoManagementService/PoManagement?xsd=1" uri="src/conf/xml-resources/web-service-references/PoManagement/wsdl/localhost_8080/PoManagementService/PoManagement.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/OffersManagementService/OffersManagement?wsdl" uri="src/conf/xml-resources/web-service-references/OffersManagement/wsdl/localhost_8080/OffersManagementService/OffersManagement.wsdl"/>
+    <system systemId="http://localhost:8080/OffersManagementService/OffersManagement?xsd=1" uri="src/conf/xml-resources/web-service-references/OffersManagement/wsdl/localhost_8080/OffersManagementService/OffersManagement.xsd_1.xsd"/>
+    <system systemId="http://service.ecocoma.com/shipping/fedex.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/fedex/wsdl/service.ecocoma.com/shipping/fedex.asmx.wsdl"/>
+    <system systemId="http://service.ecocoma.com/shipping/usps.asmx?WSDL" uri="src/conf/xml-resources/web-service-references/usps/wsdl/service.ecocoma.com/shipping/usps.asmx.wsdl"/>
+</catalog>
+
+
+
+
+
+
+
+
+
+
+
+
+

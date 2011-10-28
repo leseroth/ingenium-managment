@@ -1,0 +1,13 @@
+<adapter-config name="BAM" adapter="BAM Adapter" wsdlLocation="BAM.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/bam/rmi" UIConnectionName="BAMServerConnection1" adapterRef=""/>
+  <endpoint-interaction portType="writetoBAM_ptt" operation="writetoBAM">
+    <interaction-spec className="oracle.bam.adapter.adc.ADCInteractionSpec">
+      <property name="DataObjectName" value="/Cliente"/>
+      <property name="OperationType" value="Upsert"/>
+      <property name="InBatch" value="false"/>
+      <property name="Keys" value="_fecha,_nit"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<pagesDef xmlns="http://xmlns.oracle.com/webcenter/page"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://xmlns.oracle.com/webcenter/page/pagesDef.xsd">
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/home.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="home"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/subastas.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="subastas"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/ordenCompra.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="ordenCompra"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/ordenCompraDirecta.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="ordenCompraDirecta"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/registro.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="registro"
+           overridePolicy="false"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/factura.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="factura"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/cliente.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="cliente"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/devolucion.jspx"
+           hidden="false" shared="false" hasSubPages="false" id="devolucion"
+           overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/cambiarPassword.jspx"
+           hidden="false" shared="false" hasSubPages="false"
+           id="cambioPassword" overridePolicy="true"/>
+  <pageDef contentMRef="/oracle/webcenter/portalapp/pages/recuperarPassword.jspx"
+           hidden="false" shared="false" hasSubPages="false"
+           id="recuperarPassword" overridePolicy="false"/>
+</pagesDef>

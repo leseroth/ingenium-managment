@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionVerificacionCrediticia/GestionVerificacionCrediticia"/>
+      <con4:port>
+        <con4:name>VerificacionCrediticiaSOAP</con4:name>
+        <con4:namespace>http://marketplace.losalpes.com.co/VerificacionCrediticia</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionVerificacionCrediticia</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelineDataCredito_request">
+      <con:stage name="transformation">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-8292972538174936266-d91da25.12f186f4959.-6cce</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarDataCreditoRequest"/>
+                <con4:param name="verificarDataCredito1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelineDataCredito_response"></con:pipeline>
+    <con:pipeline type="request" name="PipelineConfecamaras_request">
+      <con:stage name="transformation">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:replace varName="body" contents-only="false" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-8292972538174936266-d91da25.12f186f4959.-6c90</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">./*</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarComfecamaraRequest"/>
+                <con4:param name="verificarComfecamara1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelineConfecamaras_response"></con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="transformation">
+        <con:context/>
+        <con:actions>
+          <con2:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7288504165834088378-4b248d87.12f6484375f.-7dda</con1:id>
+            <con2:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con2:location>
+            <con2:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarListaClintonRequest"/>
+                <con1:param name="verificarListaClinton1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con2:expr>
+          </con2:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response"/>
+    <con:pipeline type="request" name="PipelinePairNode2_request">
+      <con:stage name="transformation">
+        <con:context/>
+        <con:actions>
+          <con2:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7288504165834088378-4b248d87.12f6484375f.-7d00</con1:id>
+            <con2:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con2:location>
+            <con2:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarListaAntilavadoRequest"/>
+                <con1:param name="verificarListaAntilavado1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con2:expr>
+          </con2:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode2_response"/>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="VerificarDataCredito">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelineDataCredito">
+                <con:request>PipelineDataCredito_request</con:request>
+                <con:response>PipelineDataCredito_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteTo_DataCredito">
+                <con:context/>
+                <con:actions>
+                  <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                    <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-8292972538174936266-d91da25.12f186f4959.-6ccb</con4:id>
+                    <con1:service ref="marketPlace/business/GestionVerificacionCrediticia" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>verificarDataCredito</con1:operation>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="VerificarComfecamaras">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelineConfecamaras">
+                <con:request>PipelineConfecamaras_request</con:request>
+                <con:response>PipelineConfecamaras_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteNode1">
+                <con:context/>
+                <con:actions>
+                  <con3:route>
+                    <con1:id>_ActionId-8292972538174936266-d91da25.12f186f4959.-6bec</con1:id>
+                    <con3:service ref="marketPlace/business/GestionVerificacionCrediticia" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>verificarComfecamara</con3:operation>
+                    <con3:outboundTransform/>
+                    <con3:responseTransform/>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="VerificarListaClinton">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode1">
+                <con:request>PipelinePairNode1_request</con:request>
+                <con:response>PipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteNodeListaClinton">
+                <con:context/>
+                <con:actions>
+                  <con3:route>
+                    <con1:id>_ActionId-7288504165834088378-4b248d87.12f6484375f.-7c5d</con1:id>
+                    <con3:service ref="marketPlace/business/GestionVerificacionCrediticia" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>verificarListaClinton</con3:operation>
+                    <con3:outboundTransform/>
+                    <con3:responseTransform/>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="VerificarListaAntilavado">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode2">
+                <con:request>PipelinePairNode2_request</con:request>
+                <con:response>PipelinePairNode2_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteNodeAntiLavado">
+                <con:context/>
+                <con:actions>
+                  <con3:route>
+                    <con1:id>_ActionId-7288504165834088378-4b248d87.12f6484375f.-7bba</con1:id>
+                    <con3:service ref="marketPlace/business/GestionVerificacionCrediticia" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>verificarListaAntiLavado</con3:operation>
+                    <con3:outboundTransform/>
+                    <con3:responseTransform/>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

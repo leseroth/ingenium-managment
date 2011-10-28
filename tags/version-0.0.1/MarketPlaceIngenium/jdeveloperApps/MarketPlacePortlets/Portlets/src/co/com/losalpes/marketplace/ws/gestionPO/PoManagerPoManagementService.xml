@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="PoManagerPoManagementService"
+                     namespaceURI="http://ws.pomanager.marketplace.losalpes.com.co/"/>
+      <port-info>
+         <wsdl-port localpart="PoManagerPoManagementPort"
+                    namespaceURI="http://ws.pomanager.marketplace.losalpes.com.co/"/>
+         <runtime/>
+         <operations>
+            <operation name="registrarPO"/>
+            <operation name="consultarPOFabricantePorEstado"/>
+            <operation name="consultarPO"/>
+            <operation name="actualizarEstadoPO"/>
+            <operation name="establecerFabricanteAtiende"/>
+            <operation name="consultarComercioPorPO"/>
+            <operation name="consultarPOsComercio"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

@@ -1,0 +1,68 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+	<include schemaLocation="../../../canonicos/AvisoDespacho.xsd"/>
+	<complexType name="ConsultarDA">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="ConsultarDAResponse">
+		<sequence>
+			<element name="da" type="tns:DispatchAdvice" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<element name="consultarDA" type="tns:ConsultarDA"/>
+
+	<element name="consultarDAResponse" type="tns:ConsultarDAResponse"/>
+
+	<complexType name="RegistrarDA">
+		<sequence>
+			<element name="numSeguimientoPo" type="string" minOccurs="1" maxOccurs="1"/>
+			<element name="da" type="tns:DispatchAdvice" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="RegistrarDAResponse">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+
+	<element name="registrarDA" type="tns:RegistrarDA"/>
+
+	<element name="registrarDAResponse" type="tns:RegistrarDAResponse"/>
+
+
+	<complexType name="ConsultarDAsFabricante">
+		<sequence>
+			<element name="nit" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<complexType name="ConsultarDAsFabricanteResponse">
+		<sequence>
+			<element name="das" type="tns:DispatchAdvice" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+	<complexType name="ConsultarDAnumSeguimientoPO">
+		<sequence>
+			<element name="numSeguimientoPO" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="ConsultarDAnumSeguimientoPOResponse">
+		<sequence>
+			<element name="da" type="tns:DispatchAdvice" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<element name="consultarDAsFabricante" type="tns:ConsultarDAsFabricante"/>
+	<element name="consultarDAsFabricanteResponse" type="tns:ConsultarDAsFabricanteResponse"/>
+    <element name="consultarDAnumSeguimientoPO" type="tns:ConsultarDAnumSeguimientoPO" />
+    <element name="consultarDAnumSeguimientoPOResponse" type="tns:ConsultarDAnumSeguimientoPOResponse" />
+  
+
+
+
+
+</schema>

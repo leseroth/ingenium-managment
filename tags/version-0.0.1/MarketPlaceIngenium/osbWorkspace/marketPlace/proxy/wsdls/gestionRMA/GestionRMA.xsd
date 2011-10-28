@@ -1,0 +1,57 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="../../../canonicos/ReturnMaterialAdvice.xsd"/>
+    <complexType name="RegistrarRMA">
+    	<sequence>
+    		<element name="rma" type="tns:ReturnMaterialAdvice" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="RegistrarRMAResponse">
+    	<sequence>
+    		<element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+   
+   <complexType name="ConsultarRMAsComercio">
+    	<sequence>
+    		<element name="nitComercio" type="string" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+   
+   <complexType name="ConsultarRMAsComercioResponse">
+    	<sequence>
+    		<element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    	</sequence>
+    </complexType>
+    
+       <complexType name="ConsultarRMAsFabricante">
+    	<sequence>
+    		<element name="nitFabricante" type="string" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+   
+   <complexType name="ConsultarRMAsFabricanteResponse">
+    	<sequence>
+    		<element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    	</sequence>
+    </complexType>
+
+    <element name="registrarRMA" type="tns:RegistrarRMA"/>
+
+    <element name="registrarRMAResponse" type="tns:RegistrarRMAResponse"/>
+    
+    <element name="consultarRMAsComercio" type="tns:ConsultarRMAsComercio"/>
+    <element name="consultarRMAsComercioResponse" type="tns:ConsultarRMAsComercioResponse"/>
+        <element name="consultarRMAsFabricante" type="tns:ConsultarRMAsComercio"/>
+    <element name="consultarRMAsFabricanteResponse" type="tns:ConsultarRMAsComercioResponse"/>
+
+
+
+
+
+
+
+
+
+
+</schema>

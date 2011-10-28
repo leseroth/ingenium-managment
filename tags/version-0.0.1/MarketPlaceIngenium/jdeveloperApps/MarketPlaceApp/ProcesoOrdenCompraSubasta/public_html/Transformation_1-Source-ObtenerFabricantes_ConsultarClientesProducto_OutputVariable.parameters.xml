@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<consultarClientesProductoResponse xmlns="http://marketplace.losalpes.com.co">
+   <cliente>
+      <id xmlns="">id404</id>
+      <nombre xmlns="">nombre405</nombre>
+      <nit xmlns="">nit406</nit>
+      <direccion xmlns="">direccion407</direccion>
+      <telefono xmlns="">telefono408</telefono>
+      <email xmlns="">email409</email>
+      <ctaFact xmlns="">
+         <id>0</id>
+         <numReferencia>numReferencia411</numReferencia>
+         <transacciones>
+            <referencia>referencia412</referencia>
+            <fecha>2011-10-16T00:24:34.602</fecha>
+            <descripcion>descripcion413</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia415</referencia>
+            <fecha>2011-10-16T00:24:34.602</fecha>
+            <descripcion>descripcion416</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia418</referencia>
+            <fecha>2011-10-16T00:24:34.603</fecha>
+            <descripcion>descripcion419</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url421</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre422</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url424</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre425</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url427</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre428</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.603</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+      </ctaFact>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion431</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado432</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa433</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre435</nombre>
+            <url>url436</url>
+            <tipo>tipo437</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre439</nombre>
+            <url>url440</url>
+            <tipo>tipo441</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre443</nombre>
+            <url>url444</url>
+            <tipo>tipo445</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre446</nombre>
+            <categoria xmlns="">categoria447</categoria>
+            <estado xmlns="">estado448</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre449</nombre>
+            <categoria xmlns="">categoria450</categoria>
+            <estado xmlns="">estado451</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre452</nombre>
+            <categoria xmlns="">categoria453</categoria>
+            <estado xmlns="">estado454</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion456</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado457</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa458</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre460</nombre>
+            <url>url461</url>
+            <tipo>tipo462</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre464</nombre>
+            <url>url465</url>
+            <tipo>tipo466</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre468</nombre>
+            <url>url469</url>
+            <tipo>tipo470</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre471</nombre>
+            <categoria xmlns="">categoria472</categoria>
+            <estado xmlns="">estado473</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre474</nombre>
+            <categoria xmlns="">categoria475</categoria>
+            <estado xmlns="">estado476</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre477</nombre>
+            <categoria xmlns="">categoria478</categoria>
+            <estado xmlns="">estado479</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion481</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado482</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa483</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre485</nombre>
+            <url>url486</url>
+            <tipo>tipo487</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre489</nombre>
+            <url>url490</url>
+            <tipo>tipo491</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre493</nombre>
+            <url>url494</url>
+            <tipo>tipo495</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre496</nombre>
+            <categoria xmlns="">categoria497</categoria>
+            <estado xmlns="">estado498</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre499</nombre>
+            <categoria xmlns="">categoria500</categoria>
+            <estado xmlns="">estado501</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre502</nombre>
+            <categoria xmlns="">categoria503</categoria>
+            <estado xmlns="">estado504</estado>
+         </productos>
+      </solicitudes>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id505</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion506</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion507</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre508</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion509</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono510</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular511</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado512</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email513</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id514</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion515</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion516</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre517</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion518</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono519</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular520</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado521</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email522</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id523</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion524</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion525</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre526</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion527</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono528</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular529</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado530</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email531</email>
+      </contactos>
+      <razonSocial xmlns="">razonSocial532</razonSocial>
+      <estado xmlns="">estado533</estado>
+      <tipo xmlns="">tipo534</tipo>
+      <comision xmlns="">5350.68</comision>
+      <codigoPostal xmlns="">codigoPostal536</codigoPostal>
+      <codigoPais xmlns="">codigoPais537</codigoPais>
+   </cliente>
+   <cliente>
+      <id xmlns="">id538</id>
+      <nombre xmlns="">nombre539</nombre>
+      <nit xmlns="">nit540</nit>
+      <direccion xmlns="">direccion541</direccion>
+      <telefono xmlns="">telefono542</telefono>
+      <email xmlns="">email543</email>
+      <ctaFact xmlns="">
+         <id>0</id>
+         <numReferencia>numReferencia545</numReferencia>
+         <transacciones>
+            <referencia>referencia546</referencia>
+            <fecha>2011-10-16T00:24:34.605</fecha>
+            <descripcion>descripcion547</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia549</referencia>
+            <fecha>2011-10-16T00:24:34.605</fecha>
+            <descripcion>descripcion550</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia552</referencia>
+            <fecha>2011-10-16T00:24:34.605</fecha>
+            <descripcion>descripcion553</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url555</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre556</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.605</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.605</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url558</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre559</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.606</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.606</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url561</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre562</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.606</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.606</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+      </ctaFact>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion565</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado566</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa567</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre569</nombre>
+            <url>url570</url>
+            <tipo>tipo571</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre573</nombre>
+            <url>url574</url>
+            <tipo>tipo575</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre577</nombre>
+            <url>url578</url>
+            <tipo>tipo579</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre580</nombre>
+            <categoria xmlns="">categoria581</categoria>
+            <estado xmlns="">estado582</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre583</nombre>
+            <categoria xmlns="">categoria584</categoria>
+            <estado xmlns="">estado585</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre586</nombre>
+            <categoria xmlns="">categoria587</categoria>
+            <estado xmlns="">estado588</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion590</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado591</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa592</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre594</nombre>
+            <url>url595</url>
+            <tipo>tipo596</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre598</nombre>
+            <url>url599</url>
+            <tipo>tipo600</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre602</nombre>
+            <url>url603</url>
+            <tipo>tipo604</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre605</nombre>
+            <categoria xmlns="">categoria606</categoria>
+            <estado xmlns="">estado607</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre608</nombre>
+            <categoria xmlns="">categoria609</categoria>
+            <estado xmlns="">estado610</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre611</nombre>
+            <categoria xmlns="">categoria612</categoria>
+            <estado xmlns="">estado613</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion615</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado616</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa617</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre619</nombre>
+            <url>url620</url>
+            <tipo>tipo621</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre623</nombre>
+            <url>url624</url>
+            <tipo>tipo625</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre627</nombre>
+            <url>url628</url>
+            <tipo>tipo629</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre630</nombre>
+            <categoria xmlns="">categoria631</categoria>
+            <estado xmlns="">estado632</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre633</nombre>
+            <categoria xmlns="">categoria634</categoria>
+            <estado xmlns="">estado635</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre636</nombre>
+            <categoria xmlns="">categoria637</categoria>
+            <estado xmlns="">estado638</estado>
+         </productos>
+      </solicitudes>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id639</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion640</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion641</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre642</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion643</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono644</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular645</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado646</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email647</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id648</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion649</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion650</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre651</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion652</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono653</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular654</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado655</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email656</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id657</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion658</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion659</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre660</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion661</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono662</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular663</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado664</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email665</email>
+      </contactos>
+      <razonSocial xmlns="">razonSocial666</razonSocial>
+      <estado xmlns="">estado667</estado>
+      <tipo xmlns="">tipo668</tipo>
+      <comision xmlns="">6690.69</comision>
+      <codigoPostal xmlns="">codigoPostal670</codigoPostal>
+      <codigoPais xmlns="">codigoPais671</codigoPais>
+   </cliente>
+   <cliente>
+      <id xmlns="">id672</id>
+      <nombre xmlns="">nombre673</nombre>
+      <nit xmlns="">nit674</nit>
+      <direccion xmlns="">direccion675</direccion>
+      <telefono xmlns="">telefono676</telefono>
+      <email xmlns="">email677</email>
+      <ctaFact xmlns="">
+         <id>0</id>
+         <numReferencia>numReferencia679</numReferencia>
+         <transacciones>
+            <referencia>referencia680</referencia>
+            <fecha>2011-10-16T00:24:34.607</fecha>
+            <descripcion>descripcion681</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia683</referencia>
+            <fecha>2011-10-16T00:24:34.608</fecha>
+            <descripcion>descripcion684</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <transacciones>
+            <referencia>referencia686</referencia>
+            <fecha>2011-10-16T00:24:34.608</fecha>
+            <descripcion>descripcion687</descripcion>
+            <valor>0</valor>
+         </transacciones>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url689</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre690</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url692</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre693</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+         <facturas>
+            <url xmlns="http://marketplace.losalpes.com.co">url695</url>
+            <nombre xmlns="http://marketplace.losalpes.com.co">nombre696</nombre>
+            <fechaInicio xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaInicio>
+            <fechaFin xmlns="http://marketplace.losalpes.com.co">2011-10-16T00:24:34.608</fechaFin>
+            <valorPago xmlns="http://marketplace.losalpes.com.co">0</valorPago>
+         </facturas>
+      </ctaFact>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion699</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado700</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa701</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre703</nombre>
+            <url>url704</url>
+            <tipo>tipo705</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre707</nombre>
+            <url>url708</url>
+            <tipo>tipo709</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre711</nombre>
+            <url>url712</url>
+            <tipo>tipo713</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre714</nombre>
+            <categoria xmlns="">categoria715</categoria>
+            <estado xmlns="">estado716</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre717</nombre>
+            <categoria xmlns="">categoria718</categoria>
+            <estado xmlns="">estado719</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre720</nombre>
+            <categoria xmlns="">categoria721</categoria>
+            <estado xmlns="">estado722</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion724</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado725</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa726</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre728</nombre>
+            <url>url729</url>
+            <tipo>tipo730</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre732</nombre>
+            <url>url733</url>
+            <tipo>tipo734</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre736</nombre>
+            <url>url737</url>
+            <tipo>tipo738</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre739</nombre>
+            <categoria xmlns="">categoria740</categoria>
+            <estado xmlns="">estado741</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre742</nombre>
+            <categoria xmlns="">categoria743</categoria>
+            <estado xmlns="">estado744</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre745</nombre>
+            <categoria xmlns="">categoria746</categoria>
+            <estado xmlns="">estado747</estado>
+         </productos>
+      </solicitudes>
+      <solicitudes xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">0</id>
+         <numRadicacion xmlns="http://marketplace.losalpes.com.co">numRadicacion749</numRadicacion>
+         <fecha xmlns="http://marketplace.losalpes.com.co">2011-10-16</fecha>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado750</estado>
+         <causa xmlns="http://marketplace.losalpes.com.co">causa751</causa>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre753</nombre>
+            <url>url754</url>
+            <tipo>tipo755</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre757</nombre>
+            <url>url758</url>
+            <tipo>tipo759</tipo>
+         </documentos>
+         <documentos xmlns="http://marketplace.losalpes.com.co">
+            <id>0</id>
+            <nombre>nombre761</nombre>
+            <url>url762</url>
+            <tipo>tipo763</tipo>
+         </documentos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre764</nombre>
+            <categoria xmlns="">categoria765</categoria>
+            <estado xmlns="">estado766</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre767</nombre>
+            <categoria xmlns="">categoria768</categoria>
+            <estado xmlns="">estado769</estado>
+         </productos>
+         <productos xmlns="http://marketplace.losalpes.com.co">
+            <nombre xmlns="">nombre770</nombre>
+            <categoria xmlns="">categoria771</categoria>
+            <estado xmlns="">estado772</estado>
+         </productos>
+      </solicitudes>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id773</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion774</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion775</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre776</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion777</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono778</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular779</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado780</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email781</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id782</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion783</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion784</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre785</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion786</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono787</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular788</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado789</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email790</email>
+      </contactos>
+      <contactos xmlns="">
+         <id xmlns="http://marketplace.losalpes.com.co">id791</id>
+         <numIdentificacion xmlns="http://marketplace.losalpes.com.co">numIdentificacion792</numIdentificacion>
+         <tipoIdentificacion xmlns="http://marketplace.losalpes.com.co">tipoIdentificacion793</tipoIdentificacion>
+         <nombre xmlns="http://marketplace.losalpes.com.co">nombre794</nombre>
+         <direccion xmlns="http://marketplace.losalpes.com.co">direccion795</direccion>
+         <telefono xmlns="http://marketplace.losalpes.com.co">telefono796</telefono>
+         <celular xmlns="http://marketplace.losalpes.com.co">celular797</celular>
+         <estado xmlns="http://marketplace.losalpes.com.co">estado798</estado>
+         <email xmlns="http://marketplace.losalpes.com.co">email799</email>
+      </contactos>
+      <razonSocial xmlns="">razonSocial800</razonSocial>
+      <estado xmlns="">estado801</estado>
+      <tipo xmlns="">tipo802</tipo>
+      <comision xmlns="">8030.70</comision>
+      <codigoPostal xmlns="">codigoPostal804</codigoPostal>
+      <codigoPais xmlns="">codigoPais805</codigoPais>
+   </cliente>
+</consultarClientesProductoResponse>

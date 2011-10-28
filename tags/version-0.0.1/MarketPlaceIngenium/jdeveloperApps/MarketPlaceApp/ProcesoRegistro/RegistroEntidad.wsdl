@@ -1,0 +1,29 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="RegistroEntidad"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad"
+     xmlns:ns1="http://marketplace.losalpes.com.co"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="RegistroEntidad">
+        <plnk:role name="RegistroEntidadProvider">
+            <plnk:portType name="client:RegistroEntidad"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad"
+                 schemaLocation="xsd/RegistroEntidad.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="RegistroEntidadRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="RegistroEntidad">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:RegistroEntidadRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

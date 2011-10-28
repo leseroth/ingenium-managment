@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://marketplace.losalpes.com.co">
+
+	<include schemaLocation="../../../canonicos/PurchaseOrder.xsd"></include>
+
+	<complexType name="ConsultarPO">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="ConsultarPOResponse">
+		<sequence>
+			<element name="purchaseOrder" type="tns:PurchaseOrder"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="mensaje" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ActualizarEstadoPO">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ActualizarEstadoPOResponse">
+		<sequence>
+			<element name="respuesta" type="boolean" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<complexType name="EstablecerFabricanteAtiende">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="fabricante" type="tns:Fabricante" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="items" type="tns:Item" minOccurs="0"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="EstablecerFabricanteAtiendeResponse">
+		<sequence>
+			<element name="Respuesta" type="boolean" minOccurs="1"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+
+	<element name="consultarPO" type="tns:ConsultarPO"></element>
+
+	<element name="consultarPOResponse" type="tns:ConsultarPOResponse"></element>
+
+	<element name="actualizarEstadoPO" type="tns:ActualizarEstadoPO"></element>
+
+	<element name="actualizarEstadoPOResponse" type="tns:ActualizarEstadoPOResponse"></element>
+
+	<element name="establecerFabricanteAtiende" type="tns:EstablecerFabricanteAtiende"></element>
+
+	<element name="establecerFabricanteAtiendeResponse" type="tns:EstablecerFabricanteAtiendeResponse"></element>
+
+	<complexType name="RegistrarPO">
+		<sequence>
+			<element name="purchaseOrder" type="tns:PurchaseOrder"
+				minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RegistrarPOResponse">
+		<sequence>
+			<element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<element name="registrarPO" type="tns:RegistrarPO"></element>
+
+	<element name="registrarPOResponse" type="tns:RegistrarPOResponse"></element>
+
+	<complexType name="ConsultarPOFault">
+		<sequence>
+			<element name="mensaje" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<element name="consultarPOFault" type="tns:ConsultarPOFault"></element>
+
+	<complexType name="ConsultarComercioPO">
+		<sequence>
+			<element name="numSeguimientoPO" type="string" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ConsultarComercioPOResponse">
+		<sequence>
+			<element name="comercio" type="tns:Comercio" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+    <element name="consultarComercioPO" type="tns:ConsultarComercioPO"></element>
+
+    <element name="consultarComercioPOResponse" type="tns:ConsultarComercioPOResponse"></element>
+
+    <complexType name="ConsultarPOsComercio">
+    	<sequence>
+    		<element name="nitComercio" type="string" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="ConsultarPOsComercioResponse">
+    	<sequence>
+    		<element name="pos" type="tns:PurchaseOrder" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="consultarPOsComercioResponse"
+    	type="tns:ConsultarPOsComercioResponse">
+    </element>
+
+    <element name="consultarPOsComercio"
+    	type="tns:ConsultarPOsComercio">
+    </element>
+</schema>

@@ -1,0 +1,20 @@
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+     xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ma="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa">
+    <element name="process">
+        <complexType>
+            <sequence>
+                <element name="fechaEntrega" type="dateTime" maxOccurs="1"/>
+                <element name="numSeguimientoSubasta" type="string"/>
+                <element name="nitFabricante" nillable="false" type="string"/>
+                <element name="valorProducto" type="long" minOccurs="1" nillable="false"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="resultado" type="boolean"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

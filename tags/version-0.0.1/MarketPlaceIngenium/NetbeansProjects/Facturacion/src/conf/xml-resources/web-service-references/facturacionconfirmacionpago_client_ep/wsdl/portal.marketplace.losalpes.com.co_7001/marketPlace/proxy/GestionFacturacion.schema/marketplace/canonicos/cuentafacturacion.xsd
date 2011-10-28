@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co" xmlns:Q1="http://marketplace.losalpes.com.co">
+    <include schemaLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?SCHEMA%2FmarketPlace%2Fcanonicos%2FFactura"/>
+    <include schemaLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?SCHEMA%2FmarketPlace%2Fcanonicos%2FTransaccion"/>
+    <complexType name="CuentaFacturacion">
+    	<sequence>
+    		<element name="id" type="long" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="numReferencia" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="transacciones" type="Q1:Transaccion" minOccurs="0" maxOccurs="unbounded">
+    		</element>
+    		<element name="facturas" type="tns:Factura" minOccurs="0" maxOccurs="unbounded"/>
+    	</sequence>
+    </complexType>
+
+    <element name="cuentaFacturacion" type="tns:CuentaFacturacion"/>
+</schema>

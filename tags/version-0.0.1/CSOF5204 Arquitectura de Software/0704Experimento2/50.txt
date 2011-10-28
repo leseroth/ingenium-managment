@@ -1,0 +1,113 @@
+init:
+Deleting: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCentralSystem.init:
+ASHCentralSystem.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.init:
+ASHCommons.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHCommons.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\build
+Nothing to copy.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCommons\dist\ASHCommons.jar"
+ASHCommons.jar:
+ASHCentralSystem.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHCentralSystem\dist\ASHCentralSystem.jar"
+ASHCentralSystem.jar:
+ASHExternalSystems.init:
+ASHExternalSystems.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHExternalSystems.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHExternalSystems\dist\ASHExternalSystems.jar"
+ASHExternalSystems.jar:
+ASHHomeModule.init:
+ASHHomeModule.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHHomeModule.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHHomeModule\dist\ASHHomeModule.jar"
+ASHHomeModule.jar:
+ASHLoadBalancer.init:
+ASHLoadBalancer.deps-jar:
+Updating property ile: C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\built-jar.properties
+ASHLoadBalancer.compile:
+Copying 1 ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\build
+Copy libraries to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\lib.
+To run this application rom the command line without Ant, try:
+java -jar "C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHLoadBalancer\dist\ASHLoadBalancer.jar"
+ASHLoadBalancer.jar:
+compile:
+Compiling 1 source ile to C:\ErikArcos\ingenium-managment\CSO5204 Arquitectura de Sotware\workspace\ASHTestSystems\build\test\classes
+compile-test-single:
+run-test-with-main:
+El balanceador de carga esta listo para aceptar conexiones de servidores
+El balanceador de carga esta listo para aceptar conexiones de casas
+Se ha agregado un servidor al pool
+Se ha agregado un servidor al pool
+.........................................
+.........124
+309
+416
+416
+413
+422
+421
+428
+414
+412
+425
+428
+428
+484
+431
+546
+556
+532
+534
+562
+550
+551
+499
+523
+541
+560
+561
+507
+542
+532
+529
+547
+576
+540
+724
+716
+664
+715
+722
+723
+663
+726
+852
+821
+792
+823
+814
+855
+824
+828
+
+Time: 0.899
+
+OK (50 tests)
+

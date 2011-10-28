@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://marketplace.losalpes.com.co/GestionCliente"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="GestionCliente"
+	xmlns:ma="http://marketplace.losalpes.com.co"
+	targetNamespace="http://marketplace.losalpes.com.co/GestionCliente" xmlns:xsd1="http://ws.transact.marketplace.losalpes.com.co/">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://marketplace.losalpes.com.co"
+				schemaLocation="GestionCliente.xsd">
+			</xsd:import>
+			<xsd:import
+				namespace="http://ws.transact.marketplace.losalpes.com.co/"
+				schemaLocation="../../../business/wsdls/transactManager/XMLSchema_765612391.xsd">
+			</xsd:import></xsd:schema>    
+    </wsdl:types>
+	<wsdl:message name="CrearClienteRequest">
+		<wsdl:part name="parameters" element="ma:crearCliente"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CrearClienteResponse">
+		<wsdl:part name="parameters" element="ma:crearClienteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CrearContactosRequest">
+		<wsdl:part name="parameters" element="ma:crearContacto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CrearContactosResponse">
+		<wsdl:part name="parameters" element="ma:crearContactoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClienteRequest">
+		<wsdl:part name="parameters" element="ma:consultarCliente"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClienteResponse">
+		<wsdl:part name="parameters" element="ma:consultarClienteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesRequest">
+		<wsdl:part name="parameters" element="ma:consultarClientes"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesResponse">
+		<wsdl:part name="parameters" element="ma:consultarClientesResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarComisionRequest">
+		<wsdl:part name="parameters" element="ma:consultarComision"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarComisionResponse">
+		<wsdl:part name="parameters" element="ma:consultarComisionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarClienteRequest">
+		<wsdl:part name="parameters" element="ma:modificarCliente"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarClienteResponse">
+		<wsdl:part name="parameters" element="ma:modificarClienteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarComisionRequest">
+		<wsdl:part name="parameters" element="ma:modificarComision"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ModificarComisionResponse">
+		<wsdl:part name="parameters" element="ma:modificarComisionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesProductoRequest">
+		<wsdl:part name="parameters" element="ma:consultarClientesProducto"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarClientesProductoResponse">
+		<wsdl:part name="parameters" element="ma:consultarClientesProductoResponse"></wsdl:part>
+	</wsdl:message>
+		<wsdl:message name="RadicarSolicitudRequest">
+		<wsdl:part element="ma:radicarSolicitud" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="RadicarSolicitudResponse">
+		<wsdl:part element="ma:radicarSolicitudResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="ActualizarSolicitudRequest">
+		<wsdl:part name="parameters" element="ma:actualizarSolicitud"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ActualizarSolicitudResponse">
+		<wsdl:part name="parameters" element="ma:actualizarSolicitudResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ActualizarEstadoClienteRequest">
+		<wsdl:part name="parameters" element="ma:actualizarEstadoCliente"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ActualizarEstadoClienteResponse">
+		<wsdl:part name="parameters" element="ma:actualizarEstadoClienteResponse"></wsdl:part>
+	</wsdl:message>
+		<wsdl:message name="ActualizarEstadoSolicitudRequest">
+		<wsdl:part name="parameters" element="ma:actualizarEstadoSolicitud"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ActualizarEstadoSolicitudResponse">
+		<wsdl:part name="parameters" element="ma:actualizarEstadoSolicitudResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CerrarSolicitudRequest">
+		<wsdl:part name="parameters" element="ma:cerrarSolicitud"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CerrarSolicitudResponse">
+		<wsdl:part name="parameters" element="ma:cerrarSolicitudResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarProductosClienteRequest">
+		<wsdl:part name="parameters" element="ma:consultarProductosCliente"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ConsultarProductosClienteResponse">
+		<wsdl:part name="parameters" element="ma:consultarProductosClienteResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="GestionCliente">
+		<wsdl:operation name="CrearCliente">
+			<wsdl:input message="tns:CrearClienteRequest" />
+			<wsdl:output message="tns:CrearClienteResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="CrearContactos">
+			<wsdl:input message="tns:CrearContactosRequest"></wsdl:input>
+			<wsdl:output message="tns:CrearContactosResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCliente">
+			<wsdl:input message="tns:ConsultarClienteRequest"></wsdl:input>
+			<wsdl:output message="tns:ConsultarClienteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientes">
+			<wsdl:input message="tns:ConsultarClientesRequest"></wsdl:input>
+			<wsdl:output message="tns:ConsultarClientesResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarComision">
+			<wsdl:input message="tns:ConsultarComisionRequest"></wsdl:input>
+			<wsdl:output message="tns:ConsultarComisionResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModificarCliente">
+			<wsdl:input message="tns:ModificarClienteRequest"></wsdl:input>
+			<wsdl:output message="tns:ModificarClienteResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModificarComision">
+			<wsdl:input message="tns:ModificarComisionRequest"></wsdl:input>
+			<wsdl:output message="tns:ModificarComisionResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientesProducto">
+			<wsdl:input message="tns:ConsultarClientesProductoRequest"></wsdl:input>
+			<wsdl:output message="tns:ConsultarClientesProductoResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RadicarSolicitud">
+			<wsdl:input message="tns:RadicarSolicitudRequest" />
+			<wsdl:output message="tns:RadicarSolicitudResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ActualizarSolicitud">
+			<wsdl:input message="tns:ActualizarSolicitudRequest"></wsdl:input>
+			<wsdl:output message="tns:ActualizarSolicitudResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ActualizarEstadoCliente">
+			<wsdl:input message="tns:ActualizarEstadoClienteRequest"></wsdl:input>
+			<wsdl:output message="tns:ActualizarEstadoClienteResponse"></wsdl:output>
+		</wsdl:operation>
+				<wsdl:operation name="ActualizarEstadoSolicitud">
+			<wsdl:input message="tns:ActualizarEstadoSolicitudRequest"></wsdl:input>
+			<wsdl:output message="tns:ActualizarEstadoSolicitudResponse"></wsdl:output>
+		</wsdl:operation>
+				<wsdl:operation name="CerrarSolicitud">
+					<wsdl:input message="tns:CerrarSolicitudRequest"></wsdl:input>
+					<wsdl:output message="tns:CerrarSolicitudResponse"></wsdl:output>
+				</wsdl:operation>
+				<wsdl:operation name="ConsultarProductosCliente">
+					<wsdl:input message="tns:ConsultarProductosClienteRequest"></wsdl:input>
+					<wsdl:output message="tns:ConsultarProductosClienteResponse"></wsdl:output>
+				</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="GestionClienteSOAP" type="tns:GestionCliente">
+
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="CrearCliente">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CrearContactos">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearContactos" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCliente">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientes">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarComision">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModificarCliente">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ModificarComision">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarClientesProducto">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientesProducto" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RadicarSolicitud">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/RadicarSolicitud" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ActualizarSolicitud">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ActualizarEstadoCliente">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ActualizarEstadoSolicitud">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="CerrarSolicitud">
+
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarProductosCliente">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="GestionCliente">
+		<wsdl:port binding="tns:GestionClienteSOAP" name="GestionClienteSOAP">
+			<soap:address
+				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

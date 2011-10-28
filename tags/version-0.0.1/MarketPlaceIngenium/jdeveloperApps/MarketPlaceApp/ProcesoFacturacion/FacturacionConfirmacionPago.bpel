@@ -1,0 +1,102 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jan 31 09:42:38 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="FacturacionConfirmacionPago"
+         targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/FacturacionConfirmacionPago"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:ns2="http://marketplace.losalpes.com.co">
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="facturacionconfirmacionpago_client"
+                 partnerLinkType="client:FacturacionConfirmacionPago"
+                 myRole="FacturacionConfirmacionPagoProvider"/>
+    <partnerLink name="GestionFacturacion" partnerRole="GestionFacturacion_Role"
+                 partnerLinkType="ns1:GestionFacturacion_PL"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:FacturacionConfirmacionPagoRequestMessage"/>
+    <variable name="generarFacturasCorte"
+              messageType="ns1:generarFacturaCorteRequest"/>
+    <variable name="generarFacturasCorteResponse"
+              messageType="ns1:generarFacturaCorteResponse"/>
+    <variable name="reportarClientesMorosos"
+              messageType="ns1:reportarClientesMorososRequest"/>
+    <variable name="reportarClientesMorososResponse"
+              messageType="ns1:reportarClientesMorososResponse"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in FacturacionConfirmacionPago.wsdl) -->
+    <receive name="receiveInput"
+             partnerLink="facturacionconfirmacionpago_client"
+             portType="client:FacturacionConfirmacionPago" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <assign name="AsignarCorte">
+      <copy>
+        <from variable="inputVariable" part="corte"
+              query="/client:process/client:corte"/>
+        <to variable="generarFacturasCorte" part="parameters"
+            query="/ns2:generarFacturaCorte/ns2:corte"/>
+      </copy>
+      <copy>
+        <from expression="5"/>
+        <to variable="generarFacturasCorte" part="parameters"
+            query="/ns2:generarFacturaCorte/ns2:plazo"/>
+      </copy>
+    </assign>
+    <invoke name="GenerarFacturasCorte" inputVariable="generarFacturasCorte"
+            outputVariable="generarFacturasCorteResponse"
+            partnerLink="GestionFacturacion" portType="ns1:GestionFacturacion"
+            operation="generarFacturaCorte"/>
+    <wait name="Esperar5Dias" for="'P5D'"/>
+    <assign name="AsignarReportarMorosos">
+      <copy>
+        <from variable="inputVariable" part="corte"
+              query="/client:process/client:corte"/>
+        <to variable="reportarClientesMorosos" part="parameters"
+            query="/ns2:reportarClientesMorosos/ns2:corte"/>
+      </copy>
+    </assign>
+    <invoke name="ReportarClientesMorososCorte"
+            inputVariable="reportarClientesMorosos"
+            outputVariable="reportarClientesMorososResponse"
+            partnerLink="GestionFacturacion" portType="ns1:GestionFacturacion"
+            operation="reportarClientesMorosos"/>
+  </sequence>
+</process>

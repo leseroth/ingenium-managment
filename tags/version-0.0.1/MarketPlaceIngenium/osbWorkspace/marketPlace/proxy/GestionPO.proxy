@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionPO/PoManagerPoManagementService"/>
+      <con4:port>
+        <con4:name>PoManagerPoManagementPort</con4:name>
+        <con4:namespace>http://ws.pomanager.marketplace.losalpes.com.co/</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionPO</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="error" name="_onErrorHandler-6276929956070051044--a350ddf.12fd64f4251.-7e58">
+      <con:stage name="stage1">
+        <con:context>
+          <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+          <con2:varNsDecl namespace="http://marketplace.losalpes.com.co/marketPlace/proxy/GestionPO/" prefix="ges"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="falla">
+            <con2:id>_ActionId-2858996947483058885-27abd1ee.12fd70d79b6.-7e19</con2:id>
+            <con3:expr>
+              <con2:xqueryText>$fault/*</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="error">
+            <con2:id>_ActionId-6276929956070051044--a350ddf.12fd64f4251.-7e20</con2:id>
+            <con3:expr>
+              <con2:xqueryText>$body/soap-env:Fault/faultstring/text()</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:replace contents-only="false" varName="body">
+            <con2:id>_ActionId-2858996947483058885-27abd1ee.12fd70d79b6.-7f40</con2:id>
+            <con3:location>
+              <con2:xpathText>./*</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText><![CDATA[<soap-env:Body>
+	<soap-env:Fault>
+	<faultcode>soapenv:Server</faultcode>
+	<faultstring>{$error}</faultstring>
+	<detail>
+	<con:fault  	xmlns:con="http://www.bea.com/wli/sb/context">
+	<con:errorCode>BEA-380001</con:errorCode>
+	<con:reason>Internal Server Error</con:reason>
+	<con:location>
+	<con:node>RouteNode4</con:node>
+	<con:path>response-pipeline</con:path>
+	</con:location>
+	</con:fault>
+	</detail>
+	</soap-env:Fault>
+	</soap-env:Body>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:replace varName="fault" contents-only="false">
+            <con2:id>_ActionId-2858996947483058885-27abd1ee.12fd70d79b6.-7df4</con2:id>
+            <con3:location>
+              <con2:xpathText>./*</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText><![CDATA[<con:fault xmlns:con="http://www.bea.com/wli/sb/context">
+	<con:errorCode>{$fault/ctx:errorCode/con:errorCode}</con:errorCode>
+	<con:reason>{$fault/ctx:reason}</con:reason>
+	<con:location>
+	<con:node>{$fault/ctx:location/ctx:node}</con:node>
+	<con:path>{$fault/ctx:location/ctx:pipeline}</con:path>
+	</con:location>
+	</con:fault>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="actualizarEstadoPO">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode1">
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-78ad</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>actualizarEstadoPO</con1:operation>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="registrarPO">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-7876</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>registrarPO</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-3614027752594144527-51798254.1329c639244.-7f33</con2:id>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/PODirect"/>
+                            <con2:param name="registrarPO1">
+                              <con2:path>$body/ws1:registrarPO</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="establecerFabricanteAtiende">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode3">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-7809</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>establecerFabricanteAtiende</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-7176</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/EstablecerFabricanteAtiendeRequest"/>
+                            <con2:param name="establecerFabricanteAtiende1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-70ce</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/EstablecerFabricanteAtiendeResponse"/>
+                            <con2:param name="establecerFabricanteAtiendeResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarPO">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode4" error-handler="_onErrorHandler-6276929956070051044--a350ddf.12fd64f4251.-7e58">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-77d2</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarPO</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-8628101533651397149--6ba3c30e.12f9ef86f04.-713e</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/ConsultarPORequest"/>
+                            <con2:param name="consultarPO1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con2:reply isError="true">
+                        <con2:id>_ActionId-2858996947483058885-27abd1ee.12fd70d79b6.-7e51</con2:id>
+                      </con2:reply>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarPOsComercio">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode5">
+                <con:context>
+                  <con2:varNsDecl namespace="http://ws.pomanager.marketplace.losalpes.com.co/" prefix="ws1"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8286317879278327853-6dbc408a.1332945928b.-7fa8</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarPOsComercio</con1:operation>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarComercioPO">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode6">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-4363475675734164139-5403afa.13152710f8e.-7ff0</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarComercioPorPO</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4363475675734164139-5403afa.13152710f8e.-7fe7</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/ConsultarComercioPORequest"/>
+                            <con2:param name="consultarComercioPO1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-4363475675734164139-5403afa.13152710f8e.-7fdc</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionPO/ConsultarComercioPOResponse"/>
+                            <con2:param name="consultarComercioPorPOResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarPOFabricantePorEstado">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-908920760597468382--2a6a25d7.13279c079c7.-7fef</con2:id>
+                    <con1:service ref="marketPlace/business/GestionPO" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarPOFabricantePorEstado</con1:operation>
+                    <con1:outboundTransform/>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

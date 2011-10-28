@@ -1,0 +1,1424 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jun 09 17:41:12 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RegistroEntidad"
+               targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoRegistro/RegistroEntidad"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns2="http://marketplace.losalpes.com.co"
+         xmlns:ns4="http://marketplace.losalpes.com.co/VerificacionCrediticia"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns6="http://marketplace.losalpes.com.co/GestionUsuario"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/bam/MarketPlace/ProcesoRegistro/BAM"
+         xmlns:ns8="http://xmlns.oracle.com/bam"
+         xmlns:ns9="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="registroentidad_client" partnerLinkType="client:RegistroEntidad" myRole="RegistroEntidadProvider"/>
+    <partnerLink name="VerificacionCrediticia"
+                 partnerRole="VerificacionCrediticia_Role"
+                 partnerLinkType="ns4:VerificacionCrediticia_PL"/>
+    <partnerLink name="GestionFacturacion" partnerRole="GestionFacturacion_Role"
+                 partnerLinkType="ns5:GestionFacturacion_PL"/>
+    <partnerLink name="GestionUsuario" partnerRole="GestionUsuarioPort_Role"
+                 partnerLinkType="ns6:GestionUsuarioPort_PL"/>
+    <partnerLink name="BAM" partnerRole="writetoBAM_role"
+                 partnerLinkType="ns7:writetoBAM_plt"/>
+    <partnerLink name="GestionCorreoElectronico"
+                 partnerRole="GestionCorreoElectronico_Role"
+                 partnerLinkType="ns9:GestionCorreoElectronico_PL"/>
+    <partnerLink name="GestionCliente" partnerLinkType="ns1:GestionCliente_PL"
+                 partnerRole="GestionCliente_Role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:RegistroEntidadRequestMessage"/>
+    <variable name="crearClienteRequest" messageType="ns1:CrearClienteRequest"/>
+    <variable name="crearClienteResponse"
+              messageType="ns1:CrearClienteResponse"/>
+    <variable name="crearContactosRequest"
+              messageType="ns1:CrearContactosRequest"/>
+    <variable name="crearContactosResponse"
+              messageType="ns1:CrearContactosResponse"/>
+    <variable name="verificarComfecamarasRequest"
+              messageType="ns4:VerificarComfecamarasRequest"/>
+    <variable name="verificarComfecamarasResponse"
+              messageType="ns4:VerificarComfecamarasResponse"/>
+    <variable name="verificarDataCreditoRequest"
+              messageType="ns4:VerificarDataCreditoRequest"/>
+    <variable name="verificarDataCreditoResponse"
+              messageType="ns4:VerificarDataCreditoResponse"/>
+    <variable name="verificarListaAntilavadoRequest"
+              messageType="ns4:VerificarListaAntilavadoRequest"/>
+    <variable name="verificarListaAntilavadoResponse"
+              messageType="ns4:VerificarListaAntilavadoResponse"/>
+    <variable name="verificarListaClintonRequest"
+              messageType="ns4:VerificarListaClintonRequest"/>
+    <variable name="verificarListaClintonResponse"
+              messageType="ns4:VerificarListaClintonResponse"/>
+    <variable name="radicarSolicitudRequest"
+              messageType="ns1:RadicarSolicitudRequest"/>
+    <variable name="radicarSolicitudResponse"
+              messageType="ns1:RadicarSolicitudResponse"/>
+    <variable name="crearCuentaFacturacionRequest"
+              messageType="ns5:crearCuentaFacturacionRequest"/>
+    <variable name="crearCuentaFacturacionResponse"
+              messageType="ns5:crearCuentaFacturacionResponse"/>
+    <variable name="actualizarEstadoSolicitudRequest"
+              messageType="ns1:ActualizarEstadoSolicitudRequest"/>
+    <variable name="actualizarEstadoSolicitudResponse"
+              messageType="ns1:ActualizarEstadoSolicitudResponse"/>
+    <variable name="indice" type="xsd:int"/>
+    <variable name="registrarUsuarioRequest"
+              messageType="ns6:registrarUsuarioRequest"/>
+    <variable name="registrarUsuarioResponse"
+              messageType="ns6:registrarUsuarioResponse"/>
+    <variable name="numeroClientesBAM"
+              messageType="ns7:_ClienteCollection_msg"/>
+    <variable name="consultarClienteRequest"
+              messageType="ns1:ConsultarClienteRequest"/>
+    <variable name="consultarClienteResponse"
+              messageType="ns1:ConsultarClienteResponse"/>
+    <variable name="actualizarClienteRequest"
+              messageType="ns1:ModificarClienteRequest"/>
+    <variable name="actualizarClienteResponse"
+              messageType="ns1:ModificarClienteResponse"/>
+    <variable name="enviarCorreoElectronicoRequest"
+              messageType="ns9:enviarCorreoElectronicoRequest"/>
+    <variable name="enviarCorreoElectronicoResponse"
+              messageType="ns9:enviarCorreoElectronicoResponse"/>
+    <variable name="indiceContactos" type="xsd:int"/>
+    <variable name="indiceProductos" type="xsd:int"/>
+    <variable name="crearProductoRequest"
+              messageType="ns1:CrearProductosRequest"/>
+    <variable name="crearProductoResponse"
+              messageType="ns1:CrearProductosResponse"/>
+    <variable name="idCliente" type="xsd:string"/>
+    <variable name="consultarContactoRequest"
+              messageType="ns1:ConsultarContactoRequest"/>
+    <variable name="consultarContactoResponse"
+              messageType="ns1:ConsultarContactoResponse"/>
+    <variable name="actualizarContactoRequest"
+              messageType="ns1:ModificarContactoRequest"/>
+    <variable name="actualizarContactoResponse"
+              messageType="ns1:ModificarContactoResponse"/>
+    <variable name="estado" type="xsd:string"/>
+    <variable name="comision" type="xsd:double"/>
+    <variable name="consultarProductoRequest"
+              messageType="ns1:ConsultarProductoRequest"/>
+    <variable name="consultarProductoResponse"
+              messageType="ns1:ConsultarProductoResponse"/>
+    <variable name="actualizarProductoRequest"
+              messageType="ns1:ModificarProductoRequest"/>
+    <variable name="actualizarProductoResponse"
+              messageType="ns1:ModificarProductoResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in RegistroEntidad.wsdl) -->
+    <receive name="receiveInput" partnerLink="registroentidad_client" portType="client:RegistroEntidad" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AsignarConsultarCliente">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nit"/>
+        <to variable="consultarClienteRequest" part="parameters"
+            query="/ns2:consultarCliente/ns2:nit"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarCliente" inputVariable="consultarClienteRequest"
+            outputVariable="consultarClienteResponse"
+            partnerLink="GestionCliente" portType="ns1:GestionCliente"
+            operation="ConsultarCliente" bpelx:invokeAsDetail="no"/>
+    <switch name="Switch_2">
+      <case condition="string-length(bpws:getVariableData('consultarClienteResponse','parameters','/ns2:consultarClienteResponse/ns2:cliente/id')) = 0">
+        <sequence>
+          <assign name="AsignarCrearCliente">
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nombre"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/nombre"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/nit"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:direccion"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/direccion"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:telefono"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/telefono"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:email"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/email"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:razonSocial"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/razonSocial"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:tipo"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/tipo"/>
+            </copy>
+            <copy>
+              <from expression="10000"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/comision"/>
+            </copy>
+            <copy>
+              <from expression="'Inactivo'"/>
+              <to variable="crearClienteRequest" part="parameters"
+                  query="/ns2:crearCliente/ns2:cliente/estado"/>
+            </copy>
+          </assign>
+          <invoke name="CrearCliente" inputVariable="crearClienteRequest"
+                  outputVariable="crearClienteResponse"
+                  partnerLink="GestionCliente" portType="ns1:GestionCliente"
+                  operation="CrearCliente" bpelx:invokeAsDetail="no"/>
+          <assign name="AsignarCrearContactos">
+            <copy>
+              <from variable="crearClienteResponse" part="parameters"
+                    query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+              <to variable="crearContactosRequest" part="parameters"
+                  query="/ns2:crearContacto/ns2:idCliente"/>
+            </copy>
+            <copy>
+              <from variable="crearClienteResponse" part="parameters"
+                    query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+              <to variable="idCliente"/>
+            </copy>
+            <copy>
+              <from expression="1"/>
+              <to variable="indiceContactos"/>
+            </copy>
+          </assign>
+          <while name="While1"
+                 condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+            <sequence name="Sequence1">
+              <assign name="AsignarDatosContacto">
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:numIdentificacion"/>
+                </copy>
+                <copy>
+                  <from expression="'Activo'"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:estado"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:nombre"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:direccion"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:telefono"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:celular"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                  <to variable="crearContactosRequest" part="parameters"
+                      query="/ns2:crearContacto/ns2:contactos/ns2:email"/>
+                </copy>
+              </assign>
+              <invoke name="CrearContacto" inputVariable="crearContactosRequest"
+                      outputVariable="crearContactosResponse"
+                      partnerLink="GestionCliente" portType="ns1:GestionCliente"
+                      operation="CrearContactos" bpelx:invokeAsDetail="no"/>
+              <assign name="IncrementarIndiceContactos">
+                <copy>
+                  <from expression="bpws:getVariableData('indiceContactos')+1"/>
+                  <to variable="indiceContactos"/>
+                </copy>
+              </assign>
+            </sequence>
+          </while>
+          <assign name="AsignarCrearProductos">
+            <copy>
+              <from expression="1"/>
+              <to variable="indiceProductos"/>
+            </copy>
+            <copy>
+              <from variable="idCliente"/>
+              <to variable="crearProductoRequest" part="parameters"
+                  query="/ns2:crearProducto/ns2:idCliente"/>
+            </copy>
+          </assign>
+          <while name="While2"
+                 condition="bpws:getVariableData('indiceProductos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:productos'))">
+            <sequence name="Sequence2">
+              <assign name="AsignarDatosProducto">
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                  <to variable="crearProductoRequest" part="parameters"
+                      query="/ns2:crearProducto/ns2:productos/nombre"/>
+                </copy>
+                <copy>
+                  <from expression="'Activo'"/>
+                  <to variable="crearProductoRequest" part="parameters"
+                      query="/ns2:crearProducto/ns2:productos/estado"/>
+                </copy>
+                <copy>
+                  <from variable="crearClienteResponse" part="parameters"
+                        query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                  <to variable="crearProductoRequest" part="parameters"
+                      query="/ns2:crearProducto/ns2:idCliente"/>
+                </copy>
+                <copy>
+                  <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:categoria'))"/>
+                  <to variable="crearProductoRequest" part="parameters"
+                      query="/ns2:crearProducto/ns2:productos/categoria"/>
+                </copy>
+              </assign>
+              <invoke name="CrearProducto" partnerLink="GestionCliente"
+                      portType="ns1:GestionCliente" operation="CrearProductos"
+                      bpelx:invokeAsDetail="no"
+                      inputVariable="crearProductoRequest"
+                      outputVariable="crearProductoResponse"/>
+              <assign name="IncrementarIndiceProductos">
+                <copy>
+                  <from expression="bpws:getVariableData('indiceProductos')+1"/>
+                  <to variable="indiceProductos"/>
+                </copy>
+              </assign>
+            </sequence>
+          </while>
+          <assign name="AsignarEstadoInactivo">
+            <copy>
+              <from expression="'Inactive'"/>
+              <to variable="estado"/>
+            </copy>
+            <copy>
+              <from expression="10000"/>
+              <to variable="comision"/>
+            </copy>
+            <copy>
+              <from variable="crearClienteResponse" part="parameters"
+                    query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+              <to variable="idCliente"/>
+            </copy>
+          </assign>
+        </sequence>
+      </case>
+      <otherwise>
+        <sequence>
+          <switch name="Switch2">
+            <case condition="bpws:getVariableData('consultarClienteResponse','parameters','/ns2:consultarClienteResponse/ns2:cliente/estado') = 'Inactive'">
+              <sequence>
+                <assign name="AsignarActualizarCliente">
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/nit"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/id"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:id"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/id"/>
+                    <to variable="idCliente"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:direccion"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/direccion"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:telefono"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/telefono"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:email"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/email"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:razonSocial"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/razonSocial"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nombre"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/nombre"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Inactivo'"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/estado"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/tipo"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/tipo"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/comision"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/comision"/>
+                  </copy>
+                </assign>
+                <invoke name="ActualizarCliente" partnerLink="GestionCliente"
+                        portType="ns1:GestionCliente"
+                        operation="ModificarCliente"
+                        inputVariable="actualizarClienteRequest"
+                        outputVariable="actualizarClienteResponse"
+                        bpelx:invokeAsDetail="no"/>
+                <assign name="AsignarManejoContactos">
+                  <copy>
+                    <from expression="1"/>
+                    <to variable="indiceContactos"/>
+                  </copy>
+                </assign>
+                <while name="While3"
+                       condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+                  <sequence name="Sequence3">
+                    <assign name="AsignarConsultarContacto">
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                        <to variable="consultarContactoRequest"
+                            part="parameters"
+                            query="/ns2:consultarContacto/ns2:documento"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                        <to variable="consultarContactoRequest"
+                            part="parameters"
+                            query="/ns2:consultarContacto/ns2:tipoDocumento"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ConsultarContacto" bpelx:invokeAsDetail="no"
+                            inputVariable="consultarContactoRequest"
+                            outputVariable="consultarContactoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ConsultarContacto"/>
+                    <switch name="Switch1">
+                      <case condition="string-length(bpws:getVariableData('consultarContactoResponse','parameters','/ns2:consultarContactoResponse/ns2:contacto/ns2:id')) = 0">
+                        <sequence name="Sequence4">
+                          <assign name="AsignarCrearContacto">
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:numIdentificacion"/>
+                            </copy>
+                            <copy>
+                              <from expression="'Activo'"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:estado"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:nombre"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:direccion"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:telefono"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:celular"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:contactos/ns2:email"/>
+                            </copy>
+                            <copy>
+                              <from variable="idCliente"/>
+                              <to variable="crearContactosRequest"
+                                  part="parameters"
+                                  query="/ns2:crearContacto/ns2:idCliente"/>
+                            </copy>
+                          </assign>
+                          <invoke name="CrearContacto2"
+                                  bpelx:invokeAsDetail="no"
+                                  inputVariable="crearContactosRequest"
+                                  outputVariable="crearContactosResponse"
+                                  partnerLink="GestionCliente"
+                                  portType="ns1:GestionCliente"
+                                  operation="CrearContactos"/>
+                        </sequence>
+                      </case>
+                      <otherwise>
+                        <sequence name="Sequence5">
+                          <assign name="AsignarActualizarContacto">
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:numIdentificacion"/>
+                            </copy>
+                            <copy>
+                              <from variable="consultarContactoResponse"
+                                    part="parameters"
+                                    query="/ns2:consultarContactoResponse/ns2:contacto/ns2:estado"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:estado"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:nombre"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:direccion"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:telefono"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:celular"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:email"/>
+                            </copy>
+                            <copy>
+                              <from variable="consultarContactoResponse"
+                                    part="parameters"
+                                    query="/ns2:consultarContactoResponse/ns2:contacto/ns2:id"/>
+                              <to variable="actualizarContactoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarContacto/ns2:contactos/ns2:id"/>
+                            </copy>
+                          </assign>
+                          <invoke name="ActualizarContacto"
+                                  bpelx:invokeAsDetail="no"
+                                  inputVariable="actualizarContactoRequest"
+                                  outputVariable="actualizarContactoResponse"
+                                  partnerLink="GestionCliente"
+                                  portType="ns1:GestionCliente"
+                                  operation="ModificarContacto"/>
+                        </sequence>
+                      </otherwise>
+                    </switch>
+                    <assign name="IncrementarIndiceActualizacionContacto">
+                      <copy>
+                        <from expression="bpws:getVariableData('indiceContactos')+1"/>
+                        <to variable="indiceContactos"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </while>
+                <assign name="AsignarManejoProductos">
+                  <copy>
+                    <from expression="1"/>
+                    <to variable="indiceProductos"/>
+                  </copy>
+                </assign>
+                <while name="While4"
+                       condition="bpws:getVariableData('indiceProductos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:productos'))">
+                  <sequence name="Sequence6">
+                    <assign name="AsignarConsultarProducto">
+                      <copy>
+                        <from variable="consultarClienteResponse"
+                              part="parameters"
+                              query="/ns2:consultarClienteResponse/ns2:cliente/id"/>
+                        <to variable="consultarProductoRequest"
+                            part="parameters"
+                            query="/ns2:consultarProducto/ns2:idCliente"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                        <to variable="consultarProductoRequest"
+                            part="parameters"
+                            query="/ns2:consultarProducto/ns2:nombreProducto"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ConsultarProducto"
+                            inputVariable="consultarProductoRequest"
+                            outputVariable="consultarProductoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ConsultarProducto"
+                            bpelx:invokeAsDetail="no"/>
+                    <switch name="Switch3">
+                      <case condition="true()">
+                        <sequence name="Sequence6">
+                          <assign name="AsignarActualizarCrearProducto">
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                              <to variable="crearProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:crearProducto/ns2:productos/nombre"/>
+                            </copy>
+                            <copy>
+                              <from expression="'Activo'"/>
+                              <to variable="crearProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:crearProducto/ns2:productos/estado"/>
+                            </copy>
+                            <copy>
+                              <from variable="idCliente"/>
+                              <to variable="crearProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:crearProducto/ns2:idCliente"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:categoria'))"/>
+                              <to variable="crearProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:crearProducto/ns2:productos/categoria"/>
+                            </copy>
+                          </assign>
+                          <invoke name="CrearProducto2"
+                                  inputVariable="crearProductoRequest"
+                                  outputVariable="crearProductoResponse"
+                                  partnerLink="GestionCliente"
+                                  portType="ns1:GestionCliente"
+                                  operation="CrearProductos"
+                                  bpelx:invokeAsDetail="no"/>
+                        </sequence>
+                      </case>
+                      <otherwise>
+                        <sequence name="Sequence6">
+                          <assign name="AsignarActualizarProducto">
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/nombre"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:estado'))"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/estado"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:referencia'))"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/referencia"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:tipo'))"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/tipo"/>
+                            </copy>
+                            <copy>
+                              <from variable="consultarProductoResponse"
+                                    part="parameters"
+                                    query="/ns2:consultarProductoResponse/ns2:producto/id"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/id"/>
+                            </copy>
+                            <copy>
+                              <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:categoria'))"/>
+                              <to variable="actualizarProductoRequest"
+                                  part="parameters"
+                                  query="/ns2:modificarProducto/ns2:producto/categoria"/>
+                            </copy>
+                          </assign>
+                          <invoke name="ActualizarProducto"
+                                  bpelx:invokeAsDetail="no"
+                                  inputVariable="actualizarProductoRequest"
+                                  outputVariable="actualizarProductoResponse"
+                                  partnerLink="GestionCliente"
+                                  portType="ns1:GestionCliente"
+                                  operation="ModificarProducto"/>
+                        </sequence>
+                      </otherwise>
+                    </switch>
+                    <assign name="AsignarIncrementarIndiceProductos">
+                      <copy>
+                        <from expression="bpws:getVariableData('indiceProductos')+1"/>
+                        <to variable="indiceProductos"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </while>
+                <assign name="AsignarEstado">
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/estado"/>
+                    <to variable="estado"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/comision"/>
+                    <to variable="comision"/>
+                  </copy>
+                  <copy>
+                    <from variable="consultarClienteResponse" part="parameters"
+                          query="/ns2:consultarClienteResponse/ns2:cliente/id"/>
+                    <to variable="idCliente"/>
+                  </copy>
+                </assign>
+              </sequence>
+            </case>
+            <otherwise/>
+          </switch>
+        </sequence>
+      </otherwise>
+    </switch>
+    <switch name="Switch_3">
+      <case condition="bpws:getVariableData('estado') = 'Inactive'">
+        <sequence>
+          <assign name="AsignarRadicarSolicitud">
+            <!--<copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:documentos/client:nombre"/>
+        <to variable="radicarSolicitudRequest" part="parameters"
+            query="/ns2:radicarSolicitud/ns2:solicitud/ns2:documentos/ns2:nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:documentos/client:url"/>
+        <to variable="radicarSolicitudRequest" part="parameters"
+            query="/ns2:radicarSolicitud/ns2:solicitud/ns2:documentos/ns2:url"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:documentos/client:tipo"/>
+        <to variable="radicarSolicitudRequest" part="parameters"
+            query="/ns2:radicarSolicitud/ns2:solicitud/ns2:documentos/ns2:tipo"/>
+      </copy> -->
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="radicarSolicitudRequest" part="parameters"
+                  query="/ns2:radicarSolicitud/ns2:nit"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:fecha"/>
+              <to variable="radicarSolicitudRequest" part="parameters"
+                  query="/ns2:radicarSolicitud/ns2:solicitud/ns2:fecha"/>
+            </copy>
+            <bpelx:copyList>
+              <bpelx:from variable="inputVariable" part="payload"
+                          query="/client:process/client:productos"/>
+              <bpelx:to variable="radicarSolicitudRequest" part="parameters"
+                        query="/ns2:radicarSolicitud/ns2:solicitud/ns2:productos"/>
+            </bpelx:copyList>
+          </assign>
+          <invoke name="RadicarSolicitud"
+                  inputVariable="radicarSolicitudRequest"
+                  outputVariable="radicarSolicitudResponse"
+                  partnerLink="GestionCliente" portType="ns1:GestionCliente"
+                  operation="RadicarSolicitud"/>
+          <assign name="AsignarVerificacion">
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="verificarComfecamarasRequest" part="parameters"
+                  query="/ns2:verificarComfecamara/ns2:nit"/>
+            </copy>
+            <copy>
+              <from expression="3"/>
+              <to variable="verificarComfecamarasRequest" part="parameters"
+                  query="/ns2:verificarComfecamara/ns2:reglaValidacion"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="verificarDataCreditoRequest" part="parameters"
+                  query="/ns2:verificarDataCredito/ns2:nit"/>
+            </copy>
+            <copy>
+              <from expression="3"/>
+              <to variable="verificarDataCreditoRequest" part="parameters"
+                  query="/ns2:verificarDataCredito/ns2:reglaValidacion"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="verificarListaAntilavadoRequest" part="parameters"
+                  query="/ns2:verificarListaAntilavado/ns2:nit"/>
+            </copy>
+            <copy>
+              <from expression="3"/>
+              <to variable="verificarListaAntilavadoRequest" part="parameters"
+                  query="/ns2:verificarListaAntilavado/ns2:reglaValidacion"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/client:process/client:nit"/>
+              <to variable="verificarListaClintonRequest" part="parameters"
+                  query="/ns2:verificarListaClinton/ns2:nit"/>
+            </copy>
+            <copy>
+              <from expression="3"/>
+              <to variable="verificarListaClintonRequest" part="parameters"
+                  query="/ns2:verificarListaClinton/ns2:reglaValidacion"/>
+            </copy>
+          </assign>
+          <invoke name="ConsultarConfecamaras"
+                  inputVariable="verificarComfecamarasRequest"
+                  outputVariable="verificarComfecamarasResponse"
+                  partnerLink="VerificacionCrediticia"
+                  portType="ns4:VerificacionCrediticia"
+                  operation="VerificarComfecamaras"/>
+          <invoke name="ConsultarDataCredito"
+                  inputVariable="verificarDataCreditoRequest"
+                  outputVariable="verificarDataCreditoResponse"
+                  partnerLink="VerificacionCrediticia"
+                  portType="ns4:VerificacionCrediticia"
+                  operation="VerificarDataCredito"/>
+          <invoke name="ConsultarAntilavado"
+                  inputVariable="verificarListaAntilavadoRequest"
+                  outputVariable="verificarListaAntilavadoResponse"
+                  partnerLink="VerificacionCrediticia"
+                  portType="ns4:VerificacionCrediticia"
+                  operation="VerificarListaAntilavado"/>
+          <invoke name="ConsultarListaClinton"
+                  inputVariable="verificarListaClintonRequest"
+                  outputVariable="verificarListaClintonResponse"
+                  partnerLink="VerificacionCrediticia"
+                  portType="ns4:VerificacionCrediticia"
+                  operation="VerificarListaClinton"/>
+          <switch name="Switch_1">
+            <case condition="true()">
+              <sequence>
+                <assign name="AsignarAceptarSolicitud">
+                  <copy>
+                    <from variable="radicarSolicitudResponse" part="parameters"
+                          query="/ns2:radicarSolicitudResponse/ns2:numRadicacion"/>
+                    <to variable="actualizarEstadoSolicitudRequest"
+                        part="parameters"
+                        query="/ns2:actualizarEstadoSolicitud/ns2:numRadicacion"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Aceptada'"/>
+                    <to variable="actualizarEstadoSolicitudRequest"
+                        part="parameters"
+                        query="/ns2:actualizarEstadoSolicitud/ns2:estado"/>
+                  </copy>
+                </assign>
+                <invoke name="AceptarSolicitud"
+                        inputVariable="actualizarEstadoSolicitudRequest"
+                        outputVariable="actualizarEstadoSolicitudResponse"
+                        partnerLink="GestionCliente"
+                        portType="ns1:GestionCliente"
+                        operation="ActualizarEstadoSolicitud"/>
+                <assign name="AsignarActivarCliente">
+                  <copy>
+                    <from variable="idCliente"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:id"/>
+                  </copy>
+                  <copy>
+                    <from variable="comision"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/comision"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nombre"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/nombre"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nit"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/nit"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:direccion"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/direccion"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:telefono"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/telefono"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:email"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/email"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:razonSocial"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/razonSocial"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:tipo"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/tipo"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Activo'"/>
+                    <to variable="actualizarClienteRequest" part="parameters"
+                        query="/ns2:modificarCliente/ns2:cliente/estado"/>
+                  </copy>
+                </assign>
+                <invoke name="ActivarCliente"
+                        inputVariable="actualizarClienteRequest"
+                        outputVariable="actualizarClienteResponse"
+                        partnerLink="GestionCliente"
+                        portType="ns1:GestionCliente"
+                        operation="ModificarCliente" bpelx:invokeAsDetail="no"/>
+                <assign name="AsignarIndiceContactos">
+                  <copy>
+                    <from expression="1"/>
+                    <to variable="indiceContactos"/>
+                  </copy>
+                </assign>
+                <while name="While4"
+                       condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+                  <sequence name="Sequence6">
+                    <assign name="AsignarConsultarContacto">
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                        <to variable="consultarContactoRequest"
+                            part="parameters"
+                            query="/ns2:consultarContacto/ns2:documento"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                        <to variable="consultarContactoRequest"
+                            part="parameters"
+                            query="/ns2:consultarContacto/ns2:tipoDocumento"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ConsultarContacto"
+                            inputVariable="consultarContactoRequest"
+                            outputVariable="consultarContactoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ConsultarContacto"
+                            bpelx:invokeAsDetail="no"/>
+                    <assign name="AsignarActivarContacto">
+                      <copy>
+                        <from expression="'Activo'"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:estado"/>
+                      </copy>
+                      <copy>
+                        <from variable="consultarContactoResponse"
+                              part="parameters"
+                              query="/ns2:consultarContactoResponse/ns2:contacto/ns2:id"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:id"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:numIdentificacion"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:nombre"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:direccion"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:telefono"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:celular"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                        <to variable="actualizarContactoRequest"
+                            part="parameters"
+                            query="/ns2:modificarContacto/ns2:contactos/ns2:email"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ActivarContacto"
+                            inputVariable="actualizarContactoRequest"
+                            outputVariable="actualizarContactoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ModificarContacto"
+                            bpelx:invokeAsDetail="no"/>
+                    <assign name="IncrementarIndiceContactos">
+                      <copy>
+                        <from expression="bpws:getVariableData('indiceContactos')+1"/>
+                        <to variable="indiceContactos"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </while>
+                <assign name="AsignarIndiceProductos">
+                  <copy>
+                    <from expression="1"/>
+                    <to variable="indiceProductos"/>
+                  </copy>
+                </assign>
+                <while name="While4"
+                       condition="bpws:getVariableData('indiceProductos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:productos'))">
+                  <sequence name="Sequence6">
+                    <assign name="AsignarConsultarProducto">
+                      <copy>
+                        <from variable="idCliente"/>
+                        <to variable="consultarProductoRequest"
+                            part="parameters"
+                            query="/ns2:consultarProducto/ns2:idCliente"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                        <to variable="consultarProductoRequest"
+                            part="parameters"
+                            query="/ns2:consultarProducto/ns2:nombreProducto"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ConsultarProducto"
+                            inputVariable="consultarProductoRequest"
+                            outputVariable="consultarProductoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ConsultarProducto"
+                            bpelx:invokeAsDetail="no"/>
+                    <assign name="AsignarActivarProducto">
+                      <copy>
+                        <from variable="consultarProductoResponse"
+                              part="parameters"
+                              query="/ns2:consultarProductoResponse/ns2:producto/id"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/id"/>
+                      </copy>
+                      <copy>
+                        <from variable="consultarProductoResponse"
+                              part="parameters"
+                              query="/ns2:consultarProductoResponse/ns2:producto/nombre"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/nombre"/>
+                      </copy>
+                      <copy>
+                        <from variable="consultarProductoResponse"
+                              part="parameters"
+                              query="/ns2:consultarProductoResponse/ns2:producto/categoria"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/categoria"/>
+                      </copy>
+                      <copy>
+                        <from variable="consultarProductoResponse"
+                              part="parameters"
+                              query="/ns2:consultarProductoResponse/ns2:producto/tipo"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/tipo"/>
+                      </copy>
+                      <copy>
+                        <from variable="consultarProductoResponse"
+                              part="parameters"
+                              query="/ns2:consultarProductoResponse/ns2:producto/referencia"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/referencia"/>
+                      </copy>
+                      <copy>
+                        <from expression="'Activo'"/>
+                        <to variable="actualizarProductoRequest"
+                            part="parameters"
+                            query="/ns2:modificarProducto/ns2:producto/estado"/>
+                      </copy>
+                    </assign>
+                    <invoke name="ActivarProducto" bpelx:invokeAsDetail="no"
+                            inputVariable="actualizarProductoRequest"
+                            outputVariable="actualizarProductoResponse"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ModificarProducto"/>
+                    <assign name="IncrementarIndiceProductos">
+                      <copy>
+                        <from expression="bpws:getVariableData('indiceProductos')+1"/>
+                        <to variable="indiceProductos"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </while>
+                <assign name="AsignarValorBAM">
+                  <copy>
+                    <from expression="string(ora:getCurrentDate('MM-yyyy'))"/>
+                    <to variable="numeroClientesBAM" part="_ClienteCollection"
+                        query="/ns8:_ClienteCollection/ns8:_Cliente/ns8:_fecha"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nit"/>
+                    <to variable="numeroClientesBAM" part="_ClienteCollection"
+                        query="/ns8:_ClienteCollection/ns8:_Cliente/ns8:_nit"/>
+                  </copy>
+                </assign>
+                <invoke name="EnviarBAM" inputVariable="numeroClientesBAM"
+                        portType="ns7:writetoBAM_ptt" partnerLink="BAM"
+                        operation="writetoBAM"/>
+                <assign name="AsignarCuentaFacturacion">
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nombre"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/nombre"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nit"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/nit"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:direccion"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/direccion"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:telefono"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/telefono"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:email"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/email"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:razonSocial"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/razonSocial"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:tipo"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/tipo"/>
+                  </copy>
+                  <copy>
+                    <from expression="10000"/>
+                    <to variable="crearCuentaFacturacionRequest"
+                        part="parameters"
+                        query="/ns2:crearCuentaFacturacion/ns2:cliente/comision"/>
+                  </copy>
+                </assign>
+                <invoke name="CrearCuentaFacturacion"
+                        inputVariable="crearCuentaFacturacionRequest"
+                        outputVariable="crearCuentaFacturacionResponse"
+                        partnerLink="GestionFacturacion"
+                        portType="ns5:GestionFacturacion"
+                        operation="crearCuentaFacturacion"/>
+                <assign name="AsignarDatosUsuarioCliente">
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:nombre"/>
+                    <to variable="registrarUsuarioRequest" part="parameters"
+                        query="/ns2:registrarUsuario/nombre"/>
+                  </copy>
+                  <copy>
+                    <from expression="1"/>
+                    <to variable="indice"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:tipo"/>
+                    <to variable="registrarUsuarioRequest" part="parameters"
+                        query="/ns2:registrarUsuario/rol"/>
+                  </copy>
+                </assign>
+                <while name="While_1"
+                       condition="bpws:getVariableData('indice') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+                  <sequence>
+                    <assign name="AsignarDatosUsuario">
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:numIdentificacion'))"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/nit"/>
+                      </copy>
+                    </assign>
+                    <invoke name="CrearUsuario"
+                            inputVariable="registrarUsuarioRequest"
+                            outputVariable="registrarUsuarioResponse"
+                            partnerLink="GestionUsuario"
+                            portType="ns6:GestionUsuarioPort"
+                            operation="registrarUsuario"/>
+                    <assign name="AsignarEnvioCorreoElectronico">
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:email'))"/>
+                        <to variable="enviarCorreoElectronicoRequest"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                      </copy>
+                      <copy>
+                        <from expression="'info@marketplace.losalpes.com.co'"/>
+                        <to variable="enviarCorreoElectronicoRequest"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                      </copy>
+                      <copy>
+                        <from expression="'q0eb7sebEO'"/>
+                        <to variable="enviarCorreoElectronicoRequest"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                      </copy>
+                      <copy>
+                        <from expression="'Solicitud aceptada'"/>
+                        <to variable="enviarCorreoElectronicoRequest"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                      </copy>
+                      <copy>
+                        <from expression="concat('Estimado ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'),':\n\nSu afiliación al MarketPlace de los Alpes ha sido aceptada. A continuación adjuntamos información de login al sistema.\n\nUsuario: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/login'),'\nContraseña: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/password'),'\n\nCordialmente\n\nEl equipo del MarketPlace de los Alpes')"/>
+                        <to variable="enviarCorreoElectronicoRequest"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                      </copy>
+                    </assign>
+                    <invoke name="EnviarCorreoElectronico"
+                            inputVariable="enviarCorreoElectronicoRequest"
+                            outputVariable="enviarCorreoElectronicoResponse"
+                            partnerLink="GestionCorreoElectronico"
+                            portType="ns9:GestionCorreoElectronico"
+                            operation="enviarCorreoElectronico"/>
+                    <assign name="IncrementarIndice">
+                      <copy>
+                        <from expression="bpws:getVariableData('indice')+1"/>
+                        <to variable="indice"/>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </while>
+              </sequence>
+            </case>
+            <otherwise>
+              <sequence>
+                <assign name="AsignarRechazarSolicitud">
+                  <copy>
+                    <from variable="radicarSolicitudResponse" part="parameters"
+                          query="/ns2:radicarSolicitudResponse/ns2:numRadicacion"/>
+                    <to variable="actualizarEstadoSolicitudRequest"
+                        part="parameters"
+                        query="/ns2:actualizarEstadoSolicitud/ns2:numRadicacion"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Rechazada'"/>
+                    <to variable="actualizarEstadoSolicitudRequest"
+                        part="parameters"
+                        query="/ns2:actualizarEstadoSolicitud/ns2:estado"/>
+                  </copy>
+                </assign>
+                <invoke name="RechazarSolicitud" partnerLink="GestionCliente"
+                        portType="ns1:GestionCliente"
+                        operation="ActualizarEstadoSolicitud"
+                        inputVariable="actualizarEstadoSolicitudRequest"
+                        outputVariable="actualizarEstadoSolicitudResponse"/>
+                <assign name="AsignarEnvioCorreoElectronico">
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:email"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                  </copy>
+                  <copy>
+                    <from expression="'info@marketplace.losalpes.com.co'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                  </copy>
+                  <copy>
+                    <from expression="'q0eb7sebEO'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Afiliación rechazada'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                  </copy>
+                  <copy>
+                    <from expression="concat('Estimado ', bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'), ':\n\nLamentamos informarle que su afiliación al MarketPlace de los Alpes ha sido rechazada. Para el MarketPlace de los Alpes sus clientes son una prioridad. Nos gustaría contar con ustedes como parte de nuestros clientes por eso le alentamos a volver a solicitar registrarse con nosotros.\n\nCordialmente\n\nEl equipo el MarketPlace de los Alpes')"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                  </copy>
+                </assign>
+                <invoke name="EnviarCorreo"
+                        inputVariable="enviarCorreoElectronicoRequest"
+                        outputVariable="enviarCorreoElectronicoResponse"
+                        partnerLink="GestionCorreoElectronico"
+                        portType="ns9:GestionCorreoElectronico"
+                        operation="enviarCorreoElectronico"/>
+              </sequence>
+            </otherwise>
+          </switch>
+        </sequence>
+      </case>
+      <otherwise/>
+    </switch>
+  </sequence>
+</process>

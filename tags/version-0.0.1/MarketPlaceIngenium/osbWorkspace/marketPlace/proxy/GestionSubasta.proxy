@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionSubasta/GestionSubasta"/>
+      <con4:binding>
+        <con4:name>GestionSubastaSOAP</con4:name>
+        <con4:namespace>http://marketplace.losalpes.com.co/GestionOfertas</con4:namespace>
+      </con4:binding>
+      <con4:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionSubasta</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="cerrarSubasta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co/" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7d24</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>cerrarSubasta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7d16</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/CerrarSubastaRequest"/>
+                            <con2:param name="cerrarSubasta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7d06</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/CerrarSubastaResponse"/>
+                            <con2:param name="cerrarSubastaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="crearSubasta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode1">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co/" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7ba0</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>crearSubasta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7b89</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/CrearSubastaRequest"/>
+                            <con2:param name="crearSubasta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7b78</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/CrearSubastaResponse"/>
+                            <con2:param name="crearSubastaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="darGanadorSubasta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode3">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co/" prefix="mar"/>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar1"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-644570709750759989--5019d7e1.12f0f2c21ba.-7b94</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>darGanadorSubasta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f28</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/DarGanadorSubastaRequest"/>
+                            <con2:param name="darGanadorSubasta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f0b</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/DarGanadorSubastaResponse"/>
+                            <con2:param name="darGanadorSubastaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="asignarFabricantesSubasta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode4">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e42</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarSubastasFabricante</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e28</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/AsignarFabricantesSubastaRequest"/>
+                            <con2:param name="asignarFabricantesSubasta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e17</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/AsignarFabricantesSubastaResponse"/>
+                            <con2:param name="asignarFabricantesSubastaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarSubastasFabricante">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode5">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e37</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>asignarFabricantesSubasta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7e03</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastasFabricanteRequest"/>
+                            <con2:param name="consultarSubastasFabricante1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-3181084611268681032--5e31a2a.130493c4d42.-7df6</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastasFabricanteResponse"/>
+                            <con2:param name="consultarSubastasFabricanteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarFabricantesSubasta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode6">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7fee</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarFabricantesSubasta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7fe1</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarFabricantesSubastaRequest"/>
+                            <con2:param name="consultarFabricantesSubasta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f92</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarFabricantesSubastaResponse"/>
+                            <con2:param name="consultarFabricantesSubastaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarSubastaOrdenCompra">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7ff2</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarSubastaOrdenCompra</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7fe6</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastaOrdenCompraRequest"/>
+                            <con2:param name="consultarSubastaOrdenCompra1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7fda</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/ConsultarSubastaOrdenCompraResponse"/>
+                            <con2:param name="consultarSubastaOrdenCompraResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="registrarOferta">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode8">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f83</con2:id>
+                    <con1:service ref="marketPlace/business/GestionOfertas" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>registrarOferta</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f6f</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/RegistrarOfertaRequest"/>
+                            <con2:param name="registrarOferta1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5475631500034490609-540b3332.133086b1fc5.-7f5d</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionSubasta/RegistrarOfertaResponse"/>
+                            <con2:param name="registrarOfertaResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

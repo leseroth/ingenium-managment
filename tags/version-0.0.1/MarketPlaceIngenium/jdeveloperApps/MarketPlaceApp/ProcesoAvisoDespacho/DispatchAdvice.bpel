@@ -1,0 +1,339 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Jun 09 14:39:28 GMT-05:00 2011
+  Author:  marketplace
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="DispatchAdvice"
+               targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoAvisoDespacho/DispatchAdvice"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoAvisoDespacho/DispatchAdvice"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionDA"
+         xmlns:ns2="http://marketplace.losalpes.com.co"
+         xmlns:ns3="http://marketplace.losalpes.com.co/GestionPO"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:med="http://schemas.oracle.com/mediator/xpath"
+         xmlns:socket="http://www.oracle.com/XSL/Transform/java/oracle.tip.adapter.socket.ProtocolTranslator"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:mhdr="http://www.oracle.com/XSL/Transform/java/oracle.tip.mediator.service.common.functions.MediatorExtnFunction"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns4="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns6="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:ns7="http://marketplace.losalpes.com.co/GestionCorreoElectronico/">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="dispatchadvice_client" partnerLinkType="client:DispatchAdvice" myRole="DispatchAdviceProvider"/>
+    <partnerLink name="GestionDA" partnerRole="GestionDA_Role"
+                 partnerLinkType="ns1:GestionDA_PL"/>
+    <partnerLink name="GestionPO" partnerRole="GestionPO_Role"
+                 partnerLinkType="ns3:GestionPO_PL"/>
+    <partnerLink name="GestionCliente" partnerRole="GestionCliente_Role"
+                 partnerLinkType="ns5:GestionCliente_PL"/>
+    <partnerLink name="GestionFacturacion" partnerRole="GestionFacturacion_Role"
+                 partnerLinkType="ns6:GestionFacturacion_PL"/>
+    <partnerLink name="GestionCorreoElectronico"
+                 partnerRole="GestionCorreoElectronico_Role"
+                 partnerLinkType="ns7:GestionCorreoElectronico_PL"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:DispatchAdviceRequestMessage"/>
+    <variable name="registrarDARequest" messageType="ns1:registrarDARequest"/>
+    <variable name="registrarDAResponse" messageType="ns1:registrarDAResponse"/>
+    <variable name="consultarComercioPORequest"
+              messageType="ns3:consultarComercioPORequest"/>
+    <variable name="consultarComercioPOResponse"
+              messageType="ns3:consultarComercioPOResponse"/>
+    <variable name="consultarComisionRequest"
+              messageType="ns5:ConsultarComisionRequest"/>
+    <variable name="consultarComisionResponse"
+              messageType="ns5:ConsultarComisionResponse"/>
+    <variable name="consultarCuentaFacturacionClienteRequest"
+              messageType="ns6:consultarCuentaFacturacionClienteRequest"/>
+    <variable name="consultarCuentaFacturacionClienteResponse"
+              messageType="ns6:consultarCuentaFacturacionClienteResponse"/>
+    <variable name="registrarTransaccionRequest"
+              messageType="ns6:registrarTransaccionRequest"/>
+    <variable name="registrarTransaccionResponse"
+              messageType="ns6:registrarTransaccionResponse"/>
+    <variable name="enviarCorreoElectronicoRequest"
+              messageType="ns7:enviarCorreoElectronicoRequest"/>
+    <variable name="enviarCorreoElectronicoResponse"
+              messageType="ns7:enviarCorreoElectronicoResponse"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in DispatchAdvice.wsdl) -->
+    <receive name="receiveInput" partnerLink="dispatchadvice_client" portType="client:DispatchAdvice" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AsignarDA">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:numSeguimientoPO"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:numSeguimientoPo"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:fechaEmision"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/fechaEmision"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:fechaLlegada"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/fechaLlegada"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:montoOperacion"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/montoOperacion"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:camiones"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/camiones"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:cantidadProducto"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/items/cantidad"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nombreProducto"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/items/producto/nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:categoriaProducto"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/items/producto/categoria"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nombreFabricante"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/fabricante/nombre"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nitFabricante"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/fabricante/nit"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:emailFabricante"/>
+        <to variable="registrarDARequest" part="parameters"
+            query="/ns2:registrarDA/ns2:da/fabricante/email"/>
+      </copy>
+    </assign>
+    <invoke name="RegistrarDA" inputVariable="registrarDARequest"
+            outputVariable="registrarDAResponse" partnerLink="GestionDA"
+            portType="ns1:GestionDA" operation="registrarDA"/>
+    <assign name="AsignarConsultarComercioPO">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:numSeguimientoPO"/>
+        <to variable="consultarComercioPORequest" part="parameters"
+            query="/ns2:consultarComercioPO/ns2:numSeguimientoPO"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarComercioPO"
+            inputVariable="consultarComercioPORequest"
+            outputVariable="consultarComercioPOResponse"
+            partnerLink="GestionPO" portType="ns3:GestionPO"
+            operation="consultarComercioPO"/>
+    <scope name="Scope_1">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">EnviarCorreoElectronicoComercio</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence>
+        <assign name="AsignarEnviarCorreoElectronico">
+          <copy>
+            <from expression="bpws:getVariableData('consultarComercioPOResponse','parameters','/ns2:consultarComercioPOResponse/ns2:comercio/email')"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:to"/>
+          </copy>
+          <copy>
+            <from expression="'info@marketplace.losalpes.com.co'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:from"/>
+          </copy>
+          <copy>
+            <from expression="'marketplace2011'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:password"/>
+          </copy>
+          <copy>
+            <from expression="'Aviso de despacho'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+          </copy>
+          <copy>
+            <from expression="concat('Estimado ', bpws:getVariableData('consultarComercioPOResponse','parameters','/ns2:consultarComercioPOResponse/ns2:comercio/nombre'), ':\n\nHemos recibido un aviso de despacho correspondiente a la orden de compra con número de seguimiento ',bpws:getVariableData('inputVariable','payload','/client:process/client:numSeguimientoPO'),'. El aviso de despacho se ha radicado con el número de seguimiento ',bpws:getVariableData('registrarDAResponse','parameters','/ns2:registrarDAResponse/ns2:numSeguimiento'),'. Para ver más información al respecto, ingresar al portal del MarketPlace.\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:message"/>
+          </copy>
+        </assign>
+        <invoke name="EnviarCorreoElectronico"
+                inputVariable="enviarCorreoElectronicoRequest"
+                outputVariable="enviarCorreoElectronicoResponse"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns7:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_2">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">EnviarCorreoElectronicoFabricante</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence>
+        <assign name="AsignarEnviarCorreoElectronico">
+          <copy>
+            <from expression="bpws:getVariableData('inputVariable','payload','/client:process/client:emailFabricante')"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:to"/>
+          </copy>
+          <copy>
+            <from expression="'info@marketplace.losalpes.com.co'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:from"/>
+          </copy>
+          <copy>
+            <from expression="'marketplace2011'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:password"/>
+          </copy>
+          <copy>
+            <from expression="'Aviso de despacho'"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+          </copy>
+          <copy>
+            <from expression="concat('Estimado ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombreFabricante'),':\n\nHemos recibido un aviso de despacho a su nombre. El aviso de despacho se ha radicado con numero de seguimiento ',bpws:getVariableData('registrarDAResponse','parameters','/ns2:registrarDAResponse/ns2:numSeguimiento'),'.\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes')"/>
+            <to variable="enviarCorreoElectronicoRequest" part="parameters"
+                query="/ns2:enviarCorreoElectronico/ns2:message"/>
+          </copy>
+        </assign>
+        <invoke name="EnviarCorreoElectronico"
+                inputVariable="enviarCorreoElectronicoRequest"
+                outputVariable="enviarCorreoElectronicoResponse"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns7:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico"/>
+      </sequence>
+    </scope>
+    <assign name="AsignarConsultarComision">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nitFabricante"/>
+        <to variable="consultarComisionRequest" part="parameters"
+            query="/ns2:consultarComision/ns2:nit"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarComision" inputVariable="consultarComisionRequest"
+            outputVariable="consultarComisionResponse"
+            partnerLink="GestionCliente" portType="ns5:GestionCliente"
+            operation="ConsultarComision"/>
+    <assign name="AsignarConsultarCuentaFacturacion">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:nitFabricante"/>
+        <to variable="consultarCuentaFacturacionClienteRequest"
+            part="parameters"
+            query="/ns2:consultarCuentaFacturacionCliente/ns2:nit"/>
+      </copy>
+    </assign>
+    <invoke name="ConsultarCuentaFacturacion"
+            inputVariable="consultarCuentaFacturacionClienteRequest"
+            outputVariable="consultarCuentaFacturacionClienteResponse"
+            partnerLink="GestionFacturacion" portType="ns6:GestionFacturacion"
+            operation="consultarCuentaFacturacionCliente"/>
+    <assign name="AsignarRegistrarTransaccion">
+      <copy>
+        <from variable="consultarCuentaFacturacionClienteResponse"
+              part="parameters"
+              query="/ns2:consultarCuentaFacturacionClienteResponse/ns2:cuenta/numReferencia"/>
+        <to variable="registrarTransaccionRequest" part="parameters"
+            query="/ns2:registrarTransaccion/ns2:numCuenta"/>
+      </copy>
+      <copy>
+        <from expression="ora:getCurrentDate()"/>
+        <to variable="registrarTransaccionRequest" part="parameters"
+            query="/ns2:registrarTransaccion/ns2:transaccion/fecha"/>
+      </copy>
+      <copy>
+        <from expression="'Registro DA'"/>
+        <to variable="registrarTransaccionRequest" part="parameters"
+            query="/ns2:registrarTransaccion/ns2:transaccion/descripcion"/>
+      </copy>
+      <copy>
+        <from variable="consultarComisionResponse" part="parameters"
+              query="/ns2:consultarComisionResponse/ns2:comision"/>
+        <to variable="registrarTransaccionRequest" part="parameters"
+            query="/ns2:registrarTransaccion/ns2:transaccion/valor"/>
+      </copy>
+      <copy>
+        <from expression="concat('DA',xp20:year-from-dateTime(xp20:current-date()),xp20:month-from-dateTime(xp20:current-date()),xp20:day-from-dateTime(xp20:current-date()))"/>
+        <to variable="registrarTransaccionRequest" part="parameters"
+            query="/ns2:registrarTransaccion/ns2:transaccion/referencia"/>
+      </copy>
+    </assign>
+    <invoke name="RegistrarTransaccion"
+            inputVariable="registrarTransaccionRequest"
+            outputVariable="registrarTransaccionResponse"
+            partnerLink="GestionFacturacion" portType="ns6:GestionFacturacion"
+            operation="registrarTransaccion"/>
+  </sequence>
+</process>
