@@ -48,6 +48,9 @@
     			minOccurs="0">
     		</element>
     		<element name="codigoPais" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="categoria" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
     	</sequence></complexType>
 
     <element name="cliente" type="tns:Cliente"></element>
