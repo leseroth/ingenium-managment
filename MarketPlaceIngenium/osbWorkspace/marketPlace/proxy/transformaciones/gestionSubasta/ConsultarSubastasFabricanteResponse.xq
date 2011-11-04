@@ -176,11 +176,6 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                                             </fabricante>
                                     }
                                     {
-                                        for $mensaje in $ofertaBOList/mensaje
-                                        return
-                                            <mensaje>{ data($mensaje) }</mensaje>
-                                    }
-                                    {
                                         for $valor in $ofertaBOList/valor
                                         return
                                             <valor>{ data($valor) }</valor>
@@ -190,6 +185,11 @@ declare function xf:ConsultarSubastasFabricanteResponse12($consultarSubastasFabr
                                         return
                                             <estadoOferta>{ data($estadoOferta) }</estadoOferta>
                                     }
+                                    {
+			                            for $mensaje in $ofertaBOList/mensaje
+			                            return
+			                                <mensaje>{ data($mensaje) }</mensaje>
+			                        }
                                 </ofertas>
                         }
                     </ns0:subastas>
