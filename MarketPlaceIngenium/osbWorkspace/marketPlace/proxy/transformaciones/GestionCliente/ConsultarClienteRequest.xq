@@ -25,27 +25,32 @@ declare function xf:ConsultarClienteRequest($consultarCliente1 as element(ns0:co
                		<ns2:nComision></ns2:nComision>   
                		<ns2:stCorreo_Electronico/> 
                		<ns2:stCodigoPostal/> 
-               		<ns2:stCodigoPais/>            
+               		<ns2:stCodigoPais/>   
+               		<ns2:plCategoria/>         
               <ns2:ListOfContact>
                   <ns2:Contact>               
-                     <ns2:ContactFirstName></ns2:ContactFirstName>                     
-                     <ns2:JobTitle></ns2:JobTitle>           
+                     <ns2:ContactFirstName></ns2:ContactFirstName> 
                      <ns2:ContactLastName></ns2:ContactLastName>
                      <ns2:AccountId></ns2:AccountId>  
-                     <ns2:CellularPhone></ns2:CellularPhone>
-                     <ns2:Description></ns2:Description>
-                     <ns2:Department></ns2:Department>
                      <ns2:ContactEmail></ns2:ContactEmail>
-                     <ns2:ContactRole></ns2:ContactRole>
                      <ns2:WorkPhone></ns2:WorkPhone>                     
                      <ns2:ContactId></ns2:ContactId>
                      <ns2:stNmero_de_Identificacin></ns2:stNmero_de_Identificacin>
+                     <ns2:plTipo_de_Identificacin></ns2:plTipo_de_Identificacin>
+                     <ns2:stCelular></ns2:stCelular>
+                     <ns2:stDireccion></ns2:stDireccion>
+                     <ns2:plEstado_Contacto></ns2:plEstado_Contacto>
                   </ns2:Contact>
                </ns2:ListOfContact>  
               <ns2:ListOfCustomObject3>
                   <ns2:CustomObject3>
                      <ns2:Name></ns2:Name>
-                     <ns2:CustomObject3Id></ns2:CustomObject3Id>	 
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>	
+                     <ns2:stCategoria></ns2:stCategoria>
+                	 <ns2:stTipo></ns2:stTipo>
+                	 <ns2:stReferencia></ns2:stReferencia>
+                	 <ns2:stPesoLibras></ns2:stPesoLibras> 
+                	 <ns2:plEstado></ns2:plEstado>
                   </ns2:CustomObject3>
                </ns2:ListOfCustomObject3>  
              </ns2:Account> 
