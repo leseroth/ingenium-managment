@@ -11,7 +11,9 @@ declare function xf:ConsultarComisionResponse($accountWS_AccountQueryPage_Output
         let $AccountWS_AccountQueryPage_Output := $accountWS_AccountQueryPage_Output1,
             $ListOfAccount := $AccountWS_AccountQueryPage_Output/ns2:ListOfAccount
         return
-        	<ns0:consultarComisionResponse>{ string(data($ListOfAccount/ns2:Account[1]/ns2:nComision )) }</ns0:consultarComisionResponse>            
+            <ns0:consultarComisionResponse>
+            	<ns0:comision>{ string(data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:nComision )) }</ns0:comision>
+            </ns0:consultarComisionResponse>
 };
 
 declare variable $accountWS_AccountQueryPage_Output1 as element(ns1:AccountWS_AccountQueryPage_Output) external;
