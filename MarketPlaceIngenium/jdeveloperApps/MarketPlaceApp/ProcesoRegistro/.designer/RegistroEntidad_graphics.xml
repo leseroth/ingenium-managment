@@ -5,14 +5,14 @@
    <iconize scope="no" catchall="no" dropzone="no" pick="no" catch="no" flow="no" javaembedding="no" onmessage="no" throw="no" onalarm="no" terminate="no" empty="no" sequence="no" compensate="no" optimize="no" transform="no" reply="no" validate="no" while="no" wait="no" compensationhandler="no" receive="no" assign="no" switch="no" invoke="no"/>
    <partnerlink_locations>
       <partnerlink name="registroentidad_client" x="0" y="90" side="left"/>
-      <partnerlink name="GestionCorreoElectronico" x="0" y="5040" side="left"/>
+      <partnerlink name="GestionCorreoElectronico" x="0" y="5364" side="left"/>
       <partnerlink name="GestionCliente" x="0" y="2470" side="left"/>
       <partnerlink name="VerificacionCrediticia" x="1297" y="3267" side="right"/>
       <partnerlink name="GestionFacturacion" x="1297" y="5646" side="right"/>
-      <partnerlink name="GestionUsuario" x="1297" y="6017" side="right"/>
+      <partnerlink name="GestionUsuario" x="1297" y="6200" side="right"/>
       <partnerlink name="BAM" x="1297" y="5463" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,5925,799,534" show_swimlanes="true">
+   <graph_layout viewport="200,4166,1016,531" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]" type="switch"/>

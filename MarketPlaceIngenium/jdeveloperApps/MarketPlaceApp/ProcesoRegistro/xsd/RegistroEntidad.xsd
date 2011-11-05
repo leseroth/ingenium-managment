@@ -43,6 +43,7 @@
     <sequence>
       <element name="nombre" type="string"/>
       <element name="categoria" type="string"/>
+      <element name="referencia" type="string" minOccurs="0" maxOccurs="1"/>
     </sequence>
   </complexType>
 </schema>

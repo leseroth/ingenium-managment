@@ -908,7 +908,7 @@
                   portType="ns4:VerificacionCrediticia"
                   operation="VerificarListaClinton"/>
           <switch name="Switch_1">
-            <case condition="true()">
+            <case condition="bpws:getVariableData('verificarListaAntilavadoResponse','parameters','/ns2:verificarListaAntilavadoResponse/ns2:validacion') = 'false' and bpws:getVariableData('verificarListaClintonResponse','parameters','/ns2:verificarListaClintonResponse/ns2:validacion') = 'false' and bpws:getVariableData('verificarComfecamarasResponse','parameters','/ns2:verificarComfecamaraResponse/ns2:validacion') = 'true' and (bpws:getVariableData('verificarDataCreditoResponse','parameters','/ns2:verificarDataCreditoResponse/ns2:calificacion') = 'A' or bpws:getVariableData('verificarDataCreditoResponse','parameters','/ns2:verificarDataCreditoResponse/ns2:calificacion') = 'B')">
               <sequence>
                 <assign name="AsignarAceptarSolicitud">
                   <copy>
@@ -1270,6 +1270,46 @@
                         partnerLink="GestionFacturacion"
                         portType="ns5:GestionFacturacion"
                         operation="crearCuentaFacturacion"/>
+                <assign name="AsignarCorreoElectronico">
+                  <copy>
+                    <from expression="'info@marketplace.losalpes.com.co'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="payload"
+                          query="/client:process/client:email"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                  </copy>
+                  <copy>
+                    <from expression="concat('Estimado ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'),': Nos es grato informarle que su solicitud para registrase en el MarketPlace de los Alpes ha sido aceptada. Hemos enviado correos electrónicos con la información de login al sistema a los contactos que se registraron. No olvide que para utilizar el sistema, sus contactos deben ingresar al portal del MarketPlace (http://portal.marketplace.losalpes.com.co). Cordialmente, El equipo del MarketPlace de los Alpes')"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                  </copy>
+                  <copy>
+                    <from expression="'q0eb7sebEO'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Solicitud aceptada'"/>
+                    <to variable="enviarCorreoElectronicoRequest"
+                        part="parameters"
+                        query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                  </copy>
+                </assign>
+                <invoke name="EnviarCorreoElectronicoCliente"
+                        bpelx:invokeAsDetail="no"
+                        inputVariable="enviarCorreoElectronicoRequest"
+                        outputVariable="enviarCorreoElectronicoResponse"
+                        partnerLink="GestionCorreoElectronico"
+                        portType="ns9:GestionCorreoElectronico"
+                        operation="enviarCorreoElectronico"/>
                 <assign name="AsignarDatosUsuarioCliente">
                   <copy>
                     <from variable="inputVariable" part="payload"
@@ -1293,9 +1333,36 @@
                   <sequence>
                     <assign name="AsignarDatosUsuario">
                       <copy>
-                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:numIdentificacion'))"/>
+                        <from variable="inputVariable" part="payload"
+                              query="/client:process/client:nit"/>
                         <to variable="registrarUsuarioRequest" part="parameters"
                             query="/ns2:registrarUsuario/nit"/>
+                      </copy>
+                      <copy>
+                        <from variable="inputVariable" part="payload"
+                              query="/client:process/client:tipo"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/rol"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:numIdentificacion'))"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/numIdentificacion"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:tipoIdentificacion'))"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/tipoIdentificacion"/>
+                      </copy>
+                      <copy>
+                        <from variable="inputVariable" part="payload" query="/client:process/client:nombre"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/nombre"/>
+                      </copy>
+                      <copy>
+                        <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:email'))"/>
+                        <to variable="registrarUsuarioRequest" part="parameters"
+                            query="/ns2:registrarUsuario/email"/>
                       </copy>
                     </assign>
                     <invoke name="CrearUsuario"
@@ -1324,13 +1391,13 @@
                             query="/ns2:enviarCorreoElectronico/ns2:password"/>
                       </copy>
                       <copy>
-                        <from expression="'Solicitud aceptada'"/>
+                        <from expression="'Credenciales ingreso portal MPLA'"/>
                         <to variable="enviarCorreoElectronicoRequest"
                             part="parameters"
                             query="/ns2:enviarCorreoElectronico/ns2:subject"/>
                       </copy>
                       <copy>
-                        <from expression="concat('Estimado ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'),':\n\nSu afiliación al MarketPlace de los Alpes ha sido aceptada. A continuación adjuntamos información de login al sistema.\n\nUsuario: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/login'),'\nContraseña: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/password'),'\n\nCordialmente\n\nEl equipo del MarketPlace de los Alpes')"/>
+                        <from expression="concat('Estimado(a) ',bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indice'),']/client:nombre')),': Ha sido seleccionado como contacto de ',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'),' en el MarketPlace de los Alpes. A continuación adjuntamos información de login al sistema. Usuario: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/login'),' - Contraseña: ',bpws:getVariableData('registrarUsuarioResponse','parameters','/ns2:registrarUsuarioResponse/password'),'. Para utilizar el sistema, ingresar al portal del MarketPlace (http://portal.marketplace.losalpes.com.co). Cordialmente, El equipo del MarketPlace de los Alpes')"/>
                         <to variable="enviarCorreoElectronicoRequest"
                             part="parameters"
                             query="/ns2:enviarCorreoElectronico/ns2:message"/>
@@ -1401,7 +1468,7 @@
                         query="/ns2:enviarCorreoElectronico/ns2:subject"/>
                   </copy>
                   <copy>
-                    <from expression="concat('Estimado ', bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'), ':\n\nLamentamos informarle que su afiliación al MarketPlace de los Alpes ha sido rechazada. Para el MarketPlace de los Alpes sus clientes son una prioridad. Nos gustaría contar con ustedes como parte de nuestros clientes por eso le alentamos a volver a solicitar registrarse con nosotros.\n\nCordialmente\n\nEl equipo el MarketPlace de los Alpes')"/>
+                    <from expression="concat('Estimado ', bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'), ': Lamentamos informarle que su afiliación al MarketPlace de los Alpes ha sido rechazada. Para el MarketPlace de los Alpes sus clientes son una prioridad. Nos gustaría contar con ustedes como parte de nuestros clientes por eso le alentamos a volver a solicitar registrarse con nosotros. Cordialmente, El equipo el MarketPlace de los Alpes')"/>
                     <to variable="enviarCorreoElectronicoRequest"
                         part="parameters"
                         query="/ns2:enviarCorreoElectronico/ns2:message"/>

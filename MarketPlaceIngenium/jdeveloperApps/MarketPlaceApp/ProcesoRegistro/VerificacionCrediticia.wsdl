@@ -13,5 +13,5 @@
             <plnk:portType name="WL5G3N2:VerificacionCrediticia"/>
         </plnk:role>
     </plnk:partnerLinkType>
-    <wsdl:import namespace="http://marketplace.losalpes.com.co/VerificacionCrediticia" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionVerificacionCrediticia?wsdl"/>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/VerificacionCrediticia" location="http://marketplace10.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionVerificacionCrediticia?wsdl"/>
 </wsdl:definitions>
