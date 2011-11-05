@@ -13,5 +13,5 @@
             <plnk:portType name="WL5G3N2:GestionUsuarioPort"/>
         </plnk:role>
     </plnk:partnerLinkType>
-    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionUsuario" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionUsuario?wsdl"/>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionUsuario" location="http://marketplace10.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionUsuario?wsdl"/>
 </wsdl:definitions>
