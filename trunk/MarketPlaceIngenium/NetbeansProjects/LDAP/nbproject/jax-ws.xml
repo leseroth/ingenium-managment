@@ -30,5 +30,29 @@
         </wsimport-option>
       </wsimport-options>
     </client>
+    <client name="MailSendingManagement">
+      <wsdl-url>http://localhost:8148/MailSendingManagementService/MailSendingManagement?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8148/MailSendingManagementService/MailSendingManagement.wsdl</local-wsdl-file>
+      <package-name>co.com.losalpes.marketplace.mailer.ws</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://localhost:8148/MailSendingManagementService/MailSendingManagement?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
   </clients>
 </jax-ws>

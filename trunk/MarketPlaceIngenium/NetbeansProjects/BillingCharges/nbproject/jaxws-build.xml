@@ -31,22 +31,22 @@
             <classpath path="${j2ee.platform.wsimport.classpath}"/>
         </taskdef>
     </target>
-    <target name="wsimport-client-GestionCorreoElectronico" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico"/>
-        <property name="wsdl-GestionCorreoElectronico" location="${meta.inf}/xml-resources/web-service-references/GestionCorreoElectronico/wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico" destdir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico" wsdl="${wsdl-GestionCorreoElectronico}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:7001/marketPlace/proxy/GestionCorreoElectronico?wsdl" xnocompile="true">
-            <depends file="${wsdl-GestionCorreoElectronico}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico"/>
+    <target name="wsimport-client-MailSendingManagement" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/MailSendingManagement"/>
+        <property name="wsdl-MailSendingManagement" location="${meta.inf}/xml-resources/web-service-references/MailSendingManagement/wsdl/localhost_8148/MailSendingManagementService/MailSendingManagement.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/MailSendingManagement" destdir="${build.generated.dir}/jax-wsCache/MailSendingManagement" wsdl="${wsdl-MailSendingManagement}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8148/MailSendingManagementService/MailSendingManagement?wsdl" xnocompile="true">
+            <depends file="${wsdl-MailSendingManagement}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/MailSendingManagement"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico">
+            <fileset dir="${build.generated.dir}/jax-wsCache/MailSendingManagement">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-GestionCorreoElectronico" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/GestionCorreoElectronico"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/co/com/losalpes/marketplace/gestioncorreoelectronico"/>
+    <target name="wsimport-client-clean-MailSendingManagement" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/MailSendingManagement"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/co/com/losalpes/marketplace/mailer/ws"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-GestionCorreoElectronico"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-MailSendingManagement"/>
 </project>
