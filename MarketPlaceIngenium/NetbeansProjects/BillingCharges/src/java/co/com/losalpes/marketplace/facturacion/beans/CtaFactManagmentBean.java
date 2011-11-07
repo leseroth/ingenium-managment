@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.facturacion.beans;
 
 import co.com.losalpes.marketplace.facturacion.bos.CargoBO;
@@ -15,7 +10,7 @@ import co.com.losalpes.marketplace.facturacion.entities.Factura;
 import co.com.losalpes.marketplace.facturacion.exceptions.CuentaFacturacionNoExisteException;
 import co.com.losalpes.marketplace.facturacion.exceptions.FacturaException;
 import co.com.losalpes.marketplace.facturacion.utilities.BillGeneration;
-import co.com.losalpes.marketplace.gestioncorreoelectronico.GestionCorreoElectronico_Service;
+import co.com.losalpes.marketplace.mailer.ws.MailSendingManagementService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,20 +27,22 @@ import javax.xml.ws.WebServiceRef;
  */
 @Stateless
 public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactManagmentLocal {
-    @WebServiceRef(wsdlLocation = "META-INF/wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.wsdl")
-    private GestionCorreoElectronico_Service service;
 
-   @PersistenceContext
+    private static final String INGENIUM_EMAIL = "ingenium.uniandes@gmail.com";
+    private static final String INGENIUM_EMAIL_PASSWORD = "ingenium2011";
+    @WebServiceRef(wsdlLocation = "META-INF/wsdl/localhost_8148/MailSendingManagementService/MailSendingManagement.wsdl")
+    private MailSendingManagementService service;
+    @PersistenceContext
     private EntityManager em;
 
     public String crearCuentaFacturacion(ClienteBO cliente) {
         Query q = em.createNamedQuery("getClienteByNit");
         q.setParameter("nit", cliente.getNit());
-        List<Cliente> clientes = (List<Cliente>)q.getResultList();
-        if(!clientes.isEmpty()){
+        List<Cliente> clientes = (List<Cliente>) q.getResultList();
+        if (!clientes.isEmpty()) {
             q = em.createNamedQuery("getCuentaByNitCliente");
             q.setParameter("nit", cliente.getNit());
-            List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
+            List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
             return cuentas.get(0).getNumeroCuenta();
         }
         Cliente c = new Cliente(cliente);
@@ -59,18 +56,20 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
     public CuentaFacturacionBO consultarCuentaFacturacionCliente(String nit) throws CuentaFacturacionNoExisteException {
         Query q = em.createNamedQuery("getCuentaByNitCliente");
         q.setParameter("nit", nit);
-        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-        if(cuentas.isEmpty())
+        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+        if (cuentas.isEmpty()) {
             throw new CuentaFacturacionNoExisteException("El cliente especificado no tiene cuenta de facturacion asociada");
+        }
         return cuentas.get(0).toBO();
     }
 
     public CuentaFacturacionBO consultarCuentaFacturacion(String numeroCuenta) throws CuentaFacturacionNoExisteException {
-        Query q=em.createNamedQuery("getCtaFacturacionByNum");
+        Query q = em.createNamedQuery("getCtaFacturacionByNum");
         q.setParameter("numero", numeroCuenta);
-        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-        if(cuentas.isEmpty())
-            throw new CuentaFacturacionNoExisteException("La cuenta de facturación con el número "+ numeroCuenta+ " no existe");
+        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+        if (cuentas.isEmpty()) {
+            throw new CuentaFacturacionNoExisteException("La cuenta de facturación con el número " + numeroCuenta + " no existe");
+        }
         return cuentas.get(0).toBO();
     }
 
@@ -78,35 +77,32 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
         try {
             Query q = em.createNamedQuery("getCuentaFacturacionByCorte");
             q.setParameter("corte", corte);
-            List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-            for(int i = 0; i < cuentas.size(); i++){
+            List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+            for (int i = 0; i < cuentas.size(); i++) {
                 CuentaFacturacion cuenta = cuentas.get(i);
                 Factura f = BillGeneration.getInstance().generateBill(cuenta, plazo);
                 em.persist(f);
                 cuenta.adicionarFactura(f);
 
                 try { // Call Web Service Operation
-                    co.com.losalpes.marketplace.gestioncorreoelectronico.GestionCorreoElectronico port = service.getGestionCorreoElectronicoSOAP();
+                    co.com.losalpes.marketplace.mailer.ws.MailSendingManagement port = service.getMailSendingManagementPort();
 
                     List<String> to = new ArrayList<String>();
                     to.add(cuenta.getCliente().getEmail());
-                    String from = "info@marketplace.losalpes.com.co";
-                    String password = "marketplace2011";
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaInicio = sdf.format(f.getFechaInicio());
                     String fechaFin = sdf.format(f.getFechaFin());
                     String subject = "Factura del período " + fechaInicio + " - " + fechaFin;
-                    String message = "Estimado " + cuenta.getCliente().getNombre() + ":\n\nAdjuntamos la factura para el período "
-                            + fechaInicio + " - " + fechaFin + ".\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes";
+                    String message = "Estimado " + cuenta.getCliente().getNombre() + ":\n\nAdjuntamos la factura para el período " + fechaInicio + " - " + fechaFin + ".\n\nCordialmente,\n\nEl equipo del MarketPlace de los Alpes";
                     List<String> attachments = new ArrayList<String>();
                     attachments.add(f.getUrl());
-                    port.enviarCorreoElectronico(to, null, null, from, password, subject, message, attachments);
+
+                    port.sendMail(to, null, null, subject, message, INGENIUM_EMAIL, INGENIUM_EMAIL_PASSWORD, attachments);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             throw new FacturaException("Error generando facturas");
         }
         return true;
@@ -115,9 +111,10 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
     public Boolean registrarTransaccion(CargoBO cargo, String numeroCuenta) throws CuentaFacturacionNoExisteException {
         Query q = em.createNamedQuery("getCtaFacturacionByNum");
         q.setParameter("numero", numeroCuenta);
-        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-        if(cuentas.isEmpty())
+        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+        if (cuentas.isEmpty()) {
             throw new CuentaFacturacionNoExisteException("La cuenta especificada no existe");
+        }
         Cargo c = new Cargo(cargo);
         em.persist(c);
         cuentas.get(0).adicionarCargo(c);
@@ -127,9 +124,10 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
     public Boolean cambiarEstadoCliente(String nit, String estado) throws CuentaFacturacionNoExisteException {
         Query q = em.createNamedQuery("getCuentaByNitCliente");
         q.setParameter("nit", nit);
-        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-        if(cuentas.isEmpty())
+        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+        if (cuentas.isEmpty()) {
             throw new CuentaFacturacionNoExisteException("El cliente especificado no existe");
+        }
         cuentas.get(0).getCliente().setEstado(estado);
         return true;
     }
@@ -137,33 +135,33 @@ public class CtaFactManagmentBean implements CtaFactManagmentRemote, CtaFactMana
     public Boolean reportarClientesMorosos(int corte) {
         Query q = em.createNamedQuery("getCuentaFacturacionByCorte");
         q.setParameter("corte", corte);
-        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>)q.getResultList();
-        for(int i = 0; i < cuentas.size(); i++){
+        List<CuentaFacturacion> cuentas = (List<CuentaFacturacion>) q.getResultList();
+        for (int i = 0; i < cuentas.size(); i++) {
             CuentaFacturacion cta = cuentas.get(i);
             Date fechaInicio = new Date();
             Long valorPagoAnterior = 0L;
-            for(int j = 0; j < cta.getFacturas().size(); j++){
+            for (int j = 0; j < cta.getFacturas().size(); j++) {
                 Factura f = cta.getFacturas().get(j);
-                if(f.getFechaFin().equals(cta.getFechaUltimoCorte())){
+                if (f.getFechaFin().equals(cta.getFechaUltimoCorte())) {
                     fechaInicio = f.getFechaInicio();
                     valorPagoAnterior = f.getValorPago();
                     break;
                 }
             }
             boolean noMoroso = false;
-            for(int j = 0; j < cta.getCargos().size(); j++){
+            for (int j = 0; j < cta.getCargos().size(); j++) {
                 Cargo c = cta.getCargos().get(j);
-                if(c.getFecha().after(fechaInicio) && c.getFecha().before(cta.getFechaUltimoCorte()) && c.getValor() < 0){
+                if (c.getFecha().after(fechaInicio) && c.getFecha().before(cta.getFechaUltimoCorte()) && c.getValor() < 0) {
                     noMoroso = true;
                     break;
                 }
             }
-            if(!noMoroso){
+            if (!noMoroso) {
                 cta.getCliente().setEstado(ClienteBO.REPORTADO);
                 Cargo c = new Cargo();
                 c.setDescripcion("Valor a pagar factura anterior");
                 c.setFecha(new Date(System.currentTimeMillis()));
-                c.setReferencia(""+System.currentTimeMillis());
+                c.setReferencia("" + System.currentTimeMillis());
                 c.setValor(valorPagoAnterior);
                 cta.adicionarCargo(c);
                 em.persist(c);
