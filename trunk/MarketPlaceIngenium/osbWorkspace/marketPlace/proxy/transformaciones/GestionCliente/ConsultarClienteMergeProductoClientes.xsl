@@ -38,7 +38,16 @@
 					</comision>
 					<tipo>
 						<xsl:value-of select="tipo"></xsl:value-of>
-					</tipo>					
+					</tipo>		
+					<categoria>
+						<xsl:value-of select="categoria"></xsl:value-of>
+					</categoria>		
+					<codigoPais>
+						<xsl:value-of select="codigoPais"></xsl:value-of>
+					</codigoPais>		
+					<codigoPostal>
+						<xsl:value-of select="codigoPostal"></xsl:value-of>
+					</codigoPostal>			
 					<xsl:copy-of select="$contactos"></xsl:copy-of>	
 					<solicitudes>
 					<xsl:copy-of select="$productos"></xsl:copy-of>	

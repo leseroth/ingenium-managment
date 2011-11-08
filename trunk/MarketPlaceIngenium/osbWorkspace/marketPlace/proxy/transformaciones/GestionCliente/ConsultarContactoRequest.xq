@@ -12,16 +12,15 @@ declare function xf:ConsultarContactoRequest($consultarContacto1 as element(ns0:
             <ns1:ListOfContact>
                 <ns1:Contact>
                 	<ns1:ContactId></ns1:ContactId>
-                	<ns1:plTipo_de_Identificacin></ns1:plTipo_de_Identificacin>
                 	<ns1:ContactFirstName></ns1:ContactFirstName>
                 	<ns1:stDireccion></ns1:stDireccion>
-                	<ns1:ContactFirstName></ns1:ContactFirstName>
                 	<ns1:WorkPhone></ns1:WorkPhone>
                 	<ns1:CellularPhone></ns1:CellularPhone>
                 	<ns1:plEstado_Contacto></ns1:plEstado_Contacto>  
                 	<ns1:ContactEmail></ns1:ContactEmail>           
                     <ns1:plTipo_de_Identificacin>{ concat("='",data($consultarContacto1/ns0:tipoDocumento),"'") }</ns1:plTipo_de_Identificacin>
                     <ns1:stNmero_de_Identificacin>{ concat("='",data($consultarContacto1/ns0:documento),"'") }</ns1:stNmero_de_Identificacin>
+                    <ns1:stCelular></ns1:stCelular>
                 </ns1:Contact>
             </ns1:ListOfContact>
         </ns2:ContactWS_ContactQueryPage_Input>

@@ -20,7 +20,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <con:CellularPhone><xsl:value-of select="tns:celular"></xsl:value-of></con:CellularPhone>
         <con:ContactEmail><xsl:value-of select="tns:email"></xsl:value-of></con:ContactEmail>        
         <con:WorkPhone><xsl:value-of select="tns:telefono"></xsl:value-of></con:WorkPhone>
-        <con:HomePhone><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:HomePhone>     	   
+        <con:HomePhone><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:HomePhone>   
+        <con:plEstado_Contacto><xsl:value-of select ="tns:estado" ></xsl:value-of></con:plEstado_Contacto>  
+        <con:stDireccion><xsl:value-of select ="tns:direccion" ></xsl:value-of></con:stDireccion>
+        <con:stCelular><xsl:value-of select ="tns:celular" ></xsl:value-of></con:stCelular>  
        </con:Contact>
        </xsl:if>
       </xsl:for-each> 

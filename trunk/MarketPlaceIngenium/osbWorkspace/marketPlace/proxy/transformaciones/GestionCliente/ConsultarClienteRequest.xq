@@ -13,7 +13,6 @@ declare function xf:ConsultarClienteRequest($consultarCliente1 as element(ns0:co
                 <ns2:Account>
                 	<ns2:AccountId></ns2:AccountId>
                 	<ns2:AccountName></ns2:AccountName> 
-               		<ns2:AccountType></ns2:AccountType>
                		<ns2:MainPhone></ns2:MainPhone>
                		<!--Filtrando por el nit-->
                     <ns2:stNit>{concat("='",data($consultarCliente1/ns0:nit),"'")}</ns2:stNit>

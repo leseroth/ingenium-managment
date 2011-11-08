@@ -18,6 +18,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cus ="urn:/crmondema
 		<email><xsl:value-of select="acc:stCorreo_Electronico"></xsl:value-of></email>
 		<direccion><xsl:value-of select="acc:Location"></xsl:value-of></direccion>
 		<telefono><xsl:value-of select="acc:MainPhone"></xsl:value-of></telefono>
+		<codigoPostal><xsl:value-of select="acc:stCodigoPostal"></xsl:value-of></codigoPostal> 
+      	<codigoPais><xsl:value-of select="acc:stCodigoPais"></xsl:value-of></codigoPais>
+      	<razonSocial><xsl:value-of select="acc:stRazon_Social"></xsl:value-of></razonSocial>
+      	<estado><xsl:value-of select="acc:Status"></xsl:value-of></estado>
+      	<tipo><xsl:value-of select="acc:AccountType"></xsl:value-of></tipo>
+      	<categoria><xsl:value-of select="acc:plCategoria"></xsl:value-of></categoria>
+      	<comision><xsl:value-of select="acc:nComision"></xsl:value-of></comision>
 		</ns0:cliente>  
 		</xsl:if>		 
 		</xsl:for-each> 

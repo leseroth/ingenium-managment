@@ -17,26 +17,26 @@ declare function xf:CrearProductosRequest($crearProducto1 as element(ns0:crearPr
                             for $productos in $crearProducto/ns0:productos
                             return
                                 <ns2:CustomObject3>
-                                    <ns2:AccountId>{ data($crearProducto/ns0:idCliente) }</ns2:AccountId>
+                                    <ns2:AccountId>{ concat("='",data($crearProducto/ns0:idCliente),"'") }</ns2:AccountId>
                                     {
                                         for $id in $productos/id
                                         return
-                                            <ns2:CustomObject3Id>{ data($id) }</ns2:CustomObject3Id>
+                                            <ns2:CustomObject3Id>{ concat("='",data($id),"'") }</ns2:CustomObject3Id>
                                     }
-                                    <ns2:Name>{ data($productos/nombre) }</ns2:Name>
-                                    <ns2:plEstado>{ data($productos/estado) }</ns2:plEstado>
-                                    <ns2:stCategoria>{ data($productos/categoria) }</ns2:stCategoria>
+                                    <ns2:Name>{ concat("='",data($productos/nombre),"'") }</ns2:Name>
+                                    <ns2:plEstado>{ concat("='",data($productos/estado),"'") }</ns2:plEstado>
+                                    <ns2:stCategoria>{ concat("='",data($productos/categoria),"'") }</ns2:stCategoria>
                                     {
                                         for $tipo in $productos/tipo
                                         return
-                                            <ns2:stTipo>{ data($tipo) }</ns2:stTipo>
+                                            <ns2:stTipo>{ concat("='",data($tipo),"'") }</ns2:stTipo>
                                     }
                                     {
                                         for $referencia in $productos/referencia
                                         return
-                                            <ns2:stReferencia>{ data($referencia) }</ns2:stReferencia>
+                                            <ns2:stReferencia>{ concat("='",data($referencia),"'") }</ns2:stReferencia>
                                     }
-                                    <ns2:stPesoLibras>{ data($productos/pesoLibras) }</ns2:stPesoLibras>
+                                    <ns2:stPesoLibras>{ concat("='",data($productos/pesoLibras),"'") }</ns2:stPesoLibras>
                                 </ns2:CustomObject3>
                         }
                     </ns2:ListOfCustomObject3>

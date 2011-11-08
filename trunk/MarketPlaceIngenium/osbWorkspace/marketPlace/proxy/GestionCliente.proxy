@@ -1866,6 +1866,9 @@
                 	<ns1:AccountType>{ concat("= '",$body/mar:consultarClientesProducto/mar:tipoCliente,"'") }</ns1:AccountType>
                 	<ns1:Location></ns1:Location>
                 	<ns1:MainPhone></ns1:MainPhone>
+                	<ns1:stCodigoPostal/> 
+               		<ns1:stCodigoPais/>   
+               		<ns1:plCategoria/> 
                 </ns1:Account>
             </ns1:ListOfAccount>
  </ns:AccountWS_AccountQueryPage_Input> 
@@ -1914,7 +1917,11 @@
                 	<ns1:AccountId></ns1:AccountId>
                 	<ns1:AccountName></ns1:AccountName>
                 	<ns1:stCategoria>{ concat("~LIKE '",$categoria,"*","'") }</ns1:stCategoria>
-                	<ns1:Name>{ concat("~LIKE '",$producto,"*","'") }</ns1:Name>                	
+                	<ns1:Name>{ concat("~LIKE '",$producto,"*","'") }</ns1:Name>  
+                	<ns1:stTipo></ns1:stTipo>
+                	<ns1:stReferencia></ns1:stReferencia>
+                	<ns1:stPesoLibras></ns1:stPesoLibras>
+                	<ns1:plEstado></ns1:plEstado>              	
                 </ns1:CustomObject3>
             </ns1:ListOfCustomObject3>
  </ns:CustomObject3WS_CustomObject3QueryPage_Input> 
@@ -2258,13 +2265,13 @@
                 <ns2:CustomObject3>
                      <ns2:Name></ns2:Name>
                      <ns2:CustomObject3Id></ns2:CustomObject3Id>	
-                     <ns1:AccountId>{ concat("= '",$idCliente,"'") }</ns1:AccountId>
-                    <ns1:plEstado></ns1:plEstado>
-                    <ns1:CustomObject3Id></ns1:CustomObject3Id>
-                    <ns1:Name></ns1:Name>
-                	<ns1:stCategoria></ns1:stCategoria>
-                	<ns1:stTipo></ns1:stTipo>
-                	<ns1:stReferencia></ns1:stReferencia>
+                     <ns2:AccountId>{ concat("= '",$idCliente,"'") }</ns2:AccountId>
+                     <ns2:stTipo></ns2:stTipo>
+                	 <ns2:stReferencia></ns2:stReferencia>
+                	 <ns2:stPesoLibras></ns2:stPesoLibras> 
+                	 <ns2:plEstado></ns2:plEstado>
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>
+                	 <ns2:stCategoria></ns2:stCategoria>
                 </ns2:CustomObject3>
             </ns2:ListOfCustomObject3>
         </ns1:CustomObject3WS_CustomObject3QueryPage_Input>
@@ -2308,7 +2315,7 @@
                                 </con3:wsCallout>
                               </con3:actions>
                             </con3:case>
-                            <con3:default></con3:default>
+                            <con3:default/>
                           </con3:ifThenElse>
                         </con3:responseTransform>
                       </con3:wsCallout>
@@ -2841,7 +2848,6 @@
               </con:route-node>
             </con:flow>
           </con:branch>
-          
           <con:branch name="ConsultarClientes">
             <con:operator>equals</con:operator>
             <con:value/>
