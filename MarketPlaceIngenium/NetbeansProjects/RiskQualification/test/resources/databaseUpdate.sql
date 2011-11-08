@@ -1,0 +1,1 @@
+alter table confecamara change fecha fecha datetime;

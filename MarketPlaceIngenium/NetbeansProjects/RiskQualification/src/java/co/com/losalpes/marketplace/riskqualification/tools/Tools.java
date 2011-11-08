@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.riskqualification.tools;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -13,32 +8,18 @@ import java.util.Calendar;
  */
 public class Tools {
 
+    /**
+     * Calcula la cantidad de dias de diferencia entre las dos fechas
+     * @param dateIni Fecha inicial
+     * @param dateLast Fecha final
+     * @return Cantidad de dias de diferencia entre las dos fechas
+     */
+    public static int getDiffDates(Date dateIni, Date dateLast) {
+        long milisLast = dateLast.getTime();
+        long milisIni = dateIni.getTime();
 
-   public static java.sql.Date getDateCurrent(){
-
-        java.util.Calendar cal = Calendar.getInstance();
-        java.sql.Date sqlFecha = new java.sql.Date(cal.getTime().getTime());
-        return sqlFecha;
-   }
-
-   public static long getDiffDates(Calendar dateIni, Calendar dateLast){
-
-       long milisLast = dateLast.getTimeInMillis();
-       long milisIni = dateIni.getTimeInMillis();
-       // Calculate difference in milliseconds
-       long diff = milisLast - milisIni;
-       // Calculate difference in days
-       long diffDays = diff / (24 * 60 * 60 * 1000);
-       return diffDays;
-   }
-
-   public static int safeLongToInt(long l) {
-    int i = (int)l;
-    if ((long)i != l) {
-        throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
+        // Calculate difference in days
+        int diff = (int) ((milisLast - milisIni) / (1000 * 60 * 60 * 24));
+        return diff;
     }
-    return i;
-}
-
-
 }
