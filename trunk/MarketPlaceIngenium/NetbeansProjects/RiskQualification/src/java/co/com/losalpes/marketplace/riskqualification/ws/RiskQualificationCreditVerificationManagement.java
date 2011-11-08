@@ -1,16 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.riskqualification.ws;
 
-import co.com.losalpes.marketplace.riskqualification.beans.CreditVerificationLocal;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.ejb.Stateless;
+
+import co.com.losalpes.marketplace.riskqualification.beans.CreditVerificationLocal;
+import co.com.losalpes.marketplace.riskqualification.exceptions.BussinessException;
 
 /**
  *
@@ -19,37 +16,66 @@ import javax.ejb.Stateless;
 @WebService()
 @Stateless()
 public class RiskQualificationCreditVerificationManagement {
+
     @EJB
     private CreditVerificationLocal ejbRef;
-    // Add business logic below. (Right-click in editor and choose
-    // "Web Service > Add Operation"    
 
-    @WebMethod(operationName = "verificarDataCredito")
-    public String verificarDataCredito(@WebParam(name = "nit")
-    String nit, @WebParam(name = "reglaVal")
-    int reglaVal) throws Exception {
-        return ejbRef.verificarDataCredito(nit, reglaVal);
-    }
-
+    /**
+     * Verifica una entidad con las siguientes reglas.
+     * <ul>
+     * <li>Si la entidad no existe se registra, el nit es obligatorio</li>
+     * <li>Si la cantidad de dias del certificado supera a la maxima cantidad de dias se registra nuevamente</li>
+     * <li>Si la entidad se registra por primera vez, es verificada solo si su nit no contiene 7, 8, o 9</li>
+     * <li>Si ha expirado el certificado de la entidad existe un 50% de posibilidades de que sea certificada</li>
+     * </ul>
+     * @param nit Nit de la entidad
+     * @param reglaVal Maxima cantidad de dias en la que el certificado es valido
+     * @return true si la entidad es verificada, false en caso contrario
+     * @throws BussinessException Si no se cumple alguna de las reglas anteriores
+     */
     @WebMethod(operationName = "verificarComfecamara")
-    public Boolean verificarComfecamara(@WebParam(name = "nit")
-    String nit, @WebParam(name = "reglaVal")
-    int reglaVal) throws Exception {
+    public Boolean verificarComfecamara(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal) throws BussinessException {
         return ejbRef.verificarComfecamara(nit, reglaVal);
     }
 
-    @WebMethod(operationName = "verificarListaClinton")
-    public Boolean verificarListaClinton(@WebParam(name = "nit")
-    String nit, @WebParam(name = "reglaVal")
-    int reglaVal) throws Exception {
-        return ejbRef.verificarListaClinton(nit, reglaVal);
+    @WebMethod(operationName = "verificarDataCredito")
+    public String verificarDataCredito(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal) throws BussinessException {
+        return ejbRef.verificarDataCredito(nit, reglaVal);
     }
 
+    /**
+     * Verifica una entidad con las siguientes reglas.
+     * <ul>
+     * <li>Si la entidad no existe se registra, el nit es obligatorio</li>
+     * <li>Si la cantidad de dias del certificado supera a la maxima cantidad de dias se registra nuevamente</li>
+     * <li>Si la entidad se registra por primera vez, es verificada solo si su nit no contiene 7, 8, o 9</li>
+     * <li>Si ha expirado el certificado de la entidad existe un 50% de posibilidades de que sea certificada</li>
+     * </ul>
+     * @param nit Nit de la entidad
+     * @param reglaVal Maxima cantidad de dias en la que el certificado es valido
+     * @return true si la entidad es verificada, false en caso contrario
+     * @throws BussinessException Si no se cumple alguna de las reglas anteriores
+     */
     @WebMethod(operationName = "verificarListaAntiLavado")
-    public Boolean verificarListaAntiLavado(@WebParam(name = "nit")
-    String nit, @WebParam(name = "reglaVal")
-    int reglaVal) throws Exception {
+    public Boolean verificarListaAntiLavado(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal) throws BussinessException {
         return ejbRef.verificarListaAntiLavado(nit, reglaVal);
     }
 
+    /**
+     * Verifica una entidad con las siguientes reglas.
+     * <ul>
+     * <li>Si la entidad no existe se registra, el nit es obligatorio</li>
+     * <li>Si la cantidad de dias del certificado supera a la maxima cantidad de dias se registra nuevamente</li>
+     * <li>Si la entidad se registra por primera vez, es verificada solo si su nit no contiene 7, 8, o 9</li>
+     * <li>Si ha expirado el certificado de la entidad existe un 50% de posibilidades de que sea certificada</li>
+     * </ul>
+     * @param nit Nit de la entidad
+     * @param reglaVal Maxima cantidad de dias en la que el certificado es valido
+     * @return true si la entidad es verificada, false en caso contrario
+     * @throws BussinessException Si no se cumple alguna de las reglas anteriores
+     */
+    @WebMethod(operationName = "verificarListaClinton")
+    public Boolean verificarListaClinton(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal) throws BussinessException {
+        return ejbRef.verificarListaClinton(nit, reglaVal);
+    }
 }
