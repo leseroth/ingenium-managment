@@ -21,7 +21,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <con:WorkPhone><xsl:value-of select="tns:telefono"></xsl:value-of></con:WorkPhone>
         <con:HomePhone><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:HomePhone>
         <con:plEstado_Contacto><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:plEstado_Contacto>   
-        <con:stDireccion><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:stDireccion>        	   
+        <con:stDireccion><xsl:value-of select ="tns:telefono" ></xsl:value-of></con:stDireccion>  
+        <con:stCelular><xsl:value-of select="tns:celular"></xsl:value-of></con:stCelular>      	   
        </con:Contact>
        </xsl:if>
       </xsl:for-each> 

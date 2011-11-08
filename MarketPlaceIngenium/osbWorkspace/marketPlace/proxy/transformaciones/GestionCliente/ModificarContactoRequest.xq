@@ -11,26 +11,26 @@ declare function xf:ModificarContactoRequest($modificarContacto1 as element(ns0:
         <ns2:ContactWS_ContactUpdate_Input>
             <ns1:ListOfContact>
                 <ns1:Contact>
-                    <ns1:ContactId>{ data($modificarContacto1/ns0:contactos/ns0:id) }</ns1:ContactId>
+                    <ns1:ContactId>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:id),"'") }</ns1:ContactId>
                     {
                         for $celular in $modificarContacto1/ns0:contactos/ns0:celular
                         return
-                            <ns1:CellularPhone>{ data($celular) }</ns1:CellularPhone>
+                            <ns1:CellularPhone>{ concat("='",data($celular),"'") }</ns1:CellularPhone>
                     }
-                    <ns1:ContactEmail>{ data($modificarContacto1/ns0:contactos/ns0:email) }</ns1:ContactEmail>
-                    <ns1:ContactFirstName>{ data($modificarContacto1/ns0:contactos/ns0:nombre) }</ns1:ContactFirstName>
-                    <ns1:ContactFullName>{ data($modificarContacto1/ns0:contactos/ns0:nombre) }</ns1:ContactFullName>
-                    <ns1:ContactLastName>{ data($modificarContacto1/ns0:contactos/ns0:nombre) }</ns1:ContactLastName>
-                    <ns1:WorkPhone>{ data($modificarContacto1/ns0:contactos/ns0:telefono) }</ns1:WorkPhone>
-                    <ns1:plTipo_de_Identificacin>{ data($modificarContacto1/ns0:contactos/ns0:tipoIdentificacion) }</ns1:plTipo_de_Identificacin>
+                    <ns1:ContactEmail>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:email),"'") }</ns1:ContactEmail>
+                    <ns1:ContactFirstName>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:nombre),"'") }</ns1:ContactFirstName>
+                    <ns1:ContactFullName>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:nombre),"'") }</ns1:ContactFullName>
+                    <ns1:ContactLastName>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:nombre),"'") }</ns1:ContactLastName>
+                    <ns1:WorkPhone>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:telefono),"'") }</ns1:WorkPhone>
+                    <ns1:plTipo_de_Identificacin>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:tipoIdentificacion),"'") }</ns1:plTipo_de_Identificacin>
                     {
                         for $estado in $modificarContacto1/ns0:contactos/ns0:estado
                         return
-                            <ns1:plEstado_Contacto>{ data($estado) }</ns1:plEstado_Contacto>
+                            <ns1:plEstado_Contacto>{ concat("='",data($estado),"'") }</ns1:plEstado_Contacto>
                     }
-                    <ns1:stNmero_de_Identificacin>{ data($modificarContacto1/ns0:contactos/ns0:numIdentificacion) }</ns1:stNmero_de_Identificacin>
-                    <ns1:stDireccion>{ data($modificarContacto1/ns0:contactos/ns0:direccion) }</ns1:stDireccion>
-                    <ns1:HomePhone>{ data($modificarContacto1/ns0:contactos/ns0:telefono) }</ns1:HomePhone>
+                    <ns1:stNmero_de_Identificacin>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:numIdentificacion),"'") }</ns1:stNmero_de_Identificacin>
+                    <ns1:stDireccion>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:direccion),"'") }</ns1:stDireccion>
+                    <ns1:stCelular>{ concat("='",data($modificarContacto1/ns0:contactos/ns0:celular),"'") }</ns1:stCelular>                    
                 </ns1:Contact>
             </ns1:ListOfContact>
         </ns2:ContactWS_ContactUpdate_Input>

@@ -12,6 +12,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 		<acc:stCorreo_Electronico><xsl:value-of select="acc:stCorreo_Electronico"></xsl:value-of></acc:stCorreo_Electronico>
 		<acc:Location><xsl:value-of select="acc:Location"></xsl:value-of></acc:Location>	
 		<acc:MainPhone><xsl:value-of select="acc:MainPhone"></xsl:value-of></acc:MainPhone>   
+		<acc:Status><xsl:value-of select="acc:Status"></xsl:value-of></acc:Status>
+        <acc:AccountType><xsl:value-of select="acc:AccountType"></xsl:value-of></acc:AccountType>
+        <acc:stRazon_Social><xsl:value-of select="acc:stRazon_Social"></xsl:value-of></acc:stRazon_Social>
+        <acc:nComision><xsl:value-of select="acc:nComision"></xsl:value-of></acc:nComision>                  	
+        <acc:stCodigoPostal><xsl:value-of select="acc:stCodigoPostal"></xsl:value-of></acc:stCodigoPostal>
+        <acc:stCodigoPais><xsl:value-of select="acc:stCodigoPais"></xsl:value-of></acc:stCodigoPais> 
+        <acc:plCategoria><xsl:value-of select="acc:plCategoria"></xsl:value-of></acc:plCategoria>  
     </acc:Account> 
     </xsl:for-each>
     </acc:ListOfAccount>   

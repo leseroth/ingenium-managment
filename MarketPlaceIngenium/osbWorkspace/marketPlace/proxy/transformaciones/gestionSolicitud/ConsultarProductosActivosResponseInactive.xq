@@ -20,12 +20,12 @@ declare function xf:ConsultarProductosActivosResponseInactive($customObject3WS_C
                                     {
                                         for $CustomObject3Id in $CustomObject3/ns1:CustomObject3Id
                                         return
-                                            <ns1:CustomObject3Id>{ data($CustomObject3Id) }</ns1:CustomObject3Id>
+                                            <ns1:CustomObject3Id>{ concat("='",data($CustomObject3Id),"'") }</ns1:CustomObject3Id>
                                     }
                                     {
                                         for $plEstado in $CustomObject3/ns1:plEstado
                                         return
-                                            <ns1:plEstado>Inactivo</ns1:plEstado>
+                                            <ns1:plEstado>='Inactivo'</ns1:plEstado>
                                     }
                                 </ns1:CustomObject3>
                         }

@@ -17,9 +17,9 @@ declare function xf:ConsultarContactoResponse($contactWS_ContactQueryPage_Output
                 <ns0:direccion>{ data($contactWS_ContactQueryPage_Output1/ns1:ListOfContact/ns1:Contact[1]/ns1:stDireccion) }</ns0:direccion>
                 <ns0:telefono>{ data($contactWS_ContactQueryPage_Output1/ns1:ListOfContact/ns1:Contact[1]/ns1:WorkPhone) }</ns0:telefono>
                 {
-                    for $CellularPhone in $contactWS_ContactQueryPage_Output1/ns1:ListOfContact/ns1:Contact[1]/ns1:CellularPhone
+                    for $stCelular in $contactWS_ContactQueryPage_Output1/ns1:ListOfContact/ns1:Contact[1]/ns1:stCelular
                     return
-                        <ns0:celular>{ data($CellularPhone) }</ns0:celular>
+                        <ns0:celular>{ data($stCelular) }</ns0:celular>
                 }
                 {
                     for $plEstado_Contacto in $contactWS_ContactQueryPage_Output1/ns1:ListOfContact/ns1:Contact[1]/ns1:plEstado_Contacto
