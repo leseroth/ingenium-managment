@@ -21,6 +21,11 @@ declare function xf:CrearContactosRequest($crearContacto1 as element(ns0:crearCo
                                         for $celular in $contactos/ns0:celular
                                         return
                                             <ns1:CellularPhone>{ concat("='",data($celular),"'") }</ns1:CellularPhone>
+                                    } 
+                                    {
+                                        for $celular in $contactos/ns0:celular
+                                        return
+                                            <ns1:stCelular>{ concat("='",data($celular),"'") }</ns1:stCelular>
                                     }                                    
                                     <ns1:ContactFirstName>{ concat("='",data($contactos/ns0:nombre),"'") }</ns1:ContactFirstName>
                      				<ns1:AccountId>{ concat("='",data($crearContacto/ns0:idCliente),"'") }</ns1:AccountId>  
@@ -28,7 +33,6 @@ declare function xf:CrearContactosRequest($crearContacto1 as element(ns0:crearCo
                      				<ns1:WorkPhone>{ concat("='",data($contactos/ns0:telefono),"'") }</ns1:WorkPhone>                     
                      				<ns1:stNmero_de_Identificacin>{ concat("='",data($contactos/ns0:numIdentificacion),"'") }</ns1:stNmero_de_Identificacin>
                      				<ns1:plTipo_de_Identificacin>{ concat("='",data($contactos/ns0:tipoIdentificacion),"'") }</ns1:plTipo_de_Identificacin>
-                     				<ns1:stCelular>{ concat("='",data($contactos/ns0:celular),"'") }</ns1:stCelular>
                      				<ns1:stDireccion>{ concat("='",data($contactos/ns0:direccion),"'") }</ns1:stDireccion>
                      				{
                                         for $estado in $contactos/ns0:estado
