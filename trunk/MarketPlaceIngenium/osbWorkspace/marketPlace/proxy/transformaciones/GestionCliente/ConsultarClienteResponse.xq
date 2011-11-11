@@ -46,10 +46,6 @@ declare function xf:ConsultarClienteResponse($accountWS_AccountQueryPage_Output1
                                         }
                                         <nombre>{ data($CustomObject3/ns2:Name) }</nombre>
                                         <categoria>{ data($CustomObject3/ns2:stCategoria) }</categoria>
-                                        <tipo>{ data($CustomObject3/ns2:sttipo) }</tipo>
-                                        <estado>{ data($CustomObject3/ns2:plEstado) }</estado>
-                                        <referencia>{ data($CustomObject3/ns2:stReferencia) }</referencia>
-                                        <pesoLibras>{ data($CustomObject3/ns2:stPesoLibras) }</pesoLibras>
                                     </ns0:productos>
                             }
                         </solicitudes>
@@ -106,9 +102,9 @@ declare function xf:ConsultarClienteResponse($accountWS_AccountQueryPage_Output1
                         <tipo>{ data($AccountType) }</tipo>
                 }
                 {
-                    for $Categoria in $accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:plCategoria
+                    for $plCategoria in $accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:plCategoria
                     return
-                        <categoria>{ data($Categoria) }</categoria>
+                        <categoria>{ data($plCategoria) }</categoria>
                 }
                 <comision>{ string(data($accountWS_AccountQueryPage_Output1/ns2:ListOfAccount/ns2:Account[1]/ns2:nComision )) }</comision>
             </ns0:cliente>

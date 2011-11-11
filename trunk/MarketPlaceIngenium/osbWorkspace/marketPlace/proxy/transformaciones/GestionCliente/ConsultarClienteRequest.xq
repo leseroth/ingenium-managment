@@ -44,12 +44,7 @@ declare function xf:ConsultarClienteRequest($consultarCliente1 as element(ns0:co
               <ns2:ListOfCustomObject3>
                   <ns2:CustomObject3>
                      <ns2:Name></ns2:Name>
-                     <ns2:CustomObject3Id></ns2:CustomObject3Id>	
-                     <ns2:stCategoria></ns2:stCategoria>
-                	 <ns2:stTipo></ns2:stTipo>
-                	 <ns2:stReferencia></ns2:stReferencia>
-                	 <ns2:stPesoLibras></ns2:stPesoLibras> 
-                	 <ns2:plEstado></ns2:plEstado>
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>
                   </ns2:CustomObject3>
                </ns2:ListOfCustomObject3>  
              </ns2:Account> 
