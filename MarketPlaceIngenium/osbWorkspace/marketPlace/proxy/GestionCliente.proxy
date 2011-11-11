@@ -1813,8 +1813,8 @@
               <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
-                <wsse:Username>ANROMERO6-17/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">DkWnL7nU</wsse:Password>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con4:xqueryText>
@@ -2079,8 +2079,8 @@
                           <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
-                <wsse:Username>ANROMERO6-17/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">DkWnL7nU</wsse:Password>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -2421,8 +2421,8 @@
                           <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
-                <wsse:Username>ANROMERO6-17/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">DkWnL7nU</wsse:Password>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
@@ -2602,8 +2602,8 @@
                           <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
        <wsse:UsernameToken>
-                <wsse:Username>ANROMERO6-17/ADMIN</wsse:Username>
-                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">DkWnL7nU</wsse:Password>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
             </wsse:UsernameToken>        
     </wsse:Security>
 </soapenv:Header>]]></con1:xqueryText>
