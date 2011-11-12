@@ -34,6 +34,7 @@
       <hash><url n="URL" path="ProcesoOrdenCompraSubasta/ProcesoOrdenCompraSubasta.jpr"/></hash>
       <hash><url n="URL" path="ProcesoPricat/ProcesoPricat.jpr"/></hash>
       <hash><url n="URL" path="ProcesoRegistro/ProcesoRegistro.jpr"/></hash>
+      <hash><url n="URL" path="ProcesoRegistroInterNal/ProcesoRegistroInterNal.jpr"/></hash>
       <hash><url n="URL" path="ProcesoRetornoMaterial/ProcesoRetornoMaterial.jpr"/></hash>
       <hash><url n="URL" path="ProcesoSubastaInversa/ProcesoSubastaInversa.jpr"/></hash>
    </list>
