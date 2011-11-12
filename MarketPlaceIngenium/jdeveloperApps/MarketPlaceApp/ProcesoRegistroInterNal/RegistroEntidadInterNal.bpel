@@ -15,7 +15,10 @@
          xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"
          xmlns:ora="http://schemas.oracle.com/xpath/extension"
          xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
-         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns2="http://marketplace.losalpes.com.co"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +33,9 @@
       with the client role are automatically set using WS-Addressing.
     -->
         <partnerLink name="registroentidadinternal_client" partnerLinkType="client:RegistroEntidadInterNal" myRole="RegistroEntidadInterNalProvider" partnerRole="RegistroEntidadInterNalRequester"/>
+        <partnerLink name="GestionCliente"
+                     partnerLinkType="ns1:GestionCliente_PL"
+                     partnerRole="GestionCliente_Role"/>
     </partnerLinks>
 
     <!-- 
@@ -44,6 +50,10 @@
 
         <!-- Reference to the message that will be sent back to the requester during callback -->
         <variable name="outputVariable" messageType="client:RegistroEntidadInterNalResponseMessage"/>
+        <variable name="ConsultarCliente_ConsultarCliente_InputVariable"
+                  messageType="ns1:ConsultarClienteRequest"/>
+        <variable name="ConsultarCliente_ConsultarCliente_OutputVariable"
+                  messageType="ns1:ConsultarClienteResponse"/>
     </variables>
 
     <!-- 
@@ -60,6 +70,19 @@
         <!-- 
           Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
         -->
+        <assign name="AsignarConsultarCliente">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nit"/>
+                <to variable="ConsultarCliente_ConsultarCliente_InputVariable"
+                    part="parameters" query="/ns2:consultarCliente/ns2:nit"/>
+            </copy>
+        </assign>
+        <invoke name="ConsultarCliente" bpelx:invokeAsDetail="no"
+                inputVariable="ConsultarCliente_ConsultarCliente_InputVariable"
+                outputVariable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                partnerLink="GestionCliente" portType="ns1:GestionCliente"
+                operation="ConsultarCliente"/>
         <invoke name="callbackClient" partnerLink="registroentidadinternal_client" portType="client:RegistroEntidadInterNalCallback" operation="processResponse" inputVariable="outputVariable"/>
     </sequence>
 </process>
