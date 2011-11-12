@@ -347,6 +347,7 @@
       </hash>
    </hash>
    <value n="ProcessName" v="RegistroEntidadInterNal"/>
+   <url n="RegistroEntidadInterNal_bpelFileURL" path="RegistroEntidadInterNal.bpel"/>
    <value n="RegistroEntidadInterNal_Namespace" v="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"/>
    <value n="RegistroEntidadInterNal_ProcessName" v="RegistroEntidadInterNal"/>
    <value n="RegistroEntidadInterNal_Template" v="BPEL_ASYNC_PROCESS"/>
