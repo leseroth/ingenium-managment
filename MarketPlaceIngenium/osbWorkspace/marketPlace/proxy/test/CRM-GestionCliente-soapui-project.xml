@@ -1,0 +1,1567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="GestionCliente" resourceRoot="" soapui-version="3.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionClienteSOAP" type="wsdl" bindingName="{http://marketplace.losalpes.com.co/GestionCliente}GestionClienteSOAP" soapVersion="1_1" anonymous="optional" definition="file:/E:/Especializacion/Repositorio/MarketPlaceIngenium/osbWorkspace/marketPlace/proxy/wsdls/GestionCliente/GestionCliente.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/E:/Especializacion/Repositorio/MarketPlaceIngenium/osbWorkspace/marketPlace/proxy/wsdls/GestionCliente/GestionCliente.wsdl"><con:part><con:url>file:/E:/Especializacion/Repositorio/MarketPlaceIngenium/osbWorkspace/marketPlace/proxy/wsdls/GestionCliente/GestionCliente.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="GestionCliente" targetNamespace="http://marketplace.losalpes.com.co/GestionCliente" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionCliente" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ma="http://marketplace.losalpes.com.co" xmlns:xsd1="http://ws.transact.marketplace.losalpes.com.co/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://marketplace.losalpes.com.co" schemaLocation="GestionCliente.xsd"></xsd:import>
+      <xsd:import namespace="http://ws.transact.marketplace.losalpes.com.co/" schemaLocation="../../../business/wsdls/transactManager/XMLSchema_765612391.xsd"></xsd:import>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CrearClienteRequest">
+    <wsdl:part name="parameters" element="ma:crearCliente"/>
+  </wsdl:message>
+  <wsdl:message name="CrearClienteResponse">
+    <wsdl:part name="parameters" element="ma:crearClienteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CrearContactosRequest">
+    <wsdl:part name="parameters" element="ma:crearContacto"/>
+  </wsdl:message>
+  <wsdl:message name="CrearContactosResponse">
+    <wsdl:part name="parameters" element="ma:crearContactoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClienteRequest">
+    <wsdl:part name="parameters" element="ma:consultarCliente"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClienteResponse">
+    <wsdl:part name="parameters" element="ma:consultarClienteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClientesRequest">
+    <wsdl:part name="parameters" element="ma:consultarClientes"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClientesResponse">
+    <wsdl:part name="parameters" element="ma:consultarClientesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarComisionRequest">
+    <wsdl:part name="parameters" element="ma:consultarComision"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarComisionResponse">
+    <wsdl:part name="parameters" element="ma:consultarComisionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarClienteRequest">
+    <wsdl:part name="parameters" element="ma:modificarCliente"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarClienteResponse">
+    <wsdl:part name="parameters" element="ma:modificarClienteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarComisionRequest">
+    <wsdl:part name="parameters" element="ma:modificarComision"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarComisionResponse">
+    <wsdl:part name="parameters" element="ma:modificarComisionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClientesProductoRequest">
+    <wsdl:part name="parameters" element="ma:consultarClientesProducto"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarClientesProductoResponse">
+    <wsdl:part name="parameters" element="ma:consultarClientesProductoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RadicarSolicitudRequest">
+    <wsdl:part element="ma:radicarSolicitud" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="RadicarSolicitudResponse">
+    <wsdl:part element="ma:radicarSolicitudResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarSolicitudRequest">
+    <wsdl:part name="parameters" element="ma:actualizarSolicitud"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarSolicitudResponse">
+    <wsdl:part name="parameters" element="ma:actualizarSolicitudResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoClienteRequest">
+    <wsdl:part name="parameters" element="ma:actualizarEstadoCliente"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoClienteResponse">
+    <wsdl:part name="parameters" element="ma:actualizarEstadoClienteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoSolicitudRequest">
+    <wsdl:part name="parameters" element="ma:actualizarEstadoSolicitud"/>
+  </wsdl:message>
+  <wsdl:message name="ActualizarEstadoSolicitudResponse">
+    <wsdl:part name="parameters" element="ma:actualizarEstadoSolicitudResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CerrarSolicitudRequest">
+    <wsdl:part name="parameters" element="ma:cerrarSolicitud"/>
+  </wsdl:message>
+  <wsdl:message name="CerrarSolicitudResponse">
+    <wsdl:part name="parameters" element="ma:cerrarSolicitudResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarProductosClienteRequest">
+    <wsdl:part name="parameters" element="ma:consultarProductosCliente"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarProductosClienteResponse">
+    <wsdl:part name="parameters" element="ma:consultarProductosClienteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarContactoRequest">
+    <wsdl:part name="parameters" element="ma:consultarContacto"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarContactoResponse">
+    <wsdl:part name="parameters" element="ma:consultarContactoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CrearProductosRequest">
+    <wsdl:part name="parameters" element="ma:crearProducto"/>
+  </wsdl:message>
+  <wsdl:message name="CrearProductosResponse">
+    <wsdl:part name="parameters" element="ma:crearProductoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarContactoRequest">
+    <wsdl:part name="parameters" element="ma:modificarContacto"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarContactoResponse">
+    <wsdl:part name="parameters" element="ma:modificarContactoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarProductoRequest">
+    <wsdl:part name="parameters" element="ma:consultarProducto"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarProductoResponse">
+    <wsdl:part name="parameters" element="ma:consultarProductoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarProductoRequest">
+    <wsdl:part name="parameters" element="ma:modificarProducto"/>
+  </wsdl:message>
+  <wsdl:message name="ModificarProductoResponse">
+    <wsdl:part name="parameters" element="ma:modificarProductoResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="GestionCliente">
+    <wsdl:operation name="CrearCliente">
+      <wsdl:input message="tns:CrearClienteRequest"/>
+      <wsdl:output message="tns:CrearClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CrearContactos">
+      <wsdl:input message="tns:CrearContactosRequest"/>
+      <wsdl:output message="tns:CrearContactosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarCliente">
+      <wsdl:input message="tns:ConsultarClienteRequest"/>
+      <wsdl:output message="tns:ConsultarClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarClientes">
+      <wsdl:input message="tns:ConsultarClientesRequest"/>
+      <wsdl:output message="tns:ConsultarClientesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarComision">
+      <wsdl:input message="tns:ConsultarComisionRequest"/>
+      <wsdl:output message="tns:ConsultarComisionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarCliente">
+      <wsdl:input message="tns:ModificarClienteRequest"/>
+      <wsdl:output message="tns:ModificarClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarComision">
+      <wsdl:input message="tns:ModificarComisionRequest"/>
+      <wsdl:output message="tns:ModificarComisionResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarClientesProducto">
+      <wsdl:input message="tns:ConsultarClientesProductoRequest"/>
+      <wsdl:output message="tns:ConsultarClientesProductoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="RadicarSolicitud">
+      <wsdl:input message="tns:RadicarSolicitudRequest"/>
+      <wsdl:output message="tns:RadicarSolicitudResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarSolicitud">
+      <wsdl:input message="tns:ActualizarSolicitudRequest"/>
+      <wsdl:output message="tns:ActualizarSolicitudResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoCliente">
+      <wsdl:input message="tns:ActualizarEstadoClienteRequest"/>
+      <wsdl:output message="tns:ActualizarEstadoClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoSolicitud">
+      <wsdl:input message="tns:ActualizarEstadoSolicitudRequest"/>
+      <wsdl:output message="tns:ActualizarEstadoSolicitudResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CerrarSolicitud">
+      <wsdl:input message="tns:CerrarSolicitudRequest"/>
+      <wsdl:output message="tns:CerrarSolicitudResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarProductosCliente">
+      <wsdl:input message="tns:ConsultarProductosClienteRequest"/>
+      <wsdl:output message="tns:ConsultarProductosClienteResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarContacto">
+      <wsdl:input message="tns:ConsultarContactoRequest"/>
+      <wsdl:output message="tns:ConsultarContactoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CrearProductos">
+      <wsdl:input message="tns:CrearProductosRequest"/>
+      <wsdl:output message="tns:CrearProductosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarContacto">
+      <wsdl:input message="tns:ModificarContactoRequest"/>
+      <wsdl:output message="tns:ModificarContactoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarProducto">
+      <wsdl:input message="tns:ConsultarProductoRequest"/>
+      <wsdl:output message="tns:ConsultarProductoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarProducto">
+      <wsdl:input message="tns:ModificarProductoRequest"/>
+      <wsdl:output message="tns:ModificarProductoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GestionClienteSOAP" type="tns:GestionCliente">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CrearCliente">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearContactos">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearContactos"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarCliente">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarClientes">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarComision">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarCliente">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarComision">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarClientesProducto">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientesProducto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RadicarSolicitud">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/RadicarSolicitud"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarSolicitud">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoCliente">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarEstadoSolicitud">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CerrarSolicitud">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarProductosCliente">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarContacto">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarContacto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearProductos">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/CrearProductos"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarContacto">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarProducto">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProducto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarProducto">
+      <soap:operation soapAction="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GestionCliente">
+    <wsdl:port binding="tns:GestionClienteSOAP" name="GestionClienteSOAP">
+      <soap:address location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\proxy\wsdls\GestionCliente\GestionCliente.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co" xmlns:xsdLocal1="urn:/crmondemand/xml/account">
+  <include schemaLocation="../../../canonicos/SolicitudRegistro.xsd"/>
+  <include schemaLocation="../../../canonicos/Cliente.xsd"/>
+  <complexType name="CrearCliente">
+    <sequence>
+      <element name="cliente" type="tns:Cliente" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="CrearClienteResponse">
+    <sequence>
+      <element name="idCuenta" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarCliente">
+    <sequence>
+      <element name="cliente" type="tns:Cliente" minOccurs="1" maxOccurs="1"></element>
+      <element name="id" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarClienteResponse">
+    <sequence>
+      <element name="resultado" type="boolean"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarCliente">
+    <sequence>
+      <element name="nit" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarClienteResponse">
+    <sequence>
+      <element name="cliente" type="tns:Cliente"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarClientes">
+    <sequence>
+      <element name="tipoCliente" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarClientesResponse">
+    <sequence>
+      <element name="cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarEstadoCliente">
+    <sequence>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarEstadoClienteResponse">
+    <sequence>
+      <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="CrearContacto">
+    <sequence>
+      <element name="contactos" type="tns:Contacto" minOccurs="1" maxOccurs="unbounded"></element>
+      <element name="idCliente" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="CrearContactoResponse">
+    <sequence>
+      <element name="respuesta" type="boolean" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarContacto">
+    <sequence>
+      <element name="contactos" type="tns:Contacto" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarContactoResponse">
+    <sequence>
+      <element name="respuesta" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="actualizarEstadoCliente" type="tns:ActualizarEstadoCliente"/>
+  <element name="actualizarEstadoClienteResponse" type="tns:ActualizarEstadoClienteResponse"></element>
+  <element name="consultarCliente" type="tns:ConsultarCliente"/>
+  <element name="consultarClienteResponse" type="tns:ConsultarClienteResponse"></element>
+  <element name="consultarClientes" type="tns:ConsultarClientes"/>
+  <element name="consultarClientesResponse" type="tns:ConsultarClientesResponse"></element>
+  <element name="crearCliente" type="tns:CrearCliente"/>
+  <element name="crearClienteResponse" type="tns:CrearClienteResponse"></element>
+  <element name="crearContacto" type="tns:CrearContacto"/>
+  <element name="crearContactoResponse" type="tns:CrearContactoResponse"></element>
+  <element name="modificarCliente" type="tns:ModificarCliente"/>
+  <element name="modificarClienteResponse" type="tns:ModificarClienteResponse"></element>
+  <element name="modificarContacto" type="tns:ModificarContacto"/>
+  <element name="modificarContactoResponse" type="tns:ModificarContactoResponse"></element>
+  <complexType name="ConsultarComision">
+    <sequence>
+      <element name="nit" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarComisionResponse">
+    <sequence>
+      <element name="comision" type="double"/>
+    </sequence>
+  </complexType>
+  <element name="consultarComision" type="tns:ConsultarComision"/>
+  <element name="consultarComisionResponse" type="tns:ConsultarComisionResponse"></element>
+  <complexType name="ModificarComision">
+    <sequence>
+      <element name="nit" type="string"/>
+      <element name="comision" type="double"/>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarComisionResponse">
+    <sequence>
+      <element name="resultado" type="boolean"/>
+    </sequence>
+  </complexType>
+  <element name="modificarComision" type="tns:ModificarComision"/>
+  <element name="modificarComisionResponse" type="tns:ModificarComisionResponse"></element>
+  <complexType name="ConsultarClientesProducto">
+    <sequence>
+      <element name="nombreProducto" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipoCliente" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="categoria" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarClientesProductoResponse">
+    <sequence>
+      <element name="cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="consultarClientesProducto" type="tns:ConsultarClientesProducto"></element>
+  <element name="consultarClientesProductoResponse" type="tns:ConsultarClientesProductoResponse"></element>
+  <complexType name="RadicarSolicitud">
+    <sequence>
+      <element name="solicitud" type="tns:SolicitudRegistro" minOccurs="1" maxOccurs="1"/>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="radicarSolicitud" type="tns:RadicarSolicitud"/>
+  <element name="radicarSolicitudResponse" type="tns:RadicarSolicitudResponse"/>
+  <complexType name="RadicarSolicitudResponse">
+    <sequence>
+      <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarEstadoSolicitud">
+    <sequence>
+      <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarEstadoSolicitudResponse">
+    <sequence>
+      <element name="resultado" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarSolicitud">
+    <sequence>
+      <element name="solicitud" type="tns:SolicitudRegistro" minOccurs="1" maxOccurs="1"></element>
+      <element name="estadoSolicitud" type="string"/>
+      <element name="causa" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="estadoCliente" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="estadoProducto" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="ActualizarSolicitudResponse">
+    <sequence>
+      <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="actualizarEstadoSolicitud" type="tns:ActualizarEstadoSolicitud"/>
+  <element name="actualizarEstadoSolicitudResponse" type="tns:ActualizarEstadoSolicitudResponse"/>
+  <element name="actualizarSolicitud" type="tns:ActualizarSolicitud"/>
+  <element name="actualizarSolicitudResponse" type="tns:ActualizarSolicitudResponse"/>
+  <complexType name="CerrarSolicitud">
+    <sequence>
+      <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="estadoSolicitud" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="causa" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="estadoCliente" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="estadoProducto" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="CerrarSolicitudResponse">
+    <sequence>
+      <element name="resultado" type="boolean"/>
+    </sequence>
+  </complexType>
+  <element name="cerrarSolicitud" type="tns:CerrarSolicitud"/>
+  <element name="cerrarSolicitudResponse" type="tns:CerrarSolicitudResponse"></element>
+  <complexType name="ConsultarProductosCliente">
+    <sequence>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarProductosClienteResponse">
+    <sequence>
+      <element name="productos" type="tns:Producto" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="consultarProductosCliente" type="tns:ConsultarProductosCliente"/>
+  <element name="consultarProductosClienteResponse" type="tns:ConsultarProductosClienteResponse"/>
+  <complexType name="ConsultarContacto">
+    <sequence>
+      <element name="documento" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipoDocumento" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarContactoResponse">
+    <sequence>
+      <element name="contacto" type="tns:Contacto" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="CrearProducto">
+    <sequence>
+      <element name="idCliente" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="productos" type="tns:Producto" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="CrearProductoResponse">
+    <sequence>
+      <element name="respuesta" type="boolean" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="crearProducto" type="tns:CrearProducto"/>
+  <element name="crearProductoResponse" type="tns:CrearProductoResponse"/>
+  <element name="consultarContacto" type="tns:ConsultarContacto"/>
+  <element name="consultarContactoResponse" type="tns:ConsultarContactoResponse"/>
+  <complexType name="ModificarProducto">
+    <sequence>
+      <element name="producto" type="tns:Producto" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ModificarProductoResponse">
+    <sequence>
+      <element name="respuesta" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="modificarProducto" type="tns:ModificarProducto"/>
+  <element name="modificarProductoResponse" type="tns:ModificarProductoResponse"></element>
+  <complexType name="ConsultarProducto">
+    <sequence>
+      <element name="idCliente" type="string"/>
+      <element name="nombreProducto" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarProductoResponse">
+    <sequence>
+      <element name="producto" type="tns:Producto"/>
+    </sequence>
+  </complexType>
+  <element name="consultarProducto" type="tns:ConsultarProducto"/>
+  <element name="consultarProductoResponse" type="tns:ConsultarProductoResponse"></element>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\SolicitudRegistro.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Producto.xsd"/>
+  <include schemaLocation="Documento.xsd"/>
+  <element name="solicitudRegistro" type="tns:SolicitudRegistro"/>
+  <complexType name="SolicitudRegistro">
+    <sequence>
+      <element name="id" type="long" minOccurs="1" maxOccurs="1"/>
+      <element name="numRadicacion" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="fecha" type="date" minOccurs="1" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="causa" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="documentos" type="tns:Documento" minOccurs="1" maxOccurs="unbounded"></element>
+      <element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="unbounded"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Producto.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Fabricante.xsd"/>
+  <complexType name="Producto">
+    <sequence>
+      <element name="id" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1"/>
+      <element name="categoria" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipo" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="referencia" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="pesoLibras" type="string" maxOccurs="1" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <element name="producto" type="tns:Producto"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Fabricante.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Producto.xsd"/>
+  <include schemaLocation="AvisoDespacho.xsd"/>
+  <complexType name="Fabricante">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="direccion" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="telefono" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="codPais" type="string" minOccurs="0"/>
+      <element name="codPostal" type="string" minOccurs="0"/>
+      <element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="das" type="tns:DispatchAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="fabricante" type="tns:Fabricante"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\AvisoDespacho.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="PurchaseOrder.xsd"/>
+  <include schemaLocation="Item.xsd"/>
+  <element name="da" type="tns:DispatchAdvice"/>
+  <complexType name="DispatchAdvice">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="fechaEmision" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="fechaLlegada" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="montoOperacion" type="long" minOccurs="1" maxOccurs="1"></element>
+      <element name="camiones" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="ordenCompra" type="tns:PurchaseOrder" maxOccurs="1" minOccurs="1"></element>
+      <element name="items" type="tns:Item" maxOccurs="unbounded" minOccurs="1"></element>
+      <element name="fabricante" type="tns:Fabricante" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\PurchaseOrder.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Comercio.xsd"/>
+  <include schemaLocation="Item.xsd"/>
+  <element name="po" type="tns:PurchaseOrder"/>
+  <complexType name="PurchaseOrder">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="item" type="tns:Item" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaMaxima" type="dateTime" minOccurs="1"/>
+      <element name="tiempoSubasta" type="dateTime" minOccurs="1"></element>
+      <element name="comercio" type="tns:Comercio" minOccurs="1"></element>
+      <element name="fabricanteAtiende" type="tns:Fabricante" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="fecha" type="dateTime" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Comercio.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="PurchaseOrder.xsd"/>
+  <include schemaLocation="ReturnMaterialAdvice.xsd"/>
+  <element name="comercio" type="tns:Comercio"/>
+  <complexType name="Comercio">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="nit" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="direccion" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="telefono" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="email" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="codPais" type="string" minOccurs="0"/>
+      <element name="codPostal" type="string" minOccurs="0"/>
+      <element name="pos" type="tns:PurchaseOrder" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\ReturnMaterialAdvice.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="PurchaseOrder.xsd"/>
+  <include schemaLocation="Item.xsd"/>
+  <include schemaLocation="AvisoDespacho.xsd"/>
+  <element name="rma" type="tns:ReturnMaterialAdvice"/>
+  <complexType name="ReturnMaterialAdvice">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="causa" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="fecha" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="avisoDespacho" type="tns:DispatchAdvice" maxOccurs="1" minOccurs="1"></element>
+      <element name="ordenCompra" type="tns:PurchaseOrder" maxOccurs="1" minOccurs="1"></element>
+      <element name="items" type="tns:Item" maxOccurs="1" minOccurs="1"></element>
+      <element name="comercio" type="tns:Comercio" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Item.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Fabricante.xsd"/>
+  <include schemaLocation="Producto.xsd"/>
+  <element name="item" type="tns:Item"/>
+  <complexType name="Item">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="valor" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="cantidad" type="int" minOccurs="1" maxOccurs="1"/>
+      <element name="producto" type="tns:Producto" minOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Documento.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <element name="documento" type="tns:Documento"/>
+  <complexType name="Documento">
+    <sequence>
+      <element name="id" type="long" minOccurs="1" maxOccurs="1"/>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="url" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipo" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Cliente.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Contacto.xsd"/>
+  <include schemaLocation="SolicitudRegistro.xsd"/>
+  <include schemaLocation="CuentaFacturacion.xsd"/>
+  <complexType name="Cliente">
+    <sequence>
+      <element name="id" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="direccion" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="telefono" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="email" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="ctaFact" type="tns:CuentaFacturacion" minOccurs="0" maxOccurs="1"></element>
+      <element name="solicitudes" type="tns:SolicitudRegistro" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="contactos" type="tns:Contacto" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="razonSocial" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="tipo" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="comision" type="double" minOccurs="0" maxOccurs="1"></element>
+      <element name="codigoPostal" type="string" maxOccurs="1" minOccurs="0"></element>
+      <element name="codigoPais" type="string" maxOccurs="1" minOccurs="0"/>
+      <element name="categoria" type="string" minOccurs="0" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <element name="cliente" type="tns:Cliente"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Contacto.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <element name="contacto" type="tns:Contacto"/>
+  <complexType name="Contacto">
+    <sequence>
+      <element name="id" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="numIdentificacion" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipoIdentificacion" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="direccion" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="telefono" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="celular" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="email" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\CuentaFacturacion.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co" xmlns:Q1="http://marketplace.losalpes.com.co">
+  <include schemaLocation="Factura.xsd"/>
+  <include schemaLocation="Transaccion.xsd"/>
+  <complexType name="CuentaFacturacion">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numReferencia" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="transacciones" type="Q1:Transaccion" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="facturas" type="tns:Factura" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="cuentaFacturacion" type="tns:CuentaFacturacion"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Factura.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <complexType name="Factura">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="url" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaInicio" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaFin" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+      <element name="valorPago" type="long" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="factura" type="tns:Factura"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\canonicos\Transaccion.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <complexType name="Transaccion">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="referencia" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="fecha" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+      <element name="descripcion" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="valor" type="long" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <element name="transaccion" type="string"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\E:\Especializacion\Repositorio\MarketPlaceIngenium\osbWorkspace\marketPlace\business\wsdls\transactManager\XMLSchema_765612391.xsd</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT.-->
+<xs:schema version="1.0" targetNamespace="http://ws.transact.marketplace.losalpes.com.co/" xmlns:tns="http://ws.transact.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BussinessException" type="tns:BussinessException"/>
+  <xs:element name="asignarFabricantesSubasta" type="tns:asignarFabricantesSubasta"/>
+  <xs:element name="asignarFabricantesSubastaResponse" type="tns:asignarFabricantesSubastaResponse"/>
+  <xs:element name="cerrarSubasta" type="tns:cerrarSubasta"/>
+  <xs:element name="cerrarSubastaResponse" type="tns:cerrarSubastaResponse"/>
+  <xs:element name="consultarFabricantesSubasta" type="tns:consultarFabricantesSubasta"/>
+  <xs:element name="consultarFabricantesSubastaResponse" type="tns:consultarFabricantesSubastaResponse"/>
+  <xs:element name="consultarSubastaOrdenCompra" type="tns:consultarSubastaOrdenCompra"/>
+  <xs:element name="consultarSubastaOrdenCompraResponse" type="tns:consultarSubastaOrdenCompraResponse"/>
+  <xs:element name="consultarSubastasFabricante" type="tns:consultarSubastasFabricante"/>
+  <xs:element name="consultarSubastasFabricanteResponse" type="tns:consultarSubastasFabricanteResponse"/>
+  <xs:element name="crearSubasta" type="tns:crearSubasta"/>
+  <xs:element name="crearSubastaResponse" type="tns:crearSubastaResponse"/>
+  <xs:element name="darGanadorSubasta" type="tns:darGanadorSubasta"/>
+  <xs:element name="darGanadorSubastaResponse" type="tns:darGanadorSubastaResponse"/>
+  <xs:element name="registrarOferta" type="tns:registrarOferta"/>
+  <xs:element name="registrarOfertaResponse" type="tns:registrarOfertaResponse"/>
+  <xs:complexType name="consultarFabricantesSubasta">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarFabricantesSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fabricanteBO">
+    <xs:sequence>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BussinessException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastasFabricante">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastasFabricanteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:subastaBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subastaBO">
+    <xs:sequence>
+      <xs:element name="activa" type="xs:boolean"/>
+      <xs:element name="fabricanteBOList" type="tns:fabricanteBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="fechaCreacionSubasta" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="fechaMaxSubasta" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="mejorOfertaBO" type="tns:ofertaBO" minOccurs="0"/>
+      <xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="ofertaBOList" type="tns:ofertaBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="purchaseOrderBO" type="tns:purchaseOrderBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ofertaBO">
+    <xs:sequence>
+      <xs:element name="estadoOferta" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricanteBO" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="fechaEntrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="productoOfrecidoBO" type="tns:productoBO" minOccurs="0"/>
+      <xs:element name="valor" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="productoBO">
+    <xs:sequence>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="peso" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="purchaseOrderBO">
+    <xs:sequence>
+      <xs:element name="comercioBO" type="tns:comercioBO" minOccurs="0"/>
+      <xs:element name="entrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="itemPOBO" type="tns:itemPOBO" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="comercioBO">
+    <xs:sequence>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemPOBO">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="productoBO" type="tns:productoBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastaOrdenCompra">
+    <xs:sequence>
+      <xs:element name="numSeguimientoPO" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastaOrdenCompraResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:subastaBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cerrarSubasta">
+    <xs:sequence>
+      <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cerrarSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="darGanadorSubasta">
+    <xs:sequence>
+      <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="darGanadorSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:fabricanteBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearSubasta">
+    <xs:sequence>
+      <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"/>
+      <xs:element name="fechaMax" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOferta">
+    <xs:sequence>
+      <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+      <xs:element name="oferta" type="tns:ofertaBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOfertaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarFabricantesSubasta">
+    <xs:sequence>
+      <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricantes" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarFabricantesSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente" name="ActualizarEstadoCliente" bindingOperationName="ActualizarEstadoCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:actualizarEstadoCliente>
+         <mar:nit>?</mar:nit>
+         <mar:estado>?</mar:estado>
+      </mar:actualizarEstadoCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud" name="ActualizarEstadoSolicitud" bindingOperationName="ActualizarEstadoSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:actualizarEstadoSolicitud>
+         <mar:numRadicacion>?</mar:numRadicacion>
+         <mar:estado>?</mar:estado>
+      </mar:actualizarEstadoSolicitud>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud" name="ActualizarSolicitud" bindingOperationName="ActualizarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:actualizarSolicitud>
+         <mar:solicitud>
+            <mar:id>?</mar:id>
+            <!--Optional:-->
+            <mar:numRadicacion>?</mar:numRadicacion>
+            <mar:fecha>?</mar:fecha>
+            <mar:estado>?</mar:estado>
+            <!--Optional:-->
+            <mar:causa>?</mar:causa>
+            <!--1 or more repetitions:-->
+            <mar:documentos>
+               <mar:id>?</mar:id>
+               <mar:nombre>?</mar:nombre>
+               <mar:url>?</mar:url>
+               <mar:tipo>?</mar:tipo>
+            </mar:documentos>
+            <!--Zero or more repetitions:-->
+            <mar:productos>
+               <!--Optional:-->
+               <id>?</id>
+               <nombre>?</nombre>
+               <categoria>?</categoria>
+               <!--Optional:-->
+               <tipo>?</tipo>
+               <estado>?</estado>
+               <!--Optional:-->
+               <referencia>?</referencia>
+               <!--Optional:-->
+               <pesoLibras>?</pesoLibras>
+            </mar:productos>
+         </mar:solicitud>
+         <mar:estadoSolicitud>?</mar:estadoSolicitud>
+         <mar:causa>?</mar:causa>
+         <mar:estadoCliente>?</mar:estadoCliente>
+         <mar:estadoProducto>?</mar:estadoProducto>
+      </mar:actualizarSolicitud>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud" name="CerrarSolicitud" bindingOperationName="CerrarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:cerrarSolicitud>
+         <mar:numRadicacion>?</mar:numRadicacion>
+         <mar:estadoSolicitud>?</mar:estadoSolicitud>
+         <mar:causa>?</mar:causa>
+         <mar:estadoCliente>?</mar:estadoCliente>
+         <mar:estadoProducto>?</mar:estadoProducto>
+      </mar:cerrarSolicitud>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente" name="ConsultarCliente" bindingOperationName="ConsultarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ClienteExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://TOSHIBA-PC:8080/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarCliente>
+         <mar:nit>700700777</mar:nit>
+      </mar:consultarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ClienteNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarCliente>
+         <mar:nit>123456</mar:nit>
+      </mar:consultarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ConsultaVacia"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarCliente>
+         <mar:nit></mar:nit>
+      </mar:consultarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes" name="ConsultarClientes" bindingOperationName="ConsultarClientes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarClientes>
+         <mar:tipoCliente>Fabricante</mar:tipoCliente>
+      </mar:consultarClientes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientesProducto" name="ConsultarClientesProducto" bindingOperationName="ConsultarClientesProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarClientesProducto>
+         <mar:nombreProducto>?</mar:nombreProducto>
+         <mar:tipoCliente>?</mar:tipoCliente>
+         <mar:categoria>?</mar:categoria>
+      </mar:consultarClientesProducto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarClientesProducto"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision" name="ConsultarComision" bindingOperationName="ConsultarComision" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarComision>
+         <mar:nit>?</mar:nit>
+      </mar:consultarComision>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarComision"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarContacto" name="ConsultarContacto" bindingOperationName="ConsultarContacto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarContacto>
+         <mar:documento>?</mar:documento>
+         <mar:tipoDocumento>?</mar:tipoDocumento>
+      </mar:consultarContacto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarContacto"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProducto" name="ConsultarProducto" bindingOperationName="ConsultarProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarProducto>
+         <mar:idCliente>?</mar:idCliente>
+         <mar:nombreProducto>?</mar:nombreProducto>
+      </mar:consultarProducto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProducto"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente" name="ConsultarProductosCliente" bindingOperationName="ConsultarProductosCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarProductosCliente>
+         <mar:nit>?</mar:nit>
+      </mar:consultarProductosCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarProductosCliente"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente" name="CrearCliente" bindingOperationName="CrearCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ClienteNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:crearCliente>
+         <mar:cliente>
+            <nombre>Ramo</nombre>
+            <nit>100100111</nit>
+            <direccion>calle 100</direccion>
+            <telefono>7110011</telefono>
+            <email>samigory@gmail.com</email>
+            <razonSocial>Ramo</razonSocial>
+            <estado>Activo</estado>
+            <tipo>Fabricante</tipo>
+            <comision>1.051732E7</comision>
+            <codigoPostal>110121</codigoPostal>
+            <codigoPais>CO</codigoPais>
+           <categoria>Comida</categoria>
+         </mar:cliente>
+      </mar:crearCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ClienteExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:crearCliente>
+         <mar:cliente>
+            <nombre>Ramo</nombre>
+            <nit>100100111</nit>
+            <direccion>calle 100</direccion>
+            <telefono>7110011</telefono>
+            <email>samigory@gmail.com</email>
+            <razonSocial>Ramo</razonSocial>
+            <estado>Activo</estado>
+            <tipo>Fabricante</tipo>
+            <comision>1.051732E7</comision>
+            <codigoPostal>110121</codigoPostal>
+            <codigoPais>CO</codigoPais>
+           <categoria>Comida</categoria>
+         </mar:cliente>
+      </mar:crearCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CrearContactos" name="CrearContactos" bindingOperationName="CrearContactos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:crearContacto>
+         <!--1 or more repetitions:-->
+         <mar:contactos>
+            <mar:id>?</mar:id>
+            <mar:numIdentificacion>?</mar:numIdentificacion>
+            <mar:tipoIdentificacion>?</mar:tipoIdentificacion>
+            <mar:nombre>?</mar:nombre>
+            <mar:direccion>?</mar:direccion>
+            <mar:telefono>?</mar:telefono>
+            <!--Optional:-->
+            <mar:celular>?</mar:celular>
+            <!--Optional:-->
+            <mar:estado>?</mar:estado>
+            <mar:email>?</mar:email>
+         </mar:contactos>
+         <mar:idCliente>?</mar:idCliente>
+      </mar:crearContacto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearContactos"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CrearProductos" name="CrearProductos" bindingOperationName="CrearProductos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:crearProducto>
+         <mar:idCliente>?</mar:idCliente>
+         <!--1 or more repetitions:-->
+         <mar:productos>
+            <!--Optional:-->
+            <id>?</id>
+            <nombre>?</nombre>
+            <categoria>?</categoria>
+            <!--Optional:-->
+            <tipo>?</tipo>
+            <estado>?</estado>
+            <!--Optional:-->
+            <referencia>?</referencia>
+            <!--Optional:-->
+            <pesoLibras>?</pesoLibras>
+         </mar:productos>
+      </mar:crearProducto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearProductos"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarCliente" name="ModificarCliente" bindingOperationName="ModificarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:modificarCliente>
+         <mar:cliente>
+            <!--Optional:-->
+            <id>?</id>
+            <nombre>?</nombre>
+            <nit>?</nit>
+            <!--Optional:-->
+            <direccion>?</direccion>
+            <!--Optional:-->
+            <telefono>?</telefono>
+            <!--Optional:-->
+            <email>?</email>
+            <!--Optional:-->
+            <ctaFact>
+               <!--Optional:-->
+               <id>?</id>
+               <numReferencia>?</numReferencia>
+               <!--Zero or more repetitions:-->
+               <transacciones>
+                  <!--Optional:-->
+                  <id>?</id>
+                  <referencia>?</referencia>
+                  <fecha>?</fecha>
+                  <descripcion>?</descripcion>
+                  <valor>?</valor>
+               </transacciones>
+               <!--Zero or more repetitions:-->
+               <facturas>
+                  <!--Optional:-->
+                  <mar:id>?</mar:id>
+                  <mar:url>?</mar:url>
+                  <mar:nombre>?</mar:nombre>
+                  <mar:fechaInicio>?</mar:fechaInicio>
+                  <mar:fechaFin>?</mar:fechaFin>
+                  <mar:valorPago>?</mar:valorPago>
+               </facturas>
+            </ctaFact>
+            <!--Zero or more repetitions:-->
+            <solicitudes>
+               <mar:id>?</mar:id>
+               <!--Optional:-->
+               <mar:numRadicacion>?</mar:numRadicacion>
+               <mar:fecha>?</mar:fecha>
+               <mar:estado>?</mar:estado>
+               <!--Optional:-->
+               <mar:causa>?</mar:causa>
+               <!--1 or more repetitions:-->
+               <mar:documentos>
+                  <mar:id>?</mar:id>
+                  <mar:nombre>?</mar:nombre>
+                  <mar:url>?</mar:url>
+                  <mar:tipo>?</mar:tipo>
+               </mar:documentos>
+               <!--Zero or more repetitions:-->
+               <mar:productos>
+                  <!--Optional:-->
+                  <id>?</id>
+                  <nombre>?</nombre>
+                  <categoria>?</categoria>
+                  <!--Optional:-->
+                  <tipo>?</tipo>
+                  <estado>?</estado>
+                  <!--Optional:-->
+                  <referencia>?</referencia>
+                  <!--Optional:-->
+                  <pesoLibras>?</pesoLibras>
+               </mar:productos>
+            </solicitudes>
+            <!--Zero or more repetitions:-->
+            <contactos>
+               <mar:id>?</mar:id>
+               <mar:numIdentificacion>?</mar:numIdentificacion>
+               <mar:tipoIdentificacion>?</mar:tipoIdentificacion>
+               <mar:nombre>?</mar:nombre>
+               <mar:direccion>?</mar:direccion>
+               <mar:telefono>?</mar:telefono>
+               <!--Optional:-->
+               <mar:celular>?</mar:celular>
+               <!--Optional:-->
+               <mar:estado>?</mar:estado>
+               <mar:email>?</mar:email>
+            </contactos>
+            <!--Optional:-->
+            <razonSocial>?</razonSocial>
+            <!--Optional:-->
+            <estado>?</estado>
+            <!--Optional:-->
+            <tipo>?</tipo>
+            <!--Optional:-->
+            <comision>?</comision>
+            <!--Optional:-->
+            <codigoPostal>?</codigoPostal>
+            <!--Optional:-->
+            <codigoPais>?</codigoPais>
+            <!--Optional:-->
+            <categoria>?</categoria>
+         </mar:cliente>
+         <!--Optional:-->
+         <mar:id>?</mar:id>
+         <!--Optional:-->
+         <mar:productos>
+            <!--Optional:-->
+            <id>?</id>
+            <nombre>?</nombre>
+            <categoria>?</categoria>
+            <!--Optional:-->
+            <tipo>?</tipo>
+            <estado>?</estado>
+            <!--Optional:-->
+            <referencia>?</referencia>
+            <!--Optional:-->
+            <pesoLibras>?</pesoLibras>
+         </mar:productos>
+      </mar:modificarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarCliente"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision" name="ModificarComision" bindingOperationName="ModificarComision" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:modificarComision>
+         <mar:nit>?</mar:nit>
+         <mar:comision>?</mar:comision>
+      </mar:modificarComision>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto" name="ModificarContacto" bindingOperationName="ModificarContacto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:modificarContacto>
+         <mar:contactos>
+            <mar:id>?</mar:id>
+            <mar:numIdentificacion>?</mar:numIdentificacion>
+            <mar:tipoIdentificacion>?</mar:tipoIdentificacion>
+            <mar:nombre>?</mar:nombre>
+            <mar:direccion>?</mar:direccion>
+            <mar:telefono>?</mar:telefono>
+            <!--Optional:-->
+            <mar:celular>?</mar:celular>
+            <!--Optional:-->
+            <mar:estado>?</mar:estado>
+            <mar:email>?</mar:email>
+         </mar:contactos>
+      </mar:modificarContacto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto" name="ModificarProducto" bindingOperationName="ModificarProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:modificarProducto>
+         <mar:producto>
+            <!--Optional:-->
+            <id>?</id>
+            <nombre>?</nombre>
+            <categoria>?</categoria>
+            <!--Optional:-->
+            <tipo>?</tipo>
+            <estado>?</estado>
+            <!--Optional:-->
+            <referencia>?</referencia>
+            <!--Optional:-->
+            <pesoLibras>?</pesoLibras>
+         </mar:producto>
+      </mar:modificarProducto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/RadicarSolicitud" name="RadicarSolicitud" bindingOperationName="RadicarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:radicarSolicitud>
+         <mar:solicitud>
+            <mar:id>?</mar:id>
+            <!--Optional:-->
+            <mar:numRadicacion>?</mar:numRadicacion>
+            <mar:fecha>?</mar:fecha>
+            <mar:estado>?</mar:estado>
+            <!--Optional:-->
+            <mar:causa>?</mar:causa>
+            <!--1 or more repetitions:-->
+            <mar:documentos>
+               <mar:id>?</mar:id>
+               <mar:nombre>?</mar:nombre>
+               <mar:url>?</mar:url>
+               <mar:tipo>?</mar:tipo>
+            </mar:documentos>
+            <!--Zero or more repetitions:-->
+            <mar:productos>
+               <!--Optional:-->
+               <id>?</id>
+               <nombre>?</nombre>
+               <categoria>?</categoria>
+               <!--Optional:-->
+               <tipo>?</tipo>
+               <estado>?</estado>
+               <!--Optional:-->
+               <referencia>?</referencia>
+               <!--Optional:-->
+               <pesoLibras>?</pesoLibras>
+            </mar:productos>
+         </mar:solicitud>
+         <mar:nit>?</mar:nit>
+      </mar:radicarSolicitud>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/RadicarSolicitud"/></con:call></con:operation></con:interface><con:mockService port="8080" path="/" host="TOSHIBA-PC" name="MockConsultarCliente"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="ConsultarCliente" interface="GestionClienteSOAP" operation="ConsultarCliente"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="ClienteExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:consultarClienteResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:cliente>
+            <id>ADSA-A0L21R</id>
+            <nombre>Alpina</nombre>
+            <nit>700700777</nit>
+            <direccion>Calle 128</direccion>
+            <telefono>+34 7585858</telefono>
+            <email>samigori15@gmail.com</email>
+            <razonSocial>Alpina</razonSocial>
+            <estado>Active</estado>
+            <comision>4</comision>
+            <tipo>Fabricante</tipo>
+            <categoria/>
+            <codigoPais>CO</codigoPais>
+            <codigoPostal>110121</codigoPostal>
+            <contactos>
+               <mar:id>ADSA-A0L21W</mar:id>
+               <mar:nombre>Ana</mar:nombre>
+               <mar:telefono>+34 6888888</mar:telefono>
+               <mar:email>samigory@yahoo.com</mar:email>
+               <mar:numIdentificacion>24607108</mar:numIdentificacion>
+               <mar:tipoIdentificacion>Cedula</mar:tipoIdentificacion>
+               <mar:direccion>Carrera 13 No 13-33</mar:direccion>
+               <mar:celular>3001234564</mar:celular>
+               <mar:estado>&lt;No Values></mar:estado>
+            </contactos>
+            <solicitudes>
+               <mar:productos>
+                  <id>ADSA-A7MABZ</id>
+                  <nombre>Gelatina</nombre>
+                  <categoria>fff</categoria>
+                  <tipo>adfadf</tipo>
+                  <estado>Activo</estado>
+                  <referencia>gel01</referencia>
+                  <pesoLibras>0,1</pesoLibras>
+               </mar:productos>
+               <mar:productos>
+                  <id>ADSA-A0L226</id>
+                  <nombre>Bonyurt</nombre>
+                  <categoria>lacteos</categoria>
+                  <tipo>tipo_ejemplo1</tipo>
+                  <estado>Activo</estado>
+                  <referencia>lac001</referencia>
+                  <pesoLibras>0,5</pesoLibras>
+               </mar:productos>
+               <mar:productos>
+                  <id>ADSA-A0L22M</id>
+                  <nombre>Yogurt</nombre>
+                  <categoria>lacteos</categoria>
+                  <tipo>tipo_ejemplo2</tipo>
+                  <estado>Activo</estado>
+                  <referencia>lac002</referencia>
+                  <pesoLibras>0,3</pesoLibras>
+               </mar:productos>
+            </solicitudes>
+         </mar:cliente>
+      </mar:consultarClienteResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/></con:response><con:response name="ClienteNoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:consultarClienteResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:cliente>
+            <id/>
+            <nombre/>
+            <nit/>
+            <direccion/>
+            <telefono/>
+            <email/>
+            <razonSocial/>
+            <estado/>
+            <comision/>
+            <tipo/>
+            <categoria/>
+            <codigoPais/>
+            <codigoPostal/>
+            <solicitudes/>
+         </mar:cliente>
+      </mar:consultarClienteResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/></con:response><con:response name="ConsultaVacia" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:consultarClienteResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:cliente>
+            <id/>
+            <nombre/>
+            <nit/>
+            <direccion/>
+            <telefono/>
+            <email/>
+            <razonSocial/>
+            <estado/>
+            <comision/>
+            <tipo/>
+            <categoria/>
+            <codigoPais/>
+            <codigoPostal/>
+            <solicitudes/>
+         </mar:cliente>
+      </mar:consultarClienteResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="CrearCliente" interface="GestionClienteSOAP" operation="CrearCliente"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="ClienteNoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:crearClienteResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:idCuenta>ADSA-BD1C7J</mar:idCuenta>
+      </mar:crearClienteResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/></con:response><con:response name="ClienteExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <soapenv:Fault>
+         <faultcode>soapenv:Server</faultcode>
+         <faultstring>BEA-380001: Internal Server Error</faultstring>
+         <detail>
+            <con:fault xmlns:con="http://www.bea.com/wli/sb/context">
+               <con:errorCode>BEA-380001</con:errorCode>
+               <con:reason>Internal Server Error</con:reason>
+               <con:location>
+                  <con:node>RouteNode1</con:node>
+                  <con:path>response-pipeline</con:path>
+               </con:location>
+            </con:fault>
+         </detail>
+      </soapenv:Fault>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CrearCliente"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
