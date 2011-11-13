@@ -4,12 +4,13 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="231" side="left"/>
-      <partnerlink name="GestionCliente" x="645" y="278" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="447" side="left"/>
+      <partnerlink name="GestionCliente" x="645" y="420" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,0,761,518" show_swimlanes="true">
+   <graph_layout viewport="0,358,761,518" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch" type="switch"/>
    </graph_layout>
    <bookmarks/>
 </graphics>
