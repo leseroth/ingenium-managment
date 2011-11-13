@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="ProcesoRegistroEntidadInternal" soapui-version="4.0-beta2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="200508" name="RegistroEntidadInterNalBinding" type="wsdl" bindingName="{http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal}RegistroEntidadInterNalBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint></con:endpoints><con:operation isOneWay="false" action="process" name="process" bindingOperationName="process" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:reg="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <reg:process>
+         <reg:nit>500500555</reg:nit>
+         <reg:nombre>Colanta</reg:nombre>
+         <reg:direccion>PopayanCauca</reg:direccion>
+         <reg:telefono>3001975645</reg:telefono>
+         <reg:email>davidres@gmail.com</reg:email>
+         <reg:tipo>Fabricante</reg:tipo>
+         <reg:razonSocial>Leche Colanta</reg:razonSocial>
+         <!--1 or more repetitions:-->
+         <reg:contactos>
+            <reg:numIdentificacion>foedere certo</reg:numIdentificacion>
+            <reg:tipoIdentificacion>profundum quippe ferant</reg:tipoIdentificacion>
+            <reg:telefono>et carcere</reg:telefono>
+            <!--Optional:-->
+            <reg:celular>iovis rapidum iaculata</reg:celular>
+            <reg:email>speluncis abdidit</reg:email>
+         </reg:contactos>
+         <reg:fecha>2018-12-28-05:00</reg:fecha>
+         <!--1 or more repetitions:-->
+         <reg:documentos>
+            <reg:nombre>ac vinclis et</reg:nombre>
+            <reg:url>rapidum iaculata e</reg:url>
+            <reg:tipo>caelumque profundum</reg:tipo>
+         </reg:documentos>
+         <reg:productos>
+            <reg:nombre>circum claustra</reg:nombre>
+            <reg:categoria>coniunx una</reg:categoria>
+            <reg:referencia>arce sceptra</reg:referencia>
+         </reg:productos>
+         <reg:Categoria>Lacteos</reg:Categoria>
+         <reg:CodPais>CO</reg:CodPais>
+         <reg:CodPostal>223433</reg:CodPostal>
+      </reg:process>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="process"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="RegistroEntidadInterNalCallbackBinding" type="wsdl" bindingName="{http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal}RegistroEntidadInterNalCallbackBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL"><con:part><con:url>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="RegistroEntidadInterNal" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+    <abstractWSDL>http://User-PC:7001/soa-infra/services/default/ProcesoRegistroInterNal!1.1/RegistroEntidadInterNal.wsdl</abstractWSDL>
+  </wsdl:documentation>
+  <plnk:partnerLinkType name="RegistroEntidadInterNal">
+    <plnk:role name="RegistroEntidadInterNalRequester">
+      <plnk:portType name="client:RegistroEntidadInterNalCallback"/>
+    </plnk:role>
+    <plnk:role name="RegistroEntidadInterNalProvider">
+      <plnk:portType name="client:RegistroEntidadInterNal"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+  <wsp:Policy wsu:Id="wsaddr_policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+    <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"/>
+  </wsp:Policy>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" schemaLocation="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?XSD=xsd/RegistroEntidadInterNal.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="RegistroEntidadInterNalRequestMessage">
+    <wsdl:part name="payload" element="client:process"/>
+  </wsdl:message>
+  <wsdl:message name="RegistroEntidadInterNalResponseMessage">
+    <wsdl:part name="payload" element="client:processResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="RegistroEntidadInterNal">
+    <wsdl:operation name="process">
+      <wsdl:input message="client:RegistroEntidadInterNalRequestMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="RegistroEntidadInterNalCallback">
+    <wsdl:operation name="processResponse">
+      <wsdl:input message="client:RegistroEntidadInterNalResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistroEntidadInterNalCallbackBinding" type="client:RegistroEntidadInterNalCallback">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsdl:operation name="processResponse">
+      <soap:operation style="document" soapAction="processResponse" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RegistroEntidadInterNalBinding" type="client:RegistroEntidadInterNal">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsp:PolicyReference URI="#wsaddr_policy" wsdl:required="false" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"/>
+    <wsdl:operation name="process">
+      <soap:operation style="document" soapAction="process" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="registroentidadinternal_client_ep">
+    <wsdl:port name="RegistroEntidadInterNal_pt" binding="client:RegistroEntidadInterNalBinding">
+      <soap:address location="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?XSD=xsd/RegistroEntidadInterNal.xsd</con:url><con:content><![CDATA[<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ma="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
+  <element name="process">
+    <complexType>
+      <sequence>
+        <element name="nit" type="string" nillable="false"/>
+        <element name="nombre" type="string"/>
+        <element name="direccion" type="string"/>
+        <element name="telefono" type="string"/>
+        <element name="email" type="string"/>
+        <element name="tipo" type="string"/>
+        <element name="razonSocial" type="string"/>
+        <element name="contactos" maxOccurs="unbounded" nillable="false" type="ma:ContactoCliente"/>
+        <element name="fecha" type="date"/>
+        <element name="documentos" maxOccurs="unbounded" type="ma:DocumentoSolicitud"/>
+        <element name="productos" type="ma:ProductoSolicitud"/>
+        <element name="Categoria" type="string"/>
+        <element name="CodPais" type="string"/>
+        <element name="CodPostal" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="ContactoCliente">
+    <sequence>
+      <element name="numIdentificacion" type="string"/>
+      <element name="tipoIdentificacion" type="string"/>
+      <element name="telefono" type="string"/>
+      <element name="celular" type="string" minOccurs="0"/>
+      <element name="email" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="DocumentoSolicitud">
+    <sequence>
+      <element name="nombre" type="string"/>
+      <element name="url" type="string"/>
+      <element name="tipo" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ProductoSolicitud">
+    <sequence>
+      <element name="nombre" type="string"/>
+      <element name="categoria" type="string"/>
+      <element name="referencia" type="string"/>
+    </sequence>
+  </complexType>
+  <element name="processResponse">
+    <complexType>
+      <sequence>
+        <element name="direccion" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints/><con:operation isOneWay="false" action="processResponse" name="processResponse" bindingOperationName="processResponse" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:reg="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <reg:processResponse>
+         <reg:direccion>gero et</reg:direccion>
+      </reg:processResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="processResponse"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
