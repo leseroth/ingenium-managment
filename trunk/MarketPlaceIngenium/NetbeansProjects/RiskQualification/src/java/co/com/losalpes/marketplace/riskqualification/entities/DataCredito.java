@@ -3,28 +3,33 @@ package co.com.losalpes.marketplace.riskqualification.entities;
 import co.com.losalpes.marketplace.riskqualification.MarketPlaceEntity;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
-@Entity
-@NamedQuery(name = "getInfoDataCredito",
-query = "SELECT DC FROM DataCredito DC WHERE DC.nit = :pNit")
 /**
  *
  * @author marketplace
  */
+@Entity
+@NamedQuery(name = "getInfoDataCredito", query = "SELECT DC FROM DataCredito DC WHERE DC.nit = :pNit ORDER by DC.fecha desc")
 public class DataCredito implements MarketPlaceEntity, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
+    private Long id;
     @Column
-    protected String nit;
+    private String calificacion;
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
-    protected Date fecha;
+    private Date fecha;
     @Column
-    protected String calificacion;
+    private String nit;
 
     /**
      * Default Constructor
@@ -33,47 +38,78 @@ public class DataCredito implements MarketPlaceEntity, Serializable {
     }
 
     /**
-     * Simple Constructor
+     * Constructor completo
+     * @param estado Estado de verificacion
+     * @param fecha Fecha de registro
+     * @param nit Nit del establecimiento
      */
-    public DataCredito(String aNit, Date aFecha, String aCalificacion) {
-        this.nit = aNit;
-        this.fecha = aFecha;
-        this.calificacion = aCalificacion;
+    public DataCredito(String calificacion, Date fecha, String nit) {
+        this.calificacion = calificacion;
+        this.fecha = fecha;
+        this.nit = nit;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return getCalificacion() != null && getFecha() != null && getNit() != null && !nit.trim().isEmpty();
+    }
+
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
+    /**
+     * @return the calificacion
+     */
     public String getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(String valor) {
-        this.calificacion = valor;
+    /**
+     * @param calificacion the calificacion to set
+     */
+    public void setCalificacion(String calificacion) {
+        this.calificacion = calificacion;
     }
 
-    public boolean isInfoComplete() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the nit
+     */
+    public String getNit() {
+        return nit;
+    }
+
+    /**
+     * @param nit the nit to set
+     */
+    public void setNit(String nit) {
+        this.nit = nit;
     }
 }

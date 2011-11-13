@@ -13,7 +13,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.xml.ws.WebServiceException;
 
 /**
  * Bean que implementa la logica de verificacion de informacion
@@ -24,7 +23,6 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
 
     @PersistenceContext
     private EntityManager em;
-    private DataCredito dc = null;
     private ListasNegras ln = null;
 
     /**
@@ -64,7 +62,7 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
      * @param nit Nit de la entidad
      * @param existente Indica si ya existia, si ya existia existe el 50% de posiblidad de que no sea validada,
      * en caso contrario, es valida si su nit no contiene 7, 8 o 9
-     * @return
+     * @return La entidad creada
      */
     protected Confecamara registrarComfecamara(String nit, boolean existente) {
         boolean estado = ExternalServices.nitValidate(nit, existente);
@@ -73,18 +71,50 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
         return confecamara;
     }
 
-    public Boolean registrarDataCredito(String nit) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String verificarDataCredito(String nit, int reglaVal) throws BussinessException {
+        DataCredito datacredito = null;
 
-        //Llamado a servicio externo
-        String cal = ExternalServices.getRating(nit);
-        dc = new DataCredito(nit, new Date(), cal);
         try {
-            em.persist(dc);
-            return true;
+            Query q = em.createNamedQuery("getInfoDataCredito");
+            q.setParameter("pNit", nit.trim());
+            List results = q.getResultList();
+
+            if (!results.isEmpty()) {
+                datacredito = (DataCredito) results.get(0);
+
+                //Obteniendo fecha de registro confecamaras para validar nuevamente
+                if (Tools.getDiffDates(datacredito.getFecha(), new Date()) > reglaVal) {
+                    //Registra la entidad nuevamente
+                    System.err.println("Registra la entidad nuevamente");
+                    datacredito = registrarDataCredito(nit.trim(), true);
+                }
+            } else {
+                //Registra la entidad
+                datacredito = registrarDataCredito(nit.trim(), false);
+            }
         } catch (Exception e) {
-            //throw new DataBaseException(e.getMessage());
+            throw new BussinessException("Excepcion : " + e.getMessage());
         }
-        return true;
+
+        return datacredito.getCalificacion();
+    }
+
+    /**
+     * Permite registrar una entidad ante datacredito
+     * @param nit Nit de la entidad
+     * @param existente Indica si ya existia, si ya existia existe el 50% de posiblidad de que no sea validada,
+     * en caso contrario, es valida si su nit no contiene 7, 8 o 9
+     * @return La entidad creada
+     */
+    protected DataCredito registrarDataCredito(String nit, boolean existente) {
+        String calificacion = ExternalServices.getRating(nit, existente);
+        DataCredito datacredito = new DataCredito(calificacion, new Date(), nit);
+        em.persist(datacredito);
+        return datacredito;
     }
 
     public Boolean registrarAntiLavados(String nit, boolean existente) {
@@ -114,38 +144,6 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
             //throw new DataBaseException(e.getMessage());
         }
         return true;
-    }
-
-    public String verificarDataCredito(String nit, int reglaVal) {
-
-        String rating = "";
-        Boolean registrar;
-        Query q = em.createNamedQuery("getInfoDataCredito");
-        q.setParameter("pNit", nit.trim());
-        try {
-            List results = q.getResultList();
-            if (!results.isEmpty()) {
-                dc = (DataCredito) results.get(0);
-                //Fecha actual
-                int diff = Tools.getDiffDates(dc.getFecha(), new Date());
-                if (diff > reglaVal) {
-                    //Registra entidad
-                    registrar = registrarDataCredito(nit.trim());
-                    rating = dc.getCalificacion();
-                } else //Retorna la calificación en DataCredito
-                {
-                    rating = dc.getCalificacion();
-                }
-            } else {
-                //Registra entidad
-                registrar = registrarDataCredito(nit.trim());
-                rating = dc.getCalificacion();
-            }
-        } catch (Exception e) {
-            //throw exception for comunication fail
-            throw new WebServiceException(e.getMessage());
-        }
-        return rating;
     }
 
     public Boolean verificarListaClinton(String nit, int reglaVal) {

@@ -7,17 +7,14 @@ package co.com.losalpes.marketplace.riskqualification.tools;
 public class ExternalServices {
 
     private static int counter = 0;
-
-    static public String getRating(String nit) {
-
-        //Random generator = new Random(); //Pendiente lógica generate letters
-        int ramdomNit = 1;//getRamdomNit();
-        if (Integer.toString(ramdomNit).equals(nit.trim())) {
-            return "D";//Ramdom con las calificaciones negativas
-        } else {
-            return "A";//Ramdom con las calificaciones positivas
-        }
-    }
+    /**
+     * Calificacion positiva de confecamara
+     */
+    protected static String CONFECAMARA_POSITIVA = "A";
+    /**
+     * Calificacion negativa de confecamara
+     */
+    protected static String CONFECAMARA_NEGATIVA = "D";
 
     /**
      * Para propositos del ejercicio, los nit que contengan 7, 8 o 9 seran considerados como no validos,
@@ -32,5 +29,16 @@ public class ExternalServices {
             valid = (++counter % 2) == 0;
         }
         return valid;
+    }
+
+    /**
+     * Para propositos del ejercicio, los nit que contengan 7, 8 o 9 seran considerados como no validos,
+     * si el establecimiento ya existia existe un 50% de posibilidad de que ya no sea valido
+     * @param nit Nit a validar
+     * @param existente Indica si ya existia
+     * @return CONFECAMARA_POSITIVA (A) si el nit es valido, CONFECAMARA_NEGATIVA (D) en caso contrario.
+     */
+    static public String getRating(String nit, boolean existente) {
+        return nitValidate(nit, existente) ? CONFECAMARA_POSITIVA : CONFECAMARA_NEGATIVA;
     }
 }
