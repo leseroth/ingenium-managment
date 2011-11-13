@@ -91,11 +91,11 @@
                     part="parameters" query="/ns2:consultarCliente/ns2:nit"/>
             </copy>
         </assign>
-        <invoke name="ConsultarCliente" bpelx:invokeAsDetail="no"
+        <invoke name="ConsultarCliente"
                 inputVariable="ConsultarCliente_ConsultarCliente_InputVariable"
                 outputVariable="ConsultarCliente_ConsultarCliente_OutputVariable"
                 partnerLink="GestionCliente" portType="ns1:GestionCliente"
-                operation="ConsultarCliente"/>
+                operation="ConsultarCliente" bpelx:invokeAsDetail="no"/>
         <assign name="AsignarCrearCliente">
             <copy>
                 <from variable="inputVariable" part="payload"
@@ -103,6 +103,13 @@
                 <to variable="CrearCliente_CrearCliente_InputVariable"
                     part="parameters"
                     query="/ns2:crearCliente/ns2:cliente/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:Categoria"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/categoria"/>
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"

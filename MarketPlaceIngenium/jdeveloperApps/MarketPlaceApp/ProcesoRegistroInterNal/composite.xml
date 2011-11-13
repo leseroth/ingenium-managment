@@ -28,7 +28,7 @@
   </component>
   <reference name="GestionCliente" ui:wsdlLocation="GestionClienteWrapper.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
-    <binding.ws port="http://marketplace.losalpes.com.co/GestionCliente#wsdl.endpoint(GestionClienteSOAPQSService/GestionClienteSOAPQSPort)"
+    <binding.ws port="http://marketplace.losalpes.com.co/GestionCliente#wsdl.endpoint(GestionCliente/GestionClienteSOAP)"
                 location="GestionClienteWrapper.wsdl" soapVersion="1.1"/>
   </reference>
   <wire>

@@ -13,5 +13,5 @@
             <plnk:portType name="WL5G3N2:GestionCliente"/>
         </plnk:role>
     </plnk:partnerLinkType>
-    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionCliente" location="http://localhost:7001/marketPlace/proxy/GestionCliente?wsdl"/>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionCliente" location="http://localhost:7001/marketPlace/proxy/GestionCliente?WSDL"/>
 </wsdl:definitions>
