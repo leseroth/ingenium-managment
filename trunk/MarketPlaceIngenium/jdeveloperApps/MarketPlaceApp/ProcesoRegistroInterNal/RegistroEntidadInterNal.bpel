@@ -18,7 +18,16 @@
          xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
          xmlns:ns1="http://marketplace.losalpes.com.co/GestionCliente"
          xmlns:ns2="http://marketplace.losalpes.com.co"
-         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +63,10 @@
                   messageType="ns1:ConsultarClienteRequest"/>
         <variable name="ConsultarCliente_ConsultarCliente_OutputVariable"
                   messageType="ns1:ConsultarClienteResponse"/>
+        <variable name="CrearCliente_CrearCliente_InputVariable"
+                  messageType="ns1:CrearClienteRequest"/>
+        <variable name="CrearCliente_CrearCliente_OutputVariable"
+                  messageType="ns1:CrearClienteResponse"/>
     </variables>
 
     <!-- 
@@ -83,6 +96,94 @@
                 outputVariable="ConsultarCliente_ConsultarCliente_OutputVariable"
                 partnerLink="GestionCliente" portType="ns1:GestionCliente"
                 operation="ConsultarCliente"/>
+        <assign name="AsignarCrearCliente">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nit"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:tipo"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/tipo"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:razonSocial"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/razonSocial"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombre"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:direccion"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/direccion"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:telefono"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/telefono"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:email"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/email"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:CodPostal"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/codigoPostal"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:CodPais"/>
+                <to variable="CrearCliente_CrearCliente_InputVariable"
+                    part="parameters"
+                    query="/ns2:crearCliente/ns2:cliente/codigoPais"/>
+            </copy>
+        </assign>
+        <switch name="Switch1">
+            <case condition="string-length(bpws:getVariableData('ConsultarCliente_ConsultarCliente_OutputVariable','parameters','/ns2:consultarClienteResponse/ns2:cliente/nit')) = 0">
+                <bpelx:annotation>
+                    <bpelx:pattern>El cliente no existe en el CRM</bpelx:pattern>
+                    <bpelx:general>
+                        <bpelx:property name="userLabel">NoExiste</bpelx:property>
+                    </bpelx:general>
+                </bpelx:annotation>
+                <invoke name="CrearCliente" bpelx:invokeAsDetail="no"
+                        inputVariable="CrearCliente_CrearCliente_InputVariable"
+                        outputVariable="CrearCliente_CrearCliente_OutputVariable"
+                        partnerLink="GestionCliente"
+                        portType="ns1:GestionCliente" operation="CrearCliente"/>
+            </case>
+            <otherwise/>
+        </switch>
+        <assign name="Assign1">
+            <copy>
+                <from expression="ora:format('willian')"/>
+                <to variable="outputVariable" part="payload"
+                    query="/client:processResponse/client:direccion"/>
+            </copy>
+        </assign>
         <invoke name="callbackClient" partnerLink="registroentidadinternal_client" portType="client:RegistroEntidadInterNalCallback" operation="processResponse" inputVariable="outputVariable"/>
     </sequence>
 </process>
