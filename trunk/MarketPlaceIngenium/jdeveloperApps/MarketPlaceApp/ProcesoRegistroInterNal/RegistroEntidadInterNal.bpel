@@ -27,7 +27,8 @@
          xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
          xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
          xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
-         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +46,9 @@
         <partnerLink name="GestionCliente"
                      partnerLinkType="ns1:GestionCliente_PL"
                      partnerRole="GestionCliente_Role"/>
+        <partnerLink name="GestionCorreoElectronico"
+                     partnerLinkType="ns3:GestionCorreoElectronico_PL"
+                     partnerRole="GestionCorreoElectronico_Role"/>
     </partnerLinks>
 
     <!-- 
@@ -67,8 +71,61 @@
                   messageType="ns1:CrearClienteRequest"/>
         <variable name="CrearCliente_CrearCliente_OutputVariable"
                   messageType="ns1:CrearClienteResponse"/>
+        <variable name="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                  messageType="ns3:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoFalloRegistro_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns3:enviarCorreoElectronicoResponse"/>
+        <variable name="ActualizarCliente_ModificarCliente_InputVariable"
+                  messageType="ns1:ModificarClienteRequest"/>
+        <variable name="ActualizarCliente_ModificarCliente_OutputVariable"
+                  messageType="ns1:ModificarClienteResponse"/>
     </variables>
-
+    <faultHandlers>
+        <catch faultName="bpelx:remoteFault">
+            <sequence name="Sequence1">
+                <assign name="AsignarCorreoElectronico">
+                    <copy>
+                        <from variable="inputVariable" part="payload"
+                              query="/client:process/client:email"/>
+                        <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                        <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:format('ingenium2011')"/>
+                        <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:format('&amp;lt;html>&amp;lt;body>Marketplace de los Alpes informa:&amp;lt;br/>&amp;lt;br/>El proceso de registro de su entidad ha presentado un inconveniete.&amp;lt;br/>Solicitaos por favor volver a intentar el proceso de registro.&amp;lt;br/>Gracias.&amp;lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&amp;lt;/body>&amp;lt;/html>')"/>
+                        <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:format('PROCESO DE REGISTRO ')"/>
+                        <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                            part="parameters"
+                            query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                    </copy>
+                </assign>
+                <invoke name="EnviarCorreoFalloRegistro"
+                        bpelx:invokeAsDetail="no"
+                        inputVariable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
+                        outputVariable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_OutputVariable"
+                        partnerLink="GestionCorreoElectronico"
+                        portType="ns3:GestionCorreoElectronico"
+                        operation="enviarCorreoElectronico"/>
+            </sequence>
+        </catch>
+    </faultHandlers>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
        ORCHESTRATION LOGIC                                               
@@ -182,7 +239,91 @@
                         partnerLink="GestionCliente"
                         portType="ns1:GestionCliente" operation="CrearCliente"/>
             </case>
-            <otherwise/>
+            <otherwise>
+                <sequence>
+                    <assign name="AsignarActualizarContacto">
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:nombre"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/id"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/id"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:direccion"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/direccion"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:telefono"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/telefono"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:email"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/email"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:razonSocial"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/razonSocial"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:Categoria"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/categoria"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:CodPais"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/codigoPais"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:CodPostal"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/codigoPostal"/>
+                        </copy>
+                    </assign>
+                    <invoke name="ActualizarCliente"
+                            inputVariable="ActualizarCliente_ModificarCliente_InputVariable"
+                            outputVariable="ActualizarCliente_ModificarCliente_OutputVariable"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="ModificarCliente"
+                            bpelx:invokeAsDetail="no"/>
+                </sequence>
+            </otherwise>
         </switch>
         <assign name="Assign1">
             <copy>
