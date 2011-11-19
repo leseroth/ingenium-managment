@@ -272,22 +272,52 @@
          <reglaVal>3</reglaVal>
       </ws:verificarDataCredito>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarDataCreditoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="verificarListaAntiLavado" bindingOperationName="verificarListaAntiLavado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarDataCreditoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="verificarListaAntiLavado" bindingOperationName="verificarListaAntiLavado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="1NuevoTrue"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:verificarListaAntiLavado>
-         <!--Optional:-->
-         <nit>gero et</nit>
+         <nit>100100111</nit>
          <reglaVal>3</reglaVal>
       </ws:verificarListaAntiLavado>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaAntiLavadoRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="verificarListaClinton" bindingOperationName="verificarListaClinton" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaAntiLavadoRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="2ExistenteFechaNoSuperadaTrue"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:verificarListaAntiLavado>
+         <nit>100100111</nit>
+         <reglaVal>3</reglaVal>
+      </ws:verificarListaAntiLavado>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaAntiLavadoRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="3Nuevo7False"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:verificarListaAntiLavado>
+         <nit>700700777</nit>
+         <reglaVal>3</reglaVal>
+      </ws:verificarListaAntiLavado>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaAntiLavadoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="verificarListaClinton" bindingOperationName="verificarListaClinton" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="1NuevoTrue"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:verificarListaClinton>
-         <!--Optional:-->
-         <nit>gero et</nit>
+         <nit>100100111</nit>
          <reglaVal>3</reglaVal>
       </ws:verificarListaClinton>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaClintonRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaClintonRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="2ExistenteFechaNoSuperadaTrue"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:verificarListaClinton>
+         <nit>100100111</nit>
+         <reglaVal>3</reglaVal>
+      </ws:verificarListaClinton>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaClintonRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="3Nuevo7False"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/RiskQualificationCreditVerificationManagementService/RiskQualificationCreditVerificationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.riskqualification.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:verificarListaClinton>
+         <nit>700700777</nit>
+         <reglaVal>3</reglaVal>
+      </ws:verificarListaClinton>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.riskqualification.marketplace.losalpes.com.co/RiskQualificationCreditVerificationManagement/verificarListaClintonRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

@@ -1,16 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.riskqualification.enums;
 
 /**
  *
- * @author marketplace
+ * @author Erik
  */
 public enum TipoLista {
 
-    ninguno,listaClinton,listaAntilavados;
-
-   }
+    /**
+     * Ninbun tipo de lista seleccionado
+     */
+    NINGUNO,
+    /**
+     * Lista negra Clinton
+     */
+    LISTA_CLINTON,
+    /**
+     * Lista negra Antivalados
+     */
+    LISTA_ANTILAVADOS;
+}
