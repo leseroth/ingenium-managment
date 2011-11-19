@@ -41,4 +41,19 @@ public class ExternalServices {
     static public String getRating(String nit, boolean existente) {
         return nitValidate(nit, existente) ? CONFECAMARA_POSITIVA : CONFECAMARA_NEGATIVA;
     }
+
+    /**
+     * Para propositos del ejercicio, los nit que contengan 7, 8 o 9 seran considerados como no validos,
+     * igualmente si el codigo del pais es PE o AR el establecimiento no es valido, adicionalmente
+     * si el establecimiento ya existia existe un 50% de posibilidad de que ya no sea valido
+     * @param nit Nit a validar
+     * @param existente Indica si ya existia
+     * @param codPais Codigo del pais segun la regla <a href="http://es.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a>
+     * @return true si el nit es valido, false en caso contrario.
+     */
+    static public Boolean nitValidateIntl(String nit, boolean existente, String codPais) {
+        boolean valid = nitValidate(nit, existente);
+        valid = valid && !"PE".equalsIgnoreCase(codPais) && !"AR".equalsIgnoreCase(codPais);
+        return valid;
+    }
 }
