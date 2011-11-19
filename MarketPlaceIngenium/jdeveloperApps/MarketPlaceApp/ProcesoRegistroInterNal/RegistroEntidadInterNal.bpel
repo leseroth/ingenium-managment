@@ -29,7 +29,8 @@
          xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns3="http://marketplace.losalpes.com.co/GestionCorreoElectronico"
-         xmlns:ns4="http://marketplace.losalpes.com.co/VerificacionCrediticia">
+         xmlns:ns4="http://marketplace.losalpes.com.co/VerificacionCrediticia"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,6 +96,7 @@
                   messageType="ns1:CrearContactosRequest"/>
         <variable name="CrearContacto_CrearContactos_OutputVariable"
                   messageType="ns1:CrearContactosResponse"/>
+        <variable name="indiceContactos" type="xsd:int"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -162,6 +164,10 @@
                       query="/client:process/client:nit"/>
                 <to variable="ConsultarCliente_ConsultarCliente_InputVariable"
                     part="parameters" query="/ns2:consultarCliente/ns2:nit"/>
+            </copy>
+            <copy>
+                <from expression="0"/>
+                <to variable="indiceContactos"/>
             </copy>
         </assign>
         <invoke name="ConsultarCliente"
@@ -278,13 +284,23 @@
                                 query="/ns2:crearContacto/ns2:idCliente"/>
                         </copy>
                     </assign>
-                    <while name="Valor indice">
-                        <invoke name="CrearContacto" bpelx:invokeAsDetail="no"
-                                inputVariable="CrearContacto_CrearContactos_InputVariable"
-                                outputVariable="CrearContacto_CrearContactos_OutputVariable"
-                                partnerLink="GestionCliente"
-                                portType="ns1:GestionCliente"
-                                operation="CrearContactos"/>
+                    <while name="WhileValorIndice"
+                           condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+                        <sequence name="Sequence3">
+                            <invoke name="CrearContacto"
+                                    bpelx:invokeAsDetail="no"
+                                    inputVariable="CrearContacto_CrearContactos_InputVariable"
+                                    outputVariable="CrearContacto_CrearContactos_OutputVariable"
+                                    partnerLink="GestionCliente"
+                                    portType="ns1:GestionCliente"
+                                    operation="CrearContactos"/>
+                            <assign name="IncrementarIndiceContactos">
+                                <copy>
+                                    <from expression="bpws:getVariableData('indiceContactos') + 1"/>
+                                    <to variable="indiceContactos"/>
+                                </copy>
+                            </assign>
+                        </sequence>
                     </while>
                     <assign name="AsignarEstadoInactivo">
                         <copy>
