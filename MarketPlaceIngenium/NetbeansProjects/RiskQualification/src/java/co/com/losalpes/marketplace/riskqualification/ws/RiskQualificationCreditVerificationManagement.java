@@ -91,4 +91,26 @@ public class RiskQualificationCreditVerificationManagement {
     public Boolean verificarListaClinton(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal) throws BussinessException {
         return ejbRef.verificarListaClinton(nit, reglaVal);
     }
+
+    /**
+     * Verifica una entidad internacionalmente con la siguientes reglas.
+     * <ul>
+     * <li>Si la entidad no existe se registra, el nit es obligatorio</li>
+     * <li>Si la cantidad de dias del certificado supera a la maxima cantidad de dias se registra nuevamente</li>
+     * <li>Si la entidad se registra por primera vez, es verificada solo si su nit no contiene 7, 8, o 9</li>
+     * <li>Si ha expirado el certificado de la entidad existe un 50% de posibilidades de que sea certificada</li>
+     * <li>El codigo de pais es de dos letras, por ejemplo, co, uk, eu</li>
+     * <li>Si el codigo de pais es PE (Peru) o AR (Argentina) se retorna false</li>
+     * </ul>
+     * @throws BussinessException
+     * @param nit Nit de la entidad
+     * @param reglaVal Maxima cantidad de dias en la que el certificado es valido
+     * @param codPais Codigo del pais segun la regla <a href="http://es.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a>
+     * @return true si la entidad es verificada, false en caso contrario
+     * @throws BussinessException Si no se cumple alguna de las reglas anteriores
+     */
+    @WebMethod(operationName = "verificarListaInternacional")
+    public Boolean verificarListaInternacional(@WebParam(name = "nit") String nit, @WebParam(name = "reglaVal") int reglaVal, @WebParam(name = "codPais") String codPais) throws BussinessException {
+        return ejbRef.verificarListaInternacional(nit, reglaVal, codPais);
+    }
 }

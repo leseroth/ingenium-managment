@@ -3,6 +3,7 @@ package co.com.losalpes.marketplace.riskqualification.beans;
 import co.com.losalpes.marketplace.riskqualification.entities.Confecamara;
 import javax.ejb.Stateless;
 import co.com.losalpes.marketplace.riskqualification.entities.DataCredito;
+import co.com.losalpes.marketplace.riskqualification.entities.ListaInternacional;
 import co.com.losalpes.marketplace.riskqualification.entities.ListasNegras;
 import co.com.losalpes.marketplace.riskqualification.enums.TipoLista;
 import co.com.losalpes.marketplace.riskqualification.tools.ExternalServices;
@@ -182,5 +183,52 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
         ListasNegras listaNegra = new ListasNegras(estado, new Date(), nit, tipoLista);
         em.persist(listaNegra);
         return listaNegra;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean verificarListaInternacional(String nit, int reglaVal, String codPais) throws BussinessException {
+        ListaInternacional listaInternacional = null;
+
+        try {
+            Query q = em.createNamedQuery("getInfoConfecamara");
+            q.setParameter("pNit", nit.trim());
+            List results = q.getResultList();
+
+            if (!results.isEmpty()) {
+                listaInternacional = (ListaInternacional) results.get(0);
+
+                //Obteniendo fecha de registro confecamaras para validar nuevamente
+                if (Tools.getDiffDates(listaInternacional.getFecha(), new Date()) > reglaVal) {
+                    //Registra la entidad nuevamente
+                    System.err.println("Registra la entidad nuevamente");
+                    listaInternacional = registrarListaInternacional(nit.trim(), codPais.trim(), true);
+                }
+            } else {
+                //Registra la entidad
+                listaInternacional = registrarListaInternacional(nit.trim(), codPais.trim(), false);
+            }
+        } catch (Exception e) {
+            throw new BussinessException("Excepcion : " + e.getMessage());
+        }
+
+        return listaInternacional.getEstado();
+    }
+
+    /**
+     * Permite registrar una entidad internacionalmente
+     * @param nit Nit de la entidad
+     * @param codPais Codigo del pais segun la regla <a href="http://es.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a>
+     * @param existente Indica si ya existia, si ya existia existe el 50% de posiblidad de que no sea validada,
+     * en caso contrario, es valida si su nit no contiene 7, 8 o 9 o el codigo del pais es PE o AR
+     * @return La entidad creada
+     */
+    protected ListaInternacional registrarListaInternacional(String nit, String codPais, boolean existente) {
+        boolean estado = ExternalServices.nitValidateIntl(nit, existente, codPais);
+        ListaInternacional listaInternacional = new ListaInternacional(estado, new Date(), nit, codPais);
+        em.persist(listaInternacional);
+        return listaInternacional;
     }
 }
