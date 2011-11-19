@@ -1,102 +1,94 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.facturacion.bos;
 
+import co.com.losalpes.marketplace.facturacion.MarketPlaceBO;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author marketplace
  */
-public class CargoBO
-{
+public class CargoBO implements MarketPlaceBO, Serializable {
 
-    /**
-     * Id del cargo
-     */
     private Long id;
-    
-    private String referencia;
-
-    /**
-     * Attribute descripcion
-     */
-
     private String descripcion;
-
-    /**
-     * Attribute valor
-     */
-
+    private Date fecha;
+    private String referencia;
     private Long valor;
 
     /**
-     * Attribute fecha
+     * Constructor por defecto
      */
-    private Date fecha;
-
-    public CargoBO()
-    {
-
+    public CargoBO() {
     }
 
-    public CargoBO(long id, String descripcion, Long valor, Date fecha, String referencia) {
-        this.id=id;
-        this.descripcion = descripcion;
-        this.valor = valor;
-        this.fecha = fecha;
-        this.referencia = referencia;
-    }
-
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Dar descripción
-     * @return descripcion Descripción
+     * @return the descripcion
      */
-    public String getDescripcion()
-    {
+    public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * Modificar descripción
-     * @param descripcion Nueva descripción
+     * @param descripcion the descripcion to set
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public Long getValor() {
-        return valor;
-    }
-
-    public void setValor(Long valor) {
-        this.valor = valor;
-    }
-
+    /**
+     * @return the fecha
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * @param fecha the fecha to set
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * @return the referencia
+     */
     public String getReferencia() {
         return referencia;
     }
 
+    /**
+     * @param referencia the referencia to set
+     */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
+    }
+
+    /**
+     * @return the valor
+     */
+    public Long getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Long valor) {
+        this.valor = valor;
     }
 }

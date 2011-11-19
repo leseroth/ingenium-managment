@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.facturacion.entities;
 
+import co.com.losalpes.marketplace.facturacion.MarketPlaceEntity;
 import co.com.losalpes.marketplace.facturacion.bos.FacturaBO;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,154 +14,148 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-@SuppressWarnings({"serial", "unused", "unchecked"})
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "getFacturaFromNumId", query = "select p from Factura p where p.id = :id")
-})
-/**
- *
- * @author marketplace
- */
+@NamedQueries({@NamedQuery(name = "getFacturaFromNumId", query = "select p from Factura p where p.id = :id")})
+public class Factura implements MarketPlaceEntity, Serializable {
 
-public class Factura implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column
-    private String url;
-
-    @Column
-    private String nombreArchivo;
-
-    @Column
-    private Long valorPago;
-
-    @Column
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicio;
-
     @Column
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
+    @Column
+    private String nombreArchivo;
+    @Column
+    private String url;
+    @Column
+    private Long valorPago;
 
     /**
      * Default Constructor
      */
     public Factura() {
-        this.nombreArchivo = ""+System.currentTimeMillis();
-    }
-
-    /**
-     * Simple Constructor
-     */
-    public Factura(Long id, String url) {
-        this.id = id;
-        this.url = url;
-        this.nombreArchivo = ""+System.currentTimeMillis();
     }
 
     /**
      * BO Constructor
      */
-    public Factura(FacturaBO factBO) {
-        this.setId(factBO.getId());
-        this.setUrl(factBO.getUrl());
-        this.setNombreArchivo(factBO.getNombreArchivo());
-        this.setFechaFin(factBO.getFechaFin());
-        this.setFechaInicio(factBO.getFechaInicio());
-        this.setValorPago(factBO.getValorPago());
+    public Factura(FacturaBO facturaBO) {
+        id = facturaBO.getId();
+        fechaFin = facturaBO.getFechaFin();
+        fechaInicio = facturaBO.getFechaInicio();
+        nombreArchivo = facturaBO.getNombreArchivo();
+        url = facturaBO.getUrl();
+        valorPago = facturaBO.getValorPago();
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public FacturaBO toBO() {
         FacturaBO factBO = new FacturaBO();
-        factBO.setId(this.getId());
-        factBO.setUrl(this.getUrl());
-        factBO.setNombreArchivo(this.getNombreArchivo());
-        factBO.setFechaFin(this.getFechaFin());
-        factBO.setFechaInicio(this.getFechaInicio());
-        factBO.setValorPago(this.getValorPago());
-
+        factBO.setId(getId());
+        factBO.setFechaFin(getFechaFin());
+        factBO.setFechaInicio(getFechaInicio());
+        factBO.setNombreArchivo(getNombreArchivo());
+        factBO.setUrl(getUrl());
+        factBO.setValorPago(getValorPago());
         return factBO;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return true;
+    }
+
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getNombreArchivo() {
-        return nombreArchivo;
-    }
-
-    public void setNombreArchivo(String nombreArchivo) {
-        this.nombreArchivo = nombreArchivo;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
+    /**
+     * @return the fechaFin
+     */
     public Date getFechaFin() {
         return fechaFin;
     }
 
+    /**
+     * @param fechaFin the fechaFin to set
+     */
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 
+    /**
+     * @return the fechaInicio
+     */
     public Date getFechaInicio() {
         return fechaInicio;
     }
 
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
+    /**
+     * @return the nombreArchivo
+     */
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    /**
+     * @param nombreArchivo the nombreArchivo to set
+     */
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return the valorPago
+     */
     public Long getValorPago() {
         return valorPago;
     }
 
+    /**
+     * @param valorPago the valorPago to set
+     */
     public void setValorPago(Long valorPago) {
         this.valorPago = valorPago;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Factura)) {
-            return false;
-        }
-        Factura other = (Factura) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "co.com.losalpes.marketplace.facturacion.entities.Factura[id=" + id + "]";
-    }
-
 }

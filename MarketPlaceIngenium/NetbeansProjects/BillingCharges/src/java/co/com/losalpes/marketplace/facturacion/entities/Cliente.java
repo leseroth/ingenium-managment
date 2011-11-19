@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.facturacion.entities;
 
+import co.com.losalpes.marketplace.facturacion.MarketPlaceEntity;
 import co.com.losalpes.marketplace.facturacion.bos.ClienteBO;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -15,145 +11,147 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
 @Entity
-@NamedQueries({
-    @NamedQuery(name="getClienteByNit", query="select c from Cliente c where c.nit = :nit")
-})
+@NamedQueries({@NamedQuery(name = "getClienteByNit", query = "select c from Cliente c where c.nit = :nit")})
+public class Cliente implements MarketPlaceEntity, Serializable {
 
-/**
- * Cliente
- * @author marketplace
- */
-
-public class Cliente implements Serializable {
-   /**
-     * Attribute ClienteID
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    /**
-     * Attribute nombre
-     */
-    @Column
-    protected String nombre;
-    @Column
-    private String nit;
-
+    private Long id;
     @Column
     private String direccion;
-
-    @Column
-    private String estado;
-
     @Column
     private String email;
+    @Column
+    private String estado;
+    @Column
+    private String nit;
+    @Column
+    private String nombre;
 
     /**
      * Default Constructor
      */
     public Cliente() {
-        this.estado = ClienteBO.OK;
-    }
-
-    /**
-     * Simple Constructor
-     */
-    public Cliente(Long id, String aNombre, String direccion, String email) {
-        this.id = id;
-        this.nombre = aNombre;
-        this.direccion = direccion;
-        this.estado = ClienteBO.OK;
-        this.email = email;
     }
 
     /**
      * BO Constructor
      */
     public Cliente(ClienteBO clienteBO) {
-        this.setId(clienteBO.getId());
-        this.setNombre(clienteBO.getNombre());
-        this.setDireccion(clienteBO.getDireccion());
-        this.setEstado(ClienteBO.OK);
-        this.setEmail(clienteBO.getEmail());
+        this();
+        id = clienteBO.getId();
+        direccion = clienteBO.getDireccion();
+        email = clienteBO.getEmail();
+        estado = clienteBO.getEstado();
+        nit = clienteBO.getNit();
+        nombre = clienteBO.getNombre();
     }
 
     /**
-     * Converts the current entity to its BO
-     * @param Integer gets the bo tree in depth
+     * {@inheritDoc}
      */
+    @Override
     public ClienteBO toBO() {
         ClienteBO clienteBO = new ClienteBO();
-        clienteBO.setId(this.getId());
-        clienteBO.setNombre(this.getNombre());
-        clienteBO.setDireccion(this.getDireccion());
-        clienteBO.setEstado(ClienteBO.OK);
-        clienteBO.setEmail(this.getEmail());
+        clienteBO.setId(getId());
+        clienteBO.setDireccion(getDireccion());
+        clienteBO.setEmail(getEmail());
+        clienteBO.setEstado(getEstado());
+        clienteBO.setNit(getNit());
+        clienteBO.setNombre(getNombre());
         return clienteBO;
     }
 
     /**
-     * Getter method for attribute clienteID
-     * @return attribute clienteID
+     * {@inheritDoc}
      */
-    public Long getId() {
-        return this.id;
+    @Override
+    public boolean isInfoComplete() {
+        return direccion != null && email != null && estado != null && nit != null && nombre != null;
     }
 
     /**
-     * Setter method for attribute clienteID
-     * @param new value for attribute clienteID
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Getter method for attribute nombre
-     * @return attribute nombre
+     * @return the direccion
      */
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    /**
-     * Setter method for attribute nombre
-     * @param new value for attribute nombre
-     */
-    public void setNombre(String aNombre) {
-        this.nombre = aNombre;
-    }
-
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
     public String getDireccion() {
         return direccion;
     }
 
+    /**
+     * @param direccion the direccion to set
+     */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
+    /**
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the nit
+     */
+    public String getNit() {
+        return nit;
+    }
+
+    /**
+     * @param nit the nit to set
+     */
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

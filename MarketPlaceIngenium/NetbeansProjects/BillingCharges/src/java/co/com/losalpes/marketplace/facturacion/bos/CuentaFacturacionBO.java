@@ -1,138 +1,126 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.facturacion.bos;
 
+import co.com.losalpes.marketplace.facturacion.MarketPlaceBO;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- * @author marketplace
- */
-public class CuentaFacturacionBO implements Serializable{
+public class CuentaFacturacionBO implements MarketPlaceBO, Serializable {
 
-    private Long id;
-
-    private String numeroCuenta;
-
-    private ClienteBO cliente;
+    public static final int PRIMER_CORTE = 1;
+    public static final int SEGUNDO_CORTE = 2;
+    public static final int TERCER_CORTE = 3;
     
+    private Long id;
     private int corte;
-
     private Date fechaUltimoCorte;
-
-    /**
-     * Attribute facturas
-     */
-
-    private List<FacturaBO> facturas;
-
-    /**
-     * Attribute cargos
-     */
-   
-    private List<CargoBO> cargos;
+    private String numeroCuenta;
+    private ClienteBO cliente;
+    private List<FacturaBO> facturaBOList;
+    private List<CargoBO> cargoBOList;
 
     /**
      * Default Constructor
      */
     public CuentaFacturacionBO() {
-        this.facturas = new ArrayList<FacturaBO>();
-        this.cargos = new ArrayList<CargoBO>();
+        facturaBOList = new ArrayList<FacturaBO>();
+        cargoBOList = new ArrayList<CargoBO>();
     }
 
     /**
-     * Simple Constructor
+     * @return the id
      */
-    public CuentaFacturacionBO(Long id, int corte) {
-        this.id = id;
-        this.corte = corte;
-        this.facturas = new ArrayList<FacturaBO>();
-        this.cargos = new ArrayList<CargoBO>();
-    }
-
-    /**
-     * Complex Constructor
-     */
-    public CuentaFacturacionBO(Long id, int corte, List<FacturaBO> aFacturas, List<CargoBO> aCargos) {
-        this.id = id;
-        this.corte = corte;
-        this.facturas = aFacturas;
-        this.cargos = aCargos;
-    }   
-
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return the corte
+     */
+    public int getCorte() {
+        return corte;
+    }
+
+    /**
+     * @param corte the corte to set
+     */
+    public void setCorte(int corte) {
+        this.corte = corte;
+    }
+
+    /**
+     * @return the fechaUltimoCorte
+     */
+    public Date getFechaUltimoCorte() {
+        return fechaUltimoCorte;
+    }
+
+    /**
+     * @param fechaUltimoCorte the fechaUltimoCorte to set
+     */
+    public void setFechaUltimoCorte(Date fechaUltimoCorte) {
+        this.fechaUltimoCorte = fechaUltimoCorte;
+    }
+
+    /**
+     * @return the numeroCuenta
+     */
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    /**
+     * @param numeroCuenta the numeroCuenta to set
+     */
+    public void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    /**
+     * @return the cliente
+     */
     public ClienteBO getCliente() {
         return cliente;
     }
 
+    /**
+     * @param cliente the cliente to set
+     */
     public void setCliente(ClienteBO cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * Getter method for attribute facturas
-     * @return attribute facturas
+     * @return the facturaBOList
      */
-    public List<FacturaBO> getFacturas() {
-        return this.facturas;
+    public List<FacturaBO> getFacturaBOList() {
+        return facturaBOList;
     }
 
     /**
-     * Setter method for attribute facturas
-     * @param new value for attribute facturas
+     * @param facturaBOList the facturaBOList to set
      */
-    public void setFacturas(List<FacturaBO> aFacturas) {
-        this.facturas = aFacturas;
+    public void setFacturaBOList(List<FacturaBO> facturaBOList) {
+        this.facturaBOList = facturaBOList;
     }
 
     /**
-     * Getter method for attribute cargos
-     * @return attribute cargos
+     * @return the cargoBOList
      */
-    public List<CargoBO> getCargos() {
-        return this.cargos;
+    public List<CargoBO> getCargoBOList() {
+        return cargoBOList;
     }
 
     /**
-     * Setter method for attribute cargos
-     * @param new value for attribute cargos
+     * @param cargoBOList the cargoBOList to set
      */
-    public void setCargos(List<CargoBO> aCargos) {
-        this.cargos = aCargos;
-    }
-
-    public int getCorte() {
-        return corte;
-    }
-
-    public void setCorte(int corte) {
-        this.corte = corte;
-    }
-
-    public String getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
-
-    public Date getFechaUltimoCorte() {
-        return fechaUltimoCorte;
-    }
-
-    public void setFechaUltimoCorte(Date fechaUltimoCorte) {
-        this.fechaUltimoCorte = fechaUltimoCorte;
+    public void setCargoBOList(List<CargoBO> cargoBOList) {
+        this.cargoBOList = cargoBOList;
     }
 }

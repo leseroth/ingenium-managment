@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package co.com.losalpes.marketplace.facturacion.utilities;
+package co.com.losalpes.marketplace.facturacion.util;
 
 import co.com.losalpes.marketplace.facturacion.entities.Cargo;
 import co.com.losalpes.marketplace.facturacion.entities.CuentaFacturacion;
 import co.com.losalpes.marketplace.facturacion.entities.Factura;
-import co.com.losalpes.marketplace.facturacion.exceptions.FacturaException;
+import co.com.losalpes.marketplace.facturacion.exceptions.BussinessException;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,23 +23,11 @@ import net.sf.jasperreports.engine.JasperReport;
  */
 public class BillGeneration {
 
-    private static BillGeneration instance;
-
-    private BillGeneration(){
-        
-    }
-
-    public static BillGeneration getInstance(){
-        if(instance == null)
-            instance = new BillGeneration();
-        return instance;
-    }
-
-    public static Factura generateBill(CuentaFacturacion cuenta, int plazo) throws FacturaException{
-        try{
+    public static Factura generateBill(CuentaFacturacion cuenta, int plazo) throws BussinessException {
+        try {
             Connection conn = darConexion();
             String path = new File(".").getCanonicalPath();
-            System.setProperty("jasper.reports.compile.class.path", path+"/jasperreports-4.0.2.jar");
+            System.setProperty("jasper.reports.compile.class.path", path + "/jasperreports-4.0.2.jar");
 
             Map parameters = new HashMap();
             parameters.put("numeroCuenta", cuenta.getNumeroCuenta());
@@ -56,22 +39,24 @@ public class BillGeneration {
             cal.setTime(cuenta.getFechaUltimoCorte());
             cal.add(Calendar.DAY_OF_MONTH, plazo);
             parameters.put("plazo", cal.getTime());
-            JasperReport report = JasperCompileManager.compileReport(path+"/factura.jrxml");
+            JasperReport report = JasperCompileManager.compileReport(path + "/factura.jrxml");
             JasperPrint print = JasperFillManager.fillReport(report, parameters, conn);
 
             Factura f = new Factura();
-            File ruta = new File("C:\\BillingCharges\\facturas\\"+cuenta.getCliente().getNit());
-            if(!ruta.exists())
+            File ruta = new File("C:\\BillingCharges\\facturas\\" + cuenta.getCliente().getNit());
+            if (!ruta.exists()) {
                 ruta.mkdirs();
-            f.setUrl("C:\\BillingCharges\\facturas\\"+cuenta.getCliente().getNit()+"\\"+f.getNombreArchivo()+".pdf");
+            }
+            f.setUrl("C:\\BillingCharges\\facturas\\" + cuenta.getCliente().getNit() + "\\" + f.getNombreArchivo() + ".pdf");
             f.setFechaInicio(fechaInicio);
             f.setFechaFin(cuenta.getFechaUltimoCorte());
 
             Long valorPago = 0L;
-            for(int i = 0; i < cuenta.getCargos().size(); i++){
-                Cargo c = cuenta.getCargos().get(i);
-                if(c.getFecha().after(fechaInicio) && c.getFecha().before(cuenta.getFechaUltimoCorte()))
+            for (int i = 0; i < cuenta.getCargoList().size(); i++) {
+                Cargo c = cuenta.getCargoList().get(i);
+                if (c.getFecha().after(fechaInicio) && c.getFecha().before(cuenta.getFechaUltimoCorte())) {
                     valorPago += c.getValor();
+                }
             }
             f.setValorPago(valorPago);
 
@@ -79,11 +64,11 @@ public class BillGeneration {
             return f;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new FacturaException("Error generando la factura");
+            throw new BussinessException("Error generando la factura");
         }
     }
 
-    private static Connection darConexion() throws FacturaException{
+    private static Connection darConexion() throws BussinessException {
         try {
             String driver = "com.mysql.jdbc.Driver";
             String connectString = "jdbc:mysql://portal.marketplace.losalpes.com.co:3306/billingcharges";
@@ -91,7 +76,7 @@ public class BillGeneration {
             String password = "marketplace";
             return DriverManager.getConnection(connectString, user, password);
         } catch (Exception ex) {
-            throw new FacturaException("No se pudo realizar la conexión a la base de datos.");
+            throw new BussinessException("No se pudo realizar la conexión a la base de datos.");
         }
     }
 }
