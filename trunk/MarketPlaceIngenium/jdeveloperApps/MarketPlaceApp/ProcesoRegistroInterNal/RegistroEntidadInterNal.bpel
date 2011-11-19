@@ -28,7 +28,8 @@
          xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
          xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
-         xmlns:ns3="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
+         xmlns:ns3="http://marketplace.losalpes.com.co/GestionCorreoElectronico"
+         xmlns:ns4="http://marketplace.losalpes.com.co/VerificacionCrediticia">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +50,9 @@
         <partnerLink name="GestionCorreoElectronico"
                      partnerLinkType="ns3:GestionCorreoElectronico_PL"
                      partnerRole="GestionCorreoElectronico_Role"/>
+        <partnerLink name="VerificacionCrediticia"
+                     partnerLinkType="ns4:VerificacionCrediticia_PL"
+                     partnerRole="VerificacionCrediticia_Role"/>
     </partnerLinks>
 
     <!-- 
@@ -79,6 +83,14 @@
                   messageType="ns1:ModificarClienteRequest"/>
         <variable name="ActualizarCliente_ModificarCliente_OutputVariable"
                   messageType="ns1:ModificarClienteResponse"/>
+        <variable name="ConsultarConfecamaras_VerificarComfecamaras_InputVariable"
+                  messageType="ns4:VerificarComfecamarasRequest"/>
+        <variable name="ConsultarConfecamaras_VerificarComfecamaras_OutputVariable"
+                  messageType="ns4:VerificarComfecamarasResponse"/>
+        <variable name="ConsultarDatacredito_VerificarDataCredito_InputVariable"
+                  messageType="ns4:VerificarDataCreditoRequest"/>
+        <variable name="ConsultarDatacredito_VerificarDataCredito_OutputVariable"
+                  messageType="ns4:VerificarDataCreditoResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -104,7 +116,7 @@
                             query="/ns2:enviarCorreoElectronico/ns2:password"/>
                     </copy>
                     <copy>
-                        <from expression="ora:format('&amp;lt;html>&amp;lt;body>Marketplace de los Alpes informa:&amp;lt;br/>&amp;lt;br/>El proceso de registro de su entidad ha presentado un inconveniete.&amp;lt;br/>Solicitaos por favor volver a intentar el proceso de registro.&amp;lt;br/>Gracias.&amp;lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&amp;lt;/body>&amp;lt;/html>')"/>
+                        <from expression="ora:format('&lt;html>&lt;;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>El proceso de registro de su entidad ha presentado un inconveniete.&lt;br/>Solicitaos por favor volver a intentar el proceso de registro.&lt;br/>Gracias.&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>')"/>
                         <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
                             part="parameters"
                             query="/ns2:enviarCorreoElectronico/ns2:message"/>
@@ -153,78 +165,6 @@
                 outputVariable="ConsultarCliente_ConsultarCliente_OutputVariable"
                 partnerLink="GestionCliente" portType="ns1:GestionCliente"
                 operation="ConsultarCliente" bpelx:invokeAsDetail="no"/>
-        <assign name="AsignarCrearCliente">
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:nit"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/nit"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:Categoria"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/categoria"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:tipo"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/tipo"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:razonSocial"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/razonSocial"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:nombre"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/nombre"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:direccion"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/direccion"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:telefono"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/telefono"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:email"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/email"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:CodPostal"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/codigoPostal"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
-                      query="/client:process/client:CodPais"/>
-                <to variable="CrearCliente_CrearCliente_InputVariable"
-                    part="parameters"
-                    query="/ns2:crearCliente/ns2:cliente/codigoPais"/>
-            </copy>
-        </assign>
         <switch name="Switch1">
             <case condition="string-length(bpws:getVariableData('ConsultarCliente_ConsultarCliente_OutputVariable','parameters','/ns2:consultarClienteResponse/ns2:cliente/nit')) = 0">
                 <bpelx:annotation>
@@ -233,21 +173,136 @@
                         <bpelx:property name="userLabel">NoExiste</bpelx:property>
                     </bpelx:general>
                 </bpelx:annotation>
-                <invoke name="CrearCliente" bpelx:invokeAsDetail="no"
-                        inputVariable="CrearCliente_CrearCliente_InputVariable"
-                        outputVariable="CrearCliente_CrearCliente_OutputVariable"
-                        partnerLink="GestionCliente"
-                        portType="ns1:GestionCliente" operation="CrearCliente"/>
+                <sequence>
+                    <assign name="AsignarCrearCliente">
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:nit"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/nit"/>
+                        </copy>
+                        <copy>
+                            <from expression="1000"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/comision"/>
+                        </copy>
+                        <copy>
+                            <from expression="'Inactivo'"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/estado"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:Categoria"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/categoria"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:tipo"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/tipo"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:razonSocial"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/razonSocial"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:nombre"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/nombre"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:direccion"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/direccion"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:telefono"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/telefono"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:email"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/email"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:CodPostal"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/codigoPostal"/>
+                        </copy>
+                        <copy>
+                            <from variable="inputVariable" part="payload"
+                                  query="/client:process/client:CodPais"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/codigoPais"/>
+                        </copy>
+                    </assign>
+                    <invoke name="CrearCliente" bpelx:invokeAsDetail="no"
+                            inputVariable="CrearCliente_CrearCliente_InputVariable"
+                            outputVariable="CrearCliente_CrearCliente_OutputVariable"
+                            partnerLink="GestionCliente"
+                            portType="ns1:GestionCliente"
+                            operation="CrearCliente"/>
+                    <assign name="AsignarEstadoInactivo">
+                        <copy>
+                            <from variable="CrearCliente_CrearCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/id"/>
+                        </copy>
+                        <copy>
+                            <from expression="'Inactive'"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/estado"/>
+                        </copy>
+                        <copy>
+                            <from expression="'1000'"/>
+                            <to variable="CrearCliente_CrearCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearCliente/ns2:cliente/comision"/>
+                        </copy>
+                    </assign>
+                </sequence>
             </case>
             <otherwise>
                 <sequence>
-                    <assign name="AsignarActualizarContacto">
+                    <assign name="AsignarActualizarCliente">
                         <copy>
                             <from variable="inputVariable" part="payload"
                                   query="/client:process/client:nombre"/>
                             <to variable="ActualizarCliente_ModificarCliente_InputVariable"
                                 part="parameters"
                                 query="/ns2:modificarCliente/ns2:cliente/nombre"/>
+                        </copy>
+                        <copy>
+                            <from expression="'Inactivo'"/>
+                            <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                part="parameters"
+                                query="/ns2:modificarCliente/ns2:cliente/estado"/>
                         </copy>
                         <copy>
                             <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
@@ -325,13 +380,62 @@
                 </sequence>
             </otherwise>
         </switch>
-        <assign name="Assign1">
-            <copy>
-                <from expression="ora:format('willian')"/>
-                <to variable="outputVariable" part="payload"
-                    query="/client:processResponse/client:direccion"/>
-            </copy>
-        </assign>
+        <switch name="Switch2">
+            <case condition="bpws:getVariableData('ConsultarCliente_ConsultarCliente_OutputVariable','parameters','/ns2:consultarClienteResponse/ns2:cliente/estado') = 'Inactive'">
+                <bpelx:annotation>
+                    <bpelx:general>
+                        <bpelx:property name="userLabel">Inactivo</bpelx:property>
+                    </bpelx:general>
+                </bpelx:annotation>
+                <sequence name="Sequence2">
+                    <assign name="AsignarVerificacion">
+                        <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                            <to variable="ConsultarConfecamaras_VerificarComfecamaras_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarComfecamara/ns2:nit"/>
+                        </copy>
+                        <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                            <to variable="ConsultarDatacredito_VerificarDataCredito_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarDataCredito/ns2:nit"/>
+                        </copy>
+                        <copy>
+                            <from expression="3"/>
+                            <to variable="ConsultarDatacredito_VerificarDataCredito_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarDataCredito/ns2:reglaValidacion"/>
+                        </copy>
+                        <copy>
+                            <from expression="3"/>
+                            <to variable="ConsultarConfecamaras_VerificarComfecamaras_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarComfecamara/ns2:reglaValidacion"/>
+                        </copy>
+                    </assign>
+                    <invoke name="ConsultarConfecamaras"
+                            inputVariable="ConsultarConfecamaras_VerificarComfecamaras_InputVariable"
+                            outputVariable="ConsultarConfecamaras_VerificarComfecamaras_OutputVariable"
+                            partnerLink="VerificacionCrediticia"
+                            portType="ns4:VerificacionCrediticia"
+                            operation="VerificarComfecamaras"
+                            bpelx:invokeAsDetail="no"/>
+                    <invoke name="ConsultarDatacredito"
+                            bpelx:invokeAsDetail="no"
+                            inputVariable="ConsultarDatacredito_VerificarDataCredito_InputVariable"
+                            outputVariable="ConsultarDatacredito_VerificarDataCredito_OutputVariable"
+                            partnerLink="VerificacionCrediticia"
+                            portType="ns4:VerificacionCrediticia"
+                            operation="VerificarDataCredito"/>
+                </sequence>
+            </case>
+            <otherwise/>
+        </switch>
         <invoke name="callbackClient" partnerLink="registroentidadinternal_client" portType="client:RegistroEntidadInterNalCallback" operation="processResponse" inputVariable="outputVariable"/>
     </sequence>
 </process>
