@@ -14,7 +14,7 @@ declare function xf:ModificarContactoResponse($contactWS_ContactUpdate_Output1 a
                 {
                     let $ListOfContact := $ContactWS_ContactUpdate_Output/ns1:ListOfContact
                     return
-                        <ns0:respuesta>{(empty($ListOfContact/ns1:Contact[1]/ns1:ContactId))}</ns0:respuesta>
+                        <ns0:respuesta>{(empty($ListOfContact/ns1:Contact[1]/ns1:AccountId))}</ns0:respuesta>
                 }
             </ns0:modificarContactoResponse>
 };
