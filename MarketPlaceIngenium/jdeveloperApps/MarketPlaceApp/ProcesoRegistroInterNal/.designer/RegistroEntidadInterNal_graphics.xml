@@ -4,17 +4,21 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="499" side="left"/>
-      <partnerlink name="GestionCliente" x="790" y="498" side="right"/>
-      <partnerlink name="GestionCorreoElectronico" x="790" y="251" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="681" side="left"/>
+      <partnerlink name="GestionCliente" x="867" y="470" side="right"/>
+      <partnerlink name="GestionCorreoElectronico" x="867" y="251" side="right"/>
+      <partnerlink name="VerificacionCrediticia" x="867" y="1062" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="18,459,769,265" show_swimlanes="true">
+   <graph_layout viewport="0,0,630,497" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="catch"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch" type="switch"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch/otherwise/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]" type="switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]" type="switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence" type="sequence"/>
    </graph_layout>
    <bookmarks/>
 </graphics>

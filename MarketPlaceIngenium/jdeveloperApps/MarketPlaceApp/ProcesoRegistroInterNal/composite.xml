@@ -16,6 +16,8 @@
           location="GestionClienteWrapper.wsdl" importType="wsdl"/>
   <import namespace="http://marketplace.losalpes.com.co/GestionCorreoElectronico"
           location="GestionCorreoElectronicoWrapper.wsdl" importType="wsdl"/>
+  <import namespace="http://marketplace.losalpes.com.co/VerificacionCrediticia"
+          location="VerificacionCrediticiaWrapper.wsdl" importType="wsdl"/>
   <service name="registroentidadinternal_client_ep"
            ui:wsdlLocation="RegistroEntidadInterNal.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal#wsdl.interface(RegistroEntidadInterNal)"
@@ -43,6 +45,13 @@
                 type="xs:string" many="false">WSDLDriven</property>
     </binding.ws>
   </reference>
+  <reference name="VerificacionCrediticia"
+             ui:wsdlLocation="VerificacionCrediticiaWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/VerificacionCrediticia#wsdl.interface(VerificacionCrediticia)"/>
+    <binding.ws port="http://marketplace.losalpes.com.co/VerificacionCrediticia#wsdl.endpoint(VerificacionCrediticia/VerificacionCrediticiaSOAP)"
+                location="VerificacionCrediticiaWrapper.wsdl"
+                soapVersion="1.1"/>
+  </reference>
   <wire>
     <source.uri>registroentidadinternal_client_ep</source.uri>
     <target.uri>RegistroEntidadInterNal/registroentidadinternal_client</target.uri>
@@ -54,5 +63,9 @@
   <wire>
     <source.uri>RegistroEntidadInterNal/GestionCorreoElectronico</source.uri>
     <target.uri>GestionCorreoElectronico</target.uri>
+  </wire>
+  <wire>
+    <source.uri>RegistroEntidadInterNal/VerificacionCrediticia</source.uri>
+    <target.uri>VerificacionCrediticia</target.uri>
   </wire>
 </composite>

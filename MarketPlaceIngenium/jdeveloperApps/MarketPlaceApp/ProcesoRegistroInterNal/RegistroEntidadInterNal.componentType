@@ -20,4 +20,8 @@
              ui:wsdlLocation="GestionCorreoElectronicoWrapper1.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico#wsdl.interface(GestionCorreoElectronico)"/>
   </reference>
+  <reference name="VerificacionCrediticia"
+             ui:wsdlLocation="VerificacionCrediticiaWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/VerificacionCrediticia#wsdl.interface(VerificacionCrediticia)"/>
+  </reference>
 </componentType>
