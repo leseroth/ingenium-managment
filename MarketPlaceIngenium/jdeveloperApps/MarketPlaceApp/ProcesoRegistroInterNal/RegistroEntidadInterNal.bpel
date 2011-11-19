@@ -91,6 +91,10 @@
                   messageType="ns4:VerificarDataCreditoRequest"/>
         <variable name="ConsultarDatacredito_VerificarDataCredito_OutputVariable"
                   messageType="ns4:VerificarDataCreditoResponse"/>
+        <variable name="CrearContacto_CrearContactos_InputVariable"
+                  messageType="ns1:CrearContactosRequest"/>
+        <variable name="CrearContacto_CrearContactos_OutputVariable"
+                  messageType="ns1:CrearContactosResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -264,6 +268,24 @@
                             partnerLink="GestionCliente"
                             portType="ns1:GestionCliente"
                             operation="CrearCliente"/>
+                    <assign name="AsignarCrearContacto">
+                        <copy>
+                            <from variable="CrearCliente_CrearCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                            <to variable="CrearContacto_CrearContactos_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearContacto/ns2:idCliente"/>
+                        </copy>
+                    </assign>
+                    <while name="Valor indice">
+                        <invoke name="CrearContacto" bpelx:invokeAsDetail="no"
+                                inputVariable="CrearContacto_CrearContactos_InputVariable"
+                                outputVariable="CrearContacto_CrearContactos_OutputVariable"
+                                partnerLink="GestionCliente"
+                                portType="ns1:GestionCliente"
+                                operation="CrearContactos"/>
+                    </while>
                     <assign name="AsignarEstadoInactivo">
                         <copy>
                             <from variable="CrearCliente_CrearCliente_OutputVariable"
