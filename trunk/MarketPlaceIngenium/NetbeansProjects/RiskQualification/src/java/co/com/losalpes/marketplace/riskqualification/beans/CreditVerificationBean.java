@@ -23,7 +23,6 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
 
     @PersistenceContext
     private EntityManager em;
-    private ListasNegras ln = null;
 
     /**
      * {@inheritDoc}
@@ -117,98 +116,71 @@ public class CreditVerificationBean implements CreditVerificationRemote, CreditV
         return datacredito;
     }
 
-    public Boolean registrarAntiLavados(String nit, boolean existente) {
-
-        //Llamado a servicio externo
-        Boolean reg = !ExternalServices.nitValidate(nit, existente);
-        ln = new ListasNegras(nit, new Date(), reg, TipoLista.listaAntilavados);
-        try {
-            em.persist(ln);
-            return true;
-        } catch (Exception e) {
-            //throw new DataBaseException(e.getMessage());
-        }
-
-        return true;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean verificarListaAntiLavado(String nit, int reglaVal) throws BussinessException {
+        return consultarListaNegra(nit, reglaVal, TipoLista.LISTA_ANTILAVADOS);
     }
 
-    public Boolean registrarListaClinton(String nit, boolean existente) {
-
-        //Llamado a servicio externo
-        Boolean reg = !ExternalServices.nitValidate(nit, existente);
-        ln = new ListasNegras(nit, new Date(), reg, TipoLista.listaClinton);
-        try {
-            em.persist(ln);
-
-        } catch (Exception e) {
-            //throw new DataBaseException(e.getMessage());
-        }
-        return true;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean verificarListaClinton(String nit, int reglaVal) throws BussinessException {
+        return consultarListaNegra(nit, reglaVal, TipoLista.LISTA_CLINTON);
     }
 
-    public Boolean verificarListaClinton(String nit, int reglaVal) {
-        Boolean rating = false;
-        Query q = em.createNamedQuery("getInfoListasNegras");
-        q.setParameter("pNit", nit.trim());
-        q.setParameter("pTipo", TipoLista.listaClinton);
+    /**
+     * Consulta las listas negras dependiendo el tipo de lista
+     * @param nit Nit de la empresa
+     * @param reglaVal Dias de validacion
+     * @param tipoLista Tipo de lista a consultar
+     * @return true si el establecimiento es valido
+     * @throws BussinessException
+     */
+    protected Boolean consultarListaNegra(String nit, int reglaVal, TipoLista tipoLista) throws BussinessException {
+        ListasNegras listaNegra = null;
+
         try {
+            Query q = em.createNamedQuery("getInfoListasNegras");
+            q.setParameter("pNit", nit.trim());
+            q.setParameter("pTipo", tipoLista);
             List results = q.getResultList();
+
             if (!results.isEmpty()) {
-                ln = (ListasNegras) results.get(0);
-                //Obteniendo fecha de registro confecamaras
-                int diff = Tools.getDiffDates(ln.getFecha(), new Date());
-                if (diff > reglaVal) {
-                    //Registra la entidad
-                    rating = registrarListaClinton(nit.trim(), true);
-                    rating = ln.getEstado();
-                } else //Devuelve estado fente a confecamaras
-                {
-                    rating = ln.getEstado();
+                listaNegra = (ListasNegras) results.get(0);
+
+                //Obteniendo fecha de registro confecamaras para validar nuevamente
+                if (Tools.getDiffDates(listaNegra.getFecha(), new Date()) > reglaVal) {
+                    //Registra la entidad nuevamente
+                    System.err.println("Registra la entidad nuevamente");
+                    listaNegra = registrarListaNegra(nit.trim(), true, tipoLista);
                 }
             } else {
                 //Registra la entidad
-                rating = registrarListaClinton(nit.trim(), false);
-                rating = ln.getEstado();
+                listaNegra = registrarListaNegra(nit.trim(), false, tipoLista);
             }
-            return rating;
-
         } catch (Exception e) {
-            // throw new WebServiceException(e.getMessage());
+            throw new BussinessException("Excepcion : " + e.getMessage());
         }
 
-        return rating;
+        return listaNegra.getEstado();
     }
 
-    public Boolean verificarListaAntiLavado(String nit, int reglaVal) {
-        Boolean rating = false;
-        Query q = em.createNamedQuery("getInfoListasNegras");
-        q.setParameter("pNit", nit.trim());
-        q.setParameter("pTipo", TipoLista.listaAntilavados);
-        try {
-            List results = q.getResultList();
-            if (!results.isEmpty()) {
-                ln = (ListasNegras) results.get(0);
-                //Obteniendo fecha de registro confecamaras
-                int diff = Tools.getDiffDates(ln.getFecha(), new Date());
-                if (diff > reglaVal) {
-                    //Registra la entidad
-                    rating = registrarAntiLavados(nit.trim(), true);
-                    rating = ln.getEstado();
-                } else //Devuelve estado fente a confecamaras
-                {
-                    rating = ln.getEstado();
-                }
-            } else {
-                //Registra la entidad
-                rating = registrarAntiLavados(nit.trim(), false);
-                rating = ln.getEstado();
-            }
-            return rating;
-
-        } catch (Exception e) {
-            //throw new WebServiceException(e.getMessage());
-        }
-
-        return rating;
+    /**
+     * Permite registrar una entidad en las listas negras.
+     * @param nit Nit de la entidad
+     * @param existente Indica si ya existia, si ya existia existe el 50% de posiblidad de que no sea validada,
+     * en caso contrario, es valida si su nit no contiene 7, 8 o 9
+     * @param tipoLista Tipo de lista a registrar
+     * @return
+     */
+    protected ListasNegras registrarListaNegra(String nit, boolean existente, TipoLista tipoLista) {
+        boolean estado = ExternalServices.nitValidate(nit, existente);
+        ListasNegras listaNegra = new ListasNegras(estado, new Date(), nit, tipoLista);
+        em.persist(listaNegra);
+        return listaNegra;
     }
 }

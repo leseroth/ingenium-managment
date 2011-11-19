@@ -12,22 +12,21 @@ import java.util.Date;
  * @author marketplace
  */
 @Entity
-@NamedQuery(name = "getInfoListasNegras",
-query = "SELECT L FROM ListasNegras L WHERE L.nit = :pNit AND L.tipo = :pTipo")
+@NamedQuery(name = "getInfoListasNegras", query = "SELECT L FROM ListasNegras L WHERE L.nit = :pNit AND L.tipo = :pTipo ORDER by L.fecha desc")
 public class ListasNegras implements MarketPlaceEntity, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
-    protected String nit;
+    private Boolean estado;
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
-    protected Date fecha;
+    private Date fecha;
     @Column
-    protected Boolean estado;
+    private String nit;
     @Column
-    protected TipoLista tipo;
+    private TipoLista tipo;
 
     /**
      * Default Constructor
@@ -36,56 +35,94 @@ public class ListasNegras implements MarketPlaceEntity, Serializable {
     }
 
     /**
-     * Simple Constructor
+     * Constructor Completo
+     * @param estado
+     * @param fecha
+     * @param nit
+     * @param tipo
      */
-    public ListasNegras(String aNit, Date aFechaCreacion, Boolean aEstado, TipoLista tipo) {
-        this.nit = aNit;
-        this.fecha = aFechaCreacion;
-        this.estado = aEstado;
+    public ListasNegras(Boolean estado, Date fecha, String nit, TipoLista tipo) {
+        this.estado = estado;
+        this.fecha = fecha;
+        this.nit = nit;
         this.tipo = tipo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isInfoComplete() {
+        return getEstado() != null && getFecha() != null && getNit() != null && getTipo() != null;
+    }
+
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
+    /**
+     * @return the estado
+     */
     public Boolean getEstado() {
         return estado;
     }
 
-    public void setTipo(TipoLista tipo) {
-        this.tipo = tipo;
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    /**
+     * @return the nit
+     */
+    public String getNit() {
+        return nit;
+    }
+
+    /**
+     * @param nit the nit to set
+     */
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    /**
+     * @return the tipo
+     */
     public TipoLista getTipo() {
         return tipo;
     }
 
-    public boolean isInfoComplete() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(TipoLista tipo) {
+        this.tipo = tipo;
     }
 }
