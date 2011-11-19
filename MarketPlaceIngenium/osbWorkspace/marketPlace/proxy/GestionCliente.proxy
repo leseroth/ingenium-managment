@@ -1310,16 +1310,16 @@
           <con3:assign varName="actualizar-body">
             <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7ba8</con1:id>
             <con3:expr>
-              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
- <ns:AccountWS_AccountUpdate_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
-            <ns1:ListOfAccount>
-                <ns1:Account>
-                	<ns1:AccountId>{ $idCliente }</ns1:AccountId>
-  					<ns1:Status>{ $estado }</ns1:Status>
-                </ns1:Account>
-            </ns1:ListOfAccount>
- </ns:AccountWS_AccountUpdate_Input> 
- </soapenv:Body>]]></con1:xqueryText>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+	<ns:AccountWS_AccountUpdate_Input  	xmlns:acc="urn:/crmondemand/xml/account">
+		<acc:ListOfAccount>
+			<acc:Account>
+				<acc:AccountId>{ $idCliente }</acc:AccountId>
+  				<acc:Status>{ $estado }</acc:Status>
+			</acc:Account>
+		</acc:ListOfAccount>
+	</ns:AccountWS_AccountUpdate_Input>
+</soapenv:Body>]]></con1:xqueryText>
             </con3:expr>
           </con3:assign>
           <con3:wsCallout>
