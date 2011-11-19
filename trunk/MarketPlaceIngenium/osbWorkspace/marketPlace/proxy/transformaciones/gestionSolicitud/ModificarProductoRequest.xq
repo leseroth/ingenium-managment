@@ -14,22 +14,22 @@ declare function xf:ModificarProductoRequest($modificarProducto1 as element(ns0:
                     {
                         for $id in $modificarProducto1/ns0:producto/id
                         return
-                            <ns2:CustomObject3Id>{ concat("='",data($id),"'") }</ns2:CustomObject3Id>
+                            <ns2:CustomObject3Id>{ data($id) }</ns2:CustomObject3Id>
                     }
-                    <ns2:Name>{ concat("='",data($modificarProducto1/ns0:producto/nombre),"'") }</ns2:Name>
-                    <ns2:plEstado>{ concat("='",data($modificarProducto1/ns0:producto/estado),"'") }</ns2:plEstado>
-                    <ns2:stCategoria>{ concat("='",data($modificarProducto1/ns0:producto/categoria),"'") }</ns2:stCategoria>
+                    <ns2:Name>{ data($modificarProducto1/ns0:producto/nombre) }</ns2:Name>
+                    <ns2:plEstado>{ data($modificarProducto1/ns0:producto/estado) }</ns2:plEstado>
+                    <ns2:stCategoria>{ data($modificarProducto1/ns0:producto/categoria) }</ns2:stCategoria>
                     {
                         for $tipo in $modificarProducto1/ns0:producto/tipo
                         return
-                            <ns2:stTipo>{ concat("='",data($tipo),"'") }</ns2:stTipo>
+                            <ns2:stTipo>{ data($tipo) }</ns2:stTipo>
                     }
                     {
                         for $referencia in $modificarProducto1/ns0:producto/referencia
                         return
-                            <ns2:stReferencia>{ concat("='",data($referencia),"'") }</ns2:stReferencia>
+                            <ns2:stReferencia>{ data($referencia) }</ns2:stReferencia>
                     }
-                    <ns2:stPesoLibras>{ concat("='",data($modificarProducto1/ns0:producto/pesoLibras),"'") }</ns2:stPesoLibras>
+                    <ns2:stPesoLibras>{ data($modificarProducto1/ns0:producto/pesoLibras) }</ns2:stPesoLibras>
                 </ns2:CustomObject3>
             </ns2:ListOfCustomObject3>
         </ns1:CustomObject3WS_CustomObject3Update_Input>
