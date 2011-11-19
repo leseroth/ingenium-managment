@@ -1022,23 +1022,39 @@
       <xs:element name="return" type="xs:boolean" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente" name="ActualizarEstadoCliente" bindingOperationName="ActualizarEstadoCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente" name="ActualizarEstadoCliente" bindingOperationName="ActualizarEstadoCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ClienteExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:actualizarEstadoCliente>
-         <mar:nit>?</mar:nit>
-         <mar:estado>?</mar:estado>
+         <mar:nit>100100111</mar:nit>
+         <mar:estado>Inactivo</mar:estado>
       </mar:actualizarEstadoCliente>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud" name="ActualizarEstadoSolicitud" bindingOperationName="ActualizarEstadoSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ClienteNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:actualizarEstadoCliente>
+         <mar:nit>178</mar:nit>
+         <mar:estado>Inactivo</mar:estado>
+      </mar:actualizarEstadoCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud" name="ActualizarEstadoSolicitud" bindingOperationName="ActualizarEstadoSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="SolicitudExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:actualizarEstadoSolicitud>
-         <mar:numRadicacion>?</mar:numRadicacion>
-         <mar:estado>?</mar:estado>
+         <mar:numRadicacion>484426-698499962</mar:numRadicacion>
+         <mar:estado>Aceptada</mar:estado>
       </mar:actualizarEstadoSolicitud>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud" name="ActualizarSolicitud" bindingOperationName="ActualizarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/><con:wsrmConfig version="1.2"/></con:call><con:call name="SolicitudNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:actualizarEstadoSolicitud>
+         <mar:numRadicacion>1111</mar:numRadicacion>
+         <mar:estado>Aceptada</mar:estado>
+      </mar:actualizarEstadoSolicitud>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud" name="ActualizarSolicitud" bindingOperationName="ActualizarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:actualizarSolicitud>
@@ -1078,7 +1094,7 @@
          <mar:estadoProducto>?</mar:estadoProducto>
       </mar:actualizarSolicitud>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud" name="CerrarSolicitud" bindingOperationName="CerrarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarSolicitud"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud" name="CerrarSolicitud" bindingOperationName="CerrarSolicitud" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:cerrarSolicitud>
@@ -1709,4 +1725,54 @@
          </detail>
       </soapenv:Fault>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarProducto"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="ActualizarEstadoSolicitud" interface="GestionClienteSOAP" operation="ActualizarEstadoSolicitud"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="SolicitudExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header xmlns:mar="http://marketplace.losalpes.com.co"/>
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:actualizarSolicitudResponse xmlns:mar="http://marketplace.losalpes.com.co">true</mar:actualizarSolicitudResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/></con:response><con:response name="SolicitudNoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <soapenv:Fault>
+         <faultcode>soapenv:Server</faultcode>
+         <faultstring>BEA-382510: OSB Assign action failed updating variable "idSolicitud": weblogic.xml.query.exceptions.XQueryDynamicException: line 10, column 9: {err}FORG0005: expected exactly one item, got 0 items</faultstring>
+         <detail>
+            <con:fault xmlns:con="http://www.bea.com/wli/sb/context">
+               <con:errorCode>BEA-382510</con:errorCode>
+               <con:reason>OSB Assign action failed updating variable "idSolicitud": weblogic.xml.query.exceptions.XQueryDynamicException: line 10, column 9: {err}FORG0005: expected exactly one item, got 0 items</con:reason>
+               <con:location>
+                  <con:node>PipelinePairNode3</con:node>
+                  <con:pipeline>PipelinePairNode3_request</con:pipeline>
+                  <con:stage>ConsultarIdSolicitud</con:stage>
+                  <con:path>request-pipeline</con:path>
+               </con:location>
+            </con:fault>
+         </detail>
+      </soapenv:Fault>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoSolicitud"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="ActualizarEstadoCliente" interface="GestionClienteSOAP" operation="ActualizarEstadoCliente"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="ClienteExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Header xmlns:mar="http://marketplace.losalpes.com.co"/>
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:modificarClienteResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:resultado>true</mar:resultado>
+      </mar:modificarClienteResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:response><con:response name="ClienteNoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <soapenv:Fault>
+         <faultcode>soapenv:Server</faultcode>
+         <faultstring>BEA-382510: OSB Assign action failed updating variable "idCliente": weblogic.xml.query.exceptions.XQueryDynamicException: line 9, column 9: {err}FORG0005: expected exactly one item, got 0 items</faultstring>
+         <detail>
+            <con:fault xmlns:con="http://www.bea.com/wli/sb/context">
+               <con:errorCode>BEA-382510</con:errorCode>
+               <con:reason>OSB Assign action failed updating variable "idCliente": weblogic.xml.query.exceptions.XQueryDynamicException: line 9, column 9: {err}FORG0005: expected exactly one item, got 0 items</con:reason>
+               <con:location>
+                  <con:node>PipelinePairNode5</con:node>
+                  <con:pipeline>PipelinePairNode5_request</con:pipeline>
+                  <con:stage>ConsultarIdCuenta</con:stage>
+                  <con:path>request-pipeline</con:path>
+               </con:location>
+            </con:fault>
+         </detail>
+      </soapenv:Fault>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
