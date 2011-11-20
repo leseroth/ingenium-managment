@@ -103,6 +103,14 @@
                   messageType="ns1:CrearProductosRequest"/>
         <variable name="CrearProducto_CrearProductos_OutputVariable"
                   messageType="ns1:CrearProductosResponse"/>
+        <variable name="ConsultarAntilavado_VerificarListaAntilavado_InputVariable"
+                  messageType="ns4:VerificarListaAntilavadoRequest"/>
+        <variable name="ConsultarAntilavado_VerificarListaAntilavado_OutputVariable"
+                  messageType="ns4:VerificarListaAntilavadoResponse"/>
+        <variable name="ConsultarListaClinton_VerificarListaClinton_InputVariable"
+                  messageType="ns4:VerificarListaClintonRequest"/>
+        <variable name="ConsultarListaClinton_VerificarListaClinton_OutputVariable"
+                  messageType="ns4:VerificarListaClintonResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -600,6 +608,34 @@
                                 query="/ns2:verificarDataCredito/ns2:reglaValidacion"/>
                         </copy>
                         <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                            <to variable="ConsultarAntilavado_VerificarListaAntilavado_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarListaAntilavado/ns2:nit"/>
+                        </copy>
+                        <copy>
+                            <from expression="3"/>
+                            <to variable="ConsultarAntilavado_VerificarListaAntilavado_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarListaAntilavado/ns2:reglaValidacion"/>
+                        </copy>
+                        <copy>
+                            <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
+                            <to variable="ConsultarListaClinton_VerificarListaClinton_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarListaClinton/ns2:nit"/>
+                        </copy>
+                        <copy>
+                            <from expression="3"/>
+                            <to variable="ConsultarListaClinton_VerificarListaClinton_InputVariable"
+                                part="parameters"
+                                query="/ns2:verificarListaClinton/ns2:reglaValidacion"/>
+                        </copy>
+                        <copy>
                             <from expression="3"/>
                             <to variable="ConsultarConfecamaras_VerificarComfecamaras_InputVariable"
                                 part="parameters"
@@ -620,6 +656,20 @@
                             partnerLink="VerificacionCrediticia"
                             portType="ns4:VerificacionCrediticia"
                             operation="VerificarDataCredito"/>
+                    <invoke name="ConsultarAntilavado"
+                            bpelx:invokeAsDetail="no"
+                            inputVariable="ConsultarAntilavado_VerificarListaAntilavado_InputVariable"
+                            outputVariable="ConsultarAntilavado_VerificarListaAntilavado_OutputVariable"
+                            partnerLink="VerificacionCrediticia"
+                            portType="ns4:VerificacionCrediticia"
+                            operation="VerificarListaAntilavado"/>
+                    <invoke name="ConsultarListaClinton"
+                            bpelx:invokeAsDetail="no"
+                            inputVariable="ConsultarListaClinton_VerificarListaClinton_InputVariable"
+                            outputVariable="ConsultarListaClinton_VerificarListaClinton_OutputVariable"
+                            partnerLink="VerificacionCrediticia"
+                            portType="ns4:VerificacionCrediticia"
+                            operation="VerificarListaClinton"/>
                 </sequence>
             </case>
             <otherwise/>
