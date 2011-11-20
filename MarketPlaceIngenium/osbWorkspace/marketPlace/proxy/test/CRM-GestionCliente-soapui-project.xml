@@ -1105,7 +1105,7 @@
          <mar:estadoProducto>?</mar:estadoProducto>
       </mar:cerrarSolicitud>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente" name="ConsultarCliente" bindingOperationName="ConsultarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ClienteExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://TOSHIBA-PC:8080/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/CerrarSolicitud"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ConsultarCliente" name="ConsultarCliente" bindingOperationName="ConsultarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ClienteExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://TOSHIBA-PC:8080/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:consultarCliente>
@@ -1342,12 +1342,29 @@
          <mar:comision>?</mar:comision>
       </mar:modificarComision>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto" name="ModificarContacto" bindingOperationName="ModificarContacto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarComision"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto" name="ModificarContacto" bindingOperationName="ModificarContacto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ContactoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
    <soapenv:Header/>
    <soapenv:Body>
       <mar:modificarContacto xmlns:mar="http://marketplace.losalpes.com.co">
     <mar:contactos>
         <mar:id>ADSA-A0L21W</mar:id> 
+        <mar:numIdentificacion>24607108</mar:numIdentificacion> 
+        <mar:tipoIdentificacion>Cedula</mar:tipoIdentificacion> 
+        <mar:nombre>Ana3</mar:nombre> 
+        <mar:direccion>Carrera 13 No 13-33</mar:direccion> 
+        <mar:telefono>+34 6888883</mar:telefono> 
+        <mar:celular>3001234563</mar:celular> 
+        <mar:estado>Activo</mar:estado> 
+        <mar:email>samigory3@yahoo.com</mar:email> 
+    </mar:contactos>
+</mar:modificarContacto>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/><con:wsrmConfig version="1.2"/></con:call><con:call name="ContactoNoExiste"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionCliente</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:modificarContacto xmlns:mar="http://marketplace.losalpes.com.co">
+    <mar:contactos>
+        <mar:id>111</mar:id> 
         <mar:numIdentificacion>24607108</mar:numIdentificacion> 
         <mar:tipoIdentificacion>Cedula</mar:tipoIdentificacion> 
         <mar:nombre>Ana3</mar:nombre> 
@@ -1775,4 +1792,27 @@
          </detail>
       </soapenv:Fault>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ActualizarEstadoCliente"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="ModificarContacto" interface="GestionClienteSOAP" operation="ModificarContacto"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="ContactoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <mar:modificarContactoResponse xmlns:mar="http://marketplace.losalpes.com.co">
+         <mar:respuesta>true</mar:respuesta>
+      </mar:modificarContactoResponse>
+   </SOAP-ENV:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/></con:response><con:response name="ContactoNoExiste" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <soapenv:Fault>
+         <faultcode>soapenv:Server</faultcode>
+         <faultstring>BEA-380001: Internal Server Error</faultstring>
+         <detail>
+            <con:fault xmlns:con="http://www.bea.com/wli/sb/context">
+               <con:errorCode>BEA-380001</con:errorCode>
+               <con:reason>Internal Server Error</con:reason>
+               <con:location>
+                  <con:node>RouteNode6</con:node>
+                  <con:path>response-pipeline</con:path>
+               </con:location>
+            </con:fault>
+         </detail>
+      </soapenv:Fault>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionCliente/ModificarContacto"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
