@@ -98,6 +98,11 @@
                   messageType="ns1:CrearContactosResponse"/>
         <variable name="indiceContactos" type="xsd:int"/>
         <variable name="idCliente" type="xsd:string"/>
+        <variable name="indiceProductos" type="xsd:int"/>
+        <variable name="CrearProducto_CrearProductos_InputVariable"
+                  messageType="ns1:CrearProductosRequest"/>
+        <variable name="CrearProducto_CrearProductos_OutputVariable"
+                  messageType="ns1:CrearProductosResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -295,7 +300,7 @@
                             <to variable="indiceContactos"/>
                         </copy>
                     </assign>
-                    <while name="WhileValorIndice"
+                    <while name="WhileValorIndiceContactos"
                            condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
                         <sequence name="Sequence3">
                             <assign name="AsignarDatosContacto">
@@ -310,6 +315,14 @@
                                     <to variable="CrearContacto_CrearContactos_InputVariable"
                                         part="parameters"
                                         query="/ns2:crearContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                                </copy>
+                                <copy>
+                                    <from variable="CrearCliente_CrearCliente_OutputVariable"
+                                          part="parameters"
+                                          query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:idCliente"/>
                                 </copy>
                                 <copy>
                                     <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
@@ -359,6 +372,82 @@
                                 <copy>
                                     <from expression="bpws:getVariableData('indiceContactos') + 1"/>
                                     <to variable="indiceContactos"/>
+                                </copy>
+                            </assign>
+                        </sequence>
+                    </while>
+                    <assign name="AsignarCrearProductos">
+                        <copy>
+                            <from expression="1"/>
+                            <to variable="indiceProductos"/>
+                        </copy>
+                        <copy>
+                            <from variable="idCliente"/>
+                            <to variable="CrearProducto_CrearProductos_InputVariable"
+                                part="parameters"
+                                query="/ns2:crearProducto/ns2:idCliente"/>
+                        </copy>
+                    </assign>
+                    <while name="WhileValorIndiceProductos"
+                           condition="bpws:getVariableData('indiceProductos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:productos'))">
+                        <sequence name="Sequence4">
+                            <assign name="AsignarDatosProducto">
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/nombre"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:tipo'))"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/tipo"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:pesoLibras'))"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/pesoLibras"/>
+                                </copy>
+                                <copy>
+                                    <from expression="'Activo'"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/estado"/>
+                                </copy>
+                                <copy>
+                                    <from variable="CrearCliente_CrearCliente_OutputVariable"
+                                          part="parameters"
+                                          query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:idCliente"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:categoria'))"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/categoria"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:referencia'))"/>
+                                    <to variable="CrearProducto_CrearProductos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearProducto/ns2:productos/referencia"/>
+                                </copy>
+                            </assign>
+                            <invoke name="CrearProducto"
+                                    bpelx:invokeAsDetail="no"
+                                    inputVariable="CrearProducto_CrearProductos_InputVariable"
+                                    outputVariable="CrearProducto_CrearProductos_OutputVariable"
+                                    partnerLink="GestionCliente"
+                                    portType="ns1:GestionCliente"
+                                    operation="CrearProductos"/>
+                            <assign name="IncrementarIndiceProductos">
+                                <copy>
+                                    <from expression="bpws:getVariableData('indiceProductos') +1"/>
+                                    <to variable="indiceProductos"/>
                                 </copy>
                             </assign>
                         </sequence>

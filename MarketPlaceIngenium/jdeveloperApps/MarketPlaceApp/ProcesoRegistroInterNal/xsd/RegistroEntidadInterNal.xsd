@@ -52,7 +52,9 @@
       <sequence>
        <element name="nombre" type="string"/>
        <element name="categoria" type="string"/>
-       <element name="referencia" type="string"/>
+   <element name="tipo" type="string"/>
+   <element name="pesoLibras" type="string"/>
+   <element name="referencia" type="string" maxOccurs="1" minOccurs="0"/>
       </sequence>
      </complexType>
  <element name="processResponse">
