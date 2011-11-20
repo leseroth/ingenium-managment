@@ -97,6 +97,7 @@
         <variable name="CrearContacto_CrearContactos_OutputVariable"
                   messageType="ns1:CrearContactosResponse"/>
         <variable name="indiceContactos" type="xsd:int"/>
+        <variable name="idCliente" type="xsd:string"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -122,7 +123,7 @@
                             query="/ns2:enviarCorreoElectronico/ns2:password"/>
                     </copy>
                     <copy>
-                        <from expression="ora:format('&lt;html>&lt;;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>El proceso de registro de su entidad ha presentado un inconveniete.&lt;br/>Solicitaos por favor volver a intentar el proceso de registro.&lt;br/>Gracias.&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>')"/>
+                        <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>El proceso de registro de su entidad ha presentado un inconveniete.&lt;br/>Solicitamos por favor volver a intentar el proceso de registro.&lt;br/>Gracias.&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>')"/>
                         <to variable="EnviarCorreoFalloRegistro_enviarCorreoElectronico_InputVariable"
                             part="parameters"
                             query="/ns2:enviarCorreoElectronico/ns2:message"/>
@@ -274,7 +275,7 @@
                             partnerLink="GestionCliente"
                             portType="ns1:GestionCliente"
                             operation="CrearCliente"/>
-                    <assign name="AsignarCrearContacto">
+                    <assign name="AsignarCrearContactos">
                         <copy>
                             <from variable="CrearCliente_CrearCliente_OutputVariable"
                                   part="parameters"
@@ -283,17 +284,77 @@
                                 part="parameters"
                                 query="/ns2:crearContacto/ns2:idCliente"/>
                         </copy>
+                        <copy>
+                            <from variable="CrearCliente_CrearCliente_OutputVariable"
+                                  part="parameters"
+                                  query="/ns2:crearClienteResponse/ns2:idCuenta"/>
+                            <to variable="idCliente"/>
+                        </copy>
+                        <copy>
+                            <from expression="1"/>
+                            <to variable="indiceContactos"/>
+                        </copy>
                     </assign>
                     <while name="WhileValorIndice"
                            condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
                         <sequence name="Sequence3">
+                            <assign name="AsignarDatosContacto">
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:numIdentificacion"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:nombre"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:direccion"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:telefono"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:celular"/>
+                                </copy>
+                                <copy>
+                                    <from expression="'Activo'"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:estado"/>
+                                </copy>
+                                <copy>
+                                    <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                                    <to variable="CrearContacto_CrearContactos_InputVariable"
+                                        part="parameters"
+                                        query="/ns2:crearContacto/ns2:contactos/ns2:email"/>
+                                </copy>
+                            </assign>
                             <invoke name="CrearContacto"
-                                    bpelx:invokeAsDetail="no"
                                     inputVariable="CrearContacto_CrearContactos_InputVariable"
                                     outputVariable="CrearContacto_CrearContactos_OutputVariable"
                                     partnerLink="GestionCliente"
                                     portType="ns1:GestionCliente"
-                                    operation="CrearContactos"/>
+                                    operation="CrearContactos"
+                                    bpelx:invokeAsDetail="no"/>
                             <assign name="IncrementarIndiceContactos">
                                 <copy>
                                     <from expression="bpws:getVariableData('indiceContactos') + 1"/>
