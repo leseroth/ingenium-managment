@@ -4,12 +4,12 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="843" side="left"/>
-      <partnerlink name="GestionCliente" x="896" y="564" side="right"/>
-      <partnerlink name="GestionCorreoElectronico" x="896" y="251" side="right"/>
-      <partnerlink name="VerificacionCrediticia" x="896" y="1386" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="940" side="left"/>
+      <partnerlink name="GestionCliente" x="977" y="587" side="right"/>
+      <partnerlink name="GestionCorreoElectronico" x="977" y="251" side="right"/>
+      <partnerlink name="VerificacionCrediticia" x="977" y="1579" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,592,1029,462" show_swimlanes="true">
+   <graph_layout viewport="137,900,831,302" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="catch"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="sequence"/>
@@ -17,6 +17,7 @@
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/case/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/case/sequence/while" type="while"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/case/sequence/while/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence" type="sequence"/>
