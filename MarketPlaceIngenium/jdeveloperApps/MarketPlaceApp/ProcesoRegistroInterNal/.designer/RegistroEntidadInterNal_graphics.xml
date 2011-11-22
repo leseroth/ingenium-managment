@@ -4,12 +4,12 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="1292" side="left"/>
-      <partnerlink name="GestionCliente" x="1493" y="952" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="1933" side="left"/>
+      <partnerlink name="GestionCliente" x="1493" y="1408" side="right"/>
       <partnerlink name="GestionCorreoElectronico" x="1493" y="251" side="right"/>
-      <partnerlink name="VerificacionCrediticia" x="1493" y="2190" side="right"/>
+      <partnerlink name="VerificacionCrediticia" x="1493" y="3267" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="340,1031,792,420" show_swimlanes="true">
+   <graph_layout viewport="402,3467,792,332" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="catch"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="sequence"/>
@@ -23,13 +23,19 @@
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence" type="sequence"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while" type="while"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while/sequence" type="sequence"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while/sequence/switch" type="switch"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while/sequence/switch/case/sequence" type="sequence"/>
-      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while/sequence/switch/otherwise/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]" type="while"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence/switch" type="switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence/switch/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence/switch/otherwise/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[2]" type="while"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[2]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[2]/sequence/switch" type="switch"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[2]/sequence/switch/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[2]/sequence/switch/otherwise/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch" type="switch"/>
    </graph_layout>
    <bookmarks/>
 </graphics>
