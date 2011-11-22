@@ -119,22 +119,22 @@
    <soapenv:Body>
       <reg:process>
          <reg:nit>120120555</reg:nit>
-         <reg:nombre>Colanta 5</reg:nombre>
-         <reg:direccion>PopayanCauca2</reg:direccion>
+         <reg:nombre>Colanta</reg:nombre>
+         <reg:direccion>PopayanCauca</reg:direccion>
          <reg:telefono>3011975645</reg:telefono>
          <reg:email>davidres@gmail.com</reg:email>
          <reg:tipo>Fabricante</reg:tipo>
          <reg:razonSocial>Leche Colanta</reg:razonSocial>
          <!--1 or more repetitions:-->
          <reg:contactos>
-            <reg:numIdentificacion>10312123456</reg:numIdentificacion>
+            <reg:numIdentificacion>1031123445</reg:numIdentificacion>
             <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
-            <reg:telefono>2740816</reg:telefono>
-            <reg:direccion>Calle 157</reg:direccion>
-            <reg:nombre>David Andres</reg:nombre>
+            <reg:telefono>6155678</reg:telefono>
+            <reg:direccion>Calle 85</reg:direccion>
+            <reg:nombre>David Andres Chibuque</reg:nombre>
             <!--Optional:-->
-            <reg:celular>3167644561</reg:celular>
-            <reg:email>davidsoapiu@gmail.com</reg:email>
+            <reg:celular></reg:celular>
+            <reg:email>davidsoapiu2@gmail.com</reg:email>
          </reg:contactos>
          <reg:fecha>2018-12-28-05:00</reg:fecha>
          <!--1 or more repetitions:-->
@@ -147,18 +147,10 @@
          <reg:productos>
             <reg:nombre>Arequipe Colanta</reg:nombre>
             <reg:categoria>Lacteos</reg:categoria>
-            <reg:tipo>Arequipe</reg:tipo>
+            <reg:tipo>Arequipe MOD3</reg:tipo>
             <reg:pesoLibras>0.5</reg:pesoLibras>
             <!--Optional:-->
-            <reg:referencia>Lac0045</reg:referencia>
-         </reg:productos>
-	<reg:productos>
-            <reg:nombre>Queso Colanta</reg:nombre>
-            <reg:categoria>Lacteos</reg:categoria>
-            <reg:tipo>Queso</reg:tipo>
-            <reg:pesoLibras>1.5</reg:pesoLibras>
-            <!--Optional:-->
-            <reg:referencia>Lac0078</reg:referencia>
+            <reg:referencia>Ref001</reg:referencia>
          </reg:productos>
          <reg:Categoria>Lacteos</reg:Categoria>
          <reg:CodPais>CO</reg:CodPais>
