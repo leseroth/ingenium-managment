@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package co.com.losalpes.marketplace.pomanager.ws;
 
 import co.com.losalpes.marketplace.pomanager.exceptions.BussinessException;
@@ -21,12 +16,12 @@ import javax.ejb.Stateless;
 @WebService()
 @Stateless()
 public class PoManagerRmaManagement {
+
     @EJB
     private RmaManagementLocal ejbRef;
 
     @WebMethod(operationName = "registrarRMA")
-    public String registrarRMA(@WebParam(name = "rma")
-    ReturnMaterialAdviceBO rma) throws BussinessException {
+    public String registrarRMA(@WebParam(name = "rma") ReturnMaterialAdviceBO rma) throws BussinessException {
         return ejbRef.registrarRMA(rma);
     }
 
@@ -34,8 +29,7 @@ public class PoManagerRmaManagement {
      * Web service operation
      */
     @WebMethod(operationName = "consultarRMAsComercio")
-    public java.util.List<ReturnMaterialAdviceBO> consultarRMAsComercio(@WebParam(name = "nit")
-    String nit) throws BussinessException {
+    public java.util.List<ReturnMaterialAdviceBO> consultarRMAsComercio(@WebParam(name = "nit") String nit) throws BussinessException {
         return ejbRef.consultarRMAsComercio(nit);
     }
 
@@ -43,8 +37,7 @@ public class PoManagerRmaManagement {
      * Web service operation
      */
     @WebMethod(operationName = "consultarRMAsFabricante")
-    public java.util.List<ReturnMaterialAdviceBO> consultarRMAsFabricante(@WebParam(name = "nit")
-    String nit) throws BussinessException {
+    public java.util.List<ReturnMaterialAdviceBO> consultarRMAsFabricante(@WebParam(name = "nit") String nit) throws BussinessException {
         return ejbRef.consultarRMAsFabricante(nit);
     }
 }
