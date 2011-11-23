@@ -5,7 +5,7 @@ import co.com.losalpes.marketplace.ldap.entities.Usuario;
 import co.com.losalpes.marketplace.ldap.exceptions.EstadoNoExisteException;
 import co.com.losalpes.marketplace.ldap.exceptions.RolNoExisteException;
 import co.com.losalpes.marketplace.ldap.exceptions.UsuarioNoExisteException;
-import co.com.losalpes.marketplace.ldap.utilities.RandomPassword;
+import co.com.losalpes.marketplace.ldap.utilities.Util;
 import co.com.losalpes.marketplace.mailer.ws.MailSendingManagementService;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.xml.ws.WebServiceRef;
+import co.com.losalpes.marketplace.ldap.utilities.Constants.*;
 
-/**
- *
- * @author Asistente
- */
 @Stateless
 public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, AutenticacionUsuariosLocal {
 
@@ -28,6 +25,35 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
     private MailSendingManagementService service;
     @PersistenceContext
     private EntityManager em;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UsuarioBO crearUsuario(String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais) throws RolNoExisteException {
+
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new RolNoExisteException("El rol " + rol + " no existe en el sistema");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setEstado(Estado.Activo.toString());
+        usuario.setNit(nit);
+        usuario.setRol(rol);
+        usuario.setLogin(Util.getUniqueLogin(nombre));
+        usuario.setPassword(Util.getRandomString(10));
+        usuario.setEmail(email);
+        usuario.setDireccion(direccion);
+        usuario.setTelefono(telefono);
+        usuario.setCodPais(codPais);
+        usuario.setCodPostal(codPostal);
+
+        persist(usuario);
+        em.flush();
+
+        return usuario.toBO();
+    }
 
     @Override
     public UsuarioBO autenticar(String login, String password) throws UsuarioNoExisteException {
@@ -43,23 +69,6 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
 
     public void persist(Object object) {
         em.persist(object);
-    }
-
-    @Override
-    public UsuarioBO crearUsuario(String nit, String nombre, String rol, String email) throws RolNoExisteException {
-        if (!rol.equals("Comercio") && !rol.equals("Fabricante") && !rol.equals("MP Reportes") && !rol.equals("MP Consultas")) {
-            throw new RolNoExisteException("El rol " + rol + " no existe en el sistema");
-        }
-        Usuario u = new Usuario();
-        u.setEstado("Activo");
-        u.setNit(nit);
-        u.setRol(rol);
-        u.setLogin(nombre.substring(0, 2) + "_" + nit.substring(0, 2));
-        u.setPassword(RandomPassword.getRandomString(10));
-        u.setEmail(email);
-        persist(u);
-        em.flush();
-        return u.toBO();
     }
 
     @Override
@@ -113,7 +122,7 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
         if (!usuarios.get(0).getEmail().equals(email)) {
             throw new UsuarioNoExisteException("El usuario con el login " + login + " no posee el email especificado.");
         }
-        String newPassword = RandomPassword.getRandomString(10);
+        String newPassword = Util.getRandomString(10);
         usuarios.get(0).setPassword(newPassword);
 
         try { // Call Web Service Operation
@@ -128,7 +137,7 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         return true;
     }
 }
