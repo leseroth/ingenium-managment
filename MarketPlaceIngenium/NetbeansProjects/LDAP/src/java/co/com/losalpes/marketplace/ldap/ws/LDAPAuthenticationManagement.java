@@ -52,6 +52,40 @@ public class LDAPAuthenticationManagement {
         return ejbRef.crearUsuario(nit, nombre, rol, email, direccion, telefono, codPostal, codPais);
     }
 
+    /**
+     * Actualiza un usuario en el sistema.
+     * <ul>
+     * <li>La identificacion se hace por medio del nit y el rol</li>
+     * <li>El rol debe exisistir</li>
+     * <li>El usuario debe existir</li>
+     * <li>Solo es posible actualizar el nombre, email, direccion, telefono, codPostal, codPais</li>
+     * </ul>
+     * @param nit
+     * @param nombre
+     * @param rol
+     * @param email
+     * @param direccion
+     * @param telefono
+     * @param codPostal
+     * @param codPais
+     * @return
+     * @throws RolNoExisteException En caso de que el rol especificado no exista
+     * @throws UsuarioNoExisteException En caso de que la pareja nit/rol no exista
+     */
+    @WebMethod(operationName = "actualizarUsuario")
+    public UsuarioBO actualizarUsuario(
+            @WebParam(name = "nit") String nit,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "rol") String rol,
+            @WebParam(name = "email") String email,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "codPostal") String codPostal,
+            @WebParam(name = "codPais") String codPais)
+            throws RolNoExisteException, UsuarioNoExisteException {
+        return ejbRef.actualizarUsuario(nit, nombre, rol, email, direccion, telefono, codPostal, codPais);
+    }
+
     @WebMethod(operationName = "autenticar")
     public UsuarioBO autenticar(@WebParam(name = "login") String login,
             @WebParam(name = "password") String password) throws UsuarioNoExisteException {

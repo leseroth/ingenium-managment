@@ -13,8 +13,9 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "consultarUsuarioLoginPsswd", query = "select u from Usuario u where u.login = :login and u.password = :pwd"),
-    @NamedQuery(name = "consultarUsuarioLogin", query = "select u from Usuario u where u.login = :login")
+    @NamedQuery(name = "consultarUsuarioPorNitRol", query = "select u from Usuario u where u.nit = :nit and u.rol = :rol"),
+    @NamedQuery(name = "consultarUsuarioLoginPsswd", query = "select u from Usuario u where u.login = :login and u.password = :pwd"), // Verificar
+    @NamedQuery(name = "consultarUsuarioLogin", query = "select u from Usuario u where u.login = :login") // Verificar
 })
 public class Usuario implements Serializable, MarketPlaceEntity {
 

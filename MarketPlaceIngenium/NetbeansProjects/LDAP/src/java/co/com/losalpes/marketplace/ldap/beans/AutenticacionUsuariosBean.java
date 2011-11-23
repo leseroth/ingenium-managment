@@ -30,7 +30,9 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
      * {@inheritDoc}
      */
     @Override
-    public UsuarioBO crearUsuario(String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais) throws RolNoExisteException {
+    public UsuarioBO crearUsuario(
+            String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais)
+            throws RolNoExisteException {
 
         Rol rolMp = Rol.getRol(rol);
         if (rolMp == null) {
@@ -39,6 +41,7 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
 
         Usuario usuario = new Usuario();
         usuario.setEstado(Estado.Activo.toString());
+        usuario.setNombre(nombre);
         usuario.setNit(nit);
         usuario.setRol(rol);
         usuario.setLogin(Util.getUniqueLogin(nombre));
@@ -49,9 +52,42 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
         usuario.setCodPais(codPais);
         usuario.setCodPostal(codPostal);
 
-        persist(usuario);
+        em.persist(usuario);
         em.flush();
 
+        return usuario.toBO();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UsuarioBO actualizarUsuario(
+            String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais)
+            throws RolNoExisteException, UsuarioNoExisteException {
+
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new RolNoExisteException("El rol " + rol + " no existe en el sistema");
+        }
+
+        Query q = em.createNamedQuery("consultarUsuarioPorNitRol");
+        q.setParameter("nit", nit);
+        q.setParameter("rol", rol);
+        List<Usuario> usuarioList = (List<Usuario>) q.getResultList();
+        if (usuarioList.isEmpty()) {
+            throw new UsuarioNoExisteException("El usuario especificado no existe en el sistema");
+        }
+
+        Usuario usuario = usuarioList.get(0);
+        usuario.setNombre(nombre);
+        usuario.setEmail(email);
+        usuario.setDireccion(direccion);
+        usuario.setTelefono(telefono);
+        usuario.setCodPais(codPais);
+        usuario.setCodPostal(codPostal);
+
+        em.persist(usuario);
         return usuario.toBO();
     }
 
@@ -65,10 +101,6 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
             throw new UsuarioNoExisteException("El usuario especificado no existe en el sistema");
         }
         return usuario.get(0).toBO();
-    }
-
-    public void persist(Object object) {
-        em.persist(object);
     }
 
     @Override
