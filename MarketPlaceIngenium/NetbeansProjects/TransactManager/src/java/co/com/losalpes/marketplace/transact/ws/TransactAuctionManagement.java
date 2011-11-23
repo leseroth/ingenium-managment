@@ -153,4 +153,58 @@ public class TransactAuctionManagement {
     public SubastaBO consultarSubastaOrdenCompra(@WebParam(name = "numSeguimientoPO") String numSeguimientoPO) throws BussinessException {
         return ejbRef.consultarSubastaOrdenCompra(numSeguimientoPO);
     }
+
+    /**
+     * Permite crear un cliente
+     * @param nit
+     * @param nombre
+     * @param direccion
+     * @param telefono
+     * @param email
+     * @param codPostal
+     * @param codPais
+     * @param rol
+     * @return True en caso de que la creacion sea exitosa
+     * @throws BussinessException En caso de que el rol no exista
+     */
+    @WebMethod(operationName = "crearCliente")
+    public boolean crearCliente(
+            @WebParam(name = "nit") String nit,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "email") String email,
+            @WebParam(name = "codPostal") String codPostal,
+            @WebParam(name = "codPais") String codPais,
+            @WebParam(name = "rol") String rol)
+            throws BussinessException {
+        return ejbRef.crearCliente(nit, nombre, direccion, telefono, email, codPostal, codPais, rol);
+    }
+
+    /**
+     * Permite actualizar un cliente por medio de su nit
+     * @param nit
+     * @param nombre
+     * @param direccion
+     * @param telefono
+     * @param email
+     * @param codPostal
+     * @param codPais
+     * @param rol
+     * @return True en caso de que la actualizacion sea exitosa
+     * @throws BussinessException En caso de que el rol o el nit no existan
+     */
+    @WebMethod(operationName = "actualizarCliente")
+    public boolean actualizarCliente(
+            @WebParam(name = "nit") String nit,
+            @WebParam(name = "nombre") String nombre,
+            @WebParam(name = "direccion") String direccion,
+            @WebParam(name = "telefono") String telefono,
+            @WebParam(name = "email") String email,
+            @WebParam(name = "codPostal") String codPostal,
+            @WebParam(name = "codPais") String codPais,
+            @WebParam(name = "rol") String rol)
+            throws BussinessException {
+        return ejbRef.actualizarCliente(nit, nombre, direccion, telefono, email, codPostal, codPais, rol);
+    }
 }

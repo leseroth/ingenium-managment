@@ -112,4 +112,38 @@ public interface AuctionManagementLocal {
     public FabricanteBO darGanadorSubasta(String numSeguimientoSubasta) throws BussinessException;
 
     public SubastaBO consultarSubastaOrdenCompra(String numSeguimientoPO) throws BussinessException;
+
+    /**
+     * Permite crear un cliente
+     * @param nit
+     * @param nombre
+     * @param direccion
+     * @param telefono
+     * @param email
+     * @param codPostal
+     * @param codPais
+     * @param rol
+     * @return True en caso de que la creacion sea exitosa
+     * @throws BussinessException En caso de que el rol no exista
+     */
+    public boolean crearCliente(
+            String nit, String nombre, String direccion, String telefono, String email, String codPostal, String codPais, String rol)
+            throws BussinessException;
+
+    /**
+     * Permite actualizar un cliente por medio de su nit
+     * @param nit
+     * @param nombre
+     * @param direccion
+     * @param telefono
+     * @param email
+     * @param codPostal
+     * @param codPais
+     * @param rol
+     * @return True en caso de que la actualizacion sea exitosa
+     * @throws BussinessException En caso de que el rol o el nit no existan
+     */
+    public boolean actualizarCliente(
+            String nit, String nombre, String direccion, String telefono, String email, String codPostal, String codPais, String rol)
+            throws BussinessException;
 }

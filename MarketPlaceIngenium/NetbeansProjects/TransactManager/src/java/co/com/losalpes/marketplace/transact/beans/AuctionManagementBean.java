@@ -459,4 +459,95 @@ public class AuctionManagementBean implements AuctionManagementRemote, AuctionMa
         }
         return subs.get(0).toBO();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean crearCliente(
+            String nit, String nombre, String direccion, String telefono, String email, String codPostal, String codPais, String rol)
+            throws BussinessException {
+
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new BussinessException(EXC_INCORRECT_ROL, rol);
+        }
+
+        switch (rolMp) {
+            case Fabricante:
+                Fabricante fabricante = new Fabricante();
+                fabricante.setNit(nit);
+                fabricante.setNombre(nombre);
+                fabricante.setDireccion(direccion);
+                fabricante.setEmail(email);
+                fabricante.setCodPostal(codPostal);
+                fabricante.setCodPais(codPais);
+                em.persist(fabricante);
+                break;
+            case Comercio:
+                Comercio comercio = new Comercio();
+                comercio.setNit(nit);
+                comercio.setNombre(nombre);
+                comercio.setDireccion(direccion);
+                comercio.setTelefono(telefono);
+                comercio.setEmail(email);
+                comercio.setCodPostal(codPostal);
+                comercio.setCodPais(codPais);
+                em.persist(comercio);
+                break;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean actualizarCliente(String nit, String nombre, String direccion, String telefono, String email, String codPostal, String codPais, String rol) throws BussinessException {
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new BussinessException(EXC_INCORRECT_ROL, rol);
+        }
+
+        Query query;
+
+        switch (rolMp) {
+            case Fabricante:
+                query = em.createNamedQuery("getFabricanteByNit");
+                query.setParameter("nit", nit);
+                List<Fabricante> fabList = (List<Fabricante>) query.getResultList();
+                if (fabList.isEmpty()) {
+                    throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Fabricante", nit);
+                } else {
+                    Fabricante fabricante = fabList.get(0);
+                    fabricante.setNombre(nombre);
+                    fabricante.setDireccion(direccion);
+                    fabricante.setEmail(email);
+                    fabricante.setCodPostal(codPostal);
+                    fabricante.setCodPais(codPais);
+                    em.persist(fabricante);
+                }
+                break;
+            case Comercio:
+                query = em.createNamedQuery("getComercioByNit");
+                query.setParameter("nit", nit);
+                List<Comercio> comList = (List<Comercio>) query.getResultList();
+                if (comList.isEmpty()) {
+                    throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Comercio", nit);
+                } else {
+                    Comercio comercio = comList.get(0);
+                    comercio.setNombre(nombre);
+                    comercio.setDireccion(direccion);
+                    comercio.setTelefono(telefono);
+                    comercio.setEmail(email);
+                    comercio.setCodPostal(codPostal);
+                    comercio.setCodPais(codPais);
+                    em.persist(comercio);
+                }
+                break;
+        }
+
+        return true;
+    }
 }
