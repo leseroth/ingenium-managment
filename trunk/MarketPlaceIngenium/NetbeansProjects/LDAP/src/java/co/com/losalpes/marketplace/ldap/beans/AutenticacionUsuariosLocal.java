@@ -37,6 +37,30 @@ public interface AutenticacionUsuariosLocal {
             String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais)
             throws RolNoExisteException;
 
+    /**
+     * Actualiza un usuario en el sistema.
+     * <ul>
+     * <li>La identificacion se hace por medio del nit y el rol</li>
+     * <li>El rol debe exisistir</li>
+     * <li>El usuario debe existir</li>
+     * <li>Solo es posible actualizar el nombre, email, direccion, telefono, codPostal, codPais</li>
+     * </ul>
+     * @param nit
+     * @param nombre
+     * @param rol
+     * @param email
+     * @param direccion
+     * @param telefono
+     * @param codPostal
+     * @param codPais
+     * @return
+     * @throws RolNoExisteException En caso de que el rol especificado no exista
+     * @throws UsuarioNoExisteException En caso de que la pareja nit/rol no exista
+     */
+    public UsuarioBO actualizarUsuario(
+            String nit, String nombre, String rol, String email, String direccion, String telefono, String codPostal, String codPais)
+            throws RolNoExisteException, UsuarioNoExisteException;
+
     public UsuarioBO autenticar(String login, String password) throws UsuarioNoExisteException;
 
     public Boolean actualizarEstado(String login, String estado) throws UsuarioNoExisteException, EstadoNoExisteException;
