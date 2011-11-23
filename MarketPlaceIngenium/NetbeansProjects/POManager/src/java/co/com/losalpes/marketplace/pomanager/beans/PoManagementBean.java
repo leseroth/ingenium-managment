@@ -154,6 +154,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean actualizarEstadoPO(String numSeguimiento, String estado) throws BussinessException {
         boolean updated = false;
 
@@ -205,7 +206,7 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
         for (PurchaseOrder po : poComercioList) {
             poBOComercioList.add(po.toBO());
         }
-        
+
         return poBOComercioList;
     }
 
@@ -254,5 +255,75 @@ public class PoManagementBean implements PoManagementRemote, PoManagementLocal {
             throw new BussinessException("La orden de compra con el número de seguimiento " + numSeguimiento + " no existe.");
         }
         return pos.get(0).getComercio().toBO();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean crearCliente(String nit, String nombre, String rol) throws BussinessException {
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new BussinessException(EXC_INCORRECT_ROL, rol);
+        }
+
+        switch (rolMp) {
+            case Fabricante:
+                Fabricante fabricante = new Fabricante();
+                fabricante.setNit(nit);
+                fabricante.setNombre(nombre);
+                em.persist(fabricante);
+                break;
+            case Comercio:
+                Comercio comercio = new Comercio();
+                comercio.setNit(nit);
+                comercio.setNombre(nombre);
+                em.persist(comercio);
+                break;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean actualizarCliente(String nit, String nombre, String rol) throws BussinessException {
+        Rol rolMp = Rol.getRol(rol);
+        if (rolMp == null) {
+            throw new BussinessException(EXC_INCORRECT_ROL, rol);
+        }
+
+        Query query;
+
+        switch (rolMp) {
+            case Fabricante:
+                query = em.createNamedQuery("getFabricanteByNit");
+                query.setParameter("nit", nit);
+                List<Fabricante> fabList = (List<Fabricante>) query.getResultList();
+                if (fabList.isEmpty()) {
+                    throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Fabricante", nit);
+                } else {
+                    Fabricante fabricante = fabList.get(0);
+                    fabricante.setNombre(nombre);
+                    em.persist(fabricante);
+                }
+                break;
+            case Comercio:
+                query = em.createNamedQuery("getComercioByNit");
+                query.setParameter("nit", nit);
+                List<Comercio> comList = (List<Comercio>) query.getResultList();
+                if (comList.isEmpty()) {
+                    throw new BussinessException(EXC_ENTITY_INEXSISTENT, "Comercio", nit);
+                } else {
+                    Comercio comercio = comList.get(0);
+                    comercio.setNombre(nombre);
+                    em.persist(comercio);
+                }
+                break;
+        }
+
+        return true;
     }
 }

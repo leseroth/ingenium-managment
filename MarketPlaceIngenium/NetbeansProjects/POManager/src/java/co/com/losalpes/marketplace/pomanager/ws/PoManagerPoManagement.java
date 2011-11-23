@@ -114,11 +114,38 @@ public class PoManagerPoManagement {
         return ejbRef.establecerFabricanteAtiende(numSeguimiento, fabricante, productosAtiende);
     }
 
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "consultarComercioPorPO")
     public ComercioBO consultarComercioPorPO(@WebParam(name = "numSeguimiento") String numSeguimiento) throws BussinessException {
         return ejbRef.consultarComercioPorPO(numSeguimiento);
+    }
+
+    /**
+     * Crea un usuario en el sistema.
+     * @param nit
+     * @param nombre
+     * @param rol Puede ser Comercio o Fabricante
+     * @return true en caso de que la creacion sea satisfactoria
+     * @throws BussinessException
+     */
+    @WebMethod(operationName = "crearCliente")
+    public boolean crearCliente(
+            @WebParam(name = "nit") String nit, @WebParam(name = "nombre") String nombre, @WebParam(name = "rol") String rol)
+            throws BussinessException {
+        return ejbRef.crearCliente(nit, nombre, rol);
+    }
+
+    /**
+     * Actualiza un usuario en el sistema, unicamente el nombre.
+     * @param nit
+     * @param nombre
+     * @param rol Puede ser Comercio o Fabricante
+     * @return true en caso de que la actualizacion sea satisfactoria
+     * @throws BussinessException En caso de que no exista
+     */
+    @WebMethod(operationName = "actualizarCliente")
+    public boolean actualizarCliente(
+            @WebParam(name = "nit") String nit, @WebParam(name = "nombre") String nombre, @WebParam(name = "rol") String rol)
+            throws BussinessException {
+        return ejbRef.actualizarCliente(nit, nombre, rol);
     }
 }

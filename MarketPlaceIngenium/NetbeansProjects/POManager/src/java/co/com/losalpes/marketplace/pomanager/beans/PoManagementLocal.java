@@ -85,4 +85,24 @@ public interface PoManagementLocal {
     public boolean establecerFabricanteAtiende(String numSeguimiento, FabricanteBO fabricante, List<ProductoBO> productosAtiende) throws BussinessException;
 
     public ComercioBO consultarComercioPorPO(String numSeguimiento) throws BussinessException;
+
+    /**
+     * Crea un usuario en el sistema.
+     * @param nit
+     * @param nombre
+     * @param rol Puede ser Comercio o Fabricante
+     * @return true en caso de que la creacion sea satisfactoria
+     * @throws BussinessException
+     */
+    public boolean crearCliente(String nit, String nombre, String rol) throws BussinessException;
+
+    /**
+     * Actualiza un usuario en el sistema, unicamente el nombre.
+     * @param nit
+     * @param nombre
+     * @param rol Puede ser Comercio o Fabricante
+     * @return true en caso de que la actualizacion sea satisfactoria
+     * @throws BussinessException En caso de que no exista
+     */
+    public boolean actualizarCliente(String nit, String nombre, String rol) throws BussinessException;
 }
