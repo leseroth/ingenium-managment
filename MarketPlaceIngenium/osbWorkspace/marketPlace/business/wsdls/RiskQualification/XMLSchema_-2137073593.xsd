@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT. --><xs:schema xmlns:tns="http://ws.riskqualification.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.riskqualification.marketplace.losalpes.com.co/">
+
+<xs:element name="BussinessException" type="tns:BussinessException"></xs:element>
+
+<xs:element name="verificarComfecamara" type="tns:verificarComfecamara"></xs:element>
+
+<xs:element name="verificarComfecamaraResponse" type="tns:verificarComfecamaraResponse"></xs:element>
+
+<xs:element name="verificarDataCredito" type="tns:verificarDataCredito"></xs:element>
+
+<xs:element name="verificarDataCreditoResponse" type="tns:verificarDataCreditoResponse"></xs:element>
+
+<xs:element name="verificarListaAntiLavado" type="tns:verificarListaAntiLavado"></xs:element>
+
+<xs:element name="verificarListaAntiLavadoResponse" type="tns:verificarListaAntiLavadoResponse"></xs:element>
+
+<xs:element name="verificarListaClinton" type="tns:verificarListaClinton"></xs:element>
+
+<xs:element name="verificarListaClintonResponse" type="tns:verificarListaClintonResponse"></xs:element>
+
+<xs:element name="verificarListaInternacional" type="tns:verificarListaInternacional"></xs:element>
+
+<xs:element name="verificarListaInternacionalResponse" type="tns:verificarListaInternacionalResponse"></xs:element>
+
+<xs:complexType name="verificarListaClinton">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reglaVal" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarListaClintonResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BussinessException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarComfecamara">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reglaVal" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarComfecamaraResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarListaInternacional">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reglaVal" type="xs:int"></xs:element>
+<xs:element name="codPais" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarListaInternacionalResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarDataCredito">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reglaVal" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarDataCreditoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarListaAntiLavado">
+<xs:sequence>
+<xs:element name="nit" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reglaVal" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verificarListaAntiLavadoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
