@@ -8,17 +8,14 @@
     		<element name="reglaValidacion" type="int"></element>
     	</sequence>
     </complexType>
-    
     <complexType name="VerificarComfecamaraResponse">
     	<sequence>
     		<element name="validacion" type="boolean" minOccurs="1" maxOccurs="1"></element>
     	</sequence>
     </complexType>
-    
     <element name="verificarComfecamara" type="tns:VerificarComfecamara"></element>
-
     <element name="verificarComfecamaraResponse" type="tns:VerificarComfecamaraResponse"></element>
-
+    
     <complexType name="VerificarDataCredito">
         <sequence>
         	<element name="nit" type="string" minOccurs="1"
@@ -27,17 +24,14 @@
         	<element name="reglaValidacion" type="int"></element>
         </sequence>
     </complexType>
-
     <complexType name="VerificarDataCreditoResponse">
         <sequence>
     		<element name="calificacion" type="string" minOccurs="1" maxOccurs="1"/>
     	</sequence>    
     </complexType>
-
     <element name="verificarDataCredito" type="tns:VerificarDataCredito"></element>
-
     <element name="verificarDataCreditoResponse" type="tns:VerificarDataCreditoResponse"></element>
-
+    
     <complexType name="VerificarListaAntilavado">
         <sequence>
         	<element name="nit" type="string" minOccurs="1"
@@ -46,17 +40,14 @@
         	<element name="reglaValidacion" type="int"></element>
         </sequence>
     </complexType>
-
     <complexType name="VerificarListaAntilavadoResponse">
         <sequence>
     		<element name="validacion" type="boolean" minOccurs="1" maxOccurs="1"></element>
     	</sequence>
     </complexType>
     <element name="verificarListaAntilavado" type="tns:VerificarListaAntilavado"></element>
-
     <element name="verificarListaAntilavadoResponse" type="tns:VerificarListaAntilavadoResponse"></element>
-
-
+    
     <complexType name="VerificarListaClinton">
         <sequence>
         	<element name="nit" type="string" minOccurs="1"
@@ -65,14 +56,28 @@
         	<element name="reglaValidacion" type="int"></element>
         </sequence>
     </complexType>
-
     <complexType name="VerificarListaClintonResponse">
         <sequence>
     		<element name="validacion" type="boolean" minOccurs="1" maxOccurs="1"></element>
     	</sequence>
     </complexType>
-
     <element name="verificarListaClinton" type="tns:VerificarListaClinton"></element>
-
-    <element name="verificarListaClintonResponse" type="tns:VerificarListaClintonResponse"></element>
+    <element name="verificarListaClintonResponse" type="tns:VerificarListaClintonResponse"></element>    
+    
+    <complexType name="VerificarListaInternacional">
+        <sequence>
+        	<element name="nit" type="string" minOccurs="1"
+        		maxOccurs="1">
+        	</element>
+        	<element name="reglaValidacion" type="int"></element>
+        	<element name="codPais" type="string" minOccurs="1" maxOccurs="1"></element>
+        </sequence>
+    </complexType>
+    <complexType name="VerificarListaInternacionalResponse">
+        <sequence>
+    		<element name="validacion" type="boolean" minOccurs="1" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    <element name="verificarListaInternacional" type="tns:VerificarListaInternacional"></element>
+    <element name="verificarListaInternacionalResponse" type="tns:VerificarListaInternacionalResponse"></element>
 </schema>

@@ -63,7 +63,7 @@
         </con:actions>
       </con:stage>
     </con:pipeline>
-    <con:pipeline type="response" name="PipelineDataCredito_response"></con:pipeline>
+    <con:pipeline type="response" name="PipelineDataCredito_response"/>
     <con:pipeline type="request" name="PipelineConfecamaras_request">
       <con:stage name="transformation">
         <con:context>
@@ -87,7 +87,7 @@
         </con:actions>
       </con:stage>
     </con:pipeline>
-    <con:pipeline type="response" name="PipelineConfecamaras_response"></con:pipeline>
+    <con:pipeline type="response" name="PipelineConfecamaras_response"/>
     <con:pipeline type="request" name="PipelinePairNode1_request">
       <con:stage name="transformation">
         <con:context/>
@@ -219,6 +219,54 @@
                     <con3:operation>verificarListaAntiLavado</con3:operation>
                     <con3:outboundTransform/>
                     <con3:responseTransform/>
+                  </con3:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="VerificarListaInternacional">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNodeVerificarListaInternacional">
+                <con:context/>
+                <con:actions>
+                  <con3:route>
+                    <con1:id>_ActionId-8383480781450706909-4bea96bf.133d8fc87aa.-7fb1</con1:id>
+                    <con3:service ref="marketPlace/business/GestionVerificacionCrediticia" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con3:operation>verificarListaInternacional</con3:operation>
+                    <con3:outboundTransform>
+                      <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-8383480781450706909-4bea96bf.133d8fc87aa.-7f92</con1:id>
+                        <con2:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarListaInternacionalRequest"/>
+                            <con1:param name="verificarListaInternacional1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con2:expr>
+                      </con2:replace>
+                    </con3:outboundTransform>
+                    <con3:responseTransform>
+                      <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-8383480781450706909-4bea96bf.133d8fc87aa.-7f70</con1:id>
+                        <con2:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionVerificacionCrediticia/VerificarListaInternacionalResponse"/>
+                            <con1:param name="verificarListaInternacionalResponse1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con2:expr>
+                      </con2:replace>
+                    </con3:responseTransform>
                   </con3:route>
                 </con:actions>
               </con:route-node>

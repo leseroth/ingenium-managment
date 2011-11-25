@@ -35,6 +35,12 @@
 	<wsdl:message name="VerificarListaClintonResponse">
 		<wsdl:part name="parameters" element="xsd1:verificarListaClintonResponse" />
 	</wsdl:message>
+	<wsdl:message name="VerificarListaInternacional">
+		<wsdl:part name="parameters" element="xsd1:verificarListaInternacional"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VerificarListaInternacionalResponse">
+		<wsdl:part name="parameters" element="xsd1:verificarListaInternacionalResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:portType name="VerificacionCrediticia">
 		<wsdl:operation name="VerificarComfecamaras">
 			<wsdl:input message="tns:VerificarComfecamarasRequest" />
@@ -51,6 +57,10 @@
 		<wsdl:operation name="VerificarListaClinton">
 			<wsdl:input message="tns:VerificarListaClintonRequest" />
 			<wsdl:output message="tns:VerificarListaClintonResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="VerificarListaInternacional">
+			<wsdl:input message="tns:VerificarListaInternacional" />
+			<wsdl:output message="tns:VerificarListaInternacionalResponse" />
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="VerificacionCrediticiaSOAP" type="tns:VerificacionCrediticia">
@@ -96,11 +106,21 @@
 				<soap:body use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="VerificarListaInternacional">
+			<soap:operation
+				soapAction="http://marketplace.losalpes.com.co/VerificacionCrediticia/VerificarListaInternacional" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="VerificacionCrediticia">
 		<wsdl:port binding="tns:VerificacionCrediticiaSOAP" name="VerificacionCrediticiaSOAP">
 			<soap:address
 				location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/VerificacionCrediticia" />
 		</wsdl:port>
-	</wsdl:service>
+	</wsdl:service>	
 </wsdl:definitions>

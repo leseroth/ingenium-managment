@@ -1,5 +1,5 @@
 (:: pragma bea:global-element-parameter parameter="$verificarListaClinton1" element="ns1:verificarListaClinton" location="../../wsdls/gestionVerificacionCrediticia/GestionVerificacionCrediticia.xsd" ::)
-(:: pragma bea:global-element-return element="ns0:verificarListaClinton" location="../../../business/wsdls/RiskQualification/XMLSchema_-2137028766.xsd" ::)
+(:: pragma bea:global-element-return element="ns0:verificarListaClinton" location="../../../business/wsdls/RiskQualification/XMLSchema_-2137073593.xsd" ::)
 
 declare namespace ns1 = "http://marketplace.losalpes.com.co";
 declare namespace ns0 = "http://ws.riskqualification.marketplace.losalpes.com.co/";
