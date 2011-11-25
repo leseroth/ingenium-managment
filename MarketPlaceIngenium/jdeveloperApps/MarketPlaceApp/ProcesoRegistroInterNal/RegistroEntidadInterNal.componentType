@@ -10,7 +10,7 @@
                     callbackInterface="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal#wsdl.interface(RegistroEntidadInterNalCallback)"/>
   </service>
   <reference name="GestionCliente"
-             ui:wsdlLocation="GestionClienteWrapper1.wsdl">
+             ui:wsdlLocation="GestionClienteWrapper.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
   </reference>
   <reference name="GestionCorreoElectronico"
