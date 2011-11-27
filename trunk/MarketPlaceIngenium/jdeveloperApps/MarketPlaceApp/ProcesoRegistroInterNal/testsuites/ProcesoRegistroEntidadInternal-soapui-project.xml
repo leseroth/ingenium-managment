@@ -119,19 +119,19 @@
    <soapenv:Body>
       <reg:process>
          <reg:nit>120120555</reg:nit>
-         <reg:nombre>Colanta</reg:nombre>
-         <reg:direccion>PopayanCauca</reg:direccion>
+         <reg:nombre>Colanta Rec</reg:nombre>
+         <reg:direccion>PopayanCauca Rc</reg:direccion>
          <reg:telefono>3011975645</reg:telefono>
          <reg:email>davidres@gmail.com</reg:email>
          <reg:tipo>Fabricante</reg:tipo>
          <reg:razonSocial>Leche Colanta</reg:razonSocial>
          <!--1 or more repetitions:-->
          <reg:contactos>
-            <reg:numIdentificacion>1031123445</reg:numIdentificacion>
+            <reg:numIdentificacion>7030123445</reg:numIdentificacion>
             <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
             <reg:telefono>6155678</reg:telefono>
             <reg:direccion>Calle 85</reg:direccion>
-            <reg:nombre>David Andres Chibuque</reg:nombre>
+            <reg:nombre>David Andres</reg:nombre>
             <!--Optional:-->
             <reg:celular></reg:celular>
             <reg:email>davidsoapiu2@gmail.com</reg:email>
@@ -145,12 +145,12 @@
          </reg:documentos>
          <!--1 or more repetitions:-->
          <reg:productos>
-            <reg:nombre>Arequipe Colanta</reg:nombre>
+            <reg:nombre>Arequipe Colanta 7</reg:nombre>
             <reg:categoria>Lacteos</reg:categoria>
             <reg:tipo>Arequipe MOD3</reg:tipo>
             <reg:pesoLibras>0.5</reg:pesoLibras>
             <!--Optional:-->
-            <reg:referencia>Ref001</reg:referencia>
+            <reg:referencia>Ref007</reg:referencia>
          </reg:productos>
          <reg:Categoria>Lacteos</reg:Categoria>
          <reg:CodPais>CO</reg:CodPais>

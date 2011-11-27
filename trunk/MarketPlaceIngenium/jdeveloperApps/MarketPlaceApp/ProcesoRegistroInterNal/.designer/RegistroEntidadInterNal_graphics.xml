@@ -4,12 +4,12 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="2193" side="left"/>
-      <partnerlink name="GestionCliente" x="1493" y="1915" side="right"/>
-      <partnerlink name="GestionCorreoElectronico" x="1493" y="2157" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="2849" side="left"/>
+      <partnerlink name="GestionCliente" x="1493" y="2505" side="right"/>
+      <partnerlink name="GestionCorreoElectronico" x="1493" y="2112" side="right"/>
       <partnerlink name="VerificacionCrediticia" x="1493" y="3314" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="312,3640,847,359" show_swimlanes="true">
+   <graph_layout viewport="153,5088,787,348" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="catch"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="sequence"/>
@@ -37,6 +37,10 @@
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/case/sequence/while[1]" type="while"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/case/sequence/while[1]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/case/sequence/while[2]" type="while"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/case/sequence/while[2]/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[2]/case/sequence/switch/otherwise/sequence" type="sequence"/>
    </graph_layout>
    <bookmarks/>

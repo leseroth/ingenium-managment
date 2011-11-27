@@ -152,6 +152,14 @@
                   messageType="ns4:VerificarListaClintonRequest"/>
         <variable name="VerificarListaClinton_OutputVariable"
                   messageType="ns4:VerificarListaClintonResponse"/>
+        <variable name="ActivarContacto_ModificarContacto_InputVariable"
+                  messageType="ns1:ModificarContactoRequest"/>
+        <variable name="ActivarContacto_ModificarContacto_OutputVariable"
+                  messageType="ns1:ModificarContactoResponse"/>
+        <variable name="ActivarProducto_ModificarProducto_InputVariable"
+                  messageType="ns1:ModificarProductoRequest"/>
+        <variable name="ActivarProducto_ModificarProducto_OutputVariable"
+                  messageType="ns1:ModificarProductoResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -190,12 +198,12 @@
                     </copy>
                 </assign>
                 <invoke name="EnviarCorreoFalloRegistro"
-                        bpelx:invokeAsDetail="no"
                         inputVariable="EnviarCorreoElectronico_InputVariable"
                         outputVariable="EnviarCorreoElectronico_OutputVariable"
                         partnerLink="GestionCorreoElectronico"
                         portType="ns3:GestionCorreoElectronico"
-                        operation="enviarCorreoElectronico"/>
+                        operation="enviarCorreoElectronico"
+                        bpelx:invokeAsDetail="no"/>
             </sequence>
         </catch>
     </faultHandlers>
@@ -396,7 +404,7 @@
                                         query="/ns2:crearContacto/ns2:contactos/ns2:celular"/>
                                 </copy>
                                 <copy>
-                                    <from expression="'Activo'"/>
+                                    <from expression="'Inactivo'"/>
                                     <to variable="CrearContacto_CrearContactos_InputVariable"
                                         part="parameters"
                                         query="/ns2:crearContacto/ns2:contactos/ns2:estado"/>
@@ -458,7 +466,7 @@
                                         query="/ns2:crearProducto/ns2:productos/pesoLibras"/>
                                 </copy>
                                 <copy>
-                                    <from expression="'Activo'"/>
+                                    <from expression="'Inactivo'"/>
                                     <to variable="CrearProducto_CrearProductos_InputVariable"
                                         part="parameters"
                                         query="/ns2:crearProducto/ns2:productos/estado"/>
@@ -1143,20 +1151,6 @@
                             partnerLink="VerificacionCrediticia"
                             portType="ns4:VerificacionCrediticia"
                             operation="VerificarListaClinton"/>
-                    <assign name="Assign1">
-                        <copy>
-                            <from variable="VerificarListaInternacional_OutputVariable"
-                                  part="parameters"
-                                  query="/ns2:verificarListaInternacionalResponse/ns2:validacion"/>
-                            <to variable="inter"/>
-                        </copy>
-                        <copy>
-                            <from variable="VerificarComfecamaras_OutputVariable"
-                                  part="parameters"
-                                  query="/ns2:verificarComfecamaraResponse/ns2:validacion"/>
-                            <to variable="conf"/>
-                        </copy>
-                    </assign>
                     <switch name="Switch6">
                         <case condition="bpws:getVariableData('VerificarListaInternacional_OutputVariable','parameters','/ns2:verificarListaInternacionalResponse/ns2:validacion') = 'true'  and bpws:getVariableData('VerificarComfecamaras_OutputVariable','parameters','/ns2:verificarComfecamaraResponse/ns2:validacion') = 'true' and bpws:getVariableData('VerificarDataCredito_OutputVariable','parameters','/ns2:verificarDataCreditoResponse/ns2:calificacion') = 'A'  and bpws:getVariableData('VerificarListaAntilavado_OutputVariable','parameters','/ns2:verificarListaAntilavadoResponse/ns2:validacion') = 'true' and  bpws:getVariableData('VerificarListaClinton_OutputVariable','parameters','/ns2:verificarListaClintonResponse/ns2:validacion') = 'true'">
                             <bpelx:annotation>
@@ -1295,6 +1289,210 @@
                                         partnerLink="GestionCliente"
                                         portType="ns1:GestionCliente"
                                         operation="ModificarCliente"/>
+                                <assign name="AsignarIndiceContactos">
+                                    <copy>
+                                        <from expression="1"/>
+                                        <to variable="indiceContactos"/>
+                                    </copy>
+                                </assign>
+                                <while name="WhileValorIndiceContactos"
+                                       condition="bpws:getVariableData('indiceContactos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:contactos'))">
+                                    <sequence name="Sequence14">
+                                        <assign name="AsignarConsultarContacto">
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                                                <to variable="ConsultarContacto_ConsultarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:consultarContacto/ns2:documento"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                                                <to variable="ConsultarContacto_ConsultarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:consultarContacto/ns2:tipoDocumento"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ConsultarContacto"
+                                                bpelx:invokeAsDetail="no"
+                                                inputVariable="ConsultarContacto_ConsultarContacto_InputVariable"
+                                                outputVariable="ConsultarContacto_ConsultarContacto_OutputVariable"
+                                                partnerLink="GestionCliente"
+                                                portType="ns1:GestionCliente"
+                                                operation="ConsultarContacto"/>
+                                        <assign name="AsignarActivarContacto">
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:numIdentificacion'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:numIdentificacion"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarContacto_ConsultarContacto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarContactoResponse/ns2:contacto/ns2:id"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:id"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:tipoIdentificacion'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:tipoIdentificacion"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:nombre'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:nombre"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:direccion'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:direccion"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:telefono'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:telefono"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:celular'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:celular"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="'Activo'"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:estado"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:contactos[',bpws:getVariableData('indiceContactos'),']/client:email'))"/>
+                                                <to variable="ActivarContacto_ModificarContacto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarContacto/ns2:contactos/ns2:email"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ActivarContacto"
+                                                bpelx:invokeAsDetail="no"
+                                                inputVariable="ActivarContacto_ModificarContacto_InputVariable"
+                                                outputVariable="ActivarContacto_ModificarContacto_OutputVariable"
+                                                partnerLink="GestionCliente"
+                                                portType="ns1:GestionCliente"
+                                                operation="ModificarContacto"/>
+                                        <assign name="IncrementarIndiceContactos">
+                                            <copy>
+                                                <from expression="bpws:getVariableData('indiceContactos') + 1"/>
+                                                <to variable="indiceContactos"/>
+                                            </copy>
+                                        </assign>
+                                    </sequence>
+                                </while>
+                                <assign name="AsignarIndiceProductos">
+                                    <copy>
+                                        <from expression="1"/>
+                                        <to variable="indiceProductos"/>
+                                    </copy>
+                                </assign>
+                                <while name="While2"
+                                       condition="bpws:getVariableData('indiceProductos') &lt;= count(bpws:getVariableData('inputVariable','payload','/client:process/client:productos'))">
+                                    <sequence name="Sequence15">
+                                        <assign name="AsginarConsultarProducto">
+                                            <copy>
+                                                <from expression="bpws:getVariableData('inputVariable','payload',concat('/client:process/client:productos[',bpws:getVariableData('indiceProductos'),']/client:nombre'))"/>
+                                                <to variable="ConsultarProducto_ConsultarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:consultarProducto/ns2:nombreProducto"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="idCliente"/>
+                                                <to variable="ConsultarProducto_ConsultarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:consultarProducto/ns2:idCliente"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ConsultarProducto"
+                                                inputVariable="ConsultarProducto_ConsultarProducto_InputVariable"
+                                                outputVariable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                partnerLink="GestionCliente"
+                                                portType="ns1:GestionCliente"
+                                                operation="ConsultarProducto"
+                                                bpelx:invokeAsDetail="no"/>
+                                                <assign name="AsignarActivarProducto">
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/id"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/id"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/nombre"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/nombre"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/categoria"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/categoria"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/tipo"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/tipo"/>
+                                            </copy>
+                                            <copy>
+                                                <from expression="'Activo'"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/estado"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/referencia"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/referencia"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="ConsultarProducto_ConsultarProducto_OutputVariable"
+                                                      part="parameters"
+                                                      query="/ns2:consultarProductoResponse/ns2:producto/pesoLibras"/>
+                                                <to variable="ActivarProducto_ModificarProducto_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns2:modificarProducto/ns2:producto/pesoLibras"/>
+                                            </copy>
+                                        </assign>
+                            <invoke name="ActivarProducto"
+                                    inputVariable="ActivarProducto_ModificarProducto_InputVariable"
+                                    outputVariable="ActivarProducto_ModificarProducto_OutputVariable"
+                                    partnerLink="GestionCliente"
+                                    portType="ns1:GestionCliente"
+                                    operation="ModificarProducto"
+                                    bpelx:invokeAsDetail="no"/>
+                            <assign name="IncrementarIndiceProductos">
+                                <copy>
+                                    <from expression="bpws:getVariableData('indiceProductos') +1"/>
+                                    <to variable="indiceProductos"/>
+                                </copy>
+                            </assign>
+                                    </sequence>
+                                </while>
                             </sequence>
                         </case>
                         <otherwise>
