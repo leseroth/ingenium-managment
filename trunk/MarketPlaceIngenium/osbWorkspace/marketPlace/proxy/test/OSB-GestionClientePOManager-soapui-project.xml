@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="[OSB]GestionClientePOManager" resourceRoot="" soapui-version="4.0-beta2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="PoManagerPoManagementPortBinding" type="wsdl" bindingName="{http://ws.pomanager.marketplace.losalpes.com.co/}PoManagerPoManagementPortBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001//marketPlace/proxy/GestionClientePOManager?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001//marketPlace/proxy/GestionClientePOManager?wsdl"><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionClientePOManager?wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="PoManagerPoManagementService" targetNamespace="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://ws.pomanager.marketplace.losalpes.com.co/" schemaLocation="http://localhost:7001//marketPlace/proxy/GestionClientePOManager?SCHEMA%2FmarketPlace%2Fbusiness%2Fwsdls%2FpoManagerCliente%2FXMLSchema_-633731609"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="registrarPO">
+    <WL5G3N0:part element="WL5G3N1:registrarPO" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registrarPOResponse">
+    <WL5G3N0:part element="WL5G3N1:registrarPOResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="BussinessException">
+    <WL5G3N0:part element="WL5G3N1:BussinessException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPOFabricantePorEstado">
+    <WL5G3N0:part element="WL5G3N1:consultarPOFabricantePorEstado" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPOFabricantePorEstadoResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarPOFabricantePorEstadoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarEstadoPO">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoPO" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarEstadoPOResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoPOResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPOsComercio">
+    <WL5G3N0:part element="WL5G3N1:consultarPOsComercio" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPOsComercioResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarPOsComercioResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPO">
+    <WL5G3N0:part element="WL5G3N1:consultarPO" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarPOResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarPOResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="establecerFabricanteAtiende">
+    <WL5G3N0:part element="WL5G3N1:establecerFabricanteAtiende" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="establecerFabricanteAtiendeResponse">
+    <WL5G3N0:part element="WL5G3N1:establecerFabricanteAtiendeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarComercioPorPO">
+    <WL5G3N0:part element="WL5G3N1:consultarComercioPorPO" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarComercioPorPOResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarComercioPorPOResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearCliente">
+    <WL5G3N0:part element="WL5G3N1:crearCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:crearClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarCliente">
+    <WL5G3N0:part element="WL5G3N1:actualizarCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="PoManagerPoManagement">
+    <WL5G3N0:operation name="registrarPO">
+      <WL5G3N0:input message="WL5G3N1:registrarPO"/>
+      <WL5G3N0:output message="WL5G3N1:registrarPOResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPOFabricantePorEstado">
+      <WL5G3N0:input message="WL5G3N1:consultarPOFabricantePorEstado"/>
+      <WL5G3N0:output message="WL5G3N1:consultarPOFabricantePorEstadoResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarEstadoPO">
+      <WL5G3N0:input message="WL5G3N1:actualizarEstadoPO"/>
+      <WL5G3N0:output message="WL5G3N1:actualizarEstadoPOResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPOsComercio">
+      <WL5G3N0:input message="WL5G3N1:consultarPOsComercio"/>
+      <WL5G3N0:output message="WL5G3N1:consultarPOsComercioResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPO">
+      <WL5G3N0:input message="WL5G3N1:consultarPO"/>
+      <WL5G3N0:output message="WL5G3N1:consultarPOResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="establecerFabricanteAtiende">
+      <WL5G3N0:input message="WL5G3N1:establecerFabricanteAtiende"/>
+      <WL5G3N0:output message="WL5G3N1:establecerFabricanteAtiendeResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarComercioPorPO">
+      <WL5G3N0:input message="WL5G3N1:consultarComercioPorPO"/>
+      <WL5G3N0:output message="WL5G3N1:consultarComercioPorPOResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearCliente">
+      <WL5G3N0:input message="WL5G3N1:crearCliente"/>
+      <WL5G3N0:output message="WL5G3N1:crearClienteResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarCliente">
+      <WL5G3N0:input message="WL5G3N1:actualizarCliente"/>
+      <WL5G3N0:output message="WL5G3N1:actualizarClienteResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="PoManagerPoManagementPortBinding" type="WL5G3N1:PoManagerPoManagement">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="registrarPO">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPOFabricantePorEstado">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarEstadoPO">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPOsComercio">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarPO">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="establecerFabricanteAtiende">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarComercioPorPO">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearCliente">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarCliente">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="PoManagerPoManagementService">
+    <WL5G3N0:port binding="WL5G3N1:PoManagerPoManagementPortBinding" name="PoManagerPoManagementPort">
+      <WL5G3N2:address location="http://User-PC:7001/marketPlace/proxy/GestionClientePOManager"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionClientePOManager?SCHEMA%2FmarketPlace%2Fbusiness%2Fwsdls%2FpoManagerCliente%2FXMLSchema_-633731609</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT.-->
+<xs:schema version="1.0" targetNamespace="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:tns="http://ws.pomanager.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BussinessException" type="tns:BussinessException"/>
+  <xs:element name="actualizarCliente" type="tns:actualizarCliente"/>
+  <xs:element name="actualizarClienteResponse" type="tns:actualizarClienteResponse"/>
+  <xs:element name="actualizarEstadoPO" type="tns:actualizarEstadoPO"/>
+  <xs:element name="actualizarEstadoPOResponse" type="tns:actualizarEstadoPOResponse"/>
+  <xs:element name="consultarComercioPorPO" type="tns:consultarComercioPorPO"/>
+  <xs:element name="consultarComercioPorPOResponse" type="tns:consultarComercioPorPOResponse"/>
+  <xs:element name="consultarPO" type="tns:consultarPO"/>
+  <xs:element name="consultarPOFabricantePorEstado" type="tns:consultarPOFabricantePorEstado"/>
+  <xs:element name="consultarPOFabricantePorEstadoResponse" type="tns:consultarPOFabricantePorEstadoResponse"/>
+  <xs:element name="consultarPOResponse" type="tns:consultarPOResponse"/>
+  <xs:element name="consultarPOsComercio" type="tns:consultarPOsComercio"/>
+  <xs:element name="consultarPOsComercioResponse" type="tns:consultarPOsComercioResponse"/>
+  <xs:element name="crearCliente" type="tns:crearCliente"/>
+  <xs:element name="crearClienteResponse" type="tns:crearClienteResponse"/>
+  <xs:element name="establecerFabricanteAtiende" type="tns:establecerFabricanteAtiende"/>
+  <xs:element name="establecerFabricanteAtiendeResponse" type="tns:establecerFabricanteAtiendeResponse"/>
+  <xs:element name="registrarPO" type="tns:registrarPO"/>
+  <xs:element name="registrarPOResponse" type="tns:registrarPOResponse"/>
+  <xs:complexType name="consultarComercioPorPO">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarComercioPorPOResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:comercioBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="comercioBO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BussinessException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="establecerFabricanteAtiende">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricante" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="productosAtiende" type="tns:productoBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fabricanteBO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="productoBO">
+    <xs:sequence>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricanteAtiendeBO" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="precio" type="xs:long" minOccurs="0"/>
+      <xs:element name="tiempoFabricacion" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="establecerFabricanteAtiendeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPO">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPOResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:purchaseOrderBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="purchaseOrderBO">
+    <xs:sequence>
+      <xs:element name="comercioBO" type="tns:comercioBO" minOccurs="0"/>
+      <xs:element name="entrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricanteBO" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="itemPOBOList" type="tns:itemPOBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemPOBO">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="productoBO" type="tns:productoBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPOsComercio">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPOsComercioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:purchaseOrderBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarEstadoPO">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarEstadoPOResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPOFabricantePorEstado">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarPOFabricantePorEstadoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:purchaseOrderBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarPO">
+    <xs:sequence>
+      <xs:element name="purchaseOrderBO" type="tns:purchaseOrderBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarPOResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarCliente">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarClienteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearCliente">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearClienteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="actualizarCliente" bindingOperationName="actualizarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ActualizarClienteDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarCliente>
+         <!--Optional:-->
+         <nit>66666566</nit>
+         <!--Optional:-->
+         <nombre>willian</nombre>
+         <!--Optional:-->
+         <rol>Comercio</rol>
+      </ws:actualizarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarClienteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="actualizarEstadoPO" bindingOperationName="actualizarEstadoPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarEstadoPO>
+         <!--Optional:-->
+         <numSeguimiento>gero et</numSeguimiento>
+         <!--Optional:-->
+         <estado>sonoras imperio</estado>
+      </ws:actualizarEstadoPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/actualizarEstadoPORequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarComercioPorPO" bindingOperationName="consultarComercioPorPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarComercioPorPO>
+         <!--Optional:-->
+         <numSeguimiento>gero et</numSeguimiento>
+      </ws:consultarComercioPorPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarComercioPorPORequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarPO" bindingOperationName="consultarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPO>
+         <!--Optional:-->
+         <numSeguimiento>gero et</numSeguimiento>
+      </ws:consultarPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPORequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarPOFabricantePorEstado" bindingOperationName="consultarPOFabricantePorEstado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPOFabricantePorEstado>
+         <!--Optional:-->
+         <nit>gero et</nit>
+         <!--Optional:-->
+         <estado>sonoras imperio</estado>
+      </ws:consultarPOFabricantePorEstado>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPOFabricantePorEstadoRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarPOsComercio" bindingOperationName="consultarPOsComercio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarPOsComercio>
+         <!--Optional:-->
+         <nit>gero et</nit>
+      </ws:consultarPOsComercio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/consultarPOsComercioRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="crearCliente" bindingOperationName="crearCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="CrearClienteDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:crearCliente>
+         <!--Optional:-->
+         <nit>66666566</nit>
+         <!--Optional:-->
+         <nombre>sonoras imperio</nombre>
+         <!--Optional:-->
+         <rol>Comercio</rol>
+      </ws:crearCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/crearClienteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="establecerFabricanteAtiende" bindingOperationName="establecerFabricanteAtiende" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:establecerFabricanteAtiende>
+         <!--Optional:-->
+         <numSeguimiento>gero et</numSeguimiento>
+         <!--Optional:-->
+         <fabricante>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Optional:-->
+            <nit>sonoras imperio</nit>
+            <!--Optional:-->
+            <nombre>quae divum incedo</nombre>
+         </fabricante>
+         <!--Zero or more repetitions:-->
+         <productosAtiende>
+            <!--Optional:-->
+            <categoria>verrantque per auras</categoria>
+            <!--Optional:-->
+            <fabricanteAtiendeBO>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nit>per auras</nit>
+               <!--Optional:-->
+               <nombre>circum claustra</nombre>
+            </fabricanteAtiendeBO>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Optional:-->
+            <nombre>nimborum in</nombre>
+            <!--Optional:-->
+            <precio>10</precio>
+            <!--Optional:-->
+            <tiempoFabricacion>2013-12-21T06:32:42-05:00</tiempoFabricacion>
+         </productosAtiende>
+      </ws:establecerFabricanteAtiende>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/establecerFabricanteAtiendeRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="registrarPO" bindingOperationName="registrarPO" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClientePOManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.pomanager.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarPO>
+         <!--Optional:-->
+         <purchaseOrderBO>
+            <!--Optional:-->
+            <comercioBO>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nit>gero et</nit>
+               <!--Optional:-->
+               <nombre>sonoras imperio</nombre>
+            </comercioBO>
+            <!--Optional:-->
+            <entrega>2004-02-14T13:44:14</entrega>
+            <!--Optional:-->
+            <estado>temperat iras</estado>
+            <!--Optional:-->
+            <fabricanteBO>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nit>turbine corripuit</nit>
+               <!--Optional:-->
+               <nombre>regemque dedit</nombre>
+            </fabricanteBO>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Zero or more repetitions:-->
+            <itemPOBOList>
+               <!--Optional:-->
+               <cantidad>3</cantidad>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <productoBO>
+                  <!--Optional:-->
+                  <categoria>fremunt celsa</categoria>
+                  <!--Optional:-->
+                  <fabricanteAtiendeBO>
+                     <!--Optional:-->
+                     <id>10</id>
+                     <!--Optional:-->
+                     <nit>ferant rapidi</nit>
+                     <!--Optional:-->
+                     <nombre>sceptra tenens</nombre>
+                  </fabricanteAtiendeBO>
+                  <!--Optional:-->
+                  <id>10</id>
+                  <!--Optional:-->
+                  <nombre>turbine corripuit scopuloque</nombre>
+                  <!--Optional:-->
+                  <precio>10</precio>
+                  <!--Optional:-->
+                  <tiempoFabricacion>2010-03-18T11:05:32</tiempoFabricacion>
+               </productoBO>
+            </itemPOBOList>
+            <!--Optional:-->
+            <numSeguimiento>bella gero et</numSeguimiento>
+         </purchaseOrderBO>
+      </ws:registrarPO>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.pomanager.marketplace.losalpes.com.co/PoManagerPoManagement/registrarPORequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
