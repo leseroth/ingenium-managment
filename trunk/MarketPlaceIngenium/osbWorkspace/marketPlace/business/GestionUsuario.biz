@@ -7,7 +7,6 @@
         <con:name>LDAPAuthenticationManagementPort</con:name>
         <con:namespace>http://ws.ldap.marketplace.losalpes.com.co/</con:namespace>
       </con:port>
-      <con:WSI-compliant>false</con:WSI-compliant>
     </ser:binding>
     <ser:monitoring isEnabled="false">
       <ser:aggregationInterval>10</ser:aggregationInterval>
