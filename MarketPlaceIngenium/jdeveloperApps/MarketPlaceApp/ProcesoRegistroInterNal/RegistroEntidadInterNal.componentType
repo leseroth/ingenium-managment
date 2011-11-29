@@ -25,4 +25,20 @@
              ui:wsdlLocation="GestionClienteWrapper1.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
   </reference>
+  <reference name="GestionFacturacion"
+             ui:wsdlLocation="GestionFacturacionWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionFacturacion#wsdl.interface(GestionFacturacion)"/>
+  </reference>
+  <reference name="GestionUsuario"
+             ui:wsdlLocation="LDAPAuthenticationManagementServiceWrapper.wsdl">
+    <interface.wsdl interface="http://ws.ldap.marketplace.losalpes.com.co/#wsdl.interface(LDAPAuthenticationManagement)"/>
+  </reference>
+  <reference name="GestionClientePO"
+             ui:wsdlLocation="PoManagerPoManagementServiceWrapper.wsdl">
+    <interface.wsdl interface="http://ws.pomanager.marketplace.losalpes.com.co/#wsdl.interface(PoManagerPoManagement)"/>
+  </reference>
+  <reference name="GestionClienteTransact"
+             ui:wsdlLocation="TransactAuctionManagementServiceWrapper.wsdl">
+    <interface.wsdl interface="http://ws.transact.marketplace.losalpes.com.co/#wsdl.interface(TransactAuctionManagement)"/>
+  </reference>
 </componentType>

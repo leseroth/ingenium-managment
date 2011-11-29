@@ -4,12 +4,16 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="registroentidadinternal_client" x="1" y="2849" side="left"/>
-      <partnerlink name="GestionCliente" x="1493" y="2505" side="right"/>
-      <partnerlink name="GestionCorreoElectronico" x="1493" y="2112" side="right"/>
-      <partnerlink name="VerificacionCrediticia" x="1493" y="3314" side="right"/>
+      <partnerlink name="registroentidadinternal_client" x="1" y="3719" side="left"/>
+      <partnerlink name="GestionCliente" x="1493" y="2978" side="right"/>
+      <partnerlink name="GestionCorreoElectronico" x="1493" y="4682" side="right"/>
+      <partnerlink name="VerificacionCrediticia" x="1493" y="3956" side="right"/>
+      <partnerlink name="GestionFacturacion" x="1493" y="6199" side="right"/>
+      <partnerlink name="GestionUsuario" x="1493" y="4098" side="right"/>
+      <partnerlink name="GestionClientePO" x="1493" y="3641" side="right"/>
+      <partnerlink name="GestionClienteTransact" x="1493" y="3824" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="153,5088,787,348" show_swimlanes="true">
+   <graph_layout viewport="274,4500,582,303" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch" type="catch"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catch/sequence" type="sequence"/>
@@ -23,6 +27,8 @@
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch" type="switch"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/scope" type="scope" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/scope/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]" type="while"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence" type="sequence"/>
       <layout_item collapsed="false" xpath="/process/sequence/switch[1]/otherwise/sequence/switch/case/sequence/while[1]/sequence/switch" type="switch"/>

@@ -118,9 +118,9 @@
    <soapenv:Header/>
    <soapenv:Body>
       <reg:process>
-         <reg:nit>120120555</reg:nit>
-         <reg:nombre>Colanta Rec</reg:nombre>
-         <reg:direccion>PopayanCauca Rc</reg:direccion>
+         <reg:nit>520120555</reg:nit>
+         <reg:nombre>Colanta</reg:nombre>
+         <reg:direccion>PopayanCauca</reg:direccion>
          <reg:telefono>3011975645</reg:telefono>
          <reg:email>davidres@gmail.com</reg:email>
          <reg:tipo>Fabricante</reg:tipo>
@@ -134,7 +134,17 @@
             <reg:nombre>David Andres</reg:nombre>
             <!--Optional:-->
             <reg:celular></reg:celular>
-            <reg:email>davidsoapiu2@gmail.com</reg:email>
+            <reg:email>davidns@rocketmail.com</reg:email>
+         </reg:contactos>
+	<reg:contactos>
+            <reg:numIdentificacion>54645</reg:numIdentificacion>
+            <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
+            <reg:telefono>11111</reg:telefono>
+            <reg:direccion>Calle 65</reg:direccion>
+            <reg:nombre>WillID</reg:nombre>
+            <!--Optional:-->
+            <reg:celular></reg:celular>
+            <reg:email>davidns@rocketmail.com</reg:email>
          </reg:contactos>
          <reg:fecha>2018-12-28-05:00</reg:fecha>
          <!--1 or more repetitions:-->
@@ -145,9 +155,9 @@
          </reg:documentos>
          <!--1 or more repetitions:-->
          <reg:productos>
-            <reg:nombre>Arequipe Colanta 7</reg:nombre>
+            <reg:nombre>Arequipe Colanta</reg:nombre>
             <reg:categoria>Lacteos</reg:categoria>
-            <reg:tipo>Arequipe MOD3</reg:tipo>
+            <reg:tipo>Arequipe</reg:tipo>
             <reg:pesoLibras>0.5</reg:pesoLibras>
             <!--Optional:-->
             <reg:referencia>Ref007</reg:referencia>
