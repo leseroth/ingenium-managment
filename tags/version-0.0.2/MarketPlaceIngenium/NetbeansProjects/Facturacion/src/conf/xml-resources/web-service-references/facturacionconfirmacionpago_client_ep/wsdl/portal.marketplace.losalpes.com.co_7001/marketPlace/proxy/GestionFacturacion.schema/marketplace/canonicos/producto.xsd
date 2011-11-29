@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+    <complexType name="Producto">
+    	<sequence>
+    		<element name="id" type="long" minOccurs="1"/>
+    		<element name="nombre" type="string" minOccurs="1"/>
+    		<element name="categoria" type="string" minOccurs="0" maxOccurs="1">
+    		</element>
+
+    	</sequence>
+    </complexType>
+
+    <element name="producto" type="tns:Producto"/>
+</schema>

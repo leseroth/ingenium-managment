@@ -1,0 +1,30 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ReplicacionPricat"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoPricat/ReplicacionPricat"
+     xmlns:ns1="http://marketplace.losalpes.com.co/GestionFacturacion"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoPricat/ReplicacionPricat"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ReplicacionPricat">
+        <plnk:role name="ReplicacionPricatProvider">
+            <plnk:portType name="client:ReplicacionPricat"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionFacturacion" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoPricat/ReplicacionPricat"
+                 schemaLocation="xsd/ReplicacionPricat.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ReplicacionPricatRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="ReplicacionPricat">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ReplicacionPricatRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

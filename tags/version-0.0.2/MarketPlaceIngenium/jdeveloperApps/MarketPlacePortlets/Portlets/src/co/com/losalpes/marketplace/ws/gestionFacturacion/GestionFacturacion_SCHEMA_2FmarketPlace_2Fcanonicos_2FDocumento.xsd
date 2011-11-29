@@ -1,0 +1,12 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <element name="documento" type="tns:Documento"/>
+    <complexType name="Documento">
+        <sequence>
+            <element name="id" type="long" minOccurs="1" maxOccurs="1"/>
+            <element name="nombre" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="url" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="tipo" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,73 @@
+<wsdl:definitions
+     name="SubastaInversa"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+     xmlns:ns2="http://marketplace.losalpes.com.co"
+     xmlns:ns1="http://marketplace.losalpes.com.co/GestionOfertas/"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa!1.77/SubastaInversa.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="SubastaInversa">
+        <plnk:role name="SubastaInversaRequester">
+            <plnk:portType name="client:SubastaInversaCallback"/>
+        </plnk:role>
+        <plnk:role name="SubastaInversaProvider">
+            <plnk:portType name="client:SubastaInversa"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsp:Policy xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+         wsu:Id="wsaddr_policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"/>
+    </wsp:Policy>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionOfertas" location="GestionSubastaSOAPQSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"
+                 schemaLocation="SubastaInversa.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="SubastaInversaRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="SubastaInversaResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SubastaInversa">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:SubastaInversaRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="SubastaInversaCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:SubastaInversaResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SubastaInversaBinding" type="client:SubastaInversa">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wsaddr_policy"
+             wsdl:required="false"/>
+        <wsdl:operation name="process">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SubastaInversaCallbackBinding" type="client:SubastaInversaCallback">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="processResponse">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="processResponse"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoSubastaInversa/SubastaInversa"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="subastainversa_client_ep">
+        <wsdl:port name="SubastaInversa_pt" binding="client:SubastaInversaBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://ecos5.virtual.uniandes.edu.co:7001/soa-infra/services/default/ProcesoSubastaInversa/subastainversa_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

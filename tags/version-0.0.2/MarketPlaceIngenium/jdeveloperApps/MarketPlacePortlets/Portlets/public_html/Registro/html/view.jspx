@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document>
+      <af:form usesUpload="true">
+        <af:panelFormLayout>
+          <h:panelGrid columns="2" id="pg1">
+            <af:panelFormLayout id="pfl1" labelAlignment="start">
+              <af:inputText label="NIT" value="#{crearCliente.cliente.nit}"
+                            readOnly="false" id="it1" required="true">x</af:inputText>
+              <af:inputText label="Nombre"
+                            value="#{crearCliente.cliente.nombre}" id="it2"
+                            readOnly="false" required="true"/>
+              <af:inputText label="Razón Social" readOnly="false"
+                            value="#{crearCliente.cliente.razonSocial}" id="it4"
+                            required="true"/>
+              <af:selectOneChoice label="Tipo de Cliente" id="soc2"
+                                  showRequired="true"
+                                  value="#{crearCliente.cliente.tipo}">
+                <af:selectItem label="Comercio" value="Comercio" id="si4"/>
+                <af:selectItem label="Fabricante" value="Fabricante" id="si5"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice label="Categoria" id="itCategoria"
+                                  value="#{crearCliente.cliente.categoria}"
+                                  showRequired="true">
+                <af:selectItem label="Comida" value="Comida" id="si41"/>
+                <af:selectItem label="Categoria cliente 1"
+                               value="Categoria cliente 1" id="si51"/>
+                <af:selectItem label="Categoria cliente 2"
+                               value="Categoria cliente 2" id="si441"/>
+                <af:selectItem label="Lacteos" value="Lacteos" id="si416"/>
+              </af:selectOneChoice>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl2" labelAlignment="start">
+              <af:inputText label="Dirección" id="it3"
+                            value="#{crearCliente.cliente.direccion}"
+                            required="true"/>
+              <af:inputText label="Teléfono"
+                            value="#{crearCliente.cliente.telefono}" id="it6"
+                            required="true"/>
+              <af:inputText label="Email" value="#{crearCliente.cliente.email}"
+                            id="it5" required="true">
+                <af:validateRegExp pattern="[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Za-z]{2,4}"
+                                   messageDetailNoMatch="Correo no valido"/>
+              </af:inputText>
+              <af:inputText label="Codigo Postal" id="itcp"
+                            value="#{crearCliente.cliente.codPostal}"
+                            required="true"/>
+              <af:inputText label="Codigo Pais" id="itcpais"
+                            value="#{crearCliente.cliente.codPais}"
+                            required="true"/>
+            </af:panelFormLayout>
+          </h:panelGrid>
+          <af:panelHeader text="Contactos" id="ph2">
+            <af:table value="#{crearCliente.cliente.contactos}" var="row"
+                      partialTriggers="contactoT" rowBandingInterval="0" id="t1"
+                      width="100%" inlineStyle="height:145px;">
+              <af:column sortable="false" headerText="Num Identificacion"
+                         align="start" id="c2">
+                <af:inputText value="#{row.numIdentificacion}" id="it8"
+                              required="true">
+                  <af:validateRegExp pattern="[0-9]{1,12}"
+                                     messageDetailNoMatch="El numero de identificacion debe contener sólo números"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortable="false" headerText="Tipo Identificacion"
+                         align="start" id="c1">
+                <af:selectOneChoice id="soc1" value="#{row.tipoIdentificacion}"
+                                    required="true">
+                  <af:selectItem label="Cédula" value="Cedula" id="si2"/>
+                  <af:selectItem label="Cédula de Extranjería"
+                                 value="Cedula Extranjeria" id="si3"/>
+                  <af:selectItem label="Pasaporte" value="Pasaporte" id="si1"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortable="false" headerText="Nombre" align="start"
+                         id="c7">
+                <af:inputText value="#{row.nombre}" id="it12" required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Direccion" align="start"
+                         id="c3">
+                <af:inputText value="#{row.direccion}" id="it9"
+                              required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Telefono" align="start"
+                         id="c5">
+                <af:inputText value="#{row.telefono}" id="it13"
+                              required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Celular" align="start"
+                         id="c4">
+                <af:inputText value="#{row.celular}" id="it7"/>
+              </af:column>
+              <af:column sortable="false" headerText="Email" align="start"
+                         id="c6">
+                <af:inputText value="#{row.email}" id="it10" required="true">
+                  <af:validateRegExp pattern="[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Za-z]{2,4}"
+                                     messageDetailNoMatch="Correo no valido"/>
+                </af:inputText>
+              </af:column>
+            </af:table>
+            <af:panelGroupLayout id="pgl1" halign="right" layout="horizontal"
+                                 styleClass="AFStretchWidth">
+              <af:commandButton immediate="true" id="contactoT"
+                                text="Agregar Contacto" partialSubmit="true"
+                                action="#{crearCliente.agregarContacto_action}"
+                                partialTriggers="contactoT"/>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelHeader text="Documentos" id="ph3"
+                          inlineStyle="width:755px; height:345px;">
+            <h:panelGrid columns="2" id="pg2" style="text-align:left;">
+              <af:inputFile label="Documento" id="if1" immediate="true"
+                            valueChangeListener="#{crearCliente.archivoListener}"
+                            value="#{crearCliente.file}"
+                            partialTriggers="adjuntarDocumento"/>
+              <af:commandButton text="Cargar archivo" id="adjuntarDocumento"
+                                immediate="true" partialSubmit="true"
+                                action="#{crearCliente.adjuntarDocumento_action}"
+                                partialTriggers="adjuntarDocumento"/>
+            </h:panelGrid>
+            <af:table partialTriggers="adjuntarDocumento" var="row"
+                      value="#{crearCliente.documentos}" rowBandingInterval="0"
+                      id="t3" width="736">
+              <af:column sortable="false" headerText="Documento Adjunto"
+                         id="c10" width="730">
+                <af:outputText value="#{row}" id="ot1"/>
+              </af:column>
+            </af:table>
+          </af:panelHeader>
+          <af:panelHeader text="Productos" id="ph1">
+            <af:table var="row" rowBandingInterval="0" id="t2" width="742"
+                      partialTriggers="::productoT" inlineStyle="height:147px;"
+                      value="#{crearCliente.cliente.productos}">
+              <af:column sortable="false" headerText="Nombre" id="c9"
+                         width="300">
+                <af:inputText value="#{row.nombre}" id="it11" required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Categoría" id="c8"
+                         width="425">
+                <af:selectOneChoice label="Categoria" id="itCategoria4"
+                                    value="#{row.categoria}"
+                                    showRequired="true">
+                  <af:selectItem label="Comida" value="Comida" id="si4341"/>
+                  <af:selectItem label="Categoria cliente 1"
+                                 value="Categoria cliente 1" id="s4i51"/>
+                  <af:selectItem label="Categoria cliente 2"
+                                 value="Categoria cliente 2" id="si4441"/>
+                  <af:selectItem label="Lacteos" value="Lacteos" id="si3416"/>
+                </af:selectOneChoice>
+              </af:column>
+            </af:table>
+            <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth"
+                                 halign="right" layout="horizontal">
+              <af:commandButton text="Agregar Producto" partialSubmit="true"
+                                id="productoT" immediate="true"
+                                partialTriggers="productoT"
+                                action="#{crearCliente.agregarProducto_action}"/>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:commandButton action="#{crearCliente.crear_action}"
+                            text="Crear cliente"/>
+        </af:panelFormLayout>
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:crearCliente-->
+</jsp:root>

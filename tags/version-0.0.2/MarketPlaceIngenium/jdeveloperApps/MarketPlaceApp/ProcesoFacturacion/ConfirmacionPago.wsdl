@@ -1,0 +1,41 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ConfirmacionPago"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/ConfirmacionPago"
+     xmlns:ns1="http://marketplace.losalpes.com.co/GestionFacturacion"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/ConfirmacionPago"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ConfirmacionPago">
+        <plnk:role name="ConfirmacionPagoProvider">
+            <plnk:portType name="client:ConfirmacionPago"/>
+        </plnk:role>
+        <plnk:role name="ConfirmacionPagoRequester">
+            <plnk:portType name="client:ConfirmacionPagoCallback"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://marketplace.losalpes.com.co/GestionFacturacion" location="http://portal.marketplace.losalpes.com.co:7001/marketPlace/proxy/GestionFacturacion?wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/ConfirmacionPago"
+                 schemaLocation="xsd/ConfirmacionPago.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ConfirmacionPagoRequestMessage">
+        <wsdl:part name="referencia" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="ConfirmacionPagoResponseMessage">
+        <wsdl:part name="resultado" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ConfirmacionPago">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ConfirmacionPagoRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="ConfirmacionPagoCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:ConfirmacionPagoResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

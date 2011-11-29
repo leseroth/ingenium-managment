@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+    <complexType name="Factura">
+    	<sequence>
+    		<element name="url" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="nombre" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="fechaInicio" type="dateTime" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="fechaFin" type="dateTime" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+    
+    <element name="factura" type="tns:Factura"/>
+</schema>

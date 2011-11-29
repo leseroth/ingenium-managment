@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="[OSB]GestionClienteTransact" resourceRoot="" soapui-version="4.0-beta2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="TransactAuctionManagementPortBinding" type="wsdl" bindingName="{http://ws.transact.marketplace.losalpes.com.co/}TransactAuctionManagementPortBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001//marketPlace/proxy/GestionClienteTransact?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001//marketPlace/proxy/GestionClienteTransact?wsdl"><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionClienteTransact?wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="TransactAuctionManagementService" targetNamespace="http://ws.transact.marketplace.losalpes.com.co/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://ws.transact.marketplace.losalpes.com.co/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.transact.marketplace.losalpes.com.co/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://ws.transact.marketplace.losalpes.com.co/" schemaLocation="http://localhost:7001//marketPlace/proxy/GestionClienteTransact?SCHEMA%2FmarketPlace%2Fbusiness%2Fwsdls%2FtransactCliente%2FXMLSchema_765612391"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="crearCliente">
+    <WL5G3N0:part element="WL5G3N1:crearCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:crearClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="BussinessException">
+    <WL5G3N0:part element="WL5G3N1:BussinessException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarCliente">
+    <WL5G3N0:part element="WL5G3N1:actualizarCliente" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarClienteResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarClienteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearSubasta">
+    <WL5G3N0:part element="WL5G3N1:crearSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:crearSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="asignarFabricantesSubasta">
+    <WL5G3N0:part element="WL5G3N1:asignarFabricantesSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="asignarFabricantesSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:asignarFabricantesSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastasFabricante">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastasFabricante" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastasFabricanteResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastasFabricanteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registrarOferta">
+    <WL5G3N0:part element="WL5G3N1:registrarOferta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registrarOfertaResponse">
+    <WL5G3N0:part element="WL5G3N1:registrarOfertaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarFabricantesSubasta">
+    <WL5G3N0:part element="WL5G3N1:consultarFabricantesSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarFabricantesSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarFabricantesSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cerrarSubasta">
+    <WL5G3N0:part element="WL5G3N1:cerrarSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cerrarSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:cerrarSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="darGanadorSubasta">
+    <WL5G3N0:part element="WL5G3N1:darGanadorSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="darGanadorSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:darGanadorSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastaOrdenCompra">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastaOrdenCompra" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastaOrdenCompraResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastaOrdenCompraResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="TransactAuctionManagement">
+    <WL5G3N0:operation name="crearCliente">
+      <WL5G3N0:input message="WL5G3N1:crearCliente"/>
+      <WL5G3N0:output message="WL5G3N1:crearClienteResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarCliente">
+      <WL5G3N0:input message="WL5G3N1:actualizarCliente"/>
+      <WL5G3N0:output message="WL5G3N1:actualizarClienteResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearSubasta">
+      <WL5G3N0:input message="WL5G3N1:crearSubasta"/>
+      <WL5G3N0:output message="WL5G3N1:crearSubastaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="asignarFabricantesSubasta">
+      <WL5G3N0:input message="WL5G3N1:asignarFabricantesSubasta"/>
+      <WL5G3N0:output message="WL5G3N1:asignarFabricantesSubastaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastasFabricante">
+      <WL5G3N0:input message="WL5G3N1:consultarSubastasFabricante"/>
+      <WL5G3N0:output message="WL5G3N1:consultarSubastasFabricanteResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registrarOferta">
+      <WL5G3N0:input message="WL5G3N1:registrarOferta"/>
+      <WL5G3N0:output message="WL5G3N1:registrarOfertaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarFabricantesSubasta">
+      <WL5G3N0:input message="WL5G3N1:consultarFabricantesSubasta"/>
+      <WL5G3N0:output message="WL5G3N1:consultarFabricantesSubastaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cerrarSubasta">
+      <WL5G3N0:input message="WL5G3N1:cerrarSubasta"/>
+      <WL5G3N0:output message="WL5G3N1:cerrarSubastaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="darGanadorSubasta">
+      <WL5G3N0:input message="WL5G3N1:darGanadorSubasta"/>
+      <WL5G3N0:output message="WL5G3N1:darGanadorSubastaResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+      <WL5G3N0:input message="WL5G3N1:consultarSubastaOrdenCompra"/>
+      <WL5G3N0:output message="WL5G3N1:consultarSubastaOrdenCompraResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:BussinessException" name="BussinessException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="TransactAuctionManagementPortBinding" type="WL5G3N1:TransactAuctionManagement">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="crearCliente">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarCliente">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearSubasta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="asignarFabricantesSubasta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastasFabricante">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="registrarOferta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarFabricantesSubasta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cerrarSubasta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="darGanadorSubasta">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="BussinessException">
+        <WL5G3N2:fault name="BussinessException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="TransactAuctionManagementService">
+    <WL5G3N0:port binding="WL5G3N1:TransactAuctionManagementPortBinding" name="TransactAuctionManagementPort">
+      <WL5G3N2:address location="http://User-PC:7001/marketPlace/proxy/GestionClienteTransact"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionClienteTransact?SCHEMA%2FmarketPlace%2Fbusiness%2Fwsdls%2FtransactCliente%2FXMLSchema_765612391</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT.-->
+<xs:schema version="1.0" targetNamespace="http://ws.transact.marketplace.losalpes.com.co/" xmlns:tns="http://ws.transact.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BussinessException" type="tns:BussinessException"/>
+  <xs:element name="actualizarCliente" type="tns:actualizarCliente"/>
+  <xs:element name="actualizarClienteResponse" type="tns:actualizarClienteResponse"/>
+  <xs:element name="asignarFabricantesSubasta" type="tns:asignarFabricantesSubasta"/>
+  <xs:element name="asignarFabricantesSubastaResponse" type="tns:asignarFabricantesSubastaResponse"/>
+  <xs:element name="cerrarSubasta" type="tns:cerrarSubasta"/>
+  <xs:element name="cerrarSubastaResponse" type="tns:cerrarSubastaResponse"/>
+  <xs:element name="consultarFabricantesSubasta" type="tns:consultarFabricantesSubasta"/>
+  <xs:element name="consultarFabricantesSubastaResponse" type="tns:consultarFabricantesSubastaResponse"/>
+  <xs:element name="consultarSubastaOrdenCompra" type="tns:consultarSubastaOrdenCompra"/>
+  <xs:element name="consultarSubastaOrdenCompraResponse" type="tns:consultarSubastaOrdenCompraResponse"/>
+  <xs:element name="consultarSubastasFabricante" type="tns:consultarSubastasFabricante"/>
+  <xs:element name="consultarSubastasFabricanteResponse" type="tns:consultarSubastasFabricanteResponse"/>
+  <xs:element name="crearCliente" type="tns:crearCliente"/>
+  <xs:element name="crearClienteResponse" type="tns:crearClienteResponse"/>
+  <xs:element name="crearSubasta" type="tns:crearSubasta"/>
+  <xs:element name="crearSubastaResponse" type="tns:crearSubastaResponse"/>
+  <xs:element name="darGanadorSubasta" type="tns:darGanadorSubasta"/>
+  <xs:element name="darGanadorSubastaResponse" type="tns:darGanadorSubastaResponse"/>
+  <xs:element name="registrarOferta" type="tns:registrarOferta"/>
+  <xs:element name="registrarOfertaResponse" type="tns:registrarOfertaResponse"/>
+  <xs:complexType name="consultarFabricantesSubasta">
+    <xs:sequence>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarFabricantesSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fabricanteBO">
+    <xs:sequence>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BussinessException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastasFabricante">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastasFabricanteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:subastaBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subastaBO">
+    <xs:sequence>
+      <xs:element name="activa" type="xs:boolean"/>
+      <xs:element name="fabricanteBOList" type="tns:fabricanteBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="fechaCreacionSubasta" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="fechaMaxSubasta" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="mejorOfertaBO" type="tns:ofertaBO" minOccurs="0"/>
+      <xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="ofertaBOList" type="tns:ofertaBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="purchaseOrderBO" type="tns:purchaseOrderBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ofertaBO">
+    <xs:sequence>
+      <xs:element name="estadoOferta" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricanteBO" type="tns:fabricanteBO" minOccurs="0"/>
+      <xs:element name="fechaEntrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+      <xs:element name="productoOfrecidoBO" type="tns:productoBO" minOccurs="0"/>
+      <xs:element name="valor" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="productoBO">
+    <xs:sequence>
+      <xs:element name="categoria" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="peso" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="purchaseOrderBO">
+    <xs:sequence>
+      <xs:element name="comercioBO" type="tns:comercioBO" minOccurs="0"/>
+      <xs:element name="entrega" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="itemPOBO" type="tns:itemPOBO" minOccurs="0"/>
+      <xs:element name="numSeguimiento" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="comercioBO">
+    <xs:sequence>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemPOBO">
+    <xs:sequence>
+      <xs:element name="cantidad" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="productoBO" type="tns:productoBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastaOrdenCompra">
+    <xs:sequence>
+      <xs:element name="numSeguimientoPO" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="consultarSubastaOrdenCompraResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:subastaBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cerrarSubasta">
+    <xs:sequence>
+      <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cerrarSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="darGanadorSubasta">
+    <xs:sequence>
+      <xs:element name="idSubasta" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="darGanadorSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:fabricanteBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearSubasta">
+    <xs:sequence>
+      <xs:element name="po" type="tns:purchaseOrderBO" minOccurs="0"/>
+      <xs:element name="fechaMax" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarCliente">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarClienteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearCliente">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearClienteResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOferta">
+    <xs:sequence>
+      <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+      <xs:element name="oferta" type="tns:ofertaBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarOfertaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarFabricantesSubasta">
+    <xs:sequence>
+      <xs:element name="numSeguimientoSubasta" type="xs:string" minOccurs="0"/>
+      <xs:element name="fabricantes" type="tns:fabricanteBO" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarFabricantesSubastaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="actualizarCliente" bindingOperationName="actualizarCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ActualizarClienteDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarCliente>
+         <!--Optional:-->
+         <nit>887887878</nit>
+         <!--Optional:-->
+         <nombre>willian</nombre>
+         <!--Optional:-->
+         <direccion>quae divum incedo</direccion>
+         <!--Optional:-->
+         <telefono>verrantque per auras</telefono>
+         <!--Optional:-->
+         <email>per auras</email>
+         <!--Optional:-->
+         <codPostal>circum claustra</codPostal>
+         <!--Optional:-->
+         <codPais>nimborum in</codPais>
+         <!--Optional:-->
+         <rol>Fabricante</rol>
+      </ws:actualizarCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/actualizarClienteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="asignarFabricantesSubasta" bindingOperationName="asignarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:asignarFabricantesSubasta>
+         <!--Optional:-->
+         <numSeguimientoSubasta>gero et</numSeguimientoSubasta>
+         <!--Zero or more repetitions:-->
+         <fabricantes>
+            <!--Optional:-->
+            <codPais>sonoras imperio</codPais>
+            <!--Optional:-->
+            <codPostal>quae divum incedo</codPostal>
+            <!--Optional:-->
+            <direccion>verrantque per auras</direccion>
+            <!--Optional:-->
+            <email>per auras</email>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Optional:-->
+            <nit>circum claustra</nit>
+            <!--Optional:-->
+            <nombre>nimborum in</nombre>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/asignarFabricantesSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="cerrarSubasta" bindingOperationName="cerrarSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:cerrarSubasta>
+         <!--Optional:-->
+         <idSubasta>gero et</idSubasta>
+      </ws:cerrarSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/cerrarSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarFabricantesSubasta" bindingOperationName="consultarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarFabricantesSubasta>
+         <!--Optional:-->
+         <numSeguimiento>gero et</numSeguimiento>
+      </ws:consultarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarFabricantesSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarSubastaOrdenCompra" bindingOperationName="consultarSubastaOrdenCompra" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarSubastaOrdenCompra>
+         <!--Optional:-->
+         <numSeguimientoPO>gero et</numSeguimientoPO>
+      </ws:consultarSubastaOrdenCompra>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarSubastaOrdenCompraRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultarSubastasFabricante" bindingOperationName="consultarSubastasFabricante" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:consultarSubastasFabricante>
+         <!--Optional:-->
+         <nit>gero et</nit>
+      </ws:consultarSubastasFabricante>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/consultarSubastasFabricanteRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="crearCliente" bindingOperationName="crearCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="CrearClienteDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:crearCliente>
+         <!--Optional:-->
+         <nit>887887878</nit>
+         <!--Optional:-->
+         <nombre>sonoras imperio</nombre>
+         <!--Optional:-->
+         <direccion>quae divum incedo</direccion>
+         <!--Optional:-->
+         <telefono>verrantque per auras</telefono>
+         <!--Optional:-->
+         <email>per auras</email>
+         <!--Optional:-->
+         <codPostal>circum claustra</codPostal>
+         <!--Optional:-->
+         <codPais>nimborum in</codPais>
+         <!--Optional:-->
+         <rol>Fabricante</rol>
+      </ws:crearCliente>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearClienteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="crearSubasta" bindingOperationName="crearSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:crearSubasta>
+         <!--Optional:-->
+         <po>
+            <!--Optional:-->
+            <comercioBO>
+               <!--Optional:-->
+               <codPais>gero et</codPais>
+               <!--Optional:-->
+               <codPostal>sonoras imperio</codPostal>
+               <!--Optional:-->
+               <direccion>quae divum incedo</direccion>
+               <!--Optional:-->
+               <email>verrantque per auras</email>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nit>per auras</nit>
+               <!--Optional:-->
+               <nombre>circum claustra</nombre>
+               <!--Optional:-->
+               <telefono>nimborum in</telefono>
+            </comercioBO>
+            <!--Optional:-->
+            <entrega>2013-12-21T06:32:42-05:00</entrega>
+            <!--Optional:-->
+            <estado>sceptra tenens</estado>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Optional:-->
+            <itemPOBO>
+               <!--Optional:-->
+               <cantidad>3</cantidad>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <productoBO>
+                  <!--Optional:-->
+                  <categoria>turbine corripuit scopuloque</categoria>
+                  <!--Optional:-->
+                  <id>10</id>
+                  <!--Optional:-->
+                  <nombre>flammato secum dea</nombre>
+                  <!--Optional:-->
+                  <peso>profundum quippe ferant</peso>
+               </productoBO>
+            </itemPOBO>
+            <!--Optional:-->
+            <numSeguimiento>nubibus ignem disiecitque</numSeguimiento>
+         </po>
+         <!--Optional:-->
+         <fechaMax>2017-11-01T03:15:53-05:00</fechaMax>
+      </ws:crearSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/crearSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:darGanadorSubasta>
+         <!--Optional:-->
+         <idSubasta>gero et</idSubasta>
+      </ws:darGanadorSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/darGanadorSubastaRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="registrarOferta" bindingOperationName="registrarOferta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionClienteTransact</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:registrarOferta>
+         <!--Optional:-->
+         <numSeguimientoSubasta>gero et</numSeguimientoSubasta>
+         <!--Optional:-->
+         <oferta>
+            <!--Optional:-->
+            <estadoOferta>sonoras imperio</estadoOferta>
+            <!--Optional:-->
+            <fabricanteBO>
+               <!--Optional:-->
+               <codPais>quae divum incedo</codPais>
+               <!--Optional:-->
+               <codPostal>verrantque per auras</codPostal>
+               <!--Optional:-->
+               <direccion>per auras</direccion>
+               <!--Optional:-->
+               <email>circum claustra</email>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nit>nimborum in</nit>
+               <!--Optional:-->
+               <nombre>foedere certo</nombre>
+            </fabricanteBO>
+            <!--Optional:-->
+            <fechaEntrega>2002-06-24T10:46:32-05:00</fechaEntrega>
+            <!--Optional:-->
+            <id>10</id>
+            <!--Optional:-->
+            <mensaje>turbine corripuit scopuloque</mensaje>
+            <!--Optional:-->
+            <numSeguimiento>flammato secum dea</numSeguimiento>
+            <!--Optional:-->
+            <productoOfrecidoBO>
+               <!--Optional:-->
+               <categoria>profundum quippe ferant</categoria>
+               <!--Optional:-->
+               <id>10</id>
+               <!--Optional:-->
+               <nombre>nubibus ignem disiecitque</nombre>
+               <!--Optional:-->
+               <peso>ac vinclis et</peso>
+            </productoOfrecidoBO>
+            <!--Optional:-->
+            <valor>10</valor>
+         </oferta>
+      </ws:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.transact.marketplace.losalpes.com.co/TransactAuctionManagement/registrarOfertaRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="[OSB]LDAP" resourceRoot="" soapui-version="4.0-beta2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="LDAPAuthenticationManagementPortBinding" type="wsdl" bindingName="{http://ws.ldap.marketplace.losalpes.com.co/}LDAPAuthenticationManagementPortBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001//marketPlace/proxy/GestionUsuario?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001//marketPlace/proxy/GestionUsuario?wsdl"><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionUsuario?wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="LDAPAuthenticationManagementService" targetNamespace="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://ws.ldap.marketplace.losalpes.com.co/" schemaLocation="http://localhost:7001//marketPlace/proxy/GestionUsuario?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionUsuario%2FXMLSchema_-1211761121"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="crearUsuario">
+    <WL5G3N0:part element="WL5G3N1:crearUsuario" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearUsuarioResponse">
+    <WL5G3N0:part element="WL5G3N1:crearUsuarioResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="RolNoExisteException">
+    <WL5G3N0:part element="WL5G3N1:RolNoExisteException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarUsuario">
+    <WL5G3N0:part element="WL5G3N1:actualizarUsuario" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarUsuarioResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarUsuarioResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="UsuarioNoExisteException">
+    <WL5G3N0:part element="WL5G3N1:UsuarioNoExisteException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="autenticar">
+    <WL5G3N0:part element="WL5G3N1:autenticar" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="autenticarResponse">
+    <WL5G3N0:part element="WL5G3N1:autenticarResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarEstadoUsuario">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoUsuario" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="actualizarEstadoUsuarioResponse">
+    <WL5G3N0:part element="WL5G3N1:actualizarEstadoUsuarioResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="EstadoNoExisteException">
+    <WL5G3N0:part element="WL5G3N1:EstadoNoExisteException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="obtenerNitUsuario">
+    <WL5G3N0:part element="WL5G3N1:obtenerNitUsuario" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="obtenerNitUsuarioResponse">
+    <WL5G3N0:part element="WL5G3N1:obtenerNitUsuarioResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cambiarClave">
+    <WL5G3N0:part element="WL5G3N1:cambiarClave" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cambiarClaveResponse">
+    <WL5G3N0:part element="WL5G3N1:cambiarClaveResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="recuperarClave">
+    <WL5G3N0:part element="WL5G3N1:recuperarClave" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="recuperarClaveResponse">
+    <WL5G3N0:part element="WL5G3N1:recuperarClaveResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="LDAPAuthenticationManagement">
+    <WL5G3N0:operation name="crearUsuario">
+      <WL5G3N0:input message="WL5G3N1:crearUsuario"/>
+      <WL5G3N0:output message="WL5G3N1:crearUsuarioResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:RolNoExisteException" name="RolNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarUsuario">
+      <WL5G3N0:input message="WL5G3N1:actualizarUsuario"/>
+      <WL5G3N0:output message="WL5G3N1:actualizarUsuarioResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:RolNoExisteException" name="RolNoExisteException"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="autenticar">
+      <WL5G3N0:input message="WL5G3N1:autenticar"/>
+      <WL5G3N0:output message="WL5G3N1:autenticarResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarEstadoUsuario">
+      <WL5G3N0:input message="WL5G3N1:actualizarEstadoUsuario"/>
+      <WL5G3N0:output message="WL5G3N1:actualizarEstadoUsuarioResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+      <WL5G3N0:fault message="WL5G3N1:EstadoNoExisteException" name="EstadoNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="obtenerNitUsuario">
+      <WL5G3N0:input message="WL5G3N1:obtenerNitUsuario"/>
+      <WL5G3N0:output message="WL5G3N1:obtenerNitUsuarioResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cambiarClave">
+      <WL5G3N0:input message="WL5G3N1:cambiarClave"/>
+      <WL5G3N0:output message="WL5G3N1:cambiarClaveResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="recuperarClave">
+      <WL5G3N0:input message="WL5G3N1:recuperarClave"/>
+      <WL5G3N0:output message="WL5G3N1:recuperarClaveResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="LDAPAuthenticationManagementPortBinding" type="WL5G3N1:LDAPAuthenticationManagement">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="crearUsuario">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="RolNoExisteException">
+        <WL5G3N2:fault name="RolNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarUsuario">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="RolNoExisteException">
+        <WL5G3N2:fault name="RolNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="autenticar">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="actualizarEstadoUsuario">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+      <WL5G3N0:fault name="EstadoNoExisteException">
+        <WL5G3N2:fault name="EstadoNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="obtenerNitUsuario">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cambiarClave">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="recuperarClave">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UsuarioNoExisteException">
+        <WL5G3N2:fault name="UsuarioNoExisteException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="LDAPAuthenticationManagementService">
+    <WL5G3N0:port binding="WL5G3N1:LDAPAuthenticationManagementPortBinding" name="LDAPAuthenticationManagementPort">
+      <WL5G3N2:address location="http://User-PC:7001/marketPlace/proxy/GestionUsuario"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7001//marketPlace/proxy/GestionUsuario?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionUsuario%2FXMLSchema_-1211761121</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.3-hudson-757-SNAPSHOT.-->
+<xs:schema version="1.0" targetNamespace="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:tns="http://ws.ldap.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="EstadoNoExisteException" type="tns:EstadoNoExisteException"/>
+  <xs:element name="RolNoExisteException" type="tns:RolNoExisteException"/>
+  <xs:element name="UsuarioNoExisteException" type="tns:UsuarioNoExisteException"/>
+  <xs:element name="actualizarEstadoUsuario" type="tns:actualizarEstadoUsuario"/>
+  <xs:element name="actualizarEstadoUsuarioResponse" type="tns:actualizarEstadoUsuarioResponse"/>
+  <xs:element name="actualizarUsuario" type="tns:actualizarUsuario"/>
+  <xs:element name="actualizarUsuarioResponse" type="tns:actualizarUsuarioResponse"/>
+  <xs:element name="autenticar" type="tns:autenticar"/>
+  <xs:element name="autenticarResponse" type="tns:autenticarResponse"/>
+  <xs:element name="cambiarClave" type="tns:cambiarClave"/>
+  <xs:element name="cambiarClaveResponse" type="tns:cambiarClaveResponse"/>
+  <xs:element name="crearUsuario" type="tns:crearUsuario"/>
+  <xs:element name="crearUsuarioResponse" type="tns:crearUsuarioResponse"/>
+  <xs:element name="obtenerNitUsuario" type="tns:obtenerNitUsuario"/>
+  <xs:element name="obtenerNitUsuarioResponse" type="tns:obtenerNitUsuarioResponse"/>
+  <xs:element name="recuperarClave" type="tns:recuperarClave"/>
+  <xs:element name="recuperarClaveResponse" type="tns:recuperarClaveResponse"/>
+  <xs:complexType name="autenticar">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="autenticarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:usuarioBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="usuarioBO">
+    <xs:sequence>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UsuarioNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerNitUsuario">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerNitUsuarioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarEstadoUsuario">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+      <xs:element name="estado" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarEstadoUsuarioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EstadoNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarUsuario">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="actualizarUsuarioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:usuarioBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RolNoExisteException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recuperarClave">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="recuperarClaveResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarClave">
+    <xs:sequence>
+      <xs:element name="login" type="xs:string" minOccurs="0"/>
+      <xs:element name="nuevaClave" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarClaveResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearUsuario">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="nombre" type="xs:string" minOccurs="0"/>
+      <xs:element name="rol" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="direccion" type="xs:string" minOccurs="0"/>
+      <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPostal" type="xs:string" minOccurs="0"/>
+      <xs:element name="codPais" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="crearUsuarioResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:usuarioBO" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="actualizarEstadoUsuario" bindingOperationName="actualizarEstadoUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarEstadoUsuario>
+         <!--Optional:-->
+         <login>gero et</login>
+         <!--Optional:-->
+         <estado>sonoras imperio</estado>
+      </ws:actualizarEstadoUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/actualizarEstadoUsuarioRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="actualizarUsuario" bindingOperationName="actualizarUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ActualizarUsuarioDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:actualizarUsuario>
+         <!--Optional:-->
+         <nit>6555555</nit>
+         <!--Optional:-->
+         <nombre>willian</nombre>
+         <!--Optional:-->
+         <rol>Fabricante</rol>
+         <!--Optional:-->
+         <email>verrantque per auras</email>
+         <!--Optional:-->
+         <direccion>per auras</direccion>
+         <!--Optional:-->
+         <telefono>circum claustra</telefono>
+         <!--Optional:-->
+         <codPostal>nimborum in</codPostal>
+         <!--Optional:-->
+         <codPais>foedere certo</codPais>
+      </ws:actualizarUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/actualizarUsuarioRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="autenticar" bindingOperationName="autenticar" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:autenticar>
+         <!--Optional:-->
+         <login>gero et</login>
+         <!--Optional:-->
+         <password>sonoras imperio</password>
+      </ws:autenticar>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/autenticarRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="cambiarClave" bindingOperationName="cambiarClave" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:cambiarClave>
+         <!--Optional:-->
+         <login>gero et</login>
+         <!--Optional:-->
+         <nuevaClave>sonoras imperio</nuevaClave>
+      </ws:cambiarClave>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/cambiarClaveRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="crearUsuario" bindingOperationName="crearUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="crearUsuarioDesdeOSB"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:crearUsuario>
+         <!--Optional:-->
+         <nit>6555555</nit>
+         <!--Optional:-->
+         <nombre>sonoras imperio</nombre>
+         <!--Optional:-->
+         <rol>Fabricante</rol>
+         <!--Optional:-->
+         <email>djskdj@kadjfkj.com</email>
+         <!--Optional:-->
+         <direccion>per auras</direccion>
+         <!--Optional:-->
+         <telefono>circum claustra</telefono>
+         <!--Optional:-->
+         <codPostal>nimborum in</codPostal>
+         <!--Optional:-->
+         <codPais>foedere certo</codPais>
+      </ws:crearUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/crearUsuarioRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="obtenerNitUsuario" bindingOperationName="obtenerNitUsuario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:obtenerNitUsuario>
+         <!--Optional:-->
+         <login>gero et</login>
+      </ws:obtenerNitUsuario>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/obtenerNitUsuarioRequest"/></con:call></con:operation><con:operation isOneWay="false" action="" name="recuperarClave" bindingOperationName="recuperarClave" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionUsuario</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:recuperarClave>
+         <!--Optional:-->
+         <login>gero et</login>
+         <!--Optional:-->
+         <email>sonoras imperio</email>
+      </ws:recuperarClave>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/recuperarClaveRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

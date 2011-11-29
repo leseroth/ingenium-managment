@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/MarketPlace_jws/ProcesoAvisoDespacho/DispatchAdvice"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="process">
+		<complexType>
+			<sequence>
+				<element name="fechaEmision" type="dateTime" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="fechaLlegada" type="dateTime" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="montoOperacion" type="long" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="camiones" type="string" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="cantidadProducto" type="int" minOccurs="1" nillable="false" maxOccurs="1"/>
+        <element name="nombreProducto" type="string" minOccurs="1" nillable="false" maxOccurs="1"/>
+        <element name="categoriaProducto" type="string" minOccurs="1" nillable="false" maxOccurs="1"/>
+        <element name="referenciaProducto" type="string" minOccurs="0" nillable="false" maxOccurs="1"/>
+        <element name="numSeguimientoPO" type="string" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="nombreFabricante" type="string" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="nitFabricante" type="string" nillable="false" minOccurs="1" maxOccurs="1"/>
+        <element name="emailFabricante" type="string" nillable="false" minOccurs="1" maxOccurs="1"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

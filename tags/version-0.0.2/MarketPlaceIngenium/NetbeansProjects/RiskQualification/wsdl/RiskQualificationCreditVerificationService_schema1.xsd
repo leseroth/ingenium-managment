@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.riskqualification.marketplace.losalpes.com.co/" xmlns:tns="http://ws.riskqualification.marketplace.losalpes.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Exception" type="tns:Exception"/>
+
+  <xs:element name="antiLavadoValidar" type="tns:antiLavadoValidar"/>
+
+  <xs:element name="antiLavadoValidarResponse" type="tns:antiLavadoValidarResponse"/>
+
+  <xs:element name="comfecamaraValidar" type="tns:comfecamaraValidar"/>
+
+  <xs:element name="comfecamaraValidarResponse" type="tns:comfecamaraValidarResponse"/>
+
+  <xs:element name="dataCreditoValidar" type="tns:dataCreditoValidar"/>
+
+  <xs:element name="dataCreditoValidarResponse" type="tns:dataCreditoValidarResponse"/>
+
+  <xs:element name="listaClintonValidar" type="tns:listaClintonValidar"/>
+
+  <xs:element name="listaClintonValidarResponse" type="tns:listaClintonValidarResponse"/>
+
+  <xs:element name="registrarAntiLavados" type="tns:registrarAntiLavados"/>
+
+  <xs:element name="registrarAntiLavadosResponse" type="tns:registrarAntiLavadosResponse"/>
+
+  <xs:element name="registrarComfecamara" type="tns:registrarComfecamara"/>
+
+  <xs:element name="registrarComfecamaraResponse" type="tns:registrarComfecamaraResponse"/>
+
+  <xs:element name="registrarDataCredito" type="tns:registrarDataCredito"/>
+
+  <xs:element name="registrarDataCreditoResponse" type="tns:registrarDataCreditoResponse"/>
+
+  <xs:element name="registrarListaClinton" type="tns:registrarListaClinton"/>
+
+  <xs:element name="registrarListaClintonResponse" type="tns:registrarListaClintonResponse"/>
+
+  <xs:complexType name="antiLavadoValidar">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="reglaVal" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="antiLavadoValidarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarListaClinton">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarListaClintonResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarAntiLavados">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarAntiLavadosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dataCreditoValidar">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="reglaVal" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dataCreditoValidarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listaClintonValidar">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="reglaVal" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listaClintonValidarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarDataCredito">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarDataCreditoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarComfecamara">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registrarComfecamaraResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="comfecamaraValidar">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+      <xs:element name="reglaVal" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="comfecamaraValidarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

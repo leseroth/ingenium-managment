@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="confirmacionpago_client_ep"
+                     namespaceURI="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/ConfirmacionPago"/>
+      <port-info>
+         <wsdl-port localpart="ConfirmacionPago_pt"
+                    namespaceURI="http://xmlns.oracle.com/MarketPlace_jws/ProcesoFacturacion/ConfirmacionPago"/>
+         <runtime/>
+         <operations>
+            <operation name="process"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

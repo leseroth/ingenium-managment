@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://marketplace.losalpes.com.co">
+
+	<include schemaLocation="PurchaseOrder.xsd"></include>
+	<include schemaLocation="Item.xsd"></include>
+
+    <element name="da" type="tns:DispatchAdvice"></element>
+
+    <complexType name="DispatchAdvice">
+    	<sequence>
+            <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+            <element name="numSeguimiento" type="string" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="fechaEmision" type="dateTime" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="fechaLlegada" type="dateTime" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="montoOperacion" type="long" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="camiones" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+
+
+
+    		<element name="ordenCompra" type="tns:PurchaseOrder"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="items" type="tns:Item" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+
+
+    		<element name="fabricante" type="tns:Fabricante"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>

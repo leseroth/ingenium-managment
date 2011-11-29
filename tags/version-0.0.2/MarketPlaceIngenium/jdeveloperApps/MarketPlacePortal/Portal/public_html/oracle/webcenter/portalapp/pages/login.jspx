@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document title="MarketPlace Los Alpes" id="d1">
+	<af:pageTemplate viewId="/oracle/webcenter/portalapp/pagetemplates/template.jspx" value="#{bindings.pageTemplateBinding.templateModel}" id="pt1">
+        <f:attribute name="showNavigation" value="#{false}"/>  
+        <f:attribute name="showLogin" value="#{false}"/>  
+        <f:facet name="content">
+         <af:group>
+            <form id="loginform" name="loginform" method="POST"
+                  action="j_security_check">
+              <p/><div style="margin: 0 auto; width:300px">
+            <fieldset >
+                <table border="0"><tr><td>
+                    <label>Usuario:</label>
+                 </td><td>
+                    <input id="j_username" type="text" name="j_username" autocomplete="off"/><br/>
+                    </td>
+                 </tr><tr>
+                 <td>
+                    <label>Contraseña:</label>
+                  </td><td>
+                    <input id="j_password" type="password" name="j_password" autocomplete="off"/><br/>
+                 </td>
+              </tr><tr><td colspan="2" align="center"><input type="submit" name="submit" value="Entrar"/></td></tr>
+                
+                </table>
+              </fieldset>
+              <p align="center">
+              <af:goLink destination="/faces/pages_registro" id="cl1" text="Registrar"/> | <af:goLink  destination="/faces/pages_recuperarPassword" text="Recuperar Contraseña"
+                                                                                              id="cl2"/>
+              </p>
+              </div>
+            </form>
+</af:group>
+        </f:facet>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

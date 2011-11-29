@@ -1,0 +1,21 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FOferta.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
+    <element name="subasta" type="tns:Subasta"/>
+    <complexType name="Subasta">
+        <sequence>
+            <element name="activa" type="boolean"/>
+            <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+            <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="fechaInicio" type="dateTime" minOccurs="1" maxOccurs="1"/>
+            <element name="fechaTerminacion" type="dateTime" minOccurs="1" maxOccurs="1"/>
+            <element name="ordenCompra" type="tns:PurchaseOrder" minOccurs="1" maxOccurs="1"/>
+            <element name="mejor" type="tns:Oferta" minOccurs="0" maxOccurs="1"/>
+            <element name="mensaje" type="string" minOccurs="0"/>
+            <element name="fabricante" type="tns:Fabricante" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="ofertas" type="tns:Oferta" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>

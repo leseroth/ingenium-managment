@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="marketPlace/proxy/wsdls/gestionRMA/GestionRMA"/>
+      <con4:port>
+        <con4:name>GestionRMASOAP</con4:name>
+        <con4:namespace>http://marketplace.losalpes.com.co/GestionRMA</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionRMA</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline name="_onErrorHandler-5685957262014643461-175cd523.130377adfd3.-7f87" type="error"/>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="registrarRMA">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteTo_registrarRMA" error-handler="_onErrorHandler-5685957262014643461-175cd523.130377adfd3.-7f87">
+                <con:context>
+                  <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f8a</con2:id>
+                    <con1:service ref="marketPlace/business/GestionRMA" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>registrarRMA</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f89</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/RegistrarRMARequest"/>
+                            <con2:param name="registrarRMA1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f88</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/RegistrarRMAResponse"/>
+                            <con2:param name="registrarRMAResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarRMAsFabricante">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode1">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f79</con2:id>
+                    <con1:service ref="marketPlace/business/GestionRMA" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarRMAsFabricante</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f1e</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/consultarRMASFabricante"/>
+                            <con2:param name="consultarRMAsFabricante1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f0c</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/consultarRMAsFabricanteResponse"/>
+                            <con2:param name="consultarRMAsFabricanteResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="consultarRMAsComercio">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context/>
+                <con:actions>
+                  <con1:route>
+                    <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7f69</con2:id>
+                    <con1:service ref="marketPlace/business/GestionRMA" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con1:operation>consultarRMAsComercio</con1:operation>
+                    <con1:outboundTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7ef8</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/consultarRMAsComercio"/>
+                            <con2:param name="consultarRMAsComercio1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-5685957262014643461-175cd523.130377adfd3.-7ee8</con2:id>
+                        <con3:location>
+                          <con2:xpathText>.</con2:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con2:xqueryTransform>
+                            <con2:resource ref="marketPlace/proxy/transformaciones/gestionRMA/consultarRMAsComercioResponse"/>
+                            <con2:param name="consultarRMAsComercioResponse1">
+                              <con2:path>$body/*</con2:path>
+                            </con2:param>
+                          </con2:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con1:responseTransform>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

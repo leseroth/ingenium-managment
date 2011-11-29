@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="GestionSubastaSOAPQSService"
+                     namespaceURI="http://marketplace.losalpes.com.co/GestionOfertas"/>
+      <port-info>
+         <wsdl-port localpart="GestionSubastaSOAPQSPort"
+                    namespaceURI="http://marketplace.losalpes.com.co/GestionOfertas"/>
+         <runtime/>
+         <operations>
+            <operation name="registrarOferta"/>
+            <operation name="cerrarSubasta"/>
+            <operation name="darGanadorSubasta"/>
+            <operation name="crearSubasta"/>
+            <operation name="consultarSubastasFabricante"/>
+            <operation name="asignarFabricantesSubasta"/>
+            <operation name="consultarFabricantesSubasta"/>
+            <operation name="consultarSubastaOrdenCompra"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

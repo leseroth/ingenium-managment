@@ -1,0 +1,194 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co" xmlns:xsdLocal1="urn:/crmondemand/xml/account">
+    <include schemaLocation="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FSolicitudRegistro.xsd"/>
+    <include schemaLocation="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FCliente.xsd"/>
+    <complexType name="CrearCliente">
+        <sequence>
+            <element name="cliente" type="tns:Cliente" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CrearClienteResponse">
+        <sequence>
+            <element name="idCuenta" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ModificarCliente">
+        <sequence>
+            <element name="cliente" type="tns:Cliente" minOccurs="1" maxOccurs="1"/>
+            <element name="id" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ModificarClienteResponse">
+        <sequence>
+            <element name="resultado" type="boolean"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarCliente">
+        <sequence>
+            <element name="nit" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarClienteResponse">
+        <sequence>
+            <element name="cliente" type="tns:Cliente"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarClientes">
+        <sequence>
+            <element name="tipoCliente" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarClientesResponse">
+        <sequence>
+            <element name="cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarEstadoCliente">
+        <sequence>
+            <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estado" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarEstadoClienteResponse">
+        <sequence>
+            <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CrearContacto">
+        <sequence>
+            <element name="contactos" type="tns:Contacto" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="idCliente" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="CrearContactoResponse">
+        <sequence>
+            <element name="respuesta" type="boolean" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="ModificarContacto"/>
+    <complexType name="ModificarContactoResponse"/>
+    <element name="actualizarEstadoCliente" type="tns:ActualizarEstadoCliente"/>
+    <element name="actualizarEstadoClienteResponse" type="tns:ActualizarEstadoClienteResponse"/>
+    <element name="consultarCliente" type="tns:ConsultarCliente"/>
+    <element name="consultarClienteResponse" type="tns:ConsultarClienteResponse"/>
+    <element name="consultarClientes" type="tns:ConsultarClientes"/>
+    <element name="consultarClientesResponse" type="tns:ConsultarClientesResponse"/>
+    <element name="crearCliente" type="tns:CrearCliente"/>
+    <element name="crearClienteResponse" type="tns:CrearClienteResponse"/>
+    <element name="crearContacto" type="tns:CrearContacto"/>
+    <element name="crearContactoResponse" type="tns:CrearContactoResponse"/>
+    <element name="modificarCliente" type="tns:ModificarCliente"/>
+    <element name="modificarClienteResponse" type="tns:ModificarClienteResponse"/>
+    <element name="modificarContacto" type="tns:ModificarContacto"/>
+    <element name="modificarContactoResponse" type="tns:ModificarContactoResponse"/>
+    <complexType name="ConsultarComision">
+        <sequence>
+            <element name="nit" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarComisionResponse">
+        <sequence>
+            <element name="comision" type="double"/>
+        </sequence>
+    </complexType>
+    <element name="consultarComision" type="tns:ConsultarComision"/>
+    <element name="consultarComisionResponse" type="tns:ConsultarComisionResponse"/>
+    <complexType name="ModificarComision">
+        <sequence>
+            <element name="nit" type="string"/>
+            <element name="comision" type="double"/>
+        </sequence>
+    </complexType>
+    <complexType name="ModificarComisionResponse">
+        <sequence>
+            <element name="resultado" type="boolean"/>
+        </sequence>
+    </complexType>
+    <element name="modificarComision" type="tns:ModificarComision"/>
+    <element name="modificarComisionResponse" type="tns:ModificarComisionResponse"/>
+    <complexType name="ConsultarClientesProducto">
+        <sequence>
+            <element name="nombreProducto" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="tipoCliente" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="tipoCategoria" type="string" maxOccurs="1" minOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarClientesProductoResponse">
+        <sequence>
+            <element name="cliente" type="tns:Cliente" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <element name="consultarClientesProducto" type="tns:ConsultarClientesProducto"/>
+    <element name="consultarClientesProductoResponse" type="tns:ConsultarClientesProductoResponse"/>
+    <complexType name="RadicarSolicitud">
+        <sequence>
+            <element name="solicitud" type="tns:SolicitudRegistro" minOccurs="1" maxOccurs="1"/>
+            <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <element name="radicarSolicitud" type="tns:RadicarSolicitud"/>
+    <element name="radicarSolicitudResponse" type="tns:RadicarSolicitudResponse"/>
+    <complexType name="RadicarSolicitudResponse">
+        <sequence>
+            <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarEstadoSolicitud">
+        <sequence>
+            <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estado" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarEstadoSolicitudResponse">
+        <sequence>
+            <element name="resultado" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarSolicitud">
+        <sequence>
+            <element name="solicitud" type="tns:SolicitudRegistro" minOccurs="1" maxOccurs="1"/>
+            <element name="estadoSolicitud" type="string"/>
+            <element name="causa" type="string" maxOccurs="1" minOccurs="1"/>
+            <element name="estadoCliente" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estadoProducto" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ActualizarSolicitudResponse">
+        <sequence>
+            <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <element name="actualizarEstadoSolicitud" type="tns:ActualizarEstadoSolicitud"/>
+    <element name="actualizarEstadoSolicitudResponse" type="tns:ActualizarEstadoSolicitudResponse"/>
+    <element name="actualizarSolicitud" type="tns:ActualizarSolicitud"/>
+    <element name="actualizarSolicitudResponse" type="tns:ActualizarSolicitudResponse"/>
+    <complexType name="CerrarSolicitud">
+        <sequence>
+            <element name="numRadicacion" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estadoSolicitud" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="causa" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estadoCliente" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="estadoProducto" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="CerrarSolicitudResponse">
+        <sequence>
+            <element name="resultado" type="boolean"/>
+        </sequence>
+    </complexType>
+    <element name="cerrarSolicitud" type="tns:CerrarSolicitud"/>
+    <element name="cerrarSolicitudResponse" type="tns:CerrarSolicitudResponse"/>
+    <complexType name="ConsultarProductosCliente">
+        <sequence>
+            <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultarProductosClienteResponse">
+        <sequence>
+            <element name="productos" type="tns:Producto" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <element name="consultarProductosCliente" type="tns:ConsultarProductosCliente"/>
+    <element name="consultarProductosClienteResponse" type="tns:ConsultarProductosClienteResponse"/>
+</schema>

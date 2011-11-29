@@ -1,0 +1,2928 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/typesystem/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con4:SoapBindingType" xmlns:con4="http://www.bea.com/wli/sb/services/bindings/config">
+      <con4:wsdl ref="marketPlace/proxy/wsdls/GestionCliente/GestionCliente"/>
+      <con4:port>
+        <con4:name>GestionClienteSOAP</con4:name>
+        <con4:namespace>http://marketplace.losalpes.com.co/GestionCliente</con4:namespace>
+      </con4:port>
+      <con4:selector type="SOAP body"/>
+      <con4:WSI-compliant>false</con4:WSI-compliant>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/marketPlace/proxy/GestionCliente</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelinePairNodeCrearCliente_request">
+      <con:stage name="assigns">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="header-crm">
+            <con1:id>_ActionId-2633252153842105505-1139a7b5.12ffadc062e.-73bf</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soap-env:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<wsse:Security>
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+   </soap-env:Header>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:replace varName="header">
+            <con1:id>_ActionId-1992631742818075993--156d675c.130431237c9.-7fd8</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$header-crm</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-2633252153842105505-1139a7b5.12ffadc062e.-71c0</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/CrearClienteRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNodeCrearCliente_response">
+      <con:stage name="Resultado">
+        <con:context>
+          <con1:userNsDecl namespace="urn:crmondemand/ws/account/10/2004" prefix="ns"/>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-2633252153842105505-1139a7b5.12ffadc062e.-71b1</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/CrearClienteResponse"/>
+                <con1:param name="accountWS_AccountInsert_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNodeCrearContactos_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="header-crmod">
+            <con1:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7edb</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="InsertarContactos">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="contactos">
+            <con1:id>_ActionId-1578756828681171536--6deb1212.1309b3dbda5.-7f56</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/CrearContactosRequest"/>
+                <con1:param name="crearContacto1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="contactosBody">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-79f4</con1:id>
+            <con3:expr>
+              <con1:xqueryText>&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+{ $contactos }
+&lt;/soapenv:Body></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-5905101185577103320--40f5ff65.1304672645d.-7ec7</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionContacto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>ContactInsert</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$contactosBody</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNodeCrearContactos_response">
+      <con:stage name="Resultado">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-8364501763467040428-79c5cd68.1304d791a65.-7c42</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/CrearContactosResponse"/>
+                <con1:param name="contactWS_ContactInsert_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNodeModificarCliente_request">
+      <con:stage name="CRM-OD">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="header-crmod">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7fe0</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="cliente">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7b12</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/*</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="productos">
+            <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7f0f</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:modificarCliente/mar:productos</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="nit">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7b10</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body/mar:modificarCliente/mar:cliente/nit/text(),"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdCuenta">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="nit-body">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7b14</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7bac</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$nit-body</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNodeModificarCliente_response">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="header-crmod">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7b16</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:userNsDecl namespace="urn:crmondemand/ws/account/10/2004" prefix="ns"/>
+          <con1:userNsDecl namespace="urn:/crmondemand/xml/account" prefix="acc"/>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="idCliente">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7d04</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                <con1:param name="accountWS_AccountQueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7ca4</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$cliente</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:replace varName="body" contents-only="false">
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7be5</con1:id>
+            <con3:location>
+              <con1:xpathText>./*</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>&lt;tns:modificarCliente xmlns:tns="http://marketplace.losalpes.com.co">
+	{ $body/mar:modificarCliente/mar:cliente }
+	{ $body/mar:modificarCliente/mar:productos }
+	&lt;tns:idCuenta>{$idCliente}&lt;/tns:idCuenta>
+&lt;/tns:modificarCliente></con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Asignaciones">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="modificarContactos">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7a9e</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoModificarClienteRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="crearContactos">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7a13</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/CrearContactosModificarClienteRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="modificarProductos">
+            <con1:id>_ActionId-8992992051929641513--3cd3720b.130ad35c042.-7f03</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ModificarProductoRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="crearProductos">
+            <con1:id>_ActionId-8992992051929641513--3cd3720b.130ad35c042.-7e9f</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosRequestModificarCliente"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="modificarCliente">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7a9c</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarClienteRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Contactos">
+        <con:context/>
+        <con:actions>
+          <con3:wsCallout>
+            <con1:id>_ActionId-8992992051929641513--3cd3720b.130ad35c042.-7e9d</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionContacto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>ContactUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$modificarContactos</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:wsCallout>
+            <con1:id>_ActionId-8992992051929641513--3cd3720b.130ad35c042.-7e9b</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionContacto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>ContactInsert</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$crearContactos</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Productos">
+        <con:context/>
+        <con:actions>
+          <con3:wsCallout>
+            <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7f04</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>CustomObject3Insert</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$crearProductos</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:wsCallout>
+            <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7ef6</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>CustomObject3Update</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$modificarProductos</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Cliente">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:wsCallout>
+            <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7ac7</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$modificarCliente</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform>
+              <con3:replace contents-only="true" varName="body">
+                <con1:id>_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7aad</con1:id>
+                <con3:location>
+                  <con1:xpathText>.</con1:xpathText>
+                </con3:location>
+                <con3:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarClienteResponse"/>
+                    <con1:param name="accountWS_AccountUpdate_Output1">
+                      <con1:path>$body/*</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con3:expr>
+              </con3:replace>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="header-crm">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77b6</con1:id>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap-env:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<wsse:Security>
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+   </soap-env:Header>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:replace varName="header">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77b5</con1:id>
+            <con3:location>
+              <con2:xpathText xmlns:con2="http://www.bea.com/wli/sb/stages/config">.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$header-crm</con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar" xmlns:con2="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="solicitud">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77ba</con1:id>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/*</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="productos">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7571</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:radicarSolicitud/mar:solicitud</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="nit">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77b9</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body/mar:radicarSolicitud/mar:nit/text(),"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdCuenta">
+        <con:context>
+          <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar" xmlns:con2="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="nit-body">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77b1</con1:id>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77af</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$nit-body</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform>
+              <con3:assign varName="idCliente">
+                <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77b0</con1:id>
+                <con3:expr>
+                  <con2:xqueryTransform xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                    <con2:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                    <con2:param name="accountWS_AccountQueryPage_Output1">
+                      <con2:path>$body/*</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con3:expr>
+              </con3:assign>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="AsignacionesProductosSolicitud">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7e0e</con1:id>
+            <con3:location>
+              <con2:xpathText xmlns:con2="http://www.bea.com/wli/sb/stages/config">.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$solicitud</con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:assign varName="solicitudIdCliente">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7e0c</con1:id>
+            <con3:expr>
+              <con1:xqueryText>&lt;tns:radicarSolicitud xmlns:tns="http://marketplace.losalpes.com.co">
+	{ $body/mar:radicarSolicitud/mar:solicitud }
+	&lt;tns:idCliente>{$idCliente}&lt;/tns:idCliente>
+&lt;/tns:radicarSolicitud></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="productosIdCliente">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7e0a</con1:id>
+            <con3:expr>
+              <con1:xqueryText>&lt;mar:crearProducto xmlns:mar="http://marketplace.losalpes.com.co">
+	{ $body/mar:radicarSolicitud/mar:solicitud }
+	&lt;mar:idCliente>{$idCliente}&lt;/mar:idCliente>
+&lt;/mar:crearProducto></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="CrearProductos">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:replace varName="body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7e83</con1:id>
+            <con3:location>
+              <con1:xpathText>./*</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$productosIdCliente</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:assign varName="bodyProductos">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7fe5</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosRequest"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7f98</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>CustomObject3Insert</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$bodyProductos</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Canonico-AppLegado">
+        <con:context>
+          <con2:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar" xmlns:con2="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con3:replace varName="body">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77be</con1:id>
+            <con3:location>
+              <con2:xpathText xmlns:con2="http://www.bea.com/wli/sb/stages/config">./*</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$solicitudIdCliente</con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-77bd</con1:id>
+            <con3:location>
+              <con2:xpathText xmlns:con2="http://www.bea.com/wli/sb/stages/config">.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xsltTransform xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+                <con2:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/RadicarSolicitudRequest"/>
+                <con2:input>$body/*</con2:input>
+              </con2:xsltTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="CRMODSecurity1">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="header-crm">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7607</con1:id>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap-env:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<wsse:Security>
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+   </soap-env:Header>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarNumRadicacion">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="idRadicacionCon">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7fa4</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body,"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="bodyConsulta">
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-76f6</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
+ <ns:ServiceRequestWS_ServiceRequestQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
+            <ns1:ListOfServiceRequest>
+                <ns1:ServiceRequest>
+                	<ns1:ServiceRequestId>{$idRadicacionCon}</ns1:ServiceRequestId>
+  					<ns1:SRNumber></ns1:SRNumber>
+                </ns1:ServiceRequest>
+            </ns1:ListOfServiceRequest>
+ </ns:ServiceRequestWS_ServiceRequestQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7678</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>ServiceRequestQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$bodyConsulta</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform>
+              <con3:replace varName="body" contents-only="true">
+                <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7d97</con1:id>
+                <con3:location>
+                  <con1:xpathText>.</con1:xpathText>
+                </con3:location>
+                <con3:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/RadicarSolicitudResponse"/>
+                    <con1:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                      <con1:path>$body/*</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con3:expr>
+              </con3:replace>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode2_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="header-crmod" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7fac</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="numRadicacion" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7d6e</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">concat("= '",$body/mar:actualizarSolicitud/mar:solicitud/mar:numRadicacion/text(),"'")</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con3:assign varName="estadoCliente">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7d6b</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:actualizarSolicitud/mar:estadoCliente/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="estadoProducto">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7d6a</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:actualizarSolicitud/mar:estadoProducto/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdSolicitudIdCliente">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="idSolicitud-body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7edd</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
+ <ns:ServiceRequestWS_ServiceRequestQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
+            <ns1:ListOfServiceRequest>
+                <ns1:ServiceRequest>
+                	<ns1:ServiceRequestId></ns1:ServiceRequestId>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:SRNumber>{$numRadicacion}</ns1:SRNumber>
+                </ns1:ServiceRequest>
+            </ns1:ListOfServiceRequest>
+ </ns:ServiceRequestWS_ServiceRequestQueryPage_Input> 
+</soapenv:Body>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7edc</con4:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ServiceRequestQueryPage</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$idSolicitud-body</con1:body>
+              <con1:header>$header-crmod</con1:header>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="idSolicitud" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7edb</con4:id>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdSolicitud"/>
+                <con4:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con3:assign varName="idCliente">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-79de</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdCliente"/>
+                <con1:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Replaces">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:replace contents-only="true" varName="body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7e98</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">$solicitud</con4:xqueryText>
+            </con1:expr>
+          </con1:replace>
+          <con1:replace contents-only="false" varName="body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7e97</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">./*</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">&lt;tns:actualizarSolicitud xmlns:tns="http://marketplace.losalpes.com.co">
+	{$body/mar:actualizarSolicitud/mar:solicitud}
+	&lt;tns:idSolicitud>{$idSolicitud}&lt;/tns:idSolicitud>
+&lt;/tns:actualizarSolicitud></con4:xqueryText>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarSolicitud">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="modificarSolicitud" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7e26</con4:id>
+            <con1:expr>
+              <con4:xsltTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ActualizarSolicitudRequest"/>
+                <con4:input>$body/*</con4:input>
+              </con4:xsltTransform>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7e25</con4:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ServiceRequestUpdate</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$modificarSolicitud</con1:body>
+              <con1:header>$header-crmod</con1:header>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode2_response">
+      <con:stage name="Resultado">
+        <con:context/>
+        <con:actions>
+          <con1:replace varName="body" contents-only="true" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7d97</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ActualizarSolicitudResponse"/>
+                <con4:param name="serviceRequestWS_ServiceRequestUpdate_Output1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode3_request">
+      <con:stage name="CRMODSecurity">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="header-crmod" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7cd6</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="numRadicacion" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7bd5</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">concat("= '",$body/mar:actualizarEstadoSolicitud/mar:numRadicacion/text(),"'")</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="estado" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7bd7</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">$body/mar:actualizarEstadoSolicitud/mar:estado/text()</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdSolicitud">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="idSolicitud-body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b98</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
+ <ns:ServiceRequestWS_ServiceRequestQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
+            <ns1:ListOfServiceRequest>
+                <ns1:ServiceRequest>
+                	<ns1:ServiceRequestId></ns1:ServiceRequestId>
+  					<ns1:SRNumber>{$numRadicacion}</ns1:SRNumber>
+                </ns1:ServiceRequest>
+            </ns1:ListOfServiceRequest>
+ </ns:ServiceRequestWS_ServiceRequestQueryPage_Input> 
+</soapenv:Body>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b97</con4:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ServiceRequestQueryPage</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$idSolicitud-body</con1:body>
+              <con1:header>$header-crmod</con1:header>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="idSolicitud" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b96</con4:id>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdSolicitud"/>
+                <con4:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarEstado">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="actualizar-body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b5b</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
+ <ns:ServiceRequestWS_ServiceRequestUpdate_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
+            <ns1:ListOfServiceRequest>
+                <ns1:ServiceRequest>
+                	<ns1:ServiceRequestId>{ $idSolicitud }</ns1:ServiceRequestId>
+  					<ns1:plEstado_Solicitud>{ $estado }</ns1:plEstado_Solicitud>
+                </ns1:ServiceRequest>
+            </ns1:ListOfServiceRequest>
+ </ns:ServiceRequestWS_ServiceRequestUpdate_Input> 
+</soapenv:Body>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b5a</con4:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ServiceRequestUpdate</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$actualizar-body</con1:body>
+              <con1:header>$header-crmod</con1:header>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode3_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:replace contents-only="true" varName="body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4618626381446567586--5ae4485c.1308ab665d3.-7b06</con4:id>
+            <con1:location>
+              <con4:xpathText xmlns:con4="http://www.bea.com/wli/sb/stages/config">.</con4:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ActualizarSolicitudResponse"/>
+                <con4:param name="serviceRequestWS_ServiceRequestUpdate_Output1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode4_request">
+      <con:stage name="CRMODSecurity">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="header-crmod" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6726022297592424820--12416206.1308b4f13df.-7b3b</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="nit">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7ada</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body/mar:modificarComision/mar:nit/text(),"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="comision">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7acc</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:modificarComision/mar:comision/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdCuenta">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="nit-body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7a78</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7a6a</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$nit-body</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:assign varName="idCliente">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7a5e</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                <con1:param name="accountWS_AccountQueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarComision">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="actualizar-body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7a0a</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountUpdate_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId>{ $idCliente }</ns1:AccountId>
+  					<ns1:nComision>{ $comision }</ns1:nComision>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+ </ns:AccountWS_AccountUpdate_Input> 
+ </soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-79fa</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$actualizar-body</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode4_response">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con3:replace contents-only="true" varName="body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7ae7</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarClienteResponse"/>
+                <con1:param name="accountWS_AccountUpdate_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode5_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="header-crmod" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6726022297592424820--12416206.1308b4f13df.-7cde</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="estado" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-6726022297592424820--12416206.1308b4f13df.-7c8a</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">$body/mar:actualizarEstadoCliente/mar:estado/text()</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con3:assign varName="nit">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7c7d</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body/mar:actualizarEstadoCliente/mar:nit/text(),"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdCuenta">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="nit-body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7bfe</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7bee</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$nit-body</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:assign varName="idCliente">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7be0</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                <con1:param name="accountWS_AccountQueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarEstado">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="actualizar-body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7ba8</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+	<ns:AccountWS_AccountUpdate_Input  	xmlns:acc="urn:/crmondemand/xml/account">
+		<acc:ListOfAccount>
+			<acc:Account>
+				<acc:AccountId>{ $idCliente }</acc:AccountId>
+  				<acc:Status>{ $estado }</acc:Status>
+			</acc:Account>
+		</acc:ListOfAccount>
+	</ns:AccountWS_AccountUpdate_Input>
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7b9a</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$actualizar-body</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode5_response">
+      <con:stage name="Resultado">
+        <con:context/>
+        <con:actions>
+          <con3:replace contents-only="true" varName="body">
+            <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7b8f</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarClienteResponse"/>
+                <con1:param name="accountWS_AccountUpdate_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode6_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="header-crm">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7ec7</con1:id>
+            <con3:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap-env:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+	<wsse:Security>
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+   </soap-env:Header>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="Variables">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="numRadicacion" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7dff</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">concat("= '",$body/mar:cerrarSolicitud/mar:numRadicacion/text(),"'")</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="estadoSolicitud" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7e70</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config">$body/mar:cerrarSolicitud/mar:estadoSolicitud/text()</con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con3:assign varName="causa">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7def</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:cerrarSolicitud/mar:causa/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="estadoCliente">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7e6f</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:cerrarSolicitud/mar:estadoCliente/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="estadoProducto">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7e6e</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:actualizarSolicitud/mar:estadoProducto/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarIdSolicitudIdCliente">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="idSolicitud-body" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7cb7</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/servicerequest/10/2004">
+ <ns:ServiceRequestWS_ServiceRequestQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/servicerequest">
+            <ns1:ListOfServiceRequest>
+                <ns1:ServiceRequest>
+                	<ns1:ServiceRequestId></ns1:ServiceRequestId>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:SRNumber> { $numRadicacion }</ns1:SRNumber>
+                </ns1:ServiceRequest>
+            </ns1:ListOfServiceRequest>
+ </ns:ServiceRequestWS_ServiceRequestQueryPage_Input> 
+</soapenv:Body>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7cb6</con4:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:operation>ServiceRequestQueryPage</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$idSolicitud-body</con1:body>
+              <con1:header>$header-crm</con1:header>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">body</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="idSolicitud" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7cb5</con4:id>
+            <con1:expr>
+              <con4:xqueryTransform xmlns:con4="http://www.bea.com/wli/sb/stages/config">
+                <con4:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdSolicitud"/>
+                <con4:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                  <con4:path>$body/*</con4:path>
+                </con4:param>
+              </con4:xqueryTransform>
+            </con1:expr>
+          </con1:assign>
+          <con3:assign varName="idCliente">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7cb4</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarIdCliente"/>
+                <con1:param name="serviceRequestWS_ServiceRequestQueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarEstadoCliente">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="actualizar-body">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7bf3</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountUpdate_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId>{ $idCliente }</ns1:AccountId>
+  					<ns1:Status>{ $estadoCliente }</ns1:Status>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+ </ns:AccountWS_AccountUpdate_Input> 
+ </soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7bf2</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$actualizar-body</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarEstadoProductos">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c34</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$idCliente</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:assign varName="consultaActivos">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c33</con1:id>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductosActivosRequest"/>
+                <con1:param name="string1">
+                  <con1:path>$body/text()</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="bodyConsultaActivos">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c32</con1:id>
+            <con3:expr>
+              <con1:xqueryText>&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+ {$consultaActivos}
+&lt;/soapenv:Body></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c2c</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>CustomObject3QueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$bodyConsultaActivos</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform>
+              <con3:ifThenElse>
+                <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c31</con1:id>
+                <con3:case>
+                  <con3:condition>
+                    <con1:xqueryText>fn:matches($estadoProducto,
+     "Activo")</con1:xqueryText>
+                  </con3:condition>
+                  <con3:actions>
+                    <con3:assign varName="activos">
+                      <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c30</con1:id>
+                      <con3:expr>
+                        <con1:xqueryTransform>
+                          <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductosActivosResponseActive"/>
+                          <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                            <con1:path>$body/*</con1:path>
+                          </con1:param>
+                        </con1:xqueryTransform>
+                      </con3:expr>
+                    </con3:assign>
+                  </con3:actions>
+                </con3:case>
+                <con3:default>
+                  <con3:assign varName="activos">
+                    <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c2f</con1:id>
+                    <con3:expr>
+                      <con1:xqueryTransform>
+                        <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductosActivosResponseInactive"/>
+                        <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                          <con1:path>$body/*</con1:path>
+                        </con1:param>
+                      </con1:xqueryTransform>
+                    </con3:expr>
+                  </con3:assign>
+                </con3:default>
+              </con3:ifThenElse>
+              <con3:assign varName="bodyActivos">
+                <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c2e</con1:id>
+                <con3:expr>
+                  <con1:xqueryText>&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+{ $activos }
+&lt;/soapenv:Body></con1:xqueryText>
+                </con3:expr>
+              </con3:assign>
+              <con3:wsCallout>
+                <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7c2d</con1:id>
+                <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con3:operation>CustomObject3Update</con3:operation>
+                <con3:request>
+                  <con3:body wrapped="true">$bodyActivos</con3:body>
+                  <con3:header>$header-crm</con3:header>
+                </con3:request>
+                <con3:response>
+                  <con3:body wrapped="true">body</con3:body>
+                </con3:response>
+                <con3:requestTransform/>
+                <con3:responseTransform/>
+              </con3:wsCallout>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ActualizarSolicitud">
+        <con:context/>
+        <con:actions>
+          <con3:assign varName="solictudBody">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7b9e</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:ns ="urn:crmondemand/ws/servicerequest/10/2004">
+	<ns:ServiceRequestWS_ServiceRequestUpdate_Input xmlns:ser="urn:/crmondemand/xml/servicerequest">
+	<ser:ListOfServiceRequest>	
+	<ser:ServiceRequest> 	
+		<ser:ServiceRequestId>{$idSolicitud}</ser:ServiceRequestId>		       
+        <ser:plEstado_Solicitud>{$estadoSolicitud}</ser:plEstado_Solicitud>        
+        <ser:Cause>{ $causa }</ser:Cause>            
+    </ser:ServiceRequest>
+    </ser:ListOfServiceRequest>
+    </ns:ServiceRequestWS_ServiceRequestUpdate_Input>
+    </soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7b92</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionSolicitud" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>ServiceRequestUpdate</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$solictudBody</con3:body>
+              <con3:header>$header-crm</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode6_response">
+      <con:stage name="Resultado">
+        <con:context/>
+        <con:actions>
+          <con3:replace contents-only="true" varName="body">
+            <con1:id>_ActionId-4044852661832675429-28298bfb.1309b927f2a.-7b4d</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ActualizarSolicitudResponse"/>
+                <con1:param name="serviceRequestWS_ServiceRequestUpdate_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode7_request">
+      <con:stage name="ConsultarProductosCliente">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="header-crmod">
+            <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7fff</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="nit">
+            <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ffd</con1:id>
+            <con3:expr>
+              <con1:xqueryText>concat("= '",$body/mar:consultarProductosCliente/mar:nit/text(),"'")</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="nitBody">
+            <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ffb</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ff1</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$nitBody</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform>
+              <con3:assign varName="idCliente">
+                <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ff5</con1:id>
+                <con3:expr>
+                  <con1:xqueryTransform>
+                    <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                    <con1:param name="accountWS_AccountQueryPage_Output1">
+                      <con1:path>$body/*</con1:path>
+                    </con1:param>
+                  </con1:xqueryTransform>
+                </con3:expr>
+              </con3:assign>
+              <con3:assign varName="consultarProductos">
+                <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ff4</con1:id>
+                <con3:expr>
+                  <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:crmondemand/ws/customobject3/10/2004">
+        <ns1:CustomObject3WS_CustomObject3QueryPage_Input xmlns:ns2="urn:/crmondemand/xml/customobject3">        
+            <ns2:ListOfCustomObject3>
+                <ns2:CustomObject3>
+                     <ns2:Name></ns2:Name>
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>	
+                     <ns1:AccountId>{ concat("= '",$idCliente,"'") }</ns1:AccountId>
+                    <ns1:plEstado>='Activo'</ns1:plEstado>
+                    <ns1:CustomObject3Id></ns1:CustomObject3Id>
+                    <ns1:Name></ns1:Name>
+                	<ns1:stCategoria></ns1:stCategoria>
+                	<ns1:stTipo></ns1:stTipo>
+                	<ns1:stReferencia></ns1:stReferencia>
+                	<ns1:stPesoLibras></ns1:stPesoLibras>
+                </ns2:CustomObject3>
+            </ns2:ListOfCustomObject3>
+        </ns1:CustomObject3WS_CustomObject3QueryPage_Input>
+        </soapenv:Body>]]></con1:xqueryText>
+                </con3:expr>
+              </con3:assign>
+              <con3:wsCallout>
+                <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ff2</con1:id>
+                <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con3:operation>CustomObject3QueryPage</con3:operation>
+                <con3:request>
+                  <con3:body wrapped="true">$consultarProductos</con3:body>
+                  <con3:header>$header-crmod</con3:header>
+                </con3:request>
+                <con3:response>
+                  <con3:body wrapped="true">body</con3:body>
+                </con3:response>
+                <con3:requestTransform/>
+                <con3:responseTransform>
+                  <con3:assign varName="productos">
+                    <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7ff3</con1:id>
+                    <con3:expr>
+                      <con1:xqueryText>$body/*</con1:xqueryText>
+                    </con3:expr>
+                  </con3:assign>
+                </con3:responseTransform>
+              </con3:wsCallout>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode7_response">
+      <con:stage name="ConsultarProductosClienteResponse">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7487982553095439047--17a7f2d.130b9029071.-7fd3</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductosClienteResponse"/>
+                <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                  <con1:path>$body/*</con1:path>
+                </con1:param>
+              </con1:xqueryTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="request" name="PipelinePairNode8_request">
+      <con:stage name="CRM-OD">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="header-crmod" xmlns:con="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con4:id xmlns:con4="http://www.bea.com/wli/sb/stages/config">_ActionId-5686237925758879913--55eb52ab.132634907ba.-79f9</con4:id>
+            <con1:expr>
+              <con4:xqueryText xmlns:con4="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con4:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="variablesconsultaproducto">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="producto">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7861</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:consultarClientesProducto/mar:nombreProducto/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="categoria">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7830</con1:id>
+            <con3:expr>
+              <con1:xqueryText>$body/mar:consultarClientesProducto/mar:categoria/text()</con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarClientePorTipo">
+        <con:context>
+          <con1:userNsDecl namespace="urn:crmondemand/ws/account/10/2004" prefix="ns1"/>
+          <con1:userNsDecl namespace="urn:/crmondemand/xml/customObject3" prefix="ns2"/>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+          <con4:variable name="prueba" path="$clientes">
+            <con4:xml-schema type="anyType"/>
+          </con4:variable>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="bodyclientes">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7952</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+                	<ns1:AccountName></ns1:AccountName>
+                	<ns1:stNit></ns1:stNit> 
+                	<ns1:stCorreo_Electronico></ns1:stCorreo_Electronico>                	
+                	<ns1:Status>='Activo'</ns1:Status> 
+                	<ns1:AccountType>{ concat("= '",$body/mar:consultarClientesProducto/mar:tipoCliente,"'") }</ns1:AccountType>
+                	<ns1:Location></ns1:Location>
+                	<ns1:MainPhone></ns1:MainPhone>
+                	<ns1:stCodigoPostal/> 
+               		<ns1:stCodigoPais/>   
+               		<ns1:plCategoria/> 
+                </ns1:Account>
+            </ns1:ListOfAccount>
+ </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7941</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>AccountQueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$bodyclientes</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:assign varName="clientes">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7932</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ObtenerClientes"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ConsultarProductosPorNombreCategoria">
+        <con:context>
+          <con1:userNsDecl namespace="urn:crmondemand/ws/account/10/2004" prefix="ns"/>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="bodyproductos">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-799a</con1:id>
+            <con3:expr>
+              <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/customobject3/10/2004">
+ <ns:CustomObject3WS_CustomObject3QueryPage_Input xmlns:ns1="urn:/crmondemand/xml/customobject3">
+            <ns1:ListOfCustomObject3>
+                <ns1:CustomObject3>
+                	<ns1:CustomObject3Id></ns1:CustomObject3Id>
+                	<ns1:AccountId></ns1:AccountId>
+                	<ns1:AccountName></ns1:AccountName>
+                	<ns1:stCategoria>{ concat("~LIKE '",$categoria,"*","'") }</ns1:stCategoria>
+                	<ns1:Name>{ concat("~LIKE '",$producto,"*","'") }</ns1:Name>  
+                	<ns1:stTipo></ns1:stTipo>
+                	<ns1:stReferencia></ns1:stReferencia>
+                	<ns1:stPesoLibras></ns1:stPesoLibras>
+                	<ns1:plEstado></ns1:plEstado>              	
+                </ns1:CustomObject3>
+            </ns1:ListOfCustomObject3>
+ </ns:CustomObject3WS_CustomObject3QueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:wsCallout>
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-79a7</con1:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>CustomObject3QueryPage</con3:operation>
+            <con3:request>
+              <con3:body wrapped="true">$bodyproductos</con3:body>
+              <con3:header>$header-crmod</con3:header>
+            </con3:request>
+            <con3:response>
+              <con3:body wrapped="true">body</con3:body>
+            </con3:response>
+            <con3:requestTransform/>
+            <con3:responseTransform/>
+          </con3:wsCallout>
+          <con3:assign varName="productos">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7922</con1:id>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ObtenerProductos"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="TrnasformacionesConsulta">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:assign varName="xml">
+            <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-793f</con1:id>
+            <con3:expr>
+              <con1:xqueryText>&lt;products_clients xsi:noNamespaceSchemaLocation="sample-taxonomy.xsd" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">	
+	{$productos}
+	{$clientes}
+&lt;/products_clients></con1:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7fce</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xqueryText>$xml</con1:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con3:replace varName="body" contents-only="true">
+            <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7d19</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/MergeProductoClientes"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode8_response">
+      <con:stage name="Resultado">
+        <con:context>
+          <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+        </con:context>
+        <con:actions>
+          <con3:replace contents-only="true" varName="body">
+            <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7cb2</con1:id>
+            <con3:location>
+              <con1:xpathText>.</con1:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con1:xsltTransform>
+                <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/SelectProductoClientes"/>
+                <con1:input>$body/*</con1:input>
+              </con1:xsltTransform>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="CrearCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNodeCrearCliente">
+                <con:request>PipelinePairNodeCrearCliente_request</con:request>
+                <con:response>PipelinePairNodeCrearCliente_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteNode1">
+                <con:context/>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-2633252153842105505-1139a7b5.12ffadc062e.-71fb</con1:id>
+                    <con2:service ref="marketPlace/business/GestionCliente" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>AccountInsert</con2:operation>
+                    <con2:outboundTransform/>
+                    <con2:responseTransform/>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="CrearContactos">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNodeCrearContactos">
+                <con:request>PipelinePairNodeCrearContactos_request</con:request>
+                <con:response>PipelinePairNodeCrearContactos_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ModificarCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNodeModificarCliente">
+                <con:request>PipelinePairNodeModificarCliente_request</con:request>
+                <con:response>PipelinePairNodeModificarCliente_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ModificarContacto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode6">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e18</con1:id>
+                    <con2:service ref="marketPlace/business/GestionContacto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>ContactUpdate</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e00</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7dd0</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7df1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoRequest"/>
+                            <con1:param name="modificarContacto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7de0</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ModificarContactoResponse"/>
+                            <con1:param name="contactWS_ContactUpdate_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ActualizarEstadoCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode5">
+                <con:request>PipelinePairNode5_request</con:request>
+                <con:response>PipelinePairNode5_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ModificarComision">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode4">
+                <con:request>PipelinePairNode4_request</con:request>
+                <con:response>PipelinePairNode4_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode2">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7ff4</con1:id>
+                    <con2:service ref="marketPlace/business/GestionCliente" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>AccountQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7e70</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace contents-only="false" varName="header">
+                        <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7ed1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:assign varName="nit">
+                        <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7e8c</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>concat("= '",$body/mar:consultarCliente/mar:nit/text(),"'")</con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:assign varName="nitBody">
+                        <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7e9c</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="urn:crmondemand/ws/account/10/2004">
+ <ns:AccountWS_AccountQueryPage_Input xmlns:ns1="urn:/crmondemand/xml/account">
+            <ns1:ListOfAccount>
+                <ns1:Account>
+                	<ns1:AccountId></ns1:AccountId>
+  					<ns1:stNit>{$nit}</ns1:stNit>
+                </ns1:Account>
+            </ns1:ListOfAccount>
+        </ns:AccountWS_AccountQueryPage_Input> 
+</soapenv:Body>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:assign varName="cliente">
+                        <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7e1f</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>$body/*</con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:wsCallout>
+                        <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7e7e</con1:id>
+                        <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionCliente" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>AccountQueryPage</con3:operation>
+                        <con3:request>
+                          <con3:body wrapped="true">$nitBody</con3:body>
+                          <con3:header>$header-crmod</con3:header>
+                        </con3:request>
+                        <con3:response>
+                          <con3:body wrapped="true">body</con3:body>
+                        </con3:response>
+                        <con3:requestTransform/>
+                        <con3:responseTransform>
+                          <con3:assign varName="existe">
+                            <con1:id>_ActionId-1502326686364170488--1da8189e.1314adaac05.-7f6d</con1:id>
+                            <con3:expr>
+                              <con1:xqueryTransform>
+                                <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ClienteExiste"/>
+                                <con1:param name="accountWS_AccountQueryPage_Output1">
+                                  <con1:path>$body/*</con1:path>
+                                </con1:param>
+                              </con1:xqueryTransform>
+                            </con3:expr>
+                          </con3:assign>
+                          <con3:ifThenElse>
+                            <con1:id>_ActionId-1502326686364170488--1da8189e.1314adaac05.-7f76</con1:id>
+                            <con3:case>
+                              <con3:condition>
+                                <con1:xqueryText>fn:matches($existe,"true")</con1:xqueryText>
+                              </con3:condition>
+                              <con3:actions>
+                                <con3:assign varName="idCliente">
+                                  <con1:id>_ActionId-1502326686364170488--1da8189e.1314adaac05.-7f51</con1:id>
+                                  <con3:expr>
+                                    <con1:xqueryTransform>
+                                      <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarIdCliente"/>
+                                      <con1:param name="accountWS_AccountQueryPage_Output1">
+                                        <con1:path>$body/*</con1:path>
+                                      </con1:param>
+                                    </con1:xqueryTransform>
+                                  </con3:expr>
+                                </con3:assign>
+                                <con3:assign varName="consultarProductos">
+                                  <con1:id>_ActionId-1502326686364170488--1da8189e.1314adaac05.-7f4d</con1:id>
+                                  <con3:expr>
+                                    <con1:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:crmondemand/ws/customobject3/10/2004">
+        <ns1:CustomObject3WS_CustomObject3QueryPage_Input xmlns:ns2="urn:/crmondemand/xml/customobject3">        
+            <ns2:ListOfCustomObject3>
+                <ns2:CustomObject3>
+                     <ns2:Name></ns2:Name>
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>	
+                     <ns2:AccountId>{ concat("= '",$idCliente,"'") }</ns2:AccountId>
+                     <ns2:stTipo></ns2:stTipo>
+                	 <ns2:stReferencia></ns2:stReferencia>
+                	 <ns2:stPesoLibras></ns2:stPesoLibras> 
+                	 <ns2:plEstado></ns2:plEstado>
+                     <ns2:CustomObject3Id></ns2:CustomObject3Id>
+                	 <ns2:stCategoria></ns2:stCategoria>
+                </ns2:CustomObject3>
+            </ns2:ListOfCustomObject3>
+        </ns1:CustomObject3WS_CustomObject3QueryPage_Input>
+        </soapenv:Body>]]></con1:xqueryText>
+                                  </con3:expr>
+                                </con3:assign>
+                                <con3:wsCallout>
+                                  <con1:id>_ActionId-1502326686364170488--1da8189e.1314adaac05.-7f49</con1:id>
+                                  <con3:service xsi:type="ref:BusinessServiceRef" ref="marketPlace/business/GestionProducto" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                                  <con3:operation>CustomObject3QueryPage</con3:operation>
+                                  <con3:request>
+                                    <con3:body wrapped="true">$consultarProductos</con3:body>
+                                    <con3:header>$header-crmod</con3:header>
+                                  </con3:request>
+                                  <con3:response>
+                                    <con3:body wrapped="true">body</con3:body>
+                                  </con3:response>
+                                  <con3:requestTransform/>
+                                  <con3:responseTransform>
+                                    <con3:replace varName="body" contents-only="true">
+                                      <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7aed</con1:id>
+                                      <con3:location>
+                                        <con1:xpathText>.</con1:xpathText>
+                                      </con3:location>
+                                      <con3:expr>
+                                        <con1:xqueryTransform>
+                                          <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductosClienteResponse"/>
+                                          <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                                            <con1:path>$body/*</con1:path>
+                                          </con1:param>
+                                        </con1:xqueryTransform>
+                                      </con3:expr>
+                                    </con3:replace>
+                                    <con3:assign varName="productos">
+                                      <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7ab8</con1:id>
+                                      <con3:expr>
+                                        <con1:xqueryText>$body/mar:consultarProductosClienteResponse</con1:xqueryText>
+                                      </con3:expr>
+                                    </con3:assign>
+                                  </con3:responseTransform>
+                                </con3:wsCallout>
+                              </con3:actions>
+                            </con3:case>
+                            <con3:default/>
+                          </con3:ifThenElse>
+                        </con3:responseTransform>
+                      </con3:wsCallout>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-2949255378583512860--3c98dc0c.130b07bc615.-7e0b</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$cliente</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7fd2</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClienteRequest"/>
+                            <con1:param name="consultarCliente1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-6004167589525639858-5055d9dd.1306bf788f8.-7fca</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClienteResponse"/>
+                            <con1:param name="accountWS_AccountQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:assign varName="cliente">
+                        <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7b08</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>$body/mar:consultarClienteResponse</con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:assign varName="xml_merge">
+                        <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7b0a</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText>&lt;products_clients xsi:noNamespaceSchemaLocation="sample-taxonomy.xsd" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">	
+		{$cliente}
+		{$productos}	
+&lt;/products_clients></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7a8f</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$xml_merge</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-7601529380730202790--7f363ded.13283777b89.-7aa1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xsltTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClienteMergeProductoClientes"/>
+                            <con1:input>$body/*</con1:input>
+                          </con1:xsltTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarContacto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="ConsultarContacto">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e76</con1:id>
+                    <con2:service ref="marketPlace/business/GestionContacto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>ContactQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e5b</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e5d</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e45</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarContactoRequest"/>
+                            <con1:param name="consultarContacto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7e34</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarContactoResponse"/>
+                            <con1:param name="contactWS_ContactQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarComision">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode3">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7fe5</con1:id>
+                    <con2:service ref="marketPlace/business/GestionCliente" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>AccountQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-6004167589525639858-5055d9dd.1306bf788f8.-7ff2</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7ea5</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-7935032750150287171--65b29b6a.1306be5cc4d.-7fb5</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarComisionRequest"/>
+                            <con1:param name="consultarComision1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-983121585252107099-66f56870.1306c951fbd.-7ff3</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarComisionResponse"/>
+                            <con1:param name="accountWS_AccountQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="RadicarSolicitud">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode1">
+                <con:request>PipelinePairNode1_request</con:request>
+                <con:response>PipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="RouteNode4">
+                <con:context/>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-7048839131110202586-23c64a9d.13075312c4d.-7732</con1:id>
+                    <con2:service ref="marketPlace/business/GestionSolicitud" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>ServiceRequestInsert</con2:operation>
+                    <con2:outboundTransform/>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-6726022297592424820--12416206.1308b4f13df.-7df5</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/RadicarSolicitudResponseId"/>
+                            <con1:param name="serviceRequestWS_ServiceRequestInsert_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="CrearProductos">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode7">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7dc4</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3Insert</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7da9</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d7d</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d7b</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosRequest"/>
+                            <con1:param name="crearProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d69</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/CrearProductosResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3Insert_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="CerrarSolicitud">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode6">
+                <con:request>PipelinePairNode6_request</con:request>
+                <con:response>PipelinePairNode6_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ActualizarSolicitud">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode2">
+                <con:request>PipelinePairNode2_request</con:request>
+                <con:response>PipelinePairNode2_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ActualizarEstadoSolicitud">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode3">
+                <con:request>PipelinePairNode3_request</con:request>
+                <con:response>PipelinePairNode3_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarClientesProducto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode8">
+                <con:request>PipelinePairNode8_request</con:request>
+                <con:response>PipelinePairNode8_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarProductosCliente">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode7">
+                <con:request>PipelinePairNode7_request</con:request>
+                <con:response>PipelinePairNode7_response</con:response>
+              </con:pipeline-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarProducto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode8">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d2c</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3QueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7d20</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cf7</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cfb</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductoRequest"/>
+                            <con1:param name="consultarProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace contents-only="true" varName="body">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ce4</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ConsultarProductoResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3QueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ModificarProducto">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode9">
+                <con:context>
+                  <con1:varNsDecl namespace="http://marketplace.losalpes.com.co" prefix="mar"/>
+                </con:context>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ccd</con1:id>
+                    <con2:service ref="marketPlace/business/GestionProducto" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>CustomObject3Update</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cbf</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7cb1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7ca1</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ModificarProductoRequest"/>
+                            <con1:param name="modificarProducto1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-5686237925758879913--55eb52ab.132634907ba.-7c96</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/gestionSolicitud/ModificarProductoResponse"/>
+                            <con1:param name="customObject3WS_CustomObject3Update_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="ConsultarClientes">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:route-node name="RouteNode10">
+                <con:context/>
+                <con:actions>
+                  <con2:route>
+                    <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e86</con1:id>
+                    <con2:service ref="marketPlace/business/GestionCliente" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                    <con2:operation>AccountQueryPage</con2:operation>
+                    <con2:outboundTransform>
+                      <con3:assign varName="header-crmod">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e4d</con1:id>
+                        <con3:expr>
+                          <con1:xqueryText><![CDATA[<soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+       <wsse:UsernameToken>
+                <wsse:Username>ASARMIEN2-18/ADMIN</wsse:Username>
+                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Ingenium1</wsse:Password>
+            </wsse:UsernameToken>        
+    </wsse:Security>
+</soapenv:Header>]]></con1:xqueryText>
+                        </con3:expr>
+                      </con3:assign>
+                      <con3:replace varName="header">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e3a</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryText>$header-crmod</con1:xqueryText>
+                        </con3:expr>
+                      </con3:replace>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e73</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClientesRequest"/>
+                            <con1:param name="consultarClientes1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:outboundTransform>
+                    <con2:responseTransform>
+                      <con3:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-4035018501070001419--339c862d.1329c16f92d.-7e63</con1:id>
+                        <con3:location>
+                          <con1:xpathText>.</con1:xpathText>
+                        </con3:location>
+                        <con3:expr>
+                          <con1:xqueryTransform>
+                            <con1:resource ref="marketPlace/proxy/transformaciones/GestionCliente/ConsultarClientesResponse"/>
+                            <con1:param name="accountWS_AccountQueryPage_Output1">
+                              <con1:path>$body/*</con1:path>
+                            </con1:param>
+                          </con1:xqueryTransform>
+                        </con3:expr>
+                      </con3:replace>
+                    </con2:responseTransform>
+                  </con2:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+
+    <element name="contacto" type="tns:Contacto"/>
+
+    <complexType name="Contacto">
+    	<sequence>
+    		<element name="numIdentificacion" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="tipoIdentificacion" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="nombre" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="direccion" type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="telefono" type="string"/>
+    		<element name="celular" type="string"/>
+    		<element name="email" type="string" minOccurs="1" maxOccurs="1"/>
+    	</sequence>
+    </complexType>
+</schema>

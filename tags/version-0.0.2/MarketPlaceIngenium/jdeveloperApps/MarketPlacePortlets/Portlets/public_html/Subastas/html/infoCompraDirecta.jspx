@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:h="http://java.sun.com/jsf/html">
+  <jsp:directive.page contentType="text/html;charset=windows-1252"/>
+  <f:view>
+    <af:document>
+      <af:form>
+        <h:panelGrid columns="4">
+            <h:outputLabel value="Número de Seguimiento:" id="ol1"/><h:outputText value="#{infoCompraDirecta.compraDirecta.numSeguimiento}"
+                                                              id="ot3"/>
+            <h:outputLabel value="Comercio:" id="ol2"/><h:outputText value="#{infoCompraDirecta.compraDirecta.comercio.nombre}"
+                                                              id="ot4"/>
+            <h:outputLabel value="Fecha máxima entrega:" id="ol5"/><h:outputText value="#{infoCompraDirecta.compraDirecta.fechaMaximaEntrega}"
+                                                                        id="ot6"/>          
+            
+            <legend>Item</legend>
+            <h:panelGrid columns="2" id="pg1">
+                <h:outputLabel value="Nombre producto:" id="ol4"/>
+                <h:outputText value="#{infoCompraDirecta.compraDirecta.item.producto.nombre}" id="ot1"/>
+                <h:outputLabel value="Referencia:" id="ol51"/>
+                <h:outputText value="#{infoCompraDirecta.compraDirecta.item.producto.referencia}"
+                              id="ot5"/>
+                <h:outputLabel value="Cantidad:" id="ol6"/>
+                <h:outputText value="#{infoCompraDirecta.compraDirecta.item.cantidad}" id="ot61"/>
+                <h:outputLabel value="Valor unitario:" id="ol7"/>
+                <h:inputText value="#{infoCompraDirecta.precio}" id="ot7" required="true"/>
+            </h:panelGrid>
+            
+            <af:commandButton text="Volver" id="cb1" action="#{infoCompraDirecta.volver_action}" immediate="true"/>
+            <af:commandButton text="Aprobar orden de compra" id="aprobar"
+                          action="#{infoCompraDirecta.aprobar}"/>
+            <af:commandButton text="Rechazar orden de compra" id="rechazar"
+                          action="#{infoCompraDirecta.rechazar}" immediate="true" />
+        </h:panelGrid>
+        
+      </af:form>
+    </af:document>
+  </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:listaSubasta-->
+</jsp:root>

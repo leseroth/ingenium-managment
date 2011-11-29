@@ -1,0 +1,505 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Oct 10 19:18:06 COT 2011
+  Author:  User
+  Type: BPEL 1.1 Process
+  Purpose: Asynchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="OrdenCompraSubasta"
+         targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompraSubasta/OrdenCompraSubasta"
+         xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoOrdenCompraSubasta/OrdenCompraSubasta"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://ws.pomanager.marketplace.losalpes.com.co/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://marketplace.losalpes.com.co/GestionOfertas"
+         xmlns:ns3="http://marketplace.losalpes.com.co"
+         xmlns:ns4="http://marketplace.losalpes.com.co/GestionCliente"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionCorreoElectronico">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+    <partnerLinks>
+        <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+        <partnerLink name="ordencomprasubasta_client" partnerLinkType="client:OrdenCompraSubasta" myRole="OrdenCompraSubastaProvider" partnerRole="OrdenCompraSubastaRequester"/>
+        <partnerLink name="GestionPOSubasta"
+                     partnerLinkType="ns1:PoManagerPoManagement_PL"
+                     partnerRole="PoManagerPoManagement_Role"/>
+        <partnerLink name="GestionSubasta"
+                     partnerLinkType="ns2:GestionSubasta_PL"
+                     partnerRole="GestionSubasta_Role"/>
+        <partnerLink name="GestionCliente"
+                     partnerLinkType="ns4:GestionCliente_PL"
+                     partnerRole="GestionCliente_Role"/>
+        <partnerLink name="GestionCorreoElectronico"
+                     partnerLinkType="ns5:GestionCorreoElectronico_PL"
+                     partnerRole="GestionCorreoElectronico_Role"/>
+        <partnerLink name="GestionSubastaNew"
+                     partnerLinkType="ns2:GestionSubasta_PL"
+                     partnerRole="GestionSubasta_Role"/>
+    </partnerLinks>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        VARIABLES                                                        
+        List of messages and XML documents used within this BPEL process 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <variables>
+        <!-- Reference to the message passed as input during initiation -->
+        <variable name="inputVariable" messageType="client:OrdenCompraSubastaRequestMessage"/>
+
+        <!-- Reference to the message that will be sent back to the requester during callback -->
+        <variable name="outputVariable" messageType="client:OrdenCompraSubastaResponseMessage"/>
+        <variable name="RegistroPO_registrarPO_InputVariable"
+                  messageType="ns1:registrarPO"/>
+        <variable name="RegistroPO_registrarPO_OutputVariable"
+                  messageType="ns1:registrarPOResponse"/>
+        <variable name="Invoke1_registrarOferta_InputVariable"
+                  messageType="ns2:registrarOfertaRequest"/>
+        <variable name="Invoke1_registrarOferta_OutputVariable"
+                  messageType="ns2:registrarOfertaResponse"/>
+        <variable name="CrearSubasta_registrarOferta_InputVariable"
+                  messageType="ns2:registrarOfertaRequest"/>
+        <variable name="CrearSubasta_registrarOferta_OutputVariable"
+                  messageType="ns2:registrarOfertaResponse"/>
+        <variable name="CrearSubasta_crearSubasta_InputVariable"
+                  messageType="ns2:crearSubastaRequest"/>
+        <variable name="CrearSubasta_crearSubasta_OutputVariable"
+                  messageType="ns2:crearSubastaResponse"/>
+        <variable name="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
+                  messageType="ns4:ConsultarClientesProductoRequest"/>
+        <variable name="ObtenerFabricantes_ConsultarClientesProducto_OutputVariable"
+                  messageType="ns4:ConsultarClientesProductoResponse"/>
+        <variable name="AsignarFabricantes_asignarFabricantesSubasta_InputVariable"
+                  messageType="ns2:asignarFabricantesSubastaRequest"/>
+        <variable name="AsignarFabricantes_asignarFabricantesSubasta_OutputVariable"
+                  messageType="ns2:asignarFabricantesSubastaResponse"/>
+        <variable name="CerrarSubasta_cerrarSubasta_InputVariable"
+                  messageType="ns2:cerrarSubastaRequest"/>
+        <variable name="CerrarSubasta_cerrarSubasta_OutputVariable"
+                  messageType="ns2:cerrarSubastaResponse"/>
+        <variable name="darGanadorSubasta_darGanadorSubasta_InputVariable"
+                  messageType="ns2:darGanadorSubastaRequest"/>
+        <variable name="darGanadorSubasta_darGanadorSubasta_OutputVariable"
+                  messageType="ns2:darGanadorSubastaResponse"/>
+        <variable name="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                  messageType="ns5:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns5:enviarCorreoElectronicoResponse"/>
+        <variable name="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                  messageType="ns5:enviarCorreoElectronicoRequest"/>
+        <variable name="EnviarCorreoFabricante_enviarCorreoElectronico_OutputVariable"
+                  messageType="ns5:enviarCorreoElectronicoResponse"/>
+        <variable name="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                  messageType="ns2:consultarSubastaOrdenCompraRequest"/>
+        <variable name="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                  messageType="ns2:consultarSubastaOrdenCompraResponse"/>
+    </variables>
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC                                               
+       Set of activities coordinating the flow of messages across the    
+       services integrated within this business process                  
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <sequence name="main">
+        <!-- Receive input from requestor. (Note: This maps to operation defined in OrdenCompraSubasta.wsdl) -->
+        <receive name="receiveInput" partnerLink="ordencomprasubasta_client" portType="client:OrdenCompraSubasta" operation="process" variable="inputVariable" createInstance="yes"/>
+
+        <!-- 
+          Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
+        -->
+        <assign name="RegistrarPOSubasta">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nitComercio"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/comercioBO/nit"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/comercioBO/id"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('estado')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/estado"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/id"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/id"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/fabricanteAtiendeBO/id"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('fabricante')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/fabricanteAtiendeBO/nit"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/fabricanteAtiendeBO/nombre"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('12')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/id"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('123')"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/precio"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaMaximaEntrega"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/tiempoFabricacion"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:emailComercio"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/fabricanteBO/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreComercio"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/comercioBO/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:cantidadProducto"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/cantidad"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreProducto"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:categoriaProducto"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/itemPOBOList/productoBO/categoria"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaMaximaEntrega"/>
+                <to variable="RegistroPO_registrarPO_InputVariable"
+                    part="parameters"
+                    query="/ns1:registrarPO/purchaseOrderBO/entrega"/>
+            </copy>
+        </assign>
+        <invoke name="RegistroPO" bpelx:invokeAsDetail="no"
+                inputVariable="RegistroPO_registrarPO_InputVariable"
+                outputVariable="RegistroPO_registrarPO_OutputVariable"
+                partnerLink="GestionPOSubasta"
+                portType="ns1:PoManagerPoManagement" operation="registrarPO"/>
+        <assign name="AsignarCrearSubasta">
+            <copy>
+                <from variable="RegistroPO_registrarPO_OutputVariable"
+                      part="parameters"
+                      query="/ns1:registrarPOResponse/return"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/numSeguimiento"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nitComercio"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/comercio/nit"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:emailComercio"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/comercio/email"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreProducto"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/item/producto/nombre"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:categoriaProducto"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/item/producto/categoria"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:cantidadProducto"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/item/cantidad"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaMaximaSubasta"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/tiempoSubasta"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaMaximaSubasta"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:fechaMaxSubasta"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fecha"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters" query="/ns3:crearSubasta/ns3:po/fecha"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:fechaMaximaEntrega"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/fechaMaxima"/>
+            </copy>
+        </assign>
+        <invoke name="CrearSubasta" bpelx:invokeAsDetail="no"
+                inputVariable="CrearSubasta_crearSubasta_InputVariable"
+                outputVariable="CrearSubasta_crearSubasta_OutputVariable"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="crearSubasta"/>
+        <assign name="AsignarObtenerFabricantes">
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:nombreProducto"/>
+                <to variable="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
+                    part="parameters"
+                    query="/ns3:consultarClientesProducto/ns3:nombreProducto"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('Fabricante')"/>
+                <to variable="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
+                    part="parameters"
+                    query="/ns3:consultarClientesProducto/ns3:tipoCliente"/>
+            </copy>
+        </assign>
+        <invoke name="ObtenerFabricantes" bpelx:invokeAsDetail="no"
+                inputVariable="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
+                outputVariable="ObtenerFabricantes_ConsultarClientesProducto_OutputVariable"
+                partnerLink="GestionCliente" portType="ns4:GestionCliente"
+                operation="ConsultarClientesProducto"/>
+        <assign name="Transform1">
+            <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+                <from expression="ora:doXSLTransformForDoc('xsl/Transformation_2.xsl', $CrearSubasta_crearSubasta_OutputVariable.parameters, 'ObtenerFabricantes_ConsultarClientesProducto_OutputVariable.parameters', $ObtenerFabricantes_ConsultarClientesProducto_OutputVariable.parameters)"/>
+                <to variable="AsignarFabricantes_asignarFabricantesSubasta_InputVariable"
+                    part="parameters"/>
+            </copy>
+        </assign>
+        <invoke name="AsignarFabricantes" bpelx:invokeAsDetail="no"
+                inputVariable="AsignarFabricantes_asignarFabricantesSubasta_InputVariable"
+                outputVariable="AsignarFabricantes_asignarFabricantesSubasta_OutputVariable"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="asignarFabricantesSubasta"/>
+        <wait name="EsperarFechaSubastaFinal"
+              until="bpws:getVariableData('inputVariable','payload','/client:process/client:fechaMaximaSubasta')"/>
+        <assign name="AsiggnarCerrarSubasta">
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="CerrarSubasta_cerrarSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:cerrarSubasta/ns3:numSeguimientoSub"/>
+            </copy>
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                    part="parameters"
+                    query="/ns3:consultarSubastaOrdenCompra/ns3:numSeguimientoPO"/>
+            </copy>
+            <copy>
+                <from variable="CrearSubasta_crearSubasta_OutputVariable"
+                      part="parameters"
+                      query="/ns3:crearSubastaResponse/ns3:numSeguimientoSub"/>
+                <to variable="darGanadorSubasta_darGanadorSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:darGanadorSubasta/ns3:numSeguimientoSub"/>
+            </copy>
+        </assign>
+        <invoke name="CerrarSubasta" bpelx:invokeAsDetail="no"
+                inputVariable="CerrarSubasta_cerrarSubasta_InputVariable"
+                outputVariable="CerrarSubasta_cerrarSubasta_OutputVariable"
+                partnerLink="GestionSubasta" portType="ns2:GestionSubasta"
+                operation="cerrarSubasta"/>
+        <invoke name="RecuperarSubasta"
+                inputVariable="RecuperarSubasta_consultarSubastaOrdenCompra_InputVariable"
+                outputVariable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable" partnerLink="GestionSubastaNew"
+                portType="ns2:GestionSubasta"
+                operation="consultarSubastaOrdenCompra"
+                bpelx:invokeAsDetail="no"/>
+        <assign name="AsignarEnviarCorreo">
+            <copy>
+                <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:from"/>
+            </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:emailComercio"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:bcc"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:from"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium2011')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:password"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Una de sus subastas ha finalizado.&lt;br/>A continuación se adjunta información de la misma:&lt;br/>&lt;br/>Numero seguimiento:{0}&lt;br/>Correo fabricante ganador: {1}&lt;br/> Informacion para el envio: {2}&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/fabricante/email,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/mensaje)"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:message"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Una de sus subastas ha finalizado.&lt;br/>A continuación se adjunta información de la misma:&lt;br/>&lt;br/>Numero seguimiento:{0}&lt;br/>Correo fabricante ganador: {1}&lt;br/> Informacion para el envio: {2}&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/fabricante/email,$RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable.parameters/ns3:subasta/mejor/mensaje)"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:message"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ingenium2011')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:password"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('SUBASTA {0} TERMINADA',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub)"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:subject"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('SUBASTA {0} TERMINADA',$CrearSubasta_crearSubasta_OutputVariable.parameters/ns3:numSeguimientoSub)"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:subject"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ercos41@gmail.com')"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:cc"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('ercos41@gmail.com')"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:cc"/>
+            </copy>
+            <copy>
+                <from variable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                      part="parameters"
+                      query="/ns3:consultarSubastaOrdenCompraResponse/ns3:subasta/ordenCompra/comercio/email"/>
+                <to variable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:to"/>
+            </copy>
+            <copy>
+                <from variable="RecuperarSubasta_consultarSubastaOrdenCompra_OutputVariable"
+                      part="parameters"
+                      query="/ns3:consultarSubastaOrdenCompraResponse/ns3:subasta/mejor/fabricante/email"/>
+                <to variable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                    part="parameters"
+                    query="/ns3:enviarCorreoElectronico/ns3:to"/>
+            </copy>
+        </assign>
+        <invoke name="EnviarCorreoComercio" bpelx:invokeAsDetail="no"
+                inputVariable="EnviarCorreoComercio_enviarCorreoElectronico_InputVariable"
+                outputVariable="EnviarCorreoComercio_enviarCorreoElectronico_OutputVariable"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns5:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico"/>
+        <invoke name="EnviarCorreoFabricante"
+                inputVariable="EnviarCorreoFabricante_enviarCorreoElectronico_InputVariable"
+                outputVariable="EnviarCorreoFabricante_enviarCorreoElectronico_OutputVariable"
+                partnerLink="GestionCorreoElectronico"
+                portType="ns5:GestionCorreoElectronico"
+                operation="enviarCorreoElectronico" bpelx:invokeAsDetail="no"/>
+        <invoke name="callbackClient" partnerLink="ordencomprasubasta_client" portType="client:OrdenCompraSubastaCallback" operation="processResponse" inputVariable="outputVariable"/>
+    </sequence>
+</process>

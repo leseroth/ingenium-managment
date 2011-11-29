@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:7001/marketPlace/proxy/GestionCorreoElectronico?wsdl" uri="src/conf/xml-resources/web-service-references/GestionCorreoElectronico/wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.wsdl"/>
+    <system systemId="http://localhost:7001/marketPlace/proxy/GestionCorreoElectronico?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionCorreoElectronico%2FGestionCorreoElectronico" uri="src/conf/xml-resources/web-service-references/GestionCorreoElectronico/wsdl/localhost_7001/marketPlace/proxy/GestionCorreoElectronico.schema/marketplace/proxy/wsdls/gestioncorreoelectronico/gestioncorreoelectronico.xsd"/>
+    <system systemId="http://localhost:8148/MailSendingManagementService/MailSendingManagement?wsdl" uri="src/conf/xml-resources/web-service-references/MailSendingManagement/wsdl/localhost_8148/MailSendingManagementService/MailSendingManagement.wsdl"/>
+    <system systemId="http://localhost:8148/MailSendingManagementService/MailSendingManagement?xsd=1" uri="src/conf/xml-resources/web-service-references/MailSendingManagement/wsdl/localhost_8148/MailSendingManagementService/MailSendingManagement.xsd_1.xsd"/>
+</catalog>
+
+

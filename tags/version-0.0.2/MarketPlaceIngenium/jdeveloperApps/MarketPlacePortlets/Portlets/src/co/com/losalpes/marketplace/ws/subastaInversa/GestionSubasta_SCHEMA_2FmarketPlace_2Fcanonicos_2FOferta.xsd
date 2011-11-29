@@ -1,0 +1,19 @@
+<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema"
+     xmlns:tns="http://marketplace.losalpes.com.co">
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FFabricante.xsd"/>
+    <include schemaLocation="GestionSubasta_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
+    <complexType name="Oferta">
+        <sequence>
+            <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+            <element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="idSubasta" type="string" minOccurs="1"/>
+            <element name="horarioEntrega" type="dateTime" minOccurs="1"/>
+            <element name="fabricante" type="tns:Fabricante" minOccurs="1"/>
+            <element name="item" type="tns:Item" minOccurs="1" maxOccurs="1"/>
+            <element name="mensaje" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="valor" type="long" minOccurs="0"/>
+            <element name="estadoOferta" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <element name="oferta" type="tns:Oferta"/>
+</schema>

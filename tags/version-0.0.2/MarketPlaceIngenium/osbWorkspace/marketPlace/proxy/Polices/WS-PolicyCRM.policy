@@ -1,0 +1,14 @@
+<wsp:Policy wsu:Id="WS-PolicyCRM-example"
+	xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+	<sp:Strict wsp:Optional="true"/>
+	<wssp:Identity xmlns:wssp="http://www.bea.com/wls90/security/policy">
+	<wssp:SupportedTokens>
+	<wssp:SecurityToken TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#UsernameToken">
+	<wssp:UsePassword Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText"/>
+	</wssp:SecurityToken>
+	</wssp:SupportedTokens>
+	</wssp:Identity>
+</wsp:Policy>	
+	

@@ -1,0 +1,70 @@
+<wsdl:definitions
+     name="RegistroEntidadInterNal"
+     targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://User-PC:7001/soa-infra/services/default/ProcesoRegistroInterNal!1.66/RegistroEntidadInterNal.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="RegistroEntidadInterNal">
+        <plnk:role name="RegistroEntidadInterNalRequester">
+            <plnk:portType name="client:RegistroEntidadInterNalCallback"/>
+        </plnk:role>
+        <plnk:role name="RegistroEntidadInterNalProvider">
+            <plnk:portType name="client:RegistroEntidadInterNal"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsp:Policy xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+         wsu:Id="wsaddr_policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"/>
+    </wsp:Policy>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"
+                 schemaLocation="RegistroEntidadInterNal.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="RegistroEntidadInterNalRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="RegistroEntidadInterNalResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="RegistroEntidadInterNal">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:RegistroEntidadInterNalRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="RegistroEntidadInterNalCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:RegistroEntidadInterNalResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RegistroEntidadInterNalCallbackBinding" type="client:RegistroEntidadInterNalCallback">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="processResponse">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="processResponse"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="RegistroEntidadInterNalBinding" type="client:RegistroEntidadInterNal">
+        <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#wsaddr_policy"
+             wsdl:required="false"/>
+        <wsdl:operation name="process">
+            <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="registroentidadinternal_client_ep">
+        <wsdl:port name="RegistroEntidadInterNal_pt" binding="client:RegistroEntidadInterNalBinding">
+            <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://User-PC:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
