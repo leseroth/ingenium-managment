@@ -29,4 +29,6 @@
           uri="../co/com/losalpes/marketplace/ws/gestionCliente/GestionClienteSOAPQSService.wsdl"/>
   <system systemId="http://portal.marketplace.losalpes.com.co:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement?wsdl"
           uri="../co/com/losalpes/marketplace/ws/ldap/LDAPAuthenticationManagementService.wsdl"/>
+  <system systemId="http://User-PC:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL"
+          uri="../co/com/losalpes/marketplace/ws/registroInternal/registroentidadinternal_client_ep.wsdl"/>
 </catalog>

@@ -76,6 +76,11 @@
     <servlet-class>com.oracle.xmlns.marketplace_jws.procesosubastainversa.subastainversa.SubastaInversaCallbackImpl</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet>
+    <servlet-name>RegistroEntidadInterNalCallbackImplPort</servlet-name>
+    <servlet-class>com.oracle.xmlns.marketplace.procesoregistrointernal.registroentidadinternal.RegistroEntidadInterNalCallbackImpl</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
@@ -115,6 +120,10 @@
   <servlet-mapping>
     <servlet-name>SubastaInversaCallbackImplPort</servlet-name>
     <url-pattern>/SubastaInversaCallbackImplPort</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegistroEntidadInterNalCallbackImplPort</servlet-name>
+    <url-pattern>/RegistroEntidadInterNalCallbackImplPort</url-pattern>
   </servlet-mapping>
   <mime-mapping>
     <extension>swf</extension>

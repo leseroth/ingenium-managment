@@ -13,6 +13,9 @@ public class ClienteVO {
     private Double calificacion;
     private String razonSocial;
     private String estado;
+    private String categoria;
+    private String codPais;
+    private String codPostal;
     private List<ContactoVO> contactos;
     private CuentaFacturacionVO cuentaFact;
     private SolicitudRegistroVO solicitudRegistro;
@@ -100,6 +103,31 @@ public class ClienteVO {
 
     public String getEstado() {
         return estado;
+    }
+    
+    public void setCategoria(String categoria)
+    {
+        this.categoria  = categoria;
+    }
+    public String getCategoria()
+    {
+        return this.categoria;
+    }
+    public void setCodPais(String codPais)
+    {
+        this.codPais  = codPais;
+    }
+    public String getCodPais()
+    {
+        return this.codPais;
+    }
+    public void setCodPostal(String codPostal)
+    {
+        this.codPostal  = codPostal;
+    }
+    public String getCodPostal()
+    {
+        return this.codPostal;
     }
 
     public void setContactos(List<ContactoVO> contactos) {
