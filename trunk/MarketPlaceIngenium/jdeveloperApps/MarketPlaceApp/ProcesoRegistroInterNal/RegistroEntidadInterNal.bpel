@@ -30,7 +30,11 @@
          xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
          xmlns:ns3="http://marketplace.losalpes.com.co/GestionCorreoElectronico"
          xmlns:ns4="http://marketplace.losalpes.com.co/VerificacionCrediticia"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://marketplace.losalpes.com.co/GestionFacturacion"
+         xmlns:ns6="http://ws.ldap.marketplace.losalpes.com.co/"
+         xmlns:ns7="http://ws.pomanager.marketplace.losalpes.com.co/"
+         xmlns:ns8="http://ws.transact.marketplace.losalpes.com.co/">
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         PARTNERLINKS                                                      
@@ -56,6 +60,18 @@
         <partnerLink name="VerificacionCrediticia"
                      partnerLinkType="ns4:VerificacionCrediticia_PL"
                      partnerRole="VerificacionCrediticia_Role"/>
+        <partnerLink name="GestionFacturacion"
+                     partnerLinkType="ns5:GestionFacturacion_PL"
+                     partnerRole="GestionFacturacion_Role"/>
+        <partnerLink name="GestionUsuario"
+                     partnerLinkType="ns6:LDAPAuthenticationManagement_PL"
+                     partnerRole="LDAPAuthenticationManagement_Role"/>
+        <partnerLink name="GestionClientePO"
+                     partnerLinkType="ns7:PoManagerPoManagement_PL"
+                     partnerRole="PoManagerPoManagement_Role"/>
+        <partnerLink name="GestionClienteTransact"
+                     partnerLinkType="ns8:TransactAuctionManagement_PL"
+                     partnerRole="TransactAuctionManagement_Role"/>
     </partnerLinks>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,11 +143,6 @@
                   messageType="ns1:ModificarClienteRequest"/>
         <variable name="ModificarCliente_OutputVariable"
                   messageType="ns1:ModificarClienteResponse"/>
-        <variable name="conf" type="xsd:boolean"/>
-        <variable name="data" type="xsd:string"/>
-        <variable name="clint" type="xsd:boolean"/>
-        <variable name="anti" type="xsd:boolean"/>
-        <variable name="inter" type="xsd:boolean"/>
         <variable name="VerificarListaInternacional_InputVariable"
                   messageType="ns4:VerificarListaInternacional"/>
         <variable name="VerificarListaInternacional_OutputVariable"
@@ -160,6 +171,35 @@
                   messageType="ns1:ModificarProductoRequest"/>
         <variable name="ActivarProducto_ModificarProducto_OutputVariable"
                   messageType="ns1:ModificarProductoResponse"/>
+        <variable name="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                  messageType="ns5:crearCuentaFacturacionRequest"/>
+        <variable name="CrearCuentaFacturacion_crearCuentaFacturacion_OutputVariable"
+                  messageType="ns5:crearCuentaFacturacionResponse"/>
+        <variable name="indice" type="xsd:int"/>
+        <variable name="CrearUsuario_crearUsuario_InputVariable"
+                  messageType="ns6:crearUsuario"/>
+        <variable name="CrearUsuario_crearUsuario_OutputVariable"
+                  messageType="ns6:crearUsuarioResponse"/>
+        <variable name="CrearClientePO_crearCliente_InputVariable"
+                  messageType="ns7:crearCliente"/>
+        <variable name="CrearClientePO_crearCliente_OutputVariable"
+                  messageType="ns7:crearClienteResponse"/>
+        <variable name="CrearClienteTransact_crearCliente_InputVariable"
+                  messageType="ns8:crearCliente"/>
+        <variable name="CrearClienteTransact_crearCliente_OutputVariable"
+                  messageType="ns8:crearClienteResponse"/>
+        <variable name="ActualizarUsuario_actualizarUsuario_InputVariable"
+                  messageType="ns6:actualizarUsuario"/>
+        <variable name="ActualizarUsuario_actualizarUsuario_OutputVariable"
+                  messageType="ns6:actualizarUsuarioResponse"/>
+        <variable name="ActualizarClientePO_actualizarCliente_InputVariable"
+                  messageType="ns7:actualizarCliente"/>
+        <variable name="ActualizarClientePO_actualizarCliente_OutputVariable"
+                  messageType="ns7:actualizarClienteResponse"/>
+        <variable name="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                  messageType="ns8:actualizarCliente"/>
+        <variable name="ActualizarClienteTransact_actualizarCliente_OutputVariable"
+                  messageType="ns8:actualizarClienteResponse"/>
     </variables>
     <faultHandlers>
         <catch faultName="bpelx:remoteFault">
@@ -528,7 +568,7 @@
             <otherwise>
                 <sequence>
                     <switch name="Switch3">
-                        <case condition="bpws:getVariableData('ConsultarCliente_ConsultarCliente_OutputVariable','parameters','/ns2:consultarClienteResponse/ns2:cliente/estado') = 'Inactive'">
+                        <case condition="bpws:getVariableData('ConsultarCliente_ConsultarCliente_OutputVariable','parameters','/ns2:consultarClienteResponse/ns2:cliente/estado') = 'Active'">
                             <sequence>
                                 <assign name="AsignarActualizarCliente">
                                     <copy>
@@ -540,18 +580,18 @@
                                             query="/ns2:modificarCliente/ns2:cliente/nombre"/>
                                     </copy>
                                     <copy>
-                                        <from expression="'Inactivo'"/>
-                                        <to variable="ActualizarCliente_ModificarCliente_InputVariable"
-                                            part="parameters"
-                                            query="/ns2:modificarCliente/ns2:cliente/estado"/>
-                                    </copy>
-                                    <copy>
                                         <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
                                               part="parameters"
                                               query="/ns2:consultarClienteResponse/ns2:cliente/nit"/>
                                         <to variable="ActualizarCliente_ModificarCliente_InputVariable"
                                             part="parameters"
                                             query="/ns2:modificarCliente/ns2:cliente/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="'Activo'"/>
+                                        <to variable="ActualizarCliente_ModificarCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:modificarCliente/ns2:cliente/estado"/>
                                     </copy>
                                     <copy>
                                         <from variable="ConsultarCliente_ConsultarCliente_OutputVariable"
@@ -647,6 +687,189 @@
                                         portType="ns1:GestionCliente"
                                         operation="ModificarCliente"
                                         bpelx:invokeAsDetail="no"/>
+                                <scope name="Scope1">
+                                    <sequence name="Sequence16">
+                                        <assign name="AsignarActualizarClientePO">
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nit"/>
+                                                <to variable="ActualizarClientePO_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns7:actualizarCliente/nit"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nombre"/>
+                                                <to variable="ActualizarClientePO_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns7:actualizarCliente/nombre"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:tipo"/>
+                                                <to variable="ActualizarClientePO_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns7:actualizarCliente/rol"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ActualizarClientePO"
+                                                bpelx:invokeAsDetail="no"
+                                                inputVariable="ActualizarClientePO_actualizarCliente_InputVariable"
+                                                outputVariable="ActualizarClientePO_actualizarCliente_OutputVariable"
+                                                partnerLink="GestionClientePO"
+                                                portType="ns7:PoManagerPoManagement"
+                                                operation="actualizarCliente"/>
+                                        <assign name="AsignarActualizarClienteTransact">
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nit"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/nit"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nombre"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/nombre"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:direccion"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/direccion"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:telefono"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/telefono"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:email"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/email"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:CodPais"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/codPais"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:CodPostal"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/codPostal"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:tipo"/>
+                                                <to variable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns8:actualizarCliente/rol"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ActualizarClienteTransact"
+                                                bpelx:invokeAsDetail="no"
+                                                inputVariable="ActualizarClienteTransact_actualizarCliente_InputVariable"
+                                                outputVariable="ActualizarClienteTransact_actualizarCliente_OutputVariable"
+                                                partnerLink="GestionClienteTransact"
+                                                portType="ns8:TransactAuctionManagement"
+                                                operation="actualizarCliente"/>
+                                        <assign name="AsignarActualizarUsuario">
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nit"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/nit"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:nombre"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/nombre"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:direccion"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/direccion"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:telefono"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/telefono"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:email"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/email"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:CodPais"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/codPais"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:CodPostal"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/codPostal"/>
+                                            </copy>
+                                            <copy>
+                                                <from variable="inputVariable"
+                                                      part="payload"
+                                                      query="/client:process/client:tipo"/>
+                                                <to variable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                    part="parameters"
+                                                    query="/ns6:actualizarUsuario/rol"/>
+                                            </copy>
+                                        </assign>
+                                        <invoke name="ActualizarUsuario"
+                                                bpelx:invokeAsDetail="no"
+                                                inputVariable="ActualizarUsuario_actualizarUsuario_InputVariable"
+                                                outputVariable="ActualizarUsuario_actualizarUsuario_OutputVariable"
+                                                partnerLink="GestionUsuario"
+                                                portType="ns6:LDAPAuthenticationManagement"
+                                                operation="actualizarUsuario"/>
+                                    </sequence>
+                                </scope>
                                 <assign name="AsignarManejoContactos">
                                     <copy>
                                         <from expression="1"/>
@@ -1493,6 +1716,308 @@
                             </assign>
                                     </sequence>
                                 </while>
+                                <assign name="AsignarCuentaFacturacion">
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nit"/>
+                                        <to variable="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:crearCuentaFacturacion/ns2:cliente/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nombre"/>
+                                        <to variable="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:crearCuentaFacturacion/ns2:cliente/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:email"/>
+                                        <to variable="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:crearCuentaFacturacion/ns2:cliente/email"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:direccion"/>
+                                        <to variable="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:crearCuentaFacturacion/ns2:cliente/direccion"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="CrearCuentaFacturacion"
+                                        bpelx:invokeAsDetail="no"
+                                        inputVariable="CrearCuentaFacturacion_crearCuentaFacturacion_InputVariable"
+                                        outputVariable="CrearCuentaFacturacion_crearCuentaFacturacion_OutputVariable"
+                                        partnerLink="GestionFacturacion"
+                                        portType="ns5:GestionFacturacion"
+                                        operation="crearCuentaFacturacion"/>
+                                <assign name="AsginarDatosClientePO">
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nit"/>
+                                        <to variable="CrearClientePO_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns7:crearCliente/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nombre"/>
+                                        <to variable="CrearClientePO_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns7:crearCliente/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:tipo"/>
+                                        <to variable="CrearClientePO_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns7:crearCliente/rol"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="CrearClientePO"
+                                        bpelx:invokeAsDetail="no"
+                                        inputVariable="CrearClientePO_crearCliente_InputVariable"
+                                        outputVariable="CrearClientePO_crearCliente_OutputVariable"
+                                        partnerLink="GestionClientePO"
+                                        portType="ns7:PoManagerPoManagement"
+                                        operation="crearCliente"/>
+                                <assign name="AsignarDatosClienteTransact">
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nit"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nombre"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:direccion"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/direccion"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:telefono"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/telefono"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:email"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/email"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:tipo"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/rol"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:CodPais"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/codPais"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:CodPostal"/>
+                                        <to variable="CrearClienteTransact_crearCliente_InputVariable"
+                                            part="parameters"
+                                            query="/ns8:crearCliente/codPostal"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="CrearClienteTransact"
+                                        inputVariable="CrearClienteTransact_crearCliente_InputVariable"
+                                        outputVariable="CrearClienteTransact_crearCliente_OutputVariable"
+                                        partnerLink="GestionClienteTransact"
+                                        portType="ns8:TransactAuctionManagement"
+                                        operation="crearCliente"
+                                        bpelx:invokeAsDetail="no"/>
+                                <assign name="AsignarEnvioCorreoElectronico">
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:email"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format('ingenium2011')"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="'Solicitud Aceptada'"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Estimado(a) {0}:&lt;br/>Nos es grato informarle que su solicitud para registrase en el MarketPlace de los Alpes ha sido aceptada. Dentro de poco recibira un correo electrónico con la información de login al sistema. No olvide que para utilizar el sistema, debe ingresar al portal del MarketPlace (http://portal.marketplace.losalpes.com.co).&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'))"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="EnviarCorreo"
+                                        inputVariable="EnviarCorreoElectronico_InputVariable"
+                                        outputVariable="EnviarCorreoElectronico_OutputVariable"
+                                        partnerLink="GestionCorreoElectronico"
+                                        portType="ns3:GestionCorreoElectronico"
+                                        operation="enviarCorreoElectronico"
+                                        bpelx:invokeAsDetail="no"/>
+                                <assign name="AsignarDatosUsuario">
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:tipo"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/rol"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nit"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/nit"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:email"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/email"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:telefono"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/telefono"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:CodPais"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/codPais"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:CodPostal"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/codPostal"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:nombre"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/nombre"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:direccion"/>
+                                        <to variable="CrearUsuario_crearUsuario_InputVariable"
+                                            part="parameters"
+                                            query="/ns6:crearUsuario/direccion"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="CrearUsuario"
+                                        bpelx:invokeAsDetail="no"
+                                        inputVariable="CrearUsuario_crearUsuario_InputVariable"
+                                        outputVariable="CrearUsuario_crearUsuario_OutputVariable"
+                                        partnerLink="GestionUsuario"
+                                        portType="ns6:LDAPAuthenticationManagement"
+                                        operation="crearUsuario"/>
+                                <assign name="AsignarEnvioCorreoElectronico">
+                                    <copy>
+                                        <from expression="ora:format('ingenium.uniandes@gmail.com')"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:from"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format('ingenium2011')"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:password"/>
+                                    </copy>
+                                    <copy>
+                                        <from variable="inputVariable"
+                                              part="payload"
+                                              query="/client:process/client:email"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:to"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="'Credenciales ingreso portal MPLA'"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:subject"/>
+                                    </copy>
+                                    <copy>
+                                        <from expression="ora:format('&lt;html>&lt;body>Marketplace de los Alpes informa:&lt;br/>&lt;br/>Estimado(a) {0}:&lt;br/> A continuación adjuntamos información de login al sistema. &lt;br/>&lt;br/>Usuario: {1}&lt;br/>Contraseña: {2}&lt;br/> Para utilizar el sistema, ingresar al portal del MarketPlace (http://portal.marketplace.losalpes.com.co).&lt;br/>&lt;br/>Gracias&lt;br/>Este es un mensaje autogenerado. Por favor no responda este mensaje.&lt;/body>&lt;/html>',bpws:getVariableData('inputVariable','payload','/client:process/client:nombre'),bpws:getVariableData('CrearUsuario_crearUsuario_OutputVariable','parameters','/ns6:crearUsuarioResponse/return/login'),bpws:getVariableData('CrearUsuario_crearUsuario_OutputVariable','parameters','/ns6:crearUsuarioResponse/return/password'))"/>
+                                        <to variable="EnviarCorreoElectronico_InputVariable"
+                                            part="parameters"
+                                            query="/ns2:enviarCorreoElectronico/ns2:message"/>
+                                    </copy>
+                                </assign>
+                                <invoke name="EnviarCorreo"
+                                        inputVariable="EnviarCorreoElectronico_InputVariable"
+                                        outputVariable="EnviarCorreoElectronico_OutputVariable"
+                                        partnerLink="GestionCorreoElectronico"
+                                        portType="ns3:GestionCorreoElectronico"
+                                        operation="enviarCorreoElectronico"
+                                        bpelx:invokeAsDetail="no"/>
                             </sequence>
                         </case>
                         <otherwise>
@@ -1542,7 +2067,7 @@
                                             query="/ns2:enviarCorreoElectronico/ns2:password"/>
                                     </copy>
                                     <copy>
-                                        <from expression="'Afiliación Rechazada'"/>
+                                        <from expression="'Solicitud Rechazada'"/>
                                         <to variable="EnviarCorreoElectronico_InputVariable"
                                             part="parameters"
                                             query="/ns2:enviarCorreoElectronico/ns2:subject"/>
