@@ -44,8 +44,10 @@ import co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.PurchaseOrderDirect_ptClient;
 import co.com.losalpes.marketplace.ws.registro.RegistroEntidad;
 import co.com.losalpes.marketplace.ws.registro.RegistroEntidad_ptClient;
-import co.com.losalpes.marketplace.ws.registro.types.ContactoCliente;
-import co.com.losalpes.marketplace.ws.registro.types.ProductoSolicitud;
+//import co.com.losalpes.marketplace.ws.registro.types.ContactoCliente;
+import co.com.losalpes.marketplace.ws.registroInternal.types.ContactoCliente;
+//import co.com.losalpes.marketplace.ws.registro.types.ProductoSolicitud;
+import co.com.losalpes.marketplace.ws.registroInternal.types.ProductoSolicitud;
 import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat;
 import co.com.losalpes.marketplace.ws.replicacionPricat.ReplicacionPricat_ptClient;
 import co.com.losalpes.marketplace.ws.retornoMaterial.ReturnMaterialAdvice_ptClient;
@@ -80,6 +82,8 @@ import co.com.losalpes.marketplace.ws.types.SolicitudRegistro;
 import co.com.losalpes.marketplace.ws.types.Subasta;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.types.Aprobacion;
 import co.com.losalpes.marketplace.ws.ordenCompraDirecta.types.Process;
+import co.com.losalpes.marketplace.ws.registroInternal.types.*;
+import co.com.losalpes.marketplace.ws.registroInternal.*;
 
 import co.com.losalpes.marketplace.ws.types.BussinessException;
 import co.com.losalpes.marketplace.ws.types.FabricanteBO;
@@ -110,6 +114,9 @@ public final class ServicioProxy {
     private GestionFacturacion gestionFacturacion; 
     private SubastaInversa subastaInversa;
     private RegistroEntidad registroEntidad;
+    private RegistroEntidadInterNal registroEntidadInternal;
+    
+    
     private co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta purchaseOrder;
     private co.com.losalpes.marketplace.ws.avisoDespacho.DispatchAdvice dispatchAdvice;
     private co.com.losalpes.marketplace.ws.retornoMaterial.ReturnMaterialAdvice returnMaterialAdvice;
@@ -175,11 +182,11 @@ public final class ServicioProxy {
             }
         return subastaInversa;
         }
-    private RegistroEntidad getRegistroEntidad(){
-        if(registroEntidad==null){
-                registroEntidad=RegistroEntidad_ptClient.getRegistroEntidad();    
+    private RegistroEntidadInterNal getRegistroEntidad(){
+        if(registroEntidadInternal==null){
+                registroEntidadInternal =  RegistroEntidadInterNal_ptClient.getRegistroEntidad();    
             }
-        return registroEntidad;
+        return registroEntidadInternal;
         }
     private co.com.losalpes.marketplace.ws.ordenCompra.OrdenCompraSubasta getPurchaseOrder(){
         if(purchaseOrder==null){
@@ -359,8 +366,9 @@ public final class ServicioProxy {
             for(ProductoVO productovo:cliente.getProductos()){
                 productos.add(transformarProductoSolicitud(productovo));
                 }
-      getRegistroEntidad().process(cliente.getNit(), cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(),cliente.getEmail(), cliente.getTipo(),cliente.getRazonSocial(), contactos, toXMLGregorianCalendar(new Date()),null, productos);
-      }
+      //getRegistroEntidad().process(cliente.getNit(), cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(),cliente.getEmail(), cliente.getTipo(),cliente.getRazonSocial(), contactos, toXMLGregorianCalendar(new Date()),null, productos);
+        getRegistroEntidad().process(cliente.getNit(), cliente.getNombre(), cliente.getDireccion(), cliente.getTelefono(), cliente.getEmail(), cliente.getTipo(), cliente.getRazonSocial(), contactos, toXMLGregorianCalendar(new Date()), null, productos,cliente.getCategoria(), cliente.getCodPais(), cliente.getCodPostal());
+    }
   
   /**
    * Persistir una oferta 

@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="GestionCliente"
+                     namespaceURI="http://marketplace.losalpes.com.co/GestionCliente"/>
+      <port-info>
+         <wsdl-port localpart="GestionClienteSOAP"
+                    namespaceURI="http://marketplace.losalpes.com.co/GestionCliente"/>
+         <runtime/>
+         <operations>
+            <operation name="crearCliente"/>
+            <operation name="crearContactos"/>
+            <operation name="consultarCliente"/>
+            <operation name="consultarClientes"/>
+            <operation name="consultarComision"/>
+            <operation name="modificarCliente"/>
+            <operation name="modificarComision"/>
+            <operation name="consultarClientesProducto"/>
+            <operation name="radicarSolicitud"/>
+            <operation name="actualizarSolicitud"/>
+            <operation name="actualizarEstadoCliente"/>
+            <operation name="actualizarEstadoSolicitud"/>
+            <operation name="cerrarSolicitud"/>
+            <operation name="consultarProductosCliente"/>
+            <operation name="consultarContacto"/>
+            <operation name="crearProductos"/>
+            <operation name="modificarContacto"/>
+            <operation name="consultarProducto"/>
+            <operation name="modificarProducto"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>
