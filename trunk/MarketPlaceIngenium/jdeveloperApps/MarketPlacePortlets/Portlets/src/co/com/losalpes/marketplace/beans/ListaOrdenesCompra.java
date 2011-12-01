@@ -18,6 +18,8 @@ import javax.faces.context.FacesContext;
 
 import javax.portlet.PortletRequest;
 
+import co.com.losalpes.marketplace.ws.ldapRol.*;
+
 
 public class ListaOrdenesCompra {
     List<OrdenCompraVO> ordenes;
@@ -47,8 +49,14 @@ public class ListaOrdenesCompra {
         
         //boolean bcomercio=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Comercio");
         //boolean bfabricante=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Fabricante");
-        
-        String rol = "Fabricante";//UsuariosUtils.getInstance().obtenerRolUsuario(usuario);
+        String rol ="";
+        try {
+            rol = LDAPAuthenticationManagementPortClient.getInstanceLDapRol().obtenerRol(nit);
+        } catch (UsuarioNoExisteException e) {
+            //TODO
+            return;
+        }
+        //String rol = "Fabricante";//UsuariosUtils.getInstance().obtenerRolUsuario(usuario);
         if (rol.equals(TipoClienteConstants.COMERCIO)) {            
             comercio = true;
             ordenes= servProxy.getOrdenCompraByNitComercio(nit);

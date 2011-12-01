@@ -1,0 +1,306 @@
+<definitions
+     name="LDAPAuthenticationManagementService"
+     targetNamespace="http://ws.ldap.marketplace.losalpes.com.co/"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://ws.ldap.marketplace.losalpes.com.co/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    >
+    <ns1:Policy xmlns:ns1="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_autenticar_WSAT_Policy">
+        <ns1:ExactlyOne>
+            <ns1:All>
+                <ns2:ATAlwaysCapability xmlns:ns2="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns3:ATAssertion xmlns:ns4="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns3="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns1:Optional="true" ns4:Optional="true"/>
+            </ns1:All>
+        </ns1:ExactlyOne>
+    </ns1:Policy>
+    <ns5:Policy xmlns:ns5="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_obtenerNitUsuario_WSAT_Policy">
+        <ns5:ExactlyOne>
+            <ns5:All>
+                <ns6:ATAlwaysCapability xmlns:ns6="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns7:ATAssertion xmlns:ns8="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns7="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns5:Optional="true" ns8:Optional="true"/>
+            </ns5:All>
+        </ns5:ExactlyOne>
+    </ns5:Policy>
+    <ns9:Policy xmlns:ns9="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_obtenerRol_WSAT_Policy">
+        <ns9:ExactlyOne>
+            <ns9:All>
+                <ns10:ATAlwaysCapability xmlns:ns10="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns11:ATAssertion xmlns:ns12="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns11="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns9:Optional="true" ns12:Optional="true"/>
+            </ns9:All>
+        </ns9:ExactlyOne>
+    </ns9:Policy>
+    <ns13:Policy xmlns:ns13="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy">
+        <ns13:ExactlyOne>
+            <ns13:All>
+                <ns14:ATAlwaysCapability xmlns:ns14="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns15:ATAssertion xmlns:ns16="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns15="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns13:Optional="true" ns16:Optional="true"/>
+            </ns13:All>
+        </ns13:ExactlyOne>
+    </ns13:Policy>
+    <ns17:Policy xmlns:ns17="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy">
+        <ns17:ExactlyOne>
+            <ns17:All>
+                <ns18:ATAlwaysCapability xmlns:ns18="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns19:ATAssertion xmlns:ns20="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns19="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns17:Optional="true" ns20:Optional="true"/>
+            </ns17:All>
+        </ns17:ExactlyOne>
+    </ns17:Policy>
+    <ns21:Policy xmlns:ns21="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy">
+        <ns21:ExactlyOne>
+            <ns21:All>
+                <ns22:ATAlwaysCapability xmlns:ns22="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns23:ATAssertion xmlns:ns24="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns23="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns21:Optional="true" ns24:Optional="true"/>
+            </ns21:All>
+        </ns21:ExactlyOne>
+    </ns21:Policy>
+    <ns25:Policy xmlns:ns25="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy">
+        <ns25:ExactlyOne>
+            <ns25:All>
+                <ns26:ATAlwaysCapability xmlns:ns26="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns27:ATAssertion xmlns:ns28="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns27="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns25:Optional="true" ns28:Optional="true"/>
+            </ns25:All>
+        </ns25:ExactlyOne>
+    </ns25:Policy>
+    <ns29:Policy xmlns:ns29="http://www.w3.org/ns/ws-policy" wsu:Id="LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy">
+        <ns29:ExactlyOne>
+            <ns29:All>
+                <ns30:ATAlwaysCapability xmlns:ns30="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+                <ns31:ATAssertion xmlns:ns32="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns31="http://schemas.xmlsoap.org/ws/2004/10/wsat"
+                     ns29:Optional="true" ns32:Optional="true"/>
+            </ns29:All>
+        </ns29:ExactlyOne>
+    </ns29:Policy>
+    <types>
+        <xsd:schema>
+            <xsd:import namespace="http://ws.ldap.marketplace.losalpes.com.co/" schemaLocation="LDAPAuthenticationManagement_xsd_1.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="crearUsuario">
+        <part name="parameters" element="tns:crearUsuario"/>
+    </message>
+    <message name="crearUsuarioResponse">
+        <part name="parameters" element="tns:crearUsuarioResponse"/>
+    </message>
+    <message name="RolNoExisteException">
+        <part name="fault" element="tns:RolNoExisteException"/>
+    </message>
+    <message name="actualizarUsuario">
+        <part name="parameters" element="tns:actualizarUsuario"/>
+    </message>
+    <message name="actualizarUsuarioResponse">
+        <part name="parameters" element="tns:actualizarUsuarioResponse"/>
+    </message>
+    <message name="UsuarioNoExisteException">
+        <part name="fault" element="tns:UsuarioNoExisteException"/>
+    </message>
+    <message name="autenticar">
+        <part name="parameters" element="tns:autenticar"/>
+    </message>
+    <message name="autenticarResponse">
+        <part name="parameters" element="tns:autenticarResponse"/>
+    </message>
+    <message name="actualizarEstadoUsuario">
+        <part name="parameters" element="tns:actualizarEstadoUsuario"/>
+    </message>
+    <message name="actualizarEstadoUsuarioResponse">
+        <part name="parameters" element="tns:actualizarEstadoUsuarioResponse"/>
+    </message>
+    <message name="EstadoNoExisteException">
+        <part name="fault" element="tns:EstadoNoExisteException"/>
+    </message>
+    <message name="obtenerNitUsuario">
+        <part name="parameters" element="tns:obtenerNitUsuario"/>
+    </message>
+    <message name="obtenerNitUsuarioResponse">
+        <part name="parameters" element="tns:obtenerNitUsuarioResponse"/>
+    </message>
+    <message name="cambiarClave">
+        <part name="parameters" element="tns:cambiarClave"/>
+    </message>
+    <message name="cambiarClaveResponse">
+        <part name="parameters" element="tns:cambiarClaveResponse"/>
+    </message>
+    <message name="recuperarClave">
+        <part name="parameters" element="tns:recuperarClave"/>
+    </message>
+    <message name="recuperarClaveResponse">
+        <part name="parameters" element="tns:recuperarClaveResponse"/>
+    </message>
+    <message name="obtenerRol">
+        <part name="parameters" element="tns:obtenerRol"/>
+    </message>
+    <message name="obtenerRolResponse">
+        <part name="parameters" element="tns:obtenerRolResponse"/>
+    </message>
+    <portType name="LDAPAuthenticationManagement">
+        <operation name="crearUsuario">
+            <input message="tns:crearUsuario"/>
+            <output message="tns:crearUsuarioResponse"/>
+            <fault name="RolNoExisteException" message="tns:RolNoExisteException"/>
+        </operation>
+        <operation name="actualizarUsuario">
+            <input message="tns:actualizarUsuario"/>
+            <output message="tns:actualizarUsuarioResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+            <fault name="RolNoExisteException" message="tns:RolNoExisteException"/>
+        </operation>
+        <operation name="autenticar">
+            <input message="tns:autenticar"/>
+            <output message="tns:autenticarResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+        </operation>
+        <operation name="actualizarEstadoUsuario">
+            <input message="tns:actualizarEstadoUsuario"/>
+            <output message="tns:actualizarEstadoUsuarioResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+            <fault name="EstadoNoExisteException" message="tns:EstadoNoExisteException"/>
+        </operation>
+        <operation name="obtenerNitUsuario">
+            <input message="tns:obtenerNitUsuario"/>
+            <output message="tns:obtenerNitUsuarioResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+        </operation>
+        <operation name="cambiarClave">
+            <input message="tns:cambiarClave"/>
+            <output message="tns:cambiarClaveResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+        </operation>
+        <operation name="recuperarClave">
+            <input message="tns:recuperarClave"/>
+            <output message="tns:recuperarClaveResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+        </operation>
+        <operation name="obtenerRol">
+            <input message="tns:obtenerRol"/>
+            <output message="tns:obtenerRolResponse"/>
+            <fault name="UsuarioNoExisteException" message="tns:UsuarioNoExisteException"/>
+        </operation>
+    </portType>
+    <binding name="LDAPAuthenticationManagementPortBinding" type="tns:LDAPAuthenticationManagement">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="crearUsuario">
+            <ns33:PolicyReference xmlns:ns33="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="RolNoExisteException">
+                <soap:fault name="RolNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="actualizarUsuario">
+            <ns34:PolicyReference xmlns:ns34="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+            <fault name="RolNoExisteException">
+                <soap:fault name="RolNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="autenticar">
+            <ns35:PolicyReference xmlns:ns35="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_autenticar_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="actualizarEstadoUsuario">
+            <ns36:PolicyReference xmlns:ns36="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+            <fault name="EstadoNoExisteException">
+                <soap:fault name="EstadoNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="obtenerNitUsuario">
+            <ns37:PolicyReference xmlns:ns37="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_obtenerNitUsuario_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="cambiarClave">
+            <ns38:PolicyReference xmlns:ns38="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="recuperarClave">
+            <ns39:PolicyReference xmlns:ns39="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="obtenerRol">
+            <ns40:PolicyReference xmlns:ns40="http://www.w3.org/ns/ws-policy" URI="#LDAPAuthenticationManagementPortBinding_obtenerRol_WSAT_Policy"/>
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="UsuarioNoExisteException">
+                <soap:fault name="UsuarioNoExisteException" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="LDAPAuthenticationManagementService">
+        <port name="LDAPAuthenticationManagementPort" binding="tns:LDAPAuthenticationManagementPortBinding">
+            <soap:address location="http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement"/>
+        </port>
+    </service>
+</definitions>
