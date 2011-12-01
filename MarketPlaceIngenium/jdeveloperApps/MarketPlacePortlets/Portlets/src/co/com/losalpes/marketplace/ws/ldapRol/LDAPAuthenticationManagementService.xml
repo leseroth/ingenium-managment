@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="LDAPAuthenticationManagementService"
+                     namespaceURI="http://ws.ldap.marketplace.losalpes.com.co/"/>
+      <port-info>
+         <wsdl-port localpart="LDAPAuthenticationManagementPort"
+                    namespaceURI="http://ws.ldap.marketplace.losalpes.com.co/"/>
+         <runtime/>
+         <operations>
+            <operation name="crearUsuario"/>
+            <operation name="actualizarUsuario"/>
+            <operation name="autenticar"/>
+            <operation name="actualizarEstadoUsuario"/>
+            <operation name="obtenerNitUsuario"/>
+            <operation name="cambiarClave"/>
+            <operation name="recuperarClave"/>
+            <operation name="obtenerRol"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>
