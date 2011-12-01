@@ -52,15 +52,15 @@
         <partnerLink name="GestionSubasta"
                      partnerLinkType="ns2:GestionSubasta_PL"
                      partnerRole="GestionSubasta_Role"/>
-        <partnerLink name="GestionCliente"
-                     partnerLinkType="ns4:GestionCliente_PL"
-                     partnerRole="GestionCliente_Role"/>
         <partnerLink name="GestionCorreoElectronico"
                      partnerLinkType="ns5:GestionCorreoElectronico_PL"
                      partnerRole="GestionCorreoElectronico_Role"/>
         <partnerLink name="GestionSubastaNew"
                      partnerLinkType="ns2:GestionSubasta_PL"
                      partnerRole="GestionSubasta_Role"/>
+        <partnerLink name="GestionCliente"
+                     partnerLinkType="ns4:GestionCliente_PL"
+                     partnerRole="GestionCliente_Role"/>
     </partnerLinks>
 
     <!-- 
@@ -350,12 +350,20 @@
                     part="parameters"
                     query="/ns3:consultarClientesProducto/ns3:tipoCliente"/>
             </copy>
+            <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/client:process/client:categoriaProducto"/>
+                <to variable="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
+                    part="parameters"
+                    query="/ns3:consultarClientesProducto/ns3:categoria"/>
+            </copy>
         </assign>
-        <invoke name="ObtenerFabricantes" bpelx:invokeAsDetail="no"
+        <invoke name="ObtenerFabricantes"
                 inputVariable="ObtenerFabricantes_ConsultarClientesProducto_InputVariable"
                 outputVariable="ObtenerFabricantes_ConsultarClientesProducto_OutputVariable"
                 partnerLink="GestionCliente" portType="ns4:GestionCliente"
-                operation="ConsultarClientesProducto"/>
+                operation="ConsultarClientesProducto"
+                bpelx:invokeAsDetail="no"/>
         <assign name="Transform1">
             <bpelx:annotation>
                 <bpelx:pattern>transformation</bpelx:pattern>

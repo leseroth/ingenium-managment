@@ -17,9 +17,6 @@
              ui:wsdlLocation="GestionSubastaWrapper1.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
   </reference>
-  <reference name="GestionCliente" ui:wsdlLocation="GestionClienteWrapper.wsdl">
-    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
-  </reference>
   <reference name="GestionCorreoElectronico"
              ui:wsdlLocation="GestionCorreoElectronicoWrapper.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCorreoElectronico#wsdl.interface(GestionCorreoElectronico)"/>
@@ -27,5 +24,8 @@
   <reference name="GestionSubastaNew"
              ui:wsdlLocation="GestionSubastaWrapper2.wsdl">
     <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionOfertas#wsdl.interface(GestionSubasta)"/>
+  </reference>
+  <reference name="GestionCliente" ui:wsdlLocation="GestionClienteWrapper.wsdl">
+    <interface.wsdl interface="http://marketplace.losalpes.com.co/GestionCliente#wsdl.interface(GestionCliente)"/>
   </reference>
 </componentType>
