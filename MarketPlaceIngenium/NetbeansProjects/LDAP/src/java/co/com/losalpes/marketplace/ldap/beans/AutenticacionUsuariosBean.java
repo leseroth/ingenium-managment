@@ -172,4 +172,16 @@ public class AutenticacionUsuariosBean implements AutenticacionUsuariosRemote, A
 
         return true;
     }
+
+    public String obtenerRol(String nit) throws UsuarioNoExisteException {
+        Query q = em.createNamedQuery("consultarRolPorNit");
+        q.setParameter("nit", nit);
+        List<Usuario> usuarioList = (List<Usuario>) q.getResultList();
+        if (usuarioList.isEmpty()) {
+            throw new UsuarioNoExisteException("El usuario especificado no existe en el sistema");
+        }
+
+        Usuario usuario = usuarioList.get(0);
+        return usuario.getRol();
+    }
 }
