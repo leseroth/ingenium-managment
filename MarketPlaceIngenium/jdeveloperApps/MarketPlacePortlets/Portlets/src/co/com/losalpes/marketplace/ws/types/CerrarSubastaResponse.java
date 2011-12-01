@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CerrarSubastaResponse complex type.
+ * <p>Java class for cerrarSubastaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="CerrarSubastaResponse">
+ * &lt;complexType name="cerrarSubastaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="resultado" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,28 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CerrarSubastaResponse", propOrder = {
-    "resultado"
+@XmlType(name = "cerrarSubastaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+    "_return"
 })
 public class CerrarSubastaResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
-    protected boolean resultado;
+    @XmlElement(name = "return")
+    protected boolean _return;
 
     /**
-     * Gets the value of the resultado property.
+     * Gets the value of the return property.
      * 
      */
-    public boolean isResultado() {
-        return resultado;
+    public boolean isReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the resultado property.
+     * Sets the value of the return property.
      * 
      */
-    public void setResultado(boolean value) {
-        this.resultado = value;
+    public void setReturn(boolean value) {
+        this._return = value;
     }
 
 }

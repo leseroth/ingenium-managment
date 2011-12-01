@@ -19,77 +19,77 @@
       <url path="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FCuentaFacturacion.xsd"/>
       <url path="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FPurchaseOrder.xsd"/>
       <url path="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FItem.xsd"/>
-      <url path="../types/ActualizarSolicitudResponse.java"/>
-      <url path="../types/ConsultarClienteResponse.java"/>
-      <url path="../types/ModificarComision.java"/>
-      <url path="../types/Fabricante.java"/>
-      <url path="../types/ConsultarFabricantesSubasta.java"/>
-      <url path="../types/RadicarSolicitud.java"/>
-      <url path="GestionCliente.java"/>
-      <url path="../types/CerrarSolicitudResponse.java"/>
-      <url path="../types/ConsultarComisionResponse.java"/>
-      <url path="../types/DispatchAdvice.java"/>
-      <url path="../types/AsignarFabricantesSubastaResponse.java"/>
-      <url path="../types/ConsultarClientesProducto.java"/>
-      <url path="../types/ConsultarComision.java"/>
-      <url path="../types/DarGanadorSubastaResponse.java"/>
       <url path="../types/CrearClienteResponse.java"/>
-      <url path="../types/CerrarSolicitud.java"/>
-      <url path="../types/ConsultarSubastasFabricanteResponse.java"/>
-      <url path="../types/FabricanteBO.java"/>
-      <url path="../types/Transaccion.java"/>
-      <url path="../types/ModificarComisionResponse.java"/>
-      <url path="../types/Documento.java"/>
-      <url path="../types/ActualizarEstadoCliente.java"/>
-      <url path="../types/OfertaBO.java"/>
-      <url path="../types/ConsultarProductosClienteResponse.java"/>
-      <url path="../types/CrearSubastaResponse.java"/>
-      <url path="../types/BussinessException.java"/>
-      <url path="../types/SolicitudRegistro.java"/>
-      <url path="../types/ActualizarEstadoClienteResponse.java"/>
-      <url path="../types/ModificarContactoResponse.java"/>
-      <url path="../types/PurchaseOrder.java"/>
-      <url path="../types/ConsultarFabricantesSubastaResponse.java"/>
-      <url path="../types/Factura.java"/>
-      <url path="../types/CrearContactoResponse.java"/>
-      <url path="../types/ModificarCliente.java"/>
-      <url path="../types/Producto.java"/>
-      <url path="../types/SubastaBO.java"/>
-      <url path="../types/CrearCliente.java"/>
-      <url path="../types/Item.java"/>
-      <url path="../types/ConsultarClientesProductoResponse.java"/>
-      <url path="../types/ObjectFactory.java"/>
-      <url path="../types/CerrarSubasta.java"/>
-      <url path="../types/ActualizarEstadoSolicitudResponse.java"/>
-      <url path="../types/PurchaseOrderBO.java"/>
-      <url path="../types/DarGanadorSubasta.java"/>
-      <url path="../types/ModificarContacto.java"/>
-      <url path="../types/RadicarSolicitudResponse.java"/>
-      <url path="../types/Comercio.java"/>
-      <url path="../types/ModificarClienteResponse.java"/>
-      <url path="../types/CerrarSubastaResponse.java"/>
-      <url path="../types/ConsultarSubastasFabricante.java"/>
-      <url path="../types/ConsultarClientesResponse.java"/>
-      <url path="../types/ActualizarEstadoSolicitud.java"/>
-      <url path="../types/ConsultarSubastaOrdenCompra.java"/>
-      <url path="../types/ItemPOBO.java"/>
-      <url path="../types/package-info.java"/>
-      <url path="../types/ConsultarSubastaOrdenCompraResponse.java"/>
-      <url path="../types/CrearContacto.java"/>
-      <url path="GestionClienteSOAPQSPortClient.java"/>
-      <url path="../types/Cliente.java"/>
-      <url path="../types/ReturnMaterialAdvice.java"/>
-      <url path="../types/ProductoBO.java"/>
-      <url path="../types/ConsultarCliente.java"/>
-      <url path="../types/Contacto.java"/>
       <url path="../types/AsignarFabricantesSubasta.java"/>
-      <url path="../types/ConsultarProductosCliente.java"/>
-      <url path="../types/ConsultarClientes.java"/>
+      <url path="../types/CrearCliente.java"/>
+      <url path="GestionClienteSOAPQSPortClient.java"/>
+      <url path="../types/ConsultarCliente.java"/>
+      <url path="../types/CerrarSolicitudResponse.java"/>
+      <url path="../types/RadicarSolicitud.java"/>
+      <url path="../types/ObjectFactory.java"/>
+      <url path="../types/ModificarCliente.java"/>
+      <url path="../types/Item.java"/>
+      <url path="../types/ConsultarComisionResponse.java"/>
+      <url path="../types/Cliente.java"/>
+      <url path="../types/package-info.java"/>
       <url path="../types/CuentaFacturacion.java"/>
       <url path="../types/ActualizarSolicitud.java"/>
-      <url path="../types/CrearSubasta.java"/>
+      <url path="../types/CrearSubastaResponse.java"/>
+      <url path="../types/SolicitudRegistro.java"/>
+      <url path="../types/RadicarSolicitudResponse.java"/>
+      <url path="../types/ActualizarSolicitudResponse.java"/>
+      <url path="../types/DispatchAdvice.java"/>
       <url path="GestionClienteSOAPQSService.java"/>
+      <url path="../types/ConsultarSubastasFabricanteResponse.java"/>
+      <url path="../types/CrearSubasta.java"/>
+      <url path="../types/OfertaBO.java"/>
+      <url path="../types/ConsultarSubastaOrdenCompra.java"/>
+      <url path="../types/ActualizarEstadoCliente.java"/>
+      <url path="../types/CrearContactoResponse.java"/>
+      <url path="../types/CerrarSubasta.java"/>
+      <url path="../types/ItemPOBO.java"/>
+      <url path="../types/Comercio.java"/>
+      <url path="../types/SubastaBO.java"/>
+      <url path="../types/ConsultarProductosClienteResponse.java"/>
+      <url path="../types/DarGanadorSubastaResponse.java"/>
+      <url path="../types/ConsultarClientesResponse.java"/>
+      <url path="../types/Documento.java"/>
+      <url path="../types/ConsultarClientesProductoResponse.java"/>
+      <url path="../types/CerrarSubastaResponse.java"/>
+      <url path="../types/ConsultarSubastasFabricante.java"/>
+      <url path="../types/Contacto.java"/>
+      <url path="../types/ConsultarSubastaOrdenCompraResponse.java"/>
+      <url path="../types/Factura.java"/>
+      <url path="../types/ConsultarProductosCliente.java"/>
+      <url path="../types/ModificarContactoResponse.java"/>
+      <url path="../types/ProductoBO.java"/>
+      <url path="../types/PurchaseOrderBO.java"/>
+      <url path="../types/PurchaseOrder.java"/>
+      <url path="../types/Transaccion.java"/>
+      <url path="../types/ConsultarClientes.java"/>
+      <url path="../types/CerrarSolicitud.java"/>
+      <url path="../types/DarGanadorSubasta.java"/>
+      <url path="../types/ActualizarEstadoSolicitudResponse.java"/>
+      <url path="../types/Producto.java"/>
+      <url path="../types/ModificarComision.java"/>
+      <url path="../types/ConsultarFabricantesSubasta.java"/>
+      <url path="../types/FabricanteBO.java"/>
+      <url path="../types/ConsultarComision.java"/>
+      <url path="../types/AsignarFabricantesSubastaResponse.java"/>
+      <url path="../types/ConsultarFabricantesSubastaResponse.java"/>
+      <url path="../types/ModificarClienteResponse.java"/>
+      <url path="../types/ModificarContacto.java"/>
+      <url path="../types/ActualizarEstadoClienteResponse.java"/>
+      <url path="../types/ModificarComisionResponse.java"/>
+      <url path="../types/ReturnMaterialAdvice.java"/>
       <url path="../types/ComercioBO.java"/>
+      <url path="../types/Fabricante.java"/>
+      <url path="../types/ConsultarClientesProducto.java"/>
+      <url path="../types/CrearContacto.java"/>
+      <url path="../types/ConsultarClienteResponse.java"/>
+      <url path="../types/BussinessException.java"/>
+      <url path="../types/ActualizarEstadoSolicitud.java"/>
+      <url path="GestionCliente.java"/>
    </list>
    <hash n="DATA_MODEL">
       <value n="ATTACHMENT_ENCODING" v="MTOM"/>
@@ -191,7 +191,7 @@
       </hash>
       <value n="PROXY_SERVICE_NAME" v="GestionClienteSOAPQSService"/>
       <value n="PROXY_SERVICE_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionCliente"/>
-      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
+      <url n="PROXY_TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
       <list n="PROXY_WSDL_IMPORT_LIST">
          <url path="GestionCliente_SCHEMA_2FmarketPlace_2Fbusiness_2Fwsdls_2FtransactManager_2FXMLSchema_765612391.xsd"/>
          <url path="GestionCliente_SCHEMA_2FmarketPlace_2Fcanonicos_2FAvisoDespacho.xsd"/>
@@ -295,7 +295,7 @@
             </hash>
          </list>
          <list n="BINDING_FILES"/>
-         <value n="GUID" v="089501af-0133-1000-8002-0a0a0a0ada88"/>
+         <value n="GUID" v="f7b18dee-0133-1000-8008-c0a8000e151f"/>
          <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy$ProxyJavaWebService"/>
          <list n="PO_">
             <hash>
@@ -398,11 +398,11 @@
                <value n="PT_SERVICE_INTERFACE" v="co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente"/>
             </hash>
          </list>
-         <url n="TARGET_PROJECT" path="../../../../../../../Project1.jpr"/>
+         <url n="TARGET_PROJECT" path="../../../../../../../Portlets.jpr"/>
          <value n="WS_ORIG_GEN_DIRECTION" v="TOP_DOWN"/>
          <value n="WS_TARGET_NAMESPACE" v="http://marketplace.losalpes.com.co/GestionCliente"/>
          <value n="WS_URI" v="GestionClienteSOAPQSService"/>
-         <url n="WS_WSDL_FILE" protocol="http" host="ecos5.virtual.uniandes.edu.co" port="7001" path="/marketPlace/proxy/GestionCliente" query="wsdl"/>
+         <url n="WS_WSDL_FILE" path="GestionClienteSOAPQSService.wsdl"/>
       </hash>
       <value n="SERVICE_ASYNC" v="false"/>
       <value n="USE_WSDL_LOCATION" v="true"/>

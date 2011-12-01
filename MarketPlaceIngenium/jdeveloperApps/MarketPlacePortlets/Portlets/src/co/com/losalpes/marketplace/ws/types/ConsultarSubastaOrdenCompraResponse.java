@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ConsultarSubastaOrdenCompraResponse complex type.
+ * <p>Java class for consultarSubastaOrdenCompraResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ConsultarSubastaOrdenCompraResponse">
+ * &lt;complexType name="consultarSubastaOrdenCompraResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="subasta" type="{http://marketplace.losalpes.com.co}Subasta"/>
+ *         &lt;element name="return" type="{http://ws.transact.marketplace.losalpes.com.co/}subastaBO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ConsultarSubastaOrdenCompraResponse", propOrder = {
-    "subasta"
+@XmlType(name = "consultarSubastaOrdenCompraResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+    "_return"
 })
 public class ConsultarSubastaOrdenCompraResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected Subasta subasta;
+    @XmlElement(name = "return")
+    protected SubastaBO _return;
 
     /**
-     * Gets the value of the subasta property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link Subasta }
+     *     {@link SubastaBO }
      *     
      */
-    public Subasta getSubasta() {
-        return subasta;
+    public SubastaBO getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the subasta property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Subasta }
+     *     {@link SubastaBO }
      *     
      */
-    public void setSubasta(Subasta value) {
-        this.subasta = value;
+    public void setReturn(SubastaBO value) {
+        this._return = value;
     }
 
 }

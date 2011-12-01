@@ -75,19 +75,18 @@ public class GestionClienteSOAPQSService
   }
 
   @WebEndpoint(name="GestionClienteSOAPQSPort")
-  public co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente getGestionClienteSOAPQSPort()
+  public GestionCliente getGestionClienteSOAPQSPort()
   {
-    return (co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionCliente",
-                                                                                                  "GestionClienteSOAPQSPort"),
-                                                                                        co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente.class);
+    return (GestionCliente) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionCliente",
+                                                    "GestionClienteSOAPQSPort"),
+                                          GestionCliente.class);
   }
 
   @WebEndpoint(name="GestionClienteSOAPQSPort")
-  public co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente getGestionClienteSOAPQSPort(WebServiceFeature... features)
+  public GestionCliente getGestionClienteSOAPQSPort(WebServiceFeature... features)
   {
-    return (co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionCliente",
-                                                                                                  "GestionClienteSOAPQSPort"),
-                                                                                        co.com.losalpes.marketplace.ws.gestionCliente.GestionCliente.class,
-                                                                                        features);
+    return (GestionCliente) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionCliente",
+                                                    "GestionClienteSOAPQSPort"),
+                                          GestionCliente.class, features);
   }
 }

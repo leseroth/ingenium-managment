@@ -25,8 +25,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="direccion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telefono" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codPais" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codPostal" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="productos" type="{http://marketplace.losalpes.com.co}Producto" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="das" type="{http://marketplace.losalpes.com.co}DispatchAdvice" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -45,8 +43,6 @@ import javax.xml.bind.annotation.XmlType;
     "direccion",
     "telefono",
     "email",
-    "codPais",
-    "codPostal",
     "productos",
     "das"
 })
@@ -60,8 +56,6 @@ public class Fabricante {
     protected String direccion;
     protected String telefono;
     protected String email;
-    protected String codPais;
-    protected String codPostal;
     protected List<Producto> productos;
     protected List<DispatchAdvice> das;
 
@@ -207,54 +201,6 @@ public class Fabricante {
      */
     public void setEmail(String value) {
         this.email = value;
-    }
-
-    /**
-     * Gets the value of the codPais property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCodPais() {
-        return codPais;
-    }
-
-    /**
-     * Sets the value of the codPais property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCodPais(String value) {
-        this.codPais = value;
-    }
-
-    /**
-     * Gets the value of the codPostal property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCodPostal() {
-        return codPostal;
-    }
-
-    /**
-     * Sets the value of the codPostal property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCodPostal(String value) {
-        this.codPostal = value;
     }
 
     /**

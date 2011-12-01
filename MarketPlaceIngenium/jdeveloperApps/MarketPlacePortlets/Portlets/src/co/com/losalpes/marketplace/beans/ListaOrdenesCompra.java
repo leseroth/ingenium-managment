@@ -45,7 +45,10 @@ public class ListaOrdenesCompra {
         servProxy=ServicioProxy.getInstance();
         nit=servProxy.getNitByUsername(usuario);
         
-        String rol = UsuariosUtils.getInstance().obtenerRolUsuario(usuario);
+        //boolean bcomercio=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Comercio");
+        //boolean bfabricante=FacesContext.getCurrentInstance().getExternalContext().isUserInRole("Fabricante");
+        
+        String rol = "Fabricante";//UsuariosUtils.getInstance().obtenerRolUsuario(usuario);
         if (rol.equals(TipoClienteConstants.COMERCIO)) {            
             comercio = true;
             ordenes= servProxy.getOrdenCompraByNitComercio(nit);

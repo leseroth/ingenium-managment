@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CrearSubastaResponse complex type.
+ * <p>Java class for crearSubastaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="CrearSubastaResponse">
+ * &lt;complexType name="crearSubastaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="numSeguimientoSub" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CrearSubastaResponse", propOrder = {
-    "numSeguimientoSub"
+@XmlType(name = "crearSubastaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+    "_return"
 })
 public class CrearSubastaResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected String numSeguimientoSub;
+    @XmlElement(name = "return")
+    protected String _return;
 
     /**
-     * Gets the value of the numSeguimientoSub property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNumSeguimientoSub() {
-        return numSeguimientoSub;
+    public String getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the numSeguimientoSub property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNumSeguimientoSub(String value) {
-        this.numSeguimientoSub = value;
+    public void setReturn(String value) {
+        this._return = value;
     }
 
 }
