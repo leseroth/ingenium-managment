@@ -124,4 +124,9 @@ public class LDAPAuthenticationManagement {
     public Boolean recuperarClave(@WebParam(name = "login") String login, @WebParam(name = "email") String email) throws UsuarioNoExisteException {
         return ejbRef.recuperarClave(login, email);
     }
+
+    @WebMethod(operationName = "obtenerRol")
+    public String obtenerRol(@WebParam(name = "nit") String nit) throws UsuarioNoExisteException {
+        return ejbRef.obtenerRol(nit);
+    }
 }

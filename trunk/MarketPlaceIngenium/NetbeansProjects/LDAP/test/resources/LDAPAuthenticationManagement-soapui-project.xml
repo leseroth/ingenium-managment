@@ -18,7 +18,7 @@
       </ns5:All>
     </ns5:ExactlyOne>
   </ns5:Policy>
-  <ns9:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy" xmlns:ns9="http://www.w3.org/ns/ws-policy">
+  <ns9:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_obtenerRol_WSAT_Policy" xmlns:ns9="http://www.w3.org/ns/ws-policy">
     <ns9:ExactlyOne>
       <ns9:All>
         <ns10:ATAlwaysCapability xmlns:ns10="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
@@ -26,7 +26,7 @@
       </ns9:All>
     </ns9:ExactlyOne>
   </ns9:Policy>
-  <ns13:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy" xmlns:ns13="http://www.w3.org/ns/ws-policy">
+  <ns13:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy" xmlns:ns13="http://www.w3.org/ns/ws-policy">
     <ns13:ExactlyOne>
       <ns13:All>
         <ns14:ATAlwaysCapability xmlns:ns14="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
@@ -34,7 +34,7 @@
       </ns13:All>
     </ns13:ExactlyOne>
   </ns13:Policy>
-  <ns17:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy" xmlns:ns17="http://www.w3.org/ns/ws-policy">
+  <ns17:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy" xmlns:ns17="http://www.w3.org/ns/ws-policy">
     <ns17:ExactlyOne>
       <ns17:All>
         <ns18:ATAlwaysCapability xmlns:ns18="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
@@ -42,7 +42,7 @@
       </ns17:All>
     </ns17:ExactlyOne>
   </ns17:Policy>
-  <ns21:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy" xmlns:ns21="http://www.w3.org/ns/ws-policy">
+  <ns21:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy" xmlns:ns21="http://www.w3.org/ns/ws-policy">
     <ns21:ExactlyOne>
       <ns21:All>
         <ns22:ATAlwaysCapability xmlns:ns22="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
@@ -50,7 +50,7 @@
       </ns21:All>
     </ns21:ExactlyOne>
   </ns21:Policy>
-  <ns25:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy" xmlns:ns25="http://www.w3.org/ns/ws-policy">
+  <ns25:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy" xmlns:ns25="http://www.w3.org/ns/ws-policy">
     <ns25:ExactlyOne>
       <ns25:All>
         <ns26:ATAlwaysCapability xmlns:ns26="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
@@ -58,6 +58,14 @@
       </ns25:All>
     </ns25:ExactlyOne>
   </ns25:Policy>
+  <ns29:Policy wsu:Id="LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy" xmlns:ns29="http://www.w3.org/ns/ws-policy">
+    <ns29:ExactlyOne>
+      <ns29:All>
+        <ns30:ATAlwaysCapability xmlns:ns30="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+        <ns31:ATAssertion ns29:Optional="true" ns32:Optional="true" xmlns:ns32="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:ns31="http://schemas.xmlsoap.org/ws/2004/10/wsat"/>
+      </ns29:All>
+    </ns29:ExactlyOne>
+  </ns29:Policy>
   <types>
     <xsd:schema>
       <xsd:import namespace="http://ws.ldap.marketplace.losalpes.com.co/" schemaLocation="http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement?xsd=1"/>
@@ -114,6 +122,12 @@
   <message name="recuperarClaveResponse">
     <part name="parameters" element="tns:recuperarClaveResponse"/>
   </message>
+  <message name="obtenerRol">
+    <part name="parameters" element="tns:obtenerRol"/>
+  </message>
+  <message name="obtenerRolResponse">
+    <part name="parameters" element="tns:obtenerRolResponse"/>
+  </message>
   <portType name="LDAPAuthenticationManagement">
     <operation name="crearUsuario">
       <input message="tns:crearUsuario"/>
@@ -152,11 +166,16 @@
       <output message="tns:recuperarClaveResponse"/>
       <fault message="tns:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
     </operation>
+    <operation name="obtenerRol">
+      <input message="tns:obtenerRol"/>
+      <output message="tns:obtenerRolResponse"/>
+      <fault message="tns:UsuarioNoExisteException" name="UsuarioNoExisteException"/>
+    </operation>
   </portType>
   <binding name="LDAPAuthenticationManagementPortBinding" type="tns:LDAPAuthenticationManagement">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
     <operation name="crearUsuario">
-      <ns29:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy" xmlns:ns29="http://www.w3.org/ns/ws-policy"/>
+      <ns33:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_crearUsuario_WSAT_Policy" xmlns:ns33="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -169,7 +188,7 @@
       </fault>
     </operation>
     <operation name="actualizarUsuario">
-      <ns30:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy" xmlns:ns30="http://www.w3.org/ns/ws-policy"/>
+      <ns34:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_actualizarUsuario_WSAT_Policy" xmlns:ns34="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -185,7 +204,7 @@
       </fault>
     </operation>
     <operation name="autenticar">
-      <ns31:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_autenticar_WSAT_Policy" xmlns:ns31="http://www.w3.org/ns/ws-policy"/>
+      <ns35:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_autenticar_WSAT_Policy" xmlns:ns35="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -198,7 +217,7 @@
       </fault>
     </operation>
     <operation name="actualizarEstadoUsuario">
-      <ns32:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy" xmlns:ns32="http://www.w3.org/ns/ws-policy"/>
+      <ns36:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_actualizarEstadoUsuario_WSAT_Policy" xmlns:ns36="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -214,7 +233,7 @@
       </fault>
     </operation>
     <operation name="obtenerNitUsuario">
-      <ns33:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_obtenerNitUsuario_WSAT_Policy" xmlns:ns33="http://www.w3.org/ns/ws-policy"/>
+      <ns37:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_obtenerNitUsuario_WSAT_Policy" xmlns:ns37="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -227,7 +246,7 @@
       </fault>
     </operation>
     <operation name="cambiarClave">
-      <ns34:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy" xmlns:ns34="http://www.w3.org/ns/ws-policy"/>
+      <ns38:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_cambiarClave_WSAT_Policy" xmlns:ns38="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -240,7 +259,20 @@
       </fault>
     </operation>
     <operation name="recuperarClave">
-      <ns35:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy" xmlns:ns35="http://www.w3.org/ns/ws-policy"/>
+      <ns39:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_recuperarClave_WSAT_Policy" xmlns:ns39="http://www.w3.org/ns/ws-policy"/>
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UsuarioNoExisteException">
+        <soap:fault name="UsuarioNoExisteException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="obtenerRol">
+      <ns40:PolicyReference URI="#LDAPAuthenticationManagementPortBinding_obtenerRol_WSAT_Policy" xmlns:ns40="http://www.w3.org/ns/ws-policy"/>
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -275,6 +307,8 @@
   <xs:element name="crearUsuarioResponse" type="tns:crearUsuarioResponse"/>
   <xs:element name="obtenerNitUsuario" type="tns:obtenerNitUsuario"/>
   <xs:element name="obtenerNitUsuarioResponse" type="tns:obtenerNitUsuarioResponse"/>
+  <xs:element name="obtenerRol" type="tns:obtenerRol"/>
+  <xs:element name="obtenerRolResponse" type="tns:obtenerRolResponse"/>
   <xs:element name="recuperarClave" type="tns:recuperarClave"/>
   <xs:element name="recuperarClaveResponse" type="tns:recuperarClaveResponse"/>
   <xs:complexType name="autenticar">
@@ -355,6 +389,16 @@
   <xs:complexType name="RolNoExisteException">
     <xs:sequence>
       <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerRol">
+    <xs:sequence>
+      <xs:element name="nit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerRolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="recuperarClave">
@@ -466,4 +510,25 @@
          <codPais>CO</codPais>
       </ws:actualizarUsuario>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/actualizarUsuarioRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/actualizarUsuarioRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="obtenerRol" bindingOperationName="obtenerRol" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="1ObtenerFabricante"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:obtenerRol>
+         <nit>5346</nit>
+      </ws:obtenerRol>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/obtenerRolRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="2ObtenerComercio"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:obtenerRol>
+         <nit>10306</nit>
+      </ws:obtenerRol>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/obtenerRolRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="3ErrorNitNoExistente"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.ldap.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:obtenerRol>
+         <nit>11122233</nit>
+      </ws:obtenerRol>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ws.ldap.marketplace.losalpes.com.co/LDAPAuthenticationManagement/obtenerRolRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

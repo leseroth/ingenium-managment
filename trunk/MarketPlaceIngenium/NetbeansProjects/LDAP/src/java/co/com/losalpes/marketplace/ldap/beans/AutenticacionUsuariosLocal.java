@@ -70,4 +70,6 @@ public interface AutenticacionUsuariosLocal {
     public Boolean cambiarClave(String login, String nuevaClave) throws UsuarioNoExisteException;
 
     public Boolean recuperarClave(String login, String email) throws UsuarioNoExisteException;
+
+    public String obtenerRol(String nit) throws UsuarioNoExisteException;
 }
