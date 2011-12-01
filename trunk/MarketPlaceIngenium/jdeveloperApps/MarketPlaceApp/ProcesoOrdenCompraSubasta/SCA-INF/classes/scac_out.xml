@@ -1,2 +1,13 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Faults/>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='GestionCliente']</loc>
+      <line>51</line>
+      <col>81</col>
+      <file/>
+      <msg>
+         <![CDATA[Failed to Find Binding "GestionCliente":"{http://marketplace.losalpes.com.co/GestionCliente}GestionClienteSOAPQSPort" in WSDL Manager]]>
+      </msg>
+   </Fault>
+</Faults>

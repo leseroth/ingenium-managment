@@ -15,7 +15,8 @@
         <element name="cantidadProducto" type="int" minOccurs="1" nillable="false"/>
         <element name="nombreProducto" type="string" minOccurs="1" nillable="false"/>
         <element name="categoriaProducto" type="string" minOccurs="1" nillable="false"/>
-			</sequence>
+    <element name="pesoProducto" type="string" nillable="false" minOccurs="1"/>
+   </sequence>
 		</complexType>
 	</element>
 	<element name="processResponse">
