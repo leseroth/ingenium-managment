@@ -6,6 +6,7 @@ public class ProductoVO {
     private String referencia;
     private String tipo;
     private String estado;
+    private String peso;
     public ProductoVO() {
         super();
     }
@@ -16,6 +17,14 @@ public class ProductoVO {
 
     public String getNombre() {
         return nombre;
+    }
+    
+    public void setPeso(String peso) {
+        this.peso = peso;
+    }
+
+    public String getPeso() {
+        return peso;
     }
 
     public void setCategoria(String categoria) {

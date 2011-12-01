@@ -153,6 +153,18 @@
                   <af:selectItem label="Lacteos" value="Lacteos" id="si3416"/>
                 </af:selectOneChoice>
               </af:column>
+              <af:column sortable="false" headerText="Tipo" id="c666589"
+                         width="300">
+                <af:inputText value="#{row.tipo}" id="it78711" required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Peso" id="c688589"
+                         width="300">
+                <af:inputText value="#{row.peso}" id="it76611" required="true"/>
+              </af:column>
+              <af:column sortable="false" headerText="Referencia" id="c6876569"
+                         width="300">
+                <af:inputText value="#{row.referencia}" id="it556611" required="true"/>
+              </af:column>
             </af:table>
             <af:panelGroupLayout id="pgl2" styleClass="AFStretchWidth"
                                  halign="right" layout="horizontal">

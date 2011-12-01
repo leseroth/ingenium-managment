@@ -3,21 +3,20 @@ package co.com.losalpes.marketplace.ws.types;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CerrarSubasta complex type.
+ * <p>Java class for cerrarSubasta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="CerrarSubasta">
+ * &lt;complexType name="cerrarSubasta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="numSeguimientoSub" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="idSubasta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CerrarSubasta", propOrder = {
-    "numSeguimientoSub"
+@XmlType(name = "cerrarSubasta", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+    "idSubasta"
 })
 public class CerrarSubasta {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected String numSeguimientoSub;
+    protected String idSubasta;
 
     /**
-     * Gets the value of the numSeguimientoSub property.
+     * Gets the value of the idSubasta property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNumSeguimientoSub() {
-        return numSeguimientoSub;
+    public String getIdSubasta() {
+        return idSubasta;
     }
 
     /**
-     * Sets the value of the numSeguimientoSub property.
+     * Sets the value of the idSubasta property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNumSeguimientoSub(String value) {
-        this.numSeguimientoSub = value;
+    public void setIdSubasta(String value) {
+        this.idSubasta = value;
     }
 
 }

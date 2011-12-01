@@ -627,6 +627,9 @@ public final class ServicioProxy {
         ProductoSolicitud ps=new ProductoSolicitud();
         ps.setCategoria(p.getCategoria());
         ps.setNombre(p.getNombre());
+        ps.setReferencia(p.getReferencia());
+        ps.setTipo(p.getTipo());
+        ps.setPesoLibras(p.getPeso());
         return ps;
         }
 
@@ -745,11 +748,11 @@ public final class ServicioProxy {
         OrdenCompraVO ocVO=new OrdenCompraVO();
         ocVO.setEstado(oc.getEstado());
         ocVO.setFechaMaximaEntrega(oc.getEntrega()!=null?oc.getEntrega().toGregorianCalendar().getTime():null);
-        ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteBO()));
+        //ocVO.setFabricanteAtiende(transformarFabricante(oc.getFabricanteBO()));
         ocVO.setComercio(transformarComercio(oc.getComercioBO()));
-        if(oc.getItemPOBOList() != null && oc.getItemPOBOList().size() > 0){
-        ocVO.setItem(transformarItem(oc.getItemPOBOList().iterator().next())); 
-        }
+        //if(oc.getItemPOBOList() != null && oc.getItemPOBOList().size() > 0){
+        ocVO.setItem(transformarItem(oc.getItemPOBO())); 
+        //}
         ocVO.setNumSeguimiento(oc.getNumSeguimiento());
         return ocVO;
         }

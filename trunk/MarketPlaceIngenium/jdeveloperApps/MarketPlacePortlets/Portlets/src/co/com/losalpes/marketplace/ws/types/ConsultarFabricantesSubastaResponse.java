@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ConsultarFabricantesSubastaResponse complex type.
+ * <p>Java class for consultarFabricantesSubastaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ConsultarFabricantesSubastaResponse">
+ * &lt;complexType name="consultarFabricantesSubastaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="fabricantes" type="{http://marketplace.losalpes.com.co}Fabricante" maxOccurs="unbounded"/>
+ *         &lt;element name="return" type="{http://ws.transact.marketplace.losalpes.com.co/}fabricanteBO" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ConsultarFabricantesSubastaResponse", propOrder = {
-    "fabricantes"
+@XmlType(name = "consultarFabricantesSubastaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
+    "_return"
 })
 public class ConsultarFabricantesSubastaResponse {
 
-    @XmlElement(namespace = "http://marketplace.losalpes.com.co", required = true)
-    protected List<Fabricante> fabricantes;
+    @XmlElement(name = "return")
+    protected List<FabricanteBO> _return;
 
     /**
-     * Gets the value of the fabricantes property.
+     * Gets the value of the return property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fabricantes property.
+     * This is why there is not a <CODE>set</CODE> method for the return property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFabricantes().add(newItem);
+     *    getReturn().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Fabricante }
+     * {@link FabricanteBO }
      * 
      * 
      */
-    public List<Fabricante> getFabricantes() {
-        if (fabricantes == null) {
-            fabricantes = new ArrayList<Fabricante>();
+    public List<FabricanteBO> getReturn() {
+        if (_return == null) {
+            _return = new ArrayList<FabricanteBO>();
         }
-        return this.fabricantes;
+        return this._return;
     }
 
 }
