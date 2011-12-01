@@ -58,6 +58,11 @@ declare function xf:CrearSubastaRequest($crearSubasta1 as element(ns0:crearSubas
                                             <productoBO>
                                                 <categoria>{ data($producto/categoria) }</categoria>
                                                 <nombre>{ data($producto/nombre) }</nombre>
+                                                {
+                                                    for $pesoLibras in $producto/pesoLibras
+                                                    return
+                                                        <peso>{ data($pesoLibras) }</peso>
+                                                }
                                             </productoBO>
                                     }
                                 </itemPOBO>
