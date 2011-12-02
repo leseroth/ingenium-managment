@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for consultarSubastasFabricanteResponse complex type.
+ * <p>Java class for ConsultarSubastasFabricanteResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="consultarSubastasFabricanteResponse">
+ * &lt;complexType name="ConsultarSubastasFabricanteResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://ws.transact.marketplace.losalpes.com.co/}subastaBO" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="subastas" type="{http://marketplace.losalpes.com.co}Subasta" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "consultarSubastasFabricanteResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "_return"
+@XmlType(name = "ConsultarSubastasFabricanteResponse", propOrder = {
+    "subastas"
 })
 public class ConsultarSubastasFabricanteResponse {
 
-    @XmlElement(name = "return")
-    protected List<SubastaBO> _return;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
+    protected List<Subasta> subastas;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the subastas property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the return property.
+     * This is why there is not a <CODE>set</CODE> method for the subastas property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getReturn().add(newItem);
+     *    getSubastas().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SubastaBO }
+     * {@link Subasta }
      * 
      * 
      */
-    public List<SubastaBO> getReturn() {
-        if (_return == null) {
-            _return = new ArrayList<SubastaBO>();
+    public List<Subasta> getSubastas() {
+        if (subastas == null) {
+            subastas = new ArrayList<Subasta>();
         }
-        return this._return;
+        return this.subastas;
     }
 
 }

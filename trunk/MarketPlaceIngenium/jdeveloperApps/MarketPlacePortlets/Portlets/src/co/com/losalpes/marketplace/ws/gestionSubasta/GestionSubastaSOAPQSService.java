@@ -75,19 +75,18 @@ public class GestionSubastaSOAPQSService
   }
 
   @WebEndpoint(name="GestionSubastaSOAPQSPort")
-  public co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta getGestionSubastaSOAPQSPort()
+  public GestionSubasta getGestionSubastaSOAPQSPort()
   {
-    return (co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionOfertas",
-                                                                                                  "GestionSubastaSOAPQSPort"),
-                                                                                        co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta.class);
+    return (GestionSubasta) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionOfertas",
+                                                    "GestionSubastaSOAPQSPort"),
+                                          GestionSubasta.class);
   }
 
   @WebEndpoint(name="GestionSubastaSOAPQSPort")
-  public co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta getGestionSubastaSOAPQSPort(WebServiceFeature... features)
+  public GestionSubasta getGestionSubastaSOAPQSPort(WebServiceFeature... features)
   {
-    return (co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionOfertas",
-                                                                                                  "GestionSubastaSOAPQSPort"),
-                                                                                        co.com.losalpes.marketplace.ws.gestionSubasta.GestionSubasta.class,
-                                                                                        features);
+    return (GestionSubasta) super.getPort(new QName("http://marketplace.losalpes.com.co/GestionOfertas",
+                                                    "GestionSubastaSOAPQSPort"),
+                                          GestionSubasta.class, features);
   }
 }

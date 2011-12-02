@@ -129,42 +129,6 @@
                                url-prefix="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}"/>
     </portal:resource-mappings>
   </portal:adf-portal-config>
-  <portlet:adf-portlet-config xmlns="http://xmlns.oracle.com/adf/portlet/config">
-    <cacheSettings enabled="true">
-      <maxSize>
-        10000000
-      </maxSize>
-    </cacheSettings>
-    <cacheSettings>
-      <maxSize>
-        10000000
-      </maxSize>
-      <subscriber default="true">
-        <systemLevel>
-          <maxSize>
-            5000000
-          </maxSize>
-        </systemLevel>
-        <userLevel>
-          <maxSize>
-            8000000
-          </maxSize>
-        </userLevel>
-      </subscriber>
-    </cacheSettings>
-    <defaultTimeout>
-      20
-    </defaultTimeout>
-    <minimumTimeout>
-      1
-    </minimumTimeout>
-    <maximumTimeout>
-      60
-    </maximumTimeout>
-    <applicationStriping>
-      false
-    </applicationStriping>
-  </portlet:adf-portlet-config>
   <adf-faces-config xmlns="http://xmlns.oracle.com/adf/faces/config">
     <persistent-change-manager>
       <persistent-change-manager-class>
@@ -205,6 +169,42 @@
       </taglib>
     </taglib-config>
   </adf-faces-config>
+  <portlet:adf-portlet-config xmlns="http://xmlns.oracle.com/adf/portlet/config">
+    <cacheSettings enabled="true">
+      <maxSize>
+        10000000
+      </maxSize>
+    </cacheSettings>
+    <cacheSettings>
+      <maxSize>
+        10000000
+      </maxSize>
+      <subscriber default="true">
+        <systemLevel>
+          <maxSize>
+            5000000
+          </maxSize>
+        </systemLevel>
+        <userLevel>
+          <maxSize>
+            8000000
+          </maxSize>
+        </userLevel>
+      </subscriber>
+    </cacheSettings>
+    <defaultTimeout>
+      20
+    </defaultTimeout>
+    <minimumTimeout>
+      1
+    </minimumTimeout>
+    <maximumTimeout>
+      60
+    </maximumTimeout>
+    <applicationStriping>
+      false
+    </applicationStriping>
+  </portlet:adf-portlet-config>
   <mdsC:adf-mds-config version="11.1.1.000">
     <mds-config xmlns="http://xmlns.oracle.com/mds/config">
       <persistence-config>

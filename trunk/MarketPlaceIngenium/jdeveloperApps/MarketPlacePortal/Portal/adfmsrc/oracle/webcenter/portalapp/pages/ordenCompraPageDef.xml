@@ -13,8 +13,8 @@
     <variableIterator id="variables"/>
     <page path="oracle.webcenter.portalapp.pagetemplates.templatePageDef"
           id="pageTemplateBinding" Refresh="ifNeeded"/>
-    <portlet id="OrdenCompra2_1"
-             portletInstance="/oracle/adf/portlet/WsrpPortletProducer3/ap/OrdenCompra_36323202_0132_1000_8006_0a0a0a0a4ac0"
+    <portlet id="OrdenCompra1_1"
+             portletInstance="/oracle/adf/portlet/WsrpPortletProducer0/ap/OrdenCompra_fa61e66a_0133_1000_8018_c0a8000e357d"
              class="oracle.adf.model.portlet.binding.PortletBinding"
              retainPortletHeader="false"
              listenForAutoDeliveredPortletEvents="true"

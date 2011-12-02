@@ -33,4 +33,8 @@
           uri="../co/com/losalpes/marketplace/ws/registroInternal/registroentidadinternal_client_ep.wsdl"/>
   <system systemId="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionCliente?wsdl"
           uri="../co/com/losalpes/marketplace/ws/gestionCliente/GestionClienteSOAPQSService.wsdl"/>
+  <system systemId="http://localhost:8148/LDAPAuthenticationManagementService/LDAPAuthenticationManagement?wsdl"
+          uri="../co/com/losalpes/marketplace/ws/ldapRol/LDAPAuthenticationManagementService.wsdl"/>
+  <system systemId="http://ecos5.virtual.uniandes.edu.co:7001/marketPlace/proxy/GestionSubasta?wsdl"
+          uri="../co/com/losalpes/marketplace/ws/gestionSubasta/GestionSubastaSOAPQSService.wsdl"/>
 </catalog>

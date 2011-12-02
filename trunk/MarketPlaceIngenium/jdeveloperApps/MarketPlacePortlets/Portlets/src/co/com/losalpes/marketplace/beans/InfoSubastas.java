@@ -15,6 +15,9 @@ import javax.portlet.PortletRequest;
 import co.com.losalpes.marketplace.utils.UsuariosUtils;
 import co.com.losalpes.marketplace.constants.TipoClienteConstants;
 
+import co.com.losalpes.marketplace.ws.ldapRol.LDAPAuthenticationManagementPortClient;
+import co.com.losalpes.marketplace.ws.ldapRol.UsuarioNoExisteException;
+
 public class InfoSubastas {
     private boolean fabricante = false;
     private SubastaVO subasta;
@@ -25,7 +28,16 @@ public class InfoSubastas {
         
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         Object request = ec.getRequest();
-        String rol = UsuariosUtils.getInstance().obtenerRolUsuario(((PortletRequest)request).getUserPrincipal().getName());
+        String usuario = ((PortletRequest)request).getUserPrincipal().getName();
+        
+        String nit=servProxy.getNitByUsername(usuario);
+        String rol;
+        //String rol = UsuariosUtils.getInstance().obtenerRolUsuario(((PortletRequest)request).getUserPrincipal().getName());
+        try {
+            rol = LDAPAuthenticationManagementPortClient.getInstanceLDapRol().obtenerRol(nit);
+        } catch (UsuarioNoExisteException e) {
+            return;
+        }
         if (rol.equals(TipoClienteConstants.FABRICANTE)) {            
             fabricante = true;
         }

@@ -11,7 +11,7 @@
         <af:pageTemplate viewId="/oracle/webcenter/portalapp/pagetemplates/template.jspx"
                          value="#{bindings.pageTemplateBinding}" id="pt1">
                          <f:facet name="content">
-            <adfp:portlet value="#{bindings.OrdenCompra2_1}" id="portlet1"/>
+            <adfp:portlet value="#{bindings.OrdenCompra1_1}" id="portlet1"/>
           </f:facet>
         </af:pageTemplate>
       </af:form>

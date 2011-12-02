@@ -388,17 +388,16 @@
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"
-                      query="/client:process/client:pesoProducto"/>
-                <to variable="CrearSubasta_crearSubasta_InputVariable"
-                    part="parameters"
-                    query="/ns3:crearSubasta/ns3:po/item/producto/pesoLibras"/>
-            </copy>
-            <copy>
-                <from variable="inputVariable" part="payload"
                       query="/client:process/client:cantidadProducto"/>
                 <to variable="CrearSubasta_crearSubasta_InputVariable"
                     part="parameters"
                     query="/ns3:crearSubasta/ns3:po/item/cantidad"/>
+            </copy>
+            <copy>
+                <from expression="ora:format('1')"/>
+                <to variable="CrearSubasta_crearSubasta_InputVariable"
+                    part="parameters"
+                    query="/ns3:crearSubasta/ns3:po/item/producto/pesoLibras"/>
             </copy>
             <copy>
                 <from variable="inputVariable" part="payload"

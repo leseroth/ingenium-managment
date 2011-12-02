@@ -9,6 +9,7 @@ import co.com.losalpes.marketplace.vos.ProductoVO;
 import java.security.InvalidParameterException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 public class CrearOrdenCompra {
+    private int hora;
+    private int minutos;
     private OrdenCompraVO orden;
     private List<SelectItem> productos;
     private ServicioProxy servProxy;
@@ -45,7 +48,15 @@ public class CrearOrdenCompra {
         String username=FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         this.getOrden().setFecha(new Date());
         boolean creada=false;
+        
+        Calendar calendarFechaMax = Calendar.getInstance();
+        calendarFechaMax.setTime(orden.getFechaMaximaSubasta());
+        calendarFechaMax.set(Calendar.HOUR_OF_DAY, hora);
+        calendarFechaMax.set(Calendar.MINUTE, minutos);
+        orden.setFechaMaximaSubasta(calendarFechaMax.getTime());
+        
         try{
+            
         servProxy.persistir(this.getOrden(),username);
             creada=true;
         }catch(InvalidParameterException ipe){
@@ -72,5 +83,22 @@ public class CrearOrdenCompra {
     public String volver_action() {
         // Add event code here...
         return "inicioOC";
+    }
+    
+    
+    public int getHora() {
+        return hora;
+    }
+
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
     }
 }

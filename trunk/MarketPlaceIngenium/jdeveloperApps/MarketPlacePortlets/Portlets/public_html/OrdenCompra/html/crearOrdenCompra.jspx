@@ -15,6 +15,9 @@
                         id="id2" required="true"/>
           <af:inputDate value="#{crearOrdenCompra.orden.fechaMaximaSubasta}" label="Fecha Maxima Subasta"
                         id="id" required="true"/>
+          <af:inputText required="true" label="Hora de envio 24H" value="#{crearOrdenCompra.hora}" id="idHora"/>
+          <af:inputText required="true" label="Minutos" value="#{crearOrdenCompra.minutos}" id="idMinutos"/>
+      
             
             <af:panelGroupLayout>
                 <fieldset>

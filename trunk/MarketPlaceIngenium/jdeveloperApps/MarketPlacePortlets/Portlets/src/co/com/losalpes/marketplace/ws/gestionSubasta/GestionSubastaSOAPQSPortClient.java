@@ -12,10 +12,18 @@ public class GestionSubastaSOAPQSPortClient
   @WebServiceRef
   private static GestionSubastaSOAPQSService gestionSubastaSOAPQSService;
 
-    public static GestionSubasta getGestionSubasta()
-    {
-      gestionSubastaSOAPQSService = new GestionSubastaSOAPQSService();
-      GestionSubasta gestionSubasta = gestionSubastaSOAPQSService.getGestionSubastaSOAPQSPort();
-      return gestionSubasta;
-    }
+  public static void main(String [] args)
+  {
+    gestionSubastaSOAPQSService = new GestionSubastaSOAPQSService();
+    GestionSubasta gestionSubasta = gestionSubastaSOAPQSService.getGestionSubastaSOAPQSPort();
+    // Add your code to call the desired methods.
+  }
+  
+  public static GestionSubasta getGestionSubasta()
+  {
+          gestionSubastaSOAPQSService = new GestionSubastaSOAPQSService();
+          GestionSubasta gestionSubasta = gestionSubastaSOAPQSService.getGestionSubastaSOAPQSPort();
+          return gestionSubasta;
+  }
+  
 }

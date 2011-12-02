@@ -14,7 +14,7 @@
     <page path="oracle.webcenter.portalapp.pagetemplates.templatePageDef"
           id="pageTemplateBinding" Refresh="ifNeeded"/>
     <portlet id="Subastas1_1"
-             portletInstance="/oracle/adf/portlet/WsrpPortletProducer3/ap/Subastas_a691c18f_0132_1000_8002_0a0a0a0a7d79"
+             portletInstance="/oracle/adf/portlet/WsrpPortletProducer0/ap/Subastas_fd3f3c56_0133_1000_8001_c0a8000ca8ef"
              class="oracle.adf.model.portlet.binding.PortletBinding"
              retainPortletHeader="false"
              listenForAutoDeliveredPortletEvents="true"
