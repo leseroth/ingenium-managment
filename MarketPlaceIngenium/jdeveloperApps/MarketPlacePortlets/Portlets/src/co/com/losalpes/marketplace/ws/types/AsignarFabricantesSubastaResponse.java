@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for asignarFabricantesSubastaResponse complex type.
+ * <p>Java class for AsignarFabricantesSubastaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="asignarFabricantesSubastaResponse">
+ * &lt;complexType name="AsignarFabricantesSubastaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="resultado" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "asignarFabricantesSubastaResponse", namespace = "http://ws.transact.marketplace.losalpes.com.co/", propOrder = {
-    "_return"
+@XmlType(name = "AsignarFabricantesSubastaResponse", propOrder = {
+    "resultado"
 })
 public class AsignarFabricantesSubastaResponse {
 
-    @XmlElement(name = "return")
-    protected Boolean _return;
+    @XmlElement(namespace = "http://marketplace.losalpes.com.co")
+    protected boolean resultado;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the resultado property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
      */
-    public Boolean isReturn() {
-        return _return;
+    public boolean isResultado() {
+        return resultado;
     }
 
     /**
-     * Sets the value of the return property.
+     * Sets the value of the resultado property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
      */
-    public void setReturn(Boolean value) {
-        this._return = value;
+    public void setResultado(boolean value) {
+        this.resultado = value;
     }
 
 }
