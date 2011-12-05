@@ -29,13 +29,13 @@ insert into fabricante(id,nit,nombre) values (205,'fab205','Fabricante 205');
 
 --Crear Productos
 --No se como funciona la columna tiempoFabricacion en esta tabla
-insert into producto(id,categoria,nombre) values(2011,'Lacteos','Yogurt');
-insert into producto(id,categoria,nombre) values(2012,'Lacteos','Kumis');
-insert into producto(id,categoria,nombre) values(2013,'Lacteos','Leche');
-insert into producto(id,categoria,nombre) values(2014,'Lacteos','Queso');
-insert into producto(id,categoria,nombre) values(2021,'Papeleria','Cuaderno');
+insert into producto(id,categoria,nombre,peso) values(2011,'Lacteos','Yogurt','2');
+insert into producto(id,categoria,nombre,peso) values(2012,'Lacteos','Kumis','2');
+insert into producto(id,categoria,nombre,peso) values(2013,'Lacteos','Leche','1');
+insert into producto(id,categoria,nombre,peso) values(2014,'Lacteos','Queso','2');
+insert into producto(id,categoria,nombre,peso) values(2021,'Papeleria','Cuaderno');
 insert into producto(id,categoria,nombre,peso) values(2022,'Papeleria','Libreta','1');
-insert into producto(id,categoria,nombre) values(2023,'Papeleria','Lapicero');
+insert into producto(id,categoria,nombre,peso) values(2023,'Papeleria','Lapicero','1');
 
 --Crear PurchaseOrders y subastas
 insert into itempo(id,cantidad,producto_id) values (1,100,2011);
