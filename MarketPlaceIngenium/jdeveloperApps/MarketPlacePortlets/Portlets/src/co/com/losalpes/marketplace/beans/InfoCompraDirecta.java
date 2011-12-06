@@ -18,7 +18,7 @@ public class InfoCompraDirecta {
 
     private OrdenCompraVO compraDirecta;
     private ServicioProxy servProxy;
-    private Long precio;
+    private Long precio = 0L;
     
     public boolean aprobarRechazarCompra(String estado) {
         boolean creada=false;
