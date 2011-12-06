@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="OSB-GestionSubasta" soapui-version="4.0-beta2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionSubastaSOAP" type="wsdl" bindingName="{http://marketplace.losalpes.com.co/GestionOfertas}GestionSubastaSOAP" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/marketPlace/proxy/GestionSubasta?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001/marketPlace/proxy/GestionSubasta?wsdl"><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?wsdl</con:url><con:content><![CDATA[<WL5G3N0:definitions name="GestionSubasta" targetNamespace="http://marketplace.losalpes.com.co/GestionOfertas" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://marketplace.losalpes.com.co" xmlns:WL5G3N2="http://marketplace.losalpes.com.co/GestionOfertas" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://marketplace.losalpes.com.co/GestionOfertas" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://marketplace.losalpes.com.co">
+      <xsd:import namespace="http://marketplace.losalpes.com.co" schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionSubasta%2FGestionSubasta"></xsd:import>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="registrarOfertaRequest">
+    <WL5G3N0:part element="WL5G3N1:registrarOferta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="registrarOfertaResponse">
+    <WL5G3N0:part element="WL5G3N1:registrarOfertaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cerrarSubastaRequest">
+    <WL5G3N0:part element="WL5G3N1:cerrarSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="cerrarSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:cerrarSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="darGanadorSubastaRequest">
+    <WL5G3N0:part element="WL5G3N1:darGanadorSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="darGanadorSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:darGanadorSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearSubastaRequest">
+    <WL5G3N0:part element="WL5G3N1:crearSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="crearSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:crearSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastasFabricanteRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastasFabricante" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastasFabricanteResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastasFabricanteResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="asignarFabricantesSubastaRequest">
+    <WL5G3N0:part element="WL5G3N1:asignarFabricantesSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="asignarFabricantesSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:asignarFabricantesSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarFabricantesSubastaRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarFabricantesSubasta" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarFabricantesSubastaResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarFabricantesSubastaResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastaOrdenCompraRequest">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastaOrdenCompra" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="consultarSubastaOrdenCompraResponse">
+    <WL5G3N0:part element="WL5G3N1:consultarSubastaOrdenCompraResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="GestionSubasta">
+    <WL5G3N0:operation name="registrarOferta">
+      <WL5G3N0:input message="WL5G3N2:registrarOfertaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:registrarOfertaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cerrarSubasta">
+      <WL5G3N0:input message="WL5G3N2:cerrarSubastaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:cerrarSubastaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="darGanadorSubasta">
+      <WL5G3N0:input message="WL5G3N2:darGanadorSubastaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:darGanadorSubastaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearSubasta">
+      <WL5G3N0:input message="WL5G3N2:crearSubastaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:crearSubastaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastasFabricante">
+      <WL5G3N0:input message="WL5G3N2:consultarSubastasFabricanteRequest"/>
+      <WL5G3N0:output message="WL5G3N2:consultarSubastasFabricanteResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="asignarFabricantesSubasta">
+      <WL5G3N0:input message="WL5G3N2:asignarFabricantesSubastaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:asignarFabricantesSubastaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarFabricantesSubasta">
+      <WL5G3N0:input message="WL5G3N2:consultarFabricantesSubastaRequest"/>
+      <WL5G3N0:output message="WL5G3N2:consultarFabricantesSubastaResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+      <WL5G3N0:input message="WL5G3N2:consultarSubastaOrdenCompraRequest"/>
+      <WL5G3N0:output message="WL5G3N2:consultarSubastaOrdenCompraResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="GestionSubastaSOAP" type="WL5G3N2:GestionSubasta">
+    <WL5G3N3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="registrarOferta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="cerrarSubasta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/cerrarSubasta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="darGanadorSubasta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/darGanadorSubasta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="crearSubasta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/crearSubasta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastasFabricante">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="asignarFabricantesSubasta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/asignarFabricantesSubasta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarFabricantesSubasta">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="consultarSubastaOrdenCompra">
+      <WL5G3N3:operation soapAction="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastaOrdenCompra"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="GestionSubastaSOAPQSService">
+    <WL5G3N0:port binding="WL5G3N2:GestionSubastaSOAP" name="GestionSubastaSOAPQSPort">
+      <WL5G3N3:address location="http://User-PC:7001/marketPlace/proxy/GestionSubasta"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fproxy%2Fwsdls%2FgestionSubasta%2FGestionSubasta</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FOferta"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FSubasta"/>
+  <complexType name="CerrarSubasta">
+    <sequence>
+      <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="CerrarSubastaResponse">
+    <sequence>
+      <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="CrearSubasta">
+    <sequence>
+      <element name="po" type="tns:PurchaseOrder" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaMaxSubasta" type="dateTime" minOccurs="0"></element>
+    </sequence>
+  </complexType>
+  <complexType name="CrearSubastaResponse">
+    <sequence>
+      <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="DarGanadorSubasta">
+    <sequence>
+      <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+  <complexType name="DarGanadorSubastaResponse">
+    <sequence>
+      <element name="fabricante" type="tns:Fabricante" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="RegistrarOferta">
+    <sequence>
+      <element name="oferta" type="tns:Oferta" minOccurs="1" maxOccurs="1"/>
+      <element name="numSeguimientoSub" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="RegistrarOfertaResponse">
+    <sequence>
+      <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="AsignarFabricantesSubasta">
+    <sequence>
+      <element name="numSeguimientoSubasta" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="fabricantes" type="tns:Fabricante" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="AsignarFabricantesSubastaResponse">
+    <sequence>
+      <element name="resultado" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarSubastasFabricante">
+    <sequence>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarSubastasFabricanteResponse">
+    <sequence>
+      <element name="subastas" type="tns:Subasta" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarFabricantesSubasta">
+    <sequence>
+      <element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarFabricantesSubastaResponse">
+    <sequence>
+      <element name="fabricantes" type="tns:Fabricante" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarSubastaOrdenCompra">
+    <sequence>
+      <element name="numSeguimientoPO" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultarSubastaOrdenCompraResponse">
+    <sequence>
+      <element name="subasta" type="tns:Subasta"/>
+    </sequence>
+  </complexType>
+  <element name="cerrarSubasta" type="tns:CerrarSubasta"/>
+  <element name="cerrarSubastaResponse" type="tns:CerrarSubastaResponse"/>
+  <element name="crearSubasta" type="tns:CrearSubasta"/>
+  <element name="crearSubastaResponse" type="tns:CrearSubastaResponse"/>
+  <element name="darGanadorSubasta" type="tns:DarGanadorSubasta"/>
+  <element name="darGanadorSubastaResponse" type="tns:DarGanadorSubastaResponse"/>
+  <element name="registrarOferta" type="tns:RegistrarOferta"/>
+  <element name="registrarOfertaResponse" type="tns:RegistrarOfertaResponse"/>
+  <element name="asignarFabricantesSubasta" type="tns:AsignarFabricantesSubasta"/>
+  <element name="asignarFabricantesSubastaResponse" type="tns:AsignarFabricantesSubastaResponse"/>
+  <element name="consultarSubastasFabricante" type="tns:ConsultarSubastasFabricante"/>
+  <element name="consultarSubastasFabricanteResponse" type="tns:ConsultarSubastasFabricanteResponse"/>
+  <element name="consultarFabricantesSubasta" type="tns:ConsultarFabricantesSubasta"/>
+  <element name="consultarFabricantesSubastaResponse" type="tns:ConsultarFabricantesSubastaResponse"/>
+  <element name="consultarSubastaOrdenCompra" type="tns:ConsultarSubastaOrdenCompra"/>
+  <element name="consultarSubastaOrdenCompraResponse" type="tns:ConsultarSubastaOrdenCompraResponse"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FComercio"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FItem"/>
+  <element name="po" type="tns:PurchaseOrder"/>
+  <complexType name="PurchaseOrder">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="item" type="tns:Item" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaMaxima" type="dateTime" minOccurs="1"/>
+      <element name="tiempoSubasta" type="dateTime" minOccurs="1"></element>
+      <element name="comercio" type="tns:Comercio" minOccurs="1"></element>
+      <element name="fabricanteAtiende" type="tns:Fabricante" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="fecha" type="dateTime" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FComercio</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FReturnMaterialAdvice"/>
+  <element name="comercio" type="tns:Comercio"/>
+  <complexType name="Comercio">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="nit" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="direccion" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="telefono" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="email" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="codPais" type="string" minOccurs="0"/>
+      <element name="codPostal" type="string" minOccurs="0"/>
+      <element name="pos" type="tns:PurchaseOrder" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="rmas" type="tns:ReturnMaterialAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FReturnMaterialAdvice</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FItem"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FAvisoDespacho"/>
+  <element name="rma" type="tns:ReturnMaterialAdvice"/>
+  <complexType name="ReturnMaterialAdvice">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="causa" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="fecha" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="avisoDespacho" type="tns:DispatchAdvice" maxOccurs="1" minOccurs="1"></element>
+      <element name="ordenCompra" type="tns:PurchaseOrder" maxOccurs="1" minOccurs="1"></element>
+      <element name="items" type="tns:Item" maxOccurs="1" minOccurs="1"></element>
+      <element name="comercio" type="tns:Comercio" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FItem</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FProducto"/>
+  <element name="item" type="tns:Item"/>
+  <complexType name="Item">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="valor" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="cantidad" type="int" minOccurs="1" maxOccurs="1"/>
+      <element name="producto" type="tns:Producto" minOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FProducto"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FAvisoDespacho"/>
+  <complexType name="Fabricante">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="nombre" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="nit" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="direccion" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="telefono" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="codPais" type="string" minOccurs="0"/>
+      <element name="codPostal" type="string" minOccurs="0"/>
+      <element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="unbounded"></element>
+      <element name="das" type="tns:DispatchAdvice" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="fabricante" type="tns:Fabricante"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FProducto</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+  <complexType name="Producto">
+    <sequence>
+      <element name="id" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="nombre" type="string" minOccurs="1"/>
+      <element name="categoria" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="tipo" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="estado" type="string" minOccurs="1" maxOccurs="1"></element>
+      <element name="referencia" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="pesoLibras" type="string" maxOccurs="1" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <element name="producto" type="tns:Producto"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FAvisoDespacho</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FItem"/>
+  <element name="da" type="tns:DispatchAdvice"/>
+  <complexType name="DispatchAdvice">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="fechaEmision" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="fechaLlegada" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+      <element name="montoOperacion" type="long" minOccurs="1" maxOccurs="1"></element>
+      <element name="camiones" type="string" maxOccurs="1" minOccurs="1"></element>
+      <element name="ordenCompra" type="tns:PurchaseOrder" maxOccurs="1" minOccurs="1"></element>
+      <element name="items" type="tns:Item" maxOccurs="unbounded" minOccurs="1"></element>
+      <element name="fabricante" type="tns:Fabricante" minOccurs="1" maxOccurs="1"></element>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FOferta</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FItem"/>
+  <complexType name="Oferta">
+    <sequence>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"/>
+      <element name="numSeguimiento" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="idSubasta" type="string" minOccurs="1"/>
+      <element name="horarioEntrega" type="dateTime" minOccurs="1"/>
+      <element name="fabricante" type="tns:Fabricante" minOccurs="1"/>
+      <element name="item" type="tns:Item" minOccurs="1" maxOccurs="1"/>
+      <element name="mensaje" type="string" minOccurs="0" maxOccurs="1"/>
+      <element name="valor" type="long" minOccurs="0"/>
+      <element name="estadoOferta" type="string" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <element name="oferta" type="tns:Oferta"/>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FSubasta</con:url><con:content><![CDATA[<schema targetNamespace="http://marketplace.losalpes.com.co" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://marketplace.losalpes.com.co">
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FOferta"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FFabricante"/>
+  <include schemaLocation="http://localhost:7001/marketPlace/proxy/GestionSubasta?SCHEMA%2FmarketPlace%2Fcanonicos%2FPurchaseOrder"/>
+  <element name="subasta" type="tns:Subasta"/>
+  <complexType name="Subasta">
+    <sequence>
+      <element name="activa" type="boolean"/>
+      <element name="id" type="long" minOccurs="0" maxOccurs="1"></element>
+      <element name="numSeguimiento" type="string" minOccurs="0" maxOccurs="1"></element>
+      <element name="fechaInicio" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+      <element name="fechaTerminacion" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+      <element name="ordenCompra" type="tns:PurchaseOrder" minOccurs="1" maxOccurs="1"></element>
+      <element name="mejor" type="tns:Oferta" minOccurs="0" maxOccurs="1"></element>
+      <element name="mensaje" type="string" minOccurs="0"/>
+      <element name="fabricante" type="tns:Fabricante" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <element name="ofertas" type="tns:Oferta" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/asignarFabricantesSubasta" name="asignarFabricantesSubasta" bindingOperationName="asignarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.transact.marketplace.losalpes.com.co/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:asignarFabricantesSubasta>
+         <numSeguimientoSubasta>num001</numSeguimientoSubasta>
+         <fabricantes>
+            <nit>500500555</nit>
+         </fabricantes>
+      </ws:asignarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/asignarFabricantesSubasta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/cerrarSubasta" name="cerrarSubasta" bindingOperationName="cerrarSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:cerrarSubasta>
+         <mar:numSeguimientoSub>num001</mar:numSeguimientoSub>
+      </mar:cerrarSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/cerrarSubasta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta" name="consultarFabricantesSubasta" bindingOperationName="consultarFabricantesSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarFabricantesSubasta>
+         <mar:numSeguimiento>num001</mar:numSeguimiento>
+      </mar:consultarFabricantesSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarFabricantesSubasta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastaOrdenCompra" name="consultarSubastaOrdenCompra" bindingOperationName="consultarSubastaOrdenCompra" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarSubastaOrdenCompra>
+         <mar:numSeguimientoPO>num001</mar:numSeguimientoPO>
+      </mar:consultarSubastaOrdenCompra>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastaOrdenCompra"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante" name="consultarSubastasFabricante" bindingOperationName="consultarSubastasFabricante" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:consultarSubastasFabricante>
+         <mar:nit>321123</mar:nit>
+      </mar:consultarSubastasFabricante>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/consultarSubastasFabricante"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/crearSubasta" name="crearSubasta" bindingOperationName="crearSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:crearSubasta>
+         <mar:po>
+            <numSeguimiento>0001</numSeguimiento>
+            <item>
+               <cantidad>4</cantidad>
+               <producto>
+                  <nombre>Leche</nombre>
+                  <categoria>Lacteos</categoria>
+                  <peso>1</peso>
+               </producto>
+            </item>
+            <fechaMaxima>2012-12-04T04:34:51-05:00</fechaMaxima>
+            <comercio>
+               <nit>com102</nit>
+            </comercio>
+         </mar:po>
+         <!--Optional:-->
+         <mar:fechaMaxSubasta>2012-12-20T04:34:51-05:00</mar:fechaMaxSubasta>
+      </mar:crearSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/crearSubasta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/darGanadorSubasta" name="darGanadorSubasta" bindingOperationName="darGanadorSubasta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:darGanadorSubasta>
+         <mar:numSeguimientoSub>num001</mar:numSeguimientoSub>
+      </mar:darGanadorSubasta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/darGanadorSubasta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta" name="registrarOferta" bindingOperationName="registrarOferta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://User-PC:7001/marketPlace/proxy/GestionSubasta</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mar="http://marketplace.losalpes.com.co">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mar:registrarOferta>
+         <mar:oferta>
+            <horarioEntrega>2012-09-28T20:49:45</horarioEntrega>
+            <fabricante>
+               <nit>321123</nit>
+            </fabricante>
+            <item>
+               <valor>10</valor>
+            </item>
+         </mar:oferta>
+         <mar:numSeguimientoSub>0001</mar:numSeguimientoSub>
+      </mar:registrarOferta>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://marketplace.losalpes.com.co/GestionOfertas/registrarOferta"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
