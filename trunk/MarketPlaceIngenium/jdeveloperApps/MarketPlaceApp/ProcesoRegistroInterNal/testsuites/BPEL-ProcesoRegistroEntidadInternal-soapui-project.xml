@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project name="ProcesoRegistroEntidadInternal" soapui-version="4.0-beta2" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="200508" name="RegistroEntidadInterNalBinding" type="wsdl" bindingName="{http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal}RegistroEntidadInterNalBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL"><con:part><con:url>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="RegistroEntidadInterNal" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<con:soapui-project name="BPEL-ProcesoRegistroEntidadInternal" soapui-version="4.0-beta2" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="200508" name="RegistroEntidadInterNalBinding" type="wsdl" bindingName="{http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal}RegistroEntidadInterNalBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL"><con:part><con:url>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="RegistroEntidadInterNal" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation>
     <abstractWSDL>http://davper-PC:7001/soa-infra/services/default/ProcesoRegistroInterNal!1.5/RegistroEntidadInterNal.wsdl</abstractWSDL>
   </wsdl:documentation>
@@ -114,57 +114,94 @@
       </sequence>
     </complexType>
   </element>
-</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint></con:endpoints><con:operation isOneWay="false" action="process" name="process" bindingOperationName="process" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:reg="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint></con:endpoints><con:operation isOneWay="false" action="process" name="process" bindingOperationName="process" type="One-Way" inputName="" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Registro Comercio" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:reg="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
    <soapenv:Header/>
    <soapenv:Body>
       <reg:process>
-         <reg:nit>520120555</reg:nit>
-         <reg:nombre>Colanta</reg:nombre>
-         <reg:direccion>PopayanCauca</reg:direccion>
-         <reg:telefono>3011975645</reg:telefono>
-         <reg:email>davidres@gmail.com</reg:email>
-         <reg:tipo>Fabricante</reg:tipo>
-         <reg:razonSocial>Leche Colanta</reg:razonSocial>
+         <reg:nit>123321</reg:nit>
+         <reg:nombre>David P.</reg:nombre>
+         <reg:direccion>Calle 150 # 5</reg:direccion>
+         <reg:telefono>3121231231</reg:telefono>
+         <reg:email>mockcorreo@gmail.com</reg:email>
+         <reg:tipo>Comercio</reg:tipo>
+         <reg:razonSocial>Com SA</reg:razonSocial>
          <!--1 or more repetitions:-->
          <reg:contactos>
-            <reg:numIdentificacion>7030123445</reg:numIdentificacion>
+            <reg:numIdentificacion>123123123</reg:numIdentificacion>
             <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
             <reg:telefono>6155678</reg:telefono>
-            <reg:direccion>Calle 85</reg:direccion>
-            <reg:nombre>David Andres</reg:nombre>
+            <reg:direccion>Calle 182 # 17</reg:direccion>
+            <reg:nombre>Nombre Contacto</reg:nombre>
             <!--Optional:-->
             <reg:celular></reg:celular>
-            <reg:email>davidns@rocketmail.com</reg:email>
-         </reg:contactos>
-	<reg:contactos>
-            <reg:numIdentificacion>54645</reg:numIdentificacion>
-            <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
-            <reg:telefono>11111</reg:telefono>
-            <reg:direccion>Calle 65</reg:direccion>
-            <reg:nombre>WillID</reg:nombre>
-            <!--Optional:-->
-            <reg:celular></reg:celular>
-            <reg:email>davidns@rocketmail.com</reg:email>
-         </reg:contactos>
+            <reg:email>mockcorreo@gmail.com</reg:email>
+         </reg:contactos>	
          <reg:fecha>2018-12-28-05:00</reg:fecha>
-         <!--1 or more repetitions:-->
-         <reg:documentos>
-            <reg:nombre>ac vinclis et</reg:nombre>
-            <reg:url>rapidum iaculata e</reg:url>
-            <reg:tipo>caelumque profundum</reg:tipo>
-         </reg:documentos>
-         <!--1 or more repetitions:-->
+        <!--1 or more repetitions:-->
          <reg:productos>
-            <reg:nombre>Arequipe Colanta</reg:nombre>
+            <reg:nombre>Arequipe</reg:nombre>
             <reg:categoria>Lacteos</reg:categoria>
-            <reg:tipo>Arequipe</reg:tipo>
-            <reg:pesoLibras>0.5</reg:pesoLibras>
+            <reg:tipo>Lacteos</reg:tipo>
+            <reg:pesoLibras>1</reg:pesoLibras>
             <!--Optional:-->
-            <reg:referencia>Ref007</reg:referencia>
+            <reg:referencia>Ref000</reg:referencia>
+         </reg:productos>
+	<reg:productos>
+            <reg:nombre>Leche</reg:nombre>
+            <reg:categoria>Lacteos</reg:categoria>
+            <reg:tipo>Lacteos</reg:tipo>
+            <reg:pesoLibras>1</reg:pesoLibras>
+            <!--Optional:-->
+            <reg:referencia>Ref001</reg:referencia>
          </reg:productos>
          <reg:Categoria>Lacteos</reg:Categoria>
          <reg:CodPais>CO</reg:CodPais>
-         <reg:CodPostal>223433</reg:CodPostal>
+         <reg:CodPostal>11031</reg:CodPostal>
+      </reg:process>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="process"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Registro Fabricante" useWsAddressing="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:reg="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <reg:process>
+         <reg:nit>321123</reg:nit>
+         <reg:nombre>Andres P.</reg:nombre>
+         <reg:direccion>Calle 150 # 5</reg:direccion>
+         <reg:telefono>3121231231</reg:telefono>
+         <reg:email>mockcorreo@gmail.com</reg:email>
+         <reg:tipo>Fabricante</reg:tipo>
+         <reg:razonSocial>FabDA SA</reg:razonSocial>
+         <!--1 or more repetitions:-->
+         <reg:contactos>
+            <reg:numIdentificacion>123123123</reg:numIdentificacion>
+            <reg:tipoIdentificacion>Cedula</reg:tipoIdentificacion>
+            <reg:telefono>6155678</reg:telefono>
+            <reg:direccion>Calle 182 # 17</reg:direccion>
+            <reg:nombre>Nombre Contacto</reg:nombre>
+            <!--Optional:-->
+            <reg:celular></reg:celular>
+            <reg:email>mockcorreo@gmail.com</reg:email>
+         </reg:contactos>	
+         <reg:fecha>2018-12-28-05:00</reg:fecha>
+        <!--1 or more repetitions:-->
+         <reg:productos>
+            <reg:nombre>Arequipe</reg:nombre>
+            <reg:categoria>Lacteos</reg:categoria>
+            <reg:tipo>Lacteos</reg:tipo>
+            <reg:pesoLibras>1</reg:pesoLibras>
+            <!--Optional:-->
+            <reg:referencia>Ref000</reg:referencia>
+         </reg:productos>
+	<reg:productos>
+            <reg:nombre>Leche</reg:nombre>
+            <reg:categoria>Lacteos</reg:categoria>
+            <reg:tipo>Lacteos</reg:tipo>
+            <reg:pesoLibras>1</reg:pesoLibras>
+            <!--Optional:-->
+            <reg:referencia>Ref001</reg:referencia>
+         </reg:productos>
+         <reg:Categoria>Lacteos</reg:Categoria>
+         <reg:CodPais>CO</reg:CodPais>
+         <reg:CodPostal>11031</reg:CodPostal>
       </reg:process>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="process"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="RegistroEntidadInterNalCallbackBinding" type="wsdl" bindingName="{http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal}RegistroEntidadInterNalCallbackBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL"><con:part><con:url>http://localhost:7001/soa-infra/services/default/ProcesoRegistroInterNal/registroentidadinternal_client_ep?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="RegistroEntidadInterNal" targetNamespace="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:client="http://xmlns.oracle.com/MarketPlace/ProcesoRegistroInterNal/RegistroEntidadInterNal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
